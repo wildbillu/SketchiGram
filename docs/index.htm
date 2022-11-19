@@ -1,0 +1,219 @@
+<HTML>
+<HEAD>
+    <meta name="viewport" content="height=device-height, width=device=width initial-scale=1.0">
+    <TITLE>Your Move Puzzle</TITLE>
+    <META name="GENERATOR" content="Absolutely Vocabulous">
+
+    <link rel="stylesheet" href="Styles-Overall.css">
+    <link rel="stylesheet" href="Styles-TC-Button.css">
+
+    <link rel="stylesheet" href="Styles-Place.css">
+    <link rel="stylesheet" href="Styles-Place-Direct.css">
+    <link rel="stylesheet" href="Styles-CAB-Headings.css">
+    <link rel="stylesheet" href="Styles-GRB-Button.css">
+    <link rel="stylesheet" href="Styles-TopRowControl.css">
+    <link rel="stylesheet" href="Styles-Settings.css">
+    <link rel="stylesheet" href="Styles-More.css">
+    <link rel="stylesheet" href="Styles-Info-Content.css">
+    <link rel="stylesheet" href="Styles-StatusControl.css">
+
+    <link rel="stylesheet" href="Styles-GRBMS-Base.css">
+    <link rel="stylesheet" href="Styles-GRBMS-CAB.css">
+    <link rel="stylesheet" href="Styles-GRBMS-Image.css">
+    <link rel="stylesheet" href="Styles-GRBMS-Button.css">
+
+    <link rel="stylesheet" href="Styles-SG.css">
+    <link rel="stylesheet" href="Styles-SG-ActionMenu.css">
+
+    <link rel="stylesheet" href="Styles-Keyboard.css">
+    <link rel="stylesheet" href="Styles-Keyboard-Mini.css">
+
+    <link rel="stylesheet" href="Styles-ResultMessage.css">
+    <link rel="stylesheet" href="Styles-ScratchArea.css">
+    <link rel="stylesheet" href="Styles-DifficultyLevel.css">
+    <link rel="stylesheet" href="Styles-DisplayDualClue.css">
+
+
+    <SCRIPT SRC="TC-Defines.js"></SCRIPT>
+    <SCRIPT SRC="TC-Defines-Codes.js"></SCRIPT>
+    <SCRIPT SRC="TC-DirectorySupport.js"></SCRIPT>
+    <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
+    <SCRIPT SRC="TC-Puzzle-ImportFromFile.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-TopAndBottomMatter.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-CAB-Defines.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-Basic.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-CoreProcessing.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-HandleEntries.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-ButtonControl.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-Helpers-Answers-Status.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-HandleArrows.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-Place.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-Direct.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-Draggable.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-TouchMovable.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-MouseMovable.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-GRB-Defines.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-CoreProcessing.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-ButtonControl.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-Basic.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-MoveFocus.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-HandleEntries.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-Helpers-Answers-Status.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-HandleArrows.js"></SCRIPT>
+
+    
+    <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-LoadClueAnswer.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-GRBMS.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-TouchMove.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-SetupHelpers.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-Helpers-Advanced.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-CoreProcessing.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-ResultMessage.js"></SCRIPT>
+    <SCRIPT SRC="TC-ScratchArea.js"></SCRIPT>
+    <SCRIPT SRC="TC-DifficultyLevel.js"></SCRIPT>
+    <SCRIPT SRC="TC-DisplayDualClue.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-Keyboard-Mini.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-YourMove-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-TwistiCross-Base.js"></SCRIPT>
+
+<!-- these are the old style popup windows -->
+<SCRIPT SRC="TC-More.js"></SCRIPT>
+
+<!-- these are the 'show/noshow' windows -->
+    <SCRIPT SRC="TC-SuccessWindow.js"></SCRIPT>
+    <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-Info-Content.js"></SCRIPT>
+    <SCRIPT SRC="TC-Settings-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-Settings-Support.js"></SCRIPT>
+<!-- this controls the closing of the show/noshow windows  -->
+    <SCRIPT SRC="TC-Popup-Support.js"></SCRIPT>
+
+
+    <SCRIPT SRC="TC-TopRowButton-Setup-Process.js"></SCRIPT>
+    <SCRIPT SRC="TC-Cookies.js"></SCRIPT>
+ 
+    <SCRIPT SRC="TC-LoadExtraSolvedImages.js"></SCRIPT>
+
+
+    <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
+    <SCRIPT SRC="TC-Puzzle-AsJS.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-Status-Process.js"></SCRIPT>
+
+<!-- specific to SG -->
+    <SCRIPT SRC="TC-SG-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-SG2-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-SG-SG2-SetupHelpers.js"></SCRIPT>
+    <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
+</HEAD>
+<SCRIPT>
+
+//<meta name="viewport" content="height=device-height, width=device=width initial-scale=1.0">
+function Dispatch() 
+{// these are also features
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.022'
+//    g_Place_bDirectPlaceSupport = false;
+//    g_Place_bPopupPlaceSupport = true;
+    g_Place_bDirectPlaceSupport = true;
+    g_Place_bPopupPlaceSupport = false;
+//
+    var sTC = 'APP=TC';
+    var sYM = 'APP=YM';
+    var sSG = 'APP=SG';
+    var sSG2 = 'APP=SG2';
+
+//    var sME = sTC;
+//    var sME = sYM;
+//    var sME = sSG;
+var sME = sSG2;
+
+    var sSearch = window.location.search;
+    var sPageURL = window.location.search.substring(1);
+    var aPairs = [];
+    if ( sPageURL.length > 0 )
+        aPairs = sPageURL.split('&');
+    if ( aPairs.length == 0 )
+        aPairs.push(sME)
+    for ( var iP = 0; iP < aPairs.length; iP++ )
+    {
+        sElem = aPairs[iP].toUpperCase();
+        if ( sElem == sTC)
+        {
+            g_bIsTwistiCross = true;
+            g_bIsYourMove = false;
+            g_bIsSketchiGram = false;
+        }
+        if ( sElem == sYM)
+        {
+            g_bIsTwistiCross = false;
+            g_bIsYourMove = true;
+            g_bIsSketchiGram = false;
+        }
+        if ( sElem == sSG)
+        {
+            g_bIsTwistiCross = false;
+            g_bIsYourMove = false;
+            g_bIsSketchiGram = true;
+            g_bIsSketchiGramVariant1 = true;
+            g_bIsSketchiGramVariant2 = false;
+        }
+        if ( sElem == sSG2)
+        {
+            g_bIsTwistiCross = false;
+            g_bIsYourMove = false;
+            g_bIsSketchiGram = true;
+            g_bIsSketchiGramVariant1 = false;
+            g_bIsSketchiGramVariant2 = true;
+        }
+    }
+    if ( g_bIsTwistiCross )
+    {
+        LoadTwistiCross();
+        return;
+    }
+    if ( g_bIsYourMove )
+    {
+        GRBMS_LoadAll(0);
+        return;
+    }
+    if ( g_bIsSketchiGram && g_bIsSketchiGramVariant1 )
+    {
+        SG_LoadAll(0);
+        return;
+    }
+    if ( g_bIsSketchiGram && g_bIsSketchiGramVariant2)
+    {
+        SG2_LoadAll(0);
+        return;
+    }
+    alert('oops.')
+}
+
+function TC_SetActiveSize()
+{
+    var elemAll = document.getElementById("Body_Any");
+    elemAll.style.height = g_TC_iBiggestBottom;
+    elemAll.style.width  = g_TC_iBiggestRight;
+}
+
+</SCRIPT>
+
+<BODY Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="Dispatch();" >
+<DIV Id="Body_Any" class="Body_Any"></DIV>    
+</BODY>
+</HTML>
+
