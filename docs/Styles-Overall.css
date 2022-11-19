@@ -1,0 +1,29 @@
+/* Style-Overall.css */
+
+/*user-select: none;*/
+
+::selection{background-color: #FFEE60}
+.MoveCursor
+{
+cursor: url('image/Button_ChangeDirection.cur'),auto;
+}
+
+.ForTest
+{
+    visibility: hidden;
+}
+
+.Body_Any
+{
+    border: 1px solid green;
+    background-color: rgba(0,255,0,.0);
+    color: #fff;
+    width:600px;
+    height:900px;
+}
+
+.StartHidden
+{
+    visibility: hidden;
+}
+

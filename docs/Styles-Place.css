@@ -1,0 +1,235 @@
+/* Styles-Place.css */
+
+.Place_Button_VerticalUp
+{
+  vertical-align: 9px;
+}
+
+.Place_Button_Disabled
+{
+  top:0px;
+  border: 1px solid black;
+  padding:2px;
+  text-align:center;
+  font-size: 14px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: black;
+  height:30px;
+  width: 50px;
+  background-color: #DDDDDD;
+}
+
+.Place_Button
+{
+  top:0px;
+  border: 1px solid black;
+  padding:2px;
+  text-align:center;
+  font-size: 14px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: blue;
+  height:30px;
+  width: 50px;
+  background-color: #EEEEEE;
+}
+.Place_Button:hover{background-color: lightblue;}
+
+.Place_DragInstruction
+{
+  position:absolute;
+  top:15px;
+  left:5px;
+  width:45px;
+  height:45px;
+  border:0px solid blue;
+  background-color:lightblue;
+  font-family:Arial, Helvetica, sans-serif;  
+  font-size: 12px;
+  text-align: center;
+  padding-top: 0px;  
+}
+
+.Place_Down_Row_Controls
+{ /* this is only used to control the upper left */
+  position:absolute;
+  top:50;
+  left:50;
+  width:42px;
+  height:10px;
+  border:0px solid red;
+  background-color:lightblue;
+}
+
+.Place_Across_Row_Controls
+{
+  position:absolute;
+  top:50;
+  left:150;
+  width:10px;
+  height:10px;
+  border:0px solid green;
+  background-color:lightblue;
+}
+
+.Place_Hints_Div
+{
+  position:absolute;
+  top:80;
+  left:80;
+  width:20px;
+  height:20px;
+  border:1px solid blue;
+  background-color:lightblue;
+}
+
+.Place_CloseBox 
+{
+  position:absolute;
+  top:15;
+  left:220;
+  width:60px;
+  height:21px;
+  border:1px solid blue;
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;  
+  font-size: 15px;
+  padding-top: 0px;
+  background-color:lightblue;
+}
+
+.Place_Draggable_Down
+{
+  position:absolute;
+  top:50;
+  left:5;
+  width:40;
+  height:146;
+  border:1px solid orange;
+  z-index:4;
+  text-align: center;
+  font-size: 45px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:0px;
+}
+
+.Place_Draggable_Across
+{
+  top:5px;
+  left:50px;
+  width:250px;
+  height:40px;
+  border:1px solid green;
+  position:absolute;
+  z-index:4;
+  text-align: center;
+  font-size: 45px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:0px;
+}
+
+.Place_Hints_NoErrors
+{
+  border: 0px;
+  border-collapse: collapse;    
+  outline: none;    
+  text-align: center;
+  font-size: 10px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:bold;
+  color:black;
+}
+
+.Place_Hints_Errors
+{
+  border: 0px;
+  border-collapse: collapse;    
+  outline: none;    
+  text-align: center;
+  font-size: 10px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:bold;
+  color:red;
+}
+
+.Place_BackgroundColor
+{
+  background-color:lightblue;
+}
+
+.Place_DivBorder
+{
+  border-width:2px;
+  border-style:solid;
+  border-color:black;
+}
+
+.Place_TableBorder
+{
+  border:0px solid;
+  border-color:red;
+  padding:0px;
+}
+
+.Place_SetBox_Across
+{
+  width:100px;
+  height:21px;
+  border:1px solid blue;
+  font-size: 15px;
+  padding-top: px;
+  background-color:lightblue;
+}
+
+.Place_SetBox_Down
+{
+  width:21px;
+  height:101px;
+  border:1px solid blue;
+  font-size: 15px;
+  padding-top: px;
+  background-color:lightblue;
+}
+
+.Place_Center
+{
+  text-align: center;
+}
+
+.Place_Left
+{
+    text-align: left;
+}
+
+.Place_Right
+{
+    text-align: right;
+}
+
+.Place_Popup
+{
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: red;
+}
+
+.Place_Popup .Place_Popup_Text 
+{
+  visibility: hidden;
+  border:1px solid blue;
+  width:100px;
+  height:300px;
+  text-align: left;
+  border-radius: 1px;
+  padding: 0;
+  z-index: 1;
+  position: absolute;
+  margin-left:0px;
+}
+
+.Place_Popup .show 
+{
+  visibility: visible;
+}

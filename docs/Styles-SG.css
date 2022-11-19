@@ -1,0 +1,111 @@
+/* Styles-SG.css */
+
+.Div_Grid_Image_Extra
+{
+    user-select: none;
+    position:absolute;
+    border: 0px solid black;
+    color:#000000;
+    top:0px;
+    width:200px;
+    height:15px;
+    font-size: 12px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+}
+
+.SG_KB_Intro
+{
+    user-select: none;
+    border: 0px solid black;
+    color:#000000;
+    font-size: 12px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+    position:absolute;
+    left:0px;
+    top:570px;
+    height:30px;
+    width:600px;
+}
+
+.SG_HowToA_Div
+{
+    user-select: none;
+    border: 1px solid black;
+    color:#000000;
+    font-size: 12px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+    position:absolute;
+    left:0px;
+    top:570px;
+    height:55px;
+    width:600px;
+    background-color: white;
+    user-select: none;
+}
+
+.SG_Clues_Div
+{
+    user-select: none;
+    border: 1px solid black;
+    visibility:hidden;
+    position:relative;
+    text-align:center;
+    left:0px;
+    top:550px;
+    height:100px;
+    width:600px;
+}
+
+.SG_DualClue_Outer
+{
+    user-select: none;
+    border: 1px solid blue;
+    color:#000000;
+    font-size: 16px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+    position:absolute;
+    top:0px;
+    padding-top:3px;
+    height:66px;
+    width:600px;
+}
+
+.SG_DualClue_Text
+{
+    user-select: none;
+    border: 0px solid blue;
+    color:#000000;
+    font-size: 16px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+    position:absolute;
+    top:0px;
+    padding-top:2px;
+    height:18px;
+    width:600px;
+}
+
+.SG_Clues_Text
+{
+    user-select: none;
+    border: 0px solid blue;
+    color:#000000;
+    font-size: 16px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+    position:absolute;
+    top:0px;
+    padding-top:2px;
+    height:18px;
+    width:600px;
+}

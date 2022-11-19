@@ -1,0 +1,54 @@
+/* Styles-CAB-Headings.css */
+
+.CAB_Row_Base
+{
+    position:absolute;
+    border: 1px solid black;
+    padding: 0px;
+    top:500px;
+    height:30px;
+    width: 605px;
+    border-collapse: collapse;    
+    outline: none;    
+}
+
+.CAB_Clue_Text
+{
+    position:absolute;
+    border: 0px solid black;
+    color:black;
+    left:0;
+    height:30px;
+    width:350px;
+    outline: none; 
+    text-align:right;
+    font-size: 13px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    caret-color: transparent;
+    padding-top:8px;
+    padding-right:3px;
+}
+
+.CAB_Answer_Text
+{
+    border:0px solid purple;
+    position:absolute;
+    left:350px;
+    top:0px;
+    width:200px;
+    height:30px;
+}
+
+.CAB_Color_InActive
+{
+    background-color: white;
+    caret-color: transparent;
+}
+
+.CAB_Color_Active
+{
+    background-color: #C0EFFF;
+    caret-color: transparent;
+}
+

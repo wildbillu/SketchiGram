@@ -1,0 +1,71 @@
+/* Styles-SG-ActionMenu.css */
+
+.SG_AM_SmartMove_Div
+{
+  position: absolute;
+  border:0px solid green;
+  height:20;
+  background-color: #eeeeee;
+}
+.SG_AM_SmartMove_Div:hover{background-color: lightblue;}
+
+.SG_ActionMenu_Button_Size_20 
+{
+  border:0px solid black;
+  position:absolute;
+  left:0px;
+  top:0px;
+  background-color: white;
+  border-collapse: collapse; 
+  outline: none; 
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+  caret-color: transparent;
+  z-index: 1;
+  background-color: #eeeeee;
+}
+.SG_ActionMenu_Button_Size_20:hover{background-color: lightblue;}
+
+
+.SG_ActionMenu_Div
+{
+  border: 1px solid orange;
+  position:absolute;
+  top:120px;
+  left:0px;
+  width:210px;
+  height:50px;
+  z-index: 0;
+  background-color: #eeeeee;
+}
+
+.SG_ActionMenuButton
+{
+  position: relative;
+  border: 0px solid black;
+  padding:2px;
+  text-align:center;
+  font-size: 14px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: blue;
+  min-width: 165px;
+  background-color: #eeeeee;
+}
+.SG_ActionMenuButton:hover{background-color: lightblue;}
+
+.SG_ActionMenuButton_Disabled
+{
+  border:0px solid black;
+  padding:2px;
+  text-align:center;
+  font-size:14px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: #666666;
+  min-width:165px;
+  background-color: #EEEEEE;
+}
+
+  

@@ -1,0 +1,24 @@
+// Puzzle-5x5Test
+var sPuzzleDate='2022-10-08'
+var sPuzzleName='5x5 Test'
+var sPuzzleTitle='Miracle If It Works'
+var iGridWidth=5
+var iGridHeight=5
+var sGridAnswers='.TOOKSTUFFANNOYTEARYMORE.'
+var sGridAnswersPlayer='.-----------------------.'
+var sGridStatusPlayer='.NNNNNNNNNNNNNNNNNNNNNNN.'
+var sGridNumbering='.01234....5....6....7....'
+var iClueAnswers=10
+var sClues='DummyA|DummyB|Quest3|Quest4|Quest5|Quest6|Quest7|Quest8|Quest9|Quest10'
+var sAnswers='SURF|TURF|OFFF|TOOO|STURR|TREFF|OREOF|UFOFF|TDEOF|UFOFD'
+var sAnswersPlayer='----|----|----|----|-----|-----|-----|-----|-----|-----'
+var sStatusPlayer='NNNN|NNNN|NNNN|NNNN|NNNNN|NNNNN|NNNNN|NNNNN|NNNNN|'
+var ST_sClue_Itself='Anybody\'s Guess'
+var ST_sClue_Intro='SketchiToons Clue to Dual Answers'
+var ST_sFilename='images/Puzzle-SurfAndTurf.jpg'
+var ST_sFilename_Success='images/PuzzleTwistiCross-SurfAndTurf-Solved.jpg'
+var sDualClueBefore=' This'
+var sDualClueMiddle=' and'
+var sDualClueEnd=' More'
+var sPuzzleCreditAuthor='Puzzle By Sketchi Bill, Images By Sketchi Bill'
+var sPuzzleCreditDate='October 08, 2022'

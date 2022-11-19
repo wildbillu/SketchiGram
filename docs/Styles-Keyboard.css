@@ -1,0 +1,33 @@
+/* Styles-SPF-Keyboard.css */
+.KB_Div
+{
+    position:absolute;
+    top:750px;
+    left:10px;
+}
+
+.KB_Button_Letter 
+{
+    width: 50;
+    font-size: 30px;
+}
+
+.KB_Button_Backspace 
+{
+    width: 70;
+    font-size: 15px;
+}
+
+.KB_Button 
+{
+    border: 1px solid #222222;
+    padding: 0px;
+    height: 50px;
+    outline: none;    
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    background-color:#DDDDDD;
+    caret-color: transparent;
+    color:black;
+}

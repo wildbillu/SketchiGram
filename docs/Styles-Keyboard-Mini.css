@@ -1,0 +1,87 @@
+/* Styles-Keyboard-Mini.css */
+
+.KB_Mini_FullArea
+{
+    position:absolute;
+    top:730px;
+    left:0px;
+    border:1px solid black;
+    padding:0px;
+    height:84px;
+    width:400px;
+    border-collapse: collapse;    
+    outline: none;    
+    text-align: center;
+    background-color: white;
+    caret-color: transparent;
+    visibility: hidden;
+    user-select: none;
+}
+
+.KB_Mini_Instructions
+{
+    border:0px solid green;
+    color:black;
+    position:relative;
+    top:0px;
+    left:0px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:normal; 
+    height:15px;
+    font-size:13px;
+    padding:0px;
+    height:34px;
+    width:400px;
+    border-collapse: collapse;    
+    outline: none;    
+    text-align: center;
+    background-color: white;
+    caret-color: transparent;
+}
+
+.KB_Mini_ButtonRow
+{
+    border:0px solid green;
+    position:relative;
+    top:0px;
+    left:0px;
+    padding:0px;
+    height:40px;
+    width:400px;
+    border-collapse: collapse;    
+    outline: none;    
+    text-align: center;
+    background-color: white;
+    caret-color: transparent;
+}
+
+.KB_Mini_ButtonLetter 
+{
+    width:36px;
+    font-size:26px;
+}
+
+.KB_Mini_ButtonBackspace 
+{
+    width:43px;
+    font-size: 10px;
+    background-image: url("images/Buttons/Button_Backspace.png");
+    background-size:43px;
+    background-repeat:no-repeat;
+}
+
+.KB_Mini_Button 
+{
+    border:1px solid #222222;
+    padding-top:4px;
+    height:32px;
+    outline:none;    
+    text-align:center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    background-color:#DDDDDD;
+    caret-color: transparent;
+    color:black;
+}
+
+
