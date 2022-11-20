@@ -64,6 +64,7 @@ function Status_Check(bNonPlayerFixes)
     }
     FeaturesDependingOnPuzzleSolved();
     StoreCookie_Puzzle();
+    SG_Clues_ShowCorrect();
     g_TC_Status_bFirstCheck = false;
 }
 
@@ -101,6 +102,14 @@ function FeaturesDependingOnPuzzleSolved()
             Place_Set_EnabledDisabled(!g_bGridSolved);
         if ( g_Place_bDirectPlaceSupport )
             TC_Place_Direct_Buttons_EnableDisable_All(!g_bGridSolved);
+    }
+    if ( g_bIsSketchiGramVariant2 )
+    {
+        if ( g_bGridSolved )
+        {
+            document.getElementById("KB_Mini_Div").style.visibility = 'hidden';
+            document.getElementById("ScratchArea").style.visibility = 'hidden'
+        }
     }
 }
 

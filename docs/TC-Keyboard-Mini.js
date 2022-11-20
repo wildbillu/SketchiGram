@@ -35,7 +35,7 @@ function KB_Mini_Setup(iWidthMax)
 // we need to determine if we need more than one and row    
 // we have div at top that tells how to use the mini keypad
     sInner += '<DIV Id="KB_Mini_Instructions_Div" class="KB_Mini_Instructions">'
-    sInner += 'Click a grid Square (highlight blue) then select a new letter for it. The existing letter will move.';
+    sInner += ' Select a grid Square (highlight pink) then select a new letter for it. The existing letter will move.';
     sInner += '</DIV>'
     sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
     for (let iRow = 0; iRow < iRows; iRow ++ )

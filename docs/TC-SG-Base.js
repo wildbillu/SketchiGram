@@ -47,7 +47,7 @@ function SG_LoadMainElements()
     sMain += '<DIV Id="Div_Grid_Phantom" class="Div_Grid_Phantom StartHidden">Div_Grid</DIV>';    
     sMain += '<DIV Id="Div_Grid_Image" class="Div_Grid_Image StartHidden">Div_Grid_Image</DIV>';
     sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_FullArea StartHidden">notset</DIV>';
-    sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden">Clues here if requested</DIV>';
+    sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden"></DIV>';
     sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter StartHidden">Div_BottomMatter</DIV>';
     sMain += '<DIV Id="Messages" class="Div_Message StartHidden"></DIV>';
     sMain += MakeExtraImageDiv();

@@ -63,7 +63,6 @@ function HandleCookie_Settings(sOurCookie_Settings)
     g_bSettings_GR_Display_ShowProgress = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_CAGR_Display_Complete = IsTrue(aOurValues[iOurValue++]);
     g_iSettings_DaysToExpire = parseInt(aOurValues[iOurValue++]);
-    alert('SettingsCookie.Set:' + iOurValue)
 }
 
 function MakeCookie_Settings()

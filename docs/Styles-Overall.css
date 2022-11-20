@@ -8,18 +8,38 @@
 cursor: url('image/Button_ChangeDirection.cur'),auto;
 }
 
+.OpeningScreen
+{
+    border: 1px solid red;
+    background-color: lightskyblue;
+    color: #fff;
+    width:600px;
+    height:800px;
+    z-index:1;
+}
+
 .ForTest
 {
     visibility: hidden;
 }
 
-.Body_Any
+.Body_Any_BeforeLoad
 {
     border: 1px solid green;
-    background-color: rgba(0,255,0,.0);
+    background-color: #A7D8FF;
     color: #fff;
     width:600px;
-    height:900px;
+    height:1016px;
+    background-image:url("images/InfoScreens/StartingScreen_SG2.jpg");
+    background-repeat:no-repeat;
+    background-position: center;
+}
+
+.Body_Any_AfterLoad
+{
+    border: 0px solid red;
+    width:600px;
+    height:0px;
 }
 
 .StartHidden

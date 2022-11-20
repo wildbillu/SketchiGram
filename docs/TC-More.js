@@ -3,7 +3,8 @@
 
 function SG_ShowCheckActiveSquare(sAction)
 { //only SketchiGram versions
-    if ( g_GRBMS_Focus_sId == '' )
+    SG_Clues_ShowCorrect();
+if ( g_GRBMS_Focus_sId == '' )
         return false;
     let iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
     let iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);

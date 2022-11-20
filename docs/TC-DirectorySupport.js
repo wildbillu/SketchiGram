@@ -6,12 +6,12 @@ var g_sImagePath_Letters              = 'images/Letters/';
 var g_sImagePath_StatusIndicators     = 'images/StatusIndicators/';
 var g_sImagePath_Buttons              = 'images/Buttons/';
 
-var g_PuzzlePath_sBase               = 'puzzles/';
-var g_PuzzlePath_sThisPuzzle         = 'puzzles/latest/';
-var g_PuzzleFile_sThisPuzzle_Text         = 'puzzles/latest/latest.txt';
-var g_PuzzlePath_sThisPuzzle_Image        = 'puzzles/latest/latest.jpg';
-var g_PuzzlePath_sThisPuzzle_Image_Extra        = 'puzzles/latest/latest-extra.jpg';
-var g_PuzzlePath_sThisPuzzle_Image_Solved       = 'puzzles/latest/latest-solved.jpg';
+var g_PuzzlePath_sBase                      = 'puzzles/';
+var g_PuzzlePath_sThisPuzzle                = 'puzzles/latest/';
+var g_PuzzleFile_sThisPuzzle_Text           = 'puzzles/latest/latest.txt';
+var g_PuzzlePath_sThisPuzzle_Image          = 'puzzles/latest/latest.jpg';
+var g_PuzzlePath_sThisPuzzle_Image_Extra    = 'puzzles/latest/latest-extra.jpg';
+var g_PuzzlePath_sThisPuzzle_Image_Solved   = 'puzzles/latest/latest-solved.jpg';
 var g_File_iMinimumLines = 20;
 
 function TC_FullButtonName(sButton)

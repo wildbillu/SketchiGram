@@ -6,7 +6,6 @@ var g_iGridWidth = 4;
 var g_iGridHeight = 4;
 
 var g_aGridAnswers       = [];
-var g_sGridAnswer='NEVERUSEDREMOVE';
 var g_aGridAnswersPlayer = [];
 var g_aGridStatusPlayer  = [];
 var g_GR_aAcrossAnswers = [];

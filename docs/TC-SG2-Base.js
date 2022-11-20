@@ -22,7 +22,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="Div_Grid_Phantom" class="Div_Grid_Phantom StartHidden">Div_Phantom_Grid</DIV>';
     sMain += '<DIV Id="Div_Grid_Image" class="Div_Grid_Image StartHidden">Div_Grid_Image</DIV>';
     sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_FullArea StartHidden">notset</DIV>';
-    sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden">Clues here if requested</DIV>';
+    sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden"></DIV>';
     sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter StartHidden">Div_BottomMatter</DIV>';
     sMain += '<DIV Id="Messages" class="Div_Message StartHidden"></DIV>';
     sMain += MakeExtraImageDiv();
@@ -45,6 +45,7 @@ function SG2_LoadAll(iSection)
     {
         case 0:
             getResolution(); 
+            while ( document.readyState != "complete") {};
             HandleCookiesOnStart();
             var bLoadedFromFile = false;
             bLoadedFromFile = LoadPuzzleFromFile();
@@ -84,11 +85,11 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 6:
-            // we are going to do the show clues, but not make it visible to get spacing right
+                // we are going to do the show clues, but not make it visible to get spacing right
             let bShowLength = true;
             let bShowGridLocation = false;
             let bShowPlaceButtons = false;
-            SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons);   
+            SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons);
             TC_SetBottomMatter();
 // want to be just below             
             let iDisplayDualClueTop = 50;
@@ -111,7 +112,19 @@ function SG2_LoadAll(iSection)
             TC_AdjustSettings();
             if ( g_bSettings_ShowInfoOnStart )
                 TC_ShowInfo();
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
+            break;
+        case 7:
+            while ( document.readyState != "complete") 
+            {
+            }
+//uninitialized - Has not started loading yet
+//loading - Is loading
+//loaded - Has been loaded
+//interactive - Has loaded enough and the user can interact with it
+//complete - Fully loaded
             SG2_SetVisibles();
+//alert('h:' + g_TC_iBiggestBottom + '.w:' + g_TC_iBiggestRight)
             break;
         default:
             alert('error section:' + iSection)                    
@@ -126,6 +139,11 @@ function TC_SetVisible(sId)
 
 function SG2_SetVisibles()
 {
+    let elemBody_Any = document.getElementById("Body_Any");
+    elemBody_Any.className = 'Body_Any_AfterLoad'
+    elemBody_Any.style.visibility = 'hidden';
+    elemBody_Any.style.backgroundImage = 'url("images/InfoScreens/BlankBlueArea_SG2.jpg")'
+
     TC_SetVisible("Div_PuzzleType");
     TC_SetVisible("Div_PuzzleTitle");
     TC_SetVisible("Div_StatusControl_Right");
@@ -142,6 +160,8 @@ function SG2_SetVisibles()
 //    TC_SetVisible("ResultMessage_Div");
     TC_SetVisible("DifficultyLevel_Div");
     TC_SetVisible("DisplayDualClue_Div");
+    SG_Clues_ShowCorrect();
+
 }
 
 function SG2_Adjust_KBAndIntro(iKBRows)

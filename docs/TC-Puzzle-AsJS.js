@@ -23,8 +23,8 @@ function TC_Puzzle_Load_AsJS()
     var iGridWidth      = 4;
     var iGridHeight     = 4;
     var sGridAnswers                = 'OPTSWAWAEVILNENE';
-    var sGridAnswersPlayer          = '--TS--W---------';
-    var sGridStatusPlayer           = 'NNGSNNGNNNNNNNNN';
+    var sGridAnswersPlayer          = 'O-------------N-';
+    var sGridStatusPlayer           = 'GNNNNNNNNNNNNNGN';
     var sGridNumbering              = '01234...5...6...';
     GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
 }

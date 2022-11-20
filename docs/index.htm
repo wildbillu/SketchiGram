@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
     <meta name="viewport" content="height=device-height, width=device=width initial-scale=1.0">
-    <TITLE>Your Move Puzzle</TITLE>
+    <TITLE>SketchiGram&trade; Puzzle</TITLE>
     <META name="GENERATOR" content="Absolutely Vocabulous">
 
     <link rel="stylesheet" href="Styles-Overall.css">
@@ -119,8 +119,19 @@
     <SCRIPT SRC="TC-SG2-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-SetupHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
+    <SCRIPT SRC="TC-SG-SG2-CADisplayHelpers.js"></SCRIPT>
 </HEAD>
 <SCRIPT>
+
+function TC_SetDefaultFile(sNewDefault)
+{
+    let sOriginalDefault = 'latest'
+    g_PuzzlePath_sThisPuzzle                = g_PuzzlePath_sThisPuzzle.replaceAll(sOriginalDefault, sNewDefault);
+    g_PuzzleFile_sThisPuzzle_Text           = g_PuzzleFile_sThisPuzzle_Text.replaceAll(sOriginalDefault, sNewDefault);
+    g_PuzzlePath_sThisPuzzle_Image          = g_PuzzlePath_sThisPuzzle_Image.replaceAll(sOriginalDefault, sNewDefault);
+    g_PuzzlePath_sThisPuzzle_Image_Extra    = g_PuzzlePath_sThisPuzzle_Image_Extra.replaceAll(sOriginalDefault, sNewDefault);
+    g_PuzzlePath_sThisPuzzle_Image_Solved   = g_PuzzlePath_sThisPuzzle_Image_Solved.replaceAll(sOriginalDefault, sNewDefault);
+}
 
 //<meta name="viewport" content="height=device-height, width=device=width initial-scale=1.0">
 function Dispatch() 
@@ -136,10 +147,12 @@ function Dispatch()
     var sSG = 'APP=SG';
     var sSG2 = 'APP=SG2';
 
+    let sNewDefault         = 'puzzle006';
+    TC_SetDefaultFile(sNewDefault);
 //    var sME = sTC;
 //    var sME = sYM;
 //    var sME = sSG;
-var sME = sSG2;
+    var sME = sSG2;
 
     var sSearch = window.location.search;
     var sPageURL = window.location.search.substring(1);
@@ -213,7 +226,7 @@ function TC_SetActiveSize()
 </SCRIPT>
 
 <BODY Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="Dispatch();" >
-<DIV Id="Body_Any" class="Body_Any"></DIV>    
+<DIV Id="Body_Any" class="Body_Any_BeforeLoad"></DIV>    
 </BODY>
 </HTML>
 
