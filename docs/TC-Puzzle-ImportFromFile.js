@@ -96,7 +96,6 @@ function LoadPuzzleFromFile()
     var bUsedCookie = false;
     if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
     { 
-alert( g_Cookie_ScratchArea_sWords)
         CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, g_Cookie_ScratchArea_sWords);
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering);
         g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
