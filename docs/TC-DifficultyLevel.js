@@ -24,7 +24,7 @@ function TC_DifficultyLevel_Changed()
       TC_SetVisible("ScratchArea");
     if ( iLevel_New <= 1 && g_DifficultyLevel_iLevel > 1 )
     {
-      SG_Clues_Div_SetVisible(-2, true); // sets them all
+      SG_Clues_Div_SetVisibility(-2, true); // sets them all
     }
     if ( iLevel_New == 0 && g_DifficultyLevel_iLevel > 0 )
       SG_ShowExtraClue();
