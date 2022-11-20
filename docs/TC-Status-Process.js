@@ -110,6 +110,9 @@ function FeaturesDependingOnPuzzleSolved()
             document.getElementById("KB_Mini_Div").style.visibility = 'hidden';
             document.getElementById("ScratchArea").style.visibility = 'hidden'
         }
+        SG_Clues_Div_SetVisibility(-1, false);
+        SG_Clues_Div_SetVisibility(-2, false);
+        TC_SetVisible("KB_Mini_Div");
     }
 }
 

@@ -131,6 +131,7 @@ function Dropdown_More_ResetPuzzle()
     {
         GRBMS_ScrambleCorrectAnswersToPlayer(true);
         GRBMS_SetAllButtons()
+        document.getElementById("KB_Mini_Div").style.visibility = 'hidden';
     }
     Dropdown_More_FinishUp(true);
 }
