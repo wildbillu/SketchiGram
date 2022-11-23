@@ -1,12 +1,12 @@
 /?file=images/Puzzle-BackStab.txt
+sGridAnswers=SHOPTOPOALECBACK
 sPuzzleDate=2022-09-16
 sPuzzleName=BackStab
-sPuzzleTitle=Beware The Ides!
+sPuzzleTitle=A Sly Way To Slay
 iGridWidth=4
 iGridHeight=4
-sGridAnswersPlayer=------------B--K
-sGridAnswers=SHOPTOPOALECBACK
-sGridStatusPlayer=NNNNNNNNNNNNGNNG
+sGridAnswersPlayer=----------------
+sGridStatusPlayer=NNNNNNNNNNNNNNNN
 sGridNumbering=01234...5...6...
 iClueAnswers=8
 sClues=DummyA|DummyB|Actor in 'Rust'|____ mark|Oily group|______-graphic|Visit Amazon|Hi Ya (sp.)
