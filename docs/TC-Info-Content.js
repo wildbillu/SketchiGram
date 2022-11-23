@@ -46,7 +46,6 @@ function MakeInfoDiv()
         sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author_SG2">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
         sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date_SG2">November 20, 2022</text></DIV>';
         sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version_SG2">November 19, 2022</text></DIV>';
-
     }
     sInfoContent += '<DIV Id="Button_Close_Div" class="Button_Close_Div"><BUTTON class="Button_Info_CloseBox Id="Info_CloseBox" onclick="TC_HideInfo();">Close<BUTTON></DIV>';
     sInfoContent += '</DIV>';

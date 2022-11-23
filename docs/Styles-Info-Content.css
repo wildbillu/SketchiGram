@@ -39,7 +39,7 @@
 .Info_DivBorder_Image
 {
   width: 450px;
-  height: 600px;
+  height: 680px;
   border-width:2px;
   border-style:solid;
   border-color:black;
@@ -77,9 +77,9 @@
 .Info_Content_Credits_Version_SG{text-align:left;font-size: 16px;left:0px;top:529px;}
 .Info_Image_SG{background-image: url("images/InfoScreens/InfoBackground_SG.jpg")}
 
-.Info_Content_Credits_Author_SG2{font-size: 20px;left:0px;top:510px;}
-.Info_Content_Credits_Date_SG2{text-align: center;font-size: 20px;left:0px;top:513px;}
-.Info_Content_Credits_Version_SG2{text-align:left;font-size: 16px;left:0px;top:529px;}
+.Info_Content_Credits_Author_SG2{position:absolute;text-align:center;font-size:20px;left:0px;top:570px;width:450px;}
+.Info_Content_Credits_Date_SG2{position:absolute;text-align:center;font-size: 20px;left:0px;top:595px;width:450px;}
+.Info_Content_Credits_Version_SG2{position:absolute;text-align:left;font-size: 14px;left:0px;top:598px;}
 .Info_Image_SG2{background-image: url("images/InfoScreens/InfoBackground_SG2.jpg")}
 
 
