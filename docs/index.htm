@@ -120,6 +120,7 @@
     <SCRIPT SRC="TC-SG-SG2-SetupHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-CADisplayHelpers.js"></SCRIPT>
+    <SCRIPT SRC="TC-SG2-Positioning.js"></SCRIPT>
 </HEAD>
 <SCRIPT>
 
@@ -136,7 +137,7 @@ function TC_SetDefaultFile(sNewDefault)
 //<meta name="viewport" content="height=device-height, width=device=width initial-scale=1.0">
 function Dispatch() 
 {// these are also features
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.022'
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.023';
 //    g_Place_bDirectPlaceSupport = false;
 //    g_Place_bPopupPlaceSupport = true;
     g_Place_bDirectPlaceSupport = true;
@@ -222,11 +223,16 @@ function TC_SetActiveSize()
     elemAll.style.height = g_TC_iBiggestBottom;
     elemAll.style.width  = g_TC_iBiggestRight;
 }
+function A(e)
+{
+    GRBMS_mouseMove(e)
+}
+var iM = 0;
 
 </SCRIPT>
 
 <BODY Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="Dispatch();" >
-<DIV Id="Body_Any" class="Body_Any_BeforeLoad"></DIV>    
+<DIV Id="Body_Any" class="Body_Any_BeforeLoad" ontouchmove="GRBMS_touchMove(event);" onmousemove="A(event);"></DIV>    
 </BODY>
 </HTML>
 
