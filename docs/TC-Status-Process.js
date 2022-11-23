@@ -107,12 +107,12 @@ function FeaturesDependingOnPuzzleSolved()
     {
         if ( g_bGridSolved )
         {
-            document.getElementById("KB_Mini_Div").style.visibility = 'hidden';
-            document.getElementById("ScratchArea").style.visibility = 'hidden'
+            ForIdSetVisibility("KB_Mini_Div", false);
+            ForIdSetVisibility("ScratchArea", false);
+            ForIdSetVisibility("DifficultyLevel_Div", false);
+            ForIdSetVisibility("SG_HowToA_Div", false);
+            SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
         }
-        SG_Clues_Div_SetVisibility(-1, false);
-        SG_Clues_Div_SetVisibility(-2, false);
-        TC_SetVisible("KB_Mini_Div");
     }
 }
 

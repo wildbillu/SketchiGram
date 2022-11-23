@@ -95,6 +95,5 @@ let iMaxCheck = 0;
     let iAllLettersToPlace = sAllLettersToPlace.length;
     if ( iLettersPlaced != iAllLettersToPlace)
         alert('Mismatch.Placed:' + iLettersPlaced + 'ToPlace:' + iAllLettersToPlace)
-setlineAdd(iMaxCheck + '|')
 }
 

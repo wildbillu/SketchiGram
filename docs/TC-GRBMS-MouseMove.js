@@ -14,13 +14,39 @@ var g_GRBMS_MM_iInitialY = 0;
 var g_GRBMS_MM_Found_iRow = -1;
 var g_GRBMS_MM_Found_iLetter = -1;
 var g_GRBMS_MM_Found_sId = '';
+var g_GRBMS_MM_Found_bMouseOut = false;
+
+function GRBMS_PickingAdjustment(iRow, iLetter, iPickedX, iPickedY)
+{
+    let iBuffer = 6;
+    let elemGrid = document.getElementById('Div_Grid');
+    let rectGrid = elemGrid.getBoundingClientRect();
+    let sId = GRBMS_MakeId(iRow, iLetter);
+    let elemFound = document.getElementById(sId);
+    let rectFound = elemFound.getBoundingClientRect();
+    let elemFound_iLeft = Math.round(rectFound.left - rectGrid.left);
+    let elemFound_iTop  = Math.round(rectFound.top -  rectGrid.top);
+    let elemFound_iWidth = Math.round(rectFound.width);
+    let elemFound_iHeight = Math.round(rectFound.height);
+    let rectFoundRelative = new DOMRect(elemFound_iLeft, elemFound_iTop, elemFound_iWidth, elemFound_iHeight)
+    let rectFoundRelativeWithBuffer = MakeRectWithBuffer(rectFoundRelative, iBuffer);
+    let bWithin = IsPointWithinRect(rectFoundRelativeWithBuffer, iPickedX, iPickedY);
+    return bWithin;
+}
+
+function GRBMS_mouseOut(e)
+{
+    if (!g_GRBMS_MM_Picked_elem) return;
+    g_GRBMS_MM_Found_bMouseOut = true;
+    GRBMS_mouseUp(e)
+}
+
 
 function TC_GRBMS_MouseFunctions(iRow, iLetter)
 {
-//    sFunctionsToCall += ' onkeypress="return GRB_onkeypress(event);"';
-//    sFunctionsToCall += ' onkeyup="return GRB_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
     var sFunctionsToCall = '';
-    sFunctionsToCall += ' onMouseDown="return GRBMS_onmousedown(event, ' + iRow + ',' + iLetter + ');" ';
+    sFunctionsToCall += ' onmouseout="return GRBMS_mouseOut(event);" ';
+    sFunctionsToCall += ' onmousedown="return GRBMS_onmousedown(event, ' + iRow + ',' + iLetter + ');" ';
     sFunctionsToCall += ' onfocus="GRBMS_onfocus(this);" ';
     sFunctionsToCall += ' onmousemove="GRBMS_mouseMove(event);" ';
     sFunctionsToCall += ' onmouseUp="GRBMS_mouseUp(event);" ';
@@ -32,35 +58,34 @@ function GRBMS_mouseUp(event)
     if ( g_bGridSolved )
         return;
     if ( !g_GRBMS_MM_Picked_elem )
-    {
         return;
-    }
+    let bDropped = false;
     if ( g_GRBMS_MM_Found_sId != '')
-        GRBMS_SwitchAnswers(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter);
-// fix up the picked square then make nothing picked
-    g_GRBMS_MM_Picked_elem.style.cursor="arrow";
+    {
+        if ( !g_GRBMS_MM_Found_bMouseOut )
+        {
+            GRBMS_SwitchAnswers(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter);
+            bDropped = true;
+        }
+        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_Inactive);
+        let elemFound = document.getElementById(GRBMS_MakeId(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter));
+        elemFound.style.cursor="default";
+    }
+    // fix up the picked square then make nothing picked
+    g_GRBMS_MM_Picked_elem.style.cursor="default";
     g_GRBMS_MM_Picked_elem.style.left = MakePixelString(g_GRBMS_MM_Picked_iLetter*g_GRBMS_Square_iSize);
     g_GRBMS_MM_Picked_elem.style.top = MakePixelString(g_GRBMS_MM_Picked_iRow*g_GRBMS_Square_iSize);
     g_GRBMS_MM_Picked_elem.style.zIndex = 0;
-    if ( g_GBRMS_MM_bAllowEntry ) 
+    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_TC_cCodeMeaning_Inactive);
+    if ( g_GBRMS_MM_bAllowEntry && !bDropped ) 
     {
-        if ( g_GRBMS_MM_Found_iRow == -1 )
-        {
-            g_GRBMS_Focus_sId = GRBMS_MakeId(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter);
-            GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_TC_cCodeMeaning_HasFocus);
-            document.getElementById(g_GRBMS_Focus_sId).focus();
-        }
-        else
-        {
-            GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_TC_cCodeMeaning_Inactive);
-            g_GRB_Focus_sId = '';
-        }
+        g_GRBMS_Focus_sId = GRBMS_MakeId(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter);
+        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_TC_cCodeMeaning_HasFocus);
+        document.getElementById(g_GRBMS_Focus_sId).focus();
     }
     else
-    {
-        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_TC_cCodeMeaning_Inactive);
-        g_GRB_Focus_sId = '';
-    }
+        g_GRBMS_Focus_sId = '';
+//
     g_GRBMS_MM_Picked_iRow = -1;
     g_GRBMS_MM_Picked_iLetter = -1;
     g_GRBMS_MM_Picked_sId = '';
@@ -68,7 +93,6 @@ function GRBMS_mouseUp(event)
     g_GRBMS_MM_Found_iRow = -1;
     g_GRBMS_MM_Found_iLetter = -1;
     g_GRBMS_MM_Found_sId = '';
-setline('MMsID:' + g_GRBMS_MM_Picked_sId + '|')
     Status_Check(false);
 }
 
@@ -78,21 +102,23 @@ function GRBMS_mouseMove(e)
         return;
     if ( !g_GRBMS_MM_Picked_elem )
         return;
-    var x = Math.round(e.clientX);
-    var y = Math.round(e.clientY);
-    var xMoved = x - g_GRBMS_MM_iInitialX;
-    var yMoved = y - g_GRBMS_MM_iInitialY;
+    let x = Math.round(e.clientX);
+    let y = Math.round(e.clientY);
+    let xMoved = x - g_GRBMS_MM_iInitialX;
+    let yMoved = y - g_GRBMS_MM_iInitialY;
     g_GRBMS_MM_Picked_elem.style.position = "absolute";
-    g_GRBMS_MM_Picked_elem.style.left = (g_GRBMS_MM_Picked_Start_iLeft + xMoved)  + 'px';
-    g_GRBMS_MM_Picked_elem.style.top =  (g_GRBMS_MM_Picked_Start_iTop + yMoved) + 'px';
+    let iLeftRelative = g_GRBMS_MM_Picked_Start_iLeft + xMoved;
+    let iTopRelative = g_GRBMS_MM_Picked_Start_iTop + yMoved;
+    g_GRBMS_MM_Picked_elem.style.left = MakePixelString(iLeftRelative);
+    g_GRBMS_MM_Picked_elem.style.top =  MakePixelString(iTopRelative);
     // now we look to see what is over the top     
     rect = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
     a_elem = document.elementsFromPoint(rect.left, rect.top)
-    var bFound = false;
-    var iE = 0;
+    let bFound = false;
+    let iE = 0;
     while ( iE < a_elem.length && !bFound )
     {
-        var sId = a_elem[iE].id;
+        let sId = a_elem[iE].id;
         if ( sId == g_GRBMS_MM_Picked_sId && g_GRBMS_MM_Found_sId != '' )
         { // cant drop on invalid squares
             GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_Inactive);
@@ -102,19 +128,22 @@ function GRBMS_mouseMove(e)
         }
         if ( sId.startsWith('GRBMSID_') && sId != g_GRBMS_MM_Picked_sId )
         {
-            var iRow = GRBMS_RowFromId(sId);
-            var iLetter = GRBMS_LetterFromId(sId);
+            let iRow = GRBMS_RowFromId(sId);
+            let iLetter = GRBMS_LetterFromId(sId);
             if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
             {
                 if ( g_GRBMS_MM_Found_sId != '' )
                 {
                     GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_Inactive);
                 }
-                g_GRBMS_MM_Found_iRow = iRow;
-                g_GRBMS_MM_Found_iLetter = iLetter;
-                g_GRBMS_MM_Found_sId = GRBMS_MakeId(iRow, iLetter);
-                GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
-                bFound = true;
+                if ( GRBMS_PickingAdjustment(iRow, iLetter, iLeftRelative, iTopRelative) )
+                {
+                    g_GRBMS_MM_Found_iRow = iRow;
+                    g_GRBMS_MM_Found_iLetter = iLetter;
+                    g_GRBMS_MM_Found_sId = GRBMS_MakeId(iRow, iLetter);
+                    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
+                    bFound = true;
+                }
             }
         }
         iE++;
@@ -135,6 +164,8 @@ function GRBMS_onmousedown(e, iRow, iLetter)
         GRBMS_ForRowLetter_SetButton(GRBMS_RowFromId(g_GRBMS_Focus_sId), GRBMS_LetterFromId(g_GRBMS_Focus_sId), g_TC_cCodeMeaning_Inactive);
         g_GRBMS_Focus_sId = '';
     }
+    g_GRBMS_MM_Found_bMouseOut = false;
+//
     g_GRBMS_MM_Picked_iRow = iRow;
     g_GRBMS_MM_Picked_iLetter = iLetter;
     g_GRBMS_MM_Picked_sId = GRBMS_MakeId(iRow, iLetter);

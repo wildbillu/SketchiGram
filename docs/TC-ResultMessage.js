@@ -10,8 +10,6 @@ var g_ResultMessage_sLevel_Excellent = 'Excellent!';
 var g_ResultMessage_sLevel_GoodJob = 'Good Job';
 var g_ResultMessage_sLevel_InfoOnly = 'FYI';
 
-var g_ResultMessage_sFocusToRestore = '';
-
 function TC_ResultMessage_Setup(iTop)
 {
     let elemResultMessage_Div = document.getElementById("ResultMessage_Div");
@@ -38,10 +36,9 @@ function TC_ResultMessage_Setup(iTop)
     else
     { 
         let rectResultMessage_Div = elemResultMessage_Div.getBoundingClientRect();
-        let iLeft = TC_LeftForCentering(rectResultMessage_Div.width);
+        let iWidthElement = rectResultMessage_Div.width
+        let iLeft = TC_LeftForCentering(iWidthElement);
         elemResultMessage_Div.style.left = MakePixelString(iLeft)
-        let elemGR = document.getElementById("StatusControl_GR");
-        let rectGR = elemGR.getBoundingClientRect();
         elemResultMessage_Div.style.top = MakePixelString(iTop);
     }
 }
@@ -50,7 +47,6 @@ function TC_ResultMessage_DisplayForInterval(sMessage, sStyle, iNumber, iSeconds
 {
     if ( g_TC_ResultMessage_Active )
         return;
-    g_ResultMessage_sFocusToRestore = g_GRBMS_Focus_sId;
     let elemResultMessage_Div = document.getElementById("ResultMessage_Div");
 // sStyle determines the class and more
     if ( sStyle == g_ResultMessage_sStyle_Warning )
@@ -59,7 +55,7 @@ function TC_ResultMessage_DisplayForInterval(sMessage, sStyle, iNumber, iSeconds
         elemResultMessage_Div.className = sClassName;
         elemResultMessage_Div.innerHTML = sMessage;
         elemResultMessage_Div.style.visibility = 'visible';
-        setTimeout(function(){TC_ResultMessage_RemoveCurrentMessage();},iSeconds*1000);    
+        setTimeout(function(){TC_ResultMessage_RemoveCurrentMessage();},iSeconds*1000);
         g_TC_ResultMessage_Active = true;
         return;
     }    
@@ -97,8 +93,6 @@ function TC_ResultMessage_DisplayForInterval(sMessage, sStyle, iNumber, iSeconds
         iTotalHeight += rectRMi.height;
     }
     elemResultMessage_Div.style.height = MakePixelString(iTotalHeight);
-
-
     elemResultMessage_Div.style.visibility = 'visible';
     setTimeout(function(){TC_ResultMessage_RemoveCurrentMessage();},iSeconds*1000);    
     g_TC_ResultMessage_Active = true;
@@ -110,7 +104,4 @@ function TC_ResultMessage_RemoveCurrentMessage()
     elemResultMessage_Div.innerHTML = 'empty';
     elemResultMessage_Div.style.visibility = 'hidden';
     g_TC_ResultMessage_Active = false;
-    if ( g_ResultMessage_sFocusToRestore != '' )
-        document.getElementById(g_ResultMessage_sFocusToRestore).focus();
-    g_ResultMessage_sFocusToRestore = '';
 }

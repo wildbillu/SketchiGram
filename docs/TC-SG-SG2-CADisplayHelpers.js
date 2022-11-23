@@ -140,7 +140,6 @@ function SG_Clues_ShowClue_ResetAnswer(iRow, bShowLength, bShowAnswer, bShowGrid
 //
         let elemDualClue = document.getElementById(SG_MakeClueTextId(1));
         elemDualClue.innerHTML = sDualAnswerRow;
-        SG_Clues_Div_SetVisibility(-1, true);
         SG_Clues_Div_SetVisibility(iRow, true);
         return;
     }
@@ -152,7 +151,6 @@ function SG_Clues_ShowClue_ResetAnswer(iRow, bShowLength, bShowAnswer, bShowGrid
     if ( bShowLength ) sCluePlus += SG_Size_Answer(iRow);
     if ( bShowAnswer ) sCluePlus += ' : ' + g_aAnswers[iRow];
     elem.innerHTML = sCluePlus;
-    SG_Clues_Div_SetVisibility(-1, true);
     SG_Clues_Div_SetVisibility(iRow, true);
 }
 
@@ -161,30 +159,28 @@ function SG_ShowClue_PlaceButtonEnabling(iAnswer, bEnabled)
 
 }
 
+var g_SG_SC_FrameOnly   = -1;
+var g_SG_SC_ShowAll     = -2;
 function SG_Clues_Div_SetVisibility(iIndex, bVisible)
-{ // -2 only frame 
-    let sVisibility = 'visible';
-    if ( ! bVisible ) sVisibility = 'hidden';
+{
+    ForIdSetVisibility("SG_Clues_Div", bVisible)
     if ( iIndex == -1 )
-    {
-        TC_SetVisible("SG_Clues_Div");
         return;
-    }
     if ( iIndex == 0 || iIndex == 1 || iIndex == -2 )
     {
-      document.getElementById("SG_DualClue_Outer").style.visibility = sVisibility;
-      document.getElementById("SG_Clues_Text_Intro").style.visibility = sVisibility;
-      document.getElementById(SG_MakeClueTextId(0)).style.visibility = sVisibility;
-      document.getElementById(SG_MakeClueTextId(1)).style.visibility = sVisibility;
+        ForIdSetVisibility("SG_DualClue_Outer", bVisible)
+        ForIdSetVisibility("SG_Clues_Text_Intro", bVisible)
+        ForIdSetVisibility(SG_MakeClueTextId(0), bVisible)
+        ForIdSetVisibility(SG_MakeClueTextId(1), bVisible)
     }
     if ( iIndex == -2 )
     {
-      for ( let i = 2; i < g_aClues.length; i++ )
-        document.getElementById(SG_MakeClueTextId(i)).style.visibility = sVisibility
-      return;
+        for ( let i = 2; i < g_aClues.length; i++ )
+            ForIdSetVisibility(SG_MakeClueTextId(i), bVisible)
+        return;
     }
     if ( iIndex > 1 )
-      document.getElementById(SG_MakeClueTextId(iIndex)).style.visibility = sVisibility
+        ForIdSetVisibility(SG_MakeClueTextId(iIndex), bVisible)
 }
 
 function SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons)

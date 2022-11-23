@@ -1,7 +1,5 @@
 // TC-GRBMS-LoadClueAnswer.js
 
-
-
 function GRBMS_MakeDualClue()
 {
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;    
@@ -82,8 +80,6 @@ function GRBMS_LoadClueAnswer()
     var iMaxHeight = Math.max(iHeightLeft, iHeightRight);
     g_TC_iBiggestBottom += iMaxHeight;   
 }
-
-
 
 function GRBMS_MakeClueAnswerInnerds(iClue, iWidth)
 {

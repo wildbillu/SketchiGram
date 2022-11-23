@@ -130,8 +130,14 @@ function Dropdown_More_ResetPuzzle()
     else if ( g_bIsYourMove || g_bIsSketchiGram )
     {
         GRBMS_ScrambleCorrectAnswersToPlayer(true);
-        GRBMS_SetAllButtons()
-        document.getElementById("KB_Mini_Div").style.visibility = 'hidden';
+        GRBMS_SetAllButtons();
+        TC_SA_ClearEntries();
+        ForIdSetVisibility("KB_Mini_Div", true);
+        ForIdSetVisibility("DifficultyLevel_Div", true);
+        ForIdSetVisibility("SG_HowToA_Div", true);
+        ForIdSetVisibility("ScratchArea", false);
+        SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, false);
+        g_DifficultyLevel_iLevel = 3;
     }
     Dropdown_More_FinishUp(true);
 }

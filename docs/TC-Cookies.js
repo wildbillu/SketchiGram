@@ -44,6 +44,7 @@ var g_Cookie_bPuzzleSolved = false;
 var g_Cookie_bGridSolved = false;
 var g_Cookie_bAnswersSolved = false;
 var g_Cookie_ScratchArea_sWords = '|||||||F|||||';
+var g_Cookie_DifficultyLevel_iLevel = -1;
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
 {
@@ -56,7 +57,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     var aOurValues = [];
     var aOurValues = sCookieValue.split(g_cCookieDelimiter);
     var iOurValues = aOurValues.length;
-    if ( iOurValues != 10 )
+    if ( iOurValues != 11 )
         return false;
     g_Cookie_sPuzzle = aOurValues[0];
     g_Cookie_sAnswersPlayer = aOurValues[1];
@@ -67,6 +68,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     g_Cookie_bGridSolved = IsTrue(aOurValues[7]);
     g_Cookie_bAnswersSolved = IsTrue(aOurValues[8]);
     g_Cookie_ScratchArea_sWords = aOurValues[9];
+    g_Cookie_DifficultyLevel_iLevel = aOurValues[10];
     g_Cookie_bValid = true;
 }
 
@@ -77,12 +79,12 @@ function StoreCookie_Puzzle()
     var sAnswersStatusPlayer = g_aAnswersStatusPlayer.join('|');
     var sGridAnswersPlayer = g_aGridAnswersPlayer.join('')
     var sGridStatusPlayer = g_aGridStatusPlayer.join('')
-    var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleDate, g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0, g_bPuzzleSolved)
+    var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleDate, g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0)
     document.cookie = sCookieToAdd;
 //    setlineAdd('CPS:' + ++g_iStoredPuzzleCookies);
 }
 
-function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds, bPuzzleSolved)
+function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds)
 {
     var sCookieName = 'SketchiCross-' + sDate;
     var sCookie = '';
@@ -106,6 +108,8 @@ function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sG
     let ScratchArea_sWords = g_ScratchArea_aWords.join(g_TC_cGeneralDelimiter);
     sCookie += g_cCookieDelimiter;
     sCookie += ScratchArea_sWords;
+    sCookie += g_cCookieDelimiter;
+    sCookie += g_DifficultyLevel_iLevel;
     var exdays = 365;
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));

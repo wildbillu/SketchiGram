@@ -1,5 +1,45 @@
 // TC-GeneralFunctions
 // 
+
+function ForIdSetVisibility(sId, bVisible)
+{
+    let sVisible = 'visible';
+    if ( !bVisible )
+        sVisible = 'hidden';
+    document.getElementById(sId).style.visibility = sVisible;
+}
+
+function MakeRectWithBuffer(rect, iBuffer)
+{
+    let iLeft = rect.left + iBuffer;
+    let iTop  = rect.top  + iBuffer;
+    let iWidth = rect.width - 2 * iBuffer;
+    let iHeight = rect.height - 2 * iBuffer;
+    let rectWithBuffer = new DOMRect(iLeft, iTop, iWidth, iHeight);
+    return rectWithBuffer;
+}
+
+function IsPointWithinRect(rect, iX, iY)
+{
+if ( iX < rect.left ) return false;
+    if ( iX > rect.right ) return false;
+    if ( iY < rect.top ) return false;
+    if ( iY > rect.bottom ) return false;
+    return true;
+}
+
+function TC_LeftForCentering(iWidthElement)
+{
+    let iWidthRemaining  = g_TC_iBiggestRight - iWidthElement;
+    let iLeftForCentering = g_TC_Padding_Left_iSize + iWidthRemaining / 2;
+    return iLeftForCentering;
+}
+
+function TC_SetVisible(sId)
+{
+    document.getElementById(sId).style.visibility = 'visible';
+}
+
 function TC_GetRandomInt(iMax)
 {
     let iP = Math.floor(Math.random() * iMax);
@@ -66,7 +106,7 @@ function MakePixelString(i)
 
 function RectAsString(sName, rect)
 {
-    var s = sName + ':' + rect.top + '|' + rect.left + '|' + rect.height + '|' + rect.width;
+    var s = sName + ':' + rect.left + '|' + rect.top + '|' + rect.width + '|' + rect.height;
     return s;
 }
 

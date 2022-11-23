@@ -27,7 +27,9 @@ function TC_ShowExtraImage()
 {
     var iWidth = g_TC_iBiggestRight;
     var elemImage = document.getElementById("ExtraImage");
-    elemImage.style.top = MakePixelString(100);
+    let elemTitle = document.getElementById("Div_PuzzleTitle");
+    let rectTitle = elemTitle.getBoundingClientRect();
+    elemImage.style.top = MakePixelString(rectTitle.bottom + 2 );
     elemImage.style.left = MakePixelString(0);//g_TC_Padding_Left_iSize)
     elemImage.style.width = MakePixelString(iWidth)
     elemImage.style.visibility = 'visible'

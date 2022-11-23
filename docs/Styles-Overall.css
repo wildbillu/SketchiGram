@@ -8,16 +8,6 @@
 cursor: url('image/Button_ChangeDirection.cur'),auto;
 }
 
-.OpeningScreen
-{
-    border: 1px solid red;
-    background-color: lightskyblue;
-    color: #fff;
-    width:600px;
-    height:800px;
-    z-index:1;
-}
-
 .ForTest
 {
     visibility: hidden;
@@ -40,6 +30,7 @@ cursor: url('image/Button_ChangeDirection.cur'),auto;
     border: 0px solid red;
     width:600px;
     height:0px;
+    background-color: white;
 }
 
 .StartHidden

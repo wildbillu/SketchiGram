@@ -2,6 +2,16 @@
 
 var g_SA_Focus_sId = '';
 var g_SA_Focus_sCurrentValue = '';
+var g_SA_iMaxEntries = 12;
+
+function TC_SA_ClearEntries()
+{
+    for ( let i = 0; i < g_SA_iMaxEntries; i++)
+    {
+        g_ScratchArea_aWords[i] = '';
+        document.getElementById(TC_ScratchArea_MakeId(i)).value = '';
+    }
+}
 
 function TC_SA_UpdateValueInArray(sId)
 {
@@ -53,6 +63,7 @@ function TC_SA_CheckIfEntryMatchesAnAnswer(sId)
         {
             let sMessage = sValue + ' is a correct grid answer'
             TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
+            SG_Clues_ShowClue_ResetAnswer(iAnswer, false, true, false);
             break;
         }
     }
@@ -75,20 +86,23 @@ function TC_SA_Focus(elemInputText)
     {
         g_SA_Focus_sId = elemInputText.id;
     }
+    KB_Mini_BackspaceEnable(true);
 }
 
 function TC_SA_LoseTheFocusAndCleanup(bCheck)
 { // we are going to wait until another focus is selected before doing things on lost focus
     if ( g_SA_Focus_sId != '' && bCheck )
     {
-        TC_SA_CheckIfEntryMatchesAnAnswer(g_SA_Focus_sId);
-        TC_SA_UpdateValueInArray(g_SA_Focus_sId)
+        KB_Mini_BackspaceEnable(false);
+        //TC_SA_CheckIfEntryMatchesAnAnswer(g_SA_Focus_sId);
+        //TC_SA_UpdateValueInArray(g_SA_Focus_sId)
     }
     g_SA_Focus_sId = '';
 }
 
 function TC_SA_LostFocus(iEntry)
 {
+//    KB_Mini_BackspaceEnable(false);
 }
 
 function TC_ScratchArea_MakeId(iEntry)
@@ -138,8 +152,8 @@ function TC_ScratchArea_Setup(iTop, iLeft, iColumns, iWidth)
     sInner += '<DIV Id="ScratchArea_Text" class="ScratchArea_Text">Use this area for candidate answers</DIV>';
     sInner += '<TABLE Id="ScratchArea_TABLE" cellpadding=0 cellspacing=1 class="">';
     let iEntry = 0;
-    let iMaxEntries = 12;
-    while ( iEntry < iMaxEntries )
+
+    while ( iEntry < g_SA_iMaxEntries )
     {
         sInner += '<TR class="ScratchArea_TR">'
         for ( let iColumn = 0; iColumn < iColumns; iColumn++)
@@ -163,7 +177,7 @@ function TC_ScratchArea_Setup(iTop, iLeft, iColumns, iWidth)
     elemScratch.innerHTML = sInner;
     let iWidthEntry = (iWidth)/iColumns;
     let iEntryAdjust = 0;
-    while ( iEntryAdjust < iMaxEntries)
+    while ( iEntryAdjust < g_SA_iMaxEntries )
     {
         let iEntryLeft = 13;
         for ( let iCC = 0; iCC < iColumns; iCC++)
@@ -177,7 +191,7 @@ function TC_ScratchArea_Setup(iTop, iLeft, iColumns, iWidth)
         }
     }
     document.getElementById("ScratchArea_TABLE").style.left = MakePixelString(2);
-    let sId = TC_ScratchArea_MakeId(iMaxEntries - 1);
+    let sId = TC_ScratchArea_MakeId(g_SA_iMaxEntries - 1);
     let iBottom = document.getElementById(sId).getBoundingClientRect().bottom;
     let iHeightFull = (iBottom - iTop) + g_TC_Padding_Inter_Vertical_iSize;
     elemScratch.style.height = MakePixelString(iHeightFull);

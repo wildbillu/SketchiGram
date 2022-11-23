@@ -56,10 +56,9 @@ function KB_Mini_Setup(iWidthMax)
 //    
     let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     elemKB_Mini_Div.innerHTML = sInner;
+    KB_Mini_BackspaceEnable(false);
     return iRows;
 }
-
-
 
 function KB_Mini_KeyboardPress_CAB(keypressed)
 {
@@ -74,7 +73,7 @@ function KB_Mini_KeyboardPress_CAB(keypressed)
     return true;
 }
 
-function KB_Mini_KeyboardPress_GRB(keypressed)
+function KB_Mini_KeyboardPress_GRBMS(keypressed)
 {
     if ( g_GRBMS_Focus_sId == "")
         return false;
@@ -82,9 +81,12 @@ function KB_Mini_KeyboardPress_GRB(keypressed)
     iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
     var sCC = String.fromCharCode(8);
     if ( keypressed == sCC )
+    {
+        if ( !g_KB_Mini_bBackspaceEnabled )
+            return true;
         sToSet = ' ';
+    }
     GRBMS_onkeyup(keypressed, iRow, iLetter);
-    g_GRBMS_Focus_sId = '';
     return true;
 }
 
@@ -92,13 +94,16 @@ function KB_Mini_KeyboardPress_SA(keypressed)
 {
     if ( g_SA_Focus_sId == "")
         return false;
+    var sCC = String.fromCharCode(8);
+    if ( keypressed == sCC && !g_KB_Mini_bBackspaceEnabled )
+        return true;
     TC_SA_Entry_AddChar(keypressed)
     return true;
 }
 
 function KB_Mini_KeyboardPress(sLetter)
 {
-    if ( KB_Mini_KeyboardPress_GRB(sLetter) )
+    if ( KB_Mini_KeyboardPress_GRBMS(sLetter) )
         return;
     if ( KB_Mini_KeyboardPress_CAB(sLetter) )
         return;
@@ -109,7 +114,7 @@ function KB_Mini_MakeRowOfButtons(sLetters)
 {
     var sButtonRow = '<TABLE><TR>';
     var iLetters = sLetters.length;
-    for ( iLetter = 0; iLetter < iLetters; iLetter++ )
+    for ( let iLetter = 0; iLetter < iLetters; iLetter++ )
     {
         var cLetter = sLetters.charAt(iLetter);
         sButtonRow += '<TD>' + KB_Mini_MakeKeyboardButton(cLetter) + '</TD>';
@@ -123,12 +128,14 @@ function KB_Mini_MakeKeyboardButton(sLetter)
     let sTextForButton = sLetter;
     var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
     var sCC = String.fromCharCode(8);
+    let sTextForId = sLetter;
     if ( sLetter == sCC )
     {
         sClass = 'KB_Mini_Button KB_Mini_ButtonBackspace'
         sTextForButton = '';
+        sTextForId = 'Backspace';
     }
-    var sId = 'Id="KB_' + sTextForButton + '" ';
+    var sId = 'Id="KB_' + sTextForId + '" ';
     var sLetterSingleQuoted = "'" + sLetter + "'";
     var sOnClick = ' onclick="KB_Mini_KeyboardPress(' + sLetterSingleQuoted + ');" ';
     var sValue = 'value=' + sLetterSingleQuoted +' ';
@@ -136,4 +143,14 @@ function KB_Mini_MakeKeyboardButton(sLetter)
     var sButton = '<DIV '+ sId + sClassWrapped + sOnClick + sValue + '>' + sTextForButton + '</DIV>';
     return sButton;
 }
-
+var g_KB_Mini_bBackspaceEnabled = false;
+function KB_Mini_BackspaceEnable(bEnabled)
+{
+    g_KB_Mini_bBackspaceEnabled = bEnabled;
+    let sId = 'KB_Backspace';
+    let elemBackspace = document.getElementById(sId)
+    if ( bEnabled )
+        elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_Backspace.png")';
+    else
+        elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_Backspace-Disabled.png")';
+}

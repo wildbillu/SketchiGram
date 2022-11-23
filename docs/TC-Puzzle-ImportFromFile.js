@@ -96,6 +96,8 @@ function LoadPuzzleFromFile()
     var bUsedCookie = false;
     if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
     { 
+        g_DifficultyLevel_Range = g_DifficultyLevel_iIncrementForLevels * (g_DifficultyLevel_iLevel + 1);
+        g_Cookie_DifficultyLevel_iLevel 
         CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, g_Cookie_ScratchArea_sWords);
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering);
         g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
