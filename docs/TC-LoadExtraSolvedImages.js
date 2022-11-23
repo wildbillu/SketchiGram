@@ -37,6 +37,7 @@ function TC_ShowExtraImage()
     g_sCABOnExtraImageClick = g_CAB_Focus_sId;
     g_sGRBOnExtraImageClick = g_GRB_Focus_sId;
     g_GRBMS_ExtraImage_bActive = true;
+    ForIdSetVisibility("ScratchArea", true);
 }
 
 var g_GRBMS_SolvedImage_bActive = false;
