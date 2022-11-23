@@ -1,12 +1,12 @@
 /?file=images/Puzzle-Pokemon.txt
-sGridAnswers=POKEAREALEERMON.
 sPuzzleDate=2022-09-28
 sPuzzleName=Pokemon
 sPuzzleTitle=Play and collect rewards?
 iGridWidth=4
 iGridHeight=4
-sGridAnswersPlayer=---------------.
-sGridStatusPlayer=NNNNNNNNNNNNNNN.
+sGridAnswers=POKEAREALEERMON.
+sGridAnswersPlayer=--K-----------N.
+sGridStatusPlayer=NNGNNNNNNNNNNNG.
 sGridNumbering=01234...5...6...
 iClueAnswers=8
 sClues= |GO|Bits of one might be found in icecream|Romeo was _____ on Juliet|A doctor might joke about potatoes growing there|Height X Width for a rectangle|Tropical Tree|Villian's look

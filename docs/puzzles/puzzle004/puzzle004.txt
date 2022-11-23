@@ -1,12 +1,12 @@
 /?file=Puzzle-SurfAndTurf.txt
-sGridAnswers=.TOOSURFTREFUFO.
 sPuzzleDate=2022-09-16
 sPuzzleName=SurfAndTurf
 sPuzzleTitle=Dinner Anyone?
 iGridWidth=4
 iGridHeight=4
-sGridAnswersPlayer=.--------------.
-sGridStatusPlayer=.NNNNNNNNNNNNNN.
+sGridAnswers=.TOOSURFTREFUFO.
+sGridAnswersPlayer=.---------EF---.
+sGridStatusPlayer=.NNNNNNNNNGGNNN.
 sGridNumbering=.0123...4...5...
 iClueAnswers=8
 sClues=DummyA|DummyB|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|One with green filling for St. Pat's Day|Craft for ET
