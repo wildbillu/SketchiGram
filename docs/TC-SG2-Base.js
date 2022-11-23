@@ -46,9 +46,12 @@ function SG2_LoadAll(iSection)
         case 0:
             getResolution(); 
             while ( document.readyState != "complete") {}
+            alert('a')            
             HandleCookiesOnStart();
+            alert('b')            
             var bLoadedFromFile = false;
             bLoadedFromFile = LoadPuzzleFromFile();
+            alert('c')            
             if ( !bLoadedFromFile )
                 TC_Puzzle_Load_AsJS();
             SG2_LoadMainElements();
