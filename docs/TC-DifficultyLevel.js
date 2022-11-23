@@ -7,6 +7,12 @@ var g_DifficultyLevel_bShowClues = 0;
 var g_DifficultyLevel_bShowScratchArea = 1;
 var g_DifficultyLevel_bShowExtraCorrect = 2;
 
+function TC_DifficultyLevel_Set(iValue)
+{
+  let elemRangeControl = document.getElementById("DifficultyLevel_RangeControl");
+  elemRangeControl.value = iValue;
+  g_DifficultyLevel_iLevel = iValue;
+}
 
 function TC_DifficultyLevel_Changed()
 {
@@ -20,8 +26,8 @@ function TC_DifficultyLevel_Changed()
   TC_DifficultyLevel_ChangedWork(iLevel_New);
 }
 
-  function TC_DifficultyLevel_ChangedWork(iLevel_New)    
-  {
+function TC_DifficultyLevel_ChangedWork(iLevel_New)    
+{
     if ( iLevel_New <= 2 && g_DifficultyLevel_iLevel > 2 )
       TC_SetVisible("ScratchArea");
     if ( iLevel_New <= 1 && g_DifficultyLevel_iLevel > 1 )
@@ -41,15 +47,13 @@ function TC_DifficultyLevel_Setup(iTop)
     sInner += '  <TR><TD class="DL_Words">Hardest</TD></TR>'
     sInner += '  <TR><TD>'
     sInner += '    <DIV class="VerticalText">&nbsp;DIFFICULTY LEVEL&nbsp;</DIV>'
-    sInner += '    <DIV class="DifficultyLevel_SliderRow_Div"><input class="RangeRotate" min="0" max="3" type="range" Id="DifficultyLevel_RangeControl" onchange="TC_DifficultyLevel_Changed();"></DIV>'
+    sInner += '    <DIV class="DifficultyLevel_SliderRow_Div">'
+    sInner += '       <input class="RangeRotate" min="0" max="3" type="range" Id="DifficultyLevel_RangeControl" onchange="TC_DifficultyLevel_Changed();">'
+    sInner += '    </DIV>'
     sInner += '  </TD></TR>'
     sInner += '  <TR><TD class="DL_Words">Hard</TD></TR>';
     sInner += '</TABLE>';
     elemDifficultyLevel.innerHTML = sInner;    
-//    sInner += '  '
-//    sInner += '  </DIV>';
-
-
     let elemRange = document.getElementById("DifficultyLevel_RangeControl");
     elemRange.style.left = MakePixelString(-135);
     elemRange.style.top = MakePixelString (160);

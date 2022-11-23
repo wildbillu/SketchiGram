@@ -95,7 +95,7 @@ function SG2_LoadAll(iSection)
             let iDisplayDualClueTop = 50;
             let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
             var rectStatusControlRight =  elemStatusControlRight.getBoundingClientRect();            
-            TC_DisplayDualClue_Setup(iDisplayDualClueTop, g_TC_Padding_Left_iSize, rectStatusControlRight.left - 2 * g_TC_Padding_Left_iSize);
+            TC_DisplayDualClue_Setup(iDisplayDualClueTop, g_TC_Padding_Left_iSize, rectStatusControlRight.left - 4 * g_TC_Padding_Left_iSize);
             let iDifficultyLevelTop = 310;
             TC_DifficultyLevel_Setup(iDifficultyLevelTop);            
 // scratch area 

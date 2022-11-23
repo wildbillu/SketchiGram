@@ -137,7 +137,7 @@ function Dropdown_More_ResetPuzzle()
         ForIdSetVisibility("SG_HowToA_Div", true);
         ForIdSetVisibility("ScratchArea", false);
         SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, false);
-        g_DifficultyLevel_iLevel = 3;
+        TC_DifficultyLevel_Set(3);
     }
     Dropdown_More_FinishUp(true);
 }
