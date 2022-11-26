@@ -6,6 +6,12 @@ var g_SA_EB_cCursor = '|';
 //var g_SA_EB_cCursor = String.fromCharCode(0x2502);
 var g_SA_EB_bFudgeToKeepFocus = false;
 
+function TC_SA_EB_ClearEntries()
+{
+    for ( let iEntry = 0; iEntry < g_SA_iMaxEntries.length; iEntry++ )
+        g_ScratchArea_aWords[iEntry] = '';
+}
+
 function TC_SA_EB_InsertCursorAt(sValue)
 {// first remove any existing cursor
     let sValueNoCursor = removeAllChar(sValue, g_SA_EB_cCursor);

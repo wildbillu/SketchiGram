@@ -131,13 +131,13 @@ function Dropdown_More_ResetPuzzle()
     {
         GRBMS_ScrambleCorrectAnswersToPlayer(true);
         GRBMS_SetAllButtons();
-        TC_SA_ClearEntries();
+        TC_SA_EB_ClearEntries();
         ForIdSetVisibility("KB_Mini_Div", true);
         ForIdSetVisibility("DifficultyLevel_Div", true);
         ForIdSetVisibility("SG_HowToA_Div", true);
-        ForIdSetVisibility("ScratchArea", false);
         SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, false);
         TC_DifficultyLevel_Set(3);
+        ForIdSetVisibility("ScratchArea", false);
     }
     Dropdown_More_FinishUp(true);
 }
