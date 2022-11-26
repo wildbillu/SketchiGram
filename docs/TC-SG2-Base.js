@@ -105,7 +105,8 @@ function SG2_LoadAll(iSection)
             let iScratchAreaTop = rectGrid.top;
             let iScratchAreaLeft = rectGrid.right + 5;
             let iScratchAreaWidth = g_TC_iBiggestRight - iScratchAreaLeft - 5;
-            TC_ScratchArea_Setup(iScratchAreaTop, iScratchAreaLeft, iColumns, iScratchAreaWidth);
+            TC_SA_EB_Setup(iScratchAreaTop, iScratchAreaLeft, iColumns, iScratchAreaWidth);
+//            TC_ScratchArea_Setup(iScratchAreaTop, iScratchAreaLeft, iColumns, iScratchAreaWidth);
             let iResultMessageTop = 135;
             TC_ResultMessage_Setup(iResultMessageTop);
             Status_Check(true);

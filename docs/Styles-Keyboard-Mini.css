@@ -64,9 +64,24 @@
 .KB_Mini_ButtonBackspace 
 {
     width:43px;
-    font-size: 10px;
     background-image: url("images/Buttons/Button_Backspace.png");
     background-size:43px;
+    background-repeat:no-repeat;
+}
+
+.KB_Mini_ButtonArrowLeft 
+{
+    width:36px;
+    background-image: url("images/Buttons/Button_ArrowLeft.png");
+    background-size:32px;
+    background-repeat:no-repeat;
+}
+
+.KB_Mini_ButtonArrowRight 
+{
+    width:32px;
+    background-image: url("images/Buttons/Button_ArrowRight.png");
+    background-size:32px;
     background-repeat:no-repeat;
 }
 

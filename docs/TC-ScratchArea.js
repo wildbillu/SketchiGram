@@ -4,6 +4,40 @@ var g_SA_Focus_sId = '';
 var g_SA_Focus_sCurrentValue = '';
 var g_SA_iMaxEntries = 12;
 
+function TC_SA_onkeydown(e)
+{
+    return true;
+}
+
+function TC_SA_onkeypress(e)
+{
+    let eKey = e.key;
+    let cKey = eKey.toUpperCase();
+    if ( g_GRBMS_sAllowedGridLetters.indexOf(cKey) != -1 || eKey.startsWith('Backspace') )
+    {
+        return true; // let it through
+    }        
+    let letters = /^[a-zA-Z]$/;
+    let sMessage = 'Invalid key';
+    if ( eKey.match(letters) ) 
+        sMessage = cKey + ' Is Not In the Solution Grid';
+    TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
+    e.preventDefault();
+    return false;
+}
+
+function TC_SA_onkeyup(e, key, iEntry)
+{
+    let cKey = key.toUpperCase();
+    if ( g_GRBMS_sAllowedGridLetters.indexOf(cKey) == -1 )
+    {
+        e.preventDefault();
+        return false;
+    }
+    TC_SA_UpdateValueInArray(g_SA_Focus_sId);
+    return true;
+}
+
 function TC_SA_ClearEntries()
 {
     for ( let i = 0; i < g_SA_iMaxEntries; i++)
@@ -69,6 +103,23 @@ function TC_SA_CheckIfEntryMatchesAnAnswer(sId)
     }
 }
 
+function TC_SA_CheckIfEntryMatchesAnAnswer(iEntry)
+{
+    let sValue = g_ScratchArea_aWords[iEntry];
+    sValue = sValue.toUpperCase();
+    for ( let iAnswer = 0; iAnswer < g_aAnswers.length; iAnswer++ )
+    {
+        let sAnswer = g_aAnswers[iAnswer];
+        if ( sAnswer == sValue )
+        {
+            let sMessage = sValue + ' is a correct grid answer'
+            TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
+            SG_Clues_ShowClue_ResetAnswer(iAnswer, false, true, false);
+            break;
+        }
+    }
+}
+
 function TC_SA_Oninput(elemInputText)
 {
     TC_SA_CheckIfEntryMatchesAnAnswer(elemInputText.id);
@@ -86,7 +137,7 @@ function TC_SA_Focus(elemInputText)
     {
         g_SA_Focus_sId = elemInputText.id;
     }
-    KB_Mini_BackspaceEnable(true);
+    KB_Mini_SpecialButtonEnable(true);
 }
 
 function TC_SA_LoseTheFocusAndCleanup(bCheck)
@@ -94,15 +145,12 @@ function TC_SA_LoseTheFocusAndCleanup(bCheck)
     if ( g_SA_Focus_sId != '' && bCheck )
     {
         KB_Mini_BackspaceEnable(false);
-        //TC_SA_CheckIfEntryMatchesAnAnswer(g_SA_Focus_sId);
-        //TC_SA_UpdateValueInArray(g_SA_Focus_sId)
     }
     g_SA_Focus_sId = '';
 }
 
 function TC_SA_LostFocus(iEntry)
 {
-//    KB_Mini_BackspaceEnable(false);
 }
 
 function TC_ScratchArea_MakeId(iEntry)
@@ -115,32 +163,6 @@ function TC_ScratchArea_EntryFromId(sId)
     return sId.charAt(5);
 }
 
-function TC_SA_onkeypress(event)
-{
-    var eKey = event.key;
-    let cKey = eKey.toUpperCase();
-    if ( g_GRBMS_sAllowedGridLetters.indexOf(cKey) != -1 || eKey.startsWith('Backspace') )
-        return true; // let it through
-    var letters = /^[a-zA-Z]$/;
-    let sMessage = 'Invalid key';
-    if ( eKey.match(letters) ) 
-        sMessage = cKey + ' Is Not In the Solution Grid';
-    TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
-    event.preventDefault();
-    return false;
-}
-
-function TC_SA_onkeyup(e, key, iEntry)
-{
-    let cKey = key.toUpperCase();
-    if ( g_GRBMS_sAllowedGridLetters.indexOf(cKey) == -1 )
-    {
-        e.preventDefault();
-        return false;
-    }
-    TC_SA_UpdateValueInArray(g_SA_Focus_sId);
-    return true;
-}
 
 function TC_ScratchArea_Setup(iTop, iLeft, iColumns, iWidth)
 {
@@ -160,6 +182,7 @@ function TC_ScratchArea_Setup(iTop, iLeft, iColumns, iWidth)
         {
             let sId = TC_ScratchArea_MakeId(iEntry);
             let sFunctionsToCall = '';
+//            sFunctionsToCall += ' onkeydown="return TC_SA_onkeydown(event);"';
             sFunctionsToCall += ' onkeypress="return TC_SA_onkeypress(event);"';
             sFunctionsToCall += ' onfocusout="TC_SA_LostFocus(' + iEntry + ' );" ';
             sFunctionsToCall += ' onfocus="TC_SA_Focus(this);" ';

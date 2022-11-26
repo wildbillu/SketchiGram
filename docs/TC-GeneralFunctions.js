@@ -173,3 +173,21 @@ function removeAt(sOriginal, index)
     sNew += sOriginal.substring(index + 1);
     return sNew;
 }
+
+function removeAllChar(sOriginal, cChar) 
+{
+    var sNew = ''; 
+    for ( let i = 0; i < sOriginal.length; i++ )
+    {
+        let cThisChar = sOriginal.charAt(i);
+        if ( cThisChar != cChar )
+            sNew += cThisChar;
+    }            
+    return sNew;
+}
+
+function insertAt(sOriginal, iAt, cChar) 
+{
+    let sResult = sOriginal.substring(0, iAt) + cChar + sOriginal.substring(iAt);
+    return sResult;
+}

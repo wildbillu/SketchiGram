@@ -1,6 +1,8 @@
 // TC-Keyboard-Mini.js
 // includes only allowed characters and presents them scrambled
 
+var g_KB_Mini_bBackspaceEnabled = false;
+
 function ScrambleTheseLetters(sLetters)
 {
     var sScrambled ='';
@@ -19,16 +21,17 @@ function KB_Mini_Setup(iWidthMax)
     let sAllowedLettersScrambled = ScrambleTheseLetters(g_GRBMS_sAllowedGridLetters);
 //
     let iAllowedLetters = sAllowedLettersScrambled.length;
+    let iTotalLetters = iAllowedLetters + 3;
     let elemTest = document.getElementById("Test")
     let sLetter = 'L'
     elemTest.innerHTML = KB_Mini_MakeKeyboardButton(sLetter);
     let sId = 'KB_' + sLetter;
     let elemLetter = document.getElementById(sId)
     let rectButton = elemLetter.getBoundingClientRect();
-    let iEstimatedWidth = iAllowedLetters * (rectButton.width + 4); 
+    let iEstimatedWidth = iTotalLetters * (rectButton.width + 4); 
     let fRows = Math.ceil(iEstimatedWidth / iWidthMax);
     let iRows = parseInt(fRows);
-    let fLettersPerRow = Math.ceil(iAllowedLetters / iRows);
+    let fLettersPerRow = Math.ceil(iTotalLetters / iRows);
     let iLettersPerRow = parseInt(fLettersPerRow.toFixed());
     elemTest.innerHTML = '';
     let sInner = '';
@@ -47,6 +50,8 @@ function KB_Mini_Setup(iWidthMax)
         {
             let sCC = String.fromCharCode(8);
             sThisRow += sCC;
+            sThisRow += '<';
+            sThisRow += '>';
         }
         sInner += '<TR align=center><TD>';
         sInner += KB_Mini_MakeRowOfButtons(sThisRow);
@@ -56,7 +61,7 @@ function KB_Mini_Setup(iWidthMax)
 //    
     let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     elemKB_Mini_Div.innerHTML = sInner;
-    KB_Mini_BackspaceEnable(false);
+    KB_Mini_SpecialButtonEnable(false);
     return iRows;
 }
 
@@ -90,6 +95,19 @@ function KB_Mini_KeyboardPress_GRBMS(keypressed)
     return true;
 }
 
+function KB_Mini_KeyboardPress_SA_EB(keypressed)
+{
+    if ( g_SA_EB_Focus_sId == "")
+    {
+        return false;
+    }
+    var sCC = String.fromCharCode(8);
+    if ( keypressed == sCC && !g_KB_Mini_bBackspaceEnabled )
+        return true;
+    TC_SA_EB_Entry_AddChar(keypressed)
+    return true;
+}
+
 function KB_Mini_KeyboardPress_SA(keypressed)
 {
     if ( g_SA_Focus_sId == "")
@@ -107,7 +125,9 @@ function KB_Mini_KeyboardPress(sLetter)
         return;
     if ( KB_Mini_KeyboardPress_CAB(sLetter) )
         return;
-    KB_Mini_KeyboardPress_SA(sLetter)        
+    if ( KB_Mini_KeyboardPress_SA(sLetter) )
+        return;
+    KB_Mini_KeyboardPress_SA_EB(sLetter);
 }
 
 function KB_Mini_MakeRowOfButtons(sLetters)
@@ -135,6 +155,22 @@ function KB_Mini_MakeKeyboardButton(sLetter)
         sTextForButton = '';
         sTextForId = 'Backspace';
     }
+    else if ( sLetter == '<')
+    {
+        sLetter = 'ArrowLeft'
+        sClass = 'KB_Mini_Button KB_Mini_ButtonArrowLeft'
+        sTextForButton = '';
+        sTextForId = 'ArrowLeft';
+
+    }
+    else if ( sLetter == '>')
+    {
+        sClass = 'KB_Mini_Button KB_Mini_ButtonArrowRight'
+        sLetter = 'ArrowRight'
+        sTextForButton = '';
+        sTextForId = 'ArrowRight';
+
+    }
     var sId = 'Id="KB_' + sTextForId + '" ';
     var sLetterSingleQuoted = "'" + sLetter + "'";
     var sOnClick = ' onclick="KB_Mini_KeyboardPress(' + sLetterSingleQuoted + ');" ';
@@ -143,7 +179,14 @@ function KB_Mini_MakeKeyboardButton(sLetter)
     var sButton = '<DIV '+ sId + sClassWrapped + sOnClick + sValue + '>' + sTextForButton + '</DIV>';
     return sButton;
 }
-var g_KB_Mini_bBackspaceEnabled = false;
+
+function KB_Mini_SpecialButtonEnable(bEnabled)
+{
+    KB_Mini_BackspaceEnable(bEnabled);
+    KB_Mini_ArrowLeftEnable(bEnabled);
+    KB_Mini_ArrowRightEnable(bEnabled);
+}
+
 function KB_Mini_BackspaceEnable(bEnabled)
 {
     g_KB_Mini_bBackspaceEnabled = bEnabled;
@@ -153,4 +196,26 @@ function KB_Mini_BackspaceEnable(bEnabled)
         elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_Backspace.png")';
     else
         elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_Backspace-Disabled.png")';
+}
+
+function KB_Mini_ArrowRightEnable(bEnabled)
+{
+    g_KB_Mini_bBackspaceEnabled = bEnabled;
+    let sId = 'KB_ArrowRight';
+    let elemBackspace = document.getElementById(sId)
+    if ( bEnabled )
+        elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_ArrowRight.png")';
+    else
+        elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_ArrowRight-Disabled.png")';
+}
+
+function KB_Mini_ArrowLeftEnable(bEnabled)
+{
+    g_KB_Mini_bBackspaceEnabled = bEnabled;
+    let sId = 'KB_ArrowLeft';
+    let elemBackspace = document.getElementById(sId)
+    if ( bEnabled )
+        elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_ArrowLeft.png")';
+    else
+        elemBackspace.style.backgroundImage = 'url("images/Buttons/Button_ArrowLeft-Disabled.png")';
 }

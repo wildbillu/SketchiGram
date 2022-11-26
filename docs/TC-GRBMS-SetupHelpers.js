@@ -38,8 +38,7 @@ function GRBMS_ScrambleCorrectAnswersToPlayer(bReplaceCorrectAndCorrected)
     sGridAsString = GRB_ChangeForbiddenCharactersToDot(sGridAsString, bReplaceCorrectAndCorrected)
     var sNoDots = '';
 let iMaxCheck = 0;
-    for ( var i=0; i< sGridAsString.length; i++)
-        if ( sGridAsString.charAt(i) != '.' ) sNoDots += sGridAsString.charAt(i);
+    sNoDots = removeAllChar(sGridAsString, '.');
     for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
     {
         for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
