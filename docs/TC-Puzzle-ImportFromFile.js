@@ -98,13 +98,13 @@ function LoadPuzzleFromFile()
     var bUsedCookie = false;
     if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
     { 
-        CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus);
+        CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, 
+            g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus);
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering);
         g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
         g_bGridSolved = g_Cookie_bGridSolved;
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
         bUsedCookie = true;
-
     }
     if ( !bUsedCookie )
     {

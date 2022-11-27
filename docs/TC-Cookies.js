@@ -45,7 +45,7 @@ var g_Cookie_bGridSolved = false;
 var g_Cookie_bAnswersSolved = false;
 var g_Cookie_SA_EB_sWords = '||||||||||||';
 var g_Cookie_DifficultyLevel_iLevel = -1;
-var g_Cookie_SA_eB_sWordStatus = 'FFFFFFFFFFFF';
+var g_Cookie_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
 
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
@@ -71,7 +71,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     g_Cookie_bAnswersSolved = IsTrue(aOurValues[8]);
     g_Cookie_SA_EB_sWords = aOurValues[9];
     g_Cookie_DifficultyLevel_iLevel = aOurValues[10];
-    g_Cookie_SA_eB_sWordStatus =  aOurValues[11];
+    g_Cookie_SA_EB_sWordStatus =  aOurValues[11];
     g_Cookie_bValid = true;
 }
 
