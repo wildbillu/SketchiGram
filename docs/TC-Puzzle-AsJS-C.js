@@ -17,8 +17,8 @@ function TC_Puzzle_Load_AsJS()
     var sAnswersPlayer             = '----|----|---|---|---|----|----|---';
     var sStatusPlayer              = 'NNNN|NNNN|NNN|NNN|NNN|NNNN|NNNN|NNN';
     var sAnswerLocations           ='4 Across|1 Down|3 Down|1 Across|4 Down|5 Across|2 Down|6 Across';
-    let ScratchArea_sWords          = '|A|||||||||||';
-    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, ScratchArea_sWords);
+    let SA_EB_sWords          = '|A|||||||||||';
+    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords);
 // GR_Stuff
     var iGridWidth      = 4;
     var iGridHeight     = 4;

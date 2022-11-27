@@ -97,7 +97,6 @@ g_iScreen_Width = Math.round(screen.width * window.devicePixelRatio);
 g_iScreen_Height= Math.round(screen.height * window.devicePixelRatio);
 }
 
-
 function MakePixelString(i)
 {
     var s = i.toString() + 'px';

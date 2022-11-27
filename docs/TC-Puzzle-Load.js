@@ -1,6 +1,6 @@
 // TC-Puzzle-Load.js
 
-function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, ScratchArea_sWords)
+function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus)
 {
     g_aClues   = sClues.split(g_TC_cGeneralDelimiter);
     g_iClues   = g_aClues.length;
@@ -9,7 +9,8 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswe
     g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
     g_aAnswersStatusPlayer  = sStatusPlayer.split(g_TC_cGeneralDelimiter);
     g_aAnswerLocations = sAnswerLocations.split(g_TC_cGeneralDelimiter);
-    g_ScratchArea_aWords = ScratchArea_sWords.split(g_TC_cGeneralDelimiter);
+    g_SA_EB_aWords = SA_EB_sWords.split(g_TC_cGeneralDelimiter);
+    g_SA_EB_sWordStatus = SA_EB_sWordStatus;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues || g_aAnswersStatusPlayer.length != g_iClues)
         setline('dataProblem.' + g_iClues + g_aClues.length + g_aAnswers.length + g_aAnswersPlayer.length + g_aAnswersStatusPlayer.length);
 }

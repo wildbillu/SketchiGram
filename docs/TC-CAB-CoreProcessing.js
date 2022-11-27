@@ -159,8 +159,8 @@ function CAB_onfocus(elem)
     var sThisId = elem.id;
     if ( g_GRB_Focus_sId != '')        
         GRB_FocusLostSetActiveToInActive();
-    if ( g_SA_Focus_sId != '' )
-        TC_SA_LoseTheFocusAndCleanup(false)
+    if ( g_SA_EB_Focus_sId != '' )
+        TC_SA_EB_LoseTheFocusAndCleanup(false)
     var iThisRow        = CAB_RowFromId(sThisId);
     var iThisCharacter  = CAB_LetterFromId(sThisId);
     CAB_ForRow_SetToActive(iThisRow, iThisCharacter);

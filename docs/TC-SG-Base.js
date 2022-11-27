@@ -106,7 +106,7 @@ function SG_LoadAll(iSection)
             let iTop = rectActionMenu.bottom + g_TC_Padding_Inter_Vertical_iSize;
             let iLeft = rectActionMenu.left;
             let iWidth  = rectActionMenu.width;
-            TC_ScratchArea_Setup(iTop, iLeft, 3, iWidth);
+            TC_SA_EB_Setup(iTop, iLeft, 3, iWidth);
             TC_AdjustSettings();
             TC_ResultMessage_Setup(0);
             setTimeout(function(){SG_LoadAll(iSection + 1);}, 1);    

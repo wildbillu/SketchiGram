@@ -1,15 +1,48 @@
 // TC-ScratchArea-EditBox.js
 
+var g_SA_EB_aWords = [];
+var g_SA_EB_iMaxEntries = 12;
+var g_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
 var g_SA_EB_Focus_sId = '';
-var g_SA_EB_iCursorPosition = 2;
+var g_SA_EB_iCursorPosition = 0;
 var g_SA_EB_cCursor = '|';
-//var g_SA_EB_cCursor = String.fromCharCode(0x2502);
 var g_SA_EB_bFudgeToKeepFocus = false;
 
-function TC_SA_EB_ClearEntries()
+function TC_SA_EB_LoseFocus()
 {
-    for ( let iEntry = 0; iEntry < g_SA_iMaxEntries.length; iEntry++ )
-        g_ScratchArea_aWords[iEntry] = '';
+    if ( g_SA_EB_Focus_sId == '' )
+        return;
+    let elemOldFocus = document.getElementById(g_SA_EB_Focus_sId);
+    let iEntry = TC_SA_EB_EntryFromId(g_SA_EB_Focus_sId);
+    let sClassName = "SA_EB_Entry_Base SA_EB_Entry_Inactive";
+    if ( g_SA_EB_sWordStatus.charAt(iEntry) == 'T' )
+        sClassName = "SA_EB_Entry_Base SA_EB_Entry_Correct";
+    elemOldFocus.className = sClassName;
+    let sValue = elemOldFocus.innerHTML;
+    elemOldFocus.innerHTML = removeAllChar(sValue, g_SA_EB_cCursor);
+    g_SA_EB_Focus_sId = '';
+}
+
+function TC_SA_EB_CheckIfEntryMatchesAnAnswer(iEntry)
+{
+    let sValue = g_SA_EB_aWords[iEntry];
+    sValue = sValue.toUpperCase();
+    for ( let iAnswer = 0; iAnswer < g_aAnswers.length; iAnswer++ )
+    {
+        let sAnswer = g_aAnswers[iAnswer];
+        if ( sAnswer == sValue )
+        {
+            let sMessage = sValue + ' is a correct grid answer'
+            TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
+            SG_Clues_ShowClue_ResetAnswer(iAnswer, false, true, false);
+            let iIndex = TC_SA_EB_EntryFromId(g_SA_EB_Focus_sId);
+            g_SA_EB_sWordStatus = replaceAt(g_SA_EB_sWordStatus, iIndex, 'T');
+// lose focus 
+            TC_SA_EB_LoseFocus();
+            TC_SA_EB_LoseTheFocusAndCleanup(true);
+            break;
+        }
+    }
 }
 
 function TC_SA_EB_InsertCursorAt(sValue)
@@ -74,12 +107,18 @@ function TC_SA_EB_Entry_AddChar(keypressed)
     }
     else
     {
+        if ( iLength > g_iGridHeight && iLength > g_iGridWidth )
+        {
+            let sMessage = 'No Words ' + iLength + ' letters long';
+            TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
+            return;
+        }
         let sUpper = keypressed.toUpperCase();
         sValue = TC_SA_EB_AddCharFixup(sValue, sUpper)
     }
     TC_SA_EB_ForEntrySetWord(iEntry, sValue);
     elemInputText.innerHTML = sValue;
-    TC_SA_CheckIfEntryMatchesAnAnswer(iEntry)
+    TC_SA_EB_CheckIfEntryMatchesAnAnswer(iEntry);
 }
 
 function TC_SA_EB_onkeydown(e)
@@ -125,30 +164,54 @@ function TC_SA_EB_onkeyup(e, key, iEntry)
 function TC_SA_EB_ForEntrySetWord(iEntry, sValueWithOrWithoutCursor)
 {
     let sValueNoCursor = removeAllChar(sValueWithOrWithoutCursor, g_SA_EB_cCursor);
-    g_ScratchArea_aWords[iEntry] = sValueNoCursor;
+    g_SA_EB_aWords[iEntry] = sValueNoCursor;
+}
+
+function TC_SA_EB_LoseFocus()
+{
+    if ( g_SA_EB_Focus_sId == '' )
+        return;
+    let elemOldFocus = document.getElementById(g_SA_EB_Focus_sId);
+    let iEntry = TC_SA_EB_EntryFromId(g_SA_EB_Focus_sId);
+    let sClassName = "SA_EB_Entry_Base SA_EB_Entry_Inactive";
+    if ( g_SA_EB_sWordStatus.charAt(iEntry) == 'T' )
+        sClassName = "SA_EB_Entry_Base SA_EB_Entry_Correct";
+    elemOldFocus.className = sClassName;
+    let sValue = elemOldFocus.innerHTML;
+    elemOldFocus.innerHTML = removeAllChar(sValue, g_SA_EB_cCursor);
+    g_SA_EB_Focus_sId = '';
 }
 
 function TC_SA_EB_Focus(elemInputText)
 {
     if ( g_SA_EB_bFudgeToKeepFocus )
         return;
+// if this element is already correct, do not accept focus
+    let iEntry = TC_SA_EB_EntryFromId(elemInputText.id);
+    if ( g_SA_EB_sWordStatus.charAt(iEntry) == 'T')
+        return;
     if ( g_SA_EB_Focus_sId != '' )
-    {
-        let elemOldFocus = document.getElementById(g_SA_EB_Focus_sId);
-        elemOldFocus.className = "SA_EB_Entry";
-        let sValue = elemOldFocus.innerHTML;
-        elemOldFocus.innerHTML = removeAllChar(sValue, g_SA_EB_cCursor);
-        TC_SA_EB_LoseTheFocusAndCleanup(false);
-    }        
+        { // need to fix previous focus
+            let elemOldFocus = document.getElementById(g_SA_EB_Focus_sId);
+            let iEntry = TC_SA_EB_EntryFromId(g_SA_EB_Focus_sId);
+            let sClassName = "SA_EB_Entry_Base SA_EB_Entry_Inactive";
+            if ( g_SA_EB_sWordStatus.charAt(iEntry) == 'T' )
+                sClassName = "SA_EB_Entry_Base SA_EB_Entry_Correct";
+            elemOldFocus.className = sClassName;
+            let sValue = elemOldFocus.innerHTML;
+            elemOldFocus.innerHTML = removeAllChar(sValue, g_SA_EB_cCursor);
+            TC_SA_EB_LoseTheFocusAndCleanup(false);
+        }        
     if ( g_SA_EB_Focus_sId == '')
     {
         g_SA_EB_Focus_sId = elemInputText.id;
-        elemInputText.className = "SA_EB_Entry_Focus";
+        elemInputText.className = "SA_EB_Entry_Base SA_EB_Entry_Focus";
         let sValue = elemInputText.innerHTML;
         sValue = TC_SA_EB_InsertCursorAt(sValue)
         elemInputText.innerHTML = sValue;
     }
     KB_Mini_SpecialButtonEnable(true);
+    GRBMS_LoseCurrentFocus();
 }
 
 function TC_SA_EB_LoseTheFocusAndCleanup(bCheck)
@@ -156,10 +219,10 @@ function TC_SA_EB_LoseTheFocusAndCleanup(bCheck)
     if ( g_SA_EB_Focus_sId != '' && bCheck )
     {
         KB_Mini_SpecialButtonEnable(false);
+        TC_SA_EB_LoseFocus();
     }
     g_SA_EB_Focus_sId = '';
 }
-
 
 function TC_SA_EB_Setup(iTop, iLeft, iColumns, iWidth)
 {
@@ -168,24 +231,27 @@ function TC_SA_EB_Setup(iTop, iLeft, iColumns, iWidth)
     elemScratch.style.left = MakePixelString(iLeft);
     elemScratch.style.width = MakePixelString(iWidth+5);
     let sInner = '';
-    sInner += '<DIV Id="ScratchArea_Text">Use this area for candidate answers</DIV>';
-    sInner += '<TABLE Id="ScratchArea_TABLE" cellpadding=0 cellspacing=1 class="">';
+    sInner += '<DIV Id="ScratchArea_Text" class="Scratch_Text">Use this area for candidate answers</DIV>';
+    sInner += '<TABLE Id="ScratchArea_TABLE" cellpadding=0 cellspacing=1 class="ScratchArea_TABLE">';
     let iEntry = 0;
-    while ( iEntry < g_SA_iMaxEntries )
+    while ( iEntry < g_SA_EB_iMaxEntries )
     {
         sInner += '<TR class="ScratchArea_TR">'
         for ( let iColumn = 0; iColumn < iColumns; iColumn++)
         {
             let sId = TC_SA_EB_MakeId(iEntry);
+            let sClassName = 'SA_EB_Entry_Base SA_EB_Entry_Inactive';
+            if ( g_SA_EB_sWordStatus.charAt(iEntry) == 'T')
+                sClassName = 'SA_EB_Entry_Base SA_EB_Entry_Correct';
             let sFunctionsToCall = '';
             sFunctionsToCall += ' onkeydown="return TC_SA_EB_onkeydown(event);"';
             sFunctionsToCall += ' onkeypress="return TC_SA_EB_onkeypress(event);"';
-//            sFunctionsToCall += ' onfocusout="TC_SA_EB_LostFocus(' + iEntry + ' );" ';
             sFunctionsToCall += ' onfocus="TC_SA_EB_Focus(this);" ';
-//            sFunctionsToCall += ' onchange="TC_SA_EB_Change(this);" ';
-//            sFunctionsToCall += ' oninput="TC_SA_EB_Oninput(this);" ';
             sFunctionsToCall += ' onkeyup="return TC_SA_EB_onkeyup(event, event.key,' + iEntry + ');"';
-            sThisOne = '<TD><DIV tabindex="0" Id="' + sId + '" class="SA_EB_Entry" ' + sFunctionsToCall + ' >ABCD</DIV></TD>';
+            sThisOne = '<TD><DIV tabindex="0" Id="' + sId + '" class= "' + sClassName + '" ';
+            sThisOne += sFunctionsToCall + ' >'
+            sThisOne += g_SA_EB_aWords[iEntry];
+            sThisOne += '</DIV></TD>';
             sInner += sThisOne;
             iEntry++;
         }
@@ -195,7 +261,7 @@ function TC_SA_EB_Setup(iTop, iLeft, iColumns, iWidth)
     elemScratch.innerHTML = sInner;
     let iWidthEntry = (iWidth)/iColumns;
     let iEntryAdjust = 0;
-    while ( iEntryAdjust < g_SA_iMaxEntries )
+    while ( iEntryAdjust < g_SA_EB_iMaxEntries )
     {
         let iEntryLeft = 13;
         for ( let iCC = 0; iCC < iColumns; iCC++)
@@ -209,12 +275,17 @@ function TC_SA_EB_Setup(iTop, iLeft, iColumns, iWidth)
         }
     }
     document.getElementById("ScratchArea_TABLE").style.left = MakePixelString(2);
-    let sId = TC_SA_EB_MakeId(g_SA_iMaxEntries - 1);
+    let sId = TC_SA_EB_MakeId(g_SA_EB_iMaxEntries - 1);
     let iBottom = document.getElementById(sId).getBoundingClientRect().bottom;
     let iHeightFull = (iBottom - iTop) + g_TC_Padding_Inter_Vertical_iSize;
     elemScratch.style.height = MakePixelString(iHeightFull);
     elemScratch.style.width = MakePixelString(iWidth+4);
 }
 
+function TC_SA_EB_ClearEntries()
+{
+    for ( let iEntry = 0; iEntry < g_SA_EB_iMaxEntries.length; iEntry++ )
+        g_SA_EB_aWords[iEntry] = '';
+}
 function TC_SA_EB_MakeId(iEntry){return 'TC_SA_EB_' + iEntry;}
 function TC_SA_EB_EntryFromId(sId){return sId.charAt(9);}

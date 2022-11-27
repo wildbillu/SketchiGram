@@ -23,8 +23,9 @@ function TC_Puzzle_Load_AsJS()
     var sAnswersPlayer             =  '----|----|----|----|----|----|----|----';
     var sStatusPlayer              =  'NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
     var sAnswerLocations           ='6 Across|3 Down|2 Down|1 Across|7 Across|4 Down|5 Across|1 Down';
-    var ScratchArea_sWords          = '||||||||||||';
-    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, ScratchArea_sWords);
+    var SA_EB_sWords          = 'TWIN||||||||||||';
+    var SA_EB_sWordStatus     = 'TFFFFFFFFFFF';
+    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus);
 // GR_Stuff
     var iGridWidth      = 4;
     var iGridHeight     = 4;
@@ -32,8 +33,5 @@ function TC_Puzzle_Load_AsJS()
     var sGridAnswersPlayer          = 'O-------------N-';
     var sGridStatusPlayer           = 'GNNNNNNNNNNNNNGN';
     var sGridNumbering              = '01234...5...6...';
-
-
-
     GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
 }

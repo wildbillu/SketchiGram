@@ -11,7 +11,7 @@ var g_sPuzzleTitle = '';
 var g_sPuzzleCreditAuthor = 'By Sketchi Bill';
 var g_sPuzzleCreditDate = 'September 26, 2022';
 var g_bDisplayMessages = true;
-var g_ScratchArea_aWords = [];
+
 //
 var g_ST_sClue_Intro = 'SketchiToons Clue to Dual Answer';
 var g_ST_sClue_Itself = '';

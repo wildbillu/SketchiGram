@@ -108,24 +108,11 @@ function KB_Mini_KeyboardPress_SA_EB(keypressed)
     return true;
 }
 
-function KB_Mini_KeyboardPress_SA(keypressed)
-{
-    if ( g_SA_Focus_sId == "")
-        return false;
-    var sCC = String.fromCharCode(8);
-    if ( keypressed == sCC && !g_KB_Mini_bBackspaceEnabled )
-        return true;
-    TC_SA_Entry_AddChar(keypressed)
-    return true;
-}
-
 function KB_Mini_KeyboardPress(sLetter)
 {
     if ( KB_Mini_KeyboardPress_GRBMS(sLetter) )
         return;
     if ( KB_Mini_KeyboardPress_CAB(sLetter) )
-        return;
-    if ( KB_Mini_KeyboardPress_SA(sLetter) )
         return;
     KB_Mini_KeyboardPress_SA_EB(sLetter);
 }

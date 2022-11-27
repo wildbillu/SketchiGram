@@ -23,17 +23,23 @@ function TC_DifficultyLevel_Changed()
     elemRangeControl.value = g_DifficultyLevel_iLevel;
     return;
   }
-  TC_DifficultyLevel_ChangedWork(iLevel_New);
+  TC_DifficultyLevel_ChangedWork(iLevel_New, false);
 }
 
-function TC_DifficultyLevel_ChangedWork(iLevel_New)    
+function TC_DifficultyLevel_ChangedWork(iLevel_New, bRespectCookie)    
 {
     if ( iLevel_New <= 2 && g_DifficultyLevel_iLevel > 2 )
+    {
+      ForIdSetVisibility(TC_SA_EB_MakeId(0), true);
       TC_SetVisible("ScratchArea");
+    }
     if ( iLevel_New <= 1 && g_DifficultyLevel_iLevel > 1 )
       SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true); 
-    if ( iLevel_New == 0 && g_DifficultyLevel_iLevel > 0 && g_Cookie_DifficultyLevel_iLevel > 0 )
-      SG_ShowExtraClue();
+    if ( iLevel_New == 0 && g_DifficultyLevel_iLevel > 0 )
+    {
+      if ( !bRespectCookie )//|| g_Cookie_DifficultyLevel_iLevel > 0 )
+        SG_ShowExtraClue();
+    }      
     g_DifficultyLevel_iLevel = iLevel_New;      
     let elemRangeControl = document.getElementById("DifficultyLevel_RangeControl");
     elemRangeControl.value = g_DifficultyLevel_iLevel;
@@ -51,7 +57,7 @@ function TC_DifficultyLevel_Setup(iTop)
     sInner += '       <input class="RangeRotate" min="0" max="3" type="range" Id="DifficultyLevel_RangeControl" onchange="TC_DifficultyLevel_Changed();">'
     sInner += '    </DIV>'
     sInner += '  </TD></TR>'
-    sInner += '  <TR><TD class="DL_Words">Hard</TD></TR>';
+    sInner += '  <TR><TD Id="DL_Hard" class="DL_Words">Hard</TD></TR>';
     sInner += '</TABLE>';
     elemDifficultyLevel.innerHTML = sInner;    
     let elemRange = document.getElementById("DifficultyLevel_RangeControl");
@@ -59,6 +65,11 @@ function TC_DifficultyLevel_Setup(iTop)
     elemRange.style.top = MakePixelString (160);
     elemDifficultyLevel.style.left = MakePixelString(20);//g_TC_Padding_Left_iSize);
     elemDifficultyLevel.style.top = MakePixelString (iTop);
+
+    let elemHard = document.getElementById("DL_Hard");
+    let rectHard = elemHard.getBoundingClientRect();
+    let iHeight = rectHard.bottom - iTop;
+    elemDifficultyLevel.style.height = MakePixelString(iHeight + 5);
 
     elemDifficultyLevelRangeControl = document.getElementById("DifficultyLevel_RangeControl");
     elemDifficultyLevelRangeControl.value = g_DifficultyLevel_iLevel;

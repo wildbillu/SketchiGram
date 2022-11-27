@@ -51,7 +51,7 @@ function SG2_LoadAll(iSection)
             bLoadedFromFile = LoadPuzzleFromFile();
             if ( !bLoadedFromFile )
                 TC_Puzzle_Load_AsJS();
-            SG2_LoadMainElements();
+                SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
             GRBMS_ScrambleCorrectAnswersToPlayer(false);
             let iMaxGridWidth = 0.85 * g_TC_iBiggestRight;
@@ -106,7 +106,6 @@ function SG2_LoadAll(iSection)
             let iScratchAreaLeft = rectGrid.right + 5;
             let iScratchAreaWidth = g_TC_iBiggestRight - iScratchAreaLeft - 5;
             TC_SA_EB_Setup(iScratchAreaTop, iScratchAreaLeft, iColumns, iScratchAreaWidth);
-//            TC_ScratchArea_Setup(iScratchAreaTop, iScratchAreaLeft, iColumns, iScratchAreaWidth);
             let iResultMessageTop = 135;
             TC_ResultMessage_Setup(iResultMessageTop);
             Status_Check(true);
@@ -126,7 +125,7 @@ function SG2_LoadAll(iSection)
 //complete - Fully loaded
             SG_Clues_ShowCorrect();
             if ( g_Cookie_DifficultyLevel_iLevel > -1 )
-                TC_DifficultyLevel_ChangedWork(g_Cookie_DifficultyLevel_iLevel);
+                TC_DifficultyLevel_ChangedWork(g_Cookie_DifficultyLevel_iLevel, true);
             g_Cookie_DifficultyLevel_iLevel = -1;
             SG2_SetVisibles();
 //alert('h:' + g_TC_iBiggestBottom + '.w:' + g_TC_iBiggestRight)

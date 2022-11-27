@@ -43,8 +43,10 @@ var g_Cookie_sGridStatusPlayer = '';
 var g_Cookie_bPuzzleSolved = false;
 var g_Cookie_bGridSolved = false;
 var g_Cookie_bAnswersSolved = false;
-var g_Cookie_ScratchArea_sWords = '|||||||F|||||';
+var g_Cookie_SA_EB_sWords = '||||||||||||';
 var g_Cookie_DifficultyLevel_iLevel = -1;
+var g_Cookie_SA_eB_sWordStatus = 'FFFFFFFFFFFF';
+
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
 {
@@ -57,7 +59,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     var aOurValues = [];
     var aOurValues = sCookieValue.split(g_cCookieDelimiter);
     var iOurValues = aOurValues.length;
-    if ( iOurValues != 11 )
+    if ( iOurValues != 12 )
         return false;
     g_Cookie_sPuzzle = aOurValues[0];
     g_Cookie_sAnswersPlayer = aOurValues[1];
@@ -67,8 +69,9 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     g_Cookie_bPuzzleSolved = IsTrue(aOurValues[6]);
     g_Cookie_bGridSolved = IsTrue(aOurValues[7]);
     g_Cookie_bAnswersSolved = IsTrue(aOurValues[8]);
-    g_Cookie_ScratchArea_sWords = aOurValues[9];
+    g_Cookie_SA_EB_sWords = aOurValues[9];
     g_Cookie_DifficultyLevel_iLevel = aOurValues[10];
+    g_Cookie_SA_eB_sWordStatus =  aOurValues[11];
     g_Cookie_bValid = true;
 }
 
@@ -105,11 +108,14 @@ function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sG
     sCookie += g_bGridSolved;
     sCookie += g_cCookieDelimiter;
     sCookie += g_bAnswersSolved;
-    let ScratchArea_sWords = g_ScratchArea_aWords.join(g_TC_cGeneralDelimiter);
+    let SA_EB_sWords = g_SA_EB_aWords.join(g_TC_cGeneralDelimiter);
     sCookie += g_cCookieDelimiter;
-    sCookie += ScratchArea_sWords;
+    sCookie += SA_EB_sWords;
     sCookie += g_cCookieDelimiter;
     sCookie += g_DifficultyLevel_iLevel;
+    sCookie += g_cCookieDelimiter;
+    sCookie += g_SA_EB_sWordStatus
+//
     var exdays = 365;
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));

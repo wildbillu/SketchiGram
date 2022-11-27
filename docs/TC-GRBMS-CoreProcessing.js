@@ -1,5 +1,17 @@
 // TC-GRBMS-CoreProcessing.js
 
+function GRBMS_LoseCurrentFocus()
+{
+    if ( g_GRBMS_Focus_sId == '')
+        return;
+    let iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
+    let iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
+    GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_Inactive);
+    let elem = document.getElementById(g_GRBMS_Focus_sId);
+    elem.style.cursor="default";
+    g_GRBMS_Focus_sId = '';
+}
+
 function GRBMS_onkeyup(key, iRow, iLetter)
 {
     if ( key.startsWith('Backspace') )
@@ -44,7 +56,6 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     return false;
 }
 
-
 function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
 {
     if  (! GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
@@ -75,8 +86,8 @@ function GRBMS_onfocus(elem)
     let sThisId = elem.id;
     if ( g_CAB_Focus_sId != '')        
         CAB_FocusLostSetActiveToInActive();
-    if ( g_SA_Focus_sId != '' )
-        TC_SA_LoseTheFocusAndCleanup(true);
+    if ( g_SA_EB_Focus_sId != '' )
+        TC_SA_EB_LoseTheFocusAndCleanup(true);
     g_GRBMS_Focus_sId = sThisId;
 }    
 
@@ -84,7 +95,6 @@ function GRBMS_onkeypress(event)
 {
     return false;
 }
-
 
 function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceMe, bRejectDual)
 {
