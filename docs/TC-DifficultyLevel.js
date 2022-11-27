@@ -30,7 +30,6 @@ function TC_DifficultyLevel_ChangedWork(iLevel_New, bRespectCookie)
 {
     if ( iLevel_New <= 2 && g_DifficultyLevel_iLevel > 2 )
     {
-      ForIdSetVisibility(TC_SA_EB_MakeId(0), true);
       TC_SetVisible("ScratchArea");
     }
     if ( iLevel_New <= 1 && g_DifficultyLevel_iLevel > 1 )

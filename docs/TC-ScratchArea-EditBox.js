@@ -224,8 +224,15 @@ function TC_SA_EB_LoseTheFocusAndCleanup(bCheck)
     g_SA_EB_Focus_sId = '';
 }
 
-function TC_SA_EB_Setup(iTop, iLeft, iColumns, iWidth)
+function TC_SA_EB_Setup()
 {
+    let elemGrid = document.getElementById("Div_Grid");
+    let rectGrid = elemGrid.getBoundingClientRect();
+    let iColumns = 1;
+    let iTop = rectGrid.top;
+    let iLeft = rectGrid.right + 5;
+    let iWidth = g_TC_iBiggestRight - iLeft - 5;
+//
     let elemScratch = document.getElementById("ScratchArea");
     elemScratch.style.top = MakePixelString(iTop);
     elemScratch.style.left = MakePixelString(iLeft);
@@ -284,8 +291,12 @@ function TC_SA_EB_Setup(iTop, iLeft, iColumns, iWidth)
 
 function TC_SA_EB_ClearEntries()
 {
-    for ( let iEntry = 0; iEntry < g_SA_EB_iMaxEntries.length; iEntry++ )
+    g_SA_EB_sWordStatus = ''
+    for ( let iEntry = 0; iEntry < g_SA_EB_iMaxEntries; iEntry++ )
+    {
         g_SA_EB_aWords[iEntry] = '';
+        g_SA_EB_sWordStatus += 'F';
+    }
 }
 function TC_SA_EB_MakeId(iEntry){return 'TC_SA_EB_' + iEntry;}
 function TC_SA_EB_EntryFromId(sId){return sId.charAt(9);}

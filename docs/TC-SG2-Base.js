@@ -99,13 +99,7 @@ function SG2_LoadAll(iSection)
             let iDifficultyLevelTop = 310;
             TC_DifficultyLevel_Setup(iDifficultyLevelTop);            
 // scratch area 
-            let elemGrid = document.getElementById("Div_Grid");
-            let rectGrid = elemGrid.getBoundingClientRect();
-            let iColumns = 1;
-            let iScratchAreaTop = rectGrid.top;
-            let iScratchAreaLeft = rectGrid.right + 5;
-            let iScratchAreaWidth = g_TC_iBiggestRight - iScratchAreaLeft - 5;
-            TC_SA_EB_Setup(iScratchAreaTop, iScratchAreaLeft, iColumns, iScratchAreaWidth);
+            TC_SA_EB_Setup();
             let iResultMessageTop = 135;
             TC_ResultMessage_Setup(iResultMessageTop);
             Status_Check(true);
