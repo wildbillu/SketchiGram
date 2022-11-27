@@ -1,4 +1,4 @@
-/?file=images/Puzzle-DormRoom.txt
+/DormRoom
 sPuzzleDate=2022-09-26
 sPuzzleName=DormRoom
 sPuzzleTitle=How's Your Aim
@@ -15,12 +15,11 @@ sAnswersPlayer=----|----|----|----|----|----|----|----
 sStatusPlayer=NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
 ST_sClue_Itself=You might find a Beeramid there
 ST_sClue_Intro=SketchiToons Clue to Dual Answers
-ST_sFilename_Success=images/Puzzle-DormRoom-Solved.jpg
-ST_sFilename=images/Puzzle-DormRoom.jpg
 sDualClueBefore= 
 sDualClueMiddle= 
 sDualClueEnd= 
 sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
 sPuzzleCreditDate=September 26, 2022
 sAnswerLocations=1 Across|3 Down|1 Down|5 Across|4 Down|7 Across|6 Across|2 DOWN
-ScratchArea_sWords=||||||||||||
+SA_EB_sWords=||||||||||||
+SA_EB_sWordStatus=FFFFFFFFFFFF

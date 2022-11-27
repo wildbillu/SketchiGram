@@ -1,6 +1,6 @@
-/?file=Puzzle-5x5Test.txt
+/5x5Test
 sPuzzleDate=2022-10-08
-sPuzzleName=5x5 Test
+sPuzzleName=5x5Test
 sPuzzleTitle=Miracle If It Works
 iGridWidth=5
 iGridHeight=5
@@ -22,4 +22,5 @@ sDualClueMiddle= and
 sDualClueEnd= More
 sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
 sPuzzleCreditDate=October 08, 2022
-ScratchArea_sWords=||||||||||||
+SA_EB_sWords=||||||||||||
+SA_EB_sWordStatus=FFFFFFFFFFFF

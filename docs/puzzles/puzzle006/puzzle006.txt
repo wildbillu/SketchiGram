@@ -1,4 +1,4 @@
-/?file=Puzzle-EvilTwin.txt
+/EvilTwin
 sPuzzleDate=2022-10-21
 sPuzzleName=EvilTwin
 sPuzzleTitle=A Dr. Jekyll and Mr. Hyde Moment?
@@ -21,4 +21,5 @@ sDualClueEnd=
 sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
 sPuzzleCreditDate=October 21, 2022
 sAnswerLocations=6 Across|3 Down|2 Down|1 Across|7 Across|4 Down|5 Across|1 Down
-ScratchArea_sWords=||||||||||||
+SA_EB_sWords=||||||||||||
+SA_EB_sWordStatus=FFFFFFFFFFFF

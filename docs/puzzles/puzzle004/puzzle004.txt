@@ -1,4 +1,4 @@
-/?file=Puzzle-SurfAndTurf.txt
+/SurfAndTurf
 sPuzzleDate=2022-09-16
 sPuzzleName=SurfAndTurf
 sPuzzleTitle=Dinner Anyone?
@@ -15,13 +15,11 @@ sAnswersPlayer=----|----|---|---|---|----|----|---
 sStatusPlayer=NNNN|NNNN|NNN|NNN|NNN|NNNN|NNNN|NNN
 ST_sClue_Itself=Rhyming Restaurant Choice
 ST_sClue_Intro=SketchiToons Clue to Dual Answers
-ST_sFilename=images/Puzzle-SurfAndTurf.jpg
-ST_sFilename_Extra=images/Puzzle-SurfAndTurf.jpg
-ST_sFilename_Success=images/Puzzle-SurfAndTurf-Solved.jpg
 sDualClueBefore= 
 sDualClueMiddle= and 
 sDualClueEnd= 
 sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
 sPuzzleCreditDate=September 27, 2022
 sAnswerLocations=4 Across|1 Down|3 Down|1 Across|4 Down|5 Across|2 Down|6 Across
-ScratchArea_sWords=||||||||||||
+SA_EB_sWords=||||||||||||
+SA_EB_sWordStatus=FFFFFFFFFFFF
