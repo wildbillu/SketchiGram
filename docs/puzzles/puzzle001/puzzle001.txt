@@ -1,12 +1,12 @@
 /ForkinTheRoad
-sGridAnswers=FORKIKONBRAESADE
 sPuzzleDate=2022-09-25
 sPuzzleName=ForkInTheRoad
 sPuzzleTitle=Yogi Berra Says
 iGridWidth=4
 iGridHeight=4
-sGridAnswersPlayer=----------------
-sGridStatusPlayer=NNNNNNNNNNNNNNNN
+sGridAnswers=FORKIKONBRAESADE
+sGridAnswersPlayer=----IK----------
+sGridStatusPlayer=NNNNGGNNNNNNNNNN
 sGridNumbering=01234...5...6...
 iClueAnswers=8
 sClues=DummyA|DummyB|Human bendable|South Korean boy ban|Little lies|Marquis de _____|Gummy vegetable|Scottish hillside
