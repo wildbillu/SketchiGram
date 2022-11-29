@@ -7,7 +7,7 @@
     left:0px;
     border:1px solid black;
     padding:0px;
-    height:84px;
+    height:100px;
     width:400px;
     border-collapse: collapse;    
     outline: none;    
@@ -46,7 +46,7 @@
     top:0px;
     left:0px;
     padding:0px;
-    height:40px;
+    height:46px;
     width:400px;
     border-collapse: collapse;    
     outline: none;    
@@ -57,13 +57,13 @@
 
 .KB_Mini_ButtonLetter 
 {
-    width:36px;
-    font-size:26px;
+    width:40px;
+    font-size:28px;
 }
 
 .KB_Mini_ButtonBackspace 
 {
-    width:43px;
+    width:46px;
     background-image: url("images/Buttons/Button_Backspace.png");
     background-size:43px;
     background-repeat:no-repeat;
@@ -71,17 +71,17 @@
 
 .KB_Mini_ButtonArrowLeft 
 {
-    width:36px;
+    width:42px;
     background-image: url("images/Buttons/Button_ArrowLeft.png");
-    background-size:32px;
+    background-size:42px;
     background-repeat:no-repeat;
 }
 
 .KB_Mini_ButtonArrowRight 
 {
-    width:32px;
+    width:42px;
     background-image: url("images/Buttons/Button_ArrowRight.png");
-    background-size:32px;
+    background-size:42px;
     background-repeat:no-repeat;
 }
 
@@ -89,7 +89,7 @@
 {
     border:1px solid #222222;
     padding-top:4px;
-    height:32px;
+    height:40px;
     outline:none;    
     text-align:center;
     font-family:Arial, Helvetica, sans-serif;
