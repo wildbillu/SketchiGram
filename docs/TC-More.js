@@ -134,6 +134,7 @@ function Dropdown_More_ResetPuzzle()
         ForIdSetVisibility("KB_Mini_Div", true);
         ForIdSetVisibility("DifficultyLevel_Div", true);
         ForIdSetVisibility("SG_HowToA_Div", true);
+        SG_Clues_ShowClue_ResetAll()
         SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, false);
         TC_DifficultyLevel_Set(3);
         ForIdSetVisibility("ScratchArea", false);

@@ -94,6 +94,13 @@ function SG_Clues_ShowClue_Set1(bLength, bAnswer, bLocation)
     g_SG_Clues_Row1_bLocationSet = bLocation;
 }
 
+function SG_Clues_ShowClue_ResetAll()
+{
+    for ( let iRow = 0; iRow < g_aAnswers.length; iRow++ )
+        SG_Clues_ShowClue_ResetAnswer(iRow, true, false, false);
+}
+
+
 function SG_Clues_ShowClue_ResetAnswer(iRow, bShowLength, bShowAnswer, bShowGridLocation)
 {   let sId = SG_MakeClueTextId(iRow);
     let elem = document.getElementById(sId);
