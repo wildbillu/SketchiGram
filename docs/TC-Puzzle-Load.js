@@ -9,6 +9,7 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswe
     g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
     g_aAnswersStatusPlayer  = sStatusPlayer.split(g_TC_cGeneralDelimiter);
     g_aAnswerLocations      = sAnswerLocations.split(g_TC_cGeneralDelimiter);
+    g_SA_EB_aWords.length = 0;
     g_SA_EB_aWords          = SA_EB_sWords.split(g_TC_cGeneralDelimiter);
     g_SA_EB_sWordStatus     = SA_EB_sWordStatus;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues || g_aAnswersStatusPlayer.length != g_iClues)

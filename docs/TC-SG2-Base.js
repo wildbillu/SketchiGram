@@ -32,7 +32,7 @@ function SG2_LoadMainElements()
     sMain += MakeMoreActionsDiv();    
     sMain += SG_ActionMenu_MakeDiv()
     sMain += '<DIV Id="Test" style="ForTest StartHidden"></DIV>';
-    sMain += '<DIV Id="ScratchArea" class="ScratchArea StartHidden"></DIV>';
+    sMain += '<DIV Id="ScratchArea" class="ScratchArea StartHidden">SSSSSSWSSS</DIV>';
     sMain += '<DIV Id="ResultMessage_Div" class="ResultMessage_Div StartHidden"></DIV>';
     sMain += '<DIV Id="ElapsedTime_Div" class="ElapsedTime_Div StartHidden"></DIV>';
     sMain += '<DIV Id="DifficultyLevel_Div" class="DifficultyLevel_Div StartHidden">DifficultyLevel</DIV>';
@@ -77,7 +77,7 @@ function SG2_LoadAll(iSection)
             break;
         case 5:
             SG_ActionMenu_SizeAndPosition();
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 1);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 6:
             let iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
@@ -98,16 +98,16 @@ function SG2_LoadAll(iSection)
             let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
             var rectStatusControlRight =  elemStatusControlRight.getBoundingClientRect();            
             TC_DisplayDualClue_Setup(iDisplayDualClueTop, g_TC_Padding_Left_iSize, rectStatusControlRight.left - 4 * g_TC_Padding_Left_iSize);
-            let iDifficultyLevelTop = 310;
-            TC_DifficultyLevel_Setup(iDifficultyLevelTop);            
 // scratch area 
-            TC_SA_EB_Setup();
             let iResultMessageTop = 85;
             TC_ResultMessage_Setup(iResultMessageTop);
             Status_Check(true);
             TC_AdjustSettings();
             if ( g_bSettings_ShowInfoOnStart )
                 TC_ShowInfo();
+            let iDifficultyLevelTop = 310;
+            TC_DifficultyLevel_Setup(iDifficultyLevelTop);            
+            TC_SA_EB_Setup();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 8:

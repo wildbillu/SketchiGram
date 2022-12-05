@@ -226,8 +226,7 @@ function TC_SA_EB_LoseTheFocusAndCleanup(bCheck)
 function TC_SA_EB_Setup()
 {
     let elemGrid = document.getElementById("Div_Grid");
-    let rectGrid = elemGrid.getBoundingClientRect();
-    let iColumns = 1;
+    let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
     let iTop = rectGrid.top;
     let iLeft = rectGrid.right + 5;
     let iWidth = g_TC_iBiggestRight - iLeft - 5;
@@ -239,6 +238,7 @@ function TC_SA_EB_Setup()
     let sInner = '';
     sInner += '<DIV Id="ScratchArea_Text" class="Scratch_Text">Use this area for candidate answers</DIV>';
     sInner += '<TABLE Id="ScratchArea_TABLE" cellpadding=0 cellspacing=1 class="ScratchArea_TABLE">';
+    let iColumns = 1;
     let iEntry = 0;
     while ( iEntry < g_SA_EB_iMaxEntries )
     {
@@ -282,7 +282,9 @@ function TC_SA_EB_Setup()
     }
     document.getElementById("ScratchArea_TABLE").style.left = MakePixelString(2);
     let sId = TC_SA_EB_MakeId(g_SA_EB_iMaxEntries - 1);
-    let iBottom = document.getElementById(sId).getBoundingClientRect().bottom;
+    let elemBottomElement = document.getElementById(sId);
+    let rectBottomElement = GetBoundingClientRectAbsolute(elemBottomElement);
+    let iBottom = rectBottomElement.bottom;
     let iHeightFull = (iBottom - iTop) + g_TC_Padding_Inter_Vertical_iSize;
     elemScratch.style.height = MakePixelString(iHeightFull);
     elemScratch.style.width = MakePixelString(iWidth+4);

@@ -112,11 +112,30 @@ function GetWidthToHeightRatioOfImages()
     return GetWidthToHeightRatioOfImageWithId('ExtraImage');
 }
 
+
 function GetComputedStyleProperty(elem, sProperty)
 {
     var cssObj = window.getComputedStyle(elem, null);
     var sValue = cssObj.getPropertyValue(sProperty);
     return sValue;
+}
+
+function GetBoundingClientRectAbsolute(elem)
+{
+    let rectRelative = elem.getBoundingClientRect();
+    let iTop = rectRelative.top + window.scrollY;
+    let iLeft = rectRelative.left + window.scrollX;
+    let rectAbsolute = new DOMRect(iLeft, iTop, rectRelative.width, rectRelative.height)
+    return rectAbsolute;
+}
+
+function GetComputedStylePropertyAsInt(elem, sProperty)
+{
+    let cssObj = window.getComputedStyle(elem, null);
+    let sValue = cssObj.getPropertyValue(sProperty);
+    sValue = removePX(sValue)
+    let iValue = parseInt(sValue);
+    return iValue;
 }
 
 function GetWidthOfTextInPixels(elem, sText)
@@ -206,6 +225,18 @@ function removeAt(sOriginal, index)
 {
     var sNew = sOriginal.substring(0, index);
     sNew += sOriginal.substring(index + 1);
+    return sNew;
+}
+
+function removePX(sOriginal)
+{
+    var sNew = ''; 
+    for ( let i = 0; i < sOriginal.length; i++ )
+    {
+        let cThisChar = sOriginal.charAt(i);
+        if ( cThisChar != 'p' && cThisChar != 'x' )
+            sNew += cThisChar;
+    }            
     return sNew;
 }
 

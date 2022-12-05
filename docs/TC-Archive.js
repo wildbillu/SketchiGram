@@ -11,10 +11,10 @@ g_TC_Archive_Menu_bActive = false;
 function TC_Archive_AddButtonOrExtraSpace()
 {
     let sInner = '';
-    if ( g_TC_bFileAccess )
+//    if ( g_TC_bFileAccess )
         sInner = TC_Archive_MakeActivationButton();
-    else
-        sInner = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+//    else
+//        sInner = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
     return sInner;
 }
 

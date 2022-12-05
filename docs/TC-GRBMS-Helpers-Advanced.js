@@ -101,11 +101,11 @@ function GRBMS_SetGridButtonsGridAndPhantomGridPosition()
 {
     GRBMS_SetAllButtons();
     elemGrid = document.getElementById("Div_Grid");
-    var iWidth = g_iGridWidth * g_GRBMS_Square_iSize;
+    let iWidth = g_iGridWidth * g_GRBMS_Square_iSize;
     var iHeight = g_iGridHeight * g_GRBMS_Square_iSize;
     elemGrid.style.width = MakePixelString(iWidth);
     elemGrid.style.height = MakePixelString(iHeight);
-    var iTop = g_GRBMS_TopMatter_iHeight + g_GRBMS_PuzzleTitle_iHeight + g_TC_Padding_Inter_Vertical_iSize;
+    let iTop = g_GRBMS_TopMatter_iHeight + g_GRBMS_PuzzleTitle_iHeight + g_TC_Padding_Inter_Vertical_iSize;
     elemGrid.style.top = MakePixelString(iTop);
     elemGrid.style.left = MakePixelString(g_TC_Padding_Left_iSize);
 // now the phantom grid

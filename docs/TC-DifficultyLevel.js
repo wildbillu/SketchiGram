@@ -66,7 +66,7 @@ function TC_DifficultyLevel_Setup(iTop)
     elemDifficultyLevel.style.top = MakePixelString (iTop);
 
     let elemHard = document.getElementById("DL_Hard");
-    let rectHard = elemHard.getBoundingClientRect();
+    let rectHard = GetBoundingClientRectAbsolute(elemHard)
     let iHeight = rectHard.bottom - iTop;
     elemDifficultyLevel.style.height = MakePixelString(iHeight + 5);
 
