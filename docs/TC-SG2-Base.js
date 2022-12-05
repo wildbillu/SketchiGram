@@ -52,13 +52,13 @@ function SG2_LoadAll(iSection)
             SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
             GRBMS_ScrambleCorrectAnswersToPlayer(false);
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 500);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 1:
             let iMaxGridWidth = 0.85 * g_TC_iBiggestRight;
             SG2_SetSizes(iMaxGridWidth);
             TC_SetTopMatter();
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 500);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 2:
             GRBMS_MakeGrid();
@@ -68,7 +68,7 @@ function SG2_LoadAll(iSection)
         case 3:
             GRBMS_SetAllButtons();
             GRBMS_SetAllButtons_Phantom();
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 2000);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 4:
             let iGap = 0;

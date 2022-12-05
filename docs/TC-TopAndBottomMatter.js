@@ -72,6 +72,7 @@ function TC_SetTopMatter()
     var elemPuzzleType = document.getElementById("Div_PuzzleType");
     elemPuzzleType.style.left = MakePixelString(g_TC_Padding_Left_iSize);
     elemPuzzleType.style.top = MakePixelString(3);
+    setlineAdd('A:' + g_TC_iBiggestBottom)
     g_TC_iBiggestBottom += 3;
     elemPuzzleType.style.width = MakePixelString(g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
     if ( g_bIsTwistiCross )
@@ -86,6 +87,9 @@ function TC_SetTopMatter()
     g_TC_iBiggestBottom += rectTitle.height;
 // now we can adjust the position of the status row
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
+
+setlineAdd('B:' + g_TC_iBiggestBottom)
+
 //
     var elemStatusControlLeft = document.getElementById("Div_StatusControl_Left");
     elemStatusControlLeft.style.top = MakePixelString(g_TC_iBiggestBottom);
@@ -101,7 +105,11 @@ function TC_SetTopMatter()
         elemPuzzleTitle.style.left = MakePixelString(g_TC_Padding_Left_iSize);
         elemPuzzleTitle.style.width = MakePixelString(rectControlRight.left - g_TC_Padding_Left_iSize);
     }
-    g_TC_iBiggestBottom = rectControlRight.bottom;
+
+    g_TC_iBiggestBottom += rectControlRight.height;
+setlineAdd('C:' + g_TC_iBiggestBottom)
+
+
 //
     elemPuzzleTitle.innerHTML = g_sPuzzleTitle;
     if ( !g_bIsSketchiGramVariant2 )
