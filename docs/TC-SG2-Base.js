@@ -55,7 +55,7 @@ function SG2_LoadAll(iSection)
             let iMaxGridWidth = 0.85 * g_TC_iBiggestRight;
             SG2_SetSizes(iMaxGridWidth);
             TC_SetTopMatter();
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 500);    
             break;
         case 1:
             GRBMS_MakeGrid();
@@ -65,12 +65,12 @@ function SG2_LoadAll(iSection)
         case 2:
             GRBMS_SetAllButtons();
             GRBMS_SetAllButtons_Phantom();
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 3:
             let iGap = 0;
             SG2_Adjust_GridAndPhantomGridPosition(iGap);
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 4:
             SG_ActionMenu_SizeAndPosition();
@@ -80,7 +80,7 @@ function SG2_LoadAll(iSection)
             let iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
             var iKBRows = KB_Mini_Setup(iWidthGrid);
             SG2_Adjust_KBAndIntro(iKBRows);
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 6:
                 // we are going to do the show clues, but not make it visible to get spacing right
