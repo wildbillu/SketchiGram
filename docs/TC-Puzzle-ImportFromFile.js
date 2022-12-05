@@ -4,7 +4,7 @@
 // what ever happens the the final action needs to be
 // a call to TC_SetDefaultFile(sFinalDefaultFile)
 // absolute fallback && noFile Allowed choice - ...AsJS.  - it sets the image files directly
-let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle001';
+let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle003';
 let g_TC_sPuzzle_CommandLine                = '';
 let g_TC_sPuzzle_Archive                    = '';
 let g_TC_bFileAccess                        = false;
