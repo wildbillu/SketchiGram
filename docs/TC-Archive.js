@@ -1,12 +1,13 @@
 // TC-Archive.js
 
-g_TC_Archive_aPuzzleNames = [];
-g_TC_Archive_aPuzzleTitles = [];
-g_TC_Archive_Menu_iStartAt = 0;
-g_TC_Archive_Menu_iMaxItems = 10;
-g_TC_Archive_Menu_aActiveIds =[];
-g_TC_Archive_Menu_aActiveTitles =[];
-g_TC_Archive_Menu_bActive = false;
+var g_TC_Archive_aPuzzleNames = [];
+var g_TC_Archive_aPuzzleTitles = [];
+var g_TC_Archive_Menu_iStartAt = 0;
+var g_TC_Archive_Menu_iMaxItems = 10;
+var g_TC_Archive_Menu_aActiveIds =[];
+var g_TC_Archive_Menu_aActiveTitles =[];
+var g_TC_Archive_Menu_bActive = false;
+var g_TC_Archive_Menu_iActiveCount = 0;
 
 function TC_Archive_AddButtonOrExtraSpace()
 {
@@ -105,6 +106,8 @@ function TC_Archive_WidestEntry()
 
 function TC_Archive_Activate()
 {
+    if ( !g_TC_Archive_Menu_bActive )
+      g_TC_Archive_Menu_iActiveCount = 0;
     g_TC_Archive_Menu_bActive = !g_TC_Archive_Menu_bActive;
     ForIdSetVisibility("Archive_Div", g_TC_Archive_Menu_bActive)
 }

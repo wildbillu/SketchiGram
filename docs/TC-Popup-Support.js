@@ -4,8 +4,20 @@
 window.onclick = function(event) 
 {
 	var sTargetId = event.target.id;
-	if ( g_TC_Archive_Menu_bActive && sTargetId.indexOf('Archive') == -1 )
-		TC_Archive_Activate();
+	if ( g_TC_Archive_Menu_bActive )
+	{   
+		if ( sTargetId.indexOf('Archive') == -1 )
+		{
+			TC_Archive_Activate();
+		}
+		else
+		{
+			if ( g_TC_Archive_Menu_iActiveCount != 0 )
+				TC_Archive_Activate();
+			else
+				g_TC_Archive_Menu_iActiveCount++;
+		}
+	}
 	if ( g_GRBMS_ExtraImage_bActive && sTargetId.indexOf('ExtraImage') == -1 && sTargetId.indexOf('DisplayDualClue_Div') )
 		TC_HideExtraImage();
 	if ( g_GRBMS_SolvedImage_bActive )
