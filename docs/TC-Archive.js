@@ -3,7 +3,7 @@
 g_TC_Archive_aPuzzleNames = [];
 g_TC_Archive_aPuzzleTitles = [];
 g_TC_Archive_Menu_iStartAt = 0;
-g_TC_Archive_Menu_iMaxItems = 3;
+g_TC_Archive_Menu_iMaxItems = 10;
 g_TC_Archive_Menu_aActiveIds =[];
 g_TC_Archive_Menu_aActiveTitles =[];
 g_TC_Archive_Menu_bActive = false;
