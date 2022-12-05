@@ -1,0 +1,49 @@
+/* Styles-Archive.css */
+
+.Archive_Title
+{
+  border: 0px solid black;
+  text-align:center;
+  font-size: 16px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: red;
+  background-color: #eeeeee;
+}
+
+.Archive_Button_Activate
+{
+  border:1px solid black;
+  text-align:center;
+  font-size:26px;
+  height:30px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color:blue;
+  background-color:#eeeeee;
+}
+
+.Archive_Div
+{
+  border: 1px solid red;
+  position:absolute;
+  top:120px;
+  left:400px;
+  width:300px;
+  height:300px;
+  z-index: 1;
+  background-color: #eeeeee;
+}
+
+.Archive_Button_Selection
+{
+  border: 0px solid black;
+  padding:2px;
+  text-align:center;
+  font-size: 16px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: blue;
+  background-color: #eeeeee;
+}
+.Archive_Button_Selection:hover{background-color: lightblue;}

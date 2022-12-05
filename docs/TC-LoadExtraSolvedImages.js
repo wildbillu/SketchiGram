@@ -5,13 +5,15 @@ var g_sGRBOnExtraImageClick = '';
 
 function MakeExtraImageDiv()
 {    
-    var sExtraImage = '<img onclick="TC_HideExtraImage()" src="' + g_PuzzlePath_sThisPuzzle_Image_Extra + '" Id="ExtraImage" class="ExtraImage" width="100" alt="Cloudy Sky">';
+    var sExtraImage = '<img onclick="TC_HideExtraImage()" src="' + g_PuzzlePath_sName_Image_Extra + '" Id="ExtraImage" class="ExtraImage" width="100" alt="Cloudy Sky">';
     var sInner = '<DIV Id="ExtraImageDiv" class="ExtraImage">' + sExtraImage + '</DIV>'
     return sInner;
 }
 
 function TC_HideExtraImage()
 {
+    if ( !g_GRBMS_ExtraImage_bActive ) return;
+//
     var elemImage = document.getElementById("ExtraImage");
     elemImage.style.visibility = 'hidden'
     if ( g_sCABOnExtraImageClick != '')
@@ -38,6 +40,7 @@ function TC_ShowExtraImage()
     g_sGRBOnExtraImageClick = g_GRB_Focus_sId;
     g_GRBMS_ExtraImage_bActive = true;
     ForIdSetVisibility("ScratchArea", true);
+    setTimeout(function(){TC_HideExtraImage();}, 10000); 
 }
 
 var g_GRBMS_SolvedImage_bActive = false;
@@ -46,13 +49,14 @@ var g_sGRBOnSolvedImageClick = '';
 
 function MakeSolvedImageDiv()
 {    
-    var sSolvedImage = '<img onclick="TC_HideSolvedImage()" src="' + g_PuzzlePath_sThisPuzzle_Image_Solved + '" Id="SolvedImage" class="SolvedImage" width="100" alt="Cloudy Sky">';
+    var sSolvedImage = '<img onclick="TC_HideSolvedImage()" src="' + g_PuzzlePath_sName_Image_Solved + '" Id="SolvedImage" class="SolvedImage StartHidden" width="100" alt="Cloudy Sky">';
     var sInner = '<DIV Id="SolvedImageDiv" class="SolvedImage">' + sSolvedImage + '</DIV>'
     return sInner;
 }
 
 function TC_HideSolvedImage()
 {
+    if ( !g_GRBMS_SolvedImage_bActive ) return;
     var elemImage = document.getElementById("SolvedImage");
     elemImage.style.visibility = 'hidden'
     if ( g_sCABOnSolvedImageClick != '')
@@ -66,32 +70,14 @@ function TC_HideSolvedImage()
 
 function TC_ShowSolvedImage()
 {
-//    var elemImageDiv = document.getElementById("SolvedImageDiv");
-//    elemImageDiv.style.top = MakePixelString(0);
-//    elemImageDiv.style.left = MakePixelString(0);//g_TC_Padding_Left_iSize)
-   
     var iWidth = g_TC_iBiggestRight;
     var elemImage = document.getElementById("SolvedImage");
     elemImage.style.top = MakePixelString(100);
     elemImage.style.left = MakePixelString(g_TC_Padding_Left_iSize)
     elemImage.style.width = MakePixelString(iWidth)
     elemImage.style.visibility = 'visible'
-/*
-    var elemImageDiv = document.getElementById("SolvedImageDiv");
-    elemImageDiv.style.visibility = 'visible'
-    elemImageDiv.style.left = MakePixelString(g_TC_Padding_Left_iSize)
-    elemImageDiv.style.top = MakePixelString(100)
-    var iWidth = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
-    elemImageDiv.style.width = MakePixelString(iWidth)
-    elemImageDiv.style.height = MakePixelString(iWidth)
-    var elemImage = document.getElementById("SolvedImage");
-    elemImage.style.visibility = 'visible'
-    elemImage.style.top = MakePixelString(100)
-    elemImage.style.left = MakePixelString(g_TC_Padding_Left_iSize)
-    elemImage.style.width = MakePixelString(iWidth)
-*/
-
     g_sCABOnSolvedImageClick = g_CAB_Focus_sId;
     g_sGRBOnSolvedImageClick = g_GRB_Focus_sId;
     g_GRBMS_SolvedImage_bActive = true;
+    setTimeout(function(){TC_HideSolvedImage();}, 10000); 
 }

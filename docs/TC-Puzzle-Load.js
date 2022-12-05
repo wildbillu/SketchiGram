@@ -8,9 +8,9 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswe
     g_iAnswers = g_aAnswers.length;
     g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
     g_aAnswersStatusPlayer  = sStatusPlayer.split(g_TC_cGeneralDelimiter);
-    g_aAnswerLocations = sAnswerLocations.split(g_TC_cGeneralDelimiter);
-    g_SA_EB_aWords = SA_EB_sWords.split(g_TC_cGeneralDelimiter);
-    g_SA_EB_sWordStatus = SA_EB_sWordStatus;
+    g_aAnswerLocations      = sAnswerLocations.split(g_TC_cGeneralDelimiter);
+    g_SA_EB_aWords          = SA_EB_sWords.split(g_TC_cGeneralDelimiter);
+    g_SA_EB_sWordStatus     = SA_EB_sWordStatus;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues || g_aAnswersStatusPlayer.length != g_iClues)
         setline('dataProblem.' + g_iClues + g_aClues.length + g_aAnswers.length + g_aAnswersPlayer.length + g_aAnswersStatusPlayer.length);
 }
@@ -20,7 +20,10 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
     g_iGridWidth = iGridWidth;
     g_iGridHeight = iGridHeight;
     g_sGridNumbering = sGridNumbering;
-
+    g_aGridAnswers.length = 0;
+    g_aGridAnswersPlayer.length = 0;
+    g_aGridStatusPlayer.length = 0;
+//
     for ( iRow = 0; iRow < g_iGridHeight; iRow++ )      
     {
         g_aGridAnswers.      push(sGridAnswers.      substring(iRow*g_iGridWidth, (iRow+1)*g_iGridWidth));

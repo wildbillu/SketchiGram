@@ -12,11 +12,11 @@ function SG_HowToText()
 function SG2_LoadMainElements()
 {
     var sMain = '';
+    sMain += TC_Archive_MakeMenu();
     sMain += '<DIV Id="Div_PuzzleType" class="Div_PuzzleType StartHidden">Div_PuzzleType</DIV>';
     sMain += '<DIV Id="Div_StatusControl_Left" class="StatusControl_Div_Left StartHidden">Div_StatusControl_Left</DIV>';
     sMain += '<DIV Id="Div_StatusControl_Right" class="StatusControl_Div_Right StartHidden">Div_StatusControl_Right</DIV>';
     sMain += '<DIV Id="Div_PuzzleTitle" class="Div_PuzzleTitle StartHidden">Div_PuzzleTitle</DIV>';
-    sMain += '<DIV Id="Div_PuzzleDualClue" class="Div_PuzzleDualClue StartHidden">DualClueGoesHere</DIV>';
     sMain += '<DIV Id="SG_HowToA_Div" class="SG_HowToA_Div StartHidden">' + SG_HowToText() + '</DIV>';
     sMain += '<DIV Id="Div_Grid" class="Div_Grid StartHidden">Div_Grid</DIV>';
     sMain += '<DIV Id="Div_Grid_Phantom" class="Div_Grid_Phantom StartHidden">Div_Phantom_Grid</DIV>';
@@ -34,6 +34,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="Test" style="ForTest StartHidden"></DIV>';
     sMain += '<DIV Id="ScratchArea" class="ScratchArea StartHidden"></DIV>';
     sMain += '<DIV Id="ResultMessage_Div" class="ResultMessage_Div StartHidden"></DIV>';
+    sMain += '<DIV Id="ElapsedTime_Div" class="ElapsedTime_Div StartHidden"></DIV>';
     sMain += '<DIV Id="DifficultyLevel_Div" class="DifficultyLevel_Div StartHidden">DifficultyLevel</DIV>';
     sMain += '<DIV Id="DisplayDualClue_Div" class="DisplayDualClue_Div StartHidden" onclick="TC_DisplayDualClue()">DisplayDualClue_Div</DIV>';
     document.getElementById("Body_Any").innerHTML = sMain;
@@ -47,11 +48,8 @@ function SG2_LoadAll(iSection)
             getResolution(); 
             while ( document.readyState != "complete") {}
             HandleCookiesOnStart();
-            var bLoadedFromFile = false;
-            bLoadedFromFile = LoadPuzzleFromFile();
-            if ( !bLoadedFromFile )
-                TC_Puzzle_Load_AsJS();
-                SG2_LoadMainElements();
+            TC_InitializeFromFileOrLoadAsJS();
+            SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
             GRBMS_ScrambleCorrectAnswersToPlayer(false);
             let iMaxGridWidth = 0.85 * g_TC_iBiggestRight;
@@ -70,7 +68,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 3:
-            let iGap = 40;
+            let iGap = 0;
             SG2_Adjust_GridAndPhantomGridPosition(iGap);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
@@ -91,6 +89,7 @@ function SG2_LoadAll(iSection)
             let bShowPlaceButtons = false;
             SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons);
             TC_SetBottomMatter();
+            TC_Archive_AdjustMenu();
 // want to be just below             
             let iDisplayDualClueTop = 50;
             let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
@@ -100,7 +99,7 @@ function SG2_LoadAll(iSection)
             TC_DifficultyLevel_Setup(iDifficultyLevelTop);            
 // scratch area 
             TC_SA_EB_Setup();
-            let iResultMessageTop = 135;
+            let iResultMessageTop = 85;
             TC_ResultMessage_Setup(iResultMessageTop);
             Status_Check(true);
             TC_AdjustSettings();
@@ -121,8 +120,9 @@ function SG2_LoadAll(iSection)
             if ( g_Cookie_DifficultyLevel_iLevel > -1 )
                 TC_DifficultyLevel_ChangedWork(g_Cookie_DifficultyLevel_iLevel, true);
             g_Cookie_DifficultyLevel_iLevel = -1;
+            TC_ElapsedTime_Setup(460, 75);
             SG2_SetVisibles();
-//alert('h:' + g_TC_iBiggestBottom + '.w:' + g_TC_iBiggestRight)
+//            openFullscreen();
             break;
         default:
             alert('error section:' + iSection)                    
@@ -154,6 +154,7 @@ function SG2_SetVisibles()
 //    TC_SetVisible("ResultMessage_Div");
     TC_SetVisible("DifficultyLevel_Div");
     TC_SetVisible("DisplayDualClue_Div");
+    TC_SetVisible("ElapsedTime_Div");
 
 
 }

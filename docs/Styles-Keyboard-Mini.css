@@ -57,39 +57,39 @@
 
 .KB_Mini_ButtonLetter 
 {
-    width:40px;
+    width:46px;
     font-size:28px;
 }
 
 .KB_Mini_ButtonBackspace 
 {
-    width:46px;
+    width:56px;
     background-image: url("images/Buttons/Button_Backspace.png");
-    background-size:43px;
+    background-size:54px;
     background-repeat:no-repeat;
 }
 
 .KB_Mini_ButtonArrowLeft 
 {
-    width:42px;
+    width:44px;
     background-image: url("images/Buttons/Button_ArrowLeft.png");
-    background-size:42px;
+    background-size:48px;
     background-repeat:no-repeat;
 }
 
 .KB_Mini_ButtonArrowRight 
 {
-    width:42px;
+    width:44px;
     background-image: url("images/Buttons/Button_ArrowRight.png");
-    background-size:42px;
+    background-size:48px;
     background-repeat:no-repeat;
 }
 
 .KB_Mini_Button 
 {
     border:1px solid #222222;
-    padding-top:4px;
-    height:40px;
+    padding-top:7px;
+    height:36px;
     outline:none;    
     text-align:center;
     font-family:Arial, Helvetica, sans-serif;

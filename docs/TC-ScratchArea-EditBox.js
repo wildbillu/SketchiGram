@@ -82,7 +82,6 @@ function TC_SA_EB_Entry_AddChar(keypressed)
         {
             g_SA_EB_iCursorPosition++;
             elemInputText.innerHTML = TC_SA_EB_InsertCursorAt(sValue);
-            elemInputText.innerHTML = sValueChanged;
         }
         return;
     }

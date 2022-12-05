@@ -4,10 +4,17 @@
 window.onclick = function(event) 
 {
 	var sTargetId = event.target.id;
-//	if ( g_GRBMS_ExtraImage_bActive && sTargetId.indexOf('ExtraImage') == -1 )
-//		TC_HideExtraImage();
-//	if ( g_GRBMS_SolvedImage_bActive && sTargetId.indexOf('SolvedImage') == -1 )
-//		TC_HideSolvedImage();
+	if ( g_TC_Archive_Menu_bActive && sTargetId.indexOf('Archive') == -1 )
+		TC_Archive_Activate();
+	if ( g_GRBMS_ExtraImage_bActive && sTargetId.indexOf('ExtraImage') == -1 && sTargetId.indexOf('DisplayDualClue_Div') )
+		TC_HideExtraImage();
+	if ( g_GRBMS_SolvedImage_bActive )
+	{
+		if ( sTargetId.indexOf('SolvedImage') == -1 &&
+			sTargetId.indexOf('More') == -1 &&
+			sTargetId.indexOf('GR') == -1 )
+		TC_HideSolvedImage();
+	}
 	if ( g_GRBMS_Info_bActive && sTargetId != "Button_Info_Image" )
 		TC_HideInfo()
 //	if ( g_bPlaceWindow_Active && !sTargetId.startsWith('Place_') )

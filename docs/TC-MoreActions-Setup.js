@@ -15,6 +15,7 @@ function Make_Button_MoreActions()
 
 function MakeMoreActionsInner()
 {
+    g_TC_MoreActions_aIds.length = 0;
     var sDropdownMenu = '';
     if ( g_bIsTwistiCross || g_bIsYourMove || g_bIsSketchiGramVariant1 )
     {
@@ -78,8 +79,9 @@ function MoreActions_SizeAndPosition()
     var rectMoreButton = elemMoreButton.getBoundingClientRect();
     var iTopMenu = rectMoreButton.bottom;
     var iLeftMenu = rectMoreButton.right - iWidthMax;
-    elemDiv.style.top = iTopMenu;
-    elemDiv.style.left = iLeftMenu;
+    elemDiv.style.top = MakePixelString(iTopMenu);
+    elemDiv.style.left = MakePixelString(iLeftMenu);
+    elemDiv.style.height = MakePixelString(iHeight + 2);
 }
 
 function MakeMoreActionsDiv()

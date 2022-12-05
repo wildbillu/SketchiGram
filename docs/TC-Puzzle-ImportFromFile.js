@@ -1,30 +1,42 @@
 // TC-PuzzleFromFile.js
 // 
+// puzzle choices
+// what ever happens the the final action needs to be
+// a call to TC_SetDefaultFile(sFinalDefaultFile)
+// absolute fallback && noFile Allowed choice - ...AsJS.  - it sets the image files directly
+let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle001';
+let g_TC_sPuzzle_CommandLine                = '';
+let g_TC_sPuzzle_Archive                    = '';
+let g_TC_bFileAccess                        = false;
 
-function getFile(sFileName)
-{
-    var xmlhr = new XMLHttpRequest();
-    xmlhr.open( "GET", sFileName, false);
-    xmlhr.send( null );
-    var sResult = xmlhr.responseText;
-    if ( sResult.search('404 Not Found') != -1 || sResult.search('GridAnswers') == -1)
-    {
-        setline('F.Didnotfindpuzzlefile:' + g_PuzzleFile_sThisPuzzle_Text);
-        return '';
-    }
-    return sResult;
-}
-
-function LoadPuzzleFromFile()
+function TC_InitializeFromFileOrLoadAsJS()
 {
     if (window.location.protocol === "file:")
-       return false;
+    { // dont care about text file name and the other names are set in the AsJS file 
+        TC_Puzzle_Load_AsJS();
+        return 'AsJS';
+    }
+    g_TC_bFileAccess = true;
+    if ( g_TC_sPuzzle_Archive != '' )
+    { // we try to read this file and if success we set the image file names
+        let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + g_TC_sPuzzle_Archive + '/' + g_TC_sPuzzle_Archive + '.txt'; 
+        let sFileContents = TC_GetFile(sTextFileToLookFor);
+        if ( sFileContents != '' )
+        {
+            if ( TC_ProcessFileContents(sFileContents) )
+            {
+                TC_UseFileContents();
+                TC_SetFinalPuzzleFileNames(g_TC_sPuzzle_Archive); // need to get the (image) file names correct
+                g_TC_sPuzzle_Archive =''; // don't want to use this again unless reset
+                return;
+            }
+            g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
+        }
+    }
+// so now we look to see if the search string is valid - hopefully this is valid forever    
     var sPageURL = window.location.search.substring(1);
     var aPairs = sPageURL.split('&');
     var iPairs = aPairs.length;
-    // now we look for tag line 'puzzle=XXXX'
-// where XXXX is the subdirectory where things will be found
-// if there is nothing there then we have set things to default to latest
     var sOverride = '';
     if ( iPairs != 0 )
     {   
@@ -35,28 +47,79 @@ function LoadPuzzleFromFile()
                sOverride = aPairs[iPair].substring(iFound+7);
         }
     }
-    var sResult = '';
     if ( sOverride != '' )
     {
-        var sTxtFileToLookFor = 'puzzles/' + sOverride + '/' + sOverride + '.txt';
-        sResult = getFile(sTxtFileToLookFor);
-        g_PuzzleFile_sThisPuzzle_Text         = sTxtFileToLookFor;
-        g_PuzzlePath_sThisPuzzle_Image        = 'puzzles/' + sOverride + '/' + sOverride + '.jpg';
-        g_PuzzlePath_sThisPuzzle_Image_Extra  = 'puzzles/' + sOverride + '/' + sOverride + '-extra.jpg';
-        g_PuzzlePath_sThisPuzzle_Image_Solved = 'puzzles/' + sOverride + '/' + sOverride + '-solved.jpg';
+        let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + sOverride + '/' + sOverride + '.txt'; 
+        let sFileContents = TC_GetFile(sTextFileToLookFor);
+        if ( sFileContents != '' )
+        {
+            if ( TC_ProcessFileContents(sFileContents) )
+            {
+                TC_UseFileContents();
+                TC_SetFinalPuzzleFileNames(sOverride); // need to get the (image) file names correct
+                return;
+            }
+        }
     }
-    if ( sResult == '' )
-    { // try the default name 
-        sResult = getFile(g_PuzzleFile_sThisPuzzle_Text);
-    }
-    if ( sResult == '' )
+    if ( g_TC_sPuzzle_NoArchive_NoCommandLine != '' )
     {
-        return false;
+        let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + g_TC_sPuzzle_NoArchive_NoCommandLine + '/' + g_TC_sPuzzle_NoArchive_NoCommandLine + '.txt'; 
+        let sFileContents = TC_GetFile(sTextFileToLookFor);
+        if ( sFileContents != '' )
+        {
+            if ( TC_ProcessFileContents(sFileContents) )
+            {
+                TC_UseFileContents();
+                TC_SetFinalPuzzleFileNames(g_TC_sPuzzle_NoArchive_NoCommandLine); // need to get the (image) file names correct
+                return;
+            }
+        }
     }
-    var iUpdated = 0;
-    var aLines = sResult.split('\n');
-    var iLines = aLines.length;
+    TC_Puzzle_Load_AsJS(); // all file reads have failed 
+}
 
+var sClues = '';
+var sAnswers = '';
+var sAnswersPlayers = '';
+var sStatusPlayer = '';
+var sAnswerLocation = '';
+var SA_EB_sWords = '';
+var SA_EB_sWordStatus = '';
+var iGridWidth = 4;
+var iGridHeight = 4;
+var sGridAnswers = '';
+var sGridNumbering = '';
+
+function TC_UseFileContents()
+{   // now we need to figure out whether to use any cookie settings
+    let bUsedCookie = false;
+    if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
+    { 
+        CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, 
+            g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus);
+        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering);
+        g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
+        g_bGridSolved = g_Cookie_bGridSolved;
+        g_bAnswersSolved = g_Cookie_bAnswersSolved;
+        g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
+        
+        bUsedCookie = true;
+    }
+    if ( !bUsedCookie )
+    {
+        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus)
+        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
+        g_ElapsedTime_iSecondsPrevious = 0;
+    }
+    //    setline(sFilename + '.Updated:' + iUpdated + ';');
+    return true;
+}
+
+function TC_ProcessFileContents(sFileContents)
+{
+    let iUpdated = 0;
+    let aLines = sFileContents.split('\n');
+    let iLines = aLines.length;
     for ( var iLine = 0; iLine < iLines; iLine++)
     {
         var sLine = aLines[iLine];
@@ -93,24 +156,21 @@ function LoadPuzzleFromFile()
      {
         setlineAdd('F.Update:' + iUpdated + '.Need:' + g_File_iMinimumLines)
         return false;
-     }        
-     // now we need to figure out whether to use any cookie settings
-    var bUsedCookie = false;
-    if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
-    { 
-        CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, 
-            g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus);
-        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering);
-        g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
-        g_bGridSolved = g_Cookie_bGridSolved;
-        g_bAnswersSolved = g_Cookie_bAnswersSolved;
-        bUsedCookie = true;
-    }
-    if ( !bUsedCookie )
+     }   
+     return true;
+}
+
+
+function TC_GetFile(sFileName)
+{
+    var xmlhr = new XMLHttpRequest();
+    xmlhr.open( "GET", sFileName, false);
+    xmlhr.send( null );
+    var sResult = xmlhr.responseText;
+    if ( sResult.search('404 Not Found') != -1 || sResult.search('GridAnswers') == -1)
     {
-        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus)
-        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
+        setline('F.Didnotfindpuzzlefile:' + g_PuzzleFile_sThisPuzzle_Text);
+        return '';
     }
-    //    setline(sFilename + '.Updated:' + iUpdated + ';');
-    return true;
+    return sResult;
 }

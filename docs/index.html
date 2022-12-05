@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
     <meta name="viewport" content="height=device-height, width=device=width initial-scale=1.0">
-    <TITLE>SketchiGram&trade; Puzzle(html)</TITLE>
+    <TITLE>SketchiGram&trade; Puzzle</TITLE>
     <META name="GENERATOR" content="SketchiGram">
 
     <link rel="stylesheet" href="Styles-Overall.css">
@@ -123,23 +123,29 @@
     <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-CADisplayHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SG2-Positioning.js"></SCRIPT>
+<!-- Archive -->
+<SCRIPT SRC="TC-Archive.js"></SCRIPT>
+<link rel="stylesheet" href="Styles-Archive.css">
+<!-- ElapsedTime -->
+<SCRIPT SRC="TC-ElapsedTime.js"></SCRIPT>
+<link rel="stylesheet" href="Styles-ElapsedTime.css">
+
 </HEAD>
 <SCRIPT>
-
-function TC_SetDefaultFile(sNewDefault)
+function TC_LoadPuzzleArchive()
 {
-    let sOriginalDefault = 'latest'
-    g_PuzzlePath_sThisPuzzle                = g_PuzzlePath_sThisPuzzle.replaceAll(sOriginalDefault, sNewDefault);
-    g_PuzzleFile_sThisPuzzle_Text           = g_PuzzleFile_sThisPuzzle_Text.replaceAll(sOriginalDefault, sNewDefault);
-    g_PuzzlePath_sThisPuzzle_Image          = g_PuzzlePath_sThisPuzzle_Image.replaceAll(sOriginalDefault, sNewDefault);
-    g_PuzzlePath_sThisPuzzle_Image_Extra    = g_PuzzlePath_sThisPuzzle_Image_Extra.replaceAll(sOriginalDefault, sNewDefault);
-    g_PuzzlePath_sThisPuzzle_Image_Solved   = g_PuzzlePath_sThisPuzzle_Image_Solved.replaceAll(sOriginalDefault, sNewDefault);
+    TC_Archive_AddPuzzleToArchive('puzzle001', 'Yogi Berra Says!')
+    TC_Archive_AddPuzzleToArchive('puzzle002', 'Beware The Ides!')
+    TC_Archive_AddPuzzleToArchive('puzzle003', "How's Your Aim?")
+    TC_Archive_AddPuzzleToArchive('puzzle004', 'Dinner Anyone?')
+    TC_Archive_AddPuzzleToArchive('puzzle005', 'Play and collect rewards?')
+    TC_Archive_AddPuzzleToArchive('puzzle006', 'Dr. Jekyll and Mr. Hyde?')
+    TC_Archive_AddPuzzleToArchive('puzzle007', 'A Buzzer Beater?')
 }
 
-//<meta name="viewport" content="height=device-height, width=device=width initial-scale=1.0">
 function Dispatch() 
 {// these are also features
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.025';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.031';
 //    g_Place_bDirectPlaceSupport = false;
 //    g_Place_bPopupPlaceSupport = true;
     g_Place_bDirectPlaceSupport = true;
@@ -149,9 +155,7 @@ function Dispatch()
     var sYM = 'APP=YM';
     var sSG = 'APP=SG';
     var sSG2 = 'APP=SG2';
-
-    let sNewDefault         = 'puzzle001';
-    TC_SetDefaultFile(sNewDefault);
+    TC_LoadPuzzleArchive();
 //    var sME = sTC;
 //    var sME = sYM;
 //    var sME = sSG;

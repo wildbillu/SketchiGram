@@ -114,16 +114,19 @@ function TC_SetTopMatter()
         g_TC_iBiggestBottom += rectTitle.height;
     }
 //
-    var elemPuzzleDualClue = document.getElementById("Div_PuzzleDualClue");
-    if ( elemPuzzleDualClue )
+    if ( !g_bIsSketchiGramVariant2 )
     {
-        elemPuzzleDualClue.innerHTML = 'Dual Clue:' + g_ST_sClue_Itself;
-        g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
-        elemPuzzleDualClue.style.top = MakePixelString(g_TC_iBiggestBottom);
-        elemPuzzleDualClue.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-        elemPuzzleDualClue.style.width = MakePixelString(g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
-        var rectDualClue = elemPuzzleDualClue.getBoundingClientRect();
-        g_TC_iBiggestBottom += rectDualClue.height;
+        var elemPuzzleDualClue = document.getElementById("Div_PuzzleDualClue");
+        if ( elemPuzzleDualClue )
+        {
+            elemPuzzleDualClue.innerHTML = 'Dual Clue:' + g_ST_sClue_Itself;
+            g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
+            elemPuzzleDualClue.style.top = MakePixelString(g_TC_iBiggestBottom);
+            elemPuzzleDualClue.style.left = MakePixelString(g_TC_Padding_Left_iSize);
+            elemPuzzleDualClue.style.width = MakePixelString(g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
+            var rectDualClue = elemPuzzleDualClue.getBoundingClientRect();
+            g_TC_iBiggestBottom += rectDualClue.height;
+        }
     }
     if ( g_bIsSketchiGram )
     { // insert the instruction line to 
@@ -147,7 +150,9 @@ function TC_SetBottomMatter()
     var iWidth = g_TC_iBiggestRight - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
     elemBottomMatter.style.width = MakePixelString(iWidth);
     elemBottomMatter.style.Left = MakePixelString(g_TC_Padding_Left_iSize);
-    elemBottomMatter.innerHTML = "&copy; 2022 Northeast by Southwest, Inc.  with SketchiToons&reg; by Sketchi Bill"
+    elemBottomMatter.innerHTML = '&copy; 2022 Northeast by Southwest, Inc.&nbsp;&nbsp;';
+    elemBottomMatter.innerHTML += TC_Archive_AddButtonOrExtraSpace();
+    elemBottomMatter.innerHTML += '&nbsp;&nbsp;SketchiToons&reg; by Sketchi Bill';
     rectBottomMatter = elemBottomMatter.getBoundingClientRect();
     g_TC_iBiggestBottom += rectBottomMatter.height;
 //

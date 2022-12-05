@@ -120,7 +120,7 @@ function SG_LoadGridImage()
 {
     var sImage = '';
     sImage += '<DIV Id="Grid_Image_Extra" class="Div_Grid_Image_Extra">Click Image to Expand Dual Clue<DIV>';
-    sImage += '<img Id="Grid_Image_Itself" class="Div_Grid_Image_Itself" onclick="TC_ShowExtraImage();" src="' + g_PuzzlePath_sThisPuzzle_Image + '" alt="BB" height="200"></img>';
+    sImage += '<img Id="Grid_Image_Itself" class="Div_Grid_Image_Itself" onclick="TC_ShowExtraImage();" src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200"></img>';
     document.getElementById('Div_Grid_Image').innerHTML = sImage;
 }
 

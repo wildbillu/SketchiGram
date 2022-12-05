@@ -1,5 +1,44 @@
 // TC-GeneralFunctions
 // 
+// to detect window back forth...
+/*
+function handleBackFunctionality() {
+    if (window.event) {
+        if (window.event.clientX < 40 && window.event.clientY < 0) {
+            alert("Clicked - Browser back button.");
+        }
+        else {
+            alert("Clicked - Browser refresh button.");
+        }
+    }
+    else {
+        if (event.currentTarget.performance.navigation.type == 2) {
+            alert("Clicked - Browser refresh button.");
+        }
+        else if (event.currentTarget.performance.navigation.type == 1) {
+            alert("Clicked - Browser back button.");
+        }
+    }
+}
+window.onbeforeunload = handleBackFunctionality;
+*/
+
+function openFullscreen() 
+{
+    let elem = document.getElementById("Body_Any");
+    if (elem.requestFullscreen) 
+    {
+      elem.requestFullscreen();
+    } 
+    else if (elem.webkitRequestFullscreen) 
+    { /* Safari */
+      elem.webkitRequestFullscreen();
+    } 
+    else if (elem.msRequestFullscreen) 
+    { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+}
 
 function ForIdSetVisibility(sId, bVisible)
 {
@@ -111,13 +150,10 @@ function RectAsString(sName, rect)
 
 function ScreenSizes() 
 {
-//    setline('W:' + g_iScreen_Width + " H:" + g_iScreen_Height);
     g_iBody_Width = Math.round(document.body.getBoundingClientRect().width);
     g_iBody_Height= Math.round(document.body.getBoundingClientRect().height);
-//    setlineAdd(' Body.W:' + g_iBody_Width + " H:" + g_iBody_Height);
     g_iHTML_Width = Math.round(document.documentElement.getBoundingClientRect().width);
     g_iHTML_Height= Math.round(document.documentElement.getBoundingClientRect().height);
-//    setlineAdd(' HTML.W:' + g_iHTML_Width + " H:" + g_iHTML_Height);
 }
 
 function CharValidEntry(cLetter) 

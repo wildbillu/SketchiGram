@@ -6,12 +6,27 @@ var g_sImagePath_Letters              = 'images/Letters/';
 var g_sImagePath_StatusIndicators     = 'images/StatusIndicators/';
 var g_sImagePath_Buttons              = 'images/Buttons/';
 
-var g_PuzzlePath_sBase                      = 'puzzles/';
-var g_PuzzlePath_sThisPuzzle                = 'puzzles/latest/';
-var g_PuzzleFile_sThisPuzzle_Text           = 'puzzles/latest/latest.txt';
-var g_PuzzlePath_sThisPuzzle_Image          = 'puzzles/latest/latest.jpg';
-var g_PuzzlePath_sThisPuzzle_Image_Extra    = 'puzzles/latest/latest-extra.jpg';
-var g_PuzzlePath_sThisPuzzle_Image_Solved   = 'puzzles/latest/latest-solved.jpg';
+var g_PuzzlePath_sBaseDirectory         = 'puzzles/';
+var g_PuzzlePath_sTemplate_Directory    = 'puzzles/latest/';
+var g_PuzzleFile_sTemplate_Text         = 'puzzles/latest/latest.txt';
+var g_PuzzlePath_sTemplate_Image        = 'puzzles/latest/latest.jpg';
+var g_PuzzlePath_sTemplate_Image_Extra  = 'puzzles/latest/latest-extra.jpg';
+var g_PuzzlePath_sTemplate_Image_Solved = 'puzzles/latest/latest-solved.jpg';
+var g_PuzzlePath_sTemplate_ReplaceMe    = 'latest'
+
+var g_PuzzleFile_sName_Text         = '';
+var g_PuzzlePath_sName_Image        = '';
+var g_PuzzlePath_sName_Image_Extra  = '';
+var g_PuzzlePath_sName_Image_Solved = '';
+
+function TC_SetFinalPuzzleFileNames(sName)
+{
+    g_PuzzleFile_sName_Text         = g_PuzzleFile_sTemplate_Text.        replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
+    g_PuzzlePath_sName_Image        = g_PuzzlePath_sTemplate_Image.       replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
+    g_PuzzlePath_sName_Image_Extra  = g_PuzzlePath_sTemplate_Image_Extra. replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
+    g_PuzzlePath_sName_Image_Solved = g_PuzzlePath_sTemplate_Image_Solved.replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
+}
+
 var g_File_iMinimumLines = 20;
 
 function TC_FullButtonName(sButton)

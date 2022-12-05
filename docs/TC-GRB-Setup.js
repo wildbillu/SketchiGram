@@ -3,7 +3,7 @@
 function TC_LoadGridImage()
 {
     let sImage = '';
-    sImage += '<img Id="Grid_Image_Itself" class="Div_Grid_Image_Itself" onclick="TC_ShowExtraImage();" src="' + g_PuzzlePath_sThisPuzzle_Image + '" alt="BB" height="200"></img>';
+    sImage += '<img Id="Grid_Image_Itself" class="Div_Grid_Image_Itself" onclick="TC_ShowExtraImage();" src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200"></img>';
     let elemDivGridImage = document.getElementById('Div_Grid_Image');
     elemDivGridImage.innerHTML = sImage;
 }

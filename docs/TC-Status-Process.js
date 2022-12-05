@@ -107,6 +107,7 @@ function FeaturesDependingOnPuzzleSolved()
     {
         if ( g_bGridSolved )
         {
+            TC_ElapsedTime_Clear();
             ForIdSetVisibility("KB_Mini_Div", false);
             ForIdSetVisibility("ScratchArea", false);
             ForIdSetVisibility("DifficultyLevel_Div", false);

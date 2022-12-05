@@ -2,7 +2,6 @@
 
 function SG_SetVisibles()
 {
-    setline('SetVisibles')
     TC_SetVisible("Div_PuzzleType");
     TC_SetVisible("Div_PuzzleTitle");
     TC_SetVisible("Div_PuzzleDualClue");

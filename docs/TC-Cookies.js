@@ -59,7 +59,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     var aOurValues = [];
     var aOurValues = sCookieValue.split(g_cCookieDelimiter);
     var iOurValues = aOurValues.length;
-    if ( iOurValues != 12 )
+    if ( iOurValues != 14 )
         return false;
     g_Cookie_sPuzzle = aOurValues[0];
     g_Cookie_sAnswersPlayer = aOurValues[1];
@@ -72,6 +72,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     g_Cookie_SA_EB_sWords = aOurValues[9];
     g_Cookie_DifficultyLevel_iLevel = aOurValues[10];
     g_Cookie_SA_EB_sWordStatus =  aOurValues[11];
+    g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(aOurValues[12]);
     g_Cookie_bValid = true;
 }
 
@@ -115,7 +116,12 @@ function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sG
     sCookie += g_DifficultyLevel_iLevel;
     sCookie += g_cCookieDelimiter;
     sCookie += g_SA_EB_sWordStatus
-//
+    sCookie += g_cCookieDelimiter;
+    let iTotalTime = (g_ElapsedTime_iSecondsPrevious + g_ElapsedTime_iSecondsThisAttempt);
+    sCookie += iTotalTime.toString();
+    sCookie += g_cCookieDelimiter;
+    sCookie += 99;
+    //
     var exdays = 365;
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
