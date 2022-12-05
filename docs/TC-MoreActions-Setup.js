@@ -60,7 +60,7 @@ function MoreActions_SizeAndPosition()
     for ( let iEntry = 0; iEntry < g_TC_MoreActions_aIds.length; iEntry++ )
     { // get height and determine widest item
         let elemItem = document.getElementById(g_TC_MoreActions_aIds[iEntry]);
-        let rectItem = elemItem.getBoundingClientRect();
+        let rectItem = GetBoundingClientRectAbsolute(elemItem)
         let iWidthThis = rectItem.width + 2 * g_TC_Padding_Inter_Horizontal_iSize;
         if ( iWidthThis > iWidthMax )
             iWidthMax = iWidthThis;
@@ -75,10 +75,10 @@ function MoreActions_SizeAndPosition()
     elemDiv.style.width = MakePixelString(iWidthMax);
     elemDiv.style.height = MakePixelString(iHeight)
 //
-    var elemMoreButton = document.getElementById("MoreButton");
-    var rectMoreButton = elemMoreButton.getBoundingClientRect();
-    var iTopMenu = rectMoreButton.bottom;
-    var iLeftMenu = rectMoreButton.right - iWidthMax;
+    let elemMoreButton = document.getElementById("MoreButton");
+    let rectMoreButton = GetBoundingClientRectAbsolute(elemMoreButton);
+    let iTopMenu = rectMoreButton.bottom;
+    let iLeftMenu = rectMoreButton.right - iWidthMax;
     elemDiv.style.top = MakePixelString(iTopMenu);
     elemDiv.style.left = MakePixelString(iLeftMenu);
     elemDiv.style.height = MakePixelString(iHeight + 2);
