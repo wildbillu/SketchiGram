@@ -28,7 +28,7 @@ function KB_Mini_Setup(iWidthMax)
     let sId = 'KB_' + sLetter;
     let elemLetter = document.getElementById(sId)
     let rectButton = elemLetter.getBoundingClientRect();
-    let iEstimatedWidth = iTotalLetters * (rectButton.width + 4); 
+    let iEstimatedWidth = iTotalLetters * (rectButton.width + 10); 
     let fRows = Math.ceil(iEstimatedWidth / iWidthMax);
     let iRows = parseInt(fRows);
     let fLettersPerRow = Math.ceil(iTotalLetters / iRows);
