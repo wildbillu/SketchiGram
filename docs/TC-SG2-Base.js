@@ -52,37 +52,40 @@ function SG2_LoadAll(iSection)
             SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
             GRBMS_ScrambleCorrectAnswersToPlayer(false);
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 2000);    
+            break;
+        case 1:
             let iMaxGridWidth = 0.85 * g_TC_iBiggestRight;
             SG2_SetSizes(iMaxGridWidth);
             TC_SetTopMatter();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 500);    
             break;
-        case 1:
-            GRBMS_MakeGrid();
+        case 2:
+                GRBMS_MakeGrid();
             GRBMS_MakeGrid_Phantom();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 500);    
             break;
-        case 2:
+        case 3:
             GRBMS_SetAllButtons();
             GRBMS_SetAllButtons_Phantom();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
-        case 3:
+        case 4:
             let iGap = 0;
             SG2_Adjust_GridAndPhantomGridPosition(iGap);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
-        case 4:
+        case 5:
             SG_ActionMenu_SizeAndPosition();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 1);    
             break;
-        case 5:
+        case 6:
             let iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
             var iKBRows = KB_Mini_Setup(iWidthGrid);
             SG2_Adjust_KBAndIntro(iKBRows);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
-        case 6:
+        case 7:
                 // we are going to do the show clues, but not make it visible to get spacing right
             let bShowLength = true;
             let bShowGridLocation = false;
@@ -107,7 +110,7 @@ function SG2_LoadAll(iSection)
                 TC_ShowInfo();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
-        case 7:
+        case 8:
             while ( document.readyState != "complete") 
             {
             }
