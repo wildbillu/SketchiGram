@@ -38,7 +38,7 @@ function TC_ElapsedTime_Process()
     if ( iHours )
         sFormatted += iHours.toString() + ':';
     if ( iMinutes > 10 )
-        sFormatted += iMinutes.toString();
+        sFormatted += iMinutes.toString() + ':';
     else
     {
         if ( iHours == 0 )
