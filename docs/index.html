@@ -162,8 +162,10 @@ function Dispatch()
     var sME = sSG2;
     var sSearch = window.location.search;
     var sPageURL = window.location.search.substring(1);
-if ( sPageURL.indexOf("fbclid") != 0 )
-    sPageURL = '';
+    if ( sPageURL.indexOf("fbclid") != -1 )
+    {
+        sPageURL = '';
+    }    
     var aPairs = [];
     if ( sPageURL.length > 0 )
         aPairs = sPageURL.split('&');
@@ -218,6 +220,7 @@ if ( sPageURL.indexOf("fbclid") != 0 )
     }
     if ( g_bIsSketchiGram && g_bIsSketchiGramVariant2)
     {
+alert('a')
         SG2_LoadAll(0);
         return;
     }
