@@ -166,42 +166,33 @@ function Dispatch()
     {
         sPageURL = '';
     }    
-    var aPairs = [];
+    let aPairs = [];
     if ( sPageURL.length > 0 )
         aPairs = sPageURL.split('&');
     if ( aPairs.length == 0 )
         aPairs.push(sME)
+    let sElem = sME;
     for ( var iP = 0; iP < aPairs.length; iP++ )
     {
-        sElem = aPairs[iP].toUpperCase();
-        if ( sElem == sTC)
-        {
-            g_bIsTwistiCross = true;
-            g_bIsYourMove = false;
-            g_bIsSketchiGram = false;
-        }
-        if ( sElem == sYM)
-        {
-            g_bIsTwistiCross = false;
-            g_bIsYourMove = true;
-            g_bIsSketchiGram = false;
-        }
-        if ( sElem == sSG)
-        {
-            g_bIsTwistiCross = false;
-            g_bIsYourMove = false;
-            g_bIsSketchiGram = true;
-            g_bIsSketchiGramVariant1 = true;
-            g_bIsSketchiGramVariant2 = false;
-        }
-        if ( sElem == sSG2)
-        {
-            g_bIsTwistiCross = false;
-            g_bIsYourMove = false;
-            g_bIsSketchiGram = true;
-            g_bIsSketchiGramVariant1 = false;
-            g_bIsSketchiGramVariant2 = true;
-        }
+        let sThisElem = aPairs[iP].toUpperCase();
+        if ( sThisElem.startsWith('APP=') )
+            sElem = sThisElem;
+    }
+    if ( sElem == sTC)
+    {
+        g_bIsTwistiCross = true;g_bIsYourMove = false;g_bIsSketchiGram = false;
+    }
+    if ( sElem == sYM)
+    {
+        g_bIsTwistiCross = false;g_bIsYourMove = true;g_bIsSketchiGram = false;
+    }
+    if ( sElem == sSG)
+    {
+        g_bIsTwistiCross = false;g_bIsYourMove = false;g_bIsSketchiGram = true;g_bIsSketchiGramVariant1 = true;g_bIsSketchiGramVariant2 = false;
+    }
+    if ( sElem == sSG2)
+    {
+        g_bIsTwistiCross = false;g_bIsYourMove = false;g_bIsSketchiGram = true;g_bIsSketchiGramVariant1 = false;g_bIsSketchiGramVariant2 = true;
     }
     if ( g_bIsTwistiCross )
     {
