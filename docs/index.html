@@ -162,6 +162,8 @@ function Dispatch()
     var sME = sSG2;
     var sSearch = window.location.search;
     var sPageURL = window.location.search.substring(1);
+if ( sPageURL.indexOf("fbclid") != 0 )
+    sPageURL = '';
     var aPairs = [];
     if ( sPageURL.length > 0 )
         aPairs = sPageURL.split('&');
