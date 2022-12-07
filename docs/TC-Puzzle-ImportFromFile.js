@@ -169,7 +169,7 @@ function TC_GetFile(sFileName)
     var sResult = xmlhr.responseText;
     if ( sResult.search('404 Not Found') != -1 || sResult.search('GridAnswers') == -1)
     {
-        setline('F.Didnotfindpuzzlefile:' + g_PuzzleFile_sThisPuzzle_Text);
+        ('F.Didnotfindpuzzlefile:' + sFileName);
         return '';
     }
     return sResult;
