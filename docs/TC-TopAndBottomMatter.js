@@ -82,18 +82,19 @@ function TC_SetTopMatter()
         elemPuzzleType.innerHTML = 'Sketchi-Gram Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
     else if ( g_bIsSketchiGramVariant2 )
         elemPuzzleType.innerHTML = 'Sketchi-Gram&trade; Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
-    var rectTitle = elemPuzzleType.getBoundingClientRect();
-    g_TC_iBiggestBottom += rectTitle.height;
+    let rectType = GetBoundingClientRectAbsolute(elemPuzzleType);
+    g_TC_iBiggestBottom += rectType.height;
 // now we can adjust the position of the status row
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
 //
-    var elemStatusControlLeft = document.getElementById("Div_StatusControl_Left");
+    let elemStatusControlLeft = document.getElementById("Div_StatusControl_Left");
     elemStatusControlLeft.style.top = MakePixelString(g_TC_iBiggestBottom);
-    var elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
+    let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
     elemStatusControlRight.style.top = MakePixelString(g_TC_iBiggestBottom);
-    var rectControlRight =  elemStatusControlRight.getBoundingClientRect();
+    
+    let rectControlRight =  GetBoundingClientRectAbsolute(elemStatusControlRight);
 //
-    var elemPuzzleTitle = document.getElementById("Div_PuzzleTitle");
+    let elemPuzzleTitle = document.getElementById("Div_PuzzleTitle");
     if ( g_bIsSketchiGramVariant2 )
     {
         elemPuzzleTitle.style.top = MakePixelString(g_TC_iBiggestBottom);
@@ -109,7 +110,7 @@ function TC_SetTopMatter()
         elemPuzzleTitle.style.top = MakePixelString(g_TC_iBiggestBottom);
         elemPuzzleTitle.style.left = MakePixelString(g_TC_Padding_Left_iSize);
         elemPuzzleTitle.style.width = MakePixelString(g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
-        var rectTitle = elemPuzzleTitle.getBoundingClientRect();
+        let rectTitle = GetBoundingClientRectAbsolute(elemPuzzleTitle);
         g_TC_iBiggestBottom += rectTitle.height;
     }
 //

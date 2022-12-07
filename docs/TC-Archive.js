@@ -107,9 +107,10 @@ function TC_Archive_WidestEntry()
 function TC_Archive_Activate()
 {
     if ( !g_TC_Archive_Menu_bActive )
-      g_TC_Archive_Menu_iActiveCount = 0;
+        g_TC_Archive_Menu_iActiveCount = 0;
     g_TC_Archive_Menu_bActive = !g_TC_Archive_Menu_bActive;
-    ForIdSetVisibility("Archive_Div", g_TC_Archive_Menu_bActive)
+    ForIdSetVisibility("Archive_Div", g_TC_Archive_Menu_bActive);
+    return 0;
 }
 
 function TC_Archive_MakeActivationButton()

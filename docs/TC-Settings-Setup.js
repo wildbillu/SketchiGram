@@ -1,5 +1,6 @@
 // TC-Settings-Setup.js
 //
+var g_TC_Settings_iActiveCount = 0;
 var g_TC_Settings_bActive = false;
 var g_sCABOnSettingsClick = '';
 var g_sGRBOnSettingsClick = '';
@@ -17,6 +18,9 @@ function MakeSettingsDiv()
 
 function TC_HideSettings()
 {
+    if  ( !g_TC_Settings_bActive )
+        g_TC_Settings_iActiveCount = 0;
+    g_TC_Settings_iActiveCount = 0;
     var elemSettingDiv = document.getElementById("SettingsDiv");
     elemSettingDiv.style.visibility = 'hidden'
     if ( g_sCABOnSettingsClick != '')

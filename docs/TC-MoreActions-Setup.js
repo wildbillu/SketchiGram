@@ -1,5 +1,6 @@
 // TC-MoreActions-Setup.js
 //
+var g_TC_MoreActions_iActiveCount = 0;
 var g_TC_MoreActions_bActive = false;
 var g_sCABOnMoreActionsClick = '';
 var g_sGRBOnMoreActionsClick = '';
@@ -93,6 +94,7 @@ function MakeMoreActionsDiv()
 
 function TC_HideMoreActions()
 {
+    g_TC_MoreActions_iActiveCount = 0;
     var elemImage = document.getElementById("MoreActions_Div");
     elemImage.style.visibility = 'hidden'
     if ( g_sCABOnSettingsClick != '')
@@ -105,6 +107,8 @@ function TC_HideMoreActions()
 
 function TC_ShowMoreActions()
 {
+    if  ( !g_TC_MoreActions_bActive )
+        g_TC_MoreActions_iActiveCount = 0;
     var elemDiv = document.getElementById("MoreActions_Div");
 // assume has correct width and height so just set top and left(to be centered)
     elemDiv.style.visibility = 'visible'

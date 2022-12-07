@@ -96,7 +96,7 @@ function SG2_LoadAll(iSection)
 // want to be just below             
             let iDisplayDualClueTop = 50;
             let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
-            var rectStatusControlRight =  elemStatusControlRight.getBoundingClientRect();            
+            let rectStatusControlRight =  GetBoundingClientRectAbsolute(elemStatusControlRight);            
             TC_DisplayDualClue_Setup(iDisplayDualClueTop, g_TC_Padding_Left_iSize, rectStatusControlRight.left - 4 * g_TC_Padding_Left_iSize);
 // scratch area 
             let iResultMessageTop = 85;

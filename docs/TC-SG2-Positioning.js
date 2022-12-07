@@ -3,7 +3,7 @@
 function SG2_Adjust_KBAndIntro(iKBRows)
 {
     let elemGrid = document.getElementById('Div_Grid');
-    let rectGrid = elemGrid.getBoundingClientRect();
+    let rectGrid = GetBoundingClientRectAbsolute(elemGrid)
     let iKBWidth = rectGrid.width - 2; // account for border?
 //
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
