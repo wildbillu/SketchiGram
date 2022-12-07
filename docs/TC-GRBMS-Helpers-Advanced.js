@@ -110,7 +110,8 @@ function GRBMS_SetGridButtonsGridAndPhantomGridPosition()
     elemGrid.style.left = MakePixelString(g_TC_Padding_Left_iSize);
 // now the phantom grid
     let elemGrid_Phantom = document.getElementById('Div_Grid_Phantom');
-    let rectGrid = elemGrid.getBoundingClientRect();
+//  let rectGrid = elemGrid.getBoundingClientRect();
+    let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
     elemGrid_Phantom.style.top = MakePixelString(rectGrid.top);
     elemGrid_Phantom.style.left = MakePixelString(rectGrid.left);
 }
