@@ -1,0 +1,25 @@
+/LimaBean
+sPuzzleDate=2022-12-06
+sPuzzleName=HugeShot
+sPuzzleTitle=Perhaps found in succotash?
+iGridWidth=4
+iGridHeight=4
+sGridAnswers=COMBALEELIMALOON
+sGridAnswersPlayer=-----L---I------
+sGridStatusPlayer=NNNNNGNNNGNNNNNN
+sGridNumbering=01234...5...6...
+iClueAnswers=8
+sClues=DummyA|DummyB|Helm' _____|A miscellany of things|A short one may be on a post-it|Foghorn Leghorn has one|Canadian 1 Dollar coin is named after one|Curtain _____
+sAnswers=LIMA|BEAN|ALEE|OLIO|MEMO|COMB|LOON|CALL
+sAnswersPlayer=----|----|----|----|----|----|----|----
+sStatusPlayer=NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
+ST_sClue_Itself=Unlike a pea, one of these doesn't roll very well.
+ST_sClue_Intro=SketchiToons Clue to Dual Answers
+sDualClueBefore= 
+sDualClueMiddle=    
+sDualClueEnd= 
+sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
+sPuzzleCreditDate=December 8, 2022
+sAnswerLocations=6 Across|4 Down|5 Across|2 Down|3 Down|1 Across|7 Across|1 Down
+SA_EB_sWords=||||||||||||
+SA_EB_sWordStatus=FFFFFFFFFFFF
