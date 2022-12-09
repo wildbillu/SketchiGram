@@ -28,7 +28,7 @@ function HandleCookiesOnStart()
         var sThisCookie = aCookies[iCookie]
         if ( sThisCookie.includes(sOurCookieName_Puzzle) )
             sOurCookie_Puzzle = sThisCookie;
-            if ( sThisCookie.includes(sOurCookieName_Settings) )
+        if ( sThisCookie.includes(sOurCookieName_Settings) )
             sOurCookie_Settings = sThisCookie;
     }
     HandleCookie_Puzzle(sOurCookie_Puzzle);
