@@ -3,6 +3,38 @@
 var g_SG_Clues_bCreated = false;
 var g_SG_iExtraCluesShown = 0;
 
+function SG2_SetImage()
+{
+    let sImage = '';
+//    onclick="TC_ShowExtraImage();"
+    sImage += '<img Id="Grid_Image_Itself" class="Div_Grid_Image_Itself"  src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200"></img>';
+    let elemDivGridImage = document.getElementById('Div_Grid_Image');
+    elemDivGridImage.innerHTML = sImage;
+}
+
+function SG2_PositionImage()
+{
+// first position
+    let elemKB = document.getElementById("KB_Mini_Div");
+    let rectKB = GetBoundingClientRectAbsolute(elemKB);
+    let iTopKB = rectKB.bottom;
+    let elemDivGridImage = document.getElementById('Div_Grid_Image');
+    elemDivGridImage.style.top = MakePixelString(iTopKB);
+// need the size to be height between bottom of KB and top of Archive Button
+    let elemArchiveButton = document.getElementById("Archive_Button_Activate");
+    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton)
+    let iTopArchiveButton = rectArchiveButton.top;
+    let iHeight = iTopArchiveButton - iTopKB;
+    elemDivGridImage.style.height = MakePixelString(iHeight);
+    let elemDivGridImageItself = document.getElementById("Grid_Image_Itself");
+    elemDivGridImageItself.style.height = MakePixelString(iHeight);
+
+    let iWidth = GetWidthToHeightRatioOfImageWithId("Grid_Image_Itself")*iHeight;
+    elemDivGridImageItself.style.width = MakePixelString(iWidth);
+    let iLeft = TC_LeftForCentering(iWidth);
+    elemDivGridImage.style.left = MakePixelString(iLeft);
+}
+
 function SG_ShowExtraClue()
 {
     if ( g_SG_iExtraCluesShown > 0 )
@@ -68,7 +100,12 @@ function TC_MoveTopAndAdjustBiggestBottom(sId, iTop)
 
 function SG_ActionMenu_SizeAndPosition()
 {
-    var elemGridImageDiv = document.getElementById("Div_Grid_Image");
+    TC_LoadGridImage()      
+    let elemGridImageDiv = document.getElementById("Div_Grid_Image");
+elemGridImageDiv.style.visibility = 'visible'
+    let elemGridImageItself = document.getElementById("Grid_Image_Itself");
+  
+
     var rectGridImageDiv = elemGridImageDiv.getBoundingClientRect();
     var iTop = rectGridImageDiv.bottom + g_TC_Padding_Inter_Vertical_iSize;
     var iLeft = rectGridImageDiv.left;

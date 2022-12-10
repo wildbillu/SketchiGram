@@ -150,9 +150,7 @@ function SG_Clues_ShowClue_ResetAnswer(iRow, bShowLength, bShowAnswer, bShowGrid
         SG_Clues_Div_SetVisibility(iRow, true);
         return;
     }
-
-
-    var sCluePlus = '';
+    let sCluePlus = '';
     if ( bShowGridLocation ) sCluePlus += SG_Position_Answer(iRow);
     sCluePlus += g_aClues[iRow];
     if ( bShowLength ) sCluePlus += SG_Size_Answer(iRow);
@@ -166,11 +164,14 @@ function SG_ShowClue_PlaceButtonEnabling(iAnswer, bEnabled)
 
 }
 
+var g_SG2_CAB_bVisible = false;
 var g_SG_SC_FrameOnly   = -1;
 var g_SG_SC_ShowAll     = -2;
 function SG_Clues_Div_SetVisibility(iIndex, bVisible)
 {
+    g_SG2_CAB_bVisible = bVisible;
     ForIdSetVisibility("SG_Clues_Div", bVisible)
+    ForIdSetVisibility("Div_Grid_Image", !bVisible);
     if ( iIndex == -1 )
         return;
     if ( iIndex == 0 || iIndex == 1 || iIndex == -2 )

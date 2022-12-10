@@ -67,8 +67,8 @@ function HandleCookie_Settings(sOurCookie_Settings)
 
 function MakeCookie_Settings()
 {
-    var sCookieName = 'SketchiCross-Settings';
-    var sCookie = '';
+    let sCookieName = g_sPuzzleType + '-Settings'; 
+    let sCookie = '';
     sCookie += g_sSettings_Version; 
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_DeleteCookiesOnStartUp;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Answers_CheckRow;

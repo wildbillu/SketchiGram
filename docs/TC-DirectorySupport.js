@@ -7,12 +7,13 @@ var g_sImagePath_StatusIndicators     = 'images/StatusIndicators/';
 var g_sImagePath_Buttons              = 'images/Buttons/';
 
 var g_PuzzlePath_sBaseDirectory         = 'puzzles/';
-var g_PuzzlePath_sTemplate_Directory    = 'puzzles/latest/';
-var g_PuzzleFile_sTemplate_Text         = 'puzzles/latest/latest.txt';
-var g_PuzzlePath_sTemplate_Image        = 'puzzles/latest/latest.jpg';
-var g_PuzzlePath_sTemplate_Image_Extra  = 'puzzles/latest/latest-extra.jpg';
-var g_PuzzlePath_sTemplate_Image_Solved = 'puzzles/latest/latest-solved.jpg';
-var g_PuzzlePath_sTemplate_ReplaceMe    = 'latest'
+var g_PuzzlePath_sTemplate_Directory    = 'puzzles/puzzle000/';
+var g_PuzzleFile_sTemplate_Text         = 'puzzles/puzzle000/puzzle000.txt';
+var g_PuzzlePath_sTemplate_Image        = 'puzzles/puzzle000/puzzle000.jpg';
+var g_PuzzlePath_sTemplate_Image_Extra  = 'puzzles/puzzle000/puzzle000-extra.jpg';
+var g_PuzzlePath_sTemplate_Image_Solved = 'puzzles/puzzle000/puzzle000-solved.jpg';
+var g_PuzzlePath_sTemplate_ReplaceMe    = 'puzzle000'
+
 
 var g_PuzzleFile_sName_Text         = '';
 var g_PuzzlePath_sName_Image        = '';
@@ -25,6 +26,7 @@ function TC_SetFinalPuzzleFileNames(sName)
     g_PuzzlePath_sName_Image        = g_PuzzlePath_sTemplate_Image.       replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
     g_PuzzlePath_sName_Image_Extra  = g_PuzzlePath_sTemplate_Image_Extra. replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
     g_PuzzlePath_sName_Image_Solved = g_PuzzlePath_sTemplate_Image_Solved.replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
+    g_sPuzzleNumber = sName;
 }
 
 var g_File_iMinimumLines = 20;

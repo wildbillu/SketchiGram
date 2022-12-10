@@ -24,7 +24,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_FullArea StartHidden">notset</DIV>';
     sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden"></DIV>';
     sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter StartHidden">Div_BottomMatter</DIV>';
-    sMain += '<DIV Id="Messages" class="Div_Message StartHidden"></DIV>';
+
     sMain += MakeExtraImageDiv();
     sMain += MakeSolvedImageDiv();
     sMain += MakeInfoDiv();
@@ -45,9 +45,9 @@ function SG2_LoadAll(iSection)
     switch ( iSection)
     {
         case 0:
+            g_SG2_CAB_bVisible = false;
             getResolution(); 
             while ( document.readyState != "complete") {}
-            HandleCookiesOnStart();
             TC_InitializeFromFileOrLoadAsJS();
             SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
@@ -76,7 +76,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 5:
-            SG_ActionMenu_SizeAndPosition();
+            SG2_SetImage();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 6:
@@ -93,6 +93,7 @@ function SG2_LoadAll(iSection)
             SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons);
             TC_SetBottomMatter();
             TC_Archive_AdjustMenu();
+            SG2_PositionImage();            
 // want to be just below             
             let iDisplayDualClueTop = 50;
             let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
@@ -158,7 +159,7 @@ function SG2_SetVisibles()
     TC_SetVisible("DifficultyLevel_Div");
     TC_SetVisible("DisplayDualClue_Div");
     TC_SetVisible("ElapsedTime_Div");
-
-
+    if ( !g_SG2_CAB_bVisible )
+        TC_SetVisible("Div_Grid_Image");
 }
 

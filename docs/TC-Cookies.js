@@ -10,22 +10,23 @@ function StoreCookie_Settings()
 
 function HandleCookiesOnStart()
 {
+    g_Cookie_DifficultyLevel_iLevel = -1;
     let s = document.cookie;
     if ( s == '' )
     {
         return false;
     }
-    var aCookies = s.split(';');
-    var iCookies = aCookies.length;
+    let aCookies = s.split(';');
+    let iCookies = aCookies.length;
 //    
-    var sOurCookieName_Puzzle = "SketchiCross-" + g_sPuzzleDate;
-    var sOurCookieName_Settings = 'SketchiCross-Settings'; 
-    var sOurCookie_Puzzle = '';
-    var sOurCookie_Settings = '';
+    let sOurCookieName_Puzzle   = g_sPuzzleType + '-' + g_sPuzzleNumber;
+    let sOurCookieName_Settings = g_sPuzzleType + '-Settings'; 
+    let sOurCookie_Puzzle = '';
+    let sOurCookie_Settings = '';
 //
-    for ( var iCookie = 0; iCookie < iCookies ; iCookie++)
+    for ( let iCookie = 0; iCookie < iCookies ; iCookie++)
     {
-        var sThisCookie = aCookies[iCookie]
+        let sThisCookie = aCookies[iCookie]
         if ( sThisCookie.includes(sOurCookieName_Puzzle) )
             sOurCookie_Puzzle = sThisCookie;
         if ( sThisCookie.includes(sOurCookieName_Settings) )
@@ -52,13 +53,13 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
 {
     if ( sOurCookie_Puzzle == '')
         return;
-    var iEqual = sOurCookie_Puzzle.indexOf("=");
+    let iEqual = sOurCookie_Puzzle.indexOf("=");
     if ( iEqual == -1 )
         return false;
-    var sCookieValue = sOurCookie_Puzzle.substring(iEqual + 1);
-    var aOurValues = [];
-    var aOurValues = sCookieValue.split(g_cCookieDelimiter);
-    var iOurValues = aOurValues.length;
+    let sCookieValue = sOurCookie_Puzzle.substring(iEqual + 1);
+    let aOurValues = [];
+    aOurValues = sCookieValue.split(g_cCookieDelimiter);
+    let iOurValues = aOurValues.length;
     if ( iOurValues != 14 )
         return false;
     g_Cookie_sPuzzle = aOurValues[0];
@@ -83,14 +84,14 @@ function StoreCookie_Puzzle()
     var sAnswersStatusPlayer = g_aAnswersStatusPlayer.join('|');
     var sGridAnswersPlayer = g_aGridAnswersPlayer.join('')
     var sGridStatusPlayer = g_aGridStatusPlayer.join('')
-    var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleDate, g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0)
+    var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0)
     document.cookie = sCookieToAdd;
 //    setlineAdd('CPS:' + ++g_iStoredPuzzleCookies);
 }
 
-function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds)
+function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds)
 {
-    var sCookieName = 'SketchiCross-' + sDate;
+    var sCookieName = g_sPuzzleType + '-' + g_sPuzzleNumber;
     var sCookie = '';
     sCookie += sPuzzleName;
      sCookie += g_cCookieDelimiter;

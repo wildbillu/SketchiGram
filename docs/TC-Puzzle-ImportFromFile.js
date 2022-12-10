@@ -25,8 +25,8 @@ function TC_InitializeFromFileOrLoadAsJS()
         {
             if ( TC_ProcessFileContents(sFileContents) )
             {
-                TC_UseFileContents();
                 TC_SetFinalPuzzleFileNames(g_TC_sPuzzle_Archive); // need to get the (image) file names correct
+                TC_UseFileContents();
                 g_TC_sPuzzle_Archive =''; // don't want to use this again unless reset
                 return;
             }
@@ -35,16 +35,18 @@ function TC_InitializeFromFileOrLoadAsJS()
     }
 // so now we look to see if the search string is valid - hopefully this is valid forever    
     var sPageURL = window.location.search.substring(1);
-    var aPairs = sPageURL.split('&');
-    var iPairs = aPairs.length;
+    var aSplits = sPageURL.split('&');
+    var iSplits = aSplits.length;
     var sOverride = '';
-    if ( iPairs != 0 )
+    if ( iSplits != 0 )
     {   
-        for ( var iPair = 0; iPair < iPairs; iPair++ )
+        for ( var iSplit = 0; iSplit < iSplits; iSplit++ )
         {
-            var iFound = aPairs[iPair].indexOf("puzzle=");
+            var iFound = aSplits[iSplit].indexOf("puzzle");
             if ( iFound != -1 )
-               sOverride = aPairs[iPair].substring(iFound+7);
+            {
+               sOverride = aSplits[iSplit];
+            }
         }
     }
     if ( sOverride != '' )
@@ -55,8 +57,8 @@ function TC_InitializeFromFileOrLoadAsJS()
         {
             if ( TC_ProcessFileContents(sFileContents) )
             {
-                TC_UseFileContents();
                 TC_SetFinalPuzzleFileNames(sOverride); // need to get the (image) file names correct
+                TC_UseFileContents();
                 return;
             }
         }
@@ -69,8 +71,8 @@ function TC_InitializeFromFileOrLoadAsJS()
         {
             if ( TC_ProcessFileContents(sFileContents) )
             {
-                TC_UseFileContents();
                 TC_SetFinalPuzzleFileNames(g_TC_sPuzzle_NoArchive_NoCommandLine); // need to get the (image) file names correct
+                TC_UseFileContents();
                 return;
             }
         }
@@ -92,6 +94,7 @@ var sGridNumbering = '';
 
 function TC_UseFileContents()
 {   // now we need to figure out whether to use any cookie settings
+    HandleCookiesOnStart();    
     let bUsedCookie = false;
     if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
     { 

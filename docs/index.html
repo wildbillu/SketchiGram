@@ -143,7 +143,11 @@ function TC_LoadPuzzleArchive()
     TC_Archive_AddPuzzleToArchive('puzzle007', 'A Buzzer Beater?')
     TC_Archive_AddPuzzleToArchive('puzzle008', 'Perhaps found in your succotash?')
 }
-let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle004';
+let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle008';
+var g_sPuzzleNumber          = 'puzzle000'
+var g_sPuzzleType            = 'SG2'
+
+
 function Dispatch() 
 {// these are also features
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.043';
@@ -178,18 +182,22 @@ function Dispatch()
     if ( sElem == sTC)
     {
         g_bIsTwistiCross = true;g_bIsYourMove = false;g_bIsSketchiGram = false;
+        g_sPuzzleType            = 'TC'
     }
     if ( sElem == sYM)
     {
         g_bIsTwistiCross = false;g_bIsYourMove = true;g_bIsSketchiGram = false;
+        g_sPuzzleType            = 'YM'
     }
     if ( sElem == sSG)
     {
         g_bIsTwistiCross = false;g_bIsYourMove = false;g_bIsSketchiGram = true;g_bIsSketchiGramVariant1 = true;g_bIsSketchiGramVariant2 = false;
+        g_sPuzzleType            = 'SG'
     }
     if ( sElem == sSG2)
     {
         g_bIsTwistiCross = false;g_bIsYourMove = false;g_bIsSketchiGram = true;g_bIsSketchiGramVariant1 = false;g_bIsSketchiGramVariant2 = true;
+        g_sPuzzleType            = 'SG2'
     }
     if ( g_bIsTwistiCross )
     {
@@ -229,7 +237,8 @@ var iM = 0;
 </SCRIPT>
 
 <BODY Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="Dispatch();" >
-<DIV Id="Body_Any" class="Body_Any_BeforeLoad" ontouchmove="GRBMS_touchMove(event);" onmousemove="A(event);"></DIV>    
+<DIV Id="Body_Any" class="Body_Any_BeforeLoad" ontouchmove="GRBMS_touchMove(event);" onmousemove="A(event);"></DIV>  
+<DIV Id="Messages" class="Div_Message"></DIV>  
 </BODY>
 </HTML>
 

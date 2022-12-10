@@ -1,7 +1,5 @@
 // TC-CAB-Basic.js
 
-
-
 function CAB_FocusLostSetActiveToInActive()
 {
     if ( g_CAB_Focus_sId == '' )
