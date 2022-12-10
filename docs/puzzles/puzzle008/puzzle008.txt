@@ -1,4 +1,4 @@
-/LimaBean
+sPuzzleNumber=puzzle008
 sPuzzleDate=2022-12-06
 sPuzzleName=HugeShot
 sPuzzleTitle=Perhaps found in succotash?
