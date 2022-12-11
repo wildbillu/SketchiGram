@@ -44,11 +44,11 @@ function TC_ActOnVisibilityChange(e)
 {
     if (document.hidden) 
     { // need to stop the clock
-        setlineAdd('H');
+//        setlineAdd('H');
         TC_ElapsedTime_Pause();
         return;
     }
-    setlineAdd('V')
+//    setlineAdd('V')
     TC_ElapsedTime_Resume();
 }
 

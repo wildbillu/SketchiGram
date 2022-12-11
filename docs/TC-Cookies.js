@@ -64,7 +64,7 @@ function GetAndSplitCookies()
     let s = document.cookie;
     if ( s == '' )
     {
-        setlineAdd('NoCookies.') 
+//        setlineAdd('NoCookies.') 
         return;
     }
     g_aCookies = s.split(';');
