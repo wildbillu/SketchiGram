@@ -6,7 +6,6 @@ function TC_LoadGridImage()
     sImage += '<img Id="Grid_Image_Itself" class="Div_Grid_Image_Itself" onclick="TC_ShowExtraImage();" src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200"></img>';
     let elemDivGridImage = document.getElementById('Div_Grid_Image');
     elemDivGridImage.innerHTML = sImage;
-    alert('TC_LoadGridImage')
 }
 
 

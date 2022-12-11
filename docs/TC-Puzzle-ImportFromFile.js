@@ -7,76 +7,63 @@
 
 let g_TC_sPuzzle_CommandLine                = '';
 let g_TC_sPuzzle_Archive                    = '';
+let g_TC_sPuzzle_Cookie                     = '';
 let g_TC_bFileAccess                        = false;
 
-function TC_InitializeFromFileOrLoadAsJS()
+function TC_LoadFromThisPuzzle(sPuzzle)
 {
-    if (window.location.protocol === "file:")
-    { // dont care about text file name and the other names are set in the AsJS file 
-        TC_Puzzle_Load_AsJS();
-        return 'AsJS';
-    }
-    g_TC_bFileAccess = true;
-    if ( g_TC_sPuzzle_Archive != '' )
-    { // we try to read this file and if success we set the image file names
-        let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + g_TC_sPuzzle_Archive + '/' + g_TC_sPuzzle_Archive + '.txt'; 
-        let sFileContents = TC_GetFile(sTextFileToLookFor);
-        if ( sFileContents != '' )
-        {
-            if ( TC_ProcessFileContents(sFileContents) )
-            {
-                TC_SetFinalPuzzleFileNames(g_TC_sPuzzle_Archive); // need to get the (image) file names correct
-                TC_UseFileContents();
-                g_TC_sPuzzle_Archive =''; // don't want to use this again unless reset
-                return;
-            }
-            g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
-        }
-    }
-// so now we look to see if the search string is valid - hopefully this is valid forever    
-    var sPageURL = window.location.search.substring(1);
-    var aSplits = sPageURL.split('&');
-    var iSplits = aSplits.length;
-    var sOverride = '';
+    if ( sPuzzle == '' )
+        return false;
+    let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + sPuzzle + '/' + sPuzzle + '.txt'; 
+    let sFileContents = TC_GetFile(sTextFileToLookFor);
+    if ( sFileContents == '' )
+        return false;
+    if ( !TC_ProcessFileContents(sFileContents) )
+        return false;
+    TC_SetFinalPuzzleFileNames(sPuzzle); // need to get the (image) file names correct
+    TC_UseFileContents();
+    return true;
+}
+function GetQueryLinePuzzleName()
+{
+    let sPageURL = window.location.search.substring(1);
+    let aSplits = sPageURL.split('&');
+    let iSplits = aSplits.length;
+    let sOverride = '';
     if ( iSplits != 0 )
     {   
         for ( var iSplit = 0; iSplit < iSplits; iSplit++ )
         {
             var iFound = aSplits[iSplit].indexOf("puzzle");
             if ( iFound != -1 )
-            {
-               sOverride = aSplits[iSplit];
-            }
+            sOverride = aSplits[iSplit];
         }
     }
-    if ( sOverride != '' )
+    return sOverride;
+}
+
+function TC_InitializeFromFileOrLoadAsJS()
+{
+    if (window.location.protocol === "file:")
+    { // dont care about text file name and the other names are set in the AsJS file 
+        TC_Puzzle_Load_AsJS();
+        return;
+    }
+    g_TC_bFileAccess = true;
+    let sQueryLineOverride = GetQueryLinePuzzleName();
+    if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_Archive) )
     {
-        let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + sOverride + '/' + sOverride + '.txt'; 
-        let sFileContents = TC_GetFile(sTextFileToLookFor);
-        if ( sFileContents != '' )
-        {
-            if ( TC_ProcessFileContents(sFileContents) )
-            {
-                TC_SetFinalPuzzleFileNames(sOverride); // need to get the (image) file names correct
-                TC_UseFileContents();
-                return;
-            }
-        }
+        g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
+        return;
     }
-    if ( g_TC_sPuzzle_NoArchive_NoCommandLine != '' )
-    {
-        let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + g_TC_sPuzzle_NoArchive_NoCommandLine + '/' + g_TC_sPuzzle_NoArchive_NoCommandLine + '.txt'; 
-        let sFileContents = TC_GetFile(sTextFileToLookFor);
-        if ( sFileContents != '' )
-        {
-            if ( TC_ProcessFileContents(sFileContents) )
-            {
-                TC_SetFinalPuzzleFileNames(g_TC_sPuzzle_NoArchive_NoCommandLine); // need to get the (image) file names correct
-                TC_UseFileContents();
-                return;
-            }
-        }
-    }
+    g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
+    if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_Cookie) )
+            return;
+// so now we look to see if the search string is valid - hopefully this is valid forever    
+    if ( TC_LoadFromThisPuzzle(sQueryLineOverride) )
+        return;
+    if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_NoArchive_NoCommandLine) )
+        return;
     TC_Puzzle_Load_AsJS(); // all file reads have failed 
 }
 

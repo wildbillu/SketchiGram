@@ -2,31 +2,87 @@
 
 var g_iStoredPuzzleCookies = 0;
 
+var g_aCookies = [];
+var g_iCookies = 0;
+
+function MakeAndStoreCookie_CurrentPuzzle()
+{
+    let sValue = g_sPuzzleNumber;
+    if ( sValue == '' || sValue == g_PuzzlePath_sTemplate_ReplaceMe )
+        sValue = 'none';
+    let sCookieName = g_sPuzzleType + '-CurrentPuzzle';
+    let sCookie = '';
+    sCookie += sValue;
+    let exdays = 365;
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    let sFullCookie = sCookieName + "=" + sCookie + ";" + expires;
+    document.cookie = sFullCookie;
+}
+
+function FromCookies_GetCurrentPuzzle()
+{
+    g_TC_sPuzzle_Cookie = '';
+    let sCookieCurrentPuzzle = g_sPuzzleType + '-CurrentPuzzle';
+    for ( let iCookie = 0; iCookie < g_iCookies ; iCookie++)
+    {
+        let sThisCookie = g_aCookies[iCookie];
+        if ( sThisCookie.includes(sCookieCurrentPuzzle) )
+        {
+            let aOurValues = FromCookieParseContents(sThisCookie)
+            if ( aOurValues.length == 1 )
+            {
+                g_TC_sPuzzle_Cookie = aOurValues[0];
+                if ( g_TC_sPuzzle_Cookie == 'none')
+                    g_TC_sPuzzle_Cookie = '';
+            }
+        }
+    }
+}
+
+function FromCookieParseContents(sCookie)
+{
+    let aOurValues = [];
+    let iEqual = sCookie.indexOf("=");
+    if ( iEqual != -1 )
+    {
+        let sCookieValue = sCookie.substring(iEqual + 1);
+        aOurValues = sCookieValue.split(g_cCookieDelimiter);
+    }
+    return aOurValues;
+}
+
 function StoreCookie_Settings()
 {
     var sCookieToAdd = MakeCookie_Settings()
     document.cookie = sCookieToAdd;
 }
 
-function HandleCookiesOnStart()
+function GetAndSplitCookies()
 {
-    g_Cookie_DifficultyLevel_iLevel = -1;
     let s = document.cookie;
     if ( s == '' )
     {
-        return false;
+        setlineAdd('NoCookies.') 
+        return;
     }
-    let aCookies = s.split(';');
-    let iCookies = aCookies.length;
+    g_aCookies = s.split(';');
+    g_iCookies = g_aCookies.length;
+}
+
+function HandleCookiesOnStart()
+{
+    g_Cookie_DifficultyLevel_iLevel = -1;
 //    
     let sOurCookieName_Puzzle   = g_sPuzzleType + '-' + g_sPuzzleNumber;
     let sOurCookieName_Settings = g_sPuzzleType + '-Settings'; 
     let sOurCookie_Puzzle = '';
     let sOurCookie_Settings = '';
 //
-    for ( let iCookie = 0; iCookie < iCookies ; iCookie++)
+    for ( let iCookie = 0; iCookie < g_iCookies ; iCookie++)
     {
-        let sThisCookie = aCookies[iCookie]
+        let sThisCookie = g_aCookies[iCookie]
         if ( sThisCookie.includes(sOurCookieName_Puzzle) )
             sOurCookie_Puzzle = sThisCookie;
         if ( sThisCookie.includes(sOurCookieName_Settings) )

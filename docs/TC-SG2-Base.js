@@ -40,15 +40,31 @@ function SG2_LoadMainElements()
     document.getElementById("Body_Any").innerHTML = sMain;
 }
 
+function TC_ActOnVisibilityChange(e)
+{
+    if (document.hidden) 
+    { // need to stop the clock
+        setlineAdd('H');
+        TC_ElapsedTime_Pause();
+        return;
+    }
+    setlineAdd('V')
+    TC_ElapsedTime_Resume();
+}
+
 function SG2_LoadAll(iSection)
 {
     switch ( iSection)
     {
         case 0:
+            document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             g_SG2_CAB_bVisible = false;
+            GetAndSplitCookies();
+            FromCookies_GetCurrentPuzzle();
             getResolution(); 
             while ( document.readyState != "complete") {}
             TC_InitializeFromFileOrLoadAsJS();
+            MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
             GRBMS_ScrambleCorrectAnswersToPlayer(false);

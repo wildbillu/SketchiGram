@@ -6,8 +6,24 @@ var g_ElapsedTime_iInitialTimeInSeconds = 0;
 var g_ElapsedTime_IntervalId = 0;
 var g_ElapsedTime_eDiv = 0;
 
+function TC_ElapsedTime_Pause()
+{
+    TC_ElapsedTime_Clear();
+    g_ElapsedTime_iSecondsPrevious += g_ElapsedTime_iSecondsThisAttempt;
+    g_ElapsedTime_iSecondsThisAttempt = 0;
+}
+
+function TC_ElapsedTime_Resume()
+{
+    const d = new Date();
+    g_ElapsedTime_iInitialTimeInSeconds = Math.trunc(d.getTime()/1000);
+    TC_ElapsedTime_Process();
+    g_ElapsedTime_IntervalId = setInterval(TC_ElapsedTime_Process, 1000);
+}
+
 function TC_ElapsedTime_StartOver()
 {
+
     TC_ElapsedTime_Clear();
     g_ElapsedTime_iSecondsPrevious = 0;
     g_ElapsedTime_iSecondsThisAttempt = 0;
@@ -61,5 +77,6 @@ function TC_ElapsedTime_Setup(iLeft, iTop)
     g_ElapsedTime_eDiv.style.left = MakePixelString(iLeft);
     g_ElapsedTime_eDiv.style.top = MakePixelString(iTop);
     TC_ElapsedTime_Process();
-    g_ElapsedTime_IntervalId = setInterval(TC_ElapsedTime_Process, 1000);
+    if ( !g_bPuzzleSolved )
+        g_ElapsedTime_IntervalId = setInterval(TC_ElapsedTime_Process, 1000);
 }
