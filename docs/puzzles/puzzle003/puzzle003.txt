@@ -1,4 +1,4 @@
-/DormRoom
+sPuzzleNumber=puzzle003
 sPuzzleDate=2022-09-26
 sPuzzleName=DormRoom
 sPuzzleTitle=How's Your Aim

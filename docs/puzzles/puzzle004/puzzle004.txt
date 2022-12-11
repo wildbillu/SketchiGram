@@ -1,4 +1,4 @@
-/SurfAndTurf
+sPuzzleNumber=puzzle004
 sPuzzleDate=2022-09-16
 sPuzzleName=SurfAndTurf
 sPuzzleTitle=Dinner Anyone?

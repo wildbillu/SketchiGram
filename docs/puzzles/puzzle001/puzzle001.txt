@@ -1,4 +1,4 @@
-/ForkinTheRoad
+sPuzzleNumber=puzzle001
 sPuzzleDate=2022-09-25
 sPuzzleName=ForkInTheRoad
 sPuzzleTitle=Yogi Berra Says

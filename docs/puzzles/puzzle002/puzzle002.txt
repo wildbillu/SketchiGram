@@ -1,4 +1,4 @@
-/BackStab
+sPuzzleNumber=puzzle002
 sPuzzleDate=2022-09-16
 sPuzzleName=BackStab
 sPuzzleTitle=Beware The Ides!

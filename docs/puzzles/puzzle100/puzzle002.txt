@@ -1,4 +1,4 @@
-/5x5Test
+sPuzzleNumber=puzzle100
 sPuzzleDate=2022-10-08
 sPuzzleName=5x5Test
 sPuzzleTitle=Miracle If It Works
