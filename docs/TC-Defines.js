@@ -6,7 +6,7 @@ var g_bAnswersSolved = false;
 
 // base defines
 var g_sPuzzleDate = '';
-var g_sPuzzleName = '';
+var g_sPuzzleName = ''; // not used
 var g_sPuzzleTitle = '';
 var g_sPuzzleCreditAuthor = 'By Sketchi Bill';
 var g_sPuzzleCreditDate = 'September 26, 2022';

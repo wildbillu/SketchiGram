@@ -44,11 +44,9 @@ function TC_ActOnVisibilityChange(e)
 {
     if (document.hidden) 
     { // need to stop the clock
-//        setlineAdd('H');
         TC_ElapsedTime_Pause();
         return;
     }
-//    setlineAdd('V')
     TC_ElapsedTime_Resume();
 }
 
@@ -59,6 +57,9 @@ function SG2_LoadAll(iSection)
         case 0:
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             g_SG2_CAB_bVisible = false;
+            g_bUsedCookie = false;
+            g_TC_Status_bFirstCheck = true;
+            g_TC_iBiggestRight  = 450;
             GetAndSplitCookies();
             FromCookies_GetCurrentPuzzle();
             getResolution(); 

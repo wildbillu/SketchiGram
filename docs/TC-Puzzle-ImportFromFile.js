@@ -78,11 +78,12 @@ var iGridWidth = 4;
 var iGridHeight = 4;
 var sGridAnswers = '';
 var sGridNumbering = '';
+var g_bUsedCookie = false;
 
 function TC_UseFileContents()
 {   // now we need to figure out whether to use any cookie settings
     HandleCookiesOnStart();    
-    let bUsedCookie = false;
+    g_bUsedCookie = false;
     if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
     { 
         CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, 
@@ -92,10 +93,9 @@ function TC_UseFileContents()
         g_bGridSolved = g_Cookie_bGridSolved;
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
-        
-        bUsedCookie = true;
+        g_bUsedCookie = true;
     }
-    if ( !bUsedCookie )
+    if ( !g_bUsedCookie )
     {
         CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus)
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
