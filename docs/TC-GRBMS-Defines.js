@@ -14,4 +14,5 @@ var g_GBRMS_MM_bAllowEntry = true;
 var g_GBRMS_TM_bAllowEntry = true;
 
 var g_GRBMS_sAllowedGridLetters = '';
+var g_GRBMS_sAllowedGridLetters_Selectable = '';
 

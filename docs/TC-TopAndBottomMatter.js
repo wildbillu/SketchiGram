@@ -128,17 +128,19 @@ function TC_SetTopMatter()
             g_TC_iBiggestBottom += rectDualClue.height;
         }
     }
+/*    
     if ( g_bIsSketchiGram )
-    { // insert the instruction line to 
+    { // instruction line will be moved vertically later just adjust width
         var elemHowToA = document.getElementById("SG_HowToA_Div");
-        g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
-        elemHowToA.style.top = MakePixelString(g_TC_iBiggestBottom);
+//        g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
+//        elemHowToA.style.top = MakePixelString(g_TC_iBiggestBottom);
         // make the width the width of the grid
         var iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
         elemHowToA.style.width = MakePixelString(iWidthGrid);
-        var rectelemHowToA = elemHowToA.getBoundingClientRect();
-        g_TC_iBiggestBottom += rectelemHowToA.height;
+//        var rectelemHowToA = elemHowToA.getBoundingClientRect();
+//        g_TC_iBiggestBottom += rectelemHowToA.height;
     }
+*/    
     MoreActions_SizeAndPosition();
 }
 

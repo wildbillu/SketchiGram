@@ -77,6 +77,7 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
     var B_iRow = GRBMS_RowFromId(sFoundId);
     var B_iLetter = GRBMS_LetterFromId(sFoundId);
     GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
+    KB_Mini_SetInstructionLine('');   
     Status_Check();
     return 'exchanged';
 }
@@ -105,5 +106,6 @@ function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceMe, bRejectDual)
     var B_iRow = GRBMS_RowFromId(sFoundId);
     var B_iLetter = GRBMS_LetterFromId(sFoundId);
     GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
+    KB_Mini_SetInstructionLine('');   
     return sFoundId;
 }

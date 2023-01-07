@@ -3,6 +3,49 @@
 
 var g_KB_Mini_bBackspaceEnabled = false;
 
+function KB_Mini_LettersSetEnabled(cLetter, bEnabled)
+{
+    let sId = KB_Mini_IdForLetterKey(cLetter);
+    var eLetter = document.getElementById(sId);
+//    eLetter.disabled = !bEnabled;
+    if ( bEnabled )
+    {
+        var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
+        eLetter.className = sClass;
+    }
+    else
+    {
+        var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
+        eLetter.className = sClass;
+    }
+}
+
+function KB_Mini_DisableLettersFullyPlaced()
+{
+    let iAllowed = g_GRBMS_sAllowedGridLetters.length;
+    g_GRBMS_sAllowedGridLetters_Selectable = '';
+    for ( let i = 0; i < iAllowed; i++ )
+    {
+        let bFoundOneNotPlacedCorrectly = false;
+        let cThisOne = g_GRBMS_sAllowedGridLetters.charAt(i);
+        for ( iRow = 0; iRow < g_iGridHeight; iRow++ )
+        {
+            for ( iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+            {
+                let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                let cAnswer       = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+                if ( cAnswerPlayer == cThisOne && cAnswer != cAnswerPlayer )
+                        bFoundOneNotPlacedCorrectly = true;
+            }
+        }
+        KB_Mini_LettersSetEnabled(cThisOne, bFoundOneNotPlacedCorrectly);
+        if ( bFoundOneNotPlacedCorrectly )
+            g_GRBMS_sAllowedGridLetters_Selectable += 'T';
+        else 
+            g_GRBMS_sAllowedGridLetters_Selectable += 'F';
+    }
+}
+
 function ScrambleTheseLetters(sLetters)
 {
     var sScrambled ='';
@@ -14,6 +57,15 @@ function ScrambleTheseLetters(sLetters)
         sLetters = removeAt(sLetters, iP);
     }
     return sScrambled;
+}
+
+function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
+{
+    let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
+    let sInstructions = ' Exchange Highlighted Letter with Selection ';
+    if ( cLetterBeingReplaced != '' )
+    sInstructions = ' Exchange ' + cLetterBeingReplaced + ' With Selection '
+    eInstructions.innerHTML = sInstructions;
 }
 
 function KB_Mini_Setup(iWidthMax)
@@ -37,10 +89,10 @@ function KB_Mini_Setup(iWidthMax)
     let sInner = '';
 // we need to determine if we need more than one and row    
 // we have div at top that tells how to use the mini keypad
-    sInner += '<DIV Id="KB_Mini_Instructions_Div" class="KB_Mini_Instructions">'
-    sInner += ' Select a grid Square (highlight pink) then select a new letter for it. The existing letter will move.';
-    sInner += '</DIV>'
-    sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
+sInner += '<DIV Id="KB_Mini_Instructions_Div" class="KB_Mini_Instructions">'
+sInner += ' Exchange Highlighted Letter with Selection ';
+sInner += '</DIV>'
+sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
     for (let iRow = 0; iRow < iRows; iRow ++ )
     {
         let iStart = iRow * iLettersPerRow;
@@ -110,6 +162,14 @@ function KB_Mini_KeyboardPress_SA_EB(keypressed)
 
 function KB_Mini_KeyboardPress(sLetter)
 {
+// here we reject ones that are not selectable
+    let iIndex = g_GRBMS_sAllowedGridLetters.indexOf(sLetter)
+    let cSelectable = g_GRBMS_sAllowedGridLetters_Selectable.charAt(iIndex);
+    if ( cSelectable == 'F' )
+    {
+        setlineAdd('reject:' + sLetter)
+        return;
+    }
     if ( KB_Mini_KeyboardPress_GRBMS(sLetter) )
         return;
     if ( KB_Mini_KeyboardPress_CAB(sLetter) )
@@ -130,10 +190,16 @@ function KB_Mini_MakeRowOfButtons(sLetters)
     return sButtonRow;
 }
 
+function KB_Mini_IdForLetterKey(cLetter)
+{
+    let sId = 'KB_' + cLetter;   
+    return sId;
+}
+
 function KB_Mini_MakeKeyboardButton(sLetter)
 {
     let sTextForButton = sLetter;
-    var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
+    var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';//.KB_Mini_ButtonLetter_Disabled
     var sCC = String.fromCharCode(8);
     let sTextForId = sLetter;
     if ( sLetter == sCC )

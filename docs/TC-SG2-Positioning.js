@@ -17,7 +17,7 @@ function SG2_Adjust_KBAndIntro(iKBRows)
     var elemInstructionsDiv = document.getElementById("KB_Mini_Instructions_Div");
     elemInstructionsDiv.style.width = MakePixelString(iKBWidth);
     var rectInstructionsDiv = elemInstructionsDiv.getBoundingClientRect();
-    elem_KB.style.height = MakePixelString(iKBRows * 56 + rectInstructionsDiv.height);// fix this?
+    elem_KB.style.height = MakePixelString(iKBRows * 52 + rectInstructionsDiv.height);// fix this?
     var rect_KB = elem_KB.getBoundingClientRect();
     g_TC_iBiggestBottom += rect_KB.height;
 }
@@ -28,8 +28,10 @@ function SG2_Adjust_GridAndPhantomGridPosition(iGap)
 // instruction line goes before the grid 
     let iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
     let iHeightGrid = g_iGridHeight * g_GRBMS_Square_iSize;
+    let elemHowToA = document.getElementById("SG_HowToA_Div");
+    elemHowToA.style.width = MakePixelString(iWidthGrid);
     let iLeftForCentering = TC_LeftForCentering(iWidthGrid)
-    var elemHowToA = document.getElementById("SG_HowToA_Div");
+
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
     elemHowToA.style.top = MakePixelString(g_TC_iBiggestBottom);
     elemHowToA.style.left = MakePixelString(iLeftForCentering);

@@ -158,6 +158,7 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
 function GRBMS_SetAllowedGridLetters()
 {
     var sAllowedLetters = '';
+    var sAllowedLetters_Selectable = '';
     var sLocalGridSolution = g_aGridAnswers.join('');
     for ( var i = 0; i < sLocalGridSolution.length; i++ )
     {
@@ -166,6 +167,9 @@ function GRBMS_SetAllowedGridLetters()
             sAllowedLetters += cLetter;
     }
     g_GRBMS_sAllowedGridLetters = sAllowedLetters;
+    let iLength = g_GRBMS_sAllowedGridLetters.length;
+    for ( let i = 0; i < iLength; i++ )
+        g_GRBMS_sAllowedGridLetters_Selectable += 'T';
 }
 
 function GRBMS_SetAllButtons()

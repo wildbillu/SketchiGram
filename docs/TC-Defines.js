@@ -46,6 +46,7 @@ var g_sStatusButtonName_BlackSquare  = 'Button_BlackSquare.png';
 var g_sStatusButtonName_Frame        = 'Button_Frame.png';
 var g_sStatusButtonName_Empty        = 'Button_Empty.png';
 var g_sStatusButtonName_Focus        = 'Button_AbvocabMagenta_Transparent32.png';
+var g_sStatusButtonName_BeingMoved   = 'Button_BeingMoved.png';
 var g_sStatusButtonName_Inactive     = 'Button_White.png';
 var g_sStatusButtonName_ActiveRow    = 'Button_AbvocabBlue_Transparent64.png';
 var g_sStatusButtonName_GoldenSquare = 'Button_Golden.png';

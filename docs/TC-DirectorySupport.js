@@ -85,8 +85,11 @@ function TC_GetGridNumberImagePathAndName(sNumber)
 
 function TC_GetStatusImagePathAndName(cSelection)
 {
+
+
+
     var sStatusImage = g_sImagePath_StatusIndicators;
-    if ( cSelection == g_TC_cCodeMeaning_HasFocus)
+    if ( cSelection == g_TC_cCodeMeaning_HasFocus || cSelection == g_TC_cCodeMeaning_HasFocusBeingMoved )
         sStatusImage += g_sStatusButtonName_Focus;
     else if ( cSelection == g_TC_cCodeMeaning_ActiveRow)
         sStatusImage += g_sStatusButtonName_ActiveRow;

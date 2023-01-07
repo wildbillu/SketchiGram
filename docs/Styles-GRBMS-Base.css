@@ -81,7 +81,7 @@
 .Div_PuzzleDualClue
 {
     user-select: none;
-    border: 0px solid  blue;
+    border: 1px solid  blue;
     display: relative;
     color:blue;
     font-size: 24px;
@@ -93,7 +93,7 @@
     vertical-align: bottom;
     left:0px;
     top:15px;
-    height:28px;
+    height:100px;
     width:100px;
 }
 

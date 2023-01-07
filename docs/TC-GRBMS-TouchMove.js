@@ -5,6 +5,7 @@ var g_GRBMS_TM_Picked_Start_iLeft = 0;
 var g_GRBMS_TM_Picked_Start_iTop = 0;
 
 var g_GRBMS_TM_Picked_elem = null;
+var g_GRBMS_TM_Picked_bAlteredForMove = false;
 var g_GRBMS_TM_Picked_sId = '';
 var g_GRBMS_TM_Picked_iRow = 0;
 var g_GRBMS_TM_Picked_iLetter = 0;
@@ -52,6 +53,7 @@ function GRBMS_touchUp(event)
         GRBMS_ForRowLetter_SetButton(g_GRBMS_TM_Found_iRow, g_GRBMS_TM_Found_iLetter, g_TC_cCodeMeaning_Inactive);
         let elemFound = document.getElementById(GRBMS_MakeId(g_GRBMS_TM_Found_iRow, g_GRBMS_TM_Found_iLetter));
         elemFound.style.cursor="default";
+        KB_Mini_SetInstructionLine('');   
     }
 // fix up the picked square then make nothing picked
     g_GRBMS_TM_Picked_elem.style.cursor="default";
@@ -73,6 +75,7 @@ function GRBMS_touchUp(event)
     g_GRBMS_TM_Picked_iLetter = -1;
     g_GRBMS_TM_Picked_sId = '';
     g_GRBMS_TM_Picked_elem = null;
+    g_GRBMS_TM_Picked_bAlteredForMove = false;
     g_GRBMS_TM_Found_iRow = -1;
     g_GRBMS_TM_Found_iLetter = -1;
     g_GRBMS_TM_Found_sId = '';
@@ -85,7 +88,10 @@ function GRBMS_touchMove(e)
         return;
     if ( !g_GRBMS_TM_Picked_elem )
         return;
-    var x = Math.round(e.touches[0].clientX);
+    if ( !g_GRBMS_TM_Picked_bAlteredForMove )
+        GRBMS_ForRowLetter_SetButton(g_GRBMS_TM_Picked_iRow, g_GRBMS_TM_Picked_iLetter, g_TC_cCodeMeaning_HasFocusBeingMoved);
+        g_GRBMS_TM_Picked_bAlteredForMove = true;
+        var x = Math.round(e.touches[0].clientX);
     var y = Math.round(e.touches[0].clientY);
     var xMoved = x - g_GRBMS_TM_iInitialX;
     var yMoved = y - g_GRBMS_TM_iInitialY;
@@ -148,11 +154,12 @@ function GRBMS_touchDown(e, iRow, iLetter)
         GRBMS_ForRowLetter_SetButton(GRBMS_RowFromId(g_GRBMS_Focus_sId), GRBMS_LetterFromId(g_GRBMS_Focus_sId), g_TC_cCodeMeaning_Inactive);
         g_GRBMS_Focus_sId = '';
     }
+    let cLetterBeingReplaced = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+    KB_Mini_SetInstructionLine(cLetterBeingReplaced);
     g_GRBMS_TM_Picked_iRow = iRow;
     g_GRBMS_TM_Picked_iLetter = iLetter;
     g_GRBMS_TM_Picked_sId = GRBMS_MakeId(iRow, iLetter);
     g_GRBMS_TM_Picked_elem = document.getElementById(g_GRBMS_TM_Picked_sId);
-    GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_HasFocus);
     g_GRBMS_TM_Picked_elem.style.cursor="move";
     g_GRBMS_TM_iInitialX = Math.round(e.touches[0].clientX);
     g_GRBMS_TM_iInitialY = Math.round(e.touches[0].clientY);

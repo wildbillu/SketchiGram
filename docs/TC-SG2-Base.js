@@ -3,9 +3,9 @@
 function SG_HowToText()
 {
     let sHowToText = ""
-    sHowToText += 'Rearrange the letters to solve the Sketchi-Gram. Click Square (highlight magenta) and Drag to new position (highlight blue).';
-    sHowToText += 'Correct squares will show green letters, and cannot be moved.';
-    sHowToText += '\'Golden\' Squares are pre-set (correct.)';
+    sHowToText += 'Rearrange the letters to solve the Sketchi-Gram. Click Square (highlight magenta) and replace letter using keypad.';
+    sHowToText += 'Or drag selected square to new location.';
+    sHowToText += '\'Golden\' Squares are pre-set and green letters mean correct.';
     return sHowToText;
 }
 
@@ -88,7 +88,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 4:
-            let iGap = 0;
+            let iGap = 60;
             SG2_Adjust_GridAndPhantomGridPosition(iGap);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
@@ -117,7 +117,7 @@ function SG2_LoadAll(iSection)
             let rectStatusControlRight =  GetBoundingClientRectAbsolute(elemStatusControlRight);            
             TC_DisplayDualClue_Setup(iDisplayDualClueTop, g_TC_Padding_Left_iSize, rectStatusControlRight.left - 4 * g_TC_Padding_Left_iSize);
 // scratch area 
-            let iResultMessageTop = 85;
+            let iResultMessageTop = 75;
             TC_ResultMessage_Setup(iResultMessageTop);
             Status_Check(true);
             TC_AdjustSettings();

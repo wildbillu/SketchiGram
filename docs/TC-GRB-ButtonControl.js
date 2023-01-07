@@ -8,7 +8,7 @@ function GRB_AddWrappedUrlToString(sStarting, sNew)
     return sFinal;
 }
 
-function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cSelection)
+function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cCodeForActivity)
 {
     var sStatusImage = '';
     if ( cLetter == g_TC_cCharacterDenotingBlackSquare )
@@ -16,9 +16,10 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cSelection)
         sStatusImage  = MakeURLWrappedString(TC_GetBlackSquareImagePathAndName(), false);
         return sStatusImage;
     }
-    sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetButtonFrameImagePathAndName());
+    if ( cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
+        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetButtonFrameImagePathAndName());
     sStatusImage = GRB_AddWrappedUrlToString(sStatusImage,TC_GetStatusOverlayImagePathAndName(cStatus));
-    if ( cNumber != g_TC_cCharacterDenotingNoNumberSquare )
+    if ( cNumber != g_TC_cCharacterDenotingNoNumberSquare && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
     {
         var iNumber = parseInt(cNumber) + 1;
         var sNumber = iNumber.toString();
@@ -38,7 +39,11 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cSelection)
         sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, g_sImagePath_StatusIndicators + g_sStatusButtonName_GoldenSquare);
     }
     else
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetStatusImagePathAndName(cSelection));
+    {
+        if ( cCodeForActivity == g_TC_cCodeMeaning_HasFocusBeingMoved )
+            sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, g_sImagePath_StatusIndicators + g_sStatusButtonName_BeingMoved);
+        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetStatusImagePathAndName(cCodeForActivity));
+    }
     return sStatusImage;
 }
 

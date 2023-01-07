@@ -2,6 +2,7 @@
 var g_TC_cCodeMeaning_HasFocus  = 'F';
 var g_TC_cCodeMeaning_ActiveRow = 'A';
 var g_TC_cCodeMeaning_Inactive  = 'I';
+var g_TC_cCodeMeaning_HasFocusBeingMoved  = 'M';
 
 var g_TC_cCodeMeaning_Normal                = 'N'; // 
 var g_TC_cCodeMeaning_Incorrect             = 'I';
