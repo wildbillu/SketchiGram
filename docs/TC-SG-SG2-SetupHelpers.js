@@ -12,19 +12,20 @@ function SG2_SetImage()
     elemDivGridImage.innerHTML = sImage;
 }
 
+var g_iFudgeSpace = 5;
 function SG2_PositionImage()
 {
 // first position
     let elemKB = document.getElementById("KB_Mini_Div");
     let rectKB = GetBoundingClientRectAbsolute(elemKB);
-    let iTopKB = rectKB.bottom;
+    let iBottomKB = rectKB.bottom;
     let elemDivGridImage = document.getElementById('Div_Grid_Image');
-    elemDivGridImage.style.top = MakePixelString(iTopKB);
+    elemDivGridImage.style.top = MakePixelString(iBottomKB + g_iFudgeSpace);
 // need the size to be height between bottom of KB and top of Archive Button
     let elemArchiveButton = document.getElementById("Archive_Button_Activate");
     let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton)
     let iTopArchiveButton = rectArchiveButton.top;
-    let iHeight = iTopArchiveButton - iTopKB;
+    let iHeight = iTopArchiveButton - iBottomKB - 2 * g_iFudgeSpace;
     elemDivGridImage.style.height = MakePixelString(iHeight);
     let elemDivGridImageItself = document.getElementById("Grid_Image_Itself");
     elemDivGridImageItself.style.height = MakePixelString(iHeight);

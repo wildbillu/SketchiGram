@@ -147,7 +147,7 @@ function TC_SetTopMatter()
 function TC_SetBottomMatter()
 {
     var elemBottomMatter = document.getElementById("Div_BottomMatter");
-    g_TC_iBiggestBottom += 3 * g_TC_Padding_Inter_Vertical_iSize;
+    g_TC_iBiggestBottom += 3 * g_TC_Padding_Inter_Vertical_iSize + g_iFudgeSpace;
     elemBottomMatter.style.top = MakePixelString(g_TC_iBiggestBottom);
     var iWidth = g_TC_iBiggestRight - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
     elemBottomMatter.style.width = MakePixelString(iWidth);
@@ -158,7 +158,7 @@ function TC_SetBottomMatter()
     rectBottomMatter = elemBottomMatter.getBoundingClientRect();
     g_TC_iBiggestBottom += rectBottomMatter.height;
 //
-    g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
+    g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize + 2 * g_iFudgeSpace;
 
     var elemMessages = document.getElementById("Messages");
     elemMessages.style.top = MakePixelString(g_TC_iBiggestBottom);
@@ -166,9 +166,7 @@ function TC_SetBottomMatter()
     elemMessages.style.Left = MakePixelString( g_TC_Padding_Left_iSize);
     var rectMessages = elemMessages.getBoundingClientRect();
     g_TC_iBiggestBottom += rectMessages.height;
-    //setlineAdd('.Height:' + g_TC_iBiggestBottom + '.Width:' + g_TC_iBiggestRight)
     TC_SetActiveSize();
-
 }
 
 
