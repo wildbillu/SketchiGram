@@ -17,7 +17,7 @@ function SG2_Adjust_KBAndIntro(iKBRows)
     var elemInstructionsDiv = document.getElementById("KB_Mini_Instructions_Div");
     elemInstructionsDiv.style.width = MakePixelString(iKBWidth);
     var rectInstructionsDiv = elemInstructionsDiv.getBoundingClientRect();
-    elem_KB.style.height = MakePixelString(iKBRows * 52 + rectInstructionsDiv.height);// fix this?
+    elem_KB.style.height = MakePixelString(iKBRows * 52 + rectInstructionsDiv.height + 5);// fix this?
     var rect_KB = elem_KB.getBoundingClientRect();
     g_TC_iBiggestBottom += rect_KB.height;
 }
