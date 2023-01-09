@@ -61,9 +61,6 @@ function GRBMS_mouseUp(event)
     if ( !g_GRBMS_MM_Picked_elem )
         return;
     let bDropped = false;
-
-
-
     if ( g_GRBMS_MM_Found_sId != '')
     {
         if ( !g_GRBMS_MM_Found_bMouseOut )

@@ -16,14 +16,14 @@ function GRBMS_onkeyup(key, iRow, iLetter)
 {
     if ( key.startsWith('Backspace') )
         key = ' ';
-    var letters = /^[a-zA-Z]$/;
+    let letters = /^[a-zA-Z]$/;
     if ( !key.match(letters) ) 
         return false;
     if ( g_GRBMS_Focus_sId == '' )
         return false;
-        var sUpper = key.toUpperCase();
+    let sUpper = key.toUpperCase();
 // first determine if key is valid
-    var bValidLetter = g_GRBMS_sAllowedGridLetters.includes(sUpper);
+    let bValidLetter = g_GRBMS_sAllowedGridLetters.includes(sUpper);
     if ( !bValidLetter )
     { // set focus back to this so if 
         TC_ResultMessage_DisplayForInterval(sUpper + ' Is Nowhere in the Grid', g_ResultMessage_sStyle_Warning, 1, 3);
@@ -31,11 +31,12 @@ function GRBMS_onkeyup(key, iRow, iLetter)
         return false;
     }
 // now reject if same as square with focus
-    var sAnswerSquareWithFocus = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+    let sAnswerSquareWithFocus = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     if ( sUpper == sAnswerSquareWithFocus )
         bValidLetter = false;
     if ( !bValidLetter )
     {
+        KB_Mini_SetInstructionLine('');  
         GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_Inactive);
         g_GRBMS_Focus_sId = '';
         return false;
@@ -62,11 +63,17 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
         return 'Not Valid For Focus/Change'
     var bValidLetter = g_GRBMS_sAllowedGridLetters.includes(cLetter);
     if ( !bValidLetter )
+    {
+        KB_Mini_SetInstructionLine('');   
         return 'letter (' + cLetter + ' ) not in grid'
+    }
 // now reject if same as square with focus
     var cAnswerThisSquare = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     if ( cLetter == cAnswerThisSquare )
+    {
+        KB_Mini_SetInstructionLine('');   
         return 'Letter Same as Exising';
+    }
 // we want to switch with square that has iLetter
 // for now just pick first one (even if more than one)
     var bRejectDoubleSwap = true;

@@ -52,3 +52,6 @@ var g_sStatusButtonName_ActiveRow    = 'Button_AbvocabBlue_Transparent64.png';
 var g_sStatusButtonName_GoldenSquare = 'Button_Golden.png';
 var g_sStatusButtonName_Corrected    = 'Button_Status_OrangeCorner.png';
 var g_sStatusButtonName_Incorrect    = 'Button_Status_RedSlash.png';
+
+var g_Color_sAbvocabBlue = '#A7D8FF';
+var g_Color_sAbvocabPink = '#FFAEFF';

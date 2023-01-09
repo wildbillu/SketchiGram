@@ -21,7 +21,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="Div_Grid" class="Div_Grid StartHidden">Div_Grid</DIV>';
     sMain += '<DIV Id="Div_Grid_Phantom" class="Div_Grid_Phantom StartHidden">Div_Phantom_Grid</DIV>';
     sMain += '<DIV Id="Div_Grid_Image" class="Div_Grid_Image StartHidden">Div_Grid_Image</DIV>';
-    sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_FullArea StartHidden">notset</DIV>';
+    sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_Div StartHidden">notset</DIV>';
     sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden"></DIV>';
     sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter StartHidden">Div_BottomMatter</DIV>';
 

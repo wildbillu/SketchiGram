@@ -34,7 +34,7 @@ function GRBMS_LoadMainElements()
     sMain += '   <DIV Id="GRBMS_Div_CAB_DualClue" class="GRBMS_Div_CAB_DualClue">GRBMS_Div_CAB_DualClue</DIV>';
     sMain += '   <DIV Id="GRBMS_Div_CAB_Clues_Left" class="GRBMS_Div_CAB_Clues_Left">GRBMS_Div_CAB_Clues_Left</DIV>';
     sMain += '   <DIV Id="GRBMS_Div_CAB_Clues_Right" class="GRBMS_Div_CAB_Clues_Right">GRBMS_Div_CAB_Clues_Right</DIV>';
-    sMain += '<DIV id="KB_Mini_Div" class="KB_Mini_FullArea">notset</DIV>';
+    sMain += '<DIV id="KB_Mini_Div" class="KB_Mini_Div">notset</DIV>';
     sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter">Div_BottomMatter</DIV>';
     sMain += '<DIV Id="Messages" class="Div_Message"></DIV>';
     sMain += MakeExtraImageDiv();

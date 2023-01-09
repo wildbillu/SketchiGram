@@ -3,6 +3,23 @@
 
 var g_KB_Mini_bBackspaceEnabled = false;
 
+function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
+{
+    let eButtonRow = document.getElementById("KB_Mini_ButtonRow_Div");
+    let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
+    let sInstructions = ' Exchange Highlighted Letter with Selection ';
+    let sBackgroundColor = '#FFFFFF';
+    if ( cLetterBeingReplaced != '' )
+    {
+        sInstructions = ' Exchange ' + cLetterBeingReplaced + ' With Selection '
+        sBackgroundColor = g_Color_sAbvocabPink;
+
+    }
+    eInstructions.innerHTML = sInstructions;
+    eInstructions.style.backgroundColor = sBackgroundColor;
+    eButtonRow.style.backgroundColor = sBackgroundColor;
+}
+
 function KB_Mini_LettersSetEnabled(cLetter, bEnabled)
 {
     let sId = KB_Mini_IdForLetterKey(cLetter);
@@ -57,15 +74,6 @@ function ScrambleTheseLetters(sLetters)
         sLetters = removeAt(sLetters, iP);
     }
     return sScrambled;
-}
-
-function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
-{
-    let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
-    let sInstructions = ' Exchange Highlighted Letter with Selection ';
-    if ( cLetterBeingReplaced != '' )
-    sInstructions = ' Exchange ' + cLetterBeingReplaced + ' With Selection '
-    eInstructions.innerHTML = sInstructions;
 }
 
 function KB_Mini_Setup(iWidthMax)
@@ -166,10 +174,7 @@ function KB_Mini_KeyboardPress(sLetter)
     let iIndex = g_GRBMS_sAllowedGridLetters.indexOf(sLetter)
     let cSelectable = g_GRBMS_sAllowedGridLetters_Selectable.charAt(iIndex);
     if ( cSelectable == 'F' )
-    {
-        setlineAdd('reject:' + sLetter)
         return;
-    }
     if ( KB_Mini_KeyboardPress_GRBMS(sLetter) )
         return;
     if ( KB_Mini_KeyboardPress_CAB(sLetter) )
