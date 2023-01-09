@@ -88,7 +88,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 4:
-            let iGap = 60;
+            let iGap = 85;
             SG2_Adjust_GridAndPhantomGridPosition(iGap);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
@@ -123,7 +123,7 @@ function SG2_LoadAll(iSection)
             TC_AdjustSettings();
             if ( g_bSettings_ShowInfoOnStart )
                 TC_ShowInfo();
-            let iDifficultyLevelTop = 310;
+            let iDifficultyLevelTop = 300;
             TC_DifficultyLevel_Setup(iDifficultyLevelTop);            
             TC_SA_EB_Setup();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
