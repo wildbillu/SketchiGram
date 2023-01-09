@@ -3,9 +3,9 @@
 function SG_HowToText()
 {
     let sHowToText = ""
-    sHowToText += 'Rearrange the letters to solve the Sketchi-Gram. Click Square (highlight magenta) and replace letter using keypad.';
+    sHowToText += 'Rearrange letters to solve the Sketchi-Gram. Click Square (highlight magenta) and replace letter using keypad.';
     sHowToText += 'Or drag selected square to new location.';
-    sHowToText += '\'Golden\' Squares are pre-set and green letters mean correct.';
+    sHowToText += Pre-set '\'Golden\' Squares and green letters are correct.';
     return sHowToText;
 }
 
