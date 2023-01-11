@@ -3,7 +3,7 @@
 var g_TC_Archive_aPuzzleNames = [];
 var g_TC_Archive_aPuzzleTitles = [];
 var g_TC_Archive_Menu_iStartAt = 0;
-var g_TC_Archive_Menu_iMaxItems = 10;
+var g_TC_Archive_Menu_iMaxItems = 14;
 var g_TC_Archive_Menu_aActiveIds =[];
 var g_TC_Archive_Menu_aActiveTitles =[];
 var g_TC_Archive_Menu_bActive = false;
@@ -157,7 +157,11 @@ function TC_Archive_MakeMenuInner()
 }
 
 function TC_Archive_Id(i){return 'ArchiveItem_' + i;}
-function TC_Archive_IndexFromId(sId){return sId.charAt(12);}
+function TC_Archive_IndexFromId(sId)
+{
+    let s=sId.substring(12);
+    return parseInt(s);
+}
 
 function TC_Archive_AddPuzzleToArchive(sName, sTitle)
 {
