@@ -3,7 +3,7 @@
 var g_TC_Archive_aPuzzleNames = [];
 var g_TC_Archive_aPuzzleTitles = [];
 var g_TC_Archive_Menu_iStartAt = 0;
-var g_TC_Archive_Menu_iMaxItems = 16;
+var g_TC_Archive_Menu_iMaxItems = 20;
 var g_TC_Archive_Menu_aActiveIds =[];
 var g_TC_Archive_Menu_aActiveTitles =[];
 var g_TC_Archive_Menu_bActive = false;
