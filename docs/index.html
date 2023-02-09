@@ -36,6 +36,7 @@
 
     <SCRIPT SRC="TC-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines-Codes.js"></SCRIPT>
+    <SCRIPT SRC="TC-Defines-Colors.js"></SCRIPT>
     <SCRIPT SRC="TC-DirectorySupport.js"></SCRIPT>
     <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
     <SCRIPT SRC="TC-Puzzle-ImportFromFile.js"></SCRIPT>
@@ -119,6 +120,7 @@
 <!-- specific to SG -->
     <SCRIPT SRC="TC-SG-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-SG2-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-SG-SG2-ThemeImage.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-SetupHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-CADisplayHelpers.js"></SCRIPT>
@@ -131,6 +133,12 @@
 <link rel="stylesheet" href="Styles-ElapsedTime.css">
 
 </HEAD>
+<STYLE>
+:root
+{
+    --ColorScratchAreaActive: #F00000;
+}
+</STYLE>
 <SCRIPT>
 function TC_LoadPuzzleArchive()
 {
@@ -148,10 +156,17 @@ function TC_LoadPuzzleArchive()
     TC_Archive_AddPuzzleToArchive('puzzle012', 'Rivalry')
     TC_Archive_AddPuzzleToArchive('puzzle013', 'Alistair Cookie\'s Chair')
     TC_Archive_AddPuzzleToArchive('puzzle014', 'Pub Game')
-//    TC_Archive_AddPuzzleToArchive('puzzle015', 'Constraint')
-//    TC_Archive_AddPuzzleToArchive('puzzle016', 'Required In School Zone')
-//    TC_Archive_AddPuzzleToArchive('puzzle017', 'Seedy Neighborhood')
-//    TC_Archive_AddPuzzleToArchive('puzzle018', 'Fried Southern Treat')
+/*    TC_Archive_AddPuzzleToArchive('puzzle015', 'Constraint')
+    TC_Archive_AddPuzzleToArchive('puzzle016', 'Required In School Zone')
+    TC_Archive_AddPuzzleToArchive('puzzle017', 'Seedy Neighborhood')
+    TC_Archive_AddPuzzleToArchive('puzzle018', 'Fried Southern Treat')
+    TC_Archive_AddPuzzleToArchive('puzzle019', 'Parade your beads this day')
+    TC_Archive_AddPuzzleToArchive('puzzle020', '020')
+    TC_Archive_AddPuzzleToArchive('puzzle021', '021')
+    TC_Archive_AddPuzzleToArchive('puzzle022', '022')
+    TC_Archive_AddPuzzleToArchive('puzzle023', '023')
+    TC_Archive_AddPuzzleToArchive('puzzle024', '024')
+*/
 }
 let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle014';
 var g_sPuzzleNumber          = 'puzzle000'

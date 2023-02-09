@@ -1,23 +1,55 @@
 // TC-Keyboard-Mini.js
 // includes only allowed characters and presents them scrambled
 
+var g_KB_Mini_sUsageMode_Idle = 'Idle';
+var g_KB_Mini_sUsageMode_ActiveGrid = 'Active_Grid';
+var g_KB_Mini_sUsageMode_ActiveWords = 'Active_Words';
+var g_KB_Mini_sUsageMode = g_KB_Mini_sUsageMode_Idle;
 var g_KB_Mini_bBackspaceEnabled = false;
+
+function KB_Mini_SetUsageMode(sUsageMode)
+{
+    g_KB_Mini_sUsageMode = sUsageMode;
+    let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
+    let eButtonRow = document.getElementById("KB_Mini_ButtonRow_Div");
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_Idle )
+    {
+        let sBackgroundColor = '#FFFFFF';
+        eInstructions.style.backgroundColor = sBackgroundColor;
+        eButtonRow.style.backgroundColor = sBackgroundColor;
+        KB_Mini_DisableLettersFullyPlaced();
+        return;
+    }
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveGrid )
+    {
+        let sBackgroundColor = g_Color_sAbvocabPink;
+        eInstructions.style.backgroundColor = sBackgroundColor;
+        eButtonRow.style.backgroundColor = sBackgroundColor;
+        KB_Mini_DisableLettersFullyPlaced();
+        return;
+    }
+
+
+
+// g_KB_Mini_sUsageMode_ActiveWords 
+let sBackgroundColor = g_Color_sScratchAreaActive;
+eInstructions.style.backgroundColor = sBackgroundColor;
+eButtonRow.style.backgroundColor = sBackgroundColor;
+KB_Mini_EnableAllLetters();
+}
 
 function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
 {
-    let eButtonRow = document.getElementById("KB_Mini_ButtonRow_Div");
     let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
     let sInstructions = ' Exchange Highlighted Letter with Selection ';
-    let sBackgroundColor = '#FFFFFF';
     if ( cLetterBeingReplaced != '' )
     {
-        sInstructions = ' Exchange ' + cLetterBeingReplaced + ' With Selection '
-        sBackgroundColor = g_Color_sAbvocabPink;
-
+        sInstructions = ' Exchange ' + cLetterBeingReplaced + ' With Selection ';
+        KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_ActiveGrid)
     }
+    else
+        KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
     eInstructions.innerHTML = sInstructions;
-    eInstructions.style.backgroundColor = sBackgroundColor;
-    eButtonRow.style.backgroundColor = sBackgroundColor;
 }
 
 function KB_Mini_LettersSetEnabled(cLetter, bEnabled)
@@ -34,6 +66,16 @@ function KB_Mini_LettersSetEnabled(cLetter, bEnabled)
     {
         var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
         eLetter.className = sClass;
+    }
+}
+
+function KB_Mini_EnableAllLetters()
+{
+    let iAllowed = g_GRBMS_sAllowedGridLetters.length;
+    for ( let i = 0; i < iAllowed; i++ )
+    {
+        let cThisOne = g_GRBMS_sAllowedGridLetters.charAt(i);
+        KB_Mini_LettersSetEnabled(cThisOne, true);
     }
 }
 
@@ -122,6 +164,7 @@ sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
     let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     elemKB_Mini_Div.innerHTML = sInner;
     KB_Mini_SpecialButtonEnable(false);
+    KB_Mini_DisableLettersFullyPlaced();
     return iRows;
 }
 

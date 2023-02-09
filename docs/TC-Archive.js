@@ -34,7 +34,8 @@ function TC_Archive_Select(elem)
 
 function TC_Archive_Previous()
 {
-    g_TC_Archive_Menu_iStartAt -= g_TC_Archive_Menu_aActiveIds.length;
+    g_TC_Archive_Menu_iStartAt -= g_TC_Archive_Menu_iMaxItems;
+//    g_TC_Archive_Menu_iStartAt -= g_TC_Archive_Menu_aActiveIds.length;
     if ( g_TC_Archive_Menu_iStartAt < 0 )
         g_TC_Archive_Menu_iStartAt = 0;
     TC_Archive_UpdateMenu();
@@ -46,7 +47,7 @@ function TC_Archive_Next()
     g_TC_Archive_Menu_iStartAt += g_TC_Archive_Menu_aActiveIds.length;
     if ( g_TC_Archive_Menu_iStartAt > g_TC_Archive_aPuzzleTitles.length - 1 )
         return;
-    TC_Archive_UpdateMenu();
+        TC_Archive_UpdateMenu();
     TC_Archive_AdjustMenu();
 }
 

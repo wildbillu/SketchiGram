@@ -3,39 +3,6 @@
 var g_SG_Clues_bCreated = false;
 var g_SG_iExtraCluesShown = 0;
 
-function SG2_SetImage()
-{
-    let sImage = '';
-//    onclick="TC_ShowExtraImage();"
-    sImage += '<img Id="Grid_Image_Itself" class="Div_Grid_Image_Itself"  src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200"></img>';
-    let elemDivGridImage = document.getElementById('Div_Grid_Image');
-    elemDivGridImage.innerHTML = sImage;
-}
-
-var g_iFudgeSpace = 5;
-function SG2_PositionImage()
-{
-// first position
-    let elemKB = document.getElementById("KB_Mini_Div");
-    let rectKB = GetBoundingClientRectAbsolute(elemKB);
-    let iBottomKB = rectKB.bottom;
-    let elemDivGridImage = document.getElementById('Div_Grid_Image');
-    elemDivGridImage.style.top = MakePixelString(iBottomKB + g_iFudgeSpace);
-// need the size to be height between bottom of KB and top of Archive Button
-    let elemArchiveButton = document.getElementById("Archive_Button_Activate");
-    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton)
-    let iTopArchiveButton = rectArchiveButton.top;
-    let iHeight = iTopArchiveButton - iBottomKB - 2 * g_iFudgeSpace;
-    elemDivGridImage.style.height = MakePixelString(iHeight);
-    let elemDivGridImageItself = document.getElementById("Grid_Image_Itself");
-    elemDivGridImageItself.style.height = MakePixelString(iHeight);
-
-    let iWidth = GetWidthToHeightRatioOfImageWithId("Grid_Image_Itself")*iHeight;
-    elemDivGridImageItself.style.width = MakePixelString(iWidth);
-    let iLeft = TC_LeftForCentering(iWidth);
-    elemDivGridImage.style.left = MakePixelString(iLeft);
-}
-
 function SG_ShowExtraClue()
 {
     if ( g_SG_iExtraCluesShown > 0 )

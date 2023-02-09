@@ -93,7 +93,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 5:
-            SG2_SetImage();
+            SG2_ThemeImage_Create();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 6:
@@ -110,7 +110,9 @@ function SG2_LoadAll(iSection)
             SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons);
             TC_SetBottomMatter();
             TC_Archive_AdjustMenu();
-            SG2_PositionImage();            
+            SG2_ThemeImage_NormalSize_Setup();
+            SG2_ThemeImage_NormalSize_SetTo();
+            SG2_ThemeImage_EnlargedSize_Setup();
 // want to be just below             
             let iDisplayDualClueTop = 50;
             let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");

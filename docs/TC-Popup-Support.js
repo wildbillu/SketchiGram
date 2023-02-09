@@ -5,6 +5,16 @@
 window.onclick = function(event) 
 {
 	var sTargetId = event.target.id;
+//alert(sTargetId)
+    if ( !g_ThemeImage_bIsNormalSize )
+	{
+		if ( sTargetId.indexOf('Grid_Image') != -1 ) 
+		{
+			if ( g_ThemeImage_EnlargedSize_iHitCount != 0)
+				TC_ThemeImage_SwitchTo_NormalSize();
+			g_ThemeImage_EnlargedSize_iHitCount++;
+		}
+	}
 
 	if ( g_TC_Settings_bActive ){if ( sTargetId.indexOf('Settings') == -1 ) TC_HideSettings();
 		else { if ( g_TC_Settings_iActiveCount != 0 )TC_HideSettings();else g_TC_Settings_iActiveCount++;}
@@ -16,8 +26,11 @@ window.onclick = function(event)
 	}
 	if ( g_TC_Archive_Menu_bActive )
 	{   
-		if ( sTargetId.indexOf('Archive') == -1 ) TC_Archive_Activate();
-		else { if ( g_TC_Archive_Menu_iActiveCount != 0 )TC_Archive_Activate();else g_TC_Archive_Menu_iActiveCount++;}
+		if ( sTargetId != 'Archive_Next' && sTargetId != 'Archive_Previous')
+		{
+			if ( sTargetId.indexOf('Archive') == -1 ) TC_Archive_Activate();
+			else { if ( g_TC_Archive_Menu_iActiveCount != 0 )TC_Archive_Activate();else g_TC_Archive_Menu_iActiveCount++;}
+		}
 	}
 	if ( g_GRBMS_ExtraImage_bActive && sTargetId.indexOf('ExtraImage') == -1 && sTargetId.indexOf('DisplayDualClue_Div') )
 		TC_HideExtraImage();

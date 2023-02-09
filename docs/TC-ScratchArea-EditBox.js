@@ -210,6 +210,8 @@ function TC_SA_EB_Focus(elemInputText)
         elemInputText.innerHTML = sValue;
     }
     KB_Mini_SpecialButtonEnable(true);
+    KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_ActiveWords)
+//
     GRBMS_LoseCurrentFocus();
 }
 
@@ -221,10 +223,15 @@ function TC_SA_EB_LoseTheFocusAndCleanup(bCheck)
         TC_SA_EB_LoseFocus();
     }
     g_SA_EB_Focus_sId = '';
+    KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
+
 }
 
 function TC_SA_EB_Setup()
 {
+    var r = document.querySelector(':root');
+    r.style.setProperty('--ColorScratchAreaActive', g_Color_sScratchAreaActive);
+//
     let elemGrid = document.getElementById("Div_Grid");
     let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
     let iTop = rectGrid.top;

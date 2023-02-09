@@ -24,7 +24,7 @@
 {
     font-weight:bold;
     color:black;
-    background-color:#FFAEFF;
+    background-color:var(--ColorScratchAreaActive);
 }
 
 .SA_EB_Entry_Inactive
