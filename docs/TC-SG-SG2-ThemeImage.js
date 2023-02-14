@@ -74,7 +74,7 @@ function SG2_ThemeImage_NormalSize_SetTo()
     elemDivGridImage.style.left         = MakePixelString(g_ThemeImage_NormalSize_iLeft);
     elemDivGridImageItself.style.height = MakePixelString(g_ThemeImage_NormalSize_iHeight);
     elemDivGridImageItself.style.width  = MakePixelString(g_ThemeImage_NormalSize_iWidth);
-    elemDivGridImageItself.style.zIndex = 2;
+    elemDivGridImageItself.style.zIndex = 0;
     g_ThemeImage_bIsNormalSize = true;
 }
 

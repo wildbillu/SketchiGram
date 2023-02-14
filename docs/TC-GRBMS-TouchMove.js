@@ -133,6 +133,9 @@ function GRBMS_touchMove(e)
                     g_GRBMS_TM_Found_sId = GRBMS_MakeId(iRow, iLetter);
                     GRBMS_ForRowLetter_SetButton(g_GRBMS_TM_Found_iRow, g_GRBMS_TM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
                     bFound = true;
+                    if ( g_GRBMS_bIndicateCorrectPlacements )
+                        TC_GRBMS_IndicatePickedLetterCorrectOrNot(g_GRBMS_TM_Picked_iRow, g_GRBMS_TM_Picked_iLetter, g_GRBMS_TM_Found_iRow, g_GRBMS_TM_Found_iLetter);
+
                 }
             }
         }

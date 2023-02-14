@@ -70,6 +70,7 @@ function TC_HideSolvedImage()
 
 function TC_ShowSolvedImage()
 {
+setlineAdd('showsolved')
     var iWidth = g_TC_iBiggestRight;
     var elemImage = document.getElementById("SolvedImage");
     elemImage.style.top = MakePixelString(100);

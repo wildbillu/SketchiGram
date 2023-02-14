@@ -28,9 +28,6 @@ function KB_Mini_SetUsageMode(sUsageMode)
         KB_Mini_DisableLettersFullyPlaced();
         return;
     }
-
-
-
 // g_KB_Mini_sUsageMode_ActiveWords 
 let sBackgroundColor = g_Color_sScratchAreaActive;
 eInstructions.style.backgroundColor = sBackgroundColor;
@@ -81,6 +78,8 @@ function KB_Mini_EnableAllLetters()
 
 function KB_Mini_DisableLettersFullyPlaced()
 {
+    if ( g_SA_EB_Focus_sId != '' )
+        return;
     let iAllowed = g_GRBMS_sAllowedGridLetters.length;
     g_GRBMS_sAllowedGridLetters_Selectable = '';
     for ( let i = 0; i < iAllowed; i++ )
@@ -216,7 +215,7 @@ function KB_Mini_KeyboardPress(sLetter)
 // here we reject ones that are not selectable
     let iIndex = g_GRBMS_sAllowedGridLetters.indexOf(sLetter)
     let cSelectable = g_GRBMS_sAllowedGridLetters_Selectable.charAt(iIndex);
-    if ( cSelectable == 'F' )
+    if ( g_SA_EB_Focus_sId == "" && cSelectable == 'F' )
         return;
     if ( KB_Mini_KeyboardPress_GRBMS(sLetter) )
         return;

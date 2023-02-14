@@ -1,5 +1,7 @@
 // TC-GRBMS-MouseMove.js
 
+var g_GRBMS_bIndicateCorrectPlacements = false;
+
 var g_GRBMS_MM_Picked_Start_iLeft = 0;
 var g_GRBMS_MM_Picked_Start_iTop = 0;
 
@@ -16,6 +18,24 @@ var g_GRBMS_MM_Found_iRow = -1;
 var g_GRBMS_MM_Found_iLetter = -1;
 var g_GRBMS_MM_Found_sId = '';
 var g_GRBMS_MM_Found_bMouseOut = false;
+
+function TC_GRBMS_IndicatePickedLetterCorrectOrNot(iPickedRow, iPickedLetter, iFoundRow, iFoundLetter)
+{
+    let cLetterPicked = GRB_ForRowLetter_GetAnswerPlayer(iPickedRow, iPickedLetter);
+    let cLetterCorrectAnswer = GRB_ForRowLetter_GetAnswer(iFoundRow, iFoundLetter);
+    let bCorrect = false;
+    if ( cLetterPicked == cLetterCorrectAnswer )
+        bCorrect = true;
+    let cStatusPlayer = g_TC_cCodeMeaning_Normal;
+    let cCodeForActivity = g_TC_cCodeMeaning_HasFocusBeingMoved
+    if ( bCorrect ) 
+        cStatusPlayer = g_TC_cCodeMeaning_Correct;
+    var sId = '';
+    sStatusImage = GRB_ButtonBackgroundImage(cLetterPicked, cStatusPlayer, g_TC_cCharacterDenotingNoNumberSquare, cCodeForActivity)
+    var sId = GRBMS_MakeId(iPickedRow, iPickedLetter)
+    var elem = document.getElementById(sId);
+    elem.style.backgroundImage = sStatusImage;
+}
 
 function GRBMS_PickingAdjustment(iRow, iLetter, iPickedX, iPickedY)
 {
@@ -121,6 +141,7 @@ function GRBMS_mouseMove(e)
     rect = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
     a_elem = document.elementsFromPoint(rect.left, rect.top)
     let bFound = false;
+    let bPickedLetterCorrectForFoundSquare = false;
     let iE = 0;
     while ( iE < a_elem.length && !bFound )
     {
@@ -149,6 +170,8 @@ function GRBMS_mouseMove(e)
                     g_GRBMS_MM_Found_sId = GRBMS_MakeId(iRow, iLetter);
                     GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
                     bFound = true;
+                    if ( g_GRBMS_bIndicateCorrectPlacements )
+                        TC_GRBMS_IndicatePickedLetterCorrectOrNot(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter);
                 }
             }
         }
@@ -156,6 +179,7 @@ function GRBMS_mouseMove(e)
     }
     e.preventDefault();
 }
+
 
 function GRBMS_onmousedown(e, iRow, iLetter)
 {
