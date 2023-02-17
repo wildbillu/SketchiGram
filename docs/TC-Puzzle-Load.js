@@ -31,10 +31,19 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
         g_aGridAnswersPlayer.push(sGridAnswersPlayer.substring(iRow*g_iGridWidth, (iRow+1)*g_iGridWidth));
         g_aGridStatusPlayer. push(sGridStatusPlayer. substring(iRow*g_iGridWidth, (iRow+1)*g_iGridWidth));
     }
+    g_GR_aAcrossAnswers.length = 0;
+    g_GR_aAcrossAnswersNumber.length = 0;
+    g_GR_aAcrossAnswersStartRow.length = 0;
+    g_GR_aAcrossAnswersStartLetter.length = 0;
+    g_GR_aAcrossAnswersClueNumber.length = 0;
+
+
     for ( var iRR = 0; iRR < g_iGridHeight; iRR++ )
     {  // helpers for Grid - Across
-        var sNumber = '';
-        var sAnswer = '';
+        let sNumber = '';
+        let sAnswer = '';
+        let iStartRow = -1;
+        let iStartLetter = -1;
         for ( var iLL = 0; iLL < g_iGridWidth; iLL++ )
         {
             var cThisChar = GRB_ForRowLetter_GetAnswer(iRR, iLL);
@@ -42,16 +51,58 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
             {
                 sAnswer += cThisChar;
                 if ( sNumber == '' )
-                    sNumber = g_sGridNumbering.charAt(iRR*g_iGridWidth+iLL);
+                {
+                    sNumber = TC_FixNumber(g_sGridNumbering.charAt(iRR*g_iGridWidth+iLL));
+                    iStartRow = iRR;
+                    iStartLetter = iLL;
+                }
+            }
+            else
+            {
+                if ( sAnswer != '' )
+                {
+                    if ( sAnswer.length != 1 )
+                    {
+                        g_GR_aAcrossAnswers.push(sAnswer);
+                        g_GR_aAcrossAnswersNumber.push(sNumber);
+                        g_GR_aAcrossAnswersStartRow.push(iStartRow);
+                        g_GR_aAcrossAnswersStartLetter.push(iStartLetter);
+                        g_GR_aAcrossAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
+                    }
+                    sNumber = '';
+                    sAnswer = '';
+                    iStartRow = -1;
+                    sStartLetter = -1;
+                }
             }
         }
-        g_GR_aAcrossAnswers.push(sAnswer);
-        g_GR_aAcrossAnswersNumber.push(sNumber);
-    }        
+        if ( sAnswer != '')
+        {
+            g_GR_aAcrossAnswers.push(sAnswer);
+            g_GR_aAcrossAnswersNumber.push(sNumber);
+            g_GR_aAcrossAnswersStartRow.push(iStartRow);
+            g_GR_aAcrossAnswersStartLetter.push(iStartLetter);
+            g_GR_aAcrossAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
+        }
+    }
+//    alert(g_GR_aAcrossAnswers);
+//    alert(g_GR_aAcrossAnswersNumber);
+//    alert(g_GR_aAcrossAnswersStartRow);
+//    alert(g_GR_aAcrossAnswersStartLetter);
+//    alert(g_GR_aAcrossAnswersClueNumber);
+//
+    g_GR_aDownAnswers.length = 0;
+    g_GR_aDownAnswersNumber.length = 0
+    g_GR_aDownAnswersStartRow.length = 0;
+    g_GR_aDownAnswersStartLetter.length = 0;
+    g_GR_aDownAnswersClueNumber.length = 0;
+
     for ( var iLL = 0; iLL < g_iGridWidth; iLL++ )
     {  // helpers for Grid - Down
-        var sNumber = '';
-        var sAnswer = '';
+        let sNumber = '';
+        let sAnswer = '';
+        let iStartRow = -1;
+        let iStartLetter = -1;
         for ( var iRR = 0; iRR < g_iGridHeight; iRR++ )
         {
             var cThisChar = GRB_ForRowLetter_GetAnswer(iRR, iLL);
@@ -59,10 +110,55 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
             {
                 sAnswer += cThisChar;
                 if ( sNumber == '' )
-                    sNumber = g_sGridNumbering.charAt(iRR*g_iGridWidth+iLL);
+                {
+                    sNumber = TC_FixNumber(g_sGridNumbering.charAt(iRR*g_iGridWidth+iLL));
+                    iStartRow = iRR;
+                    iStartLetter = iLL;
+                }
+            }
+            else
+            {
+                if ( sAnswer != '' )
+                {
+                    if ( sAnswer.length != 1 )
+                    {
+                        g_GR_aDownAnswers.push(sAnswer);
+                        g_GR_aDownAnswersNumber.push(sNumber);
+                        g_GR_aDownAnswersStartRow.push(iStartRow);
+                        g_GR_aDownAnswersStartLetter.push(iStartLetter);
+                        g_GR_aDownAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
+                    }
+                    sNumber = '';
+                    sAnswer = '';
+                }
             }
         }
-        g_GR_aDownAnswers.push(sAnswer);
-        g_GR_aDownAnswersNumber.push(sNumber);
+        if ( sAnswer != '' )
+        {
+            g_GR_aDownAnswers.push(sAnswer);
+            g_GR_aDownAnswersNumber.push(sNumber);
+            g_GR_aDownAnswersStartRow.push(iStartRow);
+            g_GR_aDownAnswersStartLetter.push(iStartLetter);
+            g_GR_aDownAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
+        }
     }
+//alert(g_GR_aDownAnswers);
+//    alert(g_GR_aDownAnswersNumber);
+//    alert(g_GR_aDownAnswersStartRow);
+//    alert(g_GR_aDownAnswersStartLetter);
+//alert(g_GR_aDownAnswersClueNumber);
+
+
+}
+
+function TC_FixNumber(sNumberAsString)
+{
+    let sReturn = sNumberAsString;
+    if ( sNumberAsString == 'A') sReturn = '10'
+    if ( sNumberAsString == 'B') sReturn = '11'
+    if ( sNumberAsString == 'C') sReturn = '12'
+    if ( sNumberAsString == 'D') sReturn = '13'
+    if ( sNumberAsString == 'E') sReturn = '14'
+    if ( sNumberAsString == 'E') sReturn = '15'
+    return sReturn;
 }

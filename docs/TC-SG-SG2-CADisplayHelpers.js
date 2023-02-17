@@ -9,34 +9,55 @@ var g_SG_Clues_Row1_bLengthSet = false;
 var g_SG_Clues_Row1_bAnswerSet = false;
 var g_SG_Clues_Row1_bLocationSet = false;
 
+function SG_Clues_ShowCorrect()
+{
+    for ( let iAcross = 0; iAcross < g_GR_aAcrossAnswers.length; iAcross++)
+    {
+        //g_GR_aAcrossAnswersNumber
+        let sAnswer = g_GR_aAcrossAnswers[iAcross];
+        let iLength = sAnswer.length;
+        let bCorrect = true;
+        let iRow = g_GR_aAcrossAnswersStartRow[iAcross];
+        let iLetterStart = g_GR_aAcrossAnswersStartLetter[iAcross];
+        for ( let iL = 0; iL < iLength; iL++ )
+        {
+            let cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetterStart + iL);
+            let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetterStart + iL);
+            if ( cAnswer != cAnswerPlayer ) bCorrect = false;
+//            alert('A:' + sAnswer + '|' + cAnswer + '|' + cAnswerPlayer)        
+        }
+        if ( bCorrect )
+            SG_Clues_ShowClue_ResetAnswer(g_GR_aAcrossAnswersClueNumber[iAcross], false, true, true)
+    }
+//
+    for ( let iDown = 0; iDown < g_GR_aDownAnswers.length; iDown++)
+    {
+        //g_GR_aAcrossAnswersNumber
+        let sAnswer = g_GR_aDownAnswers[iDown];
+        let iLength = sAnswer.length;
+        let bCorrect = true;
+        let iLetter = g_GR_aDownAnswersStartLetter[iDown];
+        let iRowStart = g_GR_aDownAnswersStartRow[iDown];
+        for ( let iR = 0; iR < iLength; iR++ )
+        {
+            let cAnswer = GRB_ForRowLetter_GetAnswer(iRowStart + iR, iLetter);
+            let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRowStart + iR, iLetter);
+            if ( cAnswer != cAnswerPlayer ) bCorrect = false;
+//            alert('A:' + sAnswer + '|' + cAnswer + '|' + cAnswerPlayer)        
+        }
+        if ( bCorrect )
+            SG_Clues_ShowClue_ResetAnswer(g_GR_aDownAnswersClueNumber[iDown], false, true, true)
+    }
+
+
+}
+
 function SG_Clues_IndexOfAnswer(sAnswer)
 {
     for ( let i = 0; i < g_aAnswers.length; i++)
         if ( g_aAnswers[i] == sAnswer )
             return i;
     return -1; 
-}
-
-function SG_Clues_ShowCorrect()
-{
-    for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
-    {
-        let sCorrectAnswer = SG_Clues_ForRow_ReturnIfPlayerGridCorrect(iRow);
-        if ( sCorrectAnswer != '' )
-        {
-            let iAnswer = SG_Clues_IndexOfAnswer(sCorrectAnswer);
-            SG_Clues_ShowClue_ResetAnswer(iAnswer, false, true, true)
-        }
-    }
-    for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
-    {
-        let sCorrectAnswer = SG_Clues_ForLetter_ReturnIfPlayerGridCorrect(iLetter);
-        if ( sCorrectAnswer != '' )
-        {
-            let iAnswer = SG_Clues_IndexOfAnswer(sCorrectAnswer);
-            SG_Clues_ShowClue_ResetAnswer(iAnswer, false, true, true)
-        }
-    }
 }
 
 function SG_Clues_ForRow_ReturnIfPlayerGridCorrect(iRow)

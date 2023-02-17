@@ -41,9 +41,6 @@ function GRBMS_ShowCheckGrid(sToDo)
     return true;
 }
 
-
-
-
 function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
 {
     GRB_ForLetterMakeHints(iLetter, sForceAnswer);

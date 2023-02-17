@@ -37,7 +37,12 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="ElapsedTime_Div" class="ElapsedTime_Div StartHidden"></DIV>';
     sMain += '<DIV Id="DifficultyLevel_Div" class="DifficultyLevel_Div StartHidden">DifficultyLevel</DIV>';
     sMain += '<DIV Id="DisplayDualClue_Div" class="DisplayDualClue_Div StartHidden" onclick="TC_DisplayDualClue()">DisplayDualClue_Div</DIV>';
+//sMain += TC_Button_V2_InDiv('AAAA', false, 'TC_Text();', 'New');
     document.getElementById("Body_Any").innerHTML = sMain;
+}
+function TC_Text()
+{
+    alert('TC')
 }
 
 function TC_ActOnVisibilityChange(e)

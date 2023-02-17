@@ -10,8 +10,17 @@ var g_aGridAnswersPlayer = [];
 var g_aGridStatusPlayer  = [];
 var g_GR_aAcrossAnswers = [];
 var g_GR_aAcrossAnswersNumber = [];
+var g_GR_aAcrossAnswersStartRow = [];
+var g_GR_aAcrossAnswersStartLetter = [];
+var g_GR_aAcrossAnswersClueNumber = [];
+
 var g_GR_aDownAnswers = []
 var g_GR_aDownAnswersNumber = [];
+var g_GR_aDownAnswersStartRow = [];
+var g_GR_aDownAnswersStartLetter = [];
+var g_GR_aDownAnswersClueNumber = [];
+
+
 var g_sGridNumbering;
 
 var g_GRB_Square_iSize = 40;
