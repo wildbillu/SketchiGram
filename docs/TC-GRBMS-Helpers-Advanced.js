@@ -16,7 +16,7 @@ function GRBMS_ForRowLetter_SetButton_Phantom(iRow, iLetter, cCodeForActivity)
     var sId = '';
     var sId = GRBMS_Phantom_MakeId(iRow, iLetter)
     var elem = document.getElementById(sId);
-    elem.style.backgroundImage = GRB_ButtonBackgroundImage(g_TC_cCharMeaningNotSet, g_TC_cCodeMeaning_Normal, g_TC_cCharacterDenotingNoNumberSquare, g_TC_cCodeMeaning_Inactive);
+    elem.style.backgroundImage = GRB_ButtonBackgroundImage(g_TC_cCharMeaningNotSet, g_TC_cCodeMeaning_Normal, 0, g_TC_cCodeMeaning_Inactive);
     elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
     elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
 }
@@ -187,9 +187,9 @@ function GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
 {
     var cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     var cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    var cNumbering    = g_sGridNumbering.charAt(iRow*g_iGridWidth+iLetter);
+    let iGridNumber = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
     var sId = '';
-    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, cNumbering, cCodeForActivity)
+    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity);
     var sId = GRBMS_MakeId(iRow, iLetter)
     var elem = document.getElementById(sId);
     elem.style.backgroundImage = sStatusImage;

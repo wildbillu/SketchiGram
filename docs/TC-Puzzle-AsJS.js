@@ -29,6 +29,6 @@ function TC_Puzzle_Load_AsJS()
     var sGridAnswers                = 'OPTSWAWAEVILNENE';
     var sGridAnswersPlayer          = 'O-------------N-';
     var sGridStatusPlayer           = 'GNNNNNNNNNNNNNGN';
-    var sGridNumbering              = '01234...5...6...';
+    var sGridNumbering                = '1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0';
     GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
 }

@@ -31,16 +31,16 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
         g_aGridAnswersPlayer.push(sGridAnswersPlayer.substring(iRow*g_iGridWidth, (iRow+1)*g_iGridWidth));
         g_aGridStatusPlayer. push(sGridStatusPlayer. substring(iRow*g_iGridWidth, (iRow+1)*g_iGridWidth));
     }
+// new grid numbering helper
+    g_aGridNumbers = g_sGridNumbering.split(g_TC_cGeneralDelimiter);
     g_GR_aAcrossAnswers.length = 0;
     g_GR_aAcrossAnswersNumber.length = 0;
     g_GR_aAcrossAnswersStartRow.length = 0;
     g_GR_aAcrossAnswersStartLetter.length = 0;
     g_GR_aAcrossAnswersClueNumber.length = 0;
-
-
     for ( var iRR = 0; iRR < g_iGridHeight; iRR++ )
     {  // helpers for Grid - Across
-        let sNumber = '';
+        let iNumber = -1;
         let sAnswer = '';
         let iStartRow = -1;
         let iStartLetter = -1;
@@ -50,9 +50,9 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
             if ( cThisChar != g_TC_cCharacterDenotingBlackSquare )
             {
                 sAnswer += cThisChar;
-                if ( sNumber == '' )
+                if ( iNumber == -1 )
                 {
-                    sNumber = TC_FixNumber(g_sGridNumbering.charAt(iRR*g_iGridWidth+iLL));
+                    iNumber = g_aGridNumbers[iRR*g_iGridWidth+iLL];
                     iStartRow = iRR;
                     iStartLetter = iLL;
                 }
@@ -64,12 +64,12 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
                     if ( sAnswer.length != 1 )
                     {
                         g_GR_aAcrossAnswers.push(sAnswer);
-                        g_GR_aAcrossAnswersNumber.push(sNumber);
+                        g_GR_aAcrossAnswersNumber.push(iNumber);
                         g_GR_aAcrossAnswersStartRow.push(iStartRow);
                         g_GR_aAcrossAnswersStartLetter.push(iStartLetter);
                         g_GR_aAcrossAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
                     }
-                    sNumber = '';
+                    iNumber = -1;
                     sAnswer = '';
                     iStartRow = -1;
                     sStartLetter = -1;
@@ -79,7 +79,7 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
         if ( sAnswer != '')
         {
             g_GR_aAcrossAnswers.push(sAnswer);
-            g_GR_aAcrossAnswersNumber.push(sNumber);
+            g_GR_aAcrossAnswersNumber.push(iNumber);
             g_GR_aAcrossAnswersStartRow.push(iStartRow);
             g_GR_aAcrossAnswersStartLetter.push(iStartLetter);
             g_GR_aAcrossAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
@@ -99,7 +99,7 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
 
     for ( var iLL = 0; iLL < g_iGridWidth; iLL++ )
     {  // helpers for Grid - Down
-        let sNumber = '';
+        let iNumber = -1;
         let sAnswer = '';
         let iStartRow = -1;
         let iStartLetter = -1;
@@ -109,9 +109,9 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
             if ( cThisChar != g_TC_cCharacterDenotingBlackSquare )
             {
                 sAnswer += cThisChar;
-                if ( sNumber == '' )
+                if ( iNumber == -1 )
                 {
-                    sNumber = TC_FixNumber(g_sGridNumbering.charAt(iRR*g_iGridWidth+iLL));
+                    iNumber = g_aGridNumbers[iRR*g_iGridWidth+iLL];
                     iStartRow = iRR;
                     iStartLetter = iLL;
                 }
@@ -123,12 +123,12 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
                     if ( sAnswer.length != 1 )
                     {
                         g_GR_aDownAnswers.push(sAnswer);
-                        g_GR_aDownAnswersNumber.push(sNumber);
+                        g_GR_aDownAnswersNumber.push(iNumber);
                         g_GR_aDownAnswersStartRow.push(iStartRow);
                         g_GR_aDownAnswersStartLetter.push(iStartLetter);
                         g_GR_aDownAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
                     }
-                    sNumber = '';
+                    iNumber = -1;
                     sAnswer = '';
                 }
             }
@@ -136,7 +136,7 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
         if ( sAnswer != '' )
         {
             g_GR_aDownAnswers.push(sAnswer);
-            g_GR_aDownAnswersNumber.push(sNumber);
+            g_GR_aDownAnswersNumber.push(iNumber);
             g_GR_aDownAnswersStartRow.push(iStartRow);
             g_GR_aDownAnswersStartLetter.push(iStartLetter);
             g_GR_aDownAnswersClueNumber.push(SG_Clues_IndexOfAnswer(sAnswer));
@@ -154,7 +154,7 @@ function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlay
 function TC_FixNumber(sNumberAsString)
 {
     let sReturn = sNumberAsString;
-    if ( sNumberAsString == 'A') sReturn = '10'
+    if ( sNumberAsString == 'A') sReturn = 10
     if ( sNumberAsString == 'B') sReturn = '11'
     if ( sNumberAsString == 'C') sReturn = '12'
     if ( sNumberAsString == 'D') sReturn = '13'

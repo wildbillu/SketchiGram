@@ -20,8 +20,8 @@ var g_GR_aDownAnswersStartRow = [];
 var g_GR_aDownAnswersStartLetter = [];
 var g_GR_aDownAnswersClueNumber = [];
 
-
-var g_sGridNumbering;
+var g_sGridNumbering = '';
+var g_aGridNumbers = [];
 
 var g_GRB_Square_iSize = 40;
 var g_GRB_Square_Div_sClass = 'TC_Button_Div_Base TC_Div_40';  

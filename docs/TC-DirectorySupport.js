@@ -79,15 +79,12 @@ function TC_GetLetterImagePathAndName(cLetter, cColor)
 
 function TC_GetGridNumberImagePathAndName(sNumber)
 {
-    var sGridNumberImageAndPathName = g_sImagePath_GridNumbersAndFrames + 'No-' + sNumber + '.png';
+    let sGridNumberImageAndPathName = g_sImagePath_GridNumbersAndFrames + 'No-' + sNumber + '.png';
     return sGridNumberImageAndPathName;
 }
 
 function TC_GetStatusImagePathAndName(cSelection)
 {
-
-
-
     var sStatusImage = g_sImagePath_StatusIndicators;
     if ( cSelection == g_TC_cCodeMeaning_HasFocus || cSelection == g_TC_cCodeMeaning_HasFocusBeingMoved )
         sStatusImage += g_sStatusButtonName_Focus;

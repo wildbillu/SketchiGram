@@ -8,7 +8,7 @@ function GRB_AddWrappedUrlToString(sStarting, sNew)
     return sFinal;
 }
 
-function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cCodeForActivity)
+function GRB_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivity)
 {
     var sStatusImage = '';
     if ( cLetter == g_TC_cCharacterDenotingBlackSquare )
@@ -19,13 +19,12 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cCodeForActivity)
     if ( cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
         sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetButtonFrameImagePathAndName());
     sStatusImage = GRB_AddWrappedUrlToString(sStatusImage,TC_GetStatusOverlayImagePathAndName(cStatus));
-    if ( cNumber != g_TC_cCharacterDenotingNoNumberSquare && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
+    if ( iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
     {
-        var iNumber = parseInt(cNumber) + 1;
-        var sNumber = iNumber.toString();
-        if ( sNumber.length == 1 )
-            sNumber = '0' + sNumber;
-            sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetGridNumberImagePathAndName(sNumber));
+        var sGridNumber = iGridNumber.toString();
+        if ( sGridNumber.length == 1 )
+            sGridNumber = '0' + sGridNumber;
+        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetGridNumberImagePathAndName(sGridNumber));
     }
     let cColor = g_sColorCodeForUnknownLetter;
     if ( cStatus == g_TC_cCodeMeaning_Corrected || TC_CorrectOrGolden(cStatus) )
@@ -49,11 +48,11 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cCodeForActivity)
 
 function GRB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
 {
-    var cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-    var cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    var cNumbering    = g_sGridNumbering.charAt(iRow*g_iGridWidth+iLetter);
+    let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+    let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    let iGridNumber    = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
     var sId = '';
-    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, cNumbering, cCodeForActivity)
+    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity)
     sId = GRB_MakeId(iRow, iLetter);
     var elemButton = document.getElementById(sId);
     if ( elemButton )

@@ -31,7 +31,7 @@ function TC_GRBMS_IndicatePickedLetterCorrectOrNot(iPickedRow, iPickedLetter, iF
     if ( bCorrect ) 
         cStatusPlayer = g_TC_cCodeMeaning_Correct;
     var sId = '';
-    sStatusImage = GRB_ButtonBackgroundImage(cLetterPicked, cStatusPlayer, g_TC_cCharacterDenotingNoNumberSquare, cCodeForActivity)
+    sStatusImage = GRB_ButtonBackgroundImage(cLetterPicked, cStatusPlayer, 0, cCodeForActivity)
     var sId = GRBMS_MakeId(iPickedRow, iPickedLetter)
     var elem = document.getElementById(sId);
     elem.style.backgroundImage = sStatusImage;
