@@ -43,6 +43,7 @@ function SG2_LoadMainElements()
 function TC_Text()
 {
     alert('TC')
+    SG_PositionClues()
 }
 
 function TC_ActOnVisibilityChange(e)
@@ -105,10 +106,11 @@ function SG2_LoadAll(iSection)
             let iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
             var iKBRows = KB_Mini_Setup(iWidthGrid);
             SG2_Adjust_KBAndIntro(iKBRows);
+            TC_SetVisible("KB_Mini_Div");
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 7:
-                // we are going to do the show clues, but not make it visible to get spacing right
+// we are going to do the show clues, but not make it visible to get spacing right
             let bShowLength = true;
             let bShowGridLocation = false;
             let bShowPlaceButtons = false;

@@ -212,22 +212,37 @@ function SG_Clues_Div_SetVisibility(iIndex, bVisible)
         ForIdSetVisibility(SG_MakeClueTextId(iIndex), bVisible)
 }
 
+function SG_PositionClues()
+{
+// if the keypad is visible we go below it
+// if not we go below the grid
+    let elemClues = document.getElementById("SG_Clues_Div");
+    let iStartTop = 0;
+    let elemKB = document.getElementById("KB_Mini_Div");
+    if ( window.getComputedStyle(elemKB).visibility === "hidden" ) 
+    {
+        let elemGrid = document.getElementById("Div_Grid");
+        let rectStartFromMe = GetBoundingClientRectAbsolute(elemGrid);
+        iStartTop = rectStartFromMe.bottom + g_TC_Padding_Inter_Vertical_iSize;
+    }
+    else
+    {
+        let rectStartFromMe = GetBoundingClientRectAbsolute(elemKB);
+        iStartTop = rectStartFromMe.bottom + g_TC_Padding_Inter_Vertical_iSize;
+    }
+    elemClues.style.top = MakePixelString(iStartTop);
+}
+
 function SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons)
 {
     if ( g_SG_Clues_bCreated )
         return;
-// need to know where to start - 
-// since we might do this more than once we start at the bottom of the kb
-//    var elemStartFromMe = document.getElementById("KB_Mini_Div");
-//    var rectStartFromMe = elemStartFromMe.getBoundingClientRect();
-//var iStartTop = rectStartFromMe.bottom + g_TC_Padding_Inter_Vertical_iSize;
-g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
-    var elemClues = document.getElementById("SG_Clues_Div");
+    SG_PositionClues();
 // first do the dual row stuff
     let iWidthClues = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
+    let elemClues = document.getElementById("SG_Clues_Div");
     elemClues.style.width = MakePixelString(iWidthClues);
 //
-    elemClues.style.top = MakePixelString(g_TC_iBiggestBottom);
     var sInnerFullDualClue = '';
 // wrap this in the SG_DualClueOuter
     sInnerFullDualClue += '<DIV Id="SG_DualClue_Outer" class="SG_DualClue_Outer StartHidden">';
