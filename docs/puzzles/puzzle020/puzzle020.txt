@@ -5,10 +5,9 @@ sPuzzleTitle=He plays by a sense of smell
 iGridWidth=7
 iGridHeight=7
 sGridAnswers=..POP...WIZARDTON.PEEAMBROSEPEA.OEDENLIST...LEE..
-sGridAnswersPlayer=..---...---------.P------------.---------...L--..
-sGridStatusPlayer=NNNNNNNNNNNNNNNNNNGNNNNNNNNNNNNNNNNNNNNNNNNNGNNNN
+sGridAnswersPlayer=..---...------T--.P-------S----.---------...L--..
+sGridStatusPlayer=NNNNNNNNNNNNNNGNNNGNNNNNNNGNNNNNNNNNNNNNNNNNGNNNN
 sGridNumbering=0|0|1|2|3|0|0|0|4|0|0|0|5|6|7|0|0|0|8|0|0|9|0|0|0|0|0|0|10|0|0|0|11|0|0|12|0|0|13|0|0|0|0|0|14|0|0|0|0
-..012...3...456...7..8......9...A..B..C.....D....
 iClueAnswers=17
 sClues=Dummy1|Dummy2|Author ____ Bierce|Unit less than a lb.|Button on a timer|Use a recorder|___ goes the weasel|Not just a little|English reference book|That is|Sign up|Urinate|Bag with child on back|One for the house|It comes in a pod|Not males|Popular jeans brand
 sAnswersPlayer=-------|------|-------|--|-----|----|---|---|---|--|------|-------|-------|----|---|-----|---
