@@ -8,6 +8,13 @@ var g_SG_ActionMenu_aIds = [];
 var g_SG_ActionMenu_bSmartMovesOnly = true;
 var g_SG_ActionMenu_bSmartMovesOnly_Enabled = true;
 
+function SG_AM_ShowSketchiToonsHint(){};
+function SG_AM_CorrectSelected(){};
+function SG_AM_RevealRandomSquare(){};
+function SG_AM_SolvePuzzle(){};
+function SG_AM_ShowScratchArea(){};
+function SG_AM_ShowDualClueSquares(){};
+function SG_AM_IndicateCorrectMoves(){};
 function SG_ActionMenu_SetCheckBox(sId, bChecked, bEnabled)
 {
     var elemButton = document.getElementById(sId);
@@ -50,18 +57,47 @@ function SG_SmartMoves()
     g_SG_ActionMenu_bSmartMovesOnly = !g_SG_ActionMenu_bSmartMovesOnly;
     SG_ActionMenu_SetCheckBox("SG_AM_SmartMoveButton", g_SG_ActionMenu_bSmartMovesOnly, g_SG_ActionMenu_bSmartMovesOnly_Enabled);
 }
+function SG_ActionMenu_ShowClues()
+{
+alert('show clues')
+SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
+}
+
+function SG_ActionMenu_SolveAsCrossword()
+{
+    alert('SolveAsCrossword')
+    for ( let i = 0; i < g_aAnswers.length; i++ )
+    {  
+        SG_Clues_ShowClue_ResetAnswer(i, true, false, true)
+    }
+    SG_ShowClues(true, true, false)
+    SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
+}
+
 
 function SG_ActionMenu_MakeInner()
 {
     var sActionMenu = ''
     sActionMenu += '<DIV Id="SG_AM_SmartMove"             class="SG_AM_SmartMove_Div"><BUTTON class="SG_ActionMenu_Button_Size_20" Id="SG_AM_SmartMoveButton" onclick="SG_SmartMoves();"></BUTTON></DIV><DIV class="SG_ActionMenuButton">Smart Moves Only</DIV>';
     g_SG_ActionMenu_aIds.push("SG_AM_SmartMove");
-    sActionMenu += '<BUTTON Id="SG_AM_ShowClues"          class="SG_ActionMenuButton" onclick="SG_ShowClues(true, false, false);">Show Clues</BUTTON>';
+    sActionMenu += '<BUTTON Id="SG_AM_ShowClues"          class="SG_ActionMenuButton" onclick="SG_ActionMenu_ShowClues();">Show Clues</BUTTON>';
     g_SG_ActionMenu_aIds.push("SG_AM_ShowClues");
-    sActionMenu += '<BUTTON Id="SG_AM_SolveAsCrossword"   class="SG_ActionMenuButton" onclick="SG_ShowClues(true, true, true);">Solve As Crossword</BUTTON>';
+    sActionMenu += '<BUTTON Id="SG_AM_SolveAsCrossword"   class="SG_ActionMenuButton" onclick="SG_ActionMenu_SolveAsCrossword();">Solve As Crossword</BUTTON>';
     g_SG_ActionMenu_aIds.push("SG_AM_SolveAsCrossword");
-    sActionMenu += '<BUTTON Id="SG_AM_CorrectSelected"    class="SG_ActionMenuButton" onclick="SG_CorrectSelected();">Fix Selected Square</BUTTON>';
+    sActionMenu += '<BUTTON Id="SG_AM_CorrectSelected"    class="SG_ActionMenuButton" onclick="SG_CorrectSelected();">Reveal Selected Square</BUTTON>';
     g_SG_ActionMenu_aIds.push("SG_AM_CorrectSelected");
+    sActionMenu += '<BUTTON Id="SG_AM_RevealRandomSquare"    class="SG_ActionMenuButton" onclick="SG_AM_RevealRandomSquare();">Reveal Random Square</BUTTON>';
+    g_SG_ActionMenu_aIds.push("SG_AM_RevealRandomSquare");
+    sActionMenu += '<BUTTON Id="SG_AM_ShowSketchiToonsHint"    class="SG_ActionMenuButton" onclick="SG_AM_ShowSketchiToonsHint();">Show SketchiToons Hint</BUTTON>';
+    g_SG_ActionMenu_aIds.push("SG_AM_ShowSketchiToonsHint");
+    sActionMenu += '<BUTTON Id="SG_AM_SolvePuzzle"    class="SG_ActionMenuButton" onclick="SG_AM_SolvePuzzle();">Solve Puzzle</BUTTON>';
+    g_SG_ActionMenu_aIds.push("SG_AM_SolvePuzzle");
+    sActionMenu += '<BUTTON Id="SG_AM_ShowScratchArea"    class="SG_ActionMenuButton" onclick="SG_AM_ShowScratchArea();">Show Scratch Area</BUTTON>';
+    g_SG_ActionMenu_aIds.push("SG_AM_ShowScratchArea");
+    sActionMenu += '<BUTTON Id="SG_AM_ShowDualClueSquares"    class="SG_ActionMenuButton" onclick="SG_AM_ShowDualClueSquares();">Show Dual Clue Squares</BUTTON>';
+    g_SG_ActionMenu_aIds.push("SG_AM_ShowDualClueSquares");
+    sActionMenu += '<BUTTON Id="SG_AM_IndicateCorrectMoves"    class="SG_ActionMenuButton" onclick="SG_AM_IndicateCorrectMoves();">Indicate Correct Moves</BUTTON>';
+    g_SG_ActionMenu_aIds.push("SG_AM_IndicateCorrectMoves");
     return sActionMenu;
 }
 

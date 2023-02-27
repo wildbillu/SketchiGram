@@ -235,8 +235,8 @@ function SG_PositionClues()
 
 function SG_ShowClues(bShowLength, bShowGridLocation, bShowPlaceButtons)
 {
-    if ( g_SG_Clues_bCreated )
-        return;
+//    if ( g_SG_Clues_bCreated )
+//        return;
     SG_PositionClues();
 // first do the dual row stuff
     let iWidthClues = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
