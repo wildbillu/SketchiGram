@@ -1,7 +1,5 @@
 // TC-GRBMS-MouseMove.js
 
-var g_GRBMS_bIndicateCorrectPlacements = false;
-
 var g_GRBMS_MM_Picked_Start_iLeft = 0;
 var g_GRBMS_MM_Picked_Start_iTop = 0;
 
@@ -19,19 +17,27 @@ var g_GRBMS_MM_Found_iLetter = -1;
 var g_GRBMS_MM_Found_sId = '';
 var g_GRBMS_MM_Found_bMouseOut = false;
 
-function TC_GRBMS_IndicatePickedLetterCorrectOrNot(iPickedRow, iPickedLetter, iFoundRow, iFoundLetter)
+function TC_GRBMS_IsPickedLetterCorrectForFoundLocation(iPickedRow, iPickedLetter, iFoundRow, iFoundLetter)
 {
     let cLetterPicked = GRB_ForRowLetter_GetAnswerPlayer(iPickedRow, iPickedLetter);
     let cLetterCorrectAnswer = GRB_ForRowLetter_GetAnswer(iFoundRow, iFoundLetter);
     let bCorrect = false;
     if ( cLetterPicked == cLetterCorrectAnswer )
         bCorrect = true;
+    return bCorrect;
+}
+
+function TC_GRBMS_IndicatePickedLetterCorrectOrNot(iPickedRow, iPickedLetter, iFoundRow, iFoundLetter)
+{
+    let cLetterPicked = GRB_ForRowLetter_GetAnswerPlayer(iPickedRow, iPickedLetter);
+    bCorrect = TC_GRBMS_IsPickedLetterCorrectForFoundLocation(iPickedRow, iPickedLetter, iFoundRow, iFoundLetter);
     let cStatusPlayer = g_TC_cCodeMeaning_Normal;
     let cCodeForActivity = g_TC_cCodeMeaning_HasFocusBeingMoved
     if ( bCorrect ) 
         cStatusPlayer = g_TC_cCodeMeaning_Correct;
     var sId = '';
-    sStatusImage = GRB_ButtonBackgroundImage(cLetterPicked, cStatusPlayer, 0, cCodeForActivity)
+    let bIsDualClueSquare = GRB_ForRowLetter_IsDualClueSquare(iRow, iLetter);
+    sStatusImage = GRB_ButtonBackgroundImage(cLetterPicked, cStatusPlayer, 0, cCodeForActivity, bIsDualClueSquare)
     var sId = GRBMS_MakeId(iPickedRow, iPickedLetter)
     var elem = document.getElementById(sId);
     elem.style.backgroundImage = sStatusImage;
@@ -140,9 +146,8 @@ function GRBMS_mouseMove(e)
     // now we look to see what is over the top     
     rect = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
     a_elem = document.elementsFromPoint(rect.left, rect.top)
-    let bFound = false;
-    let bPickedLetterCorrectForFoundSquare = false;
     let iE = 0;
+    let bFound = false;
     while ( iE < a_elem.length && !bFound )
     {
         let sId = a_elem[iE].id;
@@ -165,13 +170,17 @@ function GRBMS_mouseMove(e)
                 }
                 if ( GRBMS_PickingAdjustment(iRow, iLetter, iLeftRelative, iTopRelative) )
                 {
-                    g_GRBMS_MM_Found_iRow = iRow;
-                    g_GRBMS_MM_Found_iLetter = iLetter;
-                    g_GRBMS_MM_Found_sId = GRBMS_MakeId(iRow, iLetter);
-                    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
                     bFound = true;
-                    if ( g_GRBMS_bIndicateCorrectPlacements )
-                        TC_GRBMS_IndicatePickedLetterCorrectOrNot(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter);
+                    let bCorrectDrop = TC_GRBMS_IsPickedLetterCorrectForFoundLocation(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, iRow, iLetter);
+                    if ( !g_SG_AM_bSmartMovesOnly || bCorrectDrop )
+                    {
+                        g_GRBMS_MM_Found_iRow = iRow;
+                        g_GRBMS_MM_Found_iLetter = iLetter;
+                        g_GRBMS_MM_Found_sId = GRBMS_MakeId(iRow, iLetter);
+                        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
+                    }
+                    if ( g_SG_AM_bIndicateCorrectMoves )
+                        TC_GRBMS_IndicatePickedLetterCorrectOrNot(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, iRow, iLetter);
                 }
             }
         }

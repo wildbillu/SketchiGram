@@ -23,7 +23,14 @@ function TC_HideExtraImage()
     g_sCABOnExtraImageClick = '';
     g_sGRBOnExtraImageClick = '';
     g_GRBMS_ExtraImage_bActive = false;
+
+    if ( g_ShowExtraImage_IntervalId != 0 )
+    {
+        clearInterval(g_ShowExtraImage_IntervalId);
+        g_ShowExtraImage_IntervalId = 0;
+    }
 }
+var g_ShowExtraImage_IntervalId = 0;
 
 function TC_ShowExtraImage()
 {
@@ -40,7 +47,10 @@ function TC_ShowExtraImage()
     g_sGRBOnExtraImageClick = g_GRB_Focus_sId;
     g_GRBMS_ExtraImage_bActive = true;
     ForIdSetVisibility("ScratchArea", true);
-    setTimeout(function(){TC_HideExtraImage();}, 10000); 
+
+    g_ShowExtraImage_IntervalId = setInterval(TC_HideExtraImage, 10000);
+
+//    setTimeout(function(){TC_HideExtraImage();}, 10000); 
 }
 
 var g_GRBMS_SolvedImage_bActive = false;

@@ -16,8 +16,9 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswe
         setline('dataProblem.' + g_iClues + g_aClues.length + g_aAnswers.length + g_aAnswersPlayer.length + g_aAnswersStatusPlayer.length);
 }
 
-function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
+function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sDualClueLocations)
 {
+    g_sDualClueLocations = sDualClueLocations;
     g_iGridWidth = iGridWidth;
     g_iGridHeight = iGridHeight;
     g_sGridNumbering = sGridNumbering;

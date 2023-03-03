@@ -128,13 +128,17 @@ function GRBMS_touchMove(e)
                 }
                 if ( GRBMS_PickingAdjustment(iRow, iLetter, iLeftRelative, iTopRelative) )
                 {
-                    g_GRBMS_TM_Found_iRow = iRow;
-                    g_GRBMS_TM_Found_iLetter = iLetter;
-                    g_GRBMS_TM_Found_sId = GRBMS_MakeId(iRow, iLetter);
-                    GRBMS_ForRowLetter_SetButton(g_GRBMS_TM_Found_iRow, g_GRBMS_TM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
                     bFound = true;
-                    if ( g_GRBMS_bIndicateCorrectPlacements )
-                        TC_GRBMS_IndicatePickedLetterCorrectOrNot(g_GRBMS_TM_Picked_iRow, g_GRBMS_TM_Picked_iLetter, g_GRBMS_TM_Found_iRow, g_GRBMS_TM_Found_iLetter);
+                    let bCorrectDrop = TC_GRBMS_IsPickedLetterCorrectForFoundLocation(g_GRBMS_TM_Picked_iRow, g_GRBMS_TM_Picked_iLetter, iRow, iLetter);
+                    if ( !g_SG_AM_bSmartMovesOnly || bCorrectDrop )
+                    {
+                        g_GRBMS_TM_Found_iRow = iRow;
+                        g_GRBMS_TM_Found_iLetter = iLetter;
+                        g_GRBMS_TM_Found_sId = GRBMS_MakeId(iRow, iLetter);
+                        GRBMS_ForRowLetter_SetButton(g_GRBMS_TM_Found_iRow, g_GRBMS_TM_Found_iLetter, g_TC_cCodeMeaning_ActiveRow);
+                    }
+                    if ( g_SG_AM_bIndicateCorrectMoves )
+                        TC_GRBMS_IndicatePickedLetterCorrectOrNot(g_GRBMS_TM_Picked_iRow, g_GRBMS_TM_Picked_iLetter, iRow, iLetter);
 
                 }
             }

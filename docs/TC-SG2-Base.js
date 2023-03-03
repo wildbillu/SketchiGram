@@ -30,7 +30,7 @@ function SG2_LoadMainElements()
     sMain += MakeInfoDiv();
     sMain += MakeSettingsDiv();
     sMain += MakeMoreActionsDiv();    
-    sMain += SG_ActionMenu_MakeDiv()
+    if ( g_bActionMenuActive ) sMain += SG_ActionMenu_MakeDiv()
     sMain += '<DIV Id="Test" style="ForTest StartHidden"></DIV>';
     sMain += '<DIV Id="ScratchArea" class="ScratchArea StartHidden">SSSSSSWSSS</DIV>';
     sMain += '<DIV Id="ResultMessage_Div" class="ResultMessage_Div StartHidden"></DIV>';
@@ -106,7 +106,7 @@ function SG2_LoadAll(iSection)
             let iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
             var iKBRows = KB_Mini_Setup(iWidthGrid);
             SG2_Adjust_KBAndIntro(iKBRows);
-            TC_SetVisible("KB_Mini_Div");
+            if ( !g_bPuzzleSolved ) TC_SetVisible("KB_Mini_Div");
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 7:
@@ -125,6 +125,7 @@ function SG2_LoadAll(iSection)
             let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
             let rectStatusControlRight =  GetBoundingClientRectAbsolute(elemStatusControlRight);            
             TC_DisplayDualClue_Setup(iDisplayDualClueTop, g_TC_Padding_Left_iSize, rectStatusControlRight.left - 4 * g_TC_Padding_Left_iSize);
+            if ( g_bActionMenuActive ) SG_ActionMenu_SizeAndPosition();
 // scratch area 
             let iResultMessageTop = 75;
             TC_ResultMessage_Setup(iResultMessageTop);
@@ -165,23 +166,16 @@ function SG2_SetVisibles()
     let elemBody_Any = document.getElementById("Body_Any");
     elemBody_Any.className = 'Body_Any_AfterLoad'
     elemBody_Any.style.backgroundColor = 'white'
-//    elemBody_Any.style.visibility = 'hidden';
-//elemBody_Any.style.backgroundImage = 'url("images/InfoScreens/BlankBlueArea_SG2.jpg")'
-
     TC_SetVisible("Div_PuzzleType");
     TC_SetVisible("Div_PuzzleTitle");
     TC_SetVisible("Div_StatusControl_Right");
     TC_SetVisible("SG_HowToA_Div");
     TC_SetVisible("Div_Grid");
     TC_SetVisible("Div_Grid_Phantom");
-    TC_SetVisible("KB_Mini_Div");
+    if ( !g_bPuzzleSolved ) TC_SetVisible("KB_Mini_Div");
     TC_SetVisible("Div_BottomMatter");
     TC_SetVisible("Messages");
-//    TC_SetVisible("ScratchArea");
-//    TC_SetVisible("SG_AM_SmartMove");
-//    TC_SetVisible("SG_ActionMenu_Div");
-//    TC_SetVisible("MoreActions_Div");
-//    TC_SetVisible("ResultMessage_Div");
+    if ( g_bActionMenuActive ) SG_ActionMenu_SetVisible();
     TC_SetVisible("DifficultyLevel_Div");
     TC_SetVisible("DisplayDualClue_Div");
     TC_SetVisible("ElapsedTime_Div");

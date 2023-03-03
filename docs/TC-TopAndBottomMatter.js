@@ -152,7 +152,7 @@ function TC_SetBottomMatter()
     var iWidth = g_TC_iBiggestRight - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
     elemBottomMatter.style.width = MakePixelString(iWidth);
     elemBottomMatter.style.Left = MakePixelString(g_TC_Padding_Left_iSize);
-    elemBottomMatter.innerHTML = '&copy; 2022 Northeast by Southwest, Inc.&nbsp;&nbsp;';
+    elemBottomMatter.innerHTML = '&copy; 2023 Northeast by Southwest, Inc.&nbsp;&nbsp;';
     elemBottomMatter.innerHTML += TC_Archive_AddButtonOrExtraSpace();
     elemBottomMatter.innerHTML += '&nbsp;&nbsp;SketchiToons&reg; by Sketchi Bill';
     rectBottomMatter = elemBottomMatter.getBoundingClientRect();

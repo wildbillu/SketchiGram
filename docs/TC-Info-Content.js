@@ -21,15 +21,15 @@ function MakeInfoDiv()
     {
         sInfoContent += '<DIV Id="InfoDiv" class="Info_Div Info_DivBorder_Image Info_Image">'
         sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date">September 27, 2022</text></DIV>';
-        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version">October 10, 2022</text></DIV>';
+        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date">XXXX</text></DIV>';
+        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version">XXXX</text></DIV>';
     }
     else if ( g_bIsYourMove )
     {
         sInfoContent += '<DIV Id="InfoDiv" class="Info_Div Info_DivBorder_Image Info_Image_YM">'
         sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author_YM">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date_YM">September 27, 2022</text></DIV>';
-        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version_YM">October 10, 2022</text></DIV>';
+        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date_YM">XXXX</text></DIV>';
+        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version_YM">XXXX</text></DIV>';
 
     }
     else if ( g_bIsSketchiGramVariant1 )

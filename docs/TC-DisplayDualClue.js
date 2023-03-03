@@ -11,5 +11,5 @@ function TC_DisplayDualClue_Setup(iTop, iLeft, iWidth)
 
 function TC_DisplayDualClue()
 {
-    TC_ShowExtraImage()
+    TC_ShowExtraImage();
 }

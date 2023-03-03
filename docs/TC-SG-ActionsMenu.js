@@ -4,17 +4,84 @@ var g_SG_ActionMenu_bActive = false;
 var g_sCAB_ActionMenu_Click = '';
 var g_sGRB_ActionMenu_Click = '';
 var g_SG_ActionMenu_aIds = [];
+var g_SG_ActionMenu_aCheckBoxPrefixIds = [];
 
-var g_SG_ActionMenu_bSmartMovesOnly = true;
-var g_SG_ActionMenu_bSmartMovesOnly_Enabled = true;
+var g_SG_AM_bSmartMovesOnly = false;
+var g_SG_AM_bIndicateCorrectMoves = false;
+var g_SG_AM_bShowDualClueSquares  = false;
 
-function SG_AM_ShowSketchiToonsHint(){};
-function SG_AM_CorrectSelected(){};
-function SG_AM_RevealRandomSquare(){};
-function SG_AM_SolvePuzzle(){};
-function SG_AM_ShowScratchArea(){};
-function SG_AM_ShowDualClueSquares(){};
-function SG_AM_IndicateCorrectMoves(){};
+function GRB_ForRowLetter_IsDualClueSquare(iRow, iLetter)
+{
+    let bIs = false;
+    if ( g_sDualClueLocations.charAt(iRow*g_iGridWidth + iLetter) == 'Y' )
+        bIs = true;
+    return bIs;
+}
+
+
+function SG_ActionMenu_SetCheckBoxes()
+{
+    for ( let i = 0; i < g_SG_ActionMenu_aCheckBoxPrefixIds.length; i++ )
+    {   
+        let sId = g_SG_ActionMenu_aCheckBoxPrefixIds[i] + '_Button'
+        SG_ActionMenu_SetCheckBox(sId, false, true);
+    }
+}
+
+function SG_ActionMenu_SetVisible()
+{
+    TC_SetVisible("SG_ActionMenu_Div");
+    for ( let i = 0; i < g_SG_ActionMenu_aCheckBoxPrefixIds.length; i++ )
+    {   
+        TC_SetVisible(g_SG_ActionMenu_aCheckBoxPrefixIds[i] + '_Div')
+    }
+}
+
+function SG_AM_ShowDualClueSquares()
+{
+    g_SG_AM_bShowDualClueSquares = !g_SG_AM_bShowDualClueSquares;
+    SG_ActionMenu_SetCheckBox("SG_AM_ShowDualClueSquares_Button", g_SG_AM_bShowDualClueSquares, true);
+    GRBMS_SetAllButtons();
+}
+
+function SG_AM_SmartMove()
+{
+    g_SG_AM_bSmartMovesOnly = !g_SG_AM_bSmartMovesOnly;
+    g_SG_AM_bIndicateCorrectMoves = !g_SG_AM_bIndicateCorrectMoves;
+    SG_ActionMenu_SetCheckBox("SG_AM_SmartMove_Button", g_SG_AM_bSmartMovesOnly, true);
+}
+/*
+function SG_AM_IndicateCorrectMoves()
+{
+    g_SG_AM_bIndicateCorrectMoves = !g_SG_AM_bIndicateCorrectMoves;
+    SG_ActionMenu_SetCheckBox("SG_AM_IndicateCorrectMoves_Button", g_SG_AM_bIndicateCorrectMoves, true);
+}
+*/
+
+function SG_AM_ShowSketchiToonsHint()
+{
+    TC_DisplayDualClue();
+}
+
+function SG_AM_CorrectSelected()
+{
+}
+
+function SG_AM_RevealRandomSquare()
+{
+    SG_ShowExtraClue();
+}
+
+function SG_AM_SolvePuzzle()
+{
+    Dropdown_More_SolvePuzzle();
+}
+
+function SG_AM_ShowScratchArea()
+{
+    TC_SetVisible("ScratchArea");
+}
+
 function SG_ActionMenu_SetCheckBox(sId, bChecked, bEnabled)
 {
     var elemButton = document.getElementById(sId);
@@ -34,11 +101,10 @@ function SG_ActionMenu_SetCheckBox(sId, bChecked, bEnabled)
 
 function SG_ActionMenu_FixWidthsReturnHeight(iWidth)
 {
-    elemSmartMoveButton = document.getElementById("SG_AM_SmartMoveButton");
+    elemSmartMoveButton = document.getElementById("SG_AM_SmartMove_Button");
     elemSmartMoveButton.style.left = MakePixelString(20);
     elemSmartMoveButton.style.top = MakePixelString(0);
-    SG_ActionMenu_SetCheckBox("SG_AM_SmartMoveButton", g_SG_ActionMenu_bSmartMovesOnly);
-
+    SG_ActionMenu_SetCheckBoxes();
     var iTotalHeight = 0; 
     for ( var iItem = 0; iItem < g_SG_ActionMenu_aIds.length; iItem++ )
     {
@@ -50,22 +116,14 @@ function SG_ActionMenu_FixWidthsReturnHeight(iWidth)
     return iTotalHeight;
 }
 
-function SG_SmartMoves()
-{
-    if ( !g_SG_ActionMenu_bSmartMovesOnly_Enabled ) 
-        return;
-    g_SG_ActionMenu_bSmartMovesOnly = !g_SG_ActionMenu_bSmartMovesOnly;
-    SG_ActionMenu_SetCheckBox("SG_AM_SmartMoveButton", g_SG_ActionMenu_bSmartMovesOnly, g_SG_ActionMenu_bSmartMovesOnly_Enabled);
-}
+
 function SG_ActionMenu_ShowClues()
 {
-alert('show clues')
-SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
+    SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
 }
 
 function SG_ActionMenu_SolveAsCrossword()
 {
-    alert('SolveAsCrossword')
     for ( let i = 0; i < g_aAnswers.length; i++ )
     {  
         SG_Clues_ShowClue_ResetAnswer(i, true, false, true)
@@ -74,12 +132,38 @@ function SG_ActionMenu_SolveAsCrossword()
     SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
 }
 
+function SG_ActionMenu_MakeCheckBoxButton(sId_Prefix, sFunction, sText)
+{
+    let sInner = '';
+    sInner += '<DIV    Id="' + sId_Prefix + '_Div" class="SG_AM_SmartMove_Div">';
+    sInner += '<BUTTON Id="' + sId_Prefix + '_Button" class="SG_ActionMenu_Button_Size_20" onclick="' + sFunction + ';"></BUTTON>';
+    sInner += '</DIV>'
+    sInner += '<DIV class="SG_ActionMenuButton">' + sText + '</DIV>';
+    return sInner;
+}
 
 function SG_ActionMenu_MakeInner()
 {
-    var sActionMenu = ''
-    sActionMenu += '<DIV Id="SG_AM_SmartMove"             class="SG_AM_SmartMove_Div"><BUTTON class="SG_ActionMenu_Button_Size_20" Id="SG_AM_SmartMoveButton" onclick="SG_SmartMoves();"></BUTTON></DIV><DIV class="SG_ActionMenuButton">Smart Moves Only</DIV>';
-    g_SG_ActionMenu_aIds.push("SG_AM_SmartMove");
+    g_SG_ActionMenu_aIds.length = 0;
+    g_SG_ActionMenu_aCheckBoxPrefixIds.length;
+    let sActionMenu = ''
+// first the check box items    
+    let sA = ''
+    sA = SG_ActionMenu_MakeCheckBoxButton('SG_AM_SmartMove', 'SG_AM_SmartMove()', 'Smart Moves Only');
+    sActionMenu += sA;
+    g_SG_ActionMenu_aIds.push("SG_AM_SmartMove_Div");
+    g_SG_ActionMenu_aCheckBoxPrefixIds.push("SG_AM_SmartMove");
+/* this is combined into smart move
+    sA = SG_ActionMenu_MakeCheckBoxButton('SG_AM_IndicateCorrectMoves', 'SG_AM_IndicateCorrectMoves()', 'Indicate Correct Moves');
+    sActionMenu += sA;
+    g_SG_ActionMenu_aIds.push("SG_AM_IndicateCorrectMoves_Div");
+    g_SG_ActionMenu_aCheckBoxPrefixIds.push("SG_AM_IndicateCorrectMoves");
+*/
+    sA = SG_ActionMenu_MakeCheckBoxButton('SG_AM_ShowDualClueSquares', 'SG_AM_ShowDualClueSquares()', 'Show Dual Clue Squares');
+    sActionMenu += sA;
+    g_SG_ActionMenu_aIds.push("SG_AM_ShowDualClueSquares_Div");
+    g_SG_ActionMenu_aCheckBoxPrefixIds.push("SG_AM_ShowDualClueSquares");
+// now the just buttons
     sActionMenu += '<BUTTON Id="SG_AM_ShowClues"          class="SG_ActionMenuButton" onclick="SG_ActionMenu_ShowClues();">Show Clues</BUTTON>';
     g_SG_ActionMenu_aIds.push("SG_AM_ShowClues");
     sActionMenu += '<BUTTON Id="SG_AM_SolveAsCrossword"   class="SG_ActionMenuButton" onclick="SG_ActionMenu_SolveAsCrossword();">Solve As Crossword</BUTTON>';
@@ -94,10 +178,6 @@ function SG_ActionMenu_MakeInner()
     g_SG_ActionMenu_aIds.push("SG_AM_SolvePuzzle");
     sActionMenu += '<BUTTON Id="SG_AM_ShowScratchArea"    class="SG_ActionMenuButton" onclick="SG_AM_ShowScratchArea();">Show Scratch Area</BUTTON>';
     g_SG_ActionMenu_aIds.push("SG_AM_ShowScratchArea");
-    sActionMenu += '<BUTTON Id="SG_AM_ShowDualClueSquares"    class="SG_ActionMenuButton" onclick="SG_AM_ShowDualClueSquares();">Show Dual Clue Squares</BUTTON>';
-    g_SG_ActionMenu_aIds.push("SG_AM_ShowDualClueSquares");
-    sActionMenu += '<BUTTON Id="SG_AM_IndicateCorrectMoves"    class="SG_ActionMenuButton" onclick="SG_AM_IndicateCorrectMoves();">Indicate Correct Moves</BUTTON>';
-    g_SG_ActionMenu_aIds.push("SG_AM_IndicateCorrectMoves");
     return sActionMenu;
 }
 
@@ -135,6 +215,21 @@ function SG_Size_Answer(iRow)
     return sSize;
 }
 
+function SG_ActionMenu_SizeAndPosition()
+{
+    let elemTop = document.getElementById("DisplayDualClue_Div")
+    let rectTop = GetBoundingClientRectAbsolute(elemTop);
+    var iTop = rectTop.bottom;
+    var iLeft = 10;
+    var iWidth = 200;
+    var elemActionMenuDiv = document.getElementById("SG_ActionMenu_Div")
+    elemActionMenuDiv.style.top = MakePixelString(iTop);
+    elemActionMenuDiv.style.left = MakePixelString(iLeft);
+    elemActionMenuDiv.style.width = MakePixelString(iWidth);
+    iTotalHeight = SG_ActionMenu_FixWidthsReturnHeight(iWidth);
+    elemActionMenuDiv.style.height = MakePixelString(iTotalHeight);
+    elemActionMenuDiv.style.zIndex = 2;
+}
 
 
 

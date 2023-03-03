@@ -32,8 +32,14 @@ window.onclick = function(event)
 			else { if ( g_TC_Archive_Menu_iActiveCount != 0 )TC_Archive_Activate();else g_TC_Archive_Menu_iActiveCount++;}
 		}
 	}
-	if ( g_GRBMS_ExtraImage_bActive && sTargetId.indexOf('ExtraImage') == -1 && sTargetId.indexOf('DisplayDualClue_Div') )
-		TC_HideExtraImage();
+	if ( g_GRBMS_ExtraImage_bActive )
+	{
+		let bHideExtraImage = true;
+		if ( sTargetId.indexOf('SG_AM_ShowSketchiToonsHint') != -1 ) bHideExtraImage = false;
+		if ( sTargetId.indexOf('DisplayDualClue_Div') != -1 )bHideExtraImage = false;
+		if ( sTargetId.indexOf('ExtraImage') != -1 ) bHideExtraImage = true;
+		if ( bHideExtraImage ) TC_HideExtraImage();
+	}
 	if ( g_GRBMS_SolvedImage_bActive )
 	{
 		if ( sTargetId.indexOf('SolvedImage') == -1 &&

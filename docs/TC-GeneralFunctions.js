@@ -112,7 +112,6 @@ function GetWidthToHeightRatioOfImages()
     return GetWidthToHeightRatioOfImageWithId('ExtraImage');
 }
 
-
 function GetComputedStyleProperty(elem, sProperty)
 {
     var cssObj = window.getComputedStyle(elem, null);

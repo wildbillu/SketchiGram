@@ -9,7 +9,7 @@ var g_sPuzzleDate = '';
 var g_sPuzzleName = ''; // not used
 var g_sPuzzleTitle = '';
 var g_sPuzzleCreditAuthor = 'By Sketchi Bill';
-var g_sPuzzleCreditDate = 'September 26, 2022';
+var g_sPuzzleCreditDate = 'March 1, 2023';
 var g_bDisplayMessages = true;
 
 //
@@ -44,10 +44,10 @@ var g_sToDisplay = '';
 
 var g_sStatusButtonName_BlackSquare  = 'Button_BlackSquare.png';
 var g_sStatusButtonName_Frame        = 'Button_Frame.png';
-//var g_sStatusButtonName_Frame        = 'Button_RoundedFrame.png';
-//var g_sStatusButtonName_Frame        = 'Button_SquarePlusRoundedFrame.png';
-//var g_sStatusButtonName_Frame        = 'Button_SquarePlusRoundedFrameNoTopLeft.png';
-//var g_sStatusButtonName_Frame        = 'Button_Everything-600.png';
+//var g_sStatusButtonName_Frame_Rounded        = 'Button_RoundedFrame.png';
+var g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares      = 'Button_SquarePlusRoundedFrame.png';
+var g_sStatusButtonName_Frame_Rounded_ForNumberSquares        = 'Button_SquarePlusRoundedFrameNoTopLeft.png';
+//var g_sStatusButtonName_Frame_Rounded        = 'Button_Everything-600.png';
 
 var g_sStatusButtonName_Empty        = 'Button_Empty.png';
 var g_sStatusButtonName_Focus        = 'Button_AbvocabMagenta_Transparent32.png';
