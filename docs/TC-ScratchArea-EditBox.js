@@ -209,8 +209,8 @@ function TC_SA_EB_Focus(elemInputText)
         sValue = TC_SA_EB_InsertCursorAt(sValue)
         elemInputText.innerHTML = sValue;
     }
-    KB_Mini_SpecialButtonEnable(true);
-    KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_ActiveWords)
+    KB_SpecialButtonEnable(true);
+    KB_SetUsageMode(g_KB_Mini_sUsageMode_ActiveWords)
 //
     GRBMS_LoseCurrentFocus();
 }
@@ -219,11 +219,11 @@ function TC_SA_EB_LoseTheFocusAndCleanup(bCheck)
 { // we are going to wait until another focus is selected before doing things on lost focus
     if ( g_SA_EB_Focus_sId != '' && bCheck )
     {
-        KB_Mini_SpecialButtonEnable(false);
+        KB_SpecialButtonEnable(false);
         TC_SA_EB_LoseFocus();
     }
     g_SA_EB_Focus_sId = '';
-    KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
+    KB_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
 
 }
 

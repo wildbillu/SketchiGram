@@ -79,9 +79,9 @@ function TC_SetTopMatter()
     else if ( g_bIsYourMove )
         elemPuzzleType.innerHTML = 'It\'s Your Move Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
     else if ( g_bIsSketchiGramVariant1 )
-        elemPuzzleType.innerHTML = 'Sketchi-Gram Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
+        elemPuzzleType.innerHTML = 'SketchiGram Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
     else if ( g_bIsSketchiGramVariant2 )
-        elemPuzzleType.innerHTML = 'Sketchi-Gram&trade; Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
+        elemPuzzleType.innerHTML = 'SketchiGram&trade; Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
     let rectType = GetBoundingClientRectAbsolute(elemPuzzleType);
     g_TC_iBiggestBottom += rectType.height;
 // now we can adjust the position of the status row
@@ -99,7 +99,11 @@ function TC_SetTopMatter()
     {
         elemPuzzleTitle.style.top = MakePixelString(g_TC_iBiggestBottom);
         elemPuzzleTitle.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-        elemPuzzleTitle.style.width = MakePixelString(rectControlRight.left - g_TC_Padding_Left_iSize);
+
+        if ( g_bSettingsActive )
+            elemPuzzleTitle.style.width = MakePixelString(rectControlRight.left - g_TC_Padding_Left_iSize);
+        else
+            elemPuzzleTitle.style.width = MakePixelString(g_TC_iBiggestRight);
     }
     g_TC_iBiggestBottom += rectControlRight.height;
 //

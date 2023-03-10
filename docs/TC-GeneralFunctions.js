@@ -1,27 +1,6 @@
 // TC-GeneralFunctions
 // 
 // to detect window back forth...
-/*
-function handleBackFunctionality() {
-    if (window.event) {
-        if (window.event.clientX < 40 && window.event.clientY < 0) {
-            alert("Clicked - Browser back button.");
-        }
-        else {
-            alert("Clicked - Browser refresh button.");
-        }
-    }
-    else {
-        if (event.currentTarget.performance.navigation.type == 2) {
-            alert("Clicked - Browser refresh button.");
-        }
-        else if (event.currentTarget.performance.navigation.type == 1) {
-            alert("Clicked - Browser back button.");
-        }
-    }
-}
-window.onbeforeunload = handleBackFunctionality;
-*/
 
 function openFullscreen() 
 {

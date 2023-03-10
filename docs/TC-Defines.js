@@ -47,6 +47,9 @@ var g_sStatusButtonName_Frame        = 'Button_Frame.png';
 //var g_sStatusButtonName_Frame_Rounded        = 'Button_RoundedFrame.png';
 var g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares      = 'Button_SquarePlusRoundedFrame.png';
 var g_sStatusButtonName_Frame_Rounded_ForNumberSquares        = 'Button_SquarePlusRoundedFrameNoTopLeft.png';
+var g_sStatusButtonName_Frame_DoubleRounded_ForNoNumberSquares = 'Button_SquarePlusDualRoundedFrame.png';
+var g_sStatusButtonName_Frame_DoubleRounded_ForNumberSquares = 'Button_SquarePlusDualRoundedFrameNoTopLeft.png';
+
 //var g_sStatusButtonName_Frame_Rounded        = 'Button_Everything-600.png';
 
 var g_sStatusButtonName_Empty        = 'Button_Empty.png';
@@ -56,7 +59,8 @@ var g_sStatusButtonName_BeingMoved   = 'Button-BlueArrow-Border-6px.png';
 //var g_sStatusButtonName_BeingMoved   = 'Button_BeingMoved.png';
 
 
-var g_sStatusButtonName_Inactive     = 'Button_White.png';
+//var g_sStatusButtonName_Inactive     = 'Button_White.png';
+var g_sStatusButtonName_Inactive     = 'Button_Clear.png';
 var g_sStatusButtonName_ActiveRow    = 'Button_AbvocabBlue_Transparent64.png';
 var g_sStatusButtonName_GoldenSquare = 'Button_Golden.png';
 var g_sStatusButtonName_Corrected    = 'Button_Status_OrangeCorner.png';

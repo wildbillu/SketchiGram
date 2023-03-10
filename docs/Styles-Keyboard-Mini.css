@@ -53,10 +53,10 @@
     background-color: white;
     caret-color: transparent;
 }
-
-.KB_Mini_ButtonLetter 
+/* was 46px */
+.KB_Mini_ButtonLetter
 {
-    width:46px;
+    width:38px;
     font-size:28px;
     color:#222222;
     background-color:#DDDDDD;
@@ -64,8 +64,24 @@
 
 .KB_Mini_ButtonLetter_Disabled
 {
-    width:46px;
+    width:38px;
     font-size:28px;
+    color:#777777;
+    background-color:#AAAAAA;
+}
+
+.KB_Mini_ButtonLetter_Narrow
+{
+    width:28px;
+    font-size:24px;
+    color:#222222;
+    background-color:#DDDDDD;
+}
+
+.KB_Mini_ButtonLetter_Disabled_Narrow
+{
+    width:28px;
+    font-size:24px;
     color:#777777;
     background-color:#AAAAAA;
 }

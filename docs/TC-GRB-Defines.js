@@ -20,6 +20,8 @@ var g_GR_aDownAnswersStartRow = [];
 var g_GR_aDownAnswersStartLetter = [];
 var g_GR_aDownAnswersClueNumber = [];
 
+var g_GR_sGridDualClueLocations = '';
+
 var g_sGridNumbering = '';
 var g_aGridNumbers = [];
 

@@ -28,7 +28,7 @@ function SG_SetVisibles()
 function SG_HowToText()
 {
     let sHowToText = ""
-    sHowToText += 'Rearrange the letters to solve the Sketchi-Gram. Click Square and Drag to position new position.';
+    sHowToText += 'Rearrange the letters to solve the SketchiGram. Click Square and Drag to position new position.';
     sHowToText += '\'Golden\' Squares are pre-set correct.';
     return sHowToText;
 }

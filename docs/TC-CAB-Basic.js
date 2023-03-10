@@ -11,6 +11,7 @@ function CAB_FocusLostSetActiveToInActive()
         CAB_ForRowWithFocus_SetAnswerBoxStyles();
     else if ( g_bIsYourMove )
         GRBMS_ForRowWithFocus_SetAnswerBoxStyles();
+    CAB_SetBackground(false)
 }
 
 function CAB_ForRow_SetToInactive(iRow)

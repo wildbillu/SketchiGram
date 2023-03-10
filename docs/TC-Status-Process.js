@@ -65,7 +65,7 @@ function Status_Check(bNonPlayerFixes)
     FeaturesDependingOnPuzzleSolved();
     StoreCookie_Puzzle();
     SG_Clues_ShowCorrect();
-    KB_Mini_DisableLettersFullyPlaced();
+    KB_DisableLettersFullyPlaced();
     SG_PositionClues();
     g_TC_Status_bFirstCheck = false;
 }

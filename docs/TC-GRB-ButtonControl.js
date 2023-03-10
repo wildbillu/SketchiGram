@@ -1,4 +1,14 @@
 // TC-GRB-ButtonControl.js
+
+function TC_AddWrappedUrlToString(sStarting, sNew, bSingle)
+{
+    let sFinal = sStarting;
+    if ( sStarting != '' )
+        sFinal += ', '
+    sFinal += MakeURLWrappedString(sNew, bSingle);
+    return sFinal;
+}
+
 function GRB_AddWrappedUrlToString(sStarting, sNew)
 {
     let sFinal = sStarting;
@@ -8,7 +18,7 @@ function GRB_AddWrappedUrlToString(sStarting, sNew)
     return sFinal;
 }
 
-function GRB_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivity, bIsDualClueSquare)
+function GRB_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivity, cDualClueCode)
 {
     var sStatusImage = '';
     if ( cLetter == g_TC_cCharacterDenotingBlackSquare )
@@ -27,18 +37,26 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivi
         sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetGridNumberImagePathAndName(sGridNumber));
         }
 // now we do the dual clue overlay if needed
-    if ( g_SG_AM_bShowDualClueSquares && bIsDualClueSquare )
+    if ( g_SG_AM_bShowDualClueSquares )
     {
-        let sRound = g_sImagePath_GridNumbersAndFrames + '/' + g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares
-        if ( iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
-            sRound = g_sImagePath_GridNumbersAndFrames + '/' + g_sStatusButtonName_Frame_Rounded_ForNumberSquares
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, sRound);
-
+        let sRound = '';
+        if ( cDualClueCode == g_TC_cCodeMeaning_DualClue_Single )
+        {
+            sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares
+            if ( iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
+                sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNumberSquares
+        }
+        else if ( cDualClueCode == g_TC_cCodeMeaning_DualClue_Double )
+        {
+            sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNoNumberSquares;
+            if ( iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
+                sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNumberSquares;
+        }
+        if ( sRound != '' ) sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, sRound);
     }
-
-    let cColor = g_sColorCodeForUnknownLetter;
+    let cColor = g_cColorCodeForUnknownLetter;
     if ( cStatus == g_TC_cCodeMeaning_Corrected || TC_CorrectOrGolden(cStatus) )
-        cColor =g_sColorCodeForCorrectLetter;
+        cColor = g_cColorCodeForCorrectLetter;
     if ( CharValidEntry(cLetter) )
     {
         sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetLetterImagePathAndName(cLetter, cColor));
@@ -62,8 +80,8 @@ function GRB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
     let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     let iGridNumber    = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
     var sId = '';
-    let bIsDualClueSquare = GRB_ForRowLetter_IsDualClueSquare(iRow, iLetter);
-    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity, bIsDualClueSquare)
+    let cDualClueCode = GRB_ForRowLetter_GetDualClueCode(iRow, iLetter);
+    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity, cDualClueCode)
     sId = GRB_MakeId(iRow, iLetter);
     var elemButton = document.getElementById(sId);
     if ( elemButton )

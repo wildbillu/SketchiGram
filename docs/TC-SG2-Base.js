@@ -3,7 +3,7 @@
 function SG_HowToText()
 {
     let sHowToText = ""
-    sHowToText += 'Rearrange letters to solve the Sketchi-Gram. Click Square (highlight magenta) and replace letter using keypad.';
+    sHowToText += 'Rearrange letters to solve the SketchiGram. Click Square (highlight magenta) and replace letter using keypad.';
     sHowToText += 'Or drag selected square to new location.';
     sHowToText += 'Pre-set \'Golden\' Squares and green letters are correct.';
     return sHowToText;
@@ -12,11 +12,15 @@ function SG_HowToText()
 function SG2_LoadMainElements()
 {
     var sMain = '';
+    sMain += '<DIV Id="GRBMS_Div_CAB_DualClue" class="GRBMS_Div_CAB_DualClue StartHidden">GRBMS_Div_CAB_DualClue</DIV>';    
+
     sMain += TC_Archive_MakeMenu();
     sMain += '<DIV Id="Div_PuzzleType" class="Div_PuzzleType StartHidden">Div_PuzzleType</DIV>';
     sMain += '<DIV Id="Div_StatusControl_Left" class="StatusControl_Div_Left StartHidden">Div_StatusControl_Left</DIV>';
     sMain += '<DIV Id="Div_StatusControl_Right" class="StatusControl_Div_Right StartHidden">Div_StatusControl_Right</DIV>';
     sMain += '<DIV Id="Div_PuzzleTitle" class="Div_PuzzleTitle StartHidden">Div_PuzzleTitle</DIV>';
+
+    
     sMain += '<DIV Id="SG_HowToA_Div" class="SG_HowToA_Div StartHidden">' + SG_HowToText() + '</DIV>';
     sMain += '<DIV Id="Div_Grid" class="Div_Grid StartHidden">Div_Grid</DIV>';
     sMain += '<DIV Id="Div_Grid_Phantom" class="Div_Grid_Phantom StartHidden">Div_Phantom_Grid</DIV>';
@@ -94,7 +98,9 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 4:
-            let iGap = 85;
+            let iGap = 105;
+            if ( !g_bResultMessageActive )
+                iGap = 0;
             SG2_Adjust_GridAndPhantomGridPosition(iGap);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
@@ -103,9 +109,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 6:
-            let iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
-            var iKBRows = KB_Mini_Setup(iWidthGrid);
-            SG2_Adjust_KBAndIntro(iKBRows);
+            KB_SetupAndAdjust();
             if ( !g_bPuzzleSolved ) TC_SetVisible("KB_Mini_Div");
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
@@ -133,8 +137,11 @@ function SG2_LoadAll(iSection)
             TC_AdjustSettings();
             if ( g_bSettings_ShowInfoOnStart )
                 TC_ShowInfo();
-            let iDifficultyLevelTop = 300;
-            TC_DifficultyLevel_Setup(iDifficultyLevelTop);            
+            if ( g_bDifficultyLevelActive )
+            {
+                let iDifficultyLevelTop = 300;
+                TC_DifficultyLevel_Setup(iDifficultyLevelTop);
+            }
             TC_SA_EB_Setup();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
@@ -148,11 +155,16 @@ function SG2_LoadAll(iSection)
 //interactive - Has loaded enough and the user can interact with it
 //complete - Fully loaded
             SG_Clues_ShowCorrect();
-            if ( g_Cookie_DifficultyLevel_iLevel > -1 )
-                TC_DifficultyLevel_ChangedWork(g_Cookie_DifficultyLevel_iLevel, true);
-            g_Cookie_DifficultyLevel_iLevel = -1;
-            TC_ElapsedTime_Setup(460, 75);
+            if ( g_bDifficultyLevelActive )
+            {
+                if ( g_Cookie_DifficultyLevel_iLevel > -1 )
+                    TC_DifficultyLevel_ChangedWork(g_Cookie_DifficultyLevel_iLevel, true);
+                g_Cookie_DifficultyLevel_iLevel = -1;
+            }
+            if ( g_bTimerActive ) TC_ElapsedTime_Setup(460, 75);
+            if ( g_bDualClueFrameActive ) GRBMS_MakeDualClue();
             SG2_SetVisibles();
+
 //            openFullscreen();
             break;
         default:
@@ -168,18 +180,18 @@ function SG2_SetVisibles()
     elemBody_Any.style.backgroundColor = 'white'
     TC_SetVisible("Div_PuzzleType");
     TC_SetVisible("Div_PuzzleTitle");
-    TC_SetVisible("Div_StatusControl_Right");
-    TC_SetVisible("SG_HowToA_Div");
     TC_SetVisible("Div_Grid");
     TC_SetVisible("Div_Grid_Phantom");
     if ( !g_bPuzzleSolved ) TC_SetVisible("KB_Mini_Div");
     TC_SetVisible("Div_BottomMatter");
-    TC_SetVisible("Messages");
+    if ( g_bMessageVisible ) TC_SetVisible("Messages");
     if ( g_bActionMenuActive ) SG_ActionMenu_SetVisible();
-    TC_SetVisible("DifficultyLevel_Div");
-    TC_SetVisible("DisplayDualClue_Div");
-    TC_SetVisible("ElapsedTime_Div");
-    if ( !g_SG2_CAB_bVisible )
-        TC_SetVisible("Div_Grid_Image");
+    if ( g_bDifficultyLevelActive) TC_SetVisible("DifficultyLevel_Div");
+    if ( g_bHowToActive ) TC_SetVisible("SG_HowToA_Div");
+    if ( g_bShowDualClueActive ) TC_SetVisible("DisplayDualClue_Div");
+    if ( g_bTimerActive )TC_SetVisible("ElapsedTime_Div");
+    if ( g_bSettingsActive ) TC_SetVisible("Div_StatusControl_Right");
+    if ( !g_SG2_CAB_bVisible ) TC_SetVisible("Div_Grid_Image");
+    if ( g_bDualClueAnswerBoxesActive ) TC_SetVisible("GRBMS_Div_CAB_DualClue");
 }
 

@@ -1,5 +1,10 @@
 // TC-GR-Helpers-Answers-Status.js
 
+function GRB_ForRowLetter_GetDualClueCode(iRow, iLetter)
+{
+    return g_GR_sGridDualClueLocations.charAt(iRow*g_iGridWidth + iLetter);
+}
+
 function GRB_ForRow_GetAnswerLength(iRow)
 {
     return g_GR_aAcrossAnswers[iRow].length;

@@ -88,8 +88,10 @@
     <SCRIPT SRC="TC-DisplayDualClue.js"></SCRIPT>
 
     <SCRIPT SRC="TC-Keyboard-Mini.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard-AllGridChars.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard-Dispatch.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
-
+    
     <SCRIPT SRC="TC-YourMove-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-TwistiCross-Base.js"></SCRIPT>
 
@@ -164,22 +166,103 @@ function TC_LoadPuzzleArchive()
     TC_Archive_AddPuzzleToArchive('puzzle020', 'Expert Gamer')
     TC_Archive_AddPuzzleToArchive('puzzle022', 'Famous Dire Straits Song')
     TC_Archive_AddPuzzleToArchive('puzzle021', 'Store in Quaint New England')
-//    TC_Archive_AddPuzzleToArchive('puzzle017', 'Seedy Neighborhood')
+//    TC_Archive_AddPuzzleToArchive('puzzle023', 'John Prine Sings To Her')
+    TC_Archive_AddPuzzleToArchive('puzzle017', 'Seedy Neighborhood')
     TC_Archive_AddPuzzleToArchive('puzzle018', 'Fried Southern Treat')
 /*
-    TC_Archive_AddPuzzleToArchive('puzzle023', '023')
     TC_Archive_AddPuzzleToArchive('puzzle024', '024')
 */
 }
+let g_KB_Buttons_Narrow = true;
+let g_KB_Active_Mini = false;
+let g_KB_Active_bAllGridChars = true;
+let g_KB_sWidthDeterminedBy =  'BiggestRight';//'Grid'; //
+let g_KB_fFractionAvailableWidth = 1.00; // 
+let g_KB_sJustification = 'center'; // 'right' // 'grid'
+let g_Grid_fFractionAvailableWidth = 0.80;
+let g_Grid_sJustification = 'right';//'center'
+let g_bDifficultyLevelActive = false;
+let g_bHowToActive = true;
+let g_bSuppressNonGolden = false;
+let g_bTimerActive = true;
+let g_bResultMessageActive = true;
+let g_bSettingsActive = true;
+let g_bShowDualClueActive = true;
 let g_bActionMenuActive = false;
-let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle018';
-var g_sPuzzleNumber          = 'puzzle000'
-var g_sPuzzleType            = 'SG2'
+let g_bDualClueAnswerBoxesActive = true;
+let g_bDualClueFrameActive = true; 
+let g_bMessageVisible = true; 
+let g_SG_AM_bShowDualClueSquares  = false;
 
+function setNew()
+{
+    g_KB_Buttons_Narrow = true;
+    g_KB_Active_Mini = false;
+    g_KB_Active_bAllGridChars = true;
+    g_KB_sWidthDeterminedBy =  'BiggestRight';//'Grid'; //
+    g_KB_fFractionAvailableWidth = 1.00; // 
+    g_KB_sJustification = 'center'; // 'right' // 'grid'
+    g_Grid_fFractionAvailableWidth = 0.80;
+    g_Grid_sJustification = 'right';//'center'
+    g_bDifficultyLevelActive = false;
+    g_bHowToActive = true;
+    g_bSuppressNonGolden = false;
+    g_bTimerActive = true;
+    g_bResultMessageActive = true;
+    g_bSettingsActive = true;
+    g_bShowDualClueActive = true;
+    g_bActionMenuActive = false;
+    g_bDualClueAnswerBoxesActive = true;
+    g_bDualClueFrameActive = true; 
+    g_bMessageVisible = true; 
+    g_SG_AM_bShowDualClueSquares  = false;
+}
+function setOld()
+{
+    g_KB_Buttons_Narrow = true;
+    g_KB_Active_Mini = false;
+    g_KB_Active_bAllGridChars = true;
+    g_KB_sWidthDeterminedBy =  'Grid'; 
+    g_KB_fFractionAvailableWidth = 1.00;
+    g_KB_sJustification = 'grid';
+    g_Grid_fFractionAvailableWidth = 0.80;
+    g_Grid_sJustification = 'center'
+    g_bDifficultyLevelActive = true;
+    g_bHowToActive = true;
+    g_bSuppressNonGolden = false;
+    g_bTimerActive = true;
+    g_bResultMessageActive = true;
+    g_bSettingsActive = true;
+    g_bShowDualClueActive = true;
+    g_bActionMenuActive = false;
+    g_bDualClueAnswerBoxesActive = false;
+    g_bDualClueFrameActive = false; 
+    g_bMessageVisible = true; 
+    g_SG_AM_bShowDualClueSquares  = false;
+}
+
+let g_bPrintedFormat = false;
+if ( g_bPrintedFormat )
+{
+    g_bSuppressNonGolden = true;
+    g_bSuppressGridInstructions = true;
+    g_bDifficultyLevelActive = false;
+    g_bHowToActive = false;
+    g_bActionMenuActive = false;
+    g_bTimerActive = false;
+    g_bResultMessageActive = false;
+    g_bSettingsActive = false;
+    g_bShowDualClueActive = false;
+    g_SG_AM_bShowDualClueSquares = true;
+}
+
+let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle017';
+let g_sPuzzleNumber          = 'puzzle000'
+let g_sPuzzleType            = 'SG2'
 
 function Dispatch() 
 {// these are also features
-
+    setOld();
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.050';
 //    g_Place_bDirectPlaceSupport = false;
 //    g_Place_bPopupPlaceSupport = true;

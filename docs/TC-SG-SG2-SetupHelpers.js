@@ -66,26 +66,6 @@ function TC_MoveTopAndAdjustBiggestBottom(sId, iTop)
     return rectHeight;
 }
 
-function SG_ActionMenu_SizeAndPosition()
-{
-    TC_LoadGridImage()      
-    let elemGridImageDiv = document.getElementById("Div_Grid_Image");
-elemGridImageDiv.style.visibility = 'visible'
-    let elemGridImageItself = document.getElementById("Grid_Image_Itself");
-  
-
-    var rectGridImageDiv = elemGridImageDiv.getBoundingClientRect();
-    var iTop = rectGridImageDiv.bottom + g_TC_Padding_Inter_Vertical_iSize;
-    var iLeft = rectGridImageDiv.left;
-    var iWidth = rectGridImageDiv.width;
-    var elemActionMenuDiv = document.getElementById("SG_ActionMenu_Div")
-    elemActionMenuDiv.style.top = MakePixelString(iTop);
-    elemActionMenuDiv.style.left = MakePixelString(iLeft);
-    elemActionMenuDiv.style.width = MakePixelString(iWidth);
-    iTotalHeight = SG_ActionMenu_FixWidthsReturnHeight(iWidth);
-    elemActionMenuDiv.style.height = MakePixelString(iTotalHeight);
-}
-
 function SG_AdjustGridImage()
 {
     var elemGridDiv = document.getElementById("Div_Grid");
@@ -132,12 +112,13 @@ function SG_LoadGridImage()
 function SG_Adjust_KBAndIntro(iKBRows)
 {
     var iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
-    //
+//
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
     var elem_KB = document.getElementById('KB_Mini_Div');
     elem_KB.style.top = MakePixelString(g_TC_iBiggestBottom);
     elem_KB.style.width = MakePixelString(iWidthGrid);
     elem_KB.style.left = MakePixelString(g_TC_Padding_Left_iSize);
+
     var elemButtonDiv = document.getElementById("KB_Mini_ButtonRow_Div");
     elemButtonDiv.style.width = MakePixelString(iWidthGrid);
     var elemInstructionsDiv = document.getElementById("KB_Mini_Instructions_Div");
@@ -147,6 +128,8 @@ function SG_Adjust_KBAndIntro(iKBRows)
     var rect_KB = elem_KB.getBoundingClientRect();
     g_TC_iBiggestBottom += rect_KB.height;
 }
+
+
 
 function SG_Adjust_GridAndPhantomGridPosition()
 {
@@ -171,8 +154,7 @@ function SG_SetSizes()
 // decide on button size based upon grid size
 // looking for the grid to be around 200
 // our choices are 40, 50, 60 
-// allow grid to be 75% of width
-    var iMaxGridWidth = 0.75 * g_TC_iBiggestRight;
+    var iMaxGridWidth = g_Grid_fFractionAvailableWidth * g_TC_iBiggestRight;
     var iButtonSize = Math.round(iMaxGridWidth/g_iGridWidth);
 //
     g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_40 TC_Button_Square_Absolute';

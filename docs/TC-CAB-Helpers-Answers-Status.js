@@ -1,5 +1,20 @@
 // TC-CAB-Helpers-Answers-Status.js
 
+function CAB_ForRowLetter_GetDualClueCode(iRow, iLetter)
+{
+    if ( g_aAnswersDualClueLocations.length == 0 )
+        return g_TC_cCodeMeaning_DualClue_None;
+    let sDualClueCodes = g_aAnswersDualClueLocations[iRow];
+    return sDualClueCodes.charAt(iLetter);
+}
+function CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)
+{
+    var sAnswerPlayer = g_aAnswersPlayer[iRow];
+    var cAnswerPlayer = sAnswerPlayer.charAt(iLetter)
+    var bValid = CharValidEntry(cAnswerPlayer);
+    return bValid
+}
+
 function CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)
 {
     var sAnswerPlayer = g_aAnswersPlayer[iRow];

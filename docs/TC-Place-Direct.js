@@ -230,7 +230,8 @@ function TC_Place_Direct_MakeButtons(sWordToPlace, bAcross)
     {
         var sThisButton = ''
         var cLetter = sWordToPlace.charAt(iL);
-        var sBackgroundImage = CAB_ButtonBackgroundImage(cLetter,  g_TC_cCodeMeaning_Normal, 'X');
+        let cDualClueCode = g_TC_cCodeMeaning_DualClue_None;
+        var sBackgroundImage = CAB_ButtonBackgroundImage(cLetter,  g_TC_cCodeMeaning_Normal, 'X', cDualClueCode);
         var sButtonClass = g_GRB_Square_sClass;
         if ( g_bIsYourMove )
             sButtonClass = g_GRBMS_Square_sClass;

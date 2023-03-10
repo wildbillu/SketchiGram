@@ -8,15 +8,9 @@ var g_SG_ActionMenu_aCheckBoxPrefixIds = [];
 
 var g_SG_AM_bSmartMovesOnly = false;
 var g_SG_AM_bIndicateCorrectMoves = false;
-var g_SG_AM_bShowDualClueSquares  = false;
 
-function GRB_ForRowLetter_IsDualClueSquare(iRow, iLetter)
-{
-    let bIs = false;
-    if ( g_sDualClueLocations.charAt(iRow*g_iGridWidth + iLetter) == 'Y' )
-        bIs = true;
-    return bIs;
-}
+
+
 
 
 function SG_ActionMenu_SetCheckBoxes()

@@ -79,6 +79,8 @@ var iGridHeight = 4;
 var sGridAnswers = '';
 var sGridNumbering = '';
 var g_bUsedCookie = false;
+var sGridDualClueLocations = '';
+var sAnswersDualClueLocations = '';
 
 function TC_UseFileContents()
 {   // now we need to figure out whether to use any cookie settings
@@ -87,8 +89,8 @@ function TC_UseFileContents()
     if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
     { 
         CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, 
-            g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus);
-        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering);
+            g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus, sAnswersDualClueLocations);
+        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering, sGridDualClueLocations);
         g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
         g_bGridSolved = g_Cookie_bGridSolved;
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
@@ -97,8 +99,8 @@ function TC_UseFileContents()
     }
     if ( !g_bUsedCookie )
     {
-        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus)
-        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering)
+        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus, sAnswersDualClueLocations)
+        GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridDualClueLocations)
         g_ElapsedTime_iSecondsPrevious = 0;
     }
     //    setline(sFilename + '.Updated:' + iUpdated + ';');
@@ -130,6 +132,8 @@ function TC_ProcessFileContents(sFileContents)
         else if ( sLine.startsWith('sAnswerLocations=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswerLocations = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('SA_EB_sWords=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){SA_EB_sWords = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('SA_EB_sWordStatus=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){SA_EB_sWordStatus = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sGridDualClueLocations=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridDualClueLocations = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sAnswersDualClueLocations=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswersDualClueLocations = aEntries[1]; iUpdated++;}}
 // these we set directly
         else if ( sLine.startsWith('sPuzzleDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleDate = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sPuzzleName=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleName = aEntries[1]; iUpdated++;}}

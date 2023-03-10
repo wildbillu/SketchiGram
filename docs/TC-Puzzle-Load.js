@@ -1,7 +1,8 @@
 // TC-Puzzle-Load.js
 
-function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus)
+function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus, sAnswersDualClueLocations)
 {
+    g_aAnswersDualClueLocations = sAnswersDualClueLocations.split(g_TC_cGeneralDelimiter);
     g_aClues   = sClues.split(g_TC_cGeneralDelimiter);
     g_iClues   = g_aClues.length;
     g_aAnswers = sAnswers.split(g_TC_cGeneralDelimiter);
@@ -16,9 +17,9 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswe
         setline('dataProblem.' + g_iClues + g_aClues.length + g_aAnswers.length + g_aAnswersPlayer.length + g_aAnswersStatusPlayer.length);
 }
 
-function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sDualClueLocations)
+function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridDualClueLocations)
 {
-    g_sDualClueLocations = sDualClueLocations;
+    g_GR_sGridDualClueLocations = sGridDualClueLocations;
     g_iGridWidth = iGridWidth;
     g_iGridHeight = iGridHeight;
     g_sGridNumbering = sGridNumbering;

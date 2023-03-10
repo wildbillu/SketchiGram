@@ -26,7 +26,11 @@ function CAB_ForRowWithFocus_SetAnswerBoxStyles()
 
 function CAB_MoveFocus(iNewRow, iNewLetter)
 {
-    if ( iNewRow > g_iClues -1 || iNewRow < 0 )
+// fix for only dual clue
+//    if ( iNewRow > g_iClues -1 || iNewRow < 0 )
+    if ( iNewRow > 1 )
+        iNewRow = 0;
+    if ( iNewRow == -1 )
         iNewRow = 0;
     var sNextBox = CAB_MakeId(iNewRow, iNewLetter);
 	document.getElementById(sNextBox).focus();
@@ -182,7 +186,21 @@ function CAB_onfocus(elem)
         CAB_ForRowWithFocus_SetAnswerBoxStyles();
     else if ( g_bIsYourMove )
         GRBMS_ForRowWithFocus_SetAnswerBoxStyles();
-
+    if ( g_GRBMS_Focus_sId != '')
+        GRBMS_LoseCurrentFocus();
+    KB_SetUsageMode(g_KB_Mini_sUsageMode_DualClue);
+// set background color to blue
+    CAB_SetBackground(true);
     return true;
 }
+
+function CAB_SetBackground(bActive)
+{
+    let elemFrame = document.getElementById("GRBMS_Div_CAB_DualClue");
+    if ( bActive )
+        elemFrame.style.backgroundColor = g_Color_sAbvocabBlue;
+    else
+        elemFrame.style.backgroundColor = 'white';
+}
+
 

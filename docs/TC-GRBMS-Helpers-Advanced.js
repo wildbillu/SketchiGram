@@ -16,7 +16,7 @@ function GRBMS_ForRowLetter_SetButton_Phantom(iRow, iLetter, cCodeForActivity)
     var sId = '';
     var sId = GRBMS_Phantom_MakeId(iRow, iLetter)
     var elem = document.getElementById(sId);
-    elem.style.backgroundImage = GRB_ButtonBackgroundImage(g_TC_cCharMeaningNotSet, g_TC_cCodeMeaning_Normal, 0, g_TC_cCodeMeaning_Inactive);
+    elem.style.backgroundImage = GRB_ButtonBackgroundImage(g_TC_cCharMeaningNotSet, g_TC_cCodeMeaning_Normal, 0, g_TC_cCodeMeaning_Inactive, g_TC_cCodeMeaning_DualClue_None);
     elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
     elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
 }
@@ -79,7 +79,7 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     }
     GRBMS_ForRowLetter_SetButton(A_iRow, A_iLetter, g_TC_cCodeMeaning_Inactive);
     GRBMS_ForRowLetter_SetButton(B_iRow, B_iLetter, g_TC_cCodeMeaning_Inactive);
-// need to make sure cannot change anything
+    KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter);
 }
 
 function GRBMS_MakeGrid()
@@ -174,9 +174,9 @@ function GRBMS_SetAllowedGridLetters()
 
 function GRBMS_SetAllButtons()
 {
-    for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
+    for ( let iRow = 0; iRow < g_iGridHeight; iRow++)
     {
-        for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
         {
             GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_Inactive)
         }
@@ -185,11 +185,16 @@ function GRBMS_SetAllButtons()
 
 function GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
 {
-    var cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-    var cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    let cDualClueCode = GRB_ForRowLetter_GetDualClueCode(iRow, iLetter)
+    let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+    let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+
+    if ( g_bSuppressNonGolden && cStatusPlayer != 'G' && cAnswerPlayer != g_TC_cCharacterDenotingBlackSquare )
+        cAnswerPlayer = ' ';
+
     let iGridNumber = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
     var sId = '';
-    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity);
+    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity, cDualClueCode);
     var sId = GRBMS_MakeId(iRow, iLetter)
     var elem = document.getElementById(sId);
     elem.style.backgroundImage = sStatusImage;

@@ -5,13 +5,19 @@ function GRBMS_MakeDualClue()
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;    
     elemCAB_DualClue = document.getElementById("GRBMS_Div_CAB_DualClue");
     elemCAB_DualClue.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-    elemCAB_DualClue.style.top = MakePixelString(g_TC_iBiggestBottom);
+    let iTop = g_TC_iBiggestBottom;
+    if ( !g_bIsTwistiCross && !g_bIsYourMove )
+        iTop = 100;
+    elemCAB_DualClue.style.top = MakePixelString(iTop);
     var iWidthClueAnswer = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     elemCAB_DualClue.style.width = MakePixelString(iWidthClueAnswer);
     var iAccumulated = g_TC_Padding_Top_iSize;
 // now we add 3 rows (of DIV)
-    var sDualRow = '';
-    sDualRow += '<DIV Id="CA01CI" class="CAB_Row_DualClue_Small CA_Color_InActive">' + g_ST_sClue_Intro + '</DIV>'
+    let sDualRow = '';
+    if ( g_bIsTwistiCross || g_bIsYourMove )
+    {    
+        sDualRow += '<DIV Id="CA01CI" class="CAB_Row_DualClue_Small CA_Color_InActive">' + g_ST_sClue_Intro + '</DIV>'
+    }
     sDualRow += '<DIV Id="CA01C" class="CAB_Row_DualClue CA_Color_InActive">' + g_ST_sClue_Itself + '</DIV>'
 // we need to adjust the height of the dual clue depending on the size of the buttons
     // now we need to make the dual clue
@@ -43,9 +49,12 @@ function GRBMS_MakeDualClue()
 //
     var elemIntro = document.getElementById("CA01CI");
     iAccumulated += 20;
-    elemIntro.style.top = MakePixelString(iAccumulated);
+    if ( g_bIsTwistiCross || g_bIsYourMove )
+    {
+        elemIntro.style.top = MakePixelString(iAccumulated);
+        iAccumulated += 20;
+    }
     var elemClue = document.getElementById("CA01C");
-    iAccumulated += 20;
     elemClue.style.top = MakePixelString(iAccumulated);
     elemClue.style.left = MakePixelString(100);
     iAccumulated += 30;

@@ -4,6 +4,10 @@ var g_TC_cCodeMeaning_ActiveRow = 'A';
 var g_TC_cCodeMeaning_Inactive  = 'I';
 var g_TC_cCodeMeaning_HasFocusBeingMoved  = 'M';
 
+var g_TC_cCodeMeaning_DualClue_None = 'N';
+var g_TC_cCodeMeaning_DualClue_Single = 'S';
+var g_TC_cCodeMeaning_DualClue_Double = 'D';
+
 var g_TC_cCodeMeaning_Normal                = 'N'; // 
 var g_TC_cCodeMeaning_Incorrect             = 'I';
 var g_TC_cCodeMeaning_IncorrectWithOverride = 'O';
@@ -11,8 +15,8 @@ var g_TC_cCodeMeaning_Corrected             = 'S';
 var g_TC_cCodeMeaning_Correct               = 'C';
 var g_TC_cCodeMeaning_Golden                = 'G';
 
-var g_sColorCodeForCorrectLetter = 'G';
-var g_sColorCodeForUnknownLetter = 'N';
+var g_cColorCodeForCorrectLetter = 'G';
+var g_cColorCodeForUnknownLetter = 'N';
 
 var g_TC_cCharacterDenotingBlackSquare      = '.';
 var g_TC_cCharacterDenotingNoNumberSquare   = '.';

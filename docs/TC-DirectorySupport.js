@@ -88,7 +88,7 @@ function TC_GetStatusImagePathAndName(cSelection)
     var sStatusImage = g_sImagePath_StatusIndicators;
     if ( cSelection == g_TC_cCodeMeaning_HasFocus || cSelection == g_TC_cCodeMeaning_HasFocusBeingMoved )
         sStatusImage += g_sStatusButtonName_Focus;
-    else if ( cSelection == g_TC_cCodeMeaning_ActiveRow)
+    else if ( cSelection == g_TC_cCodeMeaning_ActiveRow )
         sStatusImage += g_sStatusButtonName_ActiveRow;
     else
         sStatusImage += g_sStatusButtonName_Inactive;

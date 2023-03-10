@@ -4,8 +4,31 @@
 var g_KB_Mini_sUsageMode_Idle = 'Idle';
 var g_KB_Mini_sUsageMode_ActiveGrid = 'Active_Grid';
 var g_KB_Mini_sUsageMode_ActiveWords = 'Active_Words';
+var g_KB_Mini_sUsageMode_DualClue = 'DualClue';
 var g_KB_Mini_sUsageMode = g_KB_Mini_sUsageMode_Idle;
 var g_KB_Mini_bBackspaceEnabled = false;
+
+function KB_Mini_Adjust(iKBRows)
+{
+    let elemGrid = document.getElementById('Div_Grid');
+    let rectGrid = GetBoundingClientRectAbsolute(elemGrid)
+    let iKBWidth = rectGrid.width - 2; // account for border?
+//
+    g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
+    var elem_KB = document.getElementById('KB_Mini_Div');
+    elem_KB.style.top = MakePixelString(g_TC_iBiggestBottom);
+    elem_KB.style.width = MakePixelString(iKBWidth);
+    elem_KB.style.left = MakePixelString(rectGrid.left);
+//
+    var elemButtonDiv = document.getElementById("KB_Mini_ButtonRow_Div");
+    elemButtonDiv.style.width = MakePixelString(iKBWidth);
+    var elemInstructionsDiv = document.getElementById("KB_Mini_Instructions_Div");
+    elemInstructionsDiv.style.width = MakePixelString(iKBWidth);
+    var rectInstructionsDiv = elemInstructionsDiv.getBoundingClientRect();
+    elem_KB.style.height = MakePixelString(iKBRows * 52 + rectInstructionsDiv.height + 5);// fix this?
+    var rect_KB = elem_KB.getBoundingClientRect();
+    g_TC_iBiggestBottom += rect_KB.height;
+}
 
 function KB_Mini_SetUsageMode(sUsageMode)
 {
@@ -17,7 +40,8 @@ function KB_Mini_SetUsageMode(sUsageMode)
         let sBackgroundColor = '#FFFFFF';
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
-        KB_Mini_DisableLettersFullyPlaced();
+        KB_DisableLettersFullyPlaced();
+        KB_AGC_EnabledStateAllButtons(false);
         return;
     }
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveGrid )
@@ -25,14 +49,25 @@ function KB_Mini_SetUsageMode(sUsageMode)
         let sBackgroundColor = g_Color_sAbvocabPink;
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
-        KB_Mini_DisableLettersFullyPlaced();
+        KB_DisableLettersFullyPlaced();
+        KB_AGC_EnabledStateAllButtons(false);
+        return;
+    }
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_DualClue )
+    {
+        let sBackgroundColor = g_Color_sAbvocabBlue;
+        eInstructions.innerHTML = "Select Letter For Dual Clue Answer"
+        eInstructions.style.backgroundColor = sBackgroundColor;
+        eButtonRow.style.backgroundColor = sBackgroundColor;
+        KB_AGC_EnabledStateAllButtons(true);
         return;
     }
 // g_KB_Mini_sUsageMode_ActiveWords 
-let sBackgroundColor = g_Color_sScratchAreaActive;
-eInstructions.style.backgroundColor = sBackgroundColor;
-eButtonRow.style.backgroundColor = sBackgroundColor;
-KB_Mini_EnableAllLetters();
+    let sBackgroundColor = g_Color_sScratchAreaActive;
+    eInstructions.style.backgroundColor = sBackgroundColor;
+    eButtonRow.style.backgroundColor = sBackgroundColor;
+    KB_AGC_EnabledStateAllButtons(true);
+//    KB_Mini_EnableAllLetters();
 }
 
 function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
@@ -42,10 +77,10 @@ function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
     if ( cLetterBeingReplaced != '' )
     {
         sInstructions = ' Exchange ' + cLetterBeingReplaced + ' With Selection ';
-        KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_ActiveGrid)
+        KB_SetUsageMode(g_KB_Mini_sUsageMode_ActiveGrid)
     }
     else
-        KB_Mini_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
+        KB_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
     eInstructions.innerHTML = sInstructions;
 }
 
@@ -56,12 +91,16 @@ function KB_Mini_LettersSetEnabled(cLetter, bEnabled)
 //    eLetter.disabled = !bEnabled;
     if ( bEnabled )
     {
-        var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
+        let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
+        if ( g_KB_Buttons_Narrow )
+            sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Narrow';
         eLetter.className = sClass;
     }
     else
     {
-        var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
+        let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
+        if ( g_KB_Buttons_Narrow )
+            sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled_Narrow';
         eLetter.className = sClass;
     }
 }
@@ -124,8 +163,9 @@ function KB_Mini_Setup(iWidthMax)
     let iAllowedLetters = sAllowedLettersScrambled.length;
     let iTotalLetters = iAllowedLetters + 3;
     let elemTest = document.getElementById("Test")
-    let sLetter = 'L'
-    elemTest.innerHTML = KB_Mini_MakeKeyboardButton(sLetter);
+    let sLetter = 'W';
+    let sInnerLetter = KB_Mini_MakeKeyboardButton(sLetter);
+    elemTest.innerHTML = sInnerLetter;
     let sId = 'KB_' + sLetter;
     let elemLetter = document.getElementById(sId)
     let rectButton = elemLetter.getBoundingClientRect();
@@ -138,10 +178,10 @@ function KB_Mini_Setup(iWidthMax)
     let sInner = '';
 // we need to determine if we need more than one and row    
 // we have div at top that tells how to use the mini keypad
-sInner += '<DIV Id="KB_Mini_Instructions_Div" class="KB_Mini_Instructions">'
-sInner += ' Exchange Highlighted Letter with Selection ';
-sInner += '</DIV>'
-sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
+    sInner += '<DIV Id="KB_Mini_Instructions_Div" class="KB_Mini_Instructions">'
+    sInner += ' Exchange Highlighted Letter with Selection ';
+    sInner += '</DIV>'
+    sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
     for (let iRow = 0; iRow < iRows; iRow ++ )
     {
         let iStart = iRow * iLettersPerRow;
@@ -162,8 +202,8 @@ sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
 //    
     let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     elemKB_Mini_Div.innerHTML = sInner;
-    KB_Mini_SpecialButtonEnable(false);
-    KB_Mini_DisableLettersFullyPlaced();
+    KB_SpecialButtonEnable(false);
+    KB_DisableLettersFullyPlaced();
     return iRows;
 }
 
@@ -246,7 +286,9 @@ function KB_Mini_IdForLetterKey(cLetter)
 function KB_Mini_MakeKeyboardButton(sLetter)
 {
     let sTextForButton = sLetter;
-    var sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';//.KB_Mini_ButtonLetter_Disabled
+    let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';//.KB_Mini_ButtonLetter_Disabled
+    if ( g_KB_Buttons_Narrow )
+        sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Narrow'
     var sCC = String.fromCharCode(8);
     let sTextForId = sLetter;
     if ( sLetter == sCC )

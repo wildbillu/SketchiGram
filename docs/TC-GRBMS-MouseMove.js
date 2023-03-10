@@ -36,8 +36,8 @@ function TC_GRBMS_IndicatePickedLetterCorrectOrNot(iPickedRow, iPickedLetter, iF
     if ( bCorrect ) 
         cStatusPlayer = g_TC_cCodeMeaning_Correct;
     var sId = '';
-    let bIsDualClueSquare = GRB_ForRowLetter_IsDualClueSquare(iRow, iLetter);
-    sStatusImage = GRB_ButtonBackgroundImage(cLetterPicked, cStatusPlayer, 0, cCodeForActivity, bIsDualClueSquare)
+    let cDualClueCode = GRB_ForRowLetter_GetDualClueCode(iRow, iLetter)
+    sStatusImage = GRB_ButtonBackgroundImage(cLetterPicked, cStatusPlayer, 0, cCodeForActivity, cDualClueCode);
     var sId = GRBMS_MakeId(iPickedRow, iPickedLetter)
     var elem = document.getElementById(sId);
     elem.style.backgroundImage = sStatusImage;
