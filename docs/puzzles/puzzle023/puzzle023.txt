@@ -1,0 +1,26 @@
+sPuzzleNumber=puzzle023
+sPuzzleDate=2023-03-08
+sPuzzleName=John Prine Get Advice Song
+sPuzzleTitle=John Prine Get Advice Song
+iGridWidth=4
+iGridHeight=4
+sGridAnswers=DEARRUBEORBSPOY.
+sGridAnswersPlayer=----R-B--------.
+sGridStatusPlayer=NNNNGNGNNNNNNNN.
+sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
+iClueAnswers=8
+sClues=DummyA|DummyB|Eyes, poetically|A particular thing, especially in legal phrases|Bumpkin|A balancing pole used by tightrope walker|Discontinue|About 100 cents now
+sAnswers=DEAR|ABBY|ORBS|RES|RUBE|POY|DROP|EURO
+sAnswersPlayer=----|----|----|---|----|---|----|----
+sStatusPlayer =NNNN|NNNN|NNNN|NNN|NNNN|NNN|NNNN|NNNN
+sAnswerLocations=1 Across|3 Down|6 Across|4 Down|5 Across|7 Across|1 Down|2 Down
+ST_sClue_Itself=John Prine Get Advice Song
+ST_sClue_Intro=SketchiToons Clue to Dual Answers
+sDualClueBefore= 
+sDualClueMiddle= 
+sDualClueEnd= 
+sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
+sPuzzleCreditDate=March 8,2023
+SA_EB_sWords=||||||||||||
+SA_EB_sWordStatus=FFFFFFFFFFFF
+Signed noise-maker

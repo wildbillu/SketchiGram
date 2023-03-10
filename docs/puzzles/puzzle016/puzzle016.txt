@@ -5,6 +5,7 @@ sPuzzleTitle=This might be required in a school zone
 iGridWidth=5
 iGridHeight=5
 sGridAnswers=..APT.FREEAIDESSLEETHANDS
+sGridDualClueLocations=NNNNNNYYYYNNNNNNNNNNYYYYY
 sGridAnswersPlayer=..---.--E----E----E------
 sGridStatusPlayer=NNNNNNNNGNNNNGNNNNGNNNNNN
 sGridNumbering=0|0|1|2|3|0|4|0|0|0|5|0|0|0|0|6|0|0|0|0|7|0|0|0|0

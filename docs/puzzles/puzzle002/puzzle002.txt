@@ -6,6 +6,7 @@ iGridWidth=4
 iGridHeight=4
 sGridAnswersPlayer=------------B--K
 sGridAnswers=SHOPTOPOALECBACK
+sGridDualClueLocations=YNNNYNNNYNNNYYYY
 sGridStatusPlayer=NNNNNNNNNNNNGNNG
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
 iClueAnswers=8

@@ -5,6 +5,7 @@ sPuzzleTitle=Constraint, often on Sunday
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=BLUELARAEWERUSA.
+sGridDualClueLocations=YYYYNYNNNYNNNYNN
 sGridAnswersPlayer=B-----------U--.
 sGridStatusPlayer=GNNNNNNNNNNNGNN.
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0

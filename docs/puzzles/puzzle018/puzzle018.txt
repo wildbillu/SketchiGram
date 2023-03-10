@@ -5,6 +5,7 @@ sPuzzleTitle=Fried Southern Treat
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=IHOPNOGOCORNAKEE
+sGridDualClueLocations=NNNYNNNYYYYYNNNY
 sGridAnswersPlayer=-------------K-E
 sGridStatusPlayer=NNNNNNNNNNNNNGNG
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0

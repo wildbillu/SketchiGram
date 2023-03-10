@@ -5,6 +5,7 @@ sPuzzleTitle=Take Aim
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=BEERLUBAIRONPONG
+sGridDualClueLocations=YYYYNNNNNNNNYYYY
 sGridAnswersPlayer=-E----B---------
 sGridStatusPlayer=NGNNNNGNNNNNNNNN
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0

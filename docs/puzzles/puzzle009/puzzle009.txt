@@ -5,6 +5,7 @@ sPuzzleTitle=Outdoor Hot Spot?
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=.VOLRIPEOVENCANO
+sGridDualClueLocations=NYYYNNNNNNNNYYYY
 sGridAnswersPlayer=.V----------C---
 sGridStatusPlayer=.GNNNNNNNNNNGNNN
 sGridNumbering=0|1|2|3|4|0|0|0|5|0|0|0|6|0|0|0

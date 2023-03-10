@@ -5,6 +5,7 @@ sPuzzleTitle=Often seen in Seedy Neighborhood
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=.HAIDOWNOMANHEY.
+sGridDualClueLocations=NYNNYYYYNYNNNYNN
 sGridAnswersPlayer=.H-------M-----.
 sGridStatusPlayer=.GNNNNNNNGNNNNN.
 sGridNumbering=0|1|2|3|4|0|0|0|5|0|0|0|6|0|0|0

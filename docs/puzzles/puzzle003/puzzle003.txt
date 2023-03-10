@@ -5,6 +5,7 @@ sPuzzleTitle=How's Your Aim
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=DORMALOERIOTNOME
+sGridDualClueLocations=YYYYNNYNNNYNNNYN
 sGridAnswersPlayer=--R--L----------
 sGridStatusPlayer=NNGNNGNNNNNNNNNN
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
