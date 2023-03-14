@@ -47,6 +47,7 @@
 .GRBMS_Div_CAB_Clues_Right
 {
     user-select: none;
+
     border: 0px solid green;
     position:absolute;
     left:300px;
@@ -58,6 +59,7 @@
 .GRBMS_Div_Inline
 {
     display: inline-block;
+    border-collapse: collapse;
 }
 
 .GRBMS_Div_CAB_DualClue_Answers

@@ -55,7 +55,6 @@ function SG_FixSquare(iRowFound, iLetterFound)
     }
 }
 
-
 function TC_MoveTopAndAdjustBiggestBottom(sId, iTop)
 {
     let elem = document.getElementById(sId);
@@ -129,8 +128,6 @@ function SG_Adjust_KBAndIntro(iKBRows)
     g_TC_iBiggestBottom += rect_KB.height;
 }
 
-
-
 function SG_Adjust_GridAndPhantomGridPosition()
 {
     var elemGrid = document.getElementById('Div_Grid');
@@ -151,9 +148,7 @@ function SG_Adjust_GridAndPhantomGridPosition()
 
 function SG_SetSizes()
 {
-// decide on button size based upon grid size
-// looking for the grid to be around 200
-// our choices are 40, 50, 60 
+// SG Only (Not SG2)
     var iMaxGridWidth = g_Grid_fFractionAvailableWidth * g_TC_iBiggestRight;
     var iButtonSize = Math.round(iMaxGridWidth/g_iGridWidth);
 //
@@ -179,7 +174,4 @@ function SG_SetSizes()
         g_GRBMS_Square_iSize = 80;
         g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_80 TC_Button_Square_Absolute';
     }
-// we can alter CAB size here also
-    g_GRBMS_CAB_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_30 TC_Button_Square_Relative';
-    g_GRBMS_CAB_Square_iSize = 30;    
 }

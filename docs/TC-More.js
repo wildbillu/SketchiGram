@@ -1,6 +1,5 @@
 // TC-More.js
 
-
 function SG_ShowCheckActiveSquare(sAction)
 { //only SketchiGram versions
     SG_Clues_ShowCorrect();
@@ -132,16 +131,19 @@ function Dropdown_More_ResetPuzzle()
         GRBMS_ScrambleCorrectAnswersToPlayer(true);
         GRBMS_SetAllButtons();
         ForIdSetVisibility("KB_Mini_Div", true);
-        ForIdSetVisibility("DifficultyLevel_Div", true);
+        if ( g_bDifficultyLevelActive ) ForIdSetVisibility("DifficultyLevel_Div", true);
         if ( g_bHowToActive ) ForIdSetVisibility("SG_HowToA_Div", true);
         SG_Clues_ShowClue_ResetAll();
         SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, false);
-        TC_DifficultyLevel_Set(3);
+        if ( g_bDifficultyLevelActive ) TC_DifficultyLevel_Set(3);
         ForIdSetVisibility("ScratchArea", false);
         TC_SA_EB_ClearEntries();
         TC_SA_EB_Setup();
         TC_ElapsedTime_StartOver();
         TC_HideSolvedImage();
+        if ( g_bDualClueFrameActive ) TC_ClearDualClueAnswers();
+        if ( g_KB_Active_bAllGridChars ) KB_AllGridChars_Setup()
+
     }
     Dropdown_More_FinishUp(true);
 }

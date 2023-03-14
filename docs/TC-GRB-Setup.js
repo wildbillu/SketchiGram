@@ -8,7 +8,6 @@ function TC_LoadGridImage()
     elemDivGridImage.innerHTML = sImage;
 }
 
-
 function TC_Adjust_GridAndImagePositions()
 {
     let elemGrid = document.getElementById('Div_Grid');
@@ -52,7 +51,6 @@ function TC_Adjust_GridAndImagePositions()
     g_TC_iBiggestBottom += iHeightGrid;
 }
 
-
 function GRB_MakeGridAsButtons()
 {
     var sInner = '';
@@ -74,17 +72,29 @@ function GRB_MakeGridRowAsButtons(iRow)
     for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
     {
         sFunctionsToCall = '';
+        sFunctionsToCall += ' onclick="GRB_onfocus(this);"'
         sFunctionsToCall += ' ondrop="TC_Place_Drop(event,' + iRow + ',' + iLetter + ');"'
         sFunctionsToCall += ' ondragover="TC_Place_AllowDrop(event,' + iRow + ',' + iLetter + ');"'
         sFunctionsToCall += ' onMouseDown="return GRB_onmousedown(' + iRow + ',' + iLetter + ');"'
         sFunctionsToCall += ' onkeypress="return GRB_onkeypress(event);"';
         sFunctionsToCall += ' onkeyup="return GRB_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
         sFunctionsToCall += ' onfocus="GRB_onfocus(this);"';
-        sInnerRowHTML += '<BUTTON '
-        sInnerRowHTML += GRB_MakeHTMLId(iRow, iLetter);
-        sInnerRowHTML += ' class="' + g_GRB_Square_sClass + '"';
-        sInnerRowHTML += sFunctionsToCall;
-        sInnerRowHTML += '>';
+        if ( g_GR_Squares_bButtons )
+        {
+            sInnerRowHTML += '<BUTTON '
+            sInnerRowHTML += GRB_MakeHTMLId(iRow, iLetter);
+            sInnerRowHTML += ' class="' + g_GRB_Square_sClass + '"';
+            sInnerRowHTML += sFunctionsToCall;
+            sInnerRowHTML += '>';
+        }
+        else
+        {
+            sInnerRowHTML += '<DIV '
+            sInnerRowHTML += GRB_MakeHTMLId(iRow, iLetter);
+            sInnerRowHTML += ' class="' + g_GRB_Square_sClass + '"';
+            sInnerRowHTML += sFunctionsToCall;
+            sInnerRowHTML += '>A</DIV>';
+        }
     }
     var sDiv = 'GRB_Div' + iRow;
     document.getElementById(sDiv).innerHTML=sInnerRowHTML;

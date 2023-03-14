@@ -3,11 +3,9 @@
 function GRBMS_MakeDualClue()
 {
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;    
-    elemCAB_DualClue = document.getElementById("GRBMS_Div_CAB_DualClue");
+    let elemCAB_DualClue = document.getElementById("GRBMS_Div_CAB_DualClue");
     elemCAB_DualClue.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-    let iTop = g_TC_iBiggestBottom;
-    if ( !g_bIsTwistiCross && !g_bIsYourMove )
-        iTop = 100;
+    let iTop = g_CA_DualClue_iTop;
     elemCAB_DualClue.style.top = MakePixelString(iTop);
     var iWidthClueAnswer = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     elemCAB_DualClue.style.width = MakePixelString(iWidthClueAnswer);
@@ -19,7 +17,7 @@ function GRBMS_MakeDualClue()
         sDualRow += '<DIV Id="CA01CI" class="CAB_Row_DualClue_Small CA_Color_InActive">' + g_ST_sClue_Intro + '</DIV>'
     }
     sDualRow += '<DIV Id="CA01C" class="CAB_Row_DualClue CA_Color_InActive">' + g_ST_sClue_Itself + '</DIV>'
-// we need to adjust the height of the dual clue depending on the size of the buttons
+    // we need to adjust the height of the dual clue depending on the size of the buttons
     // now we need to make the dual clue
     var sDualAnswers = '';
     sDualAnswers += '<DIV Id="CA_01_R">';
@@ -47,20 +45,20 @@ function GRBMS_MakeDualClue()
     sDualRow += sDualAnswers;
     elemCAB_DualClue.innerHTML = sDualRow;
 //
-    var elemIntro = document.getElementById("CA01CI");
+    let elemIntro = document.getElementById("CA01CI");
     iAccumulated += 20;
     if ( g_bIsTwistiCross || g_bIsYourMove )
     {
         elemIntro.style.top = MakePixelString(iAccumulated);
         iAccumulated += 20;
     }
-    var elemClue = document.getElementById("CA01C");
+    let elemClue = document.getElementById("CA01C");
     elemClue.style.top = MakePixelString(iAccumulated);
     elemClue.style.left = MakePixelString(100);
     iAccumulated += 30;
     iAccumulated += 20;
     elemCAB_DualClue.style.height = MakePixelString(iAccumulated);
-    rect=elemCAB_DualClue.getBoundingClientRect();
+    let rect = elemCAB_DualClue.getBoundingClientRect();
     g_TC_iBiggestBottom += rect.height;
     CAB_ForRow_SetToInactive(0);
     CAB_ForRow_SetToInactive(1);

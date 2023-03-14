@@ -19,7 +19,7 @@ function TC_Puzzle_Load_AsJS()
     var sAnswers                   = 'EVIL|TWIN|PAVE|OPTS|NENE|SALE|WAWA|OWEN';
     var sAnswersPlayer             = '----|----|----|----|----|----|----|----';
     var sStatusPlayer              = 'NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
-    var sAnswersDualClueLocations  = 'NSDS|SSDS|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
+    var sAnswersDualClueLocations  = 'SSDS|SSDS|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
     var sAnswerLocations           ='6 Across|3 Down|2 Down|1 Across|7 Across|4 Down|5 Across|1 Down';
     var SA_EB_sWords               = '||||||||||||';
     var SA_EB_sWordStatus          = 'FFFFFFFFFFFF';

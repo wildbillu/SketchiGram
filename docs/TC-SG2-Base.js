@@ -19,8 +19,6 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="Div_StatusControl_Left" class="StatusControl_Div_Left StartHidden">Div_StatusControl_Left</DIV>';
     sMain += '<DIV Id="Div_StatusControl_Right" class="StatusControl_Div_Right StartHidden">Div_StatusControl_Right</DIV>';
     sMain += '<DIV Id="Div_PuzzleTitle" class="Div_PuzzleTitle StartHidden">Div_PuzzleTitle</DIV>';
-
-    
     sMain += '<DIV Id="SG_HowToA_Div" class="SG_HowToA_Div StartHidden">' + SG_HowToText() + '</DIV>';
     sMain += '<DIV Id="Div_Grid" class="Div_Grid StartHidden">Div_Grid</DIV>';
     sMain += '<DIV Id="Div_Grid_Phantom" class="Div_Grid_Phantom StartHidden">Div_Phantom_Grid</DIV>';
@@ -28,7 +26,6 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_Div StartHidden">notset</DIV>';
     sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden"></DIV>';
     sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter StartHidden">Div_BottomMatter</DIV>';
-
     sMain += MakeExtraImageDiv();
     sMain += MakeSolvedImageDiv();
     sMain += MakeInfoDiv();
@@ -98,10 +95,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 4:
-            let iGap = 105;
-            if ( !g_bResultMessageActive )
-                iGap = 0;
-            SG2_Adjust_GridAndPhantomGridPosition(iGap);
+            SG2_Adjust_GridAndPhantomGridPosition(g_GR_GridOrInstruction_iTop);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 5:
@@ -114,7 +108,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 7:
-// we are going to do the show clues, but not make it visible to get spacing right
+            // we are going to do the show clues, but not make it visible to get spacing right
             let bShowLength = true;
             let bShowGridLocation = false;
             let bShowPlaceButtons = false;
@@ -164,7 +158,7 @@ function SG2_LoadAll(iSection)
             if ( g_bTimerActive ) TC_ElapsedTime_Setup(460, 75);
             if ( g_bDualClueFrameActive ) GRBMS_MakeDualClue();
             SG2_SetVisibles();
-
+            if ( g_bPrintedFormat ) AdjustForPrintSize();
 //            openFullscreen();
             break;
         default:
@@ -182,16 +176,17 @@ function SG2_SetVisibles()
     TC_SetVisible("Div_PuzzleTitle");
     TC_SetVisible("Div_Grid");
     TC_SetVisible("Div_Grid_Phantom");
+    if ( g_bHowToActive ) TC_SetVisible("SG_HowToA_Div");
     if ( !g_bPuzzleSolved ) TC_SetVisible("KB_Mini_Div");
     TC_SetVisible("Div_BottomMatter");
     if ( g_bMessageVisible ) TC_SetVisible("Messages");
     if ( g_bActionMenuActive ) SG_ActionMenu_SetVisible();
     if ( g_bDifficultyLevelActive) TC_SetVisible("DifficultyLevel_Div");
-    if ( g_bHowToActive ) TC_SetVisible("SG_HowToA_Div");
     if ( g_bShowDualClueActive ) TC_SetVisible("DisplayDualClue_Div");
     if ( g_bTimerActive )TC_SetVisible("ElapsedTime_Div");
     if ( g_bSettingsActive ) TC_SetVisible("Div_StatusControl_Right");
     if ( !g_SG2_CAB_bVisible ) TC_SetVisible("Div_Grid_Image");
     if ( g_bDualClueAnswerBoxesActive ) TC_SetVisible("GRBMS_Div_CAB_DualClue");
+    if ( g_bArchiveShow) TC_SetVisible("Archive_Button_Activate");
 }
 

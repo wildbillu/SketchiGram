@@ -35,42 +35,55 @@ function SG2_Adjust_GridAndPhantomGridPosition(iGap)
     g_TC_iBiggestBottom += iHeightGrid;
 }
 
+let iButtonSize = 40;
 function SG2_SetSizes(iMaxGridWidth)
 {
-// decide on button size based upon grid size
-// looking for the grid to be around 200
-// our choices are 40, 50, 60 
-// allow grid to be 75% of width
-    var iButtonSize = Math.round(iMaxGridWidth/g_iGridWidth);
+    iButtonSize = Math.round(iMaxGridWidth/g_iGridWidth);
+// SG2 Only
+    if ( g_bPrintedFormat ) 
+    {
+        switch ( g_iGridWidth )
+        {
+            case 4:
+                iButtonSize = 90;
+                break;
+            case 5:
+                iButtonSize = 70;
+                break;
+            case 6:
+                iButtonSize = 50;
+                break;
+            case 7:
+                iButtonSize = 40;
+                break;
+        }
+    }
 //
-    g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_40 TC_Button_Square_Absolute';
+    g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_40 TC_Button_Square_Character_40 TC_Button_Square_Absolute';
     g_GRBMS_Square_iSize = 40;
     if ( iButtonSize > 49 )
     {
         g_GRBMS_Square_iSize = 50;
-        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_50 TC_Button_Square_Absolute';
+        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_50 TC_Button_Square_Character_50 TC_Button_Square_Absolute';
     }
     if ( iButtonSize > 59 )
     {
         g_GRBMS_Square_iSize = 60;
-        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_60 TC_Button_Square_Absolute';
+        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_60 TC_Button_Square_Character_60 TC_Button_Square_Absolute';
     }
     if ( iButtonSize > 69 )
     {
         g_GRBMS_Square_iSize = 70;
-        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_70 TC_Button_Square_Absolute';
+        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_70 TC_Button_Square_Character_70 TC_Button_Square_Absolute';
     }
     if ( iButtonSize > 79 )
     {
         g_GRBMS_Square_iSize = 80;
-        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_80 TC_Button_Square_Absolute';
+        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_80 TC_Button_Square_Character_80 TC_Button_Square_Absolute';
     }
     if ( iButtonSize > 89 )
     {
         g_GRBMS_Square_iSize = 90;
-        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_90 TC_Button_Square_Absolute';
+        g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_90 TC_Button_Square_Character_90 TC_Button_Square_Absolute';
     }
-// we can alter CAB size here also
-    g_GRBMS_CAB_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_30 TC_Button_Square_Relative';
-    g_GRBMS_CAB_Square_iSize = 30;    
 }

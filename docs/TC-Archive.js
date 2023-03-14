@@ -3,7 +3,7 @@
 var g_TC_Archive_aPuzzleNames = [];
 var g_TC_Archive_aPuzzleTitles = [];
 var g_TC_Archive_Menu_iStartAt = 0;
-var g_TC_Archive_Menu_iMaxItems = 20;
+var g_TC_Archive_Menu_iMaxItems = 30;
 var g_TC_Archive_Menu_aActiveIds =[];
 var g_TC_Archive_Menu_aActiveTitles =[];
 var g_TC_Archive_Menu_bActive = false;
@@ -12,8 +12,7 @@ var g_TC_Archive_Menu_iActiveCount = 0;
 function TC_Archive_AddButtonOrExtraSpace()
 {
     let sInner = '';
-//    if ( g_TC_bFileAccess )
-        sInner = TC_Archive_MakeActivationButton();
+    sInner = TC_Archive_MakeActivationButton();
 //    else
 //        sInner = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
     return sInner;
@@ -26,7 +25,7 @@ function TC_Archive_Select(elem)
     g_TC_iBiggestBottom = 0;
     g_SG_Clues_bCreated = false;
     SG_Clues_ShowClue_ResetAll();
-    TC_DifficultyLevel_Set(3);
+    if ( g_bDifficultyLevelActive ) TC_DifficultyLevel_Set(3);
     TC_SA_EB_ClearEntries();
 //
     SG2_LoadAll(0);
@@ -117,7 +116,7 @@ function TC_Archive_Activate()
 function TC_Archive_MakeActivationButton()
 {
     let sId = "Archive_Button_Activate";
-    let sArchiveButton = '<BUTTON class="Archive_Button_Activate" Id="' + sId + '" onclick="TC_Archive_Activate();">Show Archive</BUTTON>';
+    let sArchiveButton = '<BUTTON class="Archive_Button_Activate StartHidden" Id="' + sId + '" onclick="TC_Archive_Activate();">Show Archive</BUTTON>';
     return sArchiveButton;
 }
 

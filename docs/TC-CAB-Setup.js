@@ -1,5 +1,57 @@
 // TC-CAB-Setup.js
 //
+function CAB_MakeButtonsForAnswerWithButtons(iRow)
+{
+    let sInnerHTML = '';
+    let iLength = g_aAnswers[iRow].length;
+    for ( let iLetter = 0; iLetter < iLength; iLetter++ )
+        sInnerHTML += CAB_MakeButtonSingleHTML(iRow, iLetter);
+    if ( g_bIsTwistiCross || g_bIsYourMove )
+    {
+        if ( g_Place_bPopupPlaceSupport )
+            sInnerHTML += CA_MakePlaceButton(iRow);
+        if ( g_Place_bDirectPlaceSupport )
+            sInnerHTML += TC_Place_Direct_Buttons(iRow);
+    }
+    return sInnerHTML;
+}
+
+function CAB_MakeButtonsForAnswer(iRow)
+{
+    let sInnerHTML = '';
+    // used only for row 0 and 1
+    let iLength = g_aAnswers[iRow].length;
+    for ( let iLetter = 0; iLetter < iLength; iLetter++ )
+        sInnerHTML += CAB_MakeButtonSingleHTML(iRow, iLetter);
+    return sInnerHTML;
+}
+
+function CAB_MakeButtonSingleHTML(iRow, iLetter)
+{
+    var sInnerRowHTML = '';
+    var sFunctionsToCall = '';
+    sFunctionsToCall += ' onclick="CAB_onfocus(this);"'
+    sFunctionsToCall += ' onkeypress="return CAB_onkeypress(event);"';
+    sFunctionsToCall += ' onkeyup="return CAB_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
+    sFunctionsToCall += ' onfocus="CAB_onfocus(this);"';
+    if ( !g_CA_Squares_bButtons )
+    {
+        sInnerRowHTML += '<DIV '
+        sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
+        sInnerRowHTML += ' class="' + g_CAB_Square_sClass + '" ';
+        sInnerRowHTML += sFunctionsToCall;
+        sInnerRowHTML += '> </DIV>';
+    }
+    else
+    {
+        sInnerRowHTML += '<BUTTON '
+        sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
+        sInnerRowHTML += ' class="' + g_CAB_Square_sClass + '" ';
+        sInnerRowHTML += sFunctionsToCall;
+        sInnerRowHTML += '>';
+    }    
+    return sInnerRowHTML;
+}
 
 function TC_CAB_AdjustSingleAnswerRows()
 {
@@ -26,22 +78,6 @@ function TC_CAB_AdjustSingleAnswerRows()
         elemClueText.style.width = MakePixelString(iWidthClueText);
         elemClueText.style.left = MakePixelString(Container_iLeft);
     }
-}
-
-function CAB_MakeButtonsForAnswerWithButtons(iRow)
-{
-    var sInnerHTML = '';
-    var iLength = g_aAnswers[iRow].length;
-    for ( var iLetter = 0; iLetter < iLength; iLetter++ )
-        sInnerHTML += CAB_MakeButtonSingleHTML(iRow, iLetter);
-    if ( g_bIsTwistiCross || g_bIsYourMove )
-    {
-        if ( g_Place_bPopupPlaceSupport )
-            sInnerHTML += CA_MakePlaceButton(iRow);
-        if ( g_Place_bDirectPlaceSupport )
-            sInnerHTML += TC_Place_Direct_Buttons(iRow);
-    }
-    return sInnerHTML;
 }
 
 function CAB_SetRow(iRow)
@@ -82,31 +118,6 @@ function CAB_ClueAnswerSection_Load()
         elem.style.top = MakePixelString(g_TC_iBiggestBottom)
         g_TC_iBiggestBottom += (32 + g_TC_Padding_Inter_Vertical_iSize); // fix this?;
     }
-}
-
-function CAB_MakeButtonsForAnswer(iRow)
-{
-    // used only for row 0 and 1
-    var sInnerHTML = '';
-    var iLength = g_aAnswers[iRow].length;
-    for ( var iLetter = 0; iLetter < iLength; iLetter++ )
-        sInnerHTML += CAB_MakeButtonSingleHTML(iRow, iLetter);
-    return sInnerHTML;
-}
-
-function CAB_MakeButtonSingleHTML(iRow, iLetter)
-{
-    var sInnerRowHTML = '';
-    var sFunctionsToCall = '';
-    sFunctionsToCall += ' onkeypress="return CAB_onkeypress(event);"';
-    sFunctionsToCall += ' onkeyup="return CAB_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
-    sFunctionsToCall += ' onfocus="CAB_onfocus(this);"';
-    sInnerRowHTML += '<BUTTON '
-    sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
-    sInnerRowHTML += ' class="' + g_CAB_Square_sClass + '" ';
-    sInnerRowHTML += sFunctionsToCall;
-    sInnerRowHTML += '>';
-    return sInnerRowHTML;
 }
 
 function CAB_MakeIdForRow(iRow)

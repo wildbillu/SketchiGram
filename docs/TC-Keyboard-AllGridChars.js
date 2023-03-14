@@ -30,7 +30,6 @@ function KB_AGC_FindBoundsOfButtons()
 
 function KB_AllGridChars_Adjust(iKBRows)
 {
-
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
     let elem_KB = document.getElementById('KB_Mini_Div');
     elem_KB.style.top = MakePixelString(g_TC_iBiggestBottom);
@@ -38,6 +37,7 @@ function KB_AllGridChars_Adjust(iKBRows)
     let elemGrid = document.getElementById('Div_Grid');
     let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
     let iKBWidth = rectGrid.width;
+    let iKBLettersHeight = 0;
     if ( g_KB_sWidthDeterminedBy == 'BiggestRight' )
     { // later we want to contract this so it just fits the actual keys
         iKBWidth = g_TC_iBiggestRight * g_KB_fFractionAvailableWidth - 2; // for border
@@ -47,13 +47,12 @@ function KB_AllGridChars_Adjust(iKBRows)
         if ( iWidthOfText > iKBCandidateWidth )
             iKBCandidateWidth = iWidthOfText;
         let rect = KB_AGC_FindBoundsOfButtons()
-//        alert(iKBCandidateWidth)
-//        alert(rect.height)
-//        alert(rect.width)
-
+        let iWidthLetters = rect.width + 10; //for padding
+        if ( iWidthLetters > iKBCandidateWidth )
+            iKBCandidateWidth = iWidthLetters;
+        iKBLettersHeight = rect.height + 10;
         iKBWidth = iKBCandidateWidth;
         }
-    //
     let iKBLeft = rectGrid.left; // justify grid
     if ( g_KB_sJustification == 'center' )
     {
@@ -75,7 +74,6 @@ function KB_AllGridChars_Adjust(iKBRows)
     let rect_KB = elem_KB.getBoundingClientRect();
     g_TC_iBiggestBottom += rect_KB.height;
 }
-
 
 function KB_AllGridChars_Setup()
 {
@@ -124,7 +122,6 @@ function KB_AllGridChars_Setup()
     return iRows;
 }
 
-
 function KB_AGC_EnabledStateAllButtons(bOverrideAllToBeEnabled)
 {
     g_KB_AGC_AllButtonsEnabled = bOverrideAllToBeEnabled;
@@ -136,7 +133,6 @@ function KB_AGC_EnabledStateAllButtons(bOverrideAllToBeEnabled)
         KB_AGC_SetButtonEnabledClass(i, bEnabled)
     }
 }
-
 
 function KB_AllGridChars_MakeButtonInTD(iButton, cLetter, bPlacedCorrectly)
 {
@@ -210,14 +206,22 @@ function KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter)
     let A_cStatus = GRB_ForRowLetter_GetStatusPlayer(A_iRow, A_iLetter);
     if ( A_cStatus == g_TC_cCodeMeaning_Correct )
     {
-        let A_cLetter = GRB_ForRowLetter_GetAnswerPlayer(A_iRow, A_iLetter);
-        KB_AGC_FindAndChangeFirstNotYetCorrect(A_cLetter)
+        if ( g_KB_AGC_PendingPressedButton != -1 )
+        {
+            KB_AGC_SetButtonPlacedCorrectly(g_KB_AGC_PendingPressedButton);
+            g_KB_AGC_PendingPressedButton = -1;
+        }
+        else
+        {
+            let A_cLetter = GRB_ForRowLetter_GetAnswerPlayer(A_iRow, A_iLetter);
+            KB_AGC_FindAndChangeFirstNotYetCorrect(A_cLetter)
+        }
     }
     let B_cStatus = GRB_ForRowLetter_GetStatusPlayer(B_iRow, B_iLetter);
     if ( B_cStatus == g_TC_cCodeMeaning_Correct )
     {
-        let B_cLetter = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
-        KB_AGC_FindAndChangeFirstNotYetCorrect(B_cLetter)
+            let B_cLetter = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
+            KB_AGC_FindAndChangeFirstNotYetCorrect(B_cLetter)
     }
 }
 
@@ -227,6 +231,7 @@ function KB_AGC_KeyboardPress(iButton)
     let bPlacedCorrectly = g_KB_Buttons_a_of_bPlacedCorrectly[iButton];
     if ( bPlacedCorrectly && !g_KB_AGC_AllButtonsEnabled )
         return;
+    g_KB_AGC_PendingPressedButton = iButton;
     if ( KB_AGC_KeyboardPress_GRBMS(cLetter) )
         return;
     if ( KB_Mini_KeyboardPress_CAB(cLetter) )

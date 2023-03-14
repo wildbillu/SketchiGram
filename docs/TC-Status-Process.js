@@ -16,6 +16,40 @@ var g_TC_ShadeBackgroundOnStatus_sId = "Body_Any";
 var g_TC_ShadeBackgroundOnStatus_fMaxOpacity = 0.1;
 var g_TC_ShadeBackgroundOnStatus_sColorCode = 'rgba(0,255,0,O)';
 
+function TC_ShowDualClueAnswers()
+{
+    g_aAnswersPlayer[0] = g_aAnswers[0];
+    g_aAnswersPlayer[1] = g_aAnswers[1];
+    for ( let iA = 0; iA < 2; iA++ )
+    {
+        let iL = g_aAnswers[iA].length;
+        g_aAnswersStatusPlayer[iA] = '';
+        for ( let i = 0; i < iL; i++ )
+        {
+            g_aAnswersStatusPlayer[iA] += g_TC_cCodeMeaning_Correct;
+        }
+    }
+    CAB_ForRow_SetToInactive(0);
+    CAB_ForRow_SetToInactive(1);
+}
+
+function TC_ClearDualClueAnswers()
+{
+    for ( let iA = 0; iA < 2; iA++ )
+    {
+        let iL = g_aAnswers[iA].length;
+        g_aAnswersPlayer[iA] = '';
+        g_aAnswersStatusPlayer[iA] = '';
+        for ( let i = 0; i < iL; i++ )
+        {
+            g_aAnswersPlayer[iA]       += g_TC_cCharMeaningNotSet;
+            g_aAnswersStatusPlayer[iA] += g_cColorCodeForUnknownLetter;
+        }
+    }
+    CAB_ForRow_SetToInactive(0);
+    CAB_ForRow_SetToInactive(1);
+}
+
 function Status_Check_AddChange(sNew)
 {
     if ( g_TC_Status_sChanges != '' )
@@ -54,6 +88,7 @@ function Status_Check(bNonPlayerFixes)
     if ( !bInitiallySolved && g_bPuzzleSolved && g_bSettings_CAGR_Display_Complete )
     {
         TC_ShowSolvedImage();
+        if ( g_bDualClueFrameActive ) TC_ShowDualClueAnswers();
     }
     else if ( !g_TC_Status_bFirstCheck && ( g_TC_Status_iChanges > 0 ))
     {

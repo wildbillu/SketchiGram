@@ -193,13 +193,21 @@ function GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
         cAnswerPlayer = ' ';
 
     let iGridNumber = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
-    var sId = '';
     sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity, cDualClueCode);
-    var sId = GRBMS_MakeId(iRow, iLetter)
-    var elem = document.getElementById(sId);
+    let sId = GRBMS_MakeId(iRow, iLetter);
+    let elem = document.getElementById(sId);
     elem.style.backgroundImage = sStatusImage;
     elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
     elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
+    if ( !g_GR_Squares_bButtons )
+    {
+        if ( CharValidEntry(cAnswerPlayer) )
+            elem.innerHTML = cAnswerPlayer;    
+        let cColor = g_Color_sLetterUnknown;
+        if ( cStatusPlayer == g_TC_cCodeMeaning_Corrected || TC_CorrectOrGolden(cStatusPlayer) )
+            cColor = g_Color_sLetterCorrect;
+        elem.style.color = cColor;
+    }
 }
 
 function TC_GRBMS_MakeButton(iRow, iLetter)
@@ -213,12 +221,22 @@ function TC_GRBMS_MakeButton(iRow, iLetter)
     sFunctionsToCall += ' onkeypress="return GRBMS_onkeypress(event);"';
     sFunctionsToCall += ' onkeyup="return GRBMS_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
     sFunctionsToCall += ' onfocus="GRBMS_onfocus(this);"';
-    sInner += '<BUTTON ';
+    sFunctionsToCall += ' onclick="GRBMS_onfocus(this);"'
+    if ( g_GR_Squares_bButtons )
+        sInner += '<BUTTON ';
+    else 
+        sInner += '<DIV ';
     sInner += sHTMLId;
     sInner += ' class="' + g_GRBMS_Square_sClass + '" '; 
     sInner += sFunctionsToCall;
     sInner += '>'
-    sInner += '</BUTTON>';
+    if ( g_GR_Squares_bButtons )
+    {
+        sInner += '</BUTTON>';
+    }
+    else
+        sInner += ' </DIV>';
+//alert(sInner)
     return sInner;
 }
 

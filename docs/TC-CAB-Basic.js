@@ -16,8 +16,8 @@ function CAB_FocusLostSetActiveToInActive()
 
 function CAB_ForRow_SetToInactive(iRow)
 {
-    var iLength = g_aAnswers[iRow].length;
-    for (var iL = 0; iL < iLength; iL++ )
+    let iLength = g_aAnswers[iRow].length;
+    for (let iL = 0; iL < iLength; iL++ )
     {
         CAB_ForRowLetter_SetButton(iRow, iL, g_TC_cCodeMeaning_Inactive)
     }

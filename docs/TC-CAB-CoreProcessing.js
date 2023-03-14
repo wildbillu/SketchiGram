@@ -32,17 +32,20 @@ function CAB_MoveFocus(iNewRow, iNewLetter)
         iNewRow = 0;
     if ( iNewRow == -1 )
         iNewRow = 0;
-    var sNextBox = CAB_MakeId(iNewRow, iNewLetter);
-	document.getElementById(sNextBox).focus();
+    let sNextBox = CAB_MakeId(iNewRow, iNewLetter);
+    if ( g_CA_Squares_bButtons )
+        document.getElementById(sNextBox).focus();
+    else
+        CAB_onfocus(document.getElementById(sNextBox));
 }
 
 function CAB_SetFocusToNext(iRow, iLetter)
 {
-    var iLength = CAB_ForRow_GetLength(iRow);
-    var bLastLetter = CAB_ForRowLetter_IsLastLetter(iRow, iLetter);
+    let iLength = CAB_ForRow_GetLength(iRow);
+    let bLastLetter = CAB_ForRowLetter_IsLastLetter(iRow, iLetter);
     if ( !bLastLetter && g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares )
     {
-        for ( iL = iLetter+1; iL < iLength; iL++)
+        for (let  iL = iLetter + 1; iL < iLength; iL++)
         {
             if ( !CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
             {
@@ -54,7 +57,7 @@ function CAB_SetFocusToNext(iRow, iLetter)
     }
     if ( bLastLetter && g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare )
     { 
-        for ( iL = 0; iL < iLength; iL++)
+        for ( let iL = 0; iL < iLength; iL++)
         {
             if ( !CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
             {

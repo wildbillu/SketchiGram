@@ -48,8 +48,6 @@ function SG_Clues_ShowCorrect()
         if ( bCorrect )
             SG_Clues_ShowClue_ResetAnswer(g_GR_aDownAnswersClueNumber[iDown], false, true, true)
     }
-
-
 }
 
 function SG_Clues_IndexOfAnswer(sAnswer)
@@ -121,9 +119,9 @@ function SG_Clues_ShowClue_ResetAll()
         SG_Clues_ShowClue_ResetAnswer(iRow, true, false, false);
 }
 
-
 function SG_Clues_ShowClue_ResetAnswer(iRow, bShowLength, bShowAnswer, bShowGridLocation)
-{   let sId = SG_MakeClueTextId(iRow);
+{   
+    let sId = SG_MakeClueTextId(iRow);
     let elem = document.getElementById(sId);
 //
     if ( iRow == 0 || iRow == 1 )

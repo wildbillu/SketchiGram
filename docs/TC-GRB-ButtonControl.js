@@ -29,7 +29,7 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivi
     if ( cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
         sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetButtonFrameImagePathAndName());
     sStatusImage = GRB_AddWrappedUrlToString(sStatusImage,TC_GetStatusOverlayImagePathAndName(cStatus));
-    if ( iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
+    if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
     {
         var sGridNumber = iGridNumber.toString();
         if ( sGridNumber.length == 1 )
@@ -43,23 +43,26 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivi
         if ( cDualClueCode == g_TC_cCodeMeaning_DualClue_Single )
         {
             sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares
-            if ( iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
+            if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
                 sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNumberSquares
         }
         else if ( cDualClueCode == g_TC_cCodeMeaning_DualClue_Double )
         {
             sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNoNumberSquares;
-            if ( iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
+            if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_TC_cCodeMeaning_HasFocusBeingMoved )
                 sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNumberSquares;
         }
         if ( sRound != '' ) sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, sRound);
     }
-    let cColor = g_cColorCodeForUnknownLetter;
-    if ( cStatus == g_TC_cCodeMeaning_Corrected || TC_CorrectOrGolden(cStatus) )
-        cColor = g_cColorCodeForCorrectLetter;
-    if ( CharValidEntry(cLetter) )
+    if ( g_GR_Squares_bButtons )
     {
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetLetterImagePathAndName(cLetter, cColor));
+        let cColor = g_cColorCodeForUnknownLetter;
+        if ( cStatus == g_TC_cCodeMeaning_Corrected || TC_CorrectOrGolden(cStatus) )
+            cColor = g_cColorCodeForCorrectLetter;
+        if ( CharValidEntry(cLetter) )
+        {
+            sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetLetterImagePathAndName(cLetter, cColor));
+        }
     }
     if ( cStatus == g_TC_cCodeMeaning_Golden )
     {
