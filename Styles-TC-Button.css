@@ -1,0 +1,123 @@
+/* Styles-TC-Button.css */
+
+.TC_Button_Div_Base
+{
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    font-size:0px;
+}
+.TC_Button_Div_30{height:30px;width:200px;}
+.TC_Button_Div_40{height:40px;width:200px;}
+.TC_Button_Div_50{height:40px;width:200px;}
+.TC_Button_Div_60{height:60px;width:440px;}
+.TC_Button_Div_70{height:70px;width:440px;}
+.TC_Button_Div_80{height:80px;width:440px;}
+.TC_Button_Div_90{height:90px;width:440px;}
+
+.TC_Button_Square_Character_90
+{
+    text-align:center;
+    line-height:90px;
+    font-size:70px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TC_Button_Square_Character_80
+{
+    text-align:center;
+    line-height:80px;
+    font-size: 60px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TC_Button_Square_Character_70
+{
+    text-align:center;
+    line-height:70px;
+    font-size: 50px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TC_Button_Square_Character_60
+{
+    text-align:center;
+    line-height:60px;
+    font-size: 40px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TC_Button_Square_Character_50
+{
+    text-align:center;
+    line-height:50px;
+    font-size: 35px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TC_Button_Square_Character_40
+{
+    text-align:center;
+    line-height:40px;
+    font-size: 31px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TC_Button_Square_Character_35
+{
+    text-align:center;
+    line-height:35px;
+    font-size: 28px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.TC_Button_Square_Character_20
+{
+    color:red;
+    line-height:20px;
+    font-size:16px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+}
+
+.TC_Button_Square_Base 
+{
+    display:table-cell;
+    left: 0px;
+    top:0px;
+    background-color:white;
+    border-collapse: collapse; 
+    outline: none; 
+    border: 0px solid black;
+    caret-color: transparent;
+    background-repeat: no-repeat;
+}
+.TC_Button_Square_30{width:30px;height:30px;background-size: 30px;}
+.TC_Button_Square_35{width:35px;height:35px;background-size: 35px;}
+.TC_Button_Square_40{width:40px;height:40px;background-size: 40px;}
+.TC_Button_Square_50{width:50px;height:50px;background-size: 50px;}
+.TC_Button_Square_60{width:60px;height:60px;background-size: 60px;}
+.TC_Button_Square_70{width:70px;height:70px;background-size: 70px;}
+.TC_Button_Square_80{width:80px;height:80px;background-size: 80px;}
+.TC_Button_Square_90{width:90px;height:90px;background-size: 90px;}
+
+.TC_Button_Square_Absolute{position:absolute;}
+.TC_Button_Square_Relative{position:relative;}
+
+
+
