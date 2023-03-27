@@ -219,6 +219,6 @@ function GRBMS_onmousedown(e, iRow, iLetter)
     g_GRBMS_MM_Picked_Start_iLeft = Math.round(rect.left) - Math.round(rectBox.left);
     g_GRBMS_MM_Picked_Start_iTop = Math.round(rect.top) - Math.round(rectBox.top);
     g_GRBMS_MM_Picked_elem.style.zIndex  =  5;
-    Sync_FocusChange()
+    Sync_FocusChange('GR')
 }
 

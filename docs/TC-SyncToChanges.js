@@ -1,7 +1,19 @@
 // TC-SyncToChanges.js
 
-function Sync_FocusChange()
+function Sync_FocusChange(sFocusWith)
 {
+    if ( sFocusWith == 'GR')
+    {
+        
+    }
+    if ( sFocusWith == 'CA')
+    {
+        
+    }
+    if ( sFocusWith == 'SA')
+    {
+        
+    }
     if ( g_MAM_bActive) MAM_EnableDisable();
 }
 

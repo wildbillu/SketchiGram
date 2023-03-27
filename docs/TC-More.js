@@ -18,7 +18,7 @@ function SG_ShowCheckActiveSquare(sAction)
         SG_FixSquare(iRow, iLetter);
         bChanged = true;
     }
-    Sync_FocusChange();
+    Sync_FocusChange('GR');
     if ( bChanged )
         Sync_GridChange();
     return bChanged;

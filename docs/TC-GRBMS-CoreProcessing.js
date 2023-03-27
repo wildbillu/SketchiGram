@@ -10,7 +10,7 @@ function GRBMS_LoseCurrentFocus()
     let elem = document.getElementById(g_GRBMS_Focus_sId);
     elem.style.cursor="default";
     g_GRBMS_Focus_sId = '';
-    Sync_FocusChange();
+    Sync_FocusChange('GR');
 }
 
 function GRBMS_onkeyup(key, iRow, iLetter)
@@ -40,7 +40,7 @@ function GRBMS_onkeyup(key, iRow, iLetter)
         KB_Mini_SetInstructionLine('');  
         GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
         g_GRBMS_Focus_sId = '';
-        Sync_FocusChange();
+        Sync_FocusChange('GR');
         return false;
     }
     // we want to switch with square that has iLetter
@@ -56,7 +56,7 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     }
     g_GRBMS_Focus_sId = '';
     Status_Check(false);
-    Sync_FocusChange()
+    Sync_FocusChange('GR')
     return false;
 }
 
@@ -95,13 +95,14 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
 
 function GRBMS_onfocus(elem)
 {
+setlineAdd('GRBMS_onfocus')    
     let sThisId = elem.id;
     if ( g_CAB_Focus_sId != '')        
         CAB_FocusLostSetActiveToInActive();
     if ( g_SA_EB_Focus_sId != '' )
         TC_SA_EB_LoseTheFocusAndCleanup(true);
     g_GRBMS_Focus_sId = sThisId;
-    Sync_FocusChange();
+    Sync_FocusChange('GR');
 }    
 
 function GRBMS_onkeypress(event)

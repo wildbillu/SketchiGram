@@ -51,6 +51,10 @@ function KB_AGC_FindBoundsOfButtons()
         if ( rectButton.top < iTop ) iTop = rectButton.top;
         if ( rectButton.bottom > iBottom ) iBottom = rectButton.bottom;
     }
+// now we check the backspace button    
+    let elemBackspace = document.getElementById('Backspace');
+    rectBackspace = GetBoundingClientRectAbsolute(elemBackspace);
+    if ( rectBackspace.right > iRight ) iRight = rectBackspace.right;
     r = new DOMRect(0, 0, iRight - iLeft, iBottom - iTop)
     return r;
 }
@@ -236,7 +240,7 @@ function KB_AGC_KeyboardPress_GRBMS(keypressed)
     iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
     iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
     GRBMS_onkeyup(keypressed, iRow, iLetter);
-    Sync_FocusChange()
+    Sync_FocusChange('GR')
     return true;
 }
 

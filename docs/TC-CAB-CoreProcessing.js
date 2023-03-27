@@ -36,7 +36,7 @@ function CAB_onfocus(elem)
     g_CAB_Focus_sId = sThisId;
     KB_SetUsageMode(g_KB_Mini_sUsageMode_DualClue);
     CAB_SetBackground(true);
-    Sync_FocusChange();
+    Sync_FocusChange('CA');
     return true;
 }
 
@@ -57,7 +57,7 @@ function CAB_MoveFocus(iNewRow, iNewLetter)
 //   
     let sNextBox = CAB_MakeId(iNewRow, iNewLetter);
     CAB_onfocus(document.getElementById(sNextBox));
-    Sync_FocusChange()
+    Sync_FocusChange('CA')
 }
 
 function CAB_SetFocusToNext(iRow, iLetter)
@@ -139,7 +139,7 @@ function CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
     }
 // now we need to deal with the the entire row or letter to get the images right
     CAB_ForRow_SetToActive(iRow, iLetter);
-    Sync_FocusChange();
+    Sync_FocusChange('CA');
     Sync_CAChange();
 }
 

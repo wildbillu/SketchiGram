@@ -238,7 +238,7 @@ function KB_Mini_KeyboardPress_GRBMS(keypressed)
         sToSet = ' ';
     }
     GRBMS_onkeyup(keypressed, iRow, iLetter);
-    Sync_FocusChange();
+    Sync_FocusChange('GR');
     return true;
 }
 
