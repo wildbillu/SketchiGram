@@ -9,8 +9,8 @@ function KB_SetupAndAdjust()
         KB_Mini_Adjust(iKBRows);
         return;
     }
-    let iKBRows = KB_AllGridChars_Setup();
-    KB_AllGridChars_Adjust(iKBRows);
+    KB_AllGridChars_Setup();
+    KB_AllGridChars_Adjust(true);
 }
 
 function KB_SetUsageMode(sUsageMode)

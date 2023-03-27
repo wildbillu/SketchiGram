@@ -2,6 +2,7 @@
 // 
 // to detect window back forth...
 
+
 function openFullscreen() 
 {
     let elem = document.getElementById("Body_Any");
@@ -153,19 +154,7 @@ function ScreenSizes()
     g_iHTML_Height= Math.round(document.documentElement.getBoundingClientRect().height);
 }
 
-function CharValidEntry(cLetter) 
-{
-    if ( cLetter != '' && cLetter !=' ' && cLetter != g_TC_cCharMeaningNotSet )
-        return true;
-    return false;
-}
 
-function IfCharNotSet(cLetter) 
-{
-    if ( cLetter != '' && cLetter !=' ' && cLetter != g_TC_cCharMeaningNotSet )
-        return true;
-    return false;
-}
 
 function setlineAdd(sAdd)
 {

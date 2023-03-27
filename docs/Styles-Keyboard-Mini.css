@@ -1,5 +1,22 @@
 /* Styles-Keyboard-Mini.css */
 
+.KB_Mini_ButtonBackspace 
+{
+    width:56px;
+    background-image: url("images/Buttons/Button_Backspace.png");
+    background-size:54px;
+    background-repeat:no-repeat;
+}
+
+.KB_Mini_ButtonBackspace_Disabled
+{
+    width:56px;
+    background-image: url("images/Buttons/Button_Backspace-Disabled.png");
+    background-size:54px;
+    background-repeat:no-repeat;
+}
+
+
 .KB_Mini_Div
 {
     position:absolute;
@@ -30,7 +47,7 @@
     height:24px;
     font-size:18px;
     padding:0px;
-    width:400px;
+    width:600px;
     border-collapse: collapse;    
     outline: none;    
     text-align: center;
@@ -40,7 +57,7 @@
 
 .KB_Mini_ButtonRow
 {
-    border:0px solid green;
+    border:0px solid red;
     position:relative;
     top:0px;
     left:0px;
@@ -86,13 +103,6 @@
     background-color:#AAAAAA;
 }
 
-.KB_Mini_ButtonBackspace 
-{
-    width:56px;
-    background-image: url("images/Buttons/Button_Backspace.png");
-    background-size:54px;
-    background-repeat:no-repeat;
-}
 
 .KB_Mini_ButtonArrowLeft 
 {

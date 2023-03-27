@@ -1,0 +1,76 @@
+/* Styles-SpecialClue.css */
+
+.SpecialClue_Div
+{    user-select: none;border: 2px solid black;    position:relative;    left:0px;    top:600px;    height:72px;    width:96px;}
+
+.SpecialClue_Image_Div
+{    top:0px;    left:0px;    border: 0px solid green;    color:black;    text-align: center;    font-size: 16px;    font-family:Arial, Helvetica, sans-serif;   font-style:normal;}
+
+.SpecialClue_ClueAnswer_Div{border: 0px solid orange;   text-align: center;}
+
+.SC_TableInside_Div{border: 0px solid blue;}
+
+.SpecialClue_Button_Div
+{
+    border:0px solid green;
+}
+
+.SpecialClue_Table
+{
+    text-align: center;border:0px solid red; 
+    margin-right: auto;   margin-left: auto;
+}
+
+.SpecialClue_Text
+{
+    user-select: none;
+    outline: none; 
+    border: 0px solid black;
+    font-size: 20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    caret-color:transparent;
+    height:32px;
+    vertical-align:12px;
+    line-height:32px;
+}
+
+.SpecialClue_Div_Answers
+{
+    user-select: none;
+    text-align: center;
+    border: 0px solid green;
+    position:relative;
+    height:36px;
+    width:300px;
+}
+
+.SpecialClueItself
+{
+    border: 0px solid red;
+    color:blue;
+    padding: 0px;
+    height:30px;
+    width: 100%;
+    border-collapse: collapse;    
+    outline: none;    
+    text-align: center;
+    font-size: 24px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+}
+
+.GRBMS_Clue_Center
+{
+  text-align: center;
+}
+
+.GRBMS_Clue_Left
+{
+    text-align: left;
+}
+
+.GRBMS_Clue_Right
+{
+    text-align: right;
+}

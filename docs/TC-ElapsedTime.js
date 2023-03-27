@@ -66,16 +66,16 @@ function TC_ElapsedTime_Process()
         sFormatted += '0';
     sFormatted += iSeconds.toString();
     StoreCookie_Puzzle();
-    g_ElapsedTime_eDiv.innerHTML = sFormatted;
+    g_ElapsedTime_eDiv.innerHTML = g_Timer_sLabel + sFormatted;
 }
 
-function TC_ElapsedTime_Setup(iLeft, iTop)
+function TC_ElapsedTime_Setup()
 {
     const d = new Date();
     g_ElapsedTime_iInitialTimeInSeconds = Math.trunc(d.getTime()/1000);
     g_ElapsedTime_eDiv = document.getElementById("ElapsedTime_Div");
-    g_ElapsedTime_eDiv.style.left = MakePixelString(iLeft);
-    g_ElapsedTime_eDiv.style.top = MakePixelString(iTop);
+    g_ElapsedTime_eDiv.style.left = MakePixelString(g_Timer_iLeft);
+    g_ElapsedTime_eDiv.style.top = MakePixelString(g_Timer_iTop);
     TC_ElapsedTime_Process();
     if ( !g_bPuzzleSolved )
         g_ElapsedTime_IntervalId = setInterval(TC_ElapsedTime_Process, 1000);

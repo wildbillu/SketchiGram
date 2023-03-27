@@ -1,63 +1,180 @@
 // TC-GRBMS-Helpers-Advanced.js
 
-function GRBMS_SetAllButtons_Phantom()
+function GRBMS_ShowGrid()
 {
-    for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
+    GRBMS_LoseCurrentFocus();
+    for ( let iR = 0; iR < g_iGridHeight; iR++)
     {
-        for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+        for ( let iL = 0; iL < g_iGridWidth; iL++ )
         {
-            GRBMS_ForRowLetter_SetButton_Phantom(iRow, iLetter, g_TC_cCodeMeaning_Inactive)
+            let cAnswer = GRB_ForRowLetter_GetAnswer(iR, iL);
+            let cAnswerPlayerInitial = GRB_ForRowLetter_GetAnswerPlayer(iR, iL);
+            if ( cAnswer != cAnswerPlayerInitial)
+            {
+                GRB_ForRowLetter_UpdateAnswersPlayer(cAnswer, iR, iL);
+                GRB_ForRowLetter_SetStatusPlayer(TC_CodeCorrected(), iR, iL)
+                GRBMS_ForRowLetter_SetButton(iR, iL, g_cCode_Inactive);
+            }
         }
+    }
+    Sync_GridChange();
+    return true;
+}
+
+function GRBMS_ForRowLetterShowSquare(iRow, iLetter, sToDo, bIncorrectOverride)
+{
+    if ( !GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
+        return; // actually we should never get here
+    var bSetLetter = GRB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)
+    var cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+    var cAnswerPlayerInitial = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+    if ( sToDo == 'Check' )
+    { // if the character is not set and it is Check we do nothing
+        if ( !bSetLetter )
+            return;
+            if ( cAnswer == cAnswerPlayerInitial)
+            GRB_ForRowLetter_SetStatusPlayer(g_cCode_Correct, iRow, iLetter);
+        else
+        {
+            if ( !bIncorrectOverride )
+                GRB_ForRowLetter_SetStatusPlayer(g_cCode_Incorrect, iRow, iLetter);
+            else
+                GRB_ForRowLetter_SetStatusPlayer(g_cCode_IncorrectWithOverride, iRow, iLetter);
+        }
+    }
+    else if ( sToDo == 'Show' )
+    { // whatever happens the character is set to the correct letter
+        GRB_ForRowLetter_UpdateAnswersPlayer(cAnswer, iRow, iLetter);
+        if ( cAnswer == cAnswerPlayerInitial )
+            GRB_ForRowLetter_SetStatusPlayer(g_cCode_Correct, iRow, iLetter);
+        else
+            GRB_ForRowLetter_SetStatusPlayer(g_cCode_Corrected, iRow, iLetter);
     }
 }
 
-function GRBMS_ForRowLetter_SetButton_Phantom(iRow, iLetter, cCodeForActivity)
+
+
+
+
+function GRB_ForRowLetter_IsSquareGoldenOrBlack(iRow, iLetter)
 {
-    var sId = '';
-    var sId = GRBMS_Phantom_MakeId(iRow, iLetter)
-    var elem = document.getElementById(sId);
-    elem.style.backgroundImage = GRB_ButtonBackgroundImage(g_TC_cCharMeaningNotSet, g_TC_cCodeMeaning_Normal, 0, g_TC_cCodeMeaning_Inactive, g_TC_cCodeMeaning_DualClue_None);
-    elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
-    elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        return true;
+    if ( GRB_ForRowLetter_IsGoldenSquare(iRow, iLetter) )
+        return true;
+    return false;
 }
 
-function GRBMS_MakeGrid_Phantom()
+function GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter)
 {
-    elem = document.getElementById("Div_Grid_Phantom");
-    var iRow = 0;
-    var sButtons = ''
-    for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        return false;
+    if ( GRB_ForRowLetter_IsGoldenSquare(iRow, iLetter) )
+        return false;
+    if ( GRB_ForRowLetter_IsPlayerAnswerCorrect(iRow, iLetter) )
+        return false;
+    if ( GRB_ForRowLetter_IsPlayerAnswerCorrected(iRow, iLetter) )
+        return false;
+    return true;
+}
+
+function GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter)
+{
+    var cAnswerPlayer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+    if ( TC_IsBlackSquare(cAnswerPlayer) )
+        return true;
+    return false;
+}
+
+function GRB_ForRowLetter_IsGoldenSquare(iRow, iLetter)
+{
+    if ( GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter) == g_cCode_Golden )
+        return true;
+    return false;
+}
+
+function GRB_ForRowLetter_IsPlayerAnswerCorrected(iRow, iLetter)
+{
+    let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    if ( cStatus == g_cCode_Corrected )
+        return true;
+    return false;
+}
+
+function GRB_ForRowLetter_IsPlayerAnswerCorrect(iRow, iLetter)
+{
+    if ( GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter) == g_cCode_Correct )
+        return true;
+    return false;
+}
+
+function TC_AddWrappedUrlToString(sStarting, sNew, bSingle)
+{
+    let sFinal = sStarting;
+    if ( sStarting != '' )
+        sFinal += ', '
+    sFinal += MakeURLWrappedString(sNew, bSingle);
+    return sFinal;
+}
+
+function GRB_AddWrappedUrlToString(sStarting, sNew)
+{
+    let sFinal = sStarting;
+    if ( sStarting != '' )
+        sFinal += ', '
+    sFinal += MakeURLWrappedString(sNew, false);
+    return sFinal;
+}
+
+function GRBMS_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivity, cDualClueCode)
+{
+    var sStatusImage = '';
+    if ( TC_IsBlackSquare(cLetter) )
     {
-        for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
-        {
-            sButtons += TC_GRBMS_MakeButton_Phantom(iRow, iLetter, g_TC_cCodeMeaning_Normal);
-        }
+//        sStatusImage  = MakeURLWrappedString(TC_GetBlackSquareImagePathAndName(), false);
+        return sStatusImage;
     }
-    elem.innerHTML = sButtons;
+    if ( cCodeForActivity != g_cCode_HasFocusBeingMoved )
+        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetButtonFrameImagePathAndName());
+    sStatusImage = GRB_AddWrappedUrlToString(sStatusImage,TC_GetStatusOverlayImagePathAndName(cStatus));
+    if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_cCode_HasFocusBeingMoved )
+    {
+        var sGridNumber = iGridNumber.toString();
+        if ( sGridNumber.length == 1 )
+            sGridNumber = '0' + sGridNumber;
+        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetGridNumberImagePathAndName(sGridNumber));
+        }
+// now we do the dual clue overlay if needed
+    if ( g_SG_AM_bShowDualClueCircles )
+    {
+        let sRound = '';
+        if ( cDualClueCode == g_cCode_AnswerType_Single )
+        {
+            sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares
+            if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_cCode_HasFocusBeingMoved )
+                sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNumberSquares
+        }
+        else if ( cDualClueCode == g_cCode_AnswerType_Double )
+        {
+            sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNoNumberSquares;
+            if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_cCode_HasFocusBeingMoved )
+                sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNumberSquares;
+        }
+        if ( sRound != '' ) sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, sRound);
+    }
+    if ( cStatus == g_cCode_Golden )
+    {
+        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, g_sImagePath_StatusIndicators + g_sStatusButtonName_GoldenSquare);
+    }
+    else
+    {
+        if ( cCodeForActivity == g_cCode_HasFocusBeingMoved )
+            sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, g_sImagePath_StatusIndicators + g_sStatusButtonName_BeingMoved);
+        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetStatusImagePathAndName(cCodeForActivity));
+    }
+    return sStatusImage;
 }
 
-function GRBMS_Phantom_MakeHTMLId(iRow, iLetter)
-{
-    var sHTMLId = 'Id="' + GRBMS_Phantom_MakeId(iRow, iLetter) + '" ';
-    return sHTMLId
-}
-
-function GRBMS_Phantom_MakeId(iRow, iLetter)
-{
-    let sId = 'Phantom_' + iRow + '_' + iLetter;
-    return sId;
-}
-
-function TC_GRBMS_MakeButton_Phantom(iRow, iLetter)
-{ // will determine itself whether blacksquare or has number
-    var sInner = '';
-    sInner += '<BUTTON ';
-    sInner += GRBMS_Phantom_MakeHTMLId(iRow, iLetter);
-    sInner += ' class="' + g_GRBMS_Square_sClass + '" '; 
-    sInner += '>'
-    sInner += '</BUTTON>';
-    return sInner;
-}
 
 function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
 {
@@ -74,46 +191,13 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     }
     else
     {
-        GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Normal, B_iRow, B_iLetter);
-        GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Normal, A_iRow, A_iLetter);
+        GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, B_iRow, B_iLetter);
+        GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, A_iRow, A_iLetter);
     }
-    GRBMS_ForRowLetter_SetButton(A_iRow, A_iLetter, g_TC_cCodeMeaning_Inactive);
-    GRBMS_ForRowLetter_SetButton(B_iRow, B_iLetter, g_TC_cCodeMeaning_Inactive);
+    GRBMS_ForRowLetter_SetButton(A_iRow, A_iLetter, g_cCode_Inactive);
+    GRBMS_ForRowLetter_SetButton(B_iRow, B_iLetter, g_cCode_Inactive);
     KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter);
-}
-
-function GRBMS_MakeGrid()
-{
-    elem = document.getElementById("Div_Grid");
-    var iRow = 0;
-    var sButtons = ''
-    for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
-    {
-        for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
-        {
-            sButtons += TC_GRBMS_MakeButton(iRow, iLetter, g_TC_cCodeMeaning_Normal);
-        }
-    }
-    elem.innerHTML = sButtons;
-}
-
-function GRBMS_SetGridButtonsGridAndPhantomGridPosition()
-{
-    GRBMS_SetAllButtons();
-    elemGrid = document.getElementById("Div_Grid");
-    let iWidth = g_iGridWidth * g_GRBMS_Square_iSize;
-    var iHeight = g_iGridHeight * g_GRBMS_Square_iSize;
-    elemGrid.style.width = MakePixelString(iWidth);
-    elemGrid.style.height = MakePixelString(iHeight);
-    let iTop = g_GRBMS_TopMatter_iHeight + g_GRBMS_PuzzleTitle_iHeight + g_TC_Padding_Inter_Vertical_iSize;
-    elemGrid.style.top = MakePixelString(iTop);
-    elemGrid.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-// now the phantom grid
-    let elemGrid_Phantom = document.getElementById('Div_Grid_Phantom');
-//  let rectGrid = elemGrid.getBoundingClientRect();
-    let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
-    elemGrid_Phantom.style.top = MakePixelString(rectGrid.top);
-    elemGrid_Phantom.style.left = MakePixelString(rectGrid.left);
+    Sync_GridChange();
 }
 
 function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
@@ -128,9 +212,9 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
                 let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
                 let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
                 let bCorrectOrCorrected = false;
-                if ( cStatusPlayer == g_TC_cCodeMeaning_Correct )
+                if ( cStatusPlayer == g_cCode_Correct )
                     bCorrectOrCorrected = true;
-                if ( cStatusPlayer == g_TC_cCodeMeaning_Corrected )
+                if ( cStatusPlayer == g_cCode_Corrected )
                     bCorrectOrCorrected = true;
                 if ( !bCorrectOrCorrected && ( cAnswerPlayer == sUpper ) ) 
                 {
@@ -158,12 +242,11 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
 function GRBMS_SetAllowedGridLetters()
 {
     var sAllowedLetters = '';
-    var sAllowedLetters_Selectable = '';
     var sLocalGridSolution = g_aGridAnswers.join('');
     for ( var i = 0; i < sLocalGridSolution.length; i++ )
     {
         var cLetter = sLocalGridSolution.charAt(i);
-        if ( cLetter != g_TC_cCharacterDenotingBlackSquare && !sAllowedLetters.includes(cLetter))
+        if ( !TC_IsBlackSquare(cLetter) && !sAllowedLetters.includes(cLetter))
             sAllowedLetters += cLetter;
     }
     g_GRBMS_sAllowedGridLetters = sAllowedLetters;
@@ -178,37 +261,25 @@ function GRBMS_SetAllButtons()
     {
         for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
         {
-            GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_Inactive)
+            GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive)
         }
     }
 }
 
-function GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
+function GRBMS_MakeGrid()
 {
-    let cDualClueCode = GRB_ForRowLetter_GetDualClueCode(iRow, iLetter)
-    let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-    let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-
-    if ( g_bSuppressNonGolden && cStatusPlayer != 'G' && cAnswerPlayer != g_TC_cCharacterDenotingBlackSquare )
-        cAnswerPlayer = ' ';
-
-    let iGridNumber = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
-    sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity, cDualClueCode);
-    let sId = GRBMS_MakeId(iRow, iLetter);
-    let elem = document.getElementById(sId);
-    elem.style.backgroundImage = sStatusImage;
-    elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
-    elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
-    if ( !g_GR_Squares_bButtons )
+    let sButtons = ''
+    for ( let iRow = 0; iRow < g_iGridHeight; iRow++)
     {
-        if ( CharValidEntry(cAnswerPlayer) )
-            elem.innerHTML = cAnswerPlayer;    
-        let cColor = g_Color_sLetterUnknown;
-        if ( cStatusPlayer == g_TC_cCodeMeaning_Corrected || TC_CorrectOrGolden(cStatusPlayer) )
-            cColor = g_Color_sLetterCorrect;
-        elem.style.color = cColor;
+        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+        {
+            sButtons += TC_GRBMS_MakeButton(iRow, iLetter, g_cCode_Normal);
+        }
     }
+    let elem = document.getElementById("Div_Grid");
+    elem.innerHTML = sButtons;
 }
+
 
 function TC_GRBMS_MakeButton(iRow, iLetter)
 { // will determine itself whether blacksquare or has number
@@ -222,44 +293,45 @@ function TC_GRBMS_MakeButton(iRow, iLetter)
     sFunctionsToCall += ' onkeyup="return GRBMS_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
     sFunctionsToCall += ' onfocus="GRBMS_onfocus(this);"';
     sFunctionsToCall += ' onclick="GRBMS_onfocus(this);"'
-    if ( g_GR_Squares_bButtons )
-        sInner += '<BUTTON ';
-    else 
-        sInner += '<DIV ';
+    sInner += '<DIV ';
     sInner += sHTMLId;
     sInner += ' class="' + g_GRBMS_Square_sClass + '" '; 
     sInner += sFunctionsToCall;
-    sInner += '>'
-    if ( g_GR_Squares_bButtons )
-    {
-        sInner += '</BUTTON>';
-    }
-    else
-        sInner += ' </DIV>';
-//alert(sInner)
+    sInner += '></DIV>'
     return sInner;
 }
 
-function GRBMS_ForRowWithFocus_SetAnswerBoxStyles()
+
+function GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
 {
-    var iRowActive = -1;
-    if ( g_CAB_Focus_sId != '' )
+    let sId = GRBMS_MakeId(iRow, iLetter);
+    let elem = document.getElementById(sId);
+   let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+   let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+   let cDualClueCode = GRB_ForRowLetter_GetDualClueCode(iRow, iLetter);
+    elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
+    elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
+    if ( cAnswerPlayer == g_cCode_BlackSquare )
     {
-        iRowActive = CAB_RowFromId(g_CAB_Focus_sId);
+        elem.style.backgroundColor = 'black'
+        return;
     }
-    if ( iRowActive == 0 || iRowActive == 1 )
-        document.getElementById('GRBMS_Div_CAB_DualClue').className = 'GRBMS_Div_CAB_DualClue CAB_Color_Active';
-    else
-        document.getElementById('GRBMS_Div_CAB_DualClue').className = 'GRBMS_Div_CAB_DualClue CAB_Color_InActive';
-    for ( iR = 2; iR < g_iClues; iR++)
-    {
-        var s = CAB_MakeIdForRow(iR)
-        var elem = document.getElementById(s)
-        if ( iR == iRowActive )
-            elem.className = 'GRBMS_Div_CAB_Clue_Single_Row_Active';
-        else
-            elem.className = 'GRBMS_Div_CAB_Clue_Single_Row';
-    }
+    if ( g_bSuppressNonGolden && cStatusPlayer != 'G' && cAnswerPlayer != g_cCode_BlackSquare )
+        cAnswerPlayer = ' ';
+
+    let iGridNumber = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
+    let sStatusImage = '';
+    sStatusImage = GRBMS_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity, cDualClueCode);
+    elem.style.backgroundImage = sStatusImage;
+//    
+    elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
+    elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
+    if ( CharValidEntry(cAnswerPlayer) )
+        elem.innerHTML = cAnswerPlayer;    
+    let cColor = g_Color_sLetterUnknown;
+    if ( cStatusPlayer == g_cCode_Corrected || TC_CorrectOrGolden(cStatusPlayer) )
+        cColor = g_Color_sLetterCorrect;
+    elem.style.color = cColor;
 }
 
 function GRBMS_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, bIncorrectOverride)
@@ -274,22 +346,22 @@ function GRBMS_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, bIncorrectOverr
         if ( !bSetLetter )
             return;
             if ( cAnswer == cAnswerPlayerInitial)
-            GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Correct, iRow, iLetter);
+            GRB_ForRowLetter_SetStatusPlayer(g_cCode_Correct, iRow, iLetter);
         else
         {
             if ( !bIncorrectOverride )
-                GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Incorrect, iRow, iLetter);
+                GRB_ForRowLetter_SetStatusPlayer(g_cCode_Incorrect, iRow, iLetter);
             else
-                GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_IncorrectWithOverride, iRow, iLetter);
+                GRB_ForRowLetter_SetStatusPlayer(g_cCode_IncorrectWithOverride, iRow, iLetter);
         }
     }
     else if ( sToDo == 'Show' )
     { // whatever happens the character is set to the correct letter
         GRB_ForRowLetter_UpdateAnswersPlayer(cAnswer, iRow, iLetter);
         if ( cAnswer == cAnswerPlayerInitial )
-            GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Correct, iRow, iLetter);
+            GRB_ForRowLetter_SetStatusPlayer(g_cCode_Correct, iRow, iLetter);
         else
-            GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Corrected, iRow, iLetter);
+            GRB_ForRowLetter_SetStatusPlayer(g_cCode_Corrected, iRow, iLetter);
     }
 }
 

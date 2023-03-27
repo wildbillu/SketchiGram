@@ -18,37 +18,18 @@ function MakeMoreActionsInner()
 {
     g_TC_MoreActions_aIds.length = 0;
     var sDropdownMenu = '';
-    if ( g_bIsTwistiCross || g_bIsYourMove || g_bIsSketchiGramVariant1 )
-    {
-        sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckAnswer" onclick="Dropdown_More_CheckAnswer();">Check Selected Answer</BUTTON>';
-        g_TC_MoreActions_aIds.push("Dropdown_More_CheckAnswer");
-
-        sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowAnswer" onclick="Dropdown_More_ShowAnswer();">Reveal Selected Answer</BUTTON>';
-        g_TC_MoreActions_aIds.push("Dropdown_More_ShowAnswer");
-
-        sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveAnswers" onclick="Dropdown_More_SolveAnswers();">Reveal Answers To Clues</BUTTON>';
-        g_TC_MoreActions_aIds.push("Dropdown_More_SolveAnswers");
-    }
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckSquare" onclick="Dropdown_More_CheckSquare();">Check Selected Square</BUTTON>';
     g_TC_MoreActions_aIds.push("Dropdown_More_CheckSquare");
 //
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowSquare" onclick="Dropdown_More_ShowSquare();">Reveal Selected Square</BUTTON>';
     g_TC_MoreActions_aIds.push("Dropdown_More_ShowSquare");
 //
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveGrid" onclick="Dropdown_More_SolveGrid();">Reveal Answers To Grid</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowSketchiToon_Answer" onclick="Dropdown_More_SolveGrid();">Reveal SketchiToon Answer</BUTTON>';
+    g_TC_MoreActions_aIds.push("Dropdown_More_ShowSketchiToon_Answer");
+//
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveGrid" onclick="Dropdown_More_SolveGrid();">Reveal Puzzle</BUTTON>';
     g_TC_MoreActions_aIds.push("Dropdown_More_SolveGrid");
 //
-    if ( g_bIsTwistiCross || g_bIsYourMove || g_bIsSketchiGramVariant1 )
-    {
-        sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveAsConventional" onclick="Dropdown_More_SolveAsConventional();">Solve As Standard Crossword</BUTTON>';
-        g_TC_MoreActions_aIds.push("Dropdown_More_SolveAsConventional");
-    
-        sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckPuzzle" onclick="Dropdown_More_CheckPuzzle();">Check Puzzle</BUTTON>';
-        g_TC_MoreActions_aIds.push("Dropdown_More_CheckPuzzle");
-
-        sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolvePuzzle" onclick="Dropdown_More_SolvePuzzle();">Reveal Puzzle</BUTTON>';
-        g_TC_MoreActions_aIds.push("Dropdown_More_SolvePuzzle");
-    }
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ResetPuzzle" onclick="Dropdown_More_ResetPuzzle();">Reset All</BUTTON>';
     g_TC_MoreActions_aIds.push("Dropdown_More_ResetPuzzle");
     return sDropdownMenu;
@@ -97,10 +78,12 @@ function TC_HideMoreActions()
     g_TC_MoreActions_iActiveCount = 0;
     var elemImage = document.getElementById("MoreActions_Div");
     elemImage.style.visibility = 'hidden'
-    if ( g_sCABOnSettingsClick != '')
+    if ( g_sCABOnMoreActionsClick != '')
         document.getElementById(g_sCABOnMoreActionsClick).focus();
-    if ( g_sGRBOnSettingsClick != '')
+    if ( g_sGRBOnMoreActionsClick != '')
+    {
         document.getElementById(g_sGRBOnMoreActionsClick).focus();
+    }
     g_sCABOnMoreActionsClick = '';
     g_sGRBOnMoreActionsClick = '';
 }
@@ -113,6 +96,6 @@ function TC_ShowMoreActions()
 // assume has correct width and height so just set top and left(to be centered)
     elemDiv.style.visibility = 'visible'
     g_sCABOnMoreActionsClick = g_CAB_Focus_sId;
-    g_sGRBOnMoreActionsClick = g_GRB_Focus_sId;
+    g_sGRBOnMoreActionsClick = g_GRBMS_Focus_sId;
     g_TC_MoreActions_bActive = true;
 }

@@ -6,9 +6,8 @@
 
     <link rel="stylesheet" href="Styles-Overall.css">
     <link rel="stylesheet" href="Styles-TC-Button.css">
+    <link rel="stylesheet" href="Styles-SpecialClue.css">
 
-    <link rel="stylesheet" href="Styles-Place.css">
-    <link rel="stylesheet" href="Styles-Place-Direct.css">
     <link rel="stylesheet" href="Styles-CAB-Headings.css">
     <link rel="stylesheet" href="Styles-GRB-Button.css">
     <link rel="stylesheet" href="Styles-TopRowControl.css">
@@ -25,18 +24,18 @@
     <link rel="stylesheet" href="Styles-SG.css">
     <link rel="stylesheet" href="Styles-SG-ActionMenu.css">
 
-    <link rel="stylesheet" href="Styles-Keyboard.css">
-    <link rel="stylesheet" href="Styles-Keyboard-Mini.css">
 
     <link rel="stylesheet" href="Styles-ResultMessage.css">
     <link rel="stylesheet" href="Styles-ScratchArea.css">
-    <link rel="stylesheet" href="Styles-DifficultyLevel.css">
     <link rel="stylesheet" href="Styles-DisplayDualClue.css">
 
-
+    <SCRIPT SRC="TC-Configuration.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines-Codes.js"></SCRIPT>
+    <SCRIPT SRC="TC-CodeHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines-Colors.js"></SCRIPT>
+    <SCRIPT SRC="TC-SyncToChanges.js"></SCRIPT>
+
     <SCRIPT SRC="TC-DirectorySupport.js"></SCRIPT>
     <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
     <SCRIPT SRC="TC-Puzzle-ImportFromFile.js"></SCRIPT>
@@ -52,26 +51,12 @@
     <SCRIPT SRC="TC-CAB-Helpers-Answers-Status.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-HandleArrows.js"></SCRIPT>
 
-    <SCRIPT SRC="TC-Place.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-Direct.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-Draggable.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-TouchMovable.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-MouseMovable.js"></SCRIPT>
-
-    <SCRIPT SRC="TC-GRB-Defines.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-CoreProcessing.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-ButtonControl.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-Basic.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-MoveFocus.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-HandleEntries.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-Helpers-Answers-Status.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-HandleArrows.js"></SCRIPT>
-
+    <SCRIPT SRC="TC-CA_SetupAndPositioning.js"></SCRIPT>
+    <SCRIPT SRC="TC-CA-DisplayHelpers.js"></SCRIPT>
+    <SCRIPT SRC="TC-SyncGridAndCA.js"></SCRIPT>
     
     <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-LoadClueAnswer.js"></SCRIPT>
-
     <SCRIPT SRC="TC-GRBMS.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT>
@@ -79,25 +64,23 @@
     <SCRIPT SRC="TC-GRBMS-SetupHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Helpers-Advanced.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-CoreProcessing.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-Helpers-Answers-Status.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-Helpers-GridClueNumbering.js"></SCRIPT>
 
     <SCRIPT SRC="TC-ResultMessage.js"></SCRIPT>
 
-      <SCRIPT SRC="TC-ScratchArea-EditBox.js"></SCRIPT>
-
-    <SCRIPT SRC="TC-DifficultyLevel.js"></SCRIPT>
+    <SCRIPT SRC="TC-ScratchArea-EditBox.js"></SCRIPT>
     <SCRIPT SRC="TC-DisplayDualClue.js"></SCRIPT>
 
+<!-- these are the old style popup windows -->
+    <SCRIPT SRC="TC-More.js"></SCRIPT>
+
+<!-- keyboard -->
     <SCRIPT SRC="TC-Keyboard-Mini.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard-AllGridChars.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard-Dispatch.js"></SCRIPT>
-    <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
-    
-    <SCRIPT SRC="TC-YourMove-Base.js"></SCRIPT>
-    <SCRIPT SRC="TC-TwistiCross-Base.js"></SCRIPT>
-
-<!-- these are the old style popup windows -->
-<SCRIPT SRC="TC-More.js"></SCRIPT>
-
+    <SCRIPT SRC="TC-KeyboardSupport.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-Keyboard-Mini.css">
 <!-- these are the 'show/noshow' windows -->
     <SCRIPT SRC="TC-SuccessWindow.js"></SCRIPT>
     <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
@@ -113,19 +96,16 @@
  
     <SCRIPT SRC="TC-LoadExtraSolvedImages.js"></SCRIPT>
 
-
     <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
     <SCRIPT SRC="TC-Puzzle-AsJS.js"></SCRIPT>
 
     <SCRIPT SRC="TC-Status-Process.js"></SCRIPT>
 
 <!-- specific to SG -->
-    <SCRIPT SRC="TC-SG-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-SG2-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-ThemeImage.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-SetupHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
-    <SCRIPT SRC="TC-SG-SG2-CADisplayHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SG2-Positioning.js"></SCRIPT>
 <!-- Archive -->
     <SCRIPT SRC="TC-Archive.js"></SCRIPT>
@@ -133,9 +113,40 @@
 <!-- ElapsedTime -->
     <SCRIPT SRC="TC-ElapsedTime.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-ElapsedTime.css">
-<!-- Button -->
+<!-- Difficulty -->
+    <SCRIPT SRC="TC-DifficultyLevel.js"></SCRIPT>
+    <SCRIPT SRC="TC-DifficultyMenu.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-DifficultyLevel.css">
+    <link rel="stylesheet" href="Styles-DifficultyMenu.css">
+<!-- MiniActionMenu -->
+    <SCRIPT SRC="TC-MiniActionsMenu.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-MiniActionsMenu.css">
+ <!-- Button -->
     <SCRIPT SRC="TC_Button_V2.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-TC-Button-V2.css">
+<!--- Deprecated 
+    <link rel="stylesheet" href="Styles-Place.css">
+    <link rel="stylesheet" href="Styles-Place-Direct.css">
+    <SCRIPT SRC="TC-SG-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-YourMove-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-TwistiCross-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-Direct.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-Draggable.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-TouchMovable.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-MouseMovable.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-ButtonControl.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-CoreProcessing.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-HandleArrows.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-HandleEntries.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-MoveFocus.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-Defines.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-Basic.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
+-->
+
+
 </HEAD>
 <STYLE>
 :root
@@ -144,260 +155,24 @@
 }
 </STYLE>
 <SCRIPT>
-function TC_LoadPuzzleArchive()
-{
-    TC_Archive_AddPuzzleToArchive('puzzle001', 'Yogi Berra Says!')
-    TC_Archive_AddPuzzleToArchive('puzzle002', 'Beware The Ides!')
-    TC_Archive_AddPuzzleToArchive('puzzle003', "How's Your Aim?")
-    TC_Archive_AddPuzzleToArchive('puzzle004', 'Dinner Anyone?')
-    TC_Archive_AddPuzzleToArchive('puzzle005', 'Play and collect rewards?')
-    TC_Archive_AddPuzzleToArchive('puzzle006', 'Dr. Jekyll and Mr. Hyde?')
-    TC_Archive_AddPuzzleToArchive('puzzle007', 'A Buzzer Beater?')
-    TC_Archive_AddPuzzleToArchive('puzzle008', 'Perhaps found in your succotash?')
-    TC_Archive_AddPuzzleToArchive('puzzle009', 'Outdoor Hot Spot?')
-    TC_Archive_AddPuzzleToArchive('puzzle010', 'Zany Musicians')
-    TC_Archive_AddPuzzleToArchive('puzzle011', 'Peak')
-    TC_Archive_AddPuzzleToArchive('puzzle012', 'Rivalry')
-    TC_Archive_AddPuzzleToArchive('puzzle013', 'Alistair Cookie\'s Chair')
-    TC_Archive_AddPuzzleToArchive('puzzle014', 'Pub Game')
-    TC_Archive_AddPuzzleToArchive('puzzle015', 'Constraint')
-    TC_Archive_AddPuzzleToArchive('puzzle016', 'Required In School Zone')
-    TC_Archive_AddPuzzleToArchive('puzzle019', 'Parade your beads this day')
-    TC_Archive_AddPuzzleToArchive('puzzle020', 'Expert Gamer')
-    TC_Archive_AddPuzzleToArchive('puzzle022', 'Famous Dire Straits Song')
-    TC_Archive_AddPuzzleToArchive('puzzle021', 'Store in Quaint New England')
-    TC_Archive_AddPuzzleToArchive('puzzle017', 'Seedy Neighborhood')
-    TC_Archive_AddPuzzleToArchive('puzzle018', 'Fried Southern Treat')
-    TC_Archive_AddPuzzleToArchive('puzzle023', 'John Prine Sings To Her')
-/*
-    TC_Archive_AddPuzzleToArchive('puzzle024', '024')
-*/
-}
 
-document.onkeypress = function (e) {setlineAdd('windowkp'); e = e || window.event;};
-let g_CA_DualClue_iTop = 48;
-let g_GR_GridOrInstruction_iTop = 58;
 
-let g_CA_Squares_bButtons = false;
-let g_GR_Squares_bButtons = false;
-
-let g_KB_Buttons_Narrow = true;
-let g_KB_Active_Mini = false;
-let g_KB_Active_bAllGridChars = true;
-let g_KB_sWidthDeterminedBy =  'BiggestRight';//'Grid'; //
-let g_KB_fFractionAvailableWidth = 1.00; // 
-let g_KB_sJustification = 'center'; // 'right' // 'grid'
-let g_Grid_fFractionAvailableWidth = 0.80;
-let g_Grid_sJustification = 'right';//'center'
-let g_bDifficultyLevelActive = false;
-let g_bHowToActive = true;
-let g_bTimerActive = true;
-let g_bResultMessageActive = true;
-let g_bSettingsActive = true;
-let g_bShowDualClueActive = true;
-let g_bActionMenuActive = false;
-let g_bDualClueAnswerBoxesActive = true;
-let g_bDualClueFrameActive = true; 
-let g_bMessageVisible = true; 
-let g_SG_AM_bShowDualClueSquares  = false;
-let g_bSuppressNonGolden = false;
-let g_bPrintedFormat = false;
-let g_bSuppressGridNumbers = false;
-let g_bArchiveShow = true;
-
-function AdjustForPrintSize()
-{
-    let elemCAB_DualClue = document.getElementById("GRBMS_Div_CAB_DualClue");
-    let elemBM = document.getElementById("Div_BottomMatter");
-    let rectBM = GetBoundingClientRectAbsolute(elemBM);
-    let iBottom = rectBM.bottom;
-    let r = iBottom / g_TC_iBiggestRight;
-    let rDesired = 1.6;
-    let iBottomDesired = g_TC_iBiggestRight * rDesired;
-// move the bottom matter 
-    let iHeightBM = rectBM.height;
-    let iTopBM = iBottomDesired - iHeightBM;
-    elemBM.style.top = MakePixelString(iTopBM);
-    rectBM = GetBoundingClientRectAbsolute(elemBM);
-// now figure out where the grid ends
-    let elemKB = document.getElementById('KB_Mini_Div');
-    let rectKB = GetBoundingClientRectAbsolute(elemKB);
-// now set the theme image sizes 
-    let iBuffer = 5;
-    let iHeightTheme = iTopBM - rectKB.bottom - 2 * iBuffer;
-    g_ThemeImage_NormalSize_iTop = rectKB.bottom + iBuffer;
-    g_ThemeImage_NormalSize_iHeight = iHeightTheme;
-    let iWidthTheme = GetWidthToHeightRatioOfImageWithId("Grid_Image_Itself")*iHeightTheme;
-// now get the width and centering right
-    g_ThemeImage_NormalSize_iLeft = TC_LeftForCentering(iWidthTheme);
-    g_ThemeImage_NormalSize_iWidth = iWidthTheme;
-
-    SG2_ThemeImage_NormalSize_SetTo();
-    iBottom = rectBM.bottom;
-//alert(iButtonSize)
-//alert('|hNow:' + iBottom + '|w:' + g_TC_iBiggestRight)
-
-}
-
-function setNew()
-{
-    g_KB_Buttons_Narrow = true;
-    g_KB_Active_Mini = false;
-    g_KB_Active_bAllGridChars = true;
-    g_KB_sWidthDeterminedBy =  'BiggestRight';//'Grid'; //
-    g_KB_fFractionAvailableWidth = 1.00; // 
-    g_KB_sJustification = 'center'; // 'right' // 'grid'
-    g_Grid_fFractionAvailableWidth = 0.80;
-    g_Grid_sJustification = 'center';
-    g_bDifficultyLevelActive = false;
-    g_bHowToActive = true;
-    g_bSuppressNonGolden = false;
-    g_bTimerActive = true;
-    g_bResultMessageActive = true;
-    g_bSettingsActive = true;
-    g_bShowDualClueActive = true;
-    g_bActionMenuActive = false;
-    g_bDualClueAnswerBoxesActive = true;
-    g_bDualClueFrameActive = true; 
-    g_bMessageVisible = true; 
-    g_SG_AM_bShowDualClueSquares  = true;
-    g_bPrintedFormat = false;
-    g_bSuppressGridNumbers = false;
-    g_bArchiveShow = true;
-}
-function setOld()
-{
-    g_KB_Buttons_Narrow = true;
-    g_KB_Active_Mini = false;
-    g_KB_Active_bAllGridChars = true;
-    g_KB_sWidthDeterminedBy =  'Grid'; 
-    g_KB_fFractionAvailableWidth = 1.00;
-    g_KB_sJustification = 'grid';
-    g_Grid_fFractionAvailableWidth = 0.80;
-    g_Grid_sJustification = 'center'
-    g_bDifficultyLevelActive = true;
-    g_bHowToActive = true;
-    g_bSuppressNonGolden = false;
-    g_bTimerActive = true;
-    g_bResultMessageActive = true;
-    g_bSettingsActive = true;
-    g_bShowDualClueActive = true;
-    g_bActionMenuActive = false;
-    g_bDualClueAnswerBoxesActive = false;
-    g_bDualClueFrameActive = false; 
-    g_bMessageVisible = true; 
-    g_SG_AM_bShowDualClueSquares  = false;
-    g_bPrintedFormat = false;
-    g_bSuppressGridNumbers = false;
-    g_bArchiveShow = true;
-}
-
-function setForPrint()
-{
-    g_KB_Buttons_Narrow = true;
-    g_KB_Active_Mini = false;
-    g_KB_Active_bAllGridChars = true;
-    g_KB_sWidthDeterminedBy =  'BiggestRight'; 
-    g_KB_fFractionAvailableWidth = 1.00;
-    g_KB_sJustification = 'center';
-    g_Grid_fFractionAvailableWidth = 0.80;
-    g_Grid_sJustification = 'center'
-    g_bDifficultyLevelActive = false;
-    g_bHowToActive = false;
-    g_bSuppressNonGolden = true;
-    g_bTimerActive = false;
-    g_bResultMessageActive = false;
-    g_bSettingsActive = false;
-    g_bShowDualClueActive = false;
-    g_bActionMenuActive = false;
-    g_bDualClueAnswerBoxesActive = true;
-    g_bDualClueFrameActive = true; 
-    g_bMessageVisible = false; 
-    g_SG_AM_bShowDualClueSquares  = true;
-    g_bPrintedFormat = true;
-    g_bSuppressGridNumbers = true;
-    g_bArchiveShow = true;
-}
-
-let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle023';
+document.onkeypress = function (e) {TC_KeyboardSupport_KeyPress(e);};
+document.onkeyup = function (e) {TC_KeyboardSupport_KeyUp(e);};
+let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle012';
 let g_sPuzzleNumber          = 'puzzle000'
 let g_sPuzzleType            = 'SG2'
 
 function Dispatch() 
-{// these are also features
-    setOld();
-//    setNew();
+{
+//    setOld();
+    setNew();
 //setForPrint();
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.050';
-//    g_Place_bDirectPlaceSupport = false;
-//    g_Place_bPopupPlaceSupport = true;
-    g_Place_bDirectPlaceSupport = true;
-    g_Place_bPopupPlaceSupport = false;
 //
-    var sTC = 'APP=TC';
-    var sYM = 'APP=YM';
-    var sSG = 'APP=SG';
-    var sSG2 = 'APP=SG2';
     TC_LoadPuzzleArchive();
-//    var sME = sTC;
-//    var sME = sYM;
-//    var sME = sSG;
-    var sME = sSG2;
-    var sSearch = window.location.search;
-    var sPageURL = window.location.search.substring(1);
-    let aPairs = [];
-    if ( sPageURL.length > 0 )
-        aPairs = sPageURL.split('&');
-    if ( aPairs.length == 0 )
-        aPairs.push(sME)
-    let sElem = sME;
-    for ( var iP = 0; iP < aPairs.length; iP++ )
-    {
-        let sThisElem = aPairs[iP].toUpperCase();
-        if ( sThisElem.startsWith('APP=') )
-            sElem = sThisElem;
-    }
-    if ( sElem == sTC)
-    {
-        g_bIsTwistiCross = true;g_bIsYourMove = false;g_bIsSketchiGram = false;
-        g_sPuzzleType            = 'TC'
-    }
-    if ( sElem == sYM)
-    {
-        g_bIsTwistiCross = false;g_bIsYourMove = true;g_bIsSketchiGram = false;
-        g_sPuzzleType            = 'YM'
-    }
-    if ( sElem == sSG)
-    {
-        g_bIsTwistiCross = false;g_bIsYourMove = false;g_bIsSketchiGram = true;g_bIsSketchiGramVariant1 = true;g_bIsSketchiGramVariant2 = false;
-        g_sPuzzleType            = 'SG'
-    }
-    if ( sElem == sSG2)
-    {
-        g_bIsTwistiCross = false;g_bIsYourMove = false;g_bIsSketchiGram = true;g_bIsSketchiGramVariant1 = false;g_bIsSketchiGramVariant2 = true;
-        g_sPuzzleType            = 'SG2'
-    }
-    if ( g_bIsTwistiCross )
-    {
-        LoadTwistiCross();
-        return;
-    }
-    if ( g_bIsYourMove )
-    {
-        GRBMS_LoadAll(0);
-        return;
-    }
-    if ( g_bIsSketchiGram && g_bIsSketchiGramVariant1 )
-    {
-        SG_LoadAll(0);
-        return;
-    }
-    if ( g_bIsSketchiGram && g_bIsSketchiGramVariant2)
-    {
-        SG2_LoadAll(0);
-        return;
-    }
-    alert('oops.')
+    SG2_LoadAll(0);
+    return;
 }
 
 function TC_SetActiveSize()
@@ -406,6 +181,7 @@ function TC_SetActiveSize()
     elemAll.style.height = g_TC_iBiggestBottom;
     elemAll.style.width  = g_TC_iBiggestRight;
 }
+
 function A(e)
 {
     GRBMS_mouseMove(e)

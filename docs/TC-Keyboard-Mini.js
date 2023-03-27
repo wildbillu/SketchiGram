@@ -35,11 +35,13 @@ function KB_Mini_SetUsageMode(sUsageMode)
     g_KB_Mini_sUsageMode = sUsageMode;
     let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
     let eButtonRow = document.getElementById("KB_Mini_ButtonRow_Div");
+    let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_Idle )
     {
         let sBackgroundColor = '#FFFFFF';
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
+        elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
         KB_DisableLettersFullyPlaced();
         KB_AGC_EnabledStateAllButtons(false);
         return;
@@ -49,6 +51,7 @@ function KB_Mini_SetUsageMode(sUsageMode)
         let sBackgroundColor = g_Color_sAbvocabPink;
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
+        elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
         KB_DisableLettersFullyPlaced();
         KB_AGC_EnabledStateAllButtons(false);
         return;
@@ -59,6 +62,7 @@ function KB_Mini_SetUsageMode(sUsageMode)
         eInstructions.innerHTML = "Select Letter For Dual Clue Answer"
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
+        elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
         KB_AGC_EnabledStateAllButtons(true);
         return;
     }
@@ -234,6 +238,7 @@ function KB_Mini_KeyboardPress_GRBMS(keypressed)
         sToSet = ' ';
     }
     GRBMS_onkeyup(keypressed, iRow, iLetter);
+    Sync_FocusChange();
     return true;
 }
 

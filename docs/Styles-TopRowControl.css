@@ -24,35 +24,6 @@
     background-color:white;
 }
 
-.CAB_Row_DualClue
-{
-    border: 0px solid blue;
-    color:blue;
-    padding: 0px;
-    height:30px;
-    width: 100%;
-    border-collapse: collapse;    
-    outline: none;    
-    text-align: center;
-    font-size: 24px;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-}
-
-.CAB_Row_DualClue_Small
-{
-    padding: 0px;
-    height:20px;
-    border: 0px solid red;
-    border-collapse: collapse;    
-    outline: none;    
-    text-align: center;
-    color:red;
-    font-size: 14px;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-}
-
 .TopRowControlClass
 {
     padding: 0px;

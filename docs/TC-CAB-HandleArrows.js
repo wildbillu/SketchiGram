@@ -8,7 +8,7 @@ function CAB_HandleArrowKeys(key, iRow, iLetter)
     {
         var iNewRow = iRow - 1;
         if ( iNewRow < 0 )
-            iNewRow = g_iClues - 1;
+            iNewRow = g_CAB_iClues - 1;
         var iNewLetter = iLetter;
         var iLengthOfNewRow = CAB_ForRow_GetLength(iNewRow);
         if ( iNewLetter > iLengthOfNewRow - 1 )
@@ -19,7 +19,7 @@ function CAB_HandleArrowKeys(key, iRow, iLetter)
     if ( key.match('Down') )
     {
         var iNewRow = iRow + 1;
-        if ( iNewRow > g_iClues - 1 )
+        if ( iNewRow > g_CAB_iClues - 1 )
             iNewRow = 0;
         var iLengthNewRow = CAB_ForRow_GetLength(iNewRow);
         var iNewLetter = iLetter;

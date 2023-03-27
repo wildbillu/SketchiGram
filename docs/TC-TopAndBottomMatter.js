@@ -42,16 +42,11 @@ function TC_MakeStatusControlRow()
 // now the buttons and right side
     var sButtonsHTML = '';
     var iButtons = 0;
-    if ( g_bIsTwistiCross )
-        {sButtonsHTML += Make_Button_Direction(); iButtons++}
     sButtonsHTML += Make_Button_Info(); iButtons++;
     sButtonsHTML += Make_Button_Settings(); iButtons++;
     sButtonsHTML += Make_Button_MoreActions(); iButtons++;
-    if ( g_bIsSketchiGramVariant2 )
-    {    
-        iStatusControlWidth += g_GRBMS_TopRow_Buttons_iSize;
-    }
-    var iWidthButtons = iButtons * g_GRBMS_TopRow_Buttons_iSize;
+    iStatusControlWidth += g_GRBMS_TopRow_Buttons_iSize;
+    let iWidthButtons = iButtons * g_GRBMS_TopRow_Buttons_iSize;
 //
     var elemControlStatusRight = document.getElementById("Div_StatusControl_Right");
     elemControlStatusRight.innerHTML = sButtonsHTML;
@@ -74,14 +69,7 @@ function TC_SetTopMatter()
     elemPuzzleType.style.top = MakePixelString(3);
     g_TC_iBiggestBottom += 3;
     elemPuzzleType.style.width = MakePixelString(g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
-    if ( g_bIsTwistiCross )
-        elemPuzzleType.innerHTML = 'TwistiCross&trade; with SketchiToons&reg; from Sketchi Bill at Absolutely Vocabulous&trade;';
-    else if ( g_bIsYourMove )
-        elemPuzzleType.innerHTML = 'It\'s Your Move Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
-    else if ( g_bIsSketchiGramVariant1 )
-        elemPuzzleType.innerHTML = 'SketchiGram Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
-    else if ( g_bIsSketchiGramVariant2 )
-        elemPuzzleType.innerHTML = 'SketchiGram&trade; Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
+    elemPuzzleType.innerHTML = 'SketchiGram&trade; Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
     let rectType = GetBoundingClientRectAbsolute(elemPuzzleType);
     g_TC_iBiggestBottom += rectType.height;
 // now we can adjust the position of the status row
@@ -93,65 +81,34 @@ function TC_SetTopMatter()
     elemStatusControlRight.style.top = MakePixelString(g_TC_iBiggestBottom);
     
     let rectControlRight =  GetBoundingClientRectAbsolute(elemStatusControlRight);
-//
+// determine rows in puzzle title
     let elemPuzzleTitle = document.getElementById("Div_PuzzleTitle");
-    if ( g_bIsSketchiGramVariant2 )
-    {
-        elemPuzzleTitle.style.top = MakePixelString(g_TC_iBiggestBottom);
-        elemPuzzleTitle.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-
-        if ( g_bSettingsActive )
-            elemPuzzleTitle.style.width = MakePixelString(rectControlRight.left - g_TC_Padding_Left_iSize);
-        else
-            elemPuzzleTitle.style.width = MakePixelString(g_TC_iBiggestRight);
-    }
-    g_TC_iBiggestBottom += rectControlRight.height;
-//
+    let iWidthAvailableForTitle = g_TC_iBiggestRight
+    if ( g_bSettingsActive )
+        iWidthAvailableForTitle = rectControlRight.left - g_TC_Padding_Left_iSize;
+    let iWidthIfOneLine = GetWidthOfTextInPixels(elemPuzzleTitle, g_sPuzzleTitle);
+    let bOneLine = true;
+    if ( iWidthIfOneLine > iWidthAvailableForTitle )
+        bOneLine = false;
+    let iTop = g_TC_iBiggestBottom;
+    if ( bOneLine )
+        iTop += 10;
+    elemPuzzleTitle.style.top = MakePixelString(iTop);
+    elemPuzzleTitle.style.left = MakePixelString(g_TC_Padding_Left_iSize);
+    elemPuzzleTitle.style.width = MakePixelString(iWidthAvailableForTitle);
     elemPuzzleTitle.innerHTML = g_sPuzzleTitle;
-    if ( !g_bIsSketchiGramVariant2 )
-    {
-        g_TC_iBiggestBottom +=  - g_TC_Padding_Right_iSize;
-        elemPuzzleTitle.style.top = MakePixelString(g_TC_iBiggestBottom);
-        elemPuzzleTitle.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-        elemPuzzleTitle.style.width = MakePixelString(g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
-        let rectTitle = GetBoundingClientRectAbsolute(elemPuzzleTitle);
-        g_TC_iBiggestBottom += rectTitle.height;
-    }
-//
-    if ( !g_bIsSketchiGramVariant2 )
-    {
-        var elemPuzzleDualClue = document.getElementById("Div_PuzzleDualClue");
-        if ( elemPuzzleDualClue )
-        {
-            elemPuzzleDualClue.innerHTML = 'Dual Clue:' + g_ST_sClue_Itself;
-            g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
-            elemPuzzleDualClue.style.top = MakePixelString(g_TC_iBiggestBottom);
-            elemPuzzleDualClue.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-            elemPuzzleDualClue.style.width = MakePixelString(g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
-            var rectDualClue = elemPuzzleDualClue.getBoundingClientRect();
-            g_TC_iBiggestBottom += rectDualClue.height;
-        }
-    }
-/*    
-    if ( g_bIsSketchiGram )
-    { // instruction line will be moved vertically later just adjust width
-        var elemHowToA = document.getElementById("SG_HowToA_Div");
-//        g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
-//        elemHowToA.style.top = MakePixelString(g_TC_iBiggestBottom);
-        // make the width the width of the grid
-        var iWidthGrid = g_iGridWidth * g_GRBMS_Square_iSize;
-        elemHowToA.style.width = MakePixelString(iWidthGrid);
-//        var rectelemHowToA = elemHowToA.getBoundingClientRect();
-//        g_TC_iBiggestBottom += rectelemHowToA.height;
-    }
-*/    
+    g_TC_iBiggestBottom += rectControlRight.height;
     MoreActions_SizeAndPosition();
 }
 
 function TC_SetBottomMatter()
 {
-    var elemBottomMatter = document.getElementById("Div_BottomMatter");
-    g_TC_iBiggestBottom += 3 * g_TC_Padding_Inter_Vertical_iSize + g_iFudgeSpace;
+    let elemClue_Div = document.getElementById("SG_Clues_Div")
+    let rectClue_Div = GetBoundingClientRectAbsolute(elemClue_Div);
+    let iBottomClueDiv = rectClue_Div.bottom;
+    g_TC_iBiggestBottom = iBottomClueDiv;
+    let elemBottomMatter = document.getElementById("Div_BottomMatter");
+    g_TC_iBiggestBottom += 1 * g_TC_Padding_Inter_Vertical_iSize + g_iFudgeSpace;
     elemBottomMatter.style.top = MakePixelString(g_TC_iBiggestBottom);
     var iWidth = g_TC_iBiggestRight - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
     elemBottomMatter.style.width = MakePixelString(iWidth);

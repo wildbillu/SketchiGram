@@ -1,0 +1,127 @@
+/* Styles-MiniActionMenu.css */
+
+.MAM_Confirm_Dialog_Div
+{
+    left:600px;
+    top:100px;
+    width:100px;
+    height:22px;
+    border:2px solid blue;
+    z-index: 5;
+}
+
+.MAM_Confirm_Dialog
+{
+    left:0px;
+    top:0px;
+    width:300px;
+    height:100px;
+    border:5px solid orange;
+    z-index: 5;
+}
+
+.MAM_Confirm_Text
+{
+    color:red;
+    border:2px solid blue;
+    z-index: 5;
+}
+
+.MAM_Confirm_Buttons
+{
+    border:2px solid blue;
+    z-index: 5;
+}
+
+.MAM_Confirm_CancelButton
+{
+    border:2px solid blue;
+    z-index: 5;
+
+}
+
+.MAM_Confirm_GoAhead
+{
+    border:2px solid blue;
+    z-index: 5;
+}
+
+
+.MAM_Div
+{
+    width: 100%;
+    user-select: none;
+    border:2px solid blue;
+    text-align:center;
+    position:absolute;
+    left:10px;
+    top:350px;
+    height:300px;
+    width:100px;
+    background-color:white;
+    z-index:0; 
+}
+
+.MAM_MenuItem_Selected
+{
+    color:green;
+    background-color:white;
+}
+
+.MAM_MenuItem_Enabled
+{
+    color:blue;
+    background-color:lightblue;
+}
+
+.MAM_MenuItem_Disabled
+{
+    color:gray;
+    background-color:lightgray;
+}
+
+.MAM_MenuItem_Base
+{
+    display:inline-block;
+    position:relative;
+    user-select: none;
+    border:1px solid blue;
+    text-align:center;
+    line-height:30px;
+    left:0px;
+    top:0px;
+    height:60px;
+    width:70px;
+    font-size:20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;   
+}
+
+.MAM_MenuItem_Spacer
+{
+    left:0px;
+    top:0px;
+    height:5px;
+    width:70px;
+}
+
+
+.MAM_Header
+{
+    display: inline-block;
+    position: relative;
+    color:black;
+    background-color:white;
+    user-select: none;
+    border:0px solid blue;
+    vertical-align:12px;
+    text-align:center;
+    left:0px;
+    top:0px;
+    line-height:30px;
+    height:30px;
+    width:90px;
+    font-size:20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;   
+}

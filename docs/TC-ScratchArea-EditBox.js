@@ -27,14 +27,14 @@ function TC_SA_EB_CheckIfEntryMatchesAnAnswer(iEntry)
 {
     let sValue = g_SA_EB_aWords[iEntry];
     sValue = sValue.toUpperCase();
-    for ( let iAnswer = 0; iAnswer < g_aAnswers.length; iAnswer++ )
+    for ( let iAnswer = 0; iAnswer < g_CAB_aAnswers.length; iAnswer++ )
     {
-        let sAnswer = g_aAnswers[iAnswer];
+        let sAnswer = g_CAB_aAnswers[iAnswer];
         if ( sAnswer == sValue )
         {
             let sMessage = sValue + ' is a correct grid answer'
             TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
-            SG_Clues_ShowClue_ResetAnswer(iAnswer, false, true, false);
+            SG_UpdateAnswersCorrectInGridAndDisplay();
             let iIndex = TC_SA_EB_EntryFromId(g_SA_EB_Focus_sId);
             g_SA_EB_sWordStatus = replaceAt(g_SA_EB_sWordStatus, iIndex, 'T');
 // lose focus 
@@ -136,7 +136,7 @@ function TC_SA_EB_onkeypress(e)
     let letters = /^[a-zA-Z]$/;
     let sMessage = 'Invalid key';
     if ( eKey.match(letters) ) 
-        sMessage = cKey + ' Is Not In the Solution Grid';
+        sMessage = cKey + ' Is Not In the puzzle';
     TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
     e.preventDefault();
     return false;

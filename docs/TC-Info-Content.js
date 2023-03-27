@@ -17,36 +17,10 @@ function Make_Button_Info()
 function MakeInfoDiv()
 {    
     var sInfoContent ='';
-    if ( g_bIsTwistiCross )
-    {
-        sInfoContent += '<DIV Id="InfoDiv" class="Info_Div Info_DivBorder_Image Info_Image">'
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date">XXXX</text></DIV>';
-        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version">XXXX</text></DIV>';
-    }
-    else if ( g_bIsYourMove )
-    {
-        sInfoContent += '<DIV Id="InfoDiv" class="Info_Div Info_DivBorder_Image Info_Image_YM">'
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author_YM">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date_YM">XXXX</text></DIV>';
-        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version_YM">XXXX</text></DIV>';
-
-    }
-    else if ( g_bIsSketchiGramVariant1 )
-    {
-        sInfoContent += '<DIV Id="InfoDiv" class="Info_Div Info_DivBorder_Image Info_Image_SG">'
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author_SG">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date_SG">September 27, 2022</text></DIV>';
-        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version_SG">October 10, 2022</text></DIV>';
-
-    }
-    else if ( g_bIsSketchiGramVariant2 )
-    {
-        sInfoContent += '<DIV Id="InfoDiv" class="Info_Div Info_DivBorder_Image Info_Image_SG2">'
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author_SG2">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
-        sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date_SG2">November 20, 2022</text></DIV>';
-        sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version_SG2">November 19, 2022</text></DIV>';
-    }
+    sInfoContent += '<DIV Id="InfoDiv" class="Info_Div Info_DivBorder_Image Info_Image_SG2">'
+    sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_AuthorCredit" class="Info_Content_Credits Info_Content_Credits_Author_SG2">Puzzle By: Sketchi Bill - Image By: Sketchi Bill</text></DIV>';
+    sInfoContent += '<DIV class="Info_Center"><text Id="Info_Content_PuzzleDate" class="Info_Content_Credits Info_Content_Credits_Date_SG2">November 20, 2022</text></DIV>';
+    sInfoContent += '<DIV class="Info_Left"><text Id="Info_Content_PuzzleVersion" class="Info_Content_Credits Info_Content_Credits_Version_SG2">November 19, 2022</text></DIV>';
     sInfoContent += '<DIV Id="Button_Close_Div" class="Button_Close_Div"><BUTTON class="Button_Info_CloseBox Id="Info_CloseBox" onclick="TC_HideInfo();">Close<BUTTON></DIV>';
     sInfoContent += '</DIV>';
     return sInfoContent;
@@ -73,7 +47,7 @@ function TC_ShowInfo()
         return;
     }
     g_sCABOnInfoClick = g_CAB_Focus_sId;
-    g_sGRBOnInfoClick = g_GRB_Focus_sId;
+    g_sGRBOnInfoClick = g_GRBMS_Focus_sId;
     Make_Info_Content_Update()
     var iWidth = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     var elemInfoDiv = document.getElementById("InfoDiv");

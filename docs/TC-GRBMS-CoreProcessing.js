@@ -6,10 +6,11 @@ function GRBMS_LoseCurrentFocus()
         return;
     let iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
     let iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
-    GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_Inactive);
+    GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
     let elem = document.getElementById(g_GRBMS_Focus_sId);
     elem.style.cursor="default";
     g_GRBMS_Focus_sId = '';
+    Sync_FocusChange();
 }
 
 function GRBMS_onkeyup(key, iRow, iLetter)
@@ -26,7 +27,7 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     let bValidLetter = g_GRBMS_sAllowedGridLetters.includes(sUpper);
     if ( !bValidLetter )
     { // set focus back to this so if 
-        TC_ResultMessage_DisplayForInterval(sUpper + ' Is Nowhere in the Grid', g_ResultMessage_sStyle_Warning, 1, 3);
+        TC_ResultMessage_DisplayForInterval(sUpper + ' Is Nowhere in the Puzzle', g_ResultMessage_sStyle_Warning, 1, 3);
         document.getElementById(g_GRBMS_Focus_sId).focus();
         return false;
     }
@@ -37,8 +38,9 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     if ( !bValidLetter )
     {
         KB_Mini_SetInstructionLine('');  
-        GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_Inactive);
+        GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
         g_GRBMS_Focus_sId = '';
+        Sync_FocusChange();
         return false;
     }
     // we want to switch with square that has iLetter
@@ -54,6 +56,7 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     }
     g_GRBMS_Focus_sId = '';
     Status_Check(false);
+    Sync_FocusChange()
     return false;
 }
 
@@ -86,6 +89,7 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
     GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
     KB_Mini_SetInstructionLine('');   
     Status_Check();
+    Sync_GridChange();
     return 'exchanged';
 }
 
@@ -97,6 +101,7 @@ function GRBMS_onfocus(elem)
     if ( g_SA_EB_Focus_sId != '' )
         TC_SA_EB_LoseTheFocusAndCleanup(true);
     g_GRBMS_Focus_sId = sThisId;
+    Sync_FocusChange();
 }    
 
 function GRBMS_onkeypress(event)

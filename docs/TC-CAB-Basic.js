@@ -4,41 +4,41 @@ function CAB_FocusLostSetActiveToInActive()
 {
     if ( g_CAB_Focus_sId == '' )
         return;
-    var iRow = CAB_RowFromId(g_CAB_Focus_sId);
-    CAB_ForRow_SetToInactive(iRow);
+    let iRow = CAB_RowFromId(g_CAB_Focus_sId);
+    if ( TC_ForIndexIsClueTypeSpecial(iRow) ) CAB_ForRow_SetToInactive(iRow);
     g_CAB_Focus_sId = '';
-    if ( g_bIsTwistiCross )
-        CAB_ForRowWithFocus_SetAnswerBoxStyles();
-    else if ( g_bIsYourMove )
-        GRBMS_ForRowWithFocus_SetAnswerBoxStyles();
     CAB_SetBackground(false)
 }
 
 function CAB_ForRow_SetToInactive(iRow)
 {
-    let iLength = g_aAnswers[iRow].length;
+    if ( !TC_ForIndexIsClueTypeSpecial(iRow) )
+        return;
+    let iLength = g_CAB_aAnswers[iRow].length;
     for (let iL = 0; iL < iLength; iL++ )
     {
-        CAB_ForRowLetter_SetButton(iRow, iL, g_TC_cCodeMeaning_Inactive)
+        CAB_ForRowLetter_SetButton(iRow, iL, g_cCode_Inactive)
     }
 }
 
 function CAB_ForRow_SetToActive(iRow, iActiveLetter)
 {
-    var iLength = g_aAnswers[iRow].length;
-    for (var iL = 0; iL < iLength; iL++ )
+    if ( !TC_ForIndexIsClueTypeSpecial(iRow) )
+        return;
+    let iLength = g_CAB_aAnswers[iRow].length;
+    for (let iL = 0; iL < iLength; iL++ )
     {
         if ( iL == iActiveLetter)
-            CAB_ForRowLetter_SetButton(iRow, iL, g_TC_cCodeMeaning_HasFocus)
+            CAB_ForRowLetter_SetButton(iRow, iL, g_cCode_HasFocus)
         else
-            CAB_ForRowLetter_SetButton(iRow, iL, g_TC_cCodeMeaning_ActiveRow)
+            CAB_ForRowLetter_SetButton(iRow, iL, g_cCode_ActiveRow)
 
     }
 }
 
 function CAB_MakeId(iRow, iLetter)
 {
-    var s = 'CAB_' + iRow + '_' + iLetter   
+    let s = 'CAB_' + iRow + '_' + iLetter   
     return s;
 }
 
@@ -54,6 +54,6 @@ function CAB_RowFromId(sid)
 
 function CAB_MakeHTMLId(iRow, iLetter)
 {
-    var s = 'Id="' + CAB_MakeId(iRow, iLetter) + '" ';
+    let s = 'Id="' + CAB_MakeId(iRow, iLetter) + '" ';
     return s;
 }

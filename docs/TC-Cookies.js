@@ -136,19 +136,19 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
 function StoreCookie_Puzzle()
 {
 // for CAB we need to wrap the player answers and status with the '|'
-    var sAnswersPlayer = g_aAnswersPlayer.join('|');
-    var sAnswersStatusPlayer = g_aAnswersStatusPlayer.join('|');
-    var sGridAnswersPlayer = g_aGridAnswersPlayer.join('')
-    var sGridStatusPlayer = g_aGridStatusPlayer.join('')
-    var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0)
+    let sAnswersPlayer = g_CAB_aAnswersPlayer.join('|');
+    let sAnswersStatusPlayer = g_CAB_aAnswersPlayerStatus.join('|');
+    let sGridAnswersPlayer = g_aGridAnswersPlayer.join('')
+    let sGridStatusPlayer = g_aGridStatusPlayer.join('')
+    let sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0)
     document.cookie = sCookieToAdd;
 //    setlineAdd('CPS:' + ++g_iStoredPuzzleCookies);
 }
 
 function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds)
 {
-    var sCookieName = g_sPuzzleType + '-' + g_sPuzzleNumber;
-    var sCookie = '';
+    let sCookieName = g_sPuzzleType + '-' + g_sPuzzleNumber;
+    let sCookie = '';
     sCookie += sPuzzleName;
      sCookie += g_cCookieDelimiter;
     sCookie += sAnswersPlayer;
@@ -166,7 +166,7 @@ function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnsw
     sCookie += g_bGridSolved;
     sCookie += g_cCookieDelimiter;
     sCookie += g_bAnswersSolved;
-    let SA_EB_sWords = g_SA_EB_aWords.join(g_TC_cGeneralDelimiter);
+    let SA_EB_sWords = g_SA_EB_aWords.join(g_cGeneralDelimiter);
     sCookie += g_cCookieDelimiter;
     sCookie += SA_EB_sWords;
     sCookie += g_cCookieDelimiter;
@@ -190,11 +190,11 @@ function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnsw
 function DeleteCookiesMatching(sMatch)
 {
     let s = document.cookie;
-    var aCookies = s.split(';');
-    var iCookies = aCookies.length;
-    for ( var iCookie = 0; iCookie < iCookies; iCookie++ )
+    let aCookies = s.split(';');
+    let iCookies = aCookies.length;
+    for ( let iCookie = 0; iCookie < iCookies; iCookie++ )
     {
-        var sThisCookie = aCookies[iCookie]
+        let sThisCookie = aCookies[iCookie]
         if ( sMatch == '' || sThisCookie.startsWith(sMatch) )
         {
             const d = new Date();

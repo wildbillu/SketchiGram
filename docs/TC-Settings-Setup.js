@@ -36,7 +36,7 @@ function TC_ShowSettings()
     var elemSettingDiv = document.getElementById("SettingsDiv");
     elemSettingDiv.style.visibility = 'visible'
     g_sCABOnSettingsClick = g_CAB_Focus_sId;
-    g_sGRBOnSettingsClick = g_GRB_Focus_sId;
+    g_sGRBOnSettingsClick = g_GRBMS_Focus_sId;
     g_TC_Settings_bActive = true;
 }
 
@@ -111,43 +111,8 @@ function MakeSettingsInner()
     sPopupWindow += '<TABLE Id="Settings_I" width="100%"><TR><TD width="95%" Id="Settings_G" class="Settings_CloseBoxRow">Settings</TD><TD width="5%"><BUTTON Id="Settings_CloseBox" class="Settings_CloseBox" onclick="TC_HideSettings();">Done</TD></TR></TABLE>';
     sPopupWindow += '</TD></TR>';
 //    
-    if ( g_bIsTwistiCross || g_bIsYourMove || g_bIsSketchiGramVariant1 )
-    {
-        sPopupWindow += MakeSubTitleRow('Check and Show Correct Items', 'Settings_STA');
-        g_TC_Settings_aVariables.push(g_TC_Settings_bDummy);g_TC_Settings_aIds.push("Settings_STA"); g_TC_Settings_aTypes.push("SubTitle");
-
-        sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Answers_CheckRow, 'Settings_CAGR_Answers_CheckRow', 'Check each answer and mark when correct');
-        g_TC_Settings_aVariables.push(g_bSettings_CAGR_Answers_CheckRow);g_TC_Settings_aIds.push("Settings_CAGR_Answers_CheckRow"); g_TC_Settings_aTypes.push("Button");
-         
-        sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Answers_ShowCorrectLetters, "Settings_CAGR_Answers_ShowCorrectLetters", 'Mark each square when correct');
-        g_TC_Settings_aVariables.push(g_bSettings_CAGR_Answers_ShowCorrectLetters);g_TC_Settings_aIds.push("Settings_CAGR_Answers_ShowCorrectLetters"); g_TC_Settings_aTypes.push("Button");
-    }
-
-    if ( g_bIsTwistiCross || g_bIsYourMove || g_bIsSketchiGramVariant1 )
-    {
-        sPopupWindow += MakeSubTitleRow('Actions On Add Letter', 'Settings_STB');
-        g_TC_Settings_aVariables.push(g_TC_Settings_bDummy);g_TC_Settings_aIds.push("Settings_STB"); g_TC_Settings_aTypes.push("SubTitle");
-
-        sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares, "Settings_CAGR_Navigation_WithinWord_SkipFilledSquares", 'Skip Filled Squares')
-        g_TC_Settings_aVariables.push(g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares);g_TC_Settings_aIds.push("Settings_CAGR_Navigation_WithinWord_SkipFilledSquares"); g_TC_Settings_aTypes.push("Button");
-
-        sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare, 'Settings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare', 'Jump to empty square at end of word')
-        g_TC_Settings_aVariables.push(g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare);g_TC_Settings_aIds.push("Settings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare"); g_TC_Settings_aTypes.push("Button");
-
-        sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue, 'Settings_CAGR_Navigation_EndOfWord_JumpToNextClue', 'Jump to next word at completed word')
-        g_TC_Settings_aVariables.push(g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue);g_TC_Settings_aIds.push("Settings_CAGR_Navigation_EndOfWord_JumpToNextClue"); g_TC_Settings_aTypes.push("Button");
-    }
     sPopupWindow += MakeSubTitleRow('Progress Indicators', 'Settings_STC')
     g_TC_Settings_aVariables.push(g_TC_Settings_bDummy);g_TC_Settings_aVariables.push(g_TC_Settings_bDummy);g_TC_Settings_aIds.push("Settings_STC"); g_TC_Settings_aTypes.push("SubTitle");
-
-    if ( g_bIsTwistiCross || g_bIsYourMove || g_bIsSketchiGramVariant1 )
-    {
-        sPopupWindow += MakeCheckBox(g_bSettings_CA_Display_ShowProgress, 'Settings_CA_Display_ShowProgress', 'Show progress for clue answers')
-        g_TC_Settings_aVariables.push(g_bSettings_CA_Display_ShowProgress);g_TC_Settings_aIds.push("Settings_CA_Display_ShowProgress"); g_TC_Settings_aTypes.push("Button");
-
-        sPopupWindow += MakeCheckBox(g_bSettings_GR_Display_ShowProgress, 'Settings_GR_Display_ShowProgress', 'Show progress for grid answers')
-        g_TC_Settings_aVariables.push(g_bSettings_GR_Display_ShowProgress);g_TC_Settings_aIds.push("Settings_GR_Display_ShowProgress"); g_TC_Settings_aTypes.push("Button");
-    }
     sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Display_Complete, 'Settings_CAGR_Display_Complete', 'Show Completion(s)')
     g_TC_Settings_aVariables.push(g_bSettings_CAGR_Display_Complete);g_TC_Settings_aIds.push("Settings_CAGR_Display_Complete"); g_TC_Settings_aTypes.push("Button");
     sPopupWindow += '</TABLE>';

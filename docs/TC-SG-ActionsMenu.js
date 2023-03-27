@@ -10,7 +10,8 @@ var g_SG_AM_bSmartMovesOnly = false;
 var g_SG_AM_bIndicateCorrectMoves = false;
 
 
-
+//let g_ActionMenu_iTop = 150; 
+//let g_ActionMenu_iLeft = g_TC_Padding_Left_iSize;
 
 
 function SG_ActionMenu_SetCheckBoxes()
@@ -33,8 +34,8 @@ function SG_ActionMenu_SetVisible()
 
 function SG_AM_ShowDualClueSquares()
 {
-    g_SG_AM_bShowDualClueSquares = !g_SG_AM_bShowDualClueSquares;
-    SG_ActionMenu_SetCheckBox("SG_AM_ShowDualClueSquares_Button", g_SG_AM_bShowDualClueSquares, true);
+    g_SG_AM_bShowDualClueCircles = !g_SG_AM_bShowDualClueCircles;
+    SG_ActionMenu_SetCheckBox("SG_AM_ShowDualClueSquares_Button", g_SG_AM_bShowDualClueCircles, true);
     GRBMS_SetAllButtons();
 }
 
@@ -63,7 +64,7 @@ function SG_AM_CorrectSelected()
 
 function SG_AM_RevealRandomSquare()
 {
-    SG_ShowExtraClue();
+    SG_ShowExtraClue(false);
 }
 
 function SG_AM_SolvePuzzle()
@@ -113,18 +114,9 @@ function SG_ActionMenu_FixWidthsReturnHeight(iWidth)
 
 function SG_ActionMenu_ShowClues()
 {
-    SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
+    SG_CA_UpdateAndSetVisibility(true);
 }
 
-function SG_ActionMenu_SolveAsCrossword()
-{
-    for ( let i = 0; i < g_aAnswers.length; i++ )
-    {  
-        SG_Clues_ShowClue_ResetAnswer(i, true, false, true)
-    }
-    SG_ShowClues(true, true, false)
-    SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true);
-}
 
 function SG_ActionMenu_MakeCheckBoxButton(sId_Prefix, sFunction, sText)
 {
@@ -160,8 +152,6 @@ function SG_ActionMenu_MakeInner()
 // now the just buttons
     sActionMenu += '<BUTTON Id="SG_AM_ShowClues"          class="SG_ActionMenuButton" onclick="SG_ActionMenu_ShowClues();">Show Clues</BUTTON>';
     g_SG_ActionMenu_aIds.push("SG_AM_ShowClues");
-    sActionMenu += '<BUTTON Id="SG_AM_SolveAsCrossword"   class="SG_ActionMenuButton" onclick="SG_ActionMenu_SolveAsCrossword();">Solve As Crossword</BUTTON>';
-    g_SG_ActionMenu_aIds.push("SG_AM_SolveAsCrossword");
     sActionMenu += '<BUTTON Id="SG_AM_CorrectSelected"    class="SG_ActionMenuButton" onclick="SG_CorrectSelected();">Reveal Selected Square</BUTTON>';
     g_SG_ActionMenu_aIds.push("SG_AM_CorrectSelected");
     sActionMenu += '<BUTTON Id="SG_AM_RevealRandomSquare"    class="SG_ActionMenuButton" onclick="SG_AM_RevealRandomSquare();">Reveal Random Square</BUTTON>';
@@ -192,33 +182,26 @@ function SG_CorrectSelected()
     GRBMS_onkeyup(cCorrect, iRow, iLetter);
 }
 
-function SG_MakeClueTextId(iRow)
-{
-    return 'SG_Clues_Text_' + iRow;
-}
+
 
 function SG_Position_Answer(iRow)
 {
-    var sSize = ' [' + g_aAnswerLocations[iRow] + '] ';
+    var sSize = ' [' + g_CAB_aAnswerLocations[iRow] + '] ';
     return sSize;
 }
 
 function SG_Size_Answer(iRow)
 {
-    var sSize = ' ( ' + g_aAnswers[iRow].length + ' letters ) ';
+    var sSize = ' ( ' + g_CAB_aAnswers[iRow].length + ' letters ) ';
     return sSize;
 }
 
 function SG_ActionMenu_SizeAndPosition()
 {
-    let elemTop = document.getElementById("DisplayDualClue_Div")
-    let rectTop = GetBoundingClientRectAbsolute(elemTop);
-    var iTop = rectTop.bottom;
-    var iLeft = 10;
-    var iWidth = 200;
-    var elemActionMenuDiv = document.getElementById("SG_ActionMenu_Div")
-    elemActionMenuDiv.style.top = MakePixelString(iTop);
-    elemActionMenuDiv.style.left = MakePixelString(iLeft);
+    let iWidth = 200;
+    let elemActionMenuDiv = document.getElementById("SG_ActionMenu_Div")
+    elemActionMenuDiv.style.top = MakePixelString(g_ActionMenu_iTop);
+    elemActionMenuDiv.style.left = MakePixelString(g_ActionMenu_iLeft);
     elemActionMenuDiv.style.width = MakePixelString(iWidth);
     iTotalHeight = SG_ActionMenu_FixWidthsReturnHeight(iWidth);
     elemActionMenuDiv.style.height = MakePixelString(iTotalHeight);

@@ -37,6 +37,7 @@ window.onclick = function(event)
 		let bHideExtraImage = true;
 		if ( sTargetId.indexOf('SG_AM_ShowSketchiToonsHint') != -1 ) bHideExtraImage = false;
 		if ( sTargetId.indexOf('DisplayDualClue_Div') != -1 )bHideExtraImage = false;
+		if ( sTargetId.indexOf('SpecialClue_Image_Div') != -1 )bHideExtraImage = false;
 		if ( sTargetId.indexOf('ExtraImage') != -1 ) bHideExtraImage = true;
 		if ( bHideExtraImage ) TC_HideExtraImage();
 	}

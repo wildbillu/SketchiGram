@@ -33,11 +33,11 @@ function TC_DifficultyLevel_ChangedWork(iLevel_New, bRespectCookie)
       TC_SetVisible("ScratchArea");
     }
     if ( iLevel_New <= 1 && g_DifficultyLevel_iLevel > 1 )
-      SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, true); 
+      SSG_CA_UpdateAndSetVisibility(true);
     if ( iLevel_New == 0 && g_DifficultyLevel_iLevel > 0 )
     {
       if ( !bRespectCookie )//|| g_Cookie_DifficultyLevel_iLevel > 0 )
-        SG_ShowExtraClue();
+        SG_ShowExtraClue(false);
     }      
     g_DifficultyLevel_iLevel = iLevel_New;      
     let elemRangeControl = document.getElementById("DifficultyLevel_RangeControl");

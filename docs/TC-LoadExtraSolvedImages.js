@@ -36,17 +36,17 @@ function TC_ShowExtraImage()
 {
     var iWidth = g_TC_iBiggestRight;
     var elemImage = document.getElementById("ExtraImage");
-    let elemTitle = document.getElementById("Div_PuzzleTitle");
-    let rectTitle = elemTitle.getBoundingClientRect();
-    elemImage.style.top = MakePixelString(rectTitle.bottom + 2 );
+    let elemForPosition = document.getElementById("SpecialClue_Div");
+    let rectForPosition = elemForPosition.getBoundingClientRect();
+    elemImage.style.top = MakePixelString(rectForPosition.bottom + 2 );
     elemImage.style.left = MakePixelString(0);//g_TC_Padding_Left_iSize)
     elemImage.style.width = MakePixelString(iWidth)
     elemImage.style.visibility = 'visible'
 
     g_sCABOnExtraImageClick = g_CAB_Focus_sId;
-    g_sGRBOnExtraImageClick = g_GRB_Focus_sId;
+    g_sGRBOnExtraImageClick = g_GRBMS_Focus_sId;
     g_GRBMS_ExtraImage_bActive = true;
-    ForIdSetVisibility("ScratchArea", true);
+//    ForIdSetVisibility("ScratchArea", true);
 
     g_ShowExtraImage_IntervalId = setInterval(TC_HideExtraImage, 10000);
 
@@ -87,7 +87,7 @@ function TC_ShowSolvedImage()
     elemImage.style.width = MakePixelString(iWidth)
     elemImage.style.visibility = 'visible'
     g_sCABOnSolvedImageClick = g_CAB_Focus_sId;
-    g_sGRBOnSolvedImageClick = g_GRB_Focus_sId;
+    g_sGRBOnSolvedImageClick = g_GRBMS_Focus_sId;
     g_GRBMS_SolvedImage_bActive = true;
     setTimeout(function(){TC_HideSolvedImage();}, 10000); 
 }

@@ -10,37 +10,16 @@ var g_ResultMessage_sLevel_Excellent = 'Excellent!';
 var g_ResultMessage_sLevel_GoodJob = 'Good Job';
 var g_ResultMessage_sLevel_InfoOnly = 'FYI';
 
-function TC_ResultMessage_Setup(iTop)
+function TC_ResultMessage_Setup()
 {
     let elemResultMessage_Div = document.getElementById("ResultMessage_Div");
 // locate message and size
 // over lay it on Progress grid etc
-    if ( !g_bIsSketchiGramVariant2 )
-    {
-        let elemCA = document.getElementById("StatusControl_CA");
-        let rectCA = elemCA.getBoundingClientRect();
-        let elemGR = document.getElementById("StatusControl_GR");
-        let rectGR = elemGR.getBoundingClientRect();
-        let iLeft = rectGR.left;
-        let iRight = rectCA.right;
-        elemResultMessage_Div.style.left = MakePixelString(iLeft);
-        elemResultMessage_Div.style.width = MakePixelString(iRight - iLeft);
-        let elemStatus = document.getElementById("Div_StatusControl_Left");
-        let rectStatus = elemStatus.getBoundingClientRect();
-        if ( iTop == 0 )
-            iTop  = rectStatus.top;
-        let iHeight = rectStatus.height;
-        elemResultMessage_Div.style.top = MakePixelString(iTop);
-        elemResultMessage_Div.style.height = MakePixelString(iHeight);
-    }
-    else
-    { 
-        let rectResultMessage_Div = elemResultMessage_Div.getBoundingClientRect();
-        let iWidthElement = rectResultMessage_Div.width
-        let iLeft = TC_LeftForCentering(iWidthElement);
-        elemResultMessage_Div.style.left = MakePixelString(iLeft)
-        elemResultMessage_Div.style.top = MakePixelString(iTop);
-    }
+    let rectResultMessage_Div = elemResultMessage_Div.getBoundingClientRect();
+    let iWidthElement = rectResultMessage_Div.width
+    let iLeft = TC_LeftForCentering(iWidthElement);
+    elemResultMessage_Div.style.left = MakePixelString(iLeft)
+    elemResultMessage_Div.style.top = MakePixelString(gResultMessage_iTop);
 }
 
 function TC_ResultMessage_DisplayForInterval(sMessage, sStyle, iNumber, iSeconds)

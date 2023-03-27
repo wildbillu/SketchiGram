@@ -39,26 +39,21 @@ function TC_FullButtonName(sButton)
 
 function TC_GetStatusOverlayImagePathAndName(cStatus)
 {
-    if ( cStatus == g_TC_cCodeMeaning_Normal )
+    if ( cStatus == g_cCode_Normal )
         return g_sImagePath_StatusIndicators + g_sStatusButtonName_Empty;
-//    if ( cStatus == g_TC_cCodeMeaning_Golden )
+//    if ( cStatus == g_cCode_Golden )
 //    {
 //        return g_sImagePath_StatusIndicators + g_sStatusButtonName_GoldenSquare;
 //    }
-if ( cStatus == g_TC_cCodeMeaning_Corrected )
+    if ( cStatus == g_cCode_Corrected )
         return g_sImagePath_StatusIndicators + g_sStatusButtonName_Corrected;
-        if ( cStatus == g_TC_cCodeMeaning_Incorrect )
-        {
-            if ( g_bIsSketchiGram )
-                return g_sImagePath_StatusIndicators + g_sStatusButtonName_Empty;
-            else
-                return g_sImagePath_StatusIndicators + g_sStatusButtonName_Incorrect;
-        }
-        if ( cStatus == g_TC_cCodeMeaning_IncorrectWithOverride )
-        {
-            return g_sImagePath_StatusIndicators + g_sStatusButtonName_Incorrect;
-        }
-        return '';
+    if ( cStatus == g_cCode_Incorrect )
+        return g_sImagePath_StatusIndicators + g_sStatusButtonName_Empty;
+    if ( cStatus == g_cCode_IncorrectWithOverride )
+    {
+        return g_sImagePath_StatusIndicators + g_sStatusButtonName_Incorrect;
+    }
+    return '';
 }
 
 function TC_GetBlackSquareImagePathAndName()
@@ -86,9 +81,9 @@ function TC_GetGridNumberImagePathAndName(sNumber)
 function TC_GetStatusImagePathAndName(cSelection)
 {
     var sStatusImage = g_sImagePath_StatusIndicators;
-    if ( cSelection == g_TC_cCodeMeaning_HasFocus || cSelection == g_TC_cCodeMeaning_HasFocusBeingMoved )
+    if ( cSelection == g_cCode_HasFocus || cSelection == g_cCode_HasFocusBeingMoved )
         sStatusImage += g_sStatusButtonName_Focus;
-    else if ( cSelection == g_TC_cCodeMeaning_ActiveRow )
+    else if ( cSelection == g_cCode_ActiveRow )
         sStatusImage += g_sStatusButtonName_ActiveRow;
     else
         sStatusImage += g_sStatusButtonName_Inactive;

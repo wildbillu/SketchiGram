@@ -18,7 +18,7 @@ function GRB_ChangeForbiddenCharactersToDot(sAllowedLetters, bReplaceCorrectAndC
                 if ( !bReplaceCorrectAndCorrected )
                 {
                     let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-                    if ( cStatus == g_TC_cCodeMeaning_Corrected || cStatus == g_TC_cCodeMeaning_Correct )
+                    if ( cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct )
                     {
                         sAllowedLetters = replaceAt(sAllowedLetters, iRow*g_iGridWidth+iLetter, '.') 
 
@@ -47,9 +47,9 @@ let iMaxCheck = 0;
             let bMoveThisOne = true;
             if ( !bReplaceCorrectAndCorrected )
             {
-                if ( cStatus == g_TC_cCodeMeaning_Corrected )
+                if ( cStatus == g_cCode_Corrected )
                     bMoveThisOne = false;
-                if ( cStatus == g_TC_cCodeMeaning_Correct )
+                if ( cStatus == g_cCode_Correct )
                     bMoveThisOne = false;
             }
             if ( GRB_ForRowLetter_IsSquareGoldenOrBlack(iRow, iLetter) )
@@ -72,7 +72,7 @@ let iMaxCheck = 0;
                         var sNew = sNoDots.substring(0, iP);
                         sNew += sNoDots.substring(iP+1)
                         sNoDots = sNew;
-                        GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Normal, iRow, iLetter);
+                        GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, iRow, iLetter);
                         if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
                         {
                             GRBMS_ForRowLetterShowCheckSquare(iRow, iLetter, 'Check', false);

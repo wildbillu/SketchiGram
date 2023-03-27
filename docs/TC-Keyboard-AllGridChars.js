@@ -4,6 +4,34 @@ var g_KB_Buttons_a_of_cLetters = [];
 var g_KB_Buttons_a_of_bPlacedCorrectly = [];
 var g_KB_Buttons_a_of_sButtonInner = [];
 var g_KB_AGC_AllButtonsEnabled = false;
+var g_KB_AGC_PendingPressedButton = -1;
+var g_KB_AGC_Backspace_bActive = false;
+
+function KB_AGC_KeyboardPressBackspace()
+{
+    if ( g_CAB_Focus_sId != '' )
+    {
+        iRow = CAB_RowFromId(g_CAB_Focus_sId);
+        iLetter = CAB_LetterFromId(g_CAB_Focus_sId);
+        CAB_ForRowLetter_SetAnswerPlayer(g_cCode_MeaningNotSet ,iRow, iLetter);
+        CAB_ForRowLetter_SetStatusPlayer(g_cCode_Normal ,iRow, iLetter);
+        CAB_ForRowLetter_SetButton(iRow, iLetter, g_cCode_HasFocus);
+        return;
+    }
+    return;
+}
+
+function KB_AGC_MakeBackspaceButton()
+{
+    let sTextForButton = ' ';
+    let sTextForId = 'Backspace';
+    let sClass = 'KB_Mini_Button KB_Mini_ButtonBackspace_Disabled StartHidden';
+    let sIdWrapped = ' Id="' + sTextForId + '" ';
+    let sClassWrapped = 'class="' + sClass + '" '; 
+    let sOnClick = ' onclick="KB_AGC_KeyboardPressBackspace();" ';
+    let sButton = '<TD><DIV '+ sIdWrapped + sClassWrapped + sOnClick + '>' + sTextForButton + '</DIV></TD>';
+    return sButton;
+}
 
 function KB_AGC_FindBoundsOfButtons()
 {
@@ -18,7 +46,6 @@ function KB_AGC_FindBoundsOfButtons()
     {
         elemButton = document.getElementById(KB_AllGridChars_MakeButtonId(iButton));
         rectButton = GetBoundingClientRectAbsolute(elemButton);
-//        alert(RectAsString(iButton, rectButton))
         if ( rectButton.left < iLeft ) iLeft = rectButton.left;
         if ( rectButton.right > iRight ) iRight = rectButton.right;
         if ( rectButton.top < iTop ) iTop = rectButton.top;
@@ -28,18 +55,21 @@ function KB_AGC_FindBoundsOfButtons()
     return r;
 }
 
-function KB_AllGridChars_Adjust(iKBRows)
+function KB_AllGridChars_Adjust(bMove)
 {
-    g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
     let elem_KB = document.getElementById('KB_Mini_Div');
-    elem_KB.style.top = MakePixelString(g_TC_iBiggestBottom);
-//    let g_KB_sJustification = 'center';
     let elemGrid = document.getElementById('Div_Grid');
     let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
+    if ( bMove ) 
+    {
+        let iTop = rectGrid.bottom + g_TC_Padding_Inter_Vertical_iSize;
+        g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
+        elem_KB.style.top = MakePixelString(iTop);
+    }
     let iKBWidth = rectGrid.width;
     let iKBLettersHeight = 0;
     if ( g_KB_sWidthDeterminedBy == 'BiggestRight' )
-    { // later we want to contract this so it just fits the actual keys
+    { // later we want to contract this so it just fits the actual key
         iKBWidth = g_TC_iBiggestRight * g_KB_fFractionAvailableWidth - 2; // for border
         let iKBCandidateWidth = 0;
         let elemInstructionsDiv = document.getElementById("KB_Mini_Instructions_Div");
@@ -52,9 +82,15 @@ function KB_AllGridChars_Adjust(iKBRows)
             iKBCandidateWidth = iWidthLetters;
         iKBLettersHeight = rect.height + 10;
         iKBWidth = iKBCandidateWidth;
-        }
-    let iKBLeft = rectGrid.left; // justify grid
-    if ( g_KB_sJustification == 'center' )
+    }
+    let iKBLeft = 0;
+    if ( g_KB_sJustification == 'grid' )
+    {
+        iKBLeft = rectGrid.left;
+        if ( iKBWidth < rectGrid.width )
+            iKBWidth = rectGrid.width;
+    }
+    else if ( g_KB_sJustification == 'center' )
     {
         iKBLeft = TC_LeftForCentering(iKBWidth)
     }
@@ -66,13 +102,21 @@ function KB_AllGridChars_Adjust(iKBRows)
     elem_KB.style.left = MakePixelString(iKBLeft);
 
     let elemButtonDiv = document.getElementById("KB_Mini_ButtonRow_Div");
+
     elemButtonDiv.style.width = MakePixelString(iKBWidth);
     let elemInstructionsDiv = document.getElementById("KB_Mini_Instructions_Div");
     elemInstructionsDiv.style.width = MakePixelString(iKBWidth);
     let rectInstructionsDiv = elemInstructionsDiv.getBoundingClientRect();
-    elem_KB.style.height = MakePixelString(iKBRows * 52 + rectInstructionsDiv.height + 5);// fix this?
-    let rect_KB = elem_KB.getBoundingClientRect();
-    g_TC_iBiggestBottom += rect_KB.height;
+    elem_KB.style.height = MakePixelString(iKBLettersHeight + rectInstructionsDiv.height);
+
+    let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
+    elemKB_Mini_Div.style.height = MakePixelString(iKBLettersHeight + rectInstructionsDiv.height);
+    
+    if ( bMove ) 
+    {
+        let rect_KB = elem_KB.getBoundingClientRect();
+        g_TC_iBiggestBottom += rect_KB.height;
+    }
 }
 
 function KB_AllGridChars_Setup()
@@ -86,12 +130,12 @@ function KB_AllGridChars_Setup()
 // we use the original order of Player Grid Answers - already random
     let iLetters = g_KB_Buttons_a_of_sButtonInner.length;
 //
-    let iTotalLetters = iLetters;// + 3;
+    let iTotalButtons = iLetters + 1; // for the delete key
     let iButtonWidth = KB_GetButtonWidth();
-    let iEstimatedWidth = iTotalLetters * (iButtonWidth + 10); 
+    let iEstimatedWidth = iTotalButtons * (iButtonWidth + 10); 
     let fRows = Math.ceil(iEstimatedWidth / iWidthMax);
     iRows = parseInt(fRows);
-    let fLettersPerRow = Math.ceil(iTotalLetters / iRows);
+    let fLettersPerRow = Math.ceil(iTotalButtons / iRows);
     let iLettersPerRow = parseInt(fLettersPerRow.toFixed());
     let sInner = '';
 // we need to determine if we need more than one and row    
@@ -103,15 +147,17 @@ function KB_AllGridChars_Setup()
         sInner += ' Exchange Highlighted Letter with Selection ';
     sInner += '</DIV>'
     sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
-
     for (let iRow = 0; iRow < iRows; iRow ++ )
     {
         let iStart = iRow * iLettersPerRow;
         let iFinish = iStart + iLettersPerRow;
-        if ( iFinish > iTotalLetters )
-            iFinish = iTotalLetters;
+        if ( iFinish > iLetters )
+            iFinish = iLetters;
         sInner += '<TR align=center><TD>';
-        let sThisRow = KB_AllGridChars_MakeThisRow(iStart, iFinish);
+        let bAppendBackspace = false;
+        if ( iRow == iRows - 1)
+            bAppendBackspace = true;
+        let sThisRow = KB_AllGridChars_MakeThisRow(iStart, iFinish, bAppendBackspace);
         sInner += sThisRow;
         sInner += '</TD></TR>'
     }
@@ -132,6 +178,16 @@ function KB_AGC_EnabledStateAllButtons(bOverrideAllToBeEnabled)
            bEnabled = !g_KB_Buttons_a_of_bPlacedCorrectly[i];
         KB_AGC_SetButtonEnabledClass(i, bEnabled)
     }
+    let bBackspaceVisible = false;
+    let sClassBackspace = 'KB_Mini_Button KB_Mini_ButtonBackspace_Disabled';
+    if ( bOverrideAllToBeEnabled )
+    {
+        bBackspaceVisible = true;
+        sClassBackspace = 'KB_Mini_Button KB_Mini_ButtonBackspace';
+    }
+    let elemBackspace = document.getElementById('Backspace');
+    ForIdSetVisibility('Backspace', bBackspaceVisible)
+    elemBackspace.className = sClassBackspace;
 }
 
 function KB_AllGridChars_MakeButtonInTD(iButton, cLetter, bPlacedCorrectly)
@@ -180,6 +236,7 @@ function KB_AGC_KeyboardPress_GRBMS(keypressed)
     iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
     iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
     GRBMS_onkeyup(keypressed, iRow, iLetter);
+    Sync_FocusChange()
     return true;
 }
 
@@ -204,7 +261,7 @@ function KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter)
 {
 // either location is now correct we need to disable correct keyboard letter
     let A_cStatus = GRB_ForRowLetter_GetStatusPlayer(A_iRow, A_iLetter);
-    if ( A_cStatus == g_TC_cCodeMeaning_Correct )
+    if ( A_cStatus == g_cCode_Correct )
     {
         if ( g_KB_AGC_PendingPressedButton != -1 )
         {
@@ -218,7 +275,7 @@ function KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter)
         }
     }
     let B_cStatus = GRB_ForRowLetter_GetStatusPlayer(B_iRow, B_iLetter);
-    if ( B_cStatus == g_TC_cCodeMeaning_Correct )
+    if ( B_cStatus == g_cCode_Correct )
     {
             let B_cLetter = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
             KB_AGC_FindAndChangeFirstNotYetCorrect(B_cLetter)
@@ -253,12 +310,12 @@ function KB_AllGridChars_MakeButtons()
     {
         let cStatusPlayer = sStatusPlayer.charAt(iButton);
         let cAnswer = sAnswersPlayer.charAt(iButton)
-        if ( cAnswer != g_TC_cCharacterDenotingBlackSquare )
+        if ( cAnswer != g_cCode_BlackSquare )
         {
             let bProperlyPlaced = false;
-            if ( cStatusPlayer == g_TC_cCodeMeaning_Corrected ) bProperlyPlaced = true;
-            if ( cStatusPlayer == g_TC_cCodeMeaning_Correct ) bProperlyPlaced = true;
-            if ( cStatusPlayer == g_TC_cCodeMeaning_Golden ) bProperlyPlaced = true;
+            if ( cStatusPlayer == g_cCode_Corrected ) bProperlyPlaced = true;
+            if ( cStatusPlayer == g_cCode_Correct ) bProperlyPlaced = true;
+            if ( cStatusPlayer == g_cCode_Golden ) bProperlyPlaced = true;
             let cLetter = sAnswersPlayer.charAt(iButton);
             let s = KB_AllGridChars_MakeButtonInTD(iButtonActive, cLetter, bProperlyPlaced);
             g_KB_Buttons_a_of_sButtonInner.push(s);
@@ -269,15 +326,16 @@ function KB_AllGridChars_MakeButtons()
     }
 }
 
-function KB_AllGridChars_MakeThisRow(iStart, iFinish)
+function KB_AllGridChars_MakeThisRow(iStart, iFinish, bAppendBackspace)
 {
     let sButtonRow = '<TABLE><TR>';
     for ( iButton = iStart; iButton < iFinish; iButton++)
         sButtonRow += g_KB_Buttons_a_of_sButtonInner[iButton];
+    if ( bAppendBackspace )
+        sButtonRow += KB_AGC_MakeBackspaceButton();
     sButtonRow += '</TR></TABLE>';
     return sButtonRow; 
 }
-
 
 function KB_GetButtonWidth()
 {

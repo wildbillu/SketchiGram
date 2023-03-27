@@ -1,6 +1,6 @@
 // TC-SG2-Positioning.js
 
-function SG2_Adjust_GridAndPhantomGridPosition(iGap)
+function SG2_Adjust_GridPosition(iGap)
 {
     g_TC_iBiggestBottom += iGap;
 // instruction line goes before the grid 
@@ -9,11 +9,11 @@ function SG2_Adjust_GridAndPhantomGridPosition(iGap)
     let iLeftForPositioning = TC_LeftForCentering(iWidthGrid);
     if ( g_Grid_sJustification == 'right' )
         iLeftForPositioning = g_TC_iBiggestRight - iWidthGrid;
-    if ( g_bHowToActive )
+    if ( g_HowTo_bActive )
     {
         let elemHowToA = document.getElementById("SG_HowToA_Div");
         elemHowToA.style.width = MakePixelString(iWidthGrid);
-        g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
+        g_TC_iBiggestBottom = g_HowTo_iTop;
         elemHowToA.style.top = MakePixelString(g_TC_iBiggestBottom);
         elemHowToA.style.left = MakePixelString(iLeftForPositioning);
         // make the width the width of the grid
@@ -28,10 +28,6 @@ function SG2_Adjust_GridAndPhantomGridPosition(iGap)
     elemGrid.style.height = MakePixelString(iHeightGrid);
 // put the grid in the middle
     elemGrid.style.left = MakePixelString(iLeftForPositioning);
-// now the phantom grid
-    let elemGrid_Phantom = document.getElementById('Div_Grid_Phantom');
-    elemGrid_Phantom.style.top = MakePixelString(g_TC_iBiggestBottom);
-    elemGrid_Phantom.style.left = MakePixelString(iLeftForPositioning);
     g_TC_iBiggestBottom += iHeightGrid;
 }
 

@@ -1,43 +1,35 @@
 // TC-More.js
 
 function SG_ShowCheckActiveSquare(sAction)
-{ //only SketchiGram versions
-    SG_Clues_ShowCorrect();
-if ( g_GRBMS_Focus_sId == '' )
+{
+    SG_UpdateAnswersCorrectInGridAndDisplay();
+    if ( g_GRBMS_Focus_sId == '' )
         return false;
+    let bChanged = false;
     let iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
     let iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
     if ( sAction == 'Check' )
     {
         GRBMS_ForRowLetterShowCheckSquare(iRow, iLetter, sAction, true);
-        GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_HasFocus);
+        GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_HasFocus);
     }
     else
     {
         SG_FixSquare(iRow, iLetter);
+        bChanged = true;
     }
-}
-
-function SG_ShowCheckActiveAnswer(sAction)
-{
-    alert('Answer:' + sAction)
-    Dropdown_More_FinishUp(true);
+    Sync_FocusChange();
+    if ( bChanged )
+        Sync_GridChange();
+    return bChanged;
 }
 
 function Dropdown_More_CheckSquare()
 {
     if ( !CAB_ShowCheckActiveSquare('Check') )
-    {
-        if ( g_bIsTwistiCross )
-            GRB_ShowCheckActiveSquare('Check')
-        else if ( g_bIsYourMove )
-            alert('Need to Implement for YM')
-        else if ( g_bIsSketchiGram  )
-        {
-            SG_ShowCheckActiveSquare('Check');
-        }
-    } 
+        SG_ShowCheckActiveSquare('Check');
     Dropdown_More_FinishUp(false);
+    
 }
 
 function Dropdown_More_FinishUp(bNonPlayerFixes)
@@ -50,138 +42,45 @@ function Dropdown_More_FinishUp(bNonPlayerFixes)
 function Dropdown_More_ShowSquare()
 {
     if ( !CAB_ShowCheckActiveSquare('Show') )
-    {
-        if ( g_bIsTwistiCross )
-            GRB_ShowCheckActiveSquare('Show');
-        else if ( g_bIsYourMove )
-            alert('Need to Implement for YM')
-        else if ( g_bIsSketchiGram )
-            SG_ShowCheckActiveSquare('Show')
-    }
-    Dropdown_More_FinishUp(true);
-}
-
-function Dropdown_More_CheckAnswer()
-{
-    if ( !CAB_ShowCheckAnswerActiveRow('Check') )
-        GRB_ShowCheckAnswerActiveRowOrColumn('Check');
-    Dropdown_More_FinishUp(false);
-}
-
-function Dropdown_More_ShowAnswer()
-{
-    if ( g_bIsTwistiCross )
-    {
-        if ( !CAB_ShowCheckAnswerActiveRow('Show') )
-            GRB_ShowCheckAnswerActiveRowOrColumn('Show');
-    }    
-    if ( g_bIsYourMove )
-    {
-        if ( !CAB_ShowCheckAnswerActiveRow('Show') )
-            alert('Need to Implement for YM')
-    } 
-    if ( g_bIsSketchiGram  )
-    {
-        SG_ShowCheckActiveAnswer('Show');
-    }
+        SG_ShowCheckActiveSquare('Show')
     Dropdown_More_FinishUp(true);
 }
 
 function Dropdown_More_SolveGrid()
 {
-    if ( g_bIsTwistiCross )
-        GRB_ShowCheckGrid('Show');
-    else if ( g_bIsYourMove || g_bIsSketchiGram )
-        GRBMS_ShowCheckGrid('Show');
+    GRBMS_ShowGrid();
     Dropdown_More_FinishUp(true);
-}
-
-function Dropdown_More_SolveAsConventional()
-{
-    if ( g_bIsSketchiGram )
-    {
-        alert('option should not be here')
-        return;
-    }
-    if ( g_aAnswerLocations.length != g_iClues ) // should never get here but....
-        return;
-    var sNewDualClueText = '(' + g_aAnswerLocations[0] + ') ' + g_ST_sClue_Itself + ' (' + g_aAnswerLocations[1] + ')'
-	document.getElementById('CA01C').innerHTML = sNewDualClueText;
-    for ( iRR = 2; iRR < g_iClues; iRR++ )
-    {
-        var sId = CAB_MakeIdForClueText(iRRR)
-        var eRow = document.getElementById(sId)
-        var sClue = g_aClues[iRR];
-        var sNewText = '(' + g_aAnswerLocations[iRR] + ') \n' + sClue;
-        eRow.innerHTML = sNewText;
-    }
-    Dropdown_More_FinishUp(false);
 }
 
 function Dropdown_More_ResetPuzzle()
 {
-    if ( g_bIsTwistiCross )
-    {
-        GRB_ClearGrid();
-        CAB_ClearAnswers();
-        elem = document.getElementById(CAB_MakeId(0,0)).focus();
-    }
-    else if ( g_bIsYourMove || g_bIsSketchiGram )
-    {
-        GRBMS_ScrambleCorrectAnswersToPlayer(true);
-        GRBMS_SetAllButtons();
-        ForIdSetVisibility("KB_Mini_Div", true);
-        if ( g_bDifficultyLevelActive ) ForIdSetVisibility("DifficultyLevel_Div", true);
-        if ( g_bHowToActive ) ForIdSetVisibility("SG_HowToA_Div", true);
-        SG_Clues_ShowClue_ResetAll();
-        SG_Clues_Div_SetVisibility(g_SG_SC_ShowAll, false);
-        if ( g_bDifficultyLevelActive ) TC_DifficultyLevel_Set(3);
-        ForIdSetVisibility("ScratchArea", false);
-        TC_SA_EB_ClearEntries();
-        TC_SA_EB_Setup();
-        TC_ElapsedTime_StartOver();
-        TC_HideSolvedImage();
-        if ( g_bDualClueFrameActive ) TC_ClearDualClueAnswers();
-        if ( g_KB_Active_bAllGridChars ) KB_AllGridChars_Setup()
+    GRBMS_ScrambleCorrectAnswersToPlayer(true);
+    GRBMS_SetAllButtons();
+    if ( g_bDifficultyLevelActive ) ForIdSetVisibility("DifficultyLevel_Div", true);
+    if ( g_HowTo_bActive ) ForIdSetVisibility("SG_HowToA_Div", true);
+    SG_UpdateAnswersCorrectInGridAndDisplay();
+    SG_CA_UpdateAndSetVisibility(false);
+    if ( g_bDifficultyLevelActive ) TC_DifficultyLevel_Set(3);
+    ForIdSetVisibility("ScratchArea", false);
+    TC_SA_EB_ClearEntries();
+    TC_SA_EB_Setup();
+    TC_ElapsedTime_StartOver();
+    TC_HideSolvedImage();
+    if ( g_SpecialClueFrame_bActive ) TC_ClearDualClueAnswers();
+    KB_AllGridChars_Setup();
+    KB_AllGridChars_Adjust(false);
+    g_CAB_abSetCorrect.length = 0;
+    ForIdSetVisibility("KB_Mini_Div", true);
 
-    }
-    Dropdown_More_FinishUp(true);
-}
 
-function Dropdown_More_CheckPuzzle()
-{
-    if ( g_bIsTwistiCross )
-        GRB_ShowCheckGrid('Check');
-    else if ( g_bIsYourMove || g_bIsSketchiGram )
-        GRBMS_ShowCheckGrid('Check');
-    CAB_ShowCheckAnswers('Check');
-    Dropdown_More_FinishUp(false);
-}
-
-function Dropdown_More_SolveAnswers()
-{
-    if ( g_bIsSketchiGram )
-    {
-        alert('SolveAnswers should not exist')
-        return;
-    }
-    CAB_ShowCheckAnswers('Show');
     Dropdown_More_FinishUp(true);
 }
 
 function Dropdown_More_SolvePuzzle()
 {
     Dropdown_More_SolveGrid();
-    if ( g_bIsTwistiCross )
-    {
-        CAB_ShowCheckAnswers('Show');
-        GRB_ShowCheckGrid('Show');
-    }
-    if ( g_bIsYourMove )
-    {
-        CAB_ShowCheckAnswers('Show');
-        GRBMS_ShowCheckGrid('Show');
-    }
+    CAB_ShowCheckAnswers('Show');
+    GRBMS_ShowGrid();
     Dropdown_More_FinishUp(true);
 }
 
@@ -198,14 +97,10 @@ function SetMoreButton(sButton, bEnabled)
 function FeaturesDependingOnPuzzleSolved_MoreMenu()
 {
     SetMoreButton_IfActive("Dropdown_More_SolveGrid", !g_bGridSolved);    
-    SetMoreButton_IfActive("Dropdown_More_ShowAnswer", !g_bPuzzleSolved);
+    SetMoreButton_IfActive("Dropdown_More_ShowSketchiToon_Answer", !g_bPuzzleSolved);
     SetMoreButton_IfActive("Dropdown_More_ShowSquare", !g_bPuzzleSolved);
-    SetMoreButton_IfActive("Dropdown_More_SolveAnswers", !g_bAnswersSolved);
     SetMoreButton_IfActive("Dropdown_More_SolvePuzzle", !g_bPuzzleSolved);
-    SetMoreButton_IfActive("Dropdown_More_CheckAnswer", !g_bPuzzleSolved);
     SetMoreButton_IfActive("Dropdown_More_CheckSquare", !g_bPuzzleSolved);
-    SetMoreButton_IfActive("Dropdown_More_CheckPuzzle", !g_bPuzzleSolved);
-    SetMoreButton_IfActive("Dropdown_More_SolveAsConventional", !g_bPuzzleSolved);
     SetMoreButton_IfActive("Dropdown_More_ResetPuzzle", true);
 }
 

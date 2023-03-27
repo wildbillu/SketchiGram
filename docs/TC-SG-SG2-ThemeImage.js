@@ -49,7 +49,7 @@ function TC_ThemeImage_SwitchTo_EnlargedSize()
 {
     SG2_ThemeImage_EnlargedSize_SetTo();
     g_sCABOnThemeImageClick = g_CAB_Focus_sId;
-    g_sGRBOnThemeImageClick = g_GRB_Focus_sId;
+    g_sGRBOnThemeImageClick = g_GRBMS_Focus_sId;
     g_GRBMS_ThemeImage_bActive = true;
     g_ThemeImage_EnlargedSize_iHitCount = 0;
     g_ThemeImage_iTimeoutIndex = setTimeout(function(){TC_ThemeImage_SwitchTo_NormalSize();}, 10000); 
@@ -60,7 +60,7 @@ var g_iFudgeSpace = 5;
 function SG2_ThemeImage_Create()
 {
     let sImage = '';
-    sImage += '<img Id="Grid_Image_Itself" onclick="TC_ThemeImage_SwitchSize()" class="Div_Grid_Image_Itself"  src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200"></img>';
+    sImage += '<img Id="ThemeImage" onclick="TC_ThemeImage_SwitchSize()" class="Div_ThemeImage"  src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200"></img>';
     let elemDivGridImage = document.getElementById('Div_Grid_Image');
     elemDivGridImage.innerHTML = sImage;
 }
@@ -68,7 +68,7 @@ function SG2_ThemeImage_Create()
 function SG2_ThemeImage_NormalSize_SetTo()
 {
     let elemDivGridImage = document.getElementById('Div_Grid_Image');
-    let elemDivGridImageItself = document.getElementById("Grid_Image_Itself");
+    let elemDivGridImageItself = document.getElementById("ThemeImage");
     elemDivGridImage.style.top          = MakePixelString(g_ThemeImage_NormalSize_iTop);
     elemDivGridImage.style.height       = MakePixelString(g_ThemeImage_NormalSize_iHeight);
     elemDivGridImage.style.left         = MakePixelString(g_ThemeImage_NormalSize_iLeft);
@@ -88,7 +88,7 @@ function SG2_ThemeImage_NormalSize_Setup()
     let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton)
     let iTopArchiveButton = rectArchiveButton.top;
     let iHeight = iTopArchiveButton - iBottomKB - 2 * g_iFudgeSpace;
-    let iWidth = GetWidthToHeightRatioOfImageWithId("Grid_Image_Itself")*iHeight;
+    let iWidth = GetWidthToHeightRatioOfImageWithId("ThemeImage")*iHeight;
     let iLeft = TC_LeftForCentering(iWidth);
 //
     g_ThemeImage_NormalSize_iTop = iBottomKB + g_iFudgeSpace;
@@ -101,7 +101,7 @@ function SG2_ThemeImage_EnlargedSize_Setup()
 {
 //
     let iWidth = 0.75 * g_TC_iBiggestRight;
-    let iHeight = iWidth/GetWidthToHeightRatioOfImageWithId("Grid_Image_Itself");
+    let iHeight = iWidth/GetWidthToHeightRatioOfImageWithId("ThemeImage");
     let iLeft = TC_LeftForCentering(iWidth);
     let elemHowToA = document.getElementById("SG_HowToA_Div");
     let rectelemHowToA = elemHowToA.getBoundingClientRect();
@@ -114,7 +114,7 @@ function SG2_ThemeImage_EnlargedSize_Setup()
 function SG2_ThemeImage_EnlargedSize_SetTo()
 {
     let elemDivGridImage = document.getElementById('Div_Grid_Image');
-    let elemDivGridImageItself = document.getElementById("Grid_Image_Itself");
+    let elemDivGridImageItself = document.getElementById("ThemeImage");
     elemDivGridImage.style.top          = MakePixelString(g_ThemeImage_EnlargedSize_iTop);
     elemDivGridImage.style.height       = MakePixelString(g_ThemeImage_EnlargedSize_iHeight);
     elemDivGridImage.style.left         = MakePixelString(g_ThemeImage_EnlargedSize_iLeft);

@@ -1,42 +1,63 @@
 // TC-CAB-CoreProcessing.js
-function CAB_ForRowWithFocus_SetAnswerBoxStyles()
+
+function CAB_SquareValidForFocus(iRow, iLetter)
 {
-    var iRowActive = -1;
-    if ( g_CAB_Focus_sId != '' )
-    {
-        iRowActive = CAB_RowFromId(g_CAB_Focus_sId);
-    }
-// deal with dual row    
-    if ( iRowActive == 0 || iRowActive == 1 )
-        document.getElementById('GRBMS_Div_CAB_DualClue').className = 'GRBMS_Div_CAB_DualClue CAB_Color_Active';
-    else
-        document.getElementById('GRBMS_Div_CAB_DualClue').className = 'GRBMS_Div_CAB_DualClue CAB_Color_InActive';
-    for ( iR = 2; iR < g_iClues; iR++)
-    {
-        var sId = CAB_SingleRowClueBackgroundId(iR)
-        var sClassRowBase = 'CAB_Row_Base';
-        if ( g_bIsYourMove )
-            sClassRowBase = 'GRBMS_Div_CAB_Clue_Single_Row'
-        var sClassRow = sClassRowBase + ' CAB_Color_InActive';
-        if ( iR == iRowActive )
-            sClassRow = sClassRowBase + ' CAB_Color_Active';
-        document.getElementById(sId).className = sClassRow;
-    }
+    let cStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    if ( cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct )
+        return false;
+    return true;
 }
+
+function CAB_onfocus(elem)
+{
+    let sThisId = elem.id;
+    if ( g_GRBMS_Focus_sId != '')
+        GRBMS_LoseCurrentFocus();
+    if ( g_SA_EB_Focus_sId != '' )
+        TC_SA_EB_LoseTheFocusAndCleanup(false)
+    let iThisRow        = CAB_RowFromId(sThisId);
+    let iThisLetter  = CAB_LetterFromId(sThisId);
+    if ( !CAB_SquareValidForFocus(iThisRow, iThisLetter) )
+        return;
+    CAB_ForRow_SetToActive(iThisRow, iThisLetter);
+    if ( g_CAB_Focus_sId != '' )
+    {    
+        let iOldRow = CAB_RowFromId(g_CAB_Focus_sId);
+        if ( iThisRow != iOldRow )
+        { // need to change the old row to inactive
+            if ( ( iThisRow == 0 && iOldRow == 1 ) || ( iThisRow == 1 && iOldRow == 0 ) )
+            {
+                if ( TC_ForIndexIsClueTypeSpecial(iOldRow) ) CAB_ForRow_SetToInactive(iOldRow);
+            }
+            else
+            if ( TC_ForIndexIsClueTypeSpecial(iOldRow) )CAB_ForRow_SetToInactive(iOldRow);
+        }
+    }
+    g_CAB_Focus_sId = sThisId;
+    KB_SetUsageMode(g_KB_Mini_sUsageMode_DualClue);
+    CAB_SetBackground(true);
+    Sync_FocusChange();
+    return true;
+}
+
 
 function CAB_MoveFocus(iNewRow, iNewLetter)
 {
-// fix for only dual clue
-//    if ( iNewRow > g_iClues -1 || iNewRow < 0 )
     if ( iNewRow > 1 )
+    {
         iNewRow = 0;
+        iNewLetter = 0;
+    }
+    if ( iNewRow == 0 && !TC_ForIndexIsClueTypeSpecial(0) )
+        return;
+    if ( iNewRow == 1 && !TC_ForIndexIsClueTypeSpecial(1))
+        return;
     if ( iNewRow == -1 )
-        iNewRow = 0;
+        return;
+//   
     let sNextBox = CAB_MakeId(iNewRow, iNewLetter);
-    if ( g_CA_Squares_bButtons )
-        document.getElementById(sNextBox).focus();
-    else
-        CAB_onfocus(document.getElementById(sNextBox));
+    CAB_onfocus(document.getElementById(sNextBox));
+    Sync_FocusChange()
 }
 
 function CAB_SetFocusToNext(iRow, iLetter)
@@ -91,24 +112,24 @@ function CAB_SetFocusToNext(iRow, iLetter)
 
 function CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
 {
-    var cInitialStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    let cInitialStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     if ( TC_CorrectOrGolden(cInitialStatus) ) 
         return; // if correct already don't allow change and nothing else to do
-    CAB_ForRowLetter_UpdateAnswersPlayer(cAnswerPlayer, iRow, iLetter);
+    CAB_ForRowLetter_SetAnswerPlayer(cAnswerPlayer, iRow, iLetter);
 //    
-    if ( cInitialStatus == g_TC_cCodeMeaning_Incorrect || cInitialStatus == g_TC_cCodeMeaning_IncorrectWithOverride)
+    if ( cInitialStatus == g_cCode_Incorrect || cInitialStatus == g_cCode_IncorrectWithOverride)
     { // since a letter was typed we no longer know it is incorrect so set back to Normal
-        CAB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Normal, iRow, iLetter);
+        CAB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, iRow, iLetter);
     }
     if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
     {
-        CAB_ForRowLetterShowCheckSquare(iRow, iLetter, "Check", g_TC_cCodeMeaning_HasFocus)
+        CAB_ForRowLetterShowCheckSquare(iRow, iLetter, "Check", g_cCode_HasFocus)
         Status_Check(false);
         StoreCookie_Puzzle()
     }
     if ( g_bSettings_CAGR_Answers_CheckRow )
     {
-        var iLength = CAB_ForRow_GetLength(iRow);
+        let iLength = CAB_ForRow_GetLength(iRow);
         if ( iLetter == iLength - 1)
         {
             CAB_ShowCheckAnswerActiveRow('Check');
@@ -118,6 +139,8 @@ function CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
     }
 // now we need to deal with the the entire row or letter to get the images right
     CAB_ForRow_SetToActive(iRow, iLetter);
+    Sync_FocusChange();
+    Sync_CAChange();
 }
 
 function CAB_onmousedown(iRow, iLetter)
@@ -127,9 +150,7 @@ function CAB_onmousedown(iRow, iLetter)
 
 function CAB_onkeypress(event)
 {
-    if ( g_bIsYourMove && g_bAnswersSolved )
-        return;    
-    var ekey = event.key;
+    let ekey = event.key;
     if ( ( ekey >= 'a' && ekey <= 'z' ) || ( ekey >= 'A' && ekey <= 'Z') || ekey == ' ')
         return true; // so character will be processed
     if ( event.code == 8 || event.code == 46 )
@@ -139,17 +160,22 @@ function CAB_onkeypress(event)
 
 function CAB_onkeyup(key, iRow, iLetter)
 {
-    if ( g_bIsYourMove && g_bAnswersSolved )
-        return;    
     if ( key.startsWith('Backspace') )
-    {
-        key = ' ';
-    }
-    var letters = /^[a-zA-Z ]$/;
+       return;
+    let letters = /^[a-zA-Z ]$/;
     if ( key.match(letters) ) 
     {
-        var sUpper = key.toUpperCase();
+        let sUpper = key.toUpperCase();
+        let bValidLetter = g_GRBMS_sAllowedGridLetters.includes(sUpper);
+        if ( !bValidLetter )
+        { // set focus back to this so if 
+            TC_ResultMessage_DisplayForInterval(sUpper + ' Is Nowhere in the Puzzle', g_ResultMessage_sStyle_Warning, 1, 3);
+            document.getElementById(g_CAB_Focus_sId).focus();
+            return false;
+        }
         CAB_ForRowLetter_DoItAll(sUpper, iRow, iLetter);
+        let sMessage = CAB_CheckForCorrectAnswer();
+        if ( sMessage != '' ) TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
         CAB_SetFocusToNext(iRow, iLetter);
         return true;
     }
@@ -159,47 +185,10 @@ function CAB_onkeyup(key, iRow, iLetter)
     return false;
 }
 
-function CAB_onfocus(elem)
-{
-    if ( g_bIsYourMove&& g_bAnswersSolved )
-        return;    
-    var sThisId = elem.id;
-    if ( g_GRB_Focus_sId != '')        
-        GRB_FocusLostSetActiveToInActive();
-    if ( g_SA_EB_Focus_sId != '' )
-        TC_SA_EB_LoseTheFocusAndCleanup(false)
-    var iThisRow        = CAB_RowFromId(sThisId);
-    var iThisCharacter  = CAB_LetterFromId(sThisId);
-    CAB_ForRow_SetToActive(iThisRow, iThisCharacter);
-    if ( g_CAB_Focus_sId != '' )
-    {    
-        var iOldRow = CAB_RowFromId(g_CAB_Focus_sId);
-        if ( iThisRow != iOldRow )
-        { // need to change the old row to inactive
-            if ( ( iThisRow == 0 && iOldRow == 1 ) || ( iThisRow == 1 && iOldRow == 0 ) )
-            {
-                CAB_ForRow_SetToInactive(iOldRow);
-            }
-            else
-                CAB_ForRow_SetToInactive(iOldRow);
-        }
-    }
-    g_CAB_Focus_sId = sThisId;
-    if ( g_bIsTwistiCross )
-        CAB_ForRowWithFocus_SetAnswerBoxStyles();
-    else if ( g_bIsYourMove )
-        GRBMS_ForRowWithFocus_SetAnswerBoxStyles();
-    if ( g_GRBMS_Focus_sId != '')
-        GRBMS_LoseCurrentFocus();
-    KB_SetUsageMode(g_KB_Mini_sUsageMode_DualClue);
-// set background color to blue
-    CAB_SetBackground(true);
-    return true;
-}
 
 function CAB_SetBackground(bActive)
 {
-    let elemFrame = document.getElementById("GRBMS_Div_CAB_DualClue");
+    let elemFrame = document.getElementById("SpecialClue_Div");
     if ( bActive )
         elemFrame.style.backgroundColor = g_Color_sAbvocabBlue;
     else

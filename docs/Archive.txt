@@ -1,0 +1,27 @@
+archive
+puzzle001=Yogi Berra Says!
+puzzle002=Beware The Ides!
+puzzle003=How's Your Aim?
+puzzle004=Dinner Anyone?
+puzzle005=Play and collect rewards?
+puzzle006=Dr. Jekyll and Mr. Hyde?
+puzzle007=A Buzzer Beater?
+puzzle008=Perhaps found in your succotash?)
+puzzle009=Outdoor Hot Spot?
+puzzle010=Zany Musicians
+puzzle011=Peak
+puzzle012=Rivalry
+puzzle013=Alistair Cookie's Chair
+puzzle014=Pub Game
+puzzle015=Constraint
+puzzle016=Required In School Zone
+puzzle019=Parade your beads this day
+puzzle020=Expert Gamer
+puzzle022=Famous Dire Straits Song
+puzzle021=Store in Quaint New England
+puzzle017=Seedy Neighborhood
+puzzle018=Fried Southern Treat
+puzzle023=John Prine Sings To Her
+puzzle025=Glory? Ore bust?
+puzzle026!Like the cat that swallowed the canary
+puzzle024!Odes do this
