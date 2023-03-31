@@ -23,5 +23,5 @@ puzzle017=Seedy Neighborhood
 puzzle018=Fried Southern Treat
 puzzle023=John Prine Sings To Her
 puzzle025=Glory? Ore bust?
-puzzle026!Like the cat that swallowed the canary
-puzzle024!Odes do this
+puzzle026=Like the cat that swallowed the canary
+////puzzle024=Odes do this
