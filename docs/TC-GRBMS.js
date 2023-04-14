@@ -3,7 +3,7 @@
 function GRBMS_SetSizes()
 {
 // for YM only
-    var iHalfWidth = g_TC_iBiggestRight/2;
+    var iHalfWidth = g_Window_iWidth/2;
     var iButtonSize = Math.round(iHalfWidth/g_iGridWidth);
     g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_40 TC_Button_Square_Character_40 TC_Button_Square_Absolute';
     g_GRBMS_Square_iSize = 40;

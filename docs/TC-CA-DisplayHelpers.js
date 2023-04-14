@@ -10,10 +10,10 @@ var g_SG_bAnswersCorrectInGridSet = false;
 
 function SG_CA_UpdateAndSetVisibility(bVisible)
 {
+    if ( g_ThemeImage_Base_bActive ) TC_ThemeImage_Base_SetVisibility(!bVisible)
+
     SG_UpdateAnswersCorrectInGridAndDisplay();
     ForIdSetVisibility("SG_Clues_Div", bVisible);
-    ForIdSetVisibility("ThemeImage", !bVisible);
-    ForIdSetVisibility("Div_Grid_Image", !bVisible);
     if ( g_CA_bShowSpecial )
     {
         ForIdSetVisibility("SG_SpecialClue_AnswerItselfText_Div", bVisible);
@@ -70,9 +70,19 @@ function SG_MakeNormalCluesAnswerStringAndVisibility(iClue)
     {
         ForIdSetVisibility(sId, true);
         ForIdSetVisibility("SG_Clues_Div", true);
-        ForIdSetVisibility("ThemeImage", false);
-        ForIdSetVisibility("Div_Grid_Image", false);
     }
+}
+
+function SG_Position_Answer(iRow)
+{
+    var sSize = ' [' + g_CAB_aAnswerLocations[iRow] + '] ';
+    return sSize;
+}
+
+function SG_Size_Answer(iRow)
+{
+    var sSize = ' ( ' + g_CAB_aAnswers[iRow].length + ' letters ) ';
+    return sSize;
 }
 
 function SG_MakeSpecialCluesAnswerStringAndVisibility()
@@ -116,8 +126,6 @@ function SG_MakeSpecialCluesAnswerStringAndVisibility()
             ForIdSetVisibility("SG_SpecialClue_ClueItselfText_Div", true);
         }
         ForIdSetVisibility("SG_Clues_Div", true);
-        ForIdSetVisibility("ThemeImage", false);
-        ForIdSetVisibility("Div_Grid_Image", false);
     }
     return sClueAnswer;
 }

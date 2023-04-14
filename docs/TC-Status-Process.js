@@ -11,37 +11,34 @@ var g_TC_Status_bFirstCheck = true;
 var g_TC_Status_iChanges    = 0;
 var g_TC_Status_sChanges    = '';
 
-var g_TC_ShadeBackgroundOnStatus_bActive = true;
 var g_TC_ShadeBackgroundOnStatus_sId = "Body_Any";
 var g_TC_ShadeBackgroundOnStatus_fMaxOpacity = 0.1;
 var g_TC_ShadeBackgroundOnStatus_sColorCode = 'rgba(0,255,0,O)';
 
 function Status_Check(bNonPlayerFixes)
 { // called everytime character is done, show answer(CA or GR), solve(CA, GR, All)
-
     g_TC_Status_iChanges    = 0;
     g_TC_Status_sChanges    = '';
     let bInitiallySolved = g_bPuzzleSolved;
-    if ( g_bSettings_CA_Display_ShowProgress )
-    {
-        let sSQ = Status_Check_Squares();
-        let elemCA = document.getElementById("StatusControl_CA")
-        elemCA.innerHTML = sSQ;
-    }
-    if ( g_bSettings_CA_Display_ShowProgress )
-    {
-        let sGR = Status_Check_Grid();
-        elemGR = document.getElementById("StatusControl_GR")
-        elemGR.innerHTML = sGR;
-    }
+    let sMessage = CAB_CheckForCorrectAnswer();
+    if ( sMessage != '' )
+        Status_Check_AddChange(sMessage);
+    sMessage = Status_Check_Grid()
+//    if ( sMessage != '' )
+//        Status_Check_AddChange(sMessage);
+
+    sMessage = Status_Check_Squares(g_TC_Status_bFirstCheck)
+    if ( sMessage != '' )
+        Status_Check_AddChange(sMessage);
+
     g_bPuzzleSolved = g_bGridSolved;  
     Status_ShadeBackground();
-    if ( !bInitiallySolved && g_bPuzzleSolved && g_bSettings_CAGR_Display_Complete )
+    if ( !bInitiallySolved && g_bPuzzleSolved && g_bSettings_CAGR_Display_Complete && !g_bPrintedFormat )
     {
-        TC_ShowSolvedImage();
+        TC_ThemeImage_Solved_ShowPopup();
         if ( g_SpecialClueFrame_bActive ) TC_ShowSpecialClueAnswers();
     }
-    else if ( !g_TC_Status_bFirstCheck && ( g_TC_Status_iChanges > 0 ))
+    else if ( !g_TC_Status_bFirstCheck && ( g_TC_Status_iChanges > 0 ) && !g_bPrintedFormat )
     {
         let sMessageStyle = g_ResultMessage_sStyle_Positive;
         if ( bNonPlayerFixes )
@@ -49,19 +46,18 @@ function Status_Check(bNonPlayerFixes)
         TC_ResultMessage_DisplayForInterval(g_TC_Status_sChanges, sMessageStyle, g_TC_Status_iChanges, 3);
     }
     if ( g_bGridAndCA )
-    {
         SG_UpdateAnswersCorrectInGridAndDisplay();
-    }
-    //if ( SG_SetAnswersCorrectInGrid() ) SG_ResetAnswerFromAnswersCorrectInGrid();
-    FeaturesDependingOnPuzzleSolved();
+    if ( SG_SetAnswersCorrectInGrid() ) 
+        SG_ResetAnswerFromAnswersCorrectInGrid();
     StoreCookie_Puzzle();
-    KB_DisableLettersFullyPlaced();
     SG_PositionClueOverallDiv();
+    FeaturesDependingOnPuzzleSolved();
     if ( g_MAM_bActive ) MAM_EnableDisable();
     g_TC_Status_bFirstCheck = false;
+    if ( g_bPuzzleSolved ) GRBMS_SetAllButtons();
 }
 
-function TC_ClearDualClueAnswers()
+function TC_ClearSpecialClueAnswers()
 {
     for ( let iA = 0; iA < 2; iA++ )
     {
@@ -77,14 +73,6 @@ function TC_ClearDualClueAnswers()
     if ( TC_ForIndexIsClueTypeSpecial(0) )CAB_ForRow_SetToInactive(0);
     if ( TC_ForIndexIsClueTypeSpecial(1) )CAB_ForRow_SetToInactive(1);
 }
-
-function Status_Check_AddChange(sNew)
-{
-    if ( g_TC_Status_sChanges != '' )
-        g_TC_Status_sChanges += g_cGeneralDelimiter;
-    g_TC_Status_sChanges += sNew;
-}
-
 
 function Status_ShadeBackground()
 {
@@ -103,28 +91,31 @@ function Status_ShadeBackground()
 
 function FeaturesDependingOnPuzzleSolved()
 {
-    FeaturesDependingOnPuzzleSolved_MoreMenu();
-    if ( g_bGridSolved )
+    if ( !g_bGridSolved )
+        return;
+    TC_ElapsedTime_Clear();
+    ForIdSetVisibility("KB_Mini_Div", false);
+    if ( g_KB_bBackspaceKeyActive ) ForIdSetVisibility("Backspace", false);
+    if ( g_KB_bArrowKeysActive )
     {
-        TC_ElapsedTime_Clear();
-        ForIdSetVisibility("KB_Mini_Div", false);
-        ForIdSetVisibility("ScratchArea", false);
-        ForIdSetVisibility("DifficultyLevel_Div", false);
-        ForIdSetVisibility("SG_HowToA_Div", false);
-        SG_CA_UpdateAndSetVisibility(true);
-        DM_SetButtonsWhenSolved();
+        ForIdSetVisibility("ArrowLeft", false);
+        ForIdSetVisibility("ArrowRight", false);
     }
+    ForIdSetVisibility("ScratchArea", false);
+    if ( g_HowTo_bActive ) ForIdSetVisibility("SG_HowToA_Div", false);
+    SG_CA_UpdateAndSetVisibility(true);
+    if ( g_DM_bActive ) DM_SetButtons();
 }
 
-function Status_Check_Squares()
+function Status_Check_Squares(bSuppressMessage)
 {
     let iSquares_Correct_Starting = g_TC_iSquares_Correct;
     g_TC_iSquares_Correct = 0;
     g_TC_iSquares = 0;
-    var sSQ = '';
-    for ( var iRow = 0; iRow < g_iGridHeight; iRow++ )
+    let sMessage = '';
+    for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
     {
-        for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
         {
             if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
             {
@@ -134,17 +125,16 @@ function Status_Check_Squares()
             }
         }
     }
-    var sSQ = 'Chars: ' + g_TC_iSquares_Correct + ' of ' + g_TC_iSquares;
+    if ( bSuppressMessage )
+        return;
     if ( g_TC_iSquares_Correct > iSquares_Correct_Starting )
     {
         let iNew = g_TC_iSquares_Correct - iSquares_Correct_Starting;
-        let sMessage = iNew + ' Grid Square Solved';
+        sMessage = iNew + ' Grid Square Solved';
         if ( iNew > 1 )
             sMessage = iNew + ' Grid Squares Solved';
-        Status_Check_AddChange(sMessage);
-        g_TC_Status_iChanges += iNew;
     }
-    return sSQ;
+    return sMessage;
 }
 
 function Status_Check_Grid()
@@ -152,7 +142,7 @@ function Status_Check_Grid()
     let iGridAnswers_Correct_Starting = g_TC_iGridAnswers_Correct;
     g_TC_iGridAnswers_Correct = 0;
     var iGRRows = g_iGridWidth;
-    for ( var iGRRow = 0; iGRRow < iGRRows; iGRRow++ )
+    for ( let iGRRow = 0; iGRRow < iGRRows; iGRRow++ )
     {
         if ( g_aGridAnswersPlayer[iGRRow] == g_aGridAnswers[iGRRow] )
             g_TC_iGridAnswers_Correct++;
@@ -172,13 +162,9 @@ function Status_Check_Grid()
     }
     g_TC_iGridAnswers = g_iGridWidth + g_iGridHeight;
     sGR = 'Grid: ' + g_TC_iGridAnswers_Correct + ' of ' + g_TC_iGridAnswers;
-
     let sMessage = CAB_CheckForCorrectAnswer();
     if ( sMessage != '' )
-    {
-        alert('me')
         Status_Check_AddChange(sMessage);
-    }
     if ( g_TC_iGridAnswers_Correct == g_TC_iGridAnswers )
         g_bGridSolved = true;
     else
@@ -193,4 +179,14 @@ function Status_Check_Grid()
         g_TC_Status_iChanges += iNew;
     }
     return sGR;
+}
+
+function Status_Check_AddChange(sNew)
+{
+    if ( sNew == '' )
+        return;
+    if ( g_TC_Status_sChanges == '' )
+        g_TC_Status_sChanges += g_cGeneralDelimiter;
+    g_TC_Status_sChanges += sNew;
+    g_TC_Status_iChanges++
 }

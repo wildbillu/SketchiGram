@@ -49,7 +49,7 @@ function TC_ShowInfo()
     g_sCABOnInfoClick = g_CAB_Focus_sId;
     g_sGRBOnInfoClick = g_GRBMS_Focus_sId;
     Make_Info_Content_Update()
-    var iWidth = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
+    var iWidth = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     var elemInfoDiv = document.getElementById("InfoDiv");
     var iTopAll = 100;
     elemInfoDiv.style.top = MakePixelString(iTopAll);

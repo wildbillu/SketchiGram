@@ -8,27 +8,21 @@ var g_TC_MAM_sClass_Enabled = 'MAM_MenuItem_Base MAM_MenuItem_Enabled';
 var g_TC_MAM_sClass_Disabled = 'MAM_MenuItem_Base MAM_MenuItem_Disabled';
 var g_TC_MAM_sClass_Selected = 'MAM_MenuItem_Base MAM_MenuItem_Selected';
 
-function MIM_Reset_GoAhead()
+function MAM_ConfirmReset_Open()
 {
+    DialogBox_SetupAndOpen(
+        g_Dialog_ResetPuzzle_iTop, g_Dialog_ResetPuzzle_iLeft,  
+        'MAM_ConfirmReset',
+        'Are you sure you want to reset the puzzle?', 
+        'Yes', Action_ResetPuzzle,
+        'No', DialogBox_NoAction,
+        '', '')
 }
 
-function MIM_Reset_Cancel()
+function MAM_ResetPuzzle()
 {
+    MAM_ConfirmReset_Open();
 }
-
-function MAM_ConfirmBox_Setup()
-{
-    let elemConfirmBox = document.getElementById("MAM_Confirm");
-    let sInner = '';
-    sInner += '<dialog open class="MAM_Confirm_Dialog">'
-    sInner += '<div class="MAM_Confirm_Text">Do you really want reset the puzzle?</div>'
-    sInner += '<div class="MAM_Confirm_Buttons">'
-    sInner += '<button class="MAM_Confirm_CancelButton" onclick="MIM_Reset_Cancel();" type="button">Cancel</button>'
-    sInner += '<button class="MAM_Confirm_GoAhead" onclick="MIM_Reset_GoAhead();" type="button">Yes</button>'
-    sInner += '</div>'
-    sInner += '</dialog>'
-    elemConfirmBox.innerHTML = sInner;
-} 
 
 function MAM_SetMenuItemClass(sId, bEnabled)
 {
@@ -80,20 +74,21 @@ function MAM_ShowClues()
 
 function MAM_SolvePuzzle()
 {
-    Dropdown_More_SolvePuzzle();
-}
-
-function MAM_ResetPuzzle()
-{
-    if ( !confirm("This will reset puzzle.  Do you want to continue?") )
+    if ( g_bPuzzleSolved)
         return;
-    Dropdown_More_ResetPuzzle();
+    DialogBox_SetupAndOpen(
+        g_Dialog_SolvePuzzle_iTop, g_Dialog_SolvePuzzle_iLeft,  
+        'MAM_ConfirmSolve',
+        'Are you sure you want to solve the puzzle?', 
+        'Yes', Action_SolvePuzzle,
+        'No', DialogBox_NoAction,
+        '', '')
 }
 
 function TC_MAM_MakeDiv()
 {    
     let sMAMInner = TC_MAM_MakeInnerHTML();
-    let sInner = '<DIV Id="MAM_Div" class="MAM_Div" align=center>' + sMAMInner + '</DIV>';
+    let sInner = '<DIV Id="MAM_Div" class="MAM_Div StartHidden" align=center>' + sMAMInner + '</DIV>';
     return sInner;
 }
 
@@ -103,7 +98,6 @@ function MAM_SetPosition()
     elemMAM.style.top = g_MAM_iTop;
     elemMAM.style.left = g_MAM_iLeft;
     MAM_EnableDisable();
-//    MAM_ConfirmBox_Setup();
 }
 
 function MAM_Dispatch(elem)

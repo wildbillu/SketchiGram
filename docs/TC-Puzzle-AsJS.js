@@ -21,18 +21,18 @@ function TC_Puzzle_Load_AsJS()
     var sAnswers                   = 'EVIL|TWIN|PAVE|OPTS|NENE|SALE|WAWA|OWEN';
     var sAnswersPlayer             = '----|----|----|----|----|----|----|----';
     var sStatusPlayer              = 'NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
-    var sAnswersDualClueLocations  = 'SSDS|SSDS|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
+    var sAnswersSpecialClueLocations  = 'SSDS|SSDS|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
     var sAnswerLocations           ='6 Across|3 Down|2 Down|1 Across|7 Across|4 Down|5 Across|1 Down';
     var SA_EB_sWords               = '||||||||||||';
-    var SA_EB_sWordStatus          = 'FFFFFFFFFFFF';
-    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus, sAnswersDualClueLocations, sClueTypes);
+    var SA_EB_sWordStatus          = 'XXXX';
+    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes);
 // GR_Stuff
     var iGridWidth      = 4;
     var iGridHeight     = 4;
     var sGridAnswers                = 'OPTSWAWAEVILNENE';
-    var sGridDualClueLocations      = 'NNSNNNSNSSDSNNSN';
+    var sGridSpecialClueLocations      = 'NNSNNNSNSSDSNNSN';
     var sGridAnswersPlayer          = 'O-------------N-';
     var sGridStatusPlayer           = 'GNNNNNNNNNNNNNGN';
     var sGridNumbering              = '1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0';
-    GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridDualClueLocations)
+    GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations)
 }

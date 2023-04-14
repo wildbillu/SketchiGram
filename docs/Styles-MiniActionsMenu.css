@@ -1,52 +1,5 @@
 /* Styles-MiniActionMenu.css */
 
-.MAM_Confirm_Dialog_Div
-{
-    left:600px;
-    top:100px;
-    width:100px;
-    height:22px;
-    border:2px solid blue;
-    z-index: 5;
-}
-
-.MAM_Confirm_Dialog
-{
-    left:0px;
-    top:0px;
-    width:300px;
-    height:100px;
-    border:5px solid orange;
-    z-index: 5;
-}
-
-.MAM_Confirm_Text
-{
-    color:red;
-    border:2px solid blue;
-    z-index: 5;
-}
-
-.MAM_Confirm_Buttons
-{
-    border:2px solid blue;
-    z-index: 5;
-}
-
-.MAM_Confirm_CancelButton
-{
-    border:2px solid blue;
-    z-index: 5;
-
-}
-
-.MAM_Confirm_GoAhead
-{
-    border:2px solid blue;
-    z-index: 5;
-}
-
-
 .MAM_Div
 {
     width: 100%;

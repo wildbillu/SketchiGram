@@ -46,7 +46,7 @@
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;   
     background-color: lightgreen;
-    z-index: 5; 
+    z-index: 1; 
     visibility: hidden;
 }
 
@@ -64,7 +64,7 @@
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;   
     background-color: white;
-    z-index: 5; 
+    z-index: 1; 
     visibility: hidden;
 }
 
@@ -83,6 +83,6 @@
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;   
     background-color: lightyellow;
-    z-index: 5; 
+    z-index: 1; 
     visibility: hidden;
 }

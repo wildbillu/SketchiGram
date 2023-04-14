@@ -1,6 +1,6 @@
 // TC-CAB-CoreProcessing.js
 
-function CAB_SquareValidForFocus(iRow, iLetter)
+function CAB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter)
 {
     let cStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     if ( cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct )
@@ -11,14 +11,11 @@ function CAB_SquareValidForFocus(iRow, iLetter)
 function CAB_onfocus(elem)
 {
     let sThisId = elem.id;
-    if ( g_GRBMS_Focus_sId != '')
-        GRBMS_LoseCurrentFocus();
-    if ( g_SA_EB_Focus_sId != '' )
-        TC_SA_EB_LoseTheFocusAndCleanup(false)
     let iThisRow        = CAB_RowFromId(sThisId);
     let iThisLetter  = CAB_LetterFromId(sThisId);
-    if ( !CAB_SquareValidForFocus(iThisRow, iThisLetter) )
+    if ( !CAB_ForRowLetter_IsSquareValidForFocus(iThisRow, iThisLetter) )
         return;
+    SyncTo_OthersLoseFocus('CA');
     CAB_ForRow_SetToActive(iThisRow, iThisLetter);
     if ( g_CAB_Focus_sId != '' )
     {    
@@ -34,9 +31,8 @@ function CAB_onfocus(elem)
         }
     }
     g_CAB_Focus_sId = sThisId;
-    KB_SetUsageMode(g_KB_Mini_sUsageMode_DualClue);
     CAB_SetBackground(true);
-    Sync_FocusChange('CA');
+    SyncTo_OthersLoseFocus('CA');
     return true;
 }
 
@@ -57,7 +53,7 @@ function CAB_MoveFocus(iNewRow, iNewLetter)
 //   
     let sNextBox = CAB_MakeId(iNewRow, iNewLetter);
     CAB_onfocus(document.getElementById(sNextBox));
-    Sync_FocusChange('CA')
+    SyncTo_OthersLoseFocus('CA')
 }
 
 function CAB_SetFocusToNext(iRow, iLetter)
@@ -139,7 +135,7 @@ function CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
     }
 // now we need to deal with the the entire row or letter to get the images right
     CAB_ForRow_SetToActive(iRow, iLetter);
-    Sync_FocusChange('CA');
+    SyncTo_OthersLoseFocus('CA');
     Sync_CAChange();
 }
 

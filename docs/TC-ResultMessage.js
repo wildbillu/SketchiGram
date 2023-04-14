@@ -73,6 +73,7 @@ function TC_ResultMessage_DisplayForInterval(sMessage, sStyle, iNumber, iSeconds
     }
     elemResultMessage_Div.style.height = MakePixelString(iTotalHeight);
     elemResultMessage_Div.style.visibility = 'visible';
+    elemResultMessage_Div.style.zIndex = 1;
     setTimeout(function(){TC_ResultMessage_RemoveCurrentMessage();},iSeconds*1000);    
     g_TC_ResultMessage_Active = true;
 }

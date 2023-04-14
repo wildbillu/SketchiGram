@@ -41,12 +41,11 @@ function TC_GetStatusOverlayImagePathAndName(cStatus)
 {
     if ( cStatus == g_cCode_Normal )
         return g_sImagePath_StatusIndicators + g_sStatusButtonName_Empty;
-//    if ( cStatus == g_cCode_Golden )
-//    {
-//        return g_sImagePath_StatusIndicators + g_sStatusButtonName_GoldenSquare;
-//    }
     if ( cStatus == g_cCode_Corrected )
+    {
         return g_sImagePath_StatusIndicators + g_sStatusButtonName_Corrected;
+        return g_sImagePath_StatusIndicators + g_sStatusButtonName_Corrected;
+    }
     if ( cStatus == g_cCode_Incorrect )
         return g_sImagePath_StatusIndicators + g_sStatusButtonName_Empty;
     if ( cStatus == g_cCode_IncorrectWithOverride )

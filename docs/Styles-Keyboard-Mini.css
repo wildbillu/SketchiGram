@@ -1,11 +1,31 @@
 /* Styles-Keyboard-Mini.css */
+/* normal button w38 x h36 ; narrow button w28 x h 6 */
+
+.KB_Mini_ButtonLeftArrow
+{
+    width:38px;
+    background-image: url("images/Buttons/Button_ArrowLeft.png");
+    background-size:38px;
+    background-repeat:no-repeat;
+    background-color:#DDDDDD;
+}
+
+.KB_Mini_ButtonRightArrow
+{
+    width:38px;
+    background-image: url("images/Buttons/Button_ArrowRight.png");
+    background-size:38px;
+    background-repeat:no-repeat;
+    background-color:#DDDDDD;
+}
 
 .KB_Mini_ButtonBackspace 
 {
-    width:56px;
+    width:38px;
     background-image: url("images/Buttons/Button_Backspace.png");
-    background-size:54px;
+    background-size:38px;
     background-repeat:no-repeat;
+    background-color:#DDDDDD;
 }
 
 .KB_Mini_ButtonBackspace_Disabled
@@ -101,23 +121,6 @@
     font-size:24px;
     color:#777777;
     background-color:#AAAAAA;
-}
-
-
-.KB_Mini_ButtonArrowLeft 
-{
-    width:44px;
-    background-image: url("images/Buttons/Button_ArrowLeft.png");
-    background-size:48px;
-    background-repeat:no-repeat;
-}
-
-.KB_Mini_ButtonArrowRight 
-{
-    width:44px;
-    background-image: url("images/Buttons/Button_ArrowRight.png");
-    background-size:48px;
-    background-repeat:no-repeat;
 }
 
 .KB_Mini_Button 

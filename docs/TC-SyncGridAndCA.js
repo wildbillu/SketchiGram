@@ -35,8 +35,6 @@ function TC_ShowSpecialClueAnswers()
     }
 }
 
-
-
 function TC_SyncGridToSpecialAnswers()
 {
     let bChange = false;
@@ -108,7 +106,7 @@ function TC_SyncSpecialAnswersToGrid()
             }
         }
     }
-    if ( TC_ForIndexIsClueTypeSpecial(0) )
+    if ( TC_ForIndexIsClueTypeSpecial(1) )
     {
         for ( let i = 0; i < g_CA_aMappingSpecial1ToGrid.length; i++ )
         {

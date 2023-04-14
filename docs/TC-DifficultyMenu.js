@@ -2,19 +2,59 @@
 //
 var g_TC_DM_siDOnClick_CAB = '';
 var g_TC_DM_siDOnClick_GRB = '';
+var g_TC_DM_siDOnClick_SA = '';
 var g_TC_DM_aIds        = [];
+
+var g_Difficulty_iLevel_Expert = 3;
+var g_Difficulty_iLevel_Hard = 2;
+var g_Difficulty_iLevel_Easy = 1;
+var g_Difficulty_iLevel_Invalid = -1;
+
+
+var g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert;
+var g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Invalid;
 
 var g_TC_DM_sClass_Enabled = 'DM_MenuItem_Base DM_MenuItem_Enabled';
 var g_TC_DM_sClass_Disabled = 'DM_MenuItem_Base DM_MenuItem_Disabled';
 var g_TC_DM_sClass_Selected = 'DM_MenuItem_Base DM_MenuItem_Selected';
 
-function DM_SetButtonsWhenSolved()
+function DM_SetButtons()
 {
-    if ( g_DifficultyLevel_iLevel != 3 ) DM_SetMenuItemClass('DM_Export', g_TC_DM_sClass_Disabled);
-    if ( g_DifficultyLevel_iLevel != 2 ) DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Disabled);
-    if ( g_DifficultyLevel_iLevel != 1 ) DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Disabled);
+    if ( g_bPuzzleSolved )
+    {
+        if ( g_Difficulty_iLevel_Operating != g_Difficulty_iLevel_Expert) 
+            DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
+        else
+            DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Selected);
+        if ( g_Difficulty_iLevel_Operating != g_Difficulty_iLevel_Hard ) 
+            DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Disabled);
+        else
+            DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Selected);
+        if ( g_Difficulty_iLevel_Operating != g_Difficulty_iLevel_Easy ) 
+            DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Disabled);
+        else
+            DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Selected);
+        return;
+    }
+    sClassNotSelected = g_TC_DM_sClass_Disabled;
+    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Expert ) 
+    {
+        DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Selected);
+        DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Enabled);
+        DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Enabled);
+        return;
+    }
+    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Hard ) 
+    {
+        DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
+        DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Selected);
+        DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Enabled);
+        return;
+    }
+    DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
+    DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Disabled);
+    DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Selected);
 }
-
 
 function DM_SetPosition()
 {
@@ -44,7 +84,7 @@ function DM_ShowCount()
     return iShowExtra;
 }
 
-function DM_ChangeToLevel2()
+function DM_ChangeToLevelHard()
 {
     let iShowExtra = DM_ShowCount();
     let iShown = 0;
@@ -52,10 +92,11 @@ function DM_ChangeToLevel2()
     {
         iShown++;
         SG_ShowExtraClue(false)
-    }        
+    }     
+    TC_SetVisible("ScratchArea");
 }
 
-function DM_ChangeToLevel1()
+function DM_ChangeToLevelEasy()
 {
     let iShowExtra = DM_ShowCount();
     let iShown = 0;
@@ -70,9 +111,25 @@ function DM_ChangeToLevel1()
     SG_ResetAnswerFromAnswersCorrectInGrid();
     CA_ClearIncorrect();
     SG_CA_UpdateAndSetVisibility(true);
+    if ( g_MAM_bActive ) MAM_EnableDisable();
 }
 
-// use this so has cookie g_DifficultyLevel_iLevel
+// use this so has cookie g_Difficulty_iLevel_Operating
+
+function DM_Difficulty_Level_DefaultLevelHard()
+{
+    g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Hard;
+    StoreCookie_Settings();
+    DM_Difficulty_SetLevelHard();
+}
+
+function DM_Difficulty_Level_DefaultLevelEasy()
+{
+    g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Easy;
+    StoreCookie_Settings();
+    DM_Difficulty_SetLevelEasy();
+}
+
 function DM_Dispatch(elem)
 {
     if ( g_bGridSolved ) return;
@@ -85,30 +142,33 @@ function DM_Dispatch(elem)
         }
         case 'DM_Hard':
         {
-            if ( g_DifficultyLevel_iLevel == 3 )
+            if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Expert )
             {
-                DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
-                DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Selected);
-                g_DifficultyLevel_iLevel = 2;
-                DM_ChangeToLevel2();
+                if ( g_bConnectionIsWebBased )
+                    DialogBox_SetupAndOpen(g_Dialog_SetDifficultyLevel_iTop, g_Dialog_SetDifficultyLevel_iLeft, 
+                    'DM_ConfirmSetting',
+                    'Do you want to set \'Hard\' as your default level?', 
+                    'Yes', DM_Difficulty_Level_DefaultLevelHard,
+                    'No', DM_Difficulty_SetLevelHard,
+                    '', '')
+                else
+                    DM_Difficulty_SetLevelHard();
             }
             break;
         }
         case 'DM_Easy':
         {
-            if ( g_DifficultyLevel_iLevel ==  1)
-            {
+            if ( g_Difficulty_iLevel_Operating ==  g_Difficulty_iLevel_Easy)
                 break;
-            }
-            if ( g_DifficultyLevel_iLevel ==  3 )
-            {
-                DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
-                DM_ChangeToLevel2();
-            }
-            DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Disabled);
-            DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Selected);
-            DM_ChangeToLevel1();
-            g_DifficultyLevel_iLevel = ``;
+            if ( g_bConnectionIsWebBased )
+                DialogBox_SetupAndOpen(g_Dialog_SetDifficultyLevel_iTop, g_Dialog_SetDifficultyLevel_iLeft, 
+                'DM_ConfirmSetting',
+                'Do you want to set \'Easy\' as your default level?', 
+                'Yes', DM_Difficulty_Level_DefaultLevelEasy,
+                'No', DM_Difficulty_SetLevelEasy,
+                '', '')
+            else
+                DM_Difficulty_SetLevelEasy();
             break;
         }
         default:
@@ -116,10 +176,31 @@ function DM_Dispatch(elem)
     }
 }
 
+function DM_Difficulty_SetLevelEasy()
+{
+    if ( g_Difficulty_iLevel_Operating ==  g_Difficulty_iLevel_Expert )
+    {
+        DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
+        DM_ChangeToLevelHard();
+    }
+    DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Disabled);
+    DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Selected);
+    DM_ChangeToLevelEasy();
+    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Easy;
+}
+
+function DM_Difficulty_SetLevelHard()
+{
+    DM_ChangeToLevelHard();
+    DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
+    DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Selected);
+    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
+}
+
 function TC_DM_MakeDiv()
 {    
     let sDMInner = TC_DM_MakeInnerHTML()
-    let sInner = '<DIV Id="DM_Div" class="DM_Div" align=center>' + sDMInner + '</DIV>';
+    let sInner = '<DIV Id="DM_Div" class="DM_Div StartHidden">' + sDMInner + '</DIV>';
     return sInner;
 }
 
@@ -130,8 +211,11 @@ function TC_DM_MakeInnerHTML()
     let sId = '';
     sDM += '<DIV Id="DM_Header" class="DM_Header">Difficulty</DIV>';
     sId = 'DM_Expert';
+//
+    if ( g_Difficulty_iLevel_Settings != g_Difficulty_iLevel_Invalid )
+    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
     let sClass = g_TC_DM_sClass_Disabled;
-    switch ( g_DifficultyLevel_iLevel )
+    switch ( g_Difficulty_iLevel_Operating )
     {
         case 3: sClass = g_TC_DM_sClass_Selected; break;
         case 2: sClass = g_TC_DM_sClass_Disabled; break;
@@ -141,7 +225,7 @@ function TC_DM_MakeInnerHTML()
     g_TC_DM_aIds.push(sId);
 
     sId = 'DM_Hard';
-    switch ( g_DifficultyLevel_iLevel )
+    switch ( g_Difficulty_iLevel_Operating )
     {
         case 3: sClass = g_TC_DM_sClass_Enabled; break;
         case 2: sClass = g_TC_DM_sClass_Selected; break;
@@ -151,7 +235,7 @@ function TC_DM_MakeInnerHTML()
     g_TC_DM_aIds.push(sId);
 
     sId = 'DM_Easy';
-    switch ( g_DifficultyLevel_iLevel )
+    switch ( g_Difficulty_iLevel_Operating )
     {
         case 3: sClass = g_TC_DM_sClass_Enabled; break;
         case 2: sClass = g_TC_DM_sClass_Enabled; break;
@@ -160,33 +244,4 @@ function TC_DM_MakeInnerHTML()
     sDM += '<DIV Id="' + sId + '" class="' + sClass + '"" onclick="DM_Dispatch(this);">Easy</DIV>';
     g_TC_DM_aIds.push(sId);
     return sDM;
-}
-
-function TC_DM_FixWidthsReturnHeight(iWidth)
-{
-    elemSmartMoveButton = document.getElementById("SG_AM_SmartMove_Button");
-    elemSmartMoveButton.style.left = MakePixelString(20);
-    elemSmartMoveButton.style.top = MakePixelString(0);
-    SG_ActionMenu_SetCheckBoxes();
-    var iTotalHeight = 0; 
-    for ( var iItem = 0; iItem < g_SG_ActionMenu_aIds.length; iItem++ )
-    {
-        var elemItem = document.getElementById(g_SG_ActionMenu_aIds[iItem]);
-        elemItem.style.width = MakePixelString(iWidth)
-        var rectItem = elemItem.getBoundingClientRect();
-        iTotalHeight += rectItem.height;
-    }
-    return iTotalHeight;
-}
-
-function TC_DM_SizeAndPosition()
-{
-    let iWidth = 200;
-    let elemActionMenuDiv = document.getElementById("SG_ActionMenu_Div")
-    elemActionMenuDiv.style.top = MakePixelString(g_ActionMenu_iTop);
-    elemActionMenuDiv.style.left = MakePixelString(g_ActionMenu_iLeft);
-    elemActionMenuDiv.style.width = MakePixelString(iWidth);
-    iTotalHeight = SG_ActionMenu_FixWidthsReturnHeight(iWidth);
-    elemActionMenuDiv.style.height = MakePixelString(iTotalHeight);
-    elemActionMenuDiv.style.zIndex = 2;
 }

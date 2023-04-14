@@ -15,8 +15,8 @@ function SG_MakeClueTextId(iRow)
 function SG_SetupClueAnswers()
 {
     SG_PositionClueOverallDiv();
-// first do the dual row stuff
-    let iWidthClues = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
+// first do the special row stuff
+    let iWidthClues = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     let elemClue_Div = document.getElementById("SG_Clues_Div");
     let sFinalInner = '';
     if ( TC_ForIndexIsClueTypeSpecial(0) && TC_ForIndexIsClueTypeSpecial(1) )
@@ -71,8 +71,8 @@ function SG_SetupClueAnswers()
     elemClue_Div.style.height = MakePixelString(iTotalHeight);
     if ( g_CA_bShowSpecial )
     {
-        let elemDualClue_Outer = document.getElementById("SG_SpecialClue_Outer_Div");
-        elemDualClue_Outer.style.width = MakePixelString(iWidthClues-2);
+        let elemSpecialClue_Outer = document.getElementById("SG_SpecialClue_Outer_Div");
+        elemSpecialClue_Outer.style.width = MakePixelString(iWidthClues-2);
     }
     g_SG_Clues_bCreated = true;
 }

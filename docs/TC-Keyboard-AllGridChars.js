@@ -7,56 +7,57 @@ var g_KB_AGC_AllButtonsEnabled = false;
 var g_KB_AGC_PendingPressedButton = -1;
 var g_KB_AGC_Backspace_bActive = false;
 
-function KB_AGC_KeyboardPressBackspace()
+var g_KB_Mini_sUsageMode_Idle = 'Idle';
+var g_KB_Mini_sUsageMode_ActiveGrid = 'Active_Grid';
+var g_KB_Mini_sUsageMode_ActiveWords = 'Active_Words';
+var g_KB_Mini_sUsageMode_SpecialClue = 'SpecialClue';
+var g_KB_Mini_sUsageMode = g_KB_Mini_sUsageMode_Idle;
+var g_KB_Mini_bBackspaceEnabled = false;
+
+function KB_SetUsageMode(sUsageMode)
 {
-    if ( g_CAB_Focus_sId != '' )
+    g_KB_Mini_sUsageMode = sUsageMode;
+    let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
+    let eButtonRow = document.getElementById("KB_Mini_ButtonRow_Div");
+    let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_Idle )
     {
-        iRow = CAB_RowFromId(g_CAB_Focus_sId);
-        iLetter = CAB_LetterFromId(g_CAB_Focus_sId);
-        CAB_ForRowLetter_SetAnswerPlayer(g_cCode_MeaningNotSet ,iRow, iLetter);
-        CAB_ForRowLetter_SetStatusPlayer(g_cCode_Normal ,iRow, iLetter);
-        CAB_ForRowLetter_SetButton(iRow, iLetter, g_cCode_HasFocus);
+        let sBackgroundColor = '#FFFFFF';
+        eInstructions.style.backgroundColor = sBackgroundColor;
+        eButtonRow.style.backgroundColor = sBackgroundColor;
+        elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
+        KB_AGC_EnabledStateAllButtons(false);
         return;
     }
-    return;
-}
-
-function KB_AGC_MakeBackspaceButton()
-{
-    let sTextForButton = ' ';
-    let sTextForId = 'Backspace';
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonBackspace_Disabled StartHidden';
-    let sIdWrapped = ' Id="' + sTextForId + '" ';
-    let sClassWrapped = 'class="' + sClass + '" '; 
-    let sOnClick = ' onclick="KB_AGC_KeyboardPressBackspace();" ';
-    let sButton = '<TD><DIV '+ sIdWrapped + sClassWrapped + sOnClick + '>' + sTextForButton + '</DIV></TD>';
-    return sButton;
-}
-
-function KB_AGC_FindBoundsOfButtons()
-{
-    let iButtons = g_KB_Buttons_a_of_cLetters.length;
-    let elemButton = document.getElementById(KB_AllGridChars_MakeButtonId(0));
-    let rectButton = GetBoundingClientRectAbsolute(elemButton);
-    let iLeft = rectButton.left;
-    let iTop = rectButton.top;
-    let iRight = rectButton.right;
-    let iBottom = rectButton.bottom;
-    for ( let iButton = 1; iButton < iButtons; iButton++ )
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveGrid )
     {
-        elemButton = document.getElementById(KB_AllGridChars_MakeButtonId(iButton));
-        rectButton = GetBoundingClientRectAbsolute(elemButton);
-        if ( rectButton.left < iLeft ) iLeft = rectButton.left;
-        if ( rectButton.right > iRight ) iRight = rectButton.right;
-        if ( rectButton.top < iTop ) iTop = rectButton.top;
-        if ( rectButton.bottom > iBottom ) iBottom = rectButton.bottom;
+        let sBackgroundColor = g_Color_sAbvocabPink;
+        eInstructions.style.backgroundColor = sBackgroundColor;
+        eButtonRow.style.backgroundColor = sBackgroundColor;
+        elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
+        KB_AGC_EnabledStateAllButtons(false);
+        return;
     }
-// now we check the backspace button    
-    let elemBackspace = document.getElementById('Backspace');
-    rectBackspace = GetBoundingClientRectAbsolute(elemBackspace);
-    if ( rectBackspace.right > iRight ) iRight = rectBackspace.right;
-    r = new DOMRect(0, 0, iRight - iLeft, iBottom - iTop)
-    return r;
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_SpecialClue )
+    {
+        let sBackgroundColor = g_Color_sAbvocabBlue;
+        eInstructions.innerHTML = "Select Letter For Special Clue Answer"
+        eInstructions.style.backgroundColor = sBackgroundColor;
+        eButtonRow.style.backgroundColor = sBackgroundColor;
+        elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
+        KB_AGC_EnabledStateAllButtons(true);
+        return;
+    }
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords )
+    {
+        let sBackgroundColor = g_Color_sScratchAreaActive;
+        eInstructions.style.backgroundColor = sBackgroundColor;
+        eButtonRow.style.backgroundColor = sBackgroundColor;
+        elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
+        KB_AGC_EnabledStateAllButtons(true);
+        return;
+    }
+setlineAdd('badUsageMode:' + g_KB_Mini_sUsageMode);
 }
 
 function KB_AllGridChars_Adjust(bMove)
@@ -74,7 +75,7 @@ function KB_AllGridChars_Adjust(bMove)
     let iKBLettersHeight = 0;
     if ( g_KB_sWidthDeterminedBy == 'BiggestRight' )
     { // later we want to contract this so it just fits the actual key
-        iKBWidth = g_TC_iBiggestRight * g_KB_fFractionAvailableWidth - 2; // for border
+        iKBWidth = g_Window_iWidth * g_KB_fFractionAvailableWidth - 2; // for border
         let iKBCandidateWidth = 0;
         let elemInstructionsDiv = document.getElementById("KB_Mini_Instructions_Div");
         let iWidthOfText = GetWidthOfTextInPixels(elemInstructionsDiv, elemInstructionsDiv.innerHTML);
@@ -100,7 +101,7 @@ function KB_AllGridChars_Adjust(bMove)
     }
     else if ( g_KB_sJustification == 'right' )
     {
-        iKBLeft = g_TC_iBiggestRight - iKBWidth;
+        iKBLeft = g_Window_iWidth - iKBWidth;
     }
     elem_KB.style.width = MakePixelString(iKBWidth);
     elem_KB.style.left = MakePixelString(iKBLeft);
@@ -129,12 +130,14 @@ function KB_AllGridChars_Setup()
 //    let g_KB_sJustification = 'center';
     let iWidthMax = g_iGridWidth * g_GRBMS_Square_iSize;
     if ( g_KB_sWidthDeterminedBy == 'BiggestRight' )
-        iWidthMax = g_TC_iBiggestRight * g_KB_fFractionAvailableWidth;
+        iWidthMax = g_Window_iWidth * g_KB_fFractionAvailableWidth;
     let iRows = 1;
 // we use the original order of Player Grid Answers - already random
     let iLetters = g_KB_Buttons_a_of_sButtonInner.length;
 //
-    let iTotalButtons = iLetters + 1; // for the delete key
+    let iTotalButtons = iLetters;
+    if ( g_KB_bBackspaceKeyActive ) iTotalButtons += 1;
+    if ( g_KB_bArrowKeysActive ) iTotalButtons += 2; 
     let iButtonWidth = KB_GetButtonWidth();
     let iEstimatedWidth = iTotalButtons * (iButtonWidth + 10); 
     let fRows = Math.ceil(iEstimatedWidth / iWidthMax);
@@ -158,10 +161,10 @@ function KB_AllGridChars_Setup()
         if ( iFinish > iLetters )
             iFinish = iLetters;
         sInner += '<TR align=center><TD>';
-        let bAppendBackspace = false;
-        if ( iRow == iRows - 1)
-            bAppendBackspace = true;
-        let sThisRow = KB_AllGridChars_MakeThisRow(iStart, iFinish, bAppendBackspace);
+        let bLastRow = false;
+        if ( iRow == iRows - 1) 
+            bLastRow = true;
+        let sThisRow = KB_AllGridChars_MakeThisRow(iStart, iFinish, bLastRow);
         sInner += sThisRow;
         sInner += '</TD></TR>'
     }
@@ -170,78 +173,6 @@ function KB_AllGridChars_Setup()
     let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     elemKB_Mini_Div.innerHTML = sInner;
     return iRows;
-}
-
-function KB_AGC_EnabledStateAllButtons(bOverrideAllToBeEnabled)
-{
-    g_KB_AGC_AllButtonsEnabled = bOverrideAllToBeEnabled;
-    for ( let i = 0; i < g_KB_Buttons_a_of_cLetters.length; i++)
-    {
-        let bEnabled = true;
-        if ( !bOverrideAllToBeEnabled )
-           bEnabled = !g_KB_Buttons_a_of_bPlacedCorrectly[i];
-        KB_AGC_SetButtonEnabledClass(i, bEnabled)
-    }
-    let bBackspaceVisible = false;
-    let sClassBackspace = 'KB_Mini_Button KB_Mini_ButtonBackspace_Disabled';
-    if ( bOverrideAllToBeEnabled )
-    {
-        bBackspaceVisible = true;
-        sClassBackspace = 'KB_Mini_Button KB_Mini_ButtonBackspace';
-    }
-    let elemBackspace = document.getElementById('Backspace');
-    ForIdSetVisibility('Backspace', bBackspaceVisible)
-    elemBackspace.className = sClassBackspace;
-}
-
-function KB_AllGridChars_MakeButtonInTD(iButton, cLetter, bPlacedCorrectly)
-{
-    let sId = KB_AllGridChars_MakeButtonId(iButton)
-    let sIdWrapped = ' Id="' + sId + '" ';
-    let sTextForButton = cLetter;
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
-    if ( bPlacedCorrectly )
-        sClass += '_Disabled'
-    if ( g_KB_Buttons_Narrow )
-        sClass += '_Narrow'
-    let sClassWrapped = 'class="' + sClass + '" '; 
-    let sOnClick = ' onclick="KB_AGC_KeyboardPress(' + iButton + ');" ';
-    let sButton = '<TD><DIV '+ sIdWrapped + sClassWrapped + sOnClick + '>' + sTextForButton + '</DIV></TD>';
-    return sButton;
-}
-
-function KB_AGC_SetButtonEnabledClass(iButton, bEnabled)
-{
-    let sId = KB_AllGridChars_MakeButtonId(iButton);
-    let elemButton = document.getElementById(sId);
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
-    if ( !bEnabled )
-        sClass += '_Disabled';
-    if ( g_KB_Buttons_Narrow )
-        sClass += '_Narrow'
-    elemButton.className = sClass;
-}
-
-function KB_AGC_SetButtonPlacedCorrectly(iButton)
-{
-    g_KB_Buttons_a_of_bPlacedCorrectly[iButton] = true;
-    let sId = KB_AllGridChars_MakeButtonId(iButton);
-    let elemButton = document.getElementById(sId);
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
-    if ( g_KB_Buttons_Narrow )
-        sClass += '_Narrow'
-    elemButton.className = sClass;
-}
-
-function KB_AGC_KeyboardPress_GRBMS(keypressed)
-{
-    if ( g_GRBMS_Focus_sId == "")
-        return false;
-    iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
-    iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
-    GRBMS_onkeyup(keypressed, iRow, iLetter);
-    Sync_FocusChange('GR')
-    return true;
 }
 
 function KB_AGC_FindAndChangeFirstNotYetCorrect(cLetter)
@@ -286,73 +217,28 @@ function KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter)
     }
 }
 
-function KB_AGC_KeyboardPress(iButton)
+function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
 {
-    let cLetter = g_KB_Buttons_a_of_cLetters[iButton];
-    let bPlacedCorrectly = g_KB_Buttons_a_of_bPlacedCorrectly[iButton];
-    if ( bPlacedCorrectly && !g_KB_AGC_AllButtonsEnabled )
-        return;
-    g_KB_AGC_PendingPressedButton = iButton;
-    if ( KB_AGC_KeyboardPress_GRBMS(cLetter) )
-        return;
-    if ( KB_Mini_KeyboardPress_CAB(cLetter) )
-        return;
-    KB_Mini_KeyboardPress_SA_EB(cLetter);
-}
-
-function KB_AllGridChars_MakeButtons()
-{
-    g_KB_Buttons_a_of_cLetters.length = 0;
-    g_KB_Buttons_a_of_bPlacedCorrectly.length = 0;
-    g_KB_Buttons_a_of_sButtonInner.length = 0;
-//    
-    let sAnswersPlayer = g_aGridAnswersPlayer.join('');
-    let sStatusPlayer  = g_aGridStatusPlayer.join('');
-    let iButtons = sAnswersPlayer.length;
-    let iButtonActive = 0;
-    for ( let iButton = 0; iButton < iButtons; iButton++ )
+    let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
+    let sInstructions = ' Exchange Highlighted Letter with Selection ';
+    if ( cLetterBeingReplaced != '' )
     {
-        let cStatusPlayer = sStatusPlayer.charAt(iButton);
-        let cAnswer = sAnswersPlayer.charAt(iButton)
-        if ( cAnswer != g_cCode_BlackSquare )
-        {
-            let bProperlyPlaced = false;
-            if ( cStatusPlayer == g_cCode_Corrected ) bProperlyPlaced = true;
-            if ( cStatusPlayer == g_cCode_Correct ) bProperlyPlaced = true;
-            if ( cStatusPlayer == g_cCode_Golden ) bProperlyPlaced = true;
-            let cLetter = sAnswersPlayer.charAt(iButton);
-            let s = KB_AllGridChars_MakeButtonInTD(iButtonActive, cLetter, bProperlyPlaced);
-            g_KB_Buttons_a_of_sButtonInner.push(s);
-            g_KB_Buttons_a_of_cLetters.push(cLetter);
-            g_KB_Buttons_a_of_bPlacedCorrectly.push(bProperlyPlaced);
-            iButtonActive++
-        }
+        sInstructions = ' Exchange ' + cLetterBeingReplaced + ' With Selection ';
+        KB_SetUsageMode(g_KB_Mini_sUsageMode_ActiveGrid)
     }
+    else
+        KB_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
+    eInstructions.innerHTML = sInstructions;
 }
 
-function KB_AllGridChars_MakeThisRow(iStart, iFinish, bAppendBackspace)
-{
-    let sButtonRow = '<TABLE><TR>';
-    for ( iButton = iStart; iButton < iFinish; iButton++)
-        sButtonRow += g_KB_Buttons_a_of_sButtonInner[iButton];
-    if ( bAppendBackspace )
-        sButtonRow += KB_AGC_MakeBackspaceButton();
-    sButtonRow += '</TR></TABLE>';
-    return sButtonRow; 
-}
-
-function KB_GetButtonWidth()
-{
-    let elemTest = document.getElementById("Test")
-    let cLetter = 'W';
-    let sInnerLetter = KB_AllGridChars_MakeButtonInTD(0, cLetter, true);
-    elemTest.innerHTML = sInnerLetter;
-    let sId = KB_AllGridChars_MakeButtonId(0);
-    let elemLetter = document.getElementById(sId)
-    let rectButton = elemLetter.getBoundingClientRect();
-    let iWidth = rectButton.width; 
-    elemTest.innerHTML = '';
-    return iWidth;
+function KB_AGC_SpecialButtonEnable(bEnabled)
+{ 
+    let bVisible = false;
+    if ( g_SA_Focus_sId != '' )
+        bVisible = true;
+    ForIdSetVisibility('Backspace', bVisible);
+    ForIdSetVisibility('ArrowLeft', bVisible);
+    ForIdSetVisibility('ArrowRight', bVisible);
 }
 
 function KB_AllGridChars_MakeButtonId(iButton){let sId = 'KB_AGC_' + iButton;return sId}

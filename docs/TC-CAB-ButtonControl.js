@@ -30,12 +30,12 @@ function CAB_ButtonBackgroundImage(cStatus, cSelection, cSpecialClueType)
     let sStatusImage = '';
     sStatusImage = TC_AddWrappedUrlToString(sStatusImage, TC_GetButtonFrameImagePathAndName(), true);
     sStatusImage = TC_AddWrappedUrlToString(sStatusImage, TC_GetStatusOverlayImagePathAndName(cStatus), true);
-    let sDualCodeUrl = ''
+    let sSpecialClueBackgroundImageUrl = ''
     if ( cSpecialClueType == g_cCode_AnswerType_Single )
-        sDualCodeUrl = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares;
+        sSpecialClueBackgroundImageUrl = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares;
     if ( cSpecialClueType == g_cCode_AnswerType_Double )
-        sDualCodeUrl = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNoNumberSquares;
-    if ( sDualCodeUrl != '' ) sStatusImage = TC_AddWrappedUrlToString(sStatusImage, sDualCodeUrl, true)
+        sSpecialClueBackgroundImageUrl = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNoNumberSquares;
+    if ( sSpecialClueBackgroundImageUrl != '' ) sStatusImage = TC_AddWrappedUrlToString(sStatusImage, sSpecialClueBackgroundImageUrl, true)
     sStatusImage = TC_AddWrappedUrlToString(sStatusImage, TC_GetStatusImagePathAndName(cSelection), true)
     return sStatusImage;
 }

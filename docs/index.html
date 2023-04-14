@@ -7,34 +7,26 @@
     <link rel="stylesheet" href="Styles-Overall.css">
     <link rel="stylesheet" href="Styles-TC-Button.css">
     <link rel="stylesheet" href="Styles-SpecialClue.css">
-
     <link rel="stylesheet" href="Styles-CAB-Headings.css">
     <link rel="stylesheet" href="Styles-GRB-Button.css">
     <link rel="stylesheet" href="Styles-TopRowControl.css">
     <link rel="stylesheet" href="Styles-Settings.css">
-    <link rel="stylesheet" href="Styles-More.css">
     <link rel="stylesheet" href="Styles-Info-Content.css">
     <link rel="stylesheet" href="Styles-StatusControl.css">
-
     <link rel="stylesheet" href="Styles-GRBMS-Base.css">
     <link rel="stylesheet" href="Styles-GRBMS-CAB.css">
-    <link rel="stylesheet" href="Styles-GRBMS-Image.css">
     <link rel="stylesheet" href="Styles-GRBMS-Button.css">
-
     <link rel="stylesheet" href="Styles-SG.css">
-    <link rel="stylesheet" href="Styles-SG-ActionMenu.css">
-
-
     <link rel="stylesheet" href="Styles-ResultMessage.css">
     <link rel="stylesheet" href="Styles-ScratchArea.css">
-    <link rel="stylesheet" href="Styles-DisplayDualClue.css">
+    <link rel="stylesheet" href="Styles-DisplaySpecialClue.css">
 
-    <SCRIPT SRC="TC-Configuration.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines-Codes.js"></SCRIPT>
     <SCRIPT SRC="TC-CodeHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines-Colors.js"></SCRIPT>
     <SCRIPT SRC="TC-SyncToChanges.js"></SCRIPT>
+    <SCRIPT SRC="TC-Configuration.js"></SCRIPT>
 
     <SCRIPT SRC="TC-DirectorySupport.js"></SCRIPT>
     <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
@@ -56,7 +48,7 @@
     <SCRIPT SRC="TC-SyncGridAndCA.js"></SCRIPT>
     
     <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRBMS-LoadClueAnswer.js"></SCRIPT>
+
     <SCRIPT SRC="TC-GRBMS.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT>
@@ -69,21 +61,20 @@
 
     <SCRIPT SRC="TC-ResultMessage.js"></SCRIPT>
 
-    <SCRIPT SRC="TC-ScratchArea-EditBox.js"></SCRIPT>
-    <SCRIPT SRC="TC-DisplayDualClue.js"></SCRIPT>
-
-<!-- these are the old style popup windows -->
-    <SCRIPT SRC="TC-More.js"></SCRIPT>
+    <SCRIPT SRC="TC-ScratchArea-Base-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-ScratchArea-CoreProcessing.js"></SCRIPT>
+    <SCRIPT SRC="TC-ScratchArea-EntryProcessing.js"></SCRIPT>
+    <SCRIPT SRC="TC-DisplaySpecialClue.js"></SCRIPT>
 
 <!-- keyboard -->
-    <SCRIPT SRC="TC-Keyboard-Mini.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard-AllGridChars.js"></SCRIPT>
-    <SCRIPT SRC="TC-Keyboard-Dispatch.js"></SCRIPT>
-    <SCRIPT SRC="TC-KeyboardSupport.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard-AllGridChars-Buttons.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard-AllGridChars-HandleKeypress.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-Keyboard-WindowSupport.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-Keyboard-Mini.css">
 <!-- these are the 'show/noshow' windows -->
     <SCRIPT SRC="TC-SuccessWindow.js"></SCRIPT>
-    <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
     <SCRIPT SRC="TC-Info-Content.js"></SCRIPT>
     <SCRIPT SRC="TC-Settings-Setup.js"></SCRIPT>
     <SCRIPT SRC="TC-Settings-Support.js"></SCRIPT>
@@ -94,18 +85,14 @@
     <SCRIPT SRC="TC-TopRowButton-Setup-Process.js"></SCRIPT>
     <SCRIPT SRC="TC-Cookies.js"></SCRIPT>
  
-    <SCRIPT SRC="TC-LoadExtraSolvedImages.js"></SCRIPT>
-
-    <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
+     <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
     <SCRIPT SRC="TC-Puzzle-AsJS.js"></SCRIPT>
 
     <SCRIPT SRC="TC-Status-Process.js"></SCRIPT>
 
 <!-- specific to SG -->
     <SCRIPT SRC="TC-SG2-Base.js"></SCRIPT>
-    <SCRIPT SRC="TC-SG-SG2-ThemeImage.js"></SCRIPT>
     <SCRIPT SRC="TC-SG-SG2-SetupHelpers.js"></SCRIPT>
-    <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
     <SCRIPT SRC="TC-SG2-Positioning.js"></SCRIPT>
 <!-- Archive -->
     <SCRIPT SRC="TC-Archive.js"></SCRIPT>
@@ -114,7 +101,6 @@
     <SCRIPT SRC="TC-ElapsedTime.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-ElapsedTime.css">
 <!-- Difficulty -->
-    <SCRIPT SRC="TC-DifficultyLevel.js"></SCRIPT>
     <SCRIPT SRC="TC-DifficultyMenu.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-DifficultyLevel.css">
     <link rel="stylesheet" href="Styles-DifficultyMenu.css">
@@ -122,9 +108,30 @@
     <SCRIPT SRC="TC-MiniActionsMenu.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-MiniActionsMenu.css">
  <!-- Button -->
-    <SCRIPT SRC="TC_Button_V2.js"></SCRIPT>
+ <SCRIPT SRC="TC_Button_V2.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-TC-Button-V2.css">
+<!-- NewThemeImage -->
+<SCRIPT SRC="TC-ThemeImage-Base.js"></SCRIPT>
+<SCRIPT SRC="TC-ThemeImage-Extra.js"></SCRIPT>
+<SCRIPT SRC="TC-ThemeImage-Solved.js"></SCRIPT>
+<SCRIPT SRC="TC-ThemeImage-Popup.js"></SCRIPT>
+<link rel="stylesheet" href="Styles-ThemeImage.css">
+
+<!-- DialogBox -->
+<SCRIPT SRC="TC-DialogBox-Base.js"></SCRIPT>
+<SCRIPT SRC="TC-DialogBox-Sizing.js"></SCRIPT>
+<link rel="stylesheet" href="Styles-DialogBox-Base.css">
+
+<!-- ActionMenu actions themselves -->
+<SCRIPT SRC="TC-Actions.js"></SCRIPT>
+
 <!--- Deprecated 
+    <link rel="stylesheet" href="Styles-SG-ActionMenu.css">
+    <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-ScratchArea-EditBox.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-LoadClueAnswer.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-Place.css">
     <link rel="stylesheet" href="Styles-Place-Direct.css">
     <SCRIPT SRC="TC-SG-Base.js"></SCRIPT>
@@ -144,6 +151,8 @@
     <SCRIPT SRC="TC-GRB-Setup.js"></SCRIPT>
     <SCRIPT SRC="TC-GRB-Basic.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
+        <SCRIPT SRC="TC-DifficultyLevel.js"></SCRIPT>
+
 -->
 
 
@@ -161,13 +170,15 @@ document.onkeypress = function (e) {TC_KeyboardSupport_KeyPress(e);};
 document.onkeyup = function (e) {TC_KeyboardSupport_KeyUp(e);};
 let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle012';
 let g_sPuzzleNumber          = 'puzzle000'
-let g_sPuzzleType            = 'SG2'
+let g_bConnectionIsWebBased = true;
 
 function Dispatch() 
 {
-//    setOld();
-    setNew();
-//setForPrint();
+    if (window.location.protocol === "file:")
+        g_bConnectionIsWebBased = false;
+    TC_Configuration_pick();
+    g_TC_iBiggestBottom = 0;
+
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.060';
 //
     TC_LoadPuzzleArchive();
@@ -179,7 +190,7 @@ function TC_SetActiveSize()
 {
     var elemAll = document.getElementById("Body_Any");
     elemAll.style.height = g_TC_iBiggestBottom;
-    elemAll.style.width  = g_TC_iBiggestRight;
+    elemAll.style.width  = g_Window_iWidth;
 }
 
 function A(e)

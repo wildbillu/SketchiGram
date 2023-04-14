@@ -9,8 +9,9 @@ function GRBMS_LoseCurrentFocus()
     GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
     let elem = document.getElementById(g_GRBMS_Focus_sId);
     elem.style.cursor="default";
+    let elemWithFocus = document.getElementById(g_GRBMS_Focus_sId);
+    elemWithFocus.blur();
     g_GRBMS_Focus_sId = '';
-    Sync_FocusChange('GR');
 }
 
 function GRBMS_onkeyup(key, iRow, iLetter)
@@ -37,10 +38,11 @@ function GRBMS_onkeyup(key, iRow, iLetter)
         bValidLetter = false;
     if ( !bValidLetter )
     {
+        alert('invalidkeyup')
         KB_Mini_SetInstructionLine('');  
         GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
         g_GRBMS_Focus_sId = '';
-        Sync_FocusChange('GR');
+        SyncTo_OthersLoseFocus('GR');
         return false;
     }
     // we want to switch with square that has iLetter
@@ -56,7 +58,7 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     }
     g_GRBMS_Focus_sId = '';
     Status_Check(false);
-    Sync_FocusChange('GR')
+    SyncTo_OthersLoseFocus('GR')
     return false;
 }
 
@@ -95,14 +97,13 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
 
 function GRBMS_onfocus(elem)
 {
-setlineAdd('GRBMS_onfocus')    
     let sThisId = elem.id;
-    if ( g_CAB_Focus_sId != '')        
-        CAB_FocusLostSetActiveToInActive();
-    if ( g_SA_EB_Focus_sId != '' )
-        TC_SA_EB_LoseTheFocusAndCleanup(true);
+    let iThisRow     = GRBMS_RowFromId(sThisId);
+    let iThisLetter  = GRBMS_LetterFromId(sThisId);
+    if ( !GRB_ForRowLetter_IsSquareValidForFocus(iThisRow, iThisLetter) )
+        return;
+//    SyncTo_OthersLoseFocus('GR');
     g_GRBMS_Focus_sId = sThisId;
-    Sync_FocusChange('GR');
 }    
 
 function GRBMS_onkeypress(event)
@@ -116,9 +117,8 @@ function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceMe, bRejectDual)
     var sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cReplaceMe, bRejectDual, cNow);
     if ( sFoundId == '')
         return sFoundId;
-    var B_iRow = GRBMS_RowFromId(sFoundId);
-    var B_iLetter = GRBMS_LetterFromId(sFoundId);
+    let B_iRow = GRBMS_RowFromId(sFoundId);
+    let B_iLetter = GRBMS_LetterFromId(sFoundId);
     GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
-    KB_Mini_SetInstructionLine('');   
     return sFoundId;
 }

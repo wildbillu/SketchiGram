@@ -1,19 +1,42 @@
 // TC-SyncToChanges.js
 
-function Sync_FocusChange(sFocusWith)
+let g_SyncTo_KB_sActiveUsageMode = '';
+let g_SyncTo_LastWithFocus = 'NoOne';
+
+function SyncTo_OthersLoseFocus(sFocusIs)
 {
-    if ( sFocusWith == 'GR')
+    if ( sFocusIs == 'NoOne' && g_SyncTo_LastWithFocus != 'NoOne' )
     {
-        
+        TC_SA_LoseFocus();
+        CAB_FocusLostSetActiveToInActive();
+        GRBMS_LoseCurrentFocus();
+        if ( g_SyncTo_KB_sActiveUsageMode != g_KB_Mini_sUsageMode_Idle )
+        {
+            KB_SetUsageMode(g_KB_Mini_sUsageMode_Idle);
+        }
     }
-    if ( sFocusWith == 'CA')
+    else if ( sFocusIs == 'GR' && g_SyncTo_LastWithFocus != 'GR' )
     {
-        
+        TC_SA_LoseFocus();
+        CAB_FocusLostSetActiveToInActive();
+        if ( g_SyncTo_KB_sActiveUsageMode != g_KB_Mini_sUsageMode_ActiveGrid )
+            KB_SetUsageMode(g_KB_Mini_sUsageMode_ActiveGrid);
     }
-    if ( sFocusWith == 'SA')
+    else if ( sFocusIs == 'CA' && g_SyncTo_LastWithFocus != 'CA' )
     {
-        
+        TC_SA_LoseFocus();
+        GRBMS_LoseCurrentFocus();
+        if ( g_SyncTo_KB_sActiveUsageMode != g_KB_Mini_sUsageMode_SpecialClue )
+            KB_SetUsageMode(g_KB_Mini_sUsageMode_SpecialClue);
     }
+    else if ( sFocusIs == 'SA' && g_SyncTo_LastWithFocus != 'SA' )
+    {
+        CAB_FocusLostSetActiveToInActive();
+        GRBMS_LoseCurrentFocus();
+        if ( g_SyncTo_KB_sActiveUsageMode != g_KB_Mini_sUsageMode_ActiveWords )
+            KB_SetUsageMode(g_KB_Mini_sUsageMode_ActiveWords);
+    }
+    g_SyncTo_LastWithFocus = sFocusIs;
     if ( g_MAM_bActive) MAM_EnableDisable();
 }
 

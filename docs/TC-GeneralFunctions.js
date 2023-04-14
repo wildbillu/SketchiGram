@@ -49,7 +49,7 @@ if ( iX < rect.left ) return false;
 
 function TC_LeftForCentering(iWidthElement)
 {
-    let iWidthRemaining  = g_TC_iBiggestRight - iWidthElement;
+    let iWidthRemaining  = g_Window_iWidth - iWidthElement;
     let iLeftForCentering = g_TC_Padding_Left_iSize + iWidthRemaining / 2;
     return iLeftForCentering;
 }
@@ -85,11 +85,6 @@ function GetWidthToHeightRatioOfImageWithId(sImageId)
         return 1.011;
     var scale = width/height;
     return scale
-}
-
-function GetWidthToHeightRatioOfImages()
-{
-    return GetWidthToHeightRatioOfImageWithId('ExtraImage');
 }
 
 function GetComputedStyleProperty(elem, sProperty)
@@ -182,7 +177,7 @@ function setline(sAdd)
 
 function replaceAt(sOriginal, index, sReplacement) 
 {
-    var sNew = sOriginal.substring(0, index);
+    let sNew = sOriginal.substring(0, index);
     sNew += sReplacement
     sNew += sOriginal.substring(index + sReplacement.length);
     return sNew;

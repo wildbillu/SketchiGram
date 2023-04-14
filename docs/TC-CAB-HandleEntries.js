@@ -24,7 +24,7 @@ function CAB_ShowCheckAnswers(sToDo)
 {
     for ( var iR = 0; iR < g_iAnswers; iR++)
     {
-        if ( TC_ForIndexIsClueTypeSpecial(iL) )
+        if ( TC_ForIndexIsClueTypeSpecial(iR) )
             CAB_ShowCheckAnswerRow(iR, sToDo)
     }
     return true;

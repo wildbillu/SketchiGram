@@ -2,7 +2,7 @@
 
 function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, 
                          sStatusPlayer, sAnswerLocations, SA_EB_sWords, 
-                         SA_EB_sWordStatus, sAnswersDualClueLocations, sClueTypes)
+                         SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes)
 {
     g_CAB_aClues   = sClues.split(g_cGeneralDelimiter);
     g_CAB_iClues   = g_CAB_aClues.length;
@@ -12,19 +12,19 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer,
     g_CAB_aAnswersPlayerStatus  = sStatusPlayer.split(g_cGeneralDelimiter);
     g_CAB_aAnswerLocations      = sAnswerLocations.split(g_cGeneralDelimiter);
     g_CAB_aAnswerType           = sClueTypes.split(g_cGeneralDelimiter)
-    g_CAB_aAnswerSpecialClueType   = sAnswersDualClueLocations.split(g_cGeneralDelimiter);
+    g_CAB_aAnswerSpecialClueType   = sAnswersSpecialClueLocations.split(g_cGeneralDelimiter);
 
-    g_SA_EB_aWords.length = 0;
-    g_SA_EB_aWords          = SA_EB_sWords.split(g_cGeneralDelimiter);
-    g_SA_EB_sWordStatus     = SA_EB_sWordStatus;
+    g_SA_aWords.length = 0;
+    g_SA_aWords          = SA_EB_sWords.split(g_cGeneralDelimiter);
+    g_SA_sWordStatus     = SA_EB_sWordStatus;
 
     if ( g_CAB_aClues.length != g_CAB_iClues || g_CAB_aAnswers.length != g_CAB_iClues || g_CAB_aAnswersPlayer.length != g_CAB_iClues || g_CAB_aAnswersPlayerStatus.length != g_CAB_iClues)
         setline('dataProblem.' + g_CAB_iClues + g_CAB_aClues.length + g_CAB_aAnswers.length + g_CAB_aAnswersPlayer.length + g_CAB_aAnswersPlayerStatus.length);
 }
 
-function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridDualClueLocations)
+function GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations)
 {
-    g_GR_sGridDualClueLocations = sGridDualClueLocations;
+    g_GR_sGridSpecialClueLocations = sGridSpecialClueLocations;
     g_iGridWidth = iGridWidth;
     g_iGridHeight = iGridHeight;
     g_sGridNumbering = sGridNumbering;

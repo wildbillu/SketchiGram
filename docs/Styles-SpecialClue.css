@@ -1,10 +1,18 @@
 /* Styles-SpecialClue.css */
 
 .SpecialClue_Div
-{    user-select: none;border: 2px solid black;    position:relative;    left:0px;    top:600px;    height:72px;    width:96px;}
+{    user-select: none;border: 0px solid black;    position:relative;    left:0px;    top:600px;    height:72px;    width:96px;}
 
 .SpecialClue_Image_Div
-{    top:0px;    left:0px;    border: 0px solid green;    color:black;    text-align: center;    font-size: 16px;    font-family:Arial, Helvetica, sans-serif;   font-style:normal;}
+{top:0px;left:0px;
+ border: 0px solid green;color:black;
+}
+
+.SpecialClue_ImageItself_Div
+{top:0px;left:0px;
+ border:0px solid orange;color:black;
+ cursor:zoom-in;
+}
 
 .SpecialClue_ClueAnswer_Div{border: 0px solid orange;   text-align: center;}
 
@@ -14,6 +22,7 @@
 {
     border:0px solid green;
 }
+.SpecialClue_Button_Div.pointer {cursor: crosshair;}
 
 .SpecialClue_Table
 {

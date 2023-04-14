@@ -11,7 +11,7 @@ var g_TC_Archive_Menu_iActiveCount = 0;
 
 function TC_LoadPuzzleArchive_FromFile()
 {
-    if (window.location.protocol === "file:")
+    if ( !g_bConnectionIsWebBased )
         return;
     let sTextFileToLookFor = 'Archive.txt'; 
     let sFileContents = TC_GetFile(sTextFileToLookFor, 'archive');
@@ -85,13 +85,12 @@ function TC_Archive_Select(elem)
     g_TC_iBiggestBottom = 0;
     g_SG_Clues_bCreated = false;
     SG_UpdateAnswersCorrectInGridAndDisplay();
-    if ( g_bDifficultyLevelActive ) TC_DifficultyLevel_Set(3);
-    if ( g_DM_bActive ) g_DifficultyLevel_iLevel = 3;
+    if ( g_DM_bActive ) g_Difficulty_iLevel_Operating = 3;
     g_SG_bAnswersCorrectInGridSet = false;
-    g_DifficultyLevel_iLevel = 3;
+    g_Difficulty_iLevel_Operating = 3;
     g_bGridAndCA = false;
     g_TC_Status_bFirstCheck = true;
-    TC_SA_EB_ClearEntries();
+    TC_SA_ClearEntries();
 //
     SG2_LoadAll(0);
 }

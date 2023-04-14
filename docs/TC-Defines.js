@@ -20,7 +20,6 @@ var g_ST_sClue_Itself = '';
 // these are to help with positioning
 // they should be updated after each section
 var g_TC_iBiggestBottom = 0;
-var g_TC_iBiggestRight  = 450;
 
 var g_TC_Padding_Left_iSize = 2;
 var g_TC_Padding_Right_iSize = 2;
@@ -46,5 +45,5 @@ var g_sStatusButtonName_Inactive     = 'Button_Clear.png';
 var g_sStatusButtonName_ActiveRow    = 'Button_AbvocabBlue_Transparent64.png';
 var g_sStatusButtonName_GoldenSquare = 'Button_Golden.png';
 var g_sStatusButtonName_Corrected    = 'Button_Status_OrangeCorner.png';
-var g_sStatusButtonName_Incorrect    = 'Button_Status_RedSlash.png';
+var g_sStatusButtonName_SolvedSpecial    = 'Button_AbvocabMagenta_Transparent32.png';
 

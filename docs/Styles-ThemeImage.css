@@ -1,0 +1,109 @@
+/* Styles-GRBMS-Image.css */
+
+.ThemeImage_Popup_Div
+{
+    border: 0px solid red;
+    position:absolute;
+    left:0px;top:0px;height:200px;width:300px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    vertical-align: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.ThemeImage_Popup_ImageItself_Div
+{
+    border: 0px solid green;
+    position:relative;
+    left:0px;top:0px;height:500px;width:500px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    vertical-align: center;
+    align-items: center;
+    cursor:zoom-out;
+}
+
+.ThemeImage_Base_Div
+{
+    border: 0px solid red;
+    position:absolute;
+    left:0px;top:0px;height:200px;width:300px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    vertical-align: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.ThemeImage_Base_ImageItself_Div
+{
+    border: 0px solid green;
+    position:relative;
+    left:0px;top:0px;height:300px;width:300px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    vertical-align: center;
+    align-items: center;
+    cursor:zoom-in;
+}
+
+.ThemeImage_Extra_Div
+{
+    border: 0px solid black;
+    position:absolute;
+    left:0px;top:0px;height:300px;width:300px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    vertical-align: center;
+    align-items: center;
+}
+
+.ThemeImage_Extra_Image_Div
+{
+    border: 0px solid orange;
+    position:absolute;
+    left:0px;top:0px;height:300px;width:300px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    vertical-align: center;
+    align-items: center;
+    cursor:zoom-in;
+}
+
+.ThemeImage_Solved_Div
+{
+    border: 0px solid blue;
+    position:absolute;
+    left:0px;top:0px;height:200px;width:200px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    z-index:10;
+}
+
+.ThemeImage_Solved_Image_Div
+{
+    border: 0px solid yellow;
+    position:absolute;
+    left:0px;top:0px;height:200px;width:200px;
+    outline: none; 
+    border-collapse: collapse; 
+    padding: 0px;
+    margin:0;
+    cursor:zoom-in;
+    z-index:10;
+}

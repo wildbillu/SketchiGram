@@ -10,7 +10,7 @@ function MakeAndStoreCookie_CurrentPuzzle()
     let sValue = g_sPuzzleNumber;
     if ( sValue == '' || sValue == g_PuzzlePath_sTemplate_ReplaceMe )
         sValue = 'none';
-    let sCookieName = g_sPuzzleType + '-CurrentPuzzle';
+    let sCookieName = 'SG2' + '-CurrentPuzzle';
     let sCookie = '';
     sCookie += sValue;
     let exdays = 365;
@@ -24,7 +24,7 @@ function MakeAndStoreCookie_CurrentPuzzle()
 function FromCookies_GetCurrentPuzzle()
 {
     g_TC_sPuzzle_Cookie = '';
-    let sCookieCurrentPuzzle = g_sPuzzleType + '-CurrentPuzzle';
+    let sCookieCurrentPuzzle = 'SG2' + '-CurrentPuzzle';
     for ( let iCookie = 0; iCookie < g_iCookies ; iCookie++)
     {
         let sThisCookie = g_aCookies[iCookie];
@@ -75,8 +75,8 @@ function HandleCookiesOnStart()
 {
     g_Cookie_DifficultyLevel_iLevel = -1;
 //    
-    let sOurCookieName_Puzzle   = g_sPuzzleType + '-' + g_sPuzzleNumber;
-    let sOurCookieName_Settings = g_sPuzzleType + '-Settings'; 
+    let sOurCookieName_Puzzle   = 'SG2' + '-' + g_sPuzzleNumber;
+    let sOurCookieName_Settings = 'SG2' + '-Settings'; 
     let sOurCookie_Puzzle = '';
     let sOurCookie_Settings = '';
 //
@@ -101,36 +101,40 @@ var g_Cookie_bPuzzleSolved = false;
 var g_Cookie_bGridSolved = false;
 var g_Cookie_bAnswersSolved = false;
 var g_Cookie_SA_EB_sWords = '||||||||||||';
-var g_Cookie_DifficultyLevel_iLevel = -1;
 var g_Cookie_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
-
+var g_Cookie_Puzzle_Version_sV1000 = 'V1.000';
+var g_Cookie_Puzzle_Version_iCount = 14;
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
 {
+    g_Cookie_bValid = false;
     if ( sOurCookie_Puzzle == '')
         return;
     let iEqual = sOurCookie_Puzzle.indexOf("=");
     if ( iEqual == -1 )
-        return false;
+        return;
     let sCookieValue = sOurCookie_Puzzle.substring(iEqual + 1);
     let aOurValues = [];
     aOurValues = sCookieValue.split(g_cCookieDelimiter);
     let iOurValues = aOurValues.length;
-    if ( iOurValues != 14 )
-        return false;
-    g_Cookie_sPuzzle = aOurValues[0];
-    g_Cookie_sAnswersPlayer = aOurValues[1];
-    g_Cookie_sStatusPlayer = aOurValues[2];
-    g_Cookie_sGridAnswersPlayer = aOurValues[3];
-    g_Cookie_sGridStatusPlayer = aOurValues[4];
-    g_Cookie_bPuzzleSolved = IsTrue(aOurValues[6]);
-    g_Cookie_bGridSolved = IsTrue(aOurValues[7]);
-    g_Cookie_bAnswersSolved = IsTrue(aOurValues[8]);
-    g_Cookie_SA_EB_sWords = aOurValues[9];
-    g_Cookie_DifficultyLevel_iLevel = aOurValues[10];
-    g_Cookie_SA_EB_sWordStatus =  aOurValues[11];
-    g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(aOurValues[12]);
-    g_Cookie_bValid = true;
+    let iIndex = 0;
+    let sVersion = aOurValues[iIndex++]; //1
+    if ( sVersion == g_Cookie_Puzzle_Version_sV1000 && iOurValues == g_Cookie_Puzzle_Version_iCount )
+    {
+        g_Cookie_sPuzzle = aOurValues[iIndex++];
+        g_Cookie_sAnswersPlayer = aOurValues[iIndex++];
+        g_Cookie_sStatusPlayer = aOurValues[iIndex++];
+        g_Cookie_sGridAnswersPlayer = aOurValues[iIndex++];
+        g_Cookie_sGridStatusPlayer = aOurValues[iIndex++];
+        g_Cookie_bPuzzleSolved = IsTrue(aOurValues[iIndex++]);
+        g_Cookie_bGridSolved = IsTrue(aOurValues[iIndex++]);
+        g_Cookie_bAnswersSolved = IsTrue(aOurValues[iIndex++]);
+        g_Cookie_SA_EB_sWords = aOurValues[iIndex++];
+        g_Cookie_SA_EB_sWordStatus =  aOurValues[iIndex++];
+        g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(aOurValues[iIndex++]);
+        g_Cookie_bValid = true;
+        return;
+    }
 }
 
 function StoreCookie_Puzzle()
@@ -147,38 +151,38 @@ function StoreCookie_Puzzle()
 
 function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds)
 {
-    let sCookieName = g_sPuzzleType + '-' + g_sPuzzleNumber;
+    let sCookieName = 'SG2' + '-' + g_sPuzzleNumber;
     let sCookie = '';
-    sCookie += sPuzzleName;
+    sCookie += g_Cookie_Puzzle_Version_sV1000; //0
      sCookie += g_cCookieDelimiter;
-    sCookie += sAnswersPlayer;
+    sCookie += sPuzzleName;//1
      sCookie += g_cCookieDelimiter;
-    sCookie += sStatusPlayer;
+    sCookie += sAnswersPlayer;//2
      sCookie += g_cCookieDelimiter;
-    sCookie += sGridAnswersPlayer;
+    sCookie += sStatusPlayer;//3
      sCookie += g_cCookieDelimiter;
-    sCookie += sGridStatusPlayer
-    sCookie += g_cCookieDelimiter;
-    sCookie += iSeconds;
-    sCookie += g_cCookieDelimiter;
-    sCookie += g_bPuzzleSolved;
-    sCookie += g_cCookieDelimiter;
-    sCookie += g_bGridSolved;
-    sCookie += g_cCookieDelimiter;
-    sCookie += g_bAnswersSolved;
-    let SA_EB_sWords = g_SA_EB_aWords.join(g_cGeneralDelimiter);
-    sCookie += g_cCookieDelimiter;
-    sCookie += SA_EB_sWords;
-    sCookie += g_cCookieDelimiter;
-    sCookie += g_DifficultyLevel_iLevel;
-    sCookie += g_cCookieDelimiter;
-    sCookie += g_SA_EB_sWordStatus
-    sCookie += g_cCookieDelimiter;
+    sCookie += sGridAnswersPlayer;//4
+     sCookie += g_cCookieDelimiter;
+    sCookie += sGridStatusPlayer//5
+     sCookie += g_cCookieDelimiter;
+    sCookie += iSeconds;//6
+     sCookie += g_cCookieDelimiter;
+    sCookie += g_bPuzzleSolved;//7
+     sCookie += g_cCookieDelimiter;
+    sCookie += g_bGridSolved;//8
+     sCookie += g_cCookieDelimiter;
+    sCookie += g_bAnswersSolved;//9
+     sCookie += g_cCookieDelimiter;
+    let SA_EB_sWords = g_SA_aWords.join(g_cGeneralDelimiter);
+    sCookie += SA_EB_sWords;//10
+     sCookie += g_cCookieDelimiter;
+    sCookie += g_SA_sWordStatus//11
+     sCookie += g_cCookieDelimiter;
     let iTotalTime = (g_ElapsedTime_iSecondsPrevious + g_ElapsedTime_iSecondsThisAttempt);
-    sCookie += iTotalTime.toString();
-    sCookie += g_cCookieDelimiter;
+    sCookie += iTotalTime.toString();//12
+     sCookie += g_cCookieDelimiter;
     sCookie += 99;
-    //
+//
     var exdays = 365;
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));

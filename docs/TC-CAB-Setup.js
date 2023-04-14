@@ -1,11 +1,37 @@
 // TC-CAB-Setup.js
 
+let g_CAB_SpecialClue_bImageExpanded = false;
+
+function CAB_SpecialClueExpandClosed()
+{
+    let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
+    elemSCI.style.cursor = "zoom-in";
+    g_CAB_SpecialClue_bImageExpanded = false;
+}
+
+function CAB_SpecialClueExpandHint()
+{
+    if ( g_CAB_SpecialClue_bImageExpanded )
+    {
+        TC_ThemeImage_Popup_HidePopup();
+        return;
+    }
+    let iTop = 150;
+    let iLeft = g_TC_Padding_Left_iSize;
+    let iWidth = g_Window_iWidth;
+    let iHeight = iWidth/GetWidthToHeightRatioOfImageWithId("ThemeImage_Base_ImageItself_Div");
+    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Extra, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed)
+    let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
+    elemSCI.style.cursor = "zoom-out";
+    g_CAB_SpecialClue_bImageExpanded = true;
+}
+
 function CAB_MakeSpecialClueAnswerDiv()
 {
     let elem_SpecialClue_Div = document.getElementById("SpecialClue_Div");
     elem_SpecialClue_Div.style.left = MakePixelString(g_TC_Padding_Left_iSize);
     elem_SpecialClue_Div.style.top = MakePixelString(g_SpecialClueFrame_iTop);
-    let iSpecialClueWidth = g_TC_iBiggestRight - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
+    let iSpecialClueWidth = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     elem_SpecialClue_Div.style.width = MakePixelString(iSpecialClueWidth);
     let iHeight = g_TC_Padding_Top_iSize + 70;
     elem_SpecialClue_Div.style.height = MakePixelString(iHeight);
@@ -13,28 +39,37 @@ function CAB_MakeSpecialClueAnswerDiv()
     let sClueAnswerAndImageDivs = ''
     sClueAnswerAndImageDivs += '<TABLE  cellpadding=0 cellspacing=0 class="SpecialClue_Table"><TR>'
     sClueAnswerAndImageDivs += '<TD><DIV id="SpecialClue_ClueAnswer_Div" class="SpecialClue_ClueAnswer_Div">ClueAnswer</DIV></TD>';
-    sClueAnswerAndImageDivs += '<TD><DIV id="SpecialClue_Image_Div" class="SpecialClue_Image_Div" onclick="SpecialExpand();">Click to Expand Hint</DIV></TD>';
+    if ( g_SpecialClue_bShowImageButton )
+        sClueAnswerAndImageDivs += '<TD><DIV id="SpecialClue_Image_Div" class="SpecialClue_Image_Div"></DIV></TD>';
     sClueAnswerAndImageDivs += '</TR></TABLE>'
     elem_SpecialClue_Div.innerHTML = sClueAnswerAndImageDivs;
 // now fill the image section
-    let elemImage = document.getElementById("SpecialClue_Image_Div");
-    let fWidthToHeight = GetWidthToHeightRatioOfImageWithId("ThemeImage");
-    let iImageWidth = iHeight * fWidthToHeight;  // need to deal with aspect ratio
-    elemImage.style.width = MakePixelString(iImageWidth);
-    elemImage.style.height = MakePixelString(iHeight);
-    let sImage = '';
-    sImage = TC_AddWrappedUrlToString(sImage, g_PuzzlePath_sName_Image_Extra, true);
-    elemImage.style.backgroundImage = sImage;
-    elemImage.style.backgroundSize = MakePixelString(iImageWidth);
+    let iImageWidth = 0;
+    if ( g_SpecialClue_bShowImageButton )
+    {
+        let elemImage = document.getElementById("SpecialClue_Image_Div");
+        let sImageHTML = '<img Id="SpecialClue_ImageItself_Img" class="SpecialClue_ImageItself_Div" onclick="CAB_SpecialClueExpandHint();" src="' + g_PuzzlePath_sName_Image_Extra + '" alt="Extra" height="200"></img>';
+        elemImage.innerHTML = sImageHTML
+        let elemImageItself = document.getElementById("SpecialClue_ImageItself_Img");
+        let fWidthToHeight = GetWidthToHeightRatioOfImageWithId("SpecialClue_ImageItself_Img");
+        iImageWidth = iHeight * fWidthToHeight;  // need to deal with aspect ratio
+        elemImageItself.style.width = MakePixelString(iImageWidth);
+        elemImageItself.style.height = MakePixelString(iHeight);
+//        let sImage = '';
+//        sImage = TC_AddWrappedUrlToString(sImage, g_PuzzlePath_sName_Image_Extra, true);
+//        elemImage.style.backgroundImage = sImage;
+//        elemImage.style.backgroundSize = MakePixelString(iImageWidth);
+    }
 // now fill the clue div
     let elemClueAnswer = document.getElementById("SpecialClue_ClueAnswer_Div")
     let iClueAnswerWidth = iSpecialClueWidth - iImageWidth;
+
     elemClueAnswer.style.width = MakePixelString(iClueAnswerWidth);
     elemClueAnswer.style.height = MakePixelString(iHeight);
     let sClueAnswerRow = '';
     sClueAnswerRow += '<DIV Id="SpecialClueItself_Div" class="SpecialClueItself CA_Color_InActive">' + g_ST_sClue_Itself + '</DIV>'
-    // we need to adjust the height of the dual clue depending on the size of the buttons
-    // now we need to make the dual clue
+    // we need to adjust the height of the Special clue depending on the size of the buttons
+    // now we need to make the Special clue
     let iFudgedWidth = iClueAnswerWidth * .8;
     sClueAnswerRow += '<DIV Id="SC_TableInside_Div" class="SC_TableInside_Div">'
     sClueAnswerRow += '<TABLE Id="SpecialClue_Table" width=' + iFudgedWidth + ' class="SpecialClue_Table" cellspacing=0 cellpadding=0><TR width=100>';
@@ -87,17 +122,12 @@ function CAB_MakeButtonSingleHTML(iRow, iLetter)
     sFunctionsToCall += ' onkeypress="return CAB_onkeypress(event);"';
     sFunctionsToCall += ' onkeyup="return CAB_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
 //    sFunctionsToCall += ' onfocus="CAB_onfocus(this);"';
-    sInnerRowHTML += '<DIV '
+    sInnerRowHTML += '<DIV tabindex="0" '
     sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
     sInnerRowHTML += ' class="' + g_CAB_Square_sClass + '" ';
     sInnerRowHTML += sFunctionsToCall;
     sInnerRowHTML += '> </DIV>';
     return sInnerRowHTML;
-}
-
-function SpecialExpand()
-{
-    TC_ShowExtraImage()
 }
 
 function TC_ForIndexIsClueTypeSpecial(iIndex)

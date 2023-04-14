@@ -1,6 +1,11 @@
 /* Style-Overall.css */
 
-/*user-select: none;*/
+/* zIndexes
+- 0 most things
+- 1 result message
+- 2 popup images
+- 3 popup dialogs
+*/
 
 ::selection{background-color: #FFEE60}
 .MoveCursor

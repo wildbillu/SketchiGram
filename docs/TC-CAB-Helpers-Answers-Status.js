@@ -4,17 +4,19 @@ function CA_ClearIncorrect()
 {
     for ( let iRow = 0; iRow < 2; iRow++ )
     {
-        let iLength = g_CAB_aAnswers[iRow].length;
-        for ( let iLetter = 0; iLetter < iLength; iLetter++ )
+        if ( TC_ForIndexIsClueTypeSpecial(iRow) )
         {
-            setlineAdd('.s:' + iLetter)
-            let cAnswer = CAB_ForRowLetter_GetAnswer(iRow, iLetter);
-            let cAnswerPlayer = CAB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-            if ( cAnswer != cAnswerPlayer )
+            let iLength = g_CAB_aAnswers[iRow].length;
+            for ( let iLetter = 0; iLetter < iLength; iLetter++ )
             {
-                CAB_ForRowLetter_SetAnswerPlayer(g_cCode_MeaningNotSet, iRow, iLetter);                    
-                CAB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, iRow, iLetter);    
-                CAB_ForRowLetter_SetButton(iRow, iLetter);
+                let cAnswer = CAB_ForRowLetter_GetAnswer(iRow, iLetter);
+                let cAnswerPlayer = CAB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                if ( cAnswer != cAnswerPlayer )
+                {
+                    CAB_ForRowLetter_SetAnswerPlayer(g_cCode_MeaningNotSet, iRow, iLetter);                    
+                    CAB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, iRow, iLetter);    
+                    CAB_ForRowLetter_SetButton(iRow, iLetter);
+                }
             }
         }
     }
@@ -67,8 +69,8 @@ function CAB_ForRowLetter_GetSpecialClueType(iRow, iLetter)
 {
     if ( g_CAB_aAnswerSpecialClueType.length == 0 )
         return g_cCode_AnswerType_Normal;
-    let sDualClueCodes = g_CAB_aAnswerSpecialClueType[iRow];
-    return sDualClueCodes.charAt(iLetter);
+    let sSpecialClueCodes = g_CAB_aAnswerSpecialClueType[iRow];
+    return sSpecialClueCodes.charAt(iLetter);
 }
 
 function CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)

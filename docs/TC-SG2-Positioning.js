@@ -8,7 +8,7 @@ function SG2_Adjust_GridPosition(iGap)
     let iHeightGrid = g_iGridHeight * g_GRBMS_Square_iSize;
     let iLeftForPositioning = TC_LeftForCentering(iWidthGrid);
     if ( g_Grid_sJustification == 'right' )
-        iLeftForPositioning = g_TC_iBiggestRight - iWidthGrid;
+        iLeftForPositioning = g_Window_iWidth - iWidthGrid;
     if ( g_HowTo_bActive )
     {
         let elemHowToA = document.getElementById("SG_HowToA_Div");
@@ -20,6 +20,10 @@ function SG2_Adjust_GridPosition(iGap)
         elemHowToA.style.width = MakePixelString(iWidthGrid);
         let rectelemHowToA = elemHowToA.getBoundingClientRect();
         g_TC_iBiggestBottom += rectelemHowToA.height;
+    }
+    else
+    {
+        g_TC_iBiggestBottom = g_Grid_iTopIfNoHowTo;
     }
 //
     let elemGrid = document.getElementById('Div_Grid');
