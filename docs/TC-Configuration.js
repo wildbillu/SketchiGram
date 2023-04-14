@@ -68,9 +68,9 @@ var g_ThemeImage_Base_bActive = true;
 
 function TC_Configuration_pick()
 {
-//  setNew();
+  setNew();
 //  setForPrint();
-    setForPrint_ShowSolution();
+//    setForPrint_ShowSolution();
 }
 
 function setForPrint_ShowSolution()
