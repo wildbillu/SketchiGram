@@ -31,6 +31,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="ResultMessage_Div" class="ResultMessage_Div StartHidden"></DIV>';
     sMain += '<DIV Id="ElapsedTime_Div" class="ElapsedTime_Div StartHidden"></DIV>';
     sMain += '<DIV Id="DifficultyLevel_Div" class="DifficultyLevel_Div StartHidden">DifficultyLevel</DIV>';
+    sMain += '<DIV Id="ThemeImage_All_GetAspectRatio_Div" style="ThemeImage_Base_Div StartHidden"></DIV>';
     sMain += '<DIV Id="ThemeImage_Base_Div" class="ThemeImage_Base_Div StartHidden">ThemeImage_Base_Div</DIV>';
     sMain += '<DIV Id="ThemeImage_Extra_Div" class="ThemeImage_Extra_Div StartHidden">ThemeImage_Extra_Div</DIV>';
     sMain += '<DIV Id="ThemeImage_Solved_Div" class="ThemeImage_Solved_Div StartHidden">ThemeImage_Solved_Div</DIV>';
@@ -75,6 +76,7 @@ function SG2_LoadAll(iSection)
             TC_InitializeFromFileOrLoadAsJS();
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
+
             GRBMS_SetAllowedGridLetters()
             GRBMS_ScrambleCorrectAnswersToPlayer(false);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
@@ -109,7 +111,10 @@ function SG2_LoadAll(iSection)
             // we are going to do the show clues, but not make it visible to get spacing right
             AnswersCorrectInGridInitialize()
             SG_SetupClueAnswers();
-            TC_ThemeImage_Base_Create();
+            TC_ThemeImage_Base_Create(); // these need to wait for load
+            TC_ThemeImage_Extra_Create();
+            TC_ThemeImage_Solved_Create();
+            TC_ThemeImage_Popup_Create();
             TC_SetBottomMatter();
             TC_Archive_AdjustMenu();
 // want to be just below             
@@ -118,7 +123,7 @@ function SG2_LoadAll(iSection)
             if ( g_InfoSettingsButtons_bActive ) TC_AdjustSettings();
             if ( g_bSettings_ShowInfoOnStart )
                 TC_ShowInfo();
-            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
+            setTimeout(function(){SG2_LoadAll(iSection + 1);}, 200);    
             break;
         case 8:
             while ( document.readyState != "complete") 
@@ -129,6 +134,8 @@ function SG2_LoadAll(iSection)
 //loaded - Has been loaded
 //interactive - Has loaded enough and the user can interact with it
 //complete - Fully loaded
+            TC_ThemeImage_GetAspectRatio();
+
             SG_UpdateAnswersCorrectInGridAndDisplay();
             if ( g_Timer_bActive ) TC_ElapsedTime_Setup();
             if ( g_SpecialClueFrame_bActive ) CAB_MakeSpecialClueAnswerDiv();
@@ -136,10 +143,6 @@ function SG2_LoadAll(iSection)
             if ( g_MAM_bActive) MAM_SetPosition();
             if ( g_SA_bActive ) TC_SA_Setup();
             SG2_SetVisibles();
-
-            TC_ThemeImage_Extra_Create();
-            TC_ThemeImage_Solved_Create();
-            TC_ThemeImage_Popup_Create();
             if ( g_bPrintedFormat ) 
             {
                  AdjustForPrintSize();
@@ -159,6 +162,7 @@ function SG2_LoadAll(iSection)
                 TC_ThemeImage_Base_SizeAndPosition();
                 TC_ThemeImage_Base_SetVisibility(true);
             }
+
 //            openFullscreen();
             break;
         default:

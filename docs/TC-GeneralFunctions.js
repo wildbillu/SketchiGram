@@ -77,13 +77,14 @@ function MakeURLWrappedString(sPathAndFileName, bSingle)
 
 function GetWidthToHeightRatioOfImageWithId(sImageId)
 {
-    var elem = null;
-    elem = document.getElementById(sImageId)
-    var height = elem.naturalHeight;
-    var width  = elem.naturalWidth;
+    let elem = null;
+    elem = document.getElementById(sImageId);
+    if ( !elem ) return 1.02;
+    let height = elem.naturalHeight;
+    let width  = elem.naturalWidth;
     if (width == 0.0 || height == 0.0 )
-        return 1.011;
-    var scale = width/height;
+        return 1.01;
+    let scale = width/height;
     return scale
 }
 

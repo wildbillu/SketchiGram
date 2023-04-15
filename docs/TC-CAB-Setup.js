@@ -19,7 +19,7 @@ function CAB_SpecialClueExpandHint()
     let iTop = 150;
     let iLeft = g_TC_Padding_Left_iSize;
     let iWidth = g_Window_iWidth;
-    let iHeight = iWidth/GetWidthToHeightRatioOfImageWithId("ThemeImage_Base_ImageItself_Div");
+    let iHeight = iWidth/g_ThemeImage_All_fWidthToHeight;
     TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Extra, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed)
     let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
     elemSCI.style.cursor = "zoom-out";
@@ -48,17 +48,13 @@ function CAB_MakeSpecialClueAnswerDiv()
     if ( g_SpecialClue_bShowImageButton )
     {
         let elemImage = document.getElementById("SpecialClue_Image_Div");
-        let sImageHTML = '<img Id="SpecialClue_ImageItself_Img" class="SpecialClue_ImageItself_Div" onclick="CAB_SpecialClueExpandHint();" src="' + g_PuzzlePath_sName_Image_Extra + '" alt="Extra" height="200"></img>';
-        elemImage.innerHTML = sImageHTML
-        let elemImageItself = document.getElementById("SpecialClue_ImageItself_Img");
-        let fWidthToHeight = GetWidthToHeightRatioOfImageWithId("SpecialClue_ImageItself_Img");
-        iImageWidth = iHeight * fWidthToHeight;  // need to deal with aspect ratio
+        let sImageHTML = '<img Id="SpecialClue_ImageItself_Img" class="SpecialClue_ImageItself_Div" onclick="CAB_SpecialClueExpandHint();" src="' + g_PuzzlePath_sName_Image_Extra + '" alt="Extra" height="200">';
+        elemImage.innerHTML = sImageHTML;
+        let sId = "SpecialClue_ImageItself_Img";
+        let elemImageItself = document.getElementById(sId);
+        iImageWidth = iHeight * g_ThemeImage_All_fWidthToHeight;  // need to deal with aspect ratio
         elemImageItself.style.width = MakePixelString(iImageWidth);
         elemImageItself.style.height = MakePixelString(iHeight);
-//        let sImage = '';
-//        sImage = TC_AddWrappedUrlToString(sImage, g_PuzzlePath_sName_Image_Extra, true);
-//        elemImage.style.backgroundImage = sImage;
-//        elemImage.style.backgroundSize = MakePixelString(iImageWidth);
     }
 // now fill the clue div
     let elemClueAnswer = document.getElementById("SpecialClue_ClueAnswer_Div")

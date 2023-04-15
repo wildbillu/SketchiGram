@@ -7,15 +7,15 @@ function TC_ThemeImage_Solved_ShowPopup()
     let iTop = 150;
     let iLeft = g_TC_Padding_Left_iSize;
     let iWidth = g_Window_iWidth;
-    let iHeight = iWidth/GetWidthToHeightRatioOfImageWithId("ThemeImage_Base_ImageItself_Div");
-    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Solved, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed) 
+    let iHeight = iWidth/g_ThemeImage_All_fWidthToHeight;
+    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Solved, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed);
 }
 
 function TC_ThemeImage_Solved_Create()
 {
     let elemThemeImage = document.getElementById('ThemeImage_Solved_Div');
     let sImage = '';
-    sImage += '<img Id="ThemeImage_Solved_ImageItself" class="ThemeImage_Solved_Image_Div" onclick="TC_ThemeImage_Solved_ShowPopup();" src="' + g_PuzzlePath_sName_Image_Solved + '" alt="Solved" height="200"></img>';
+    sImage += '<img Id="ThemeImage_Solved_ImageItself" class="ThemeImage_Solved_Image_Div" onclick="TC_ThemeImage_Solved_ShowPopup();" src="' + g_PuzzlePath_sName_Image_Solved + '" alt="Solved" height="200">';
     elemThemeImage.innerHTML = sImage;
 }
 
@@ -34,7 +34,7 @@ function TC_ThemeImage_Solved_PositionVisibility_PrintAndSolve(bVisible)
     let iHeight = iBottom - iTop;
 
 
-    let iWidth = GetWidthToHeightRatioOfImageWithId("ThemeImage_Solved_ImageItself")*iHeight;
+    let iWidth = g_ThemeImage_All_fWidthToHeight*iHeight;
 
     let iLeft = TC_LeftForCentering(iWidth);
     elemThemeImageDiv.style.top = MakePixelString(iTop);

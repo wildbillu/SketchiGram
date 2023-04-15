@@ -54,6 +54,7 @@
     vertical-align: center;
     align-items: center;
     cursor:zoom-in;
+    visibility: hidden;
 }
 
 .ThemeImage_Extra_Div

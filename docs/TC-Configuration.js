@@ -206,18 +206,6 @@ function AdjustForPrintSize()
     rectBM = GetBoundingClientRectAbsolute(elemBM);
 // now figure out where the grid ends
     let elemKB = document.getElementById('KB_Mini_Div');
-    let rectKB = GetBoundingClientRectAbsolute(elemKB);
-/*    
-// now set the theme image sizes 
-    let iBuffer = 5;
-    let iHeightTheme = iTopBM - rectKB.bottom - 2 * iBuffer;
-    g_ThemeImage_NormalSize_iTop = rectKB.bottom + iBuffer;
-    g_ThemeImage_NormalSize_iHeight = iHeightTheme;
-    let iWidthTheme = GetWidthToHeightRatioOfImageWithId("ThemeImage_Base_Div")*iHeightTheme;
-// now get the width and centering right
-    g_ThemeImage_NormalSize_iLeft = TC_LeftForCentering(iWidthTheme);
-    g_ThemeImage_NormalSize_iWidth = iWidthTheme;
-*/
     iBottom = rectBM.bottom;
 }
 

@@ -23,7 +23,7 @@ function TC_ThemeImage_Popup_HidePopup()
 
 function TC_ThemeImage_Popup_SetImgHTML(sImageName)
 {
-    let sImageHTML = '<img Id="ThemeImage_Popup_ImageItself" class="ThemeImage_Popup_ImageItself_Div" onclick="TC_ThemeImage_Popup_HidePopup();" src="' + sImageName + '" alt="Popup" height="200"></img>';
+    let sImageHTML = '<img Id="ThemeImage_Popup_ImageItself" class="ThemeImage_Popup_ImageItself_Div" onclick="TC_ThemeImage_Popup_HidePopup();" src="' + sImageName + '" alt="Popup" height="200">';
     let elemThemeImage = document.getElementById('ThemeImage_Popup_Div');
     elemThemeImage.innerHTML = sImageHTML;
 }
@@ -33,13 +33,8 @@ function TC_ThemeImage_Popup_ShowPopup(sImageName, iTop, iLeft, iHeight, iWidth,
     if ( g_ThemeImage_Popup_Active )
     { // we need to close the existing one
         TC_ThemeImage_Popup_HidePopup();
-//        clearInterval(g_ThemeImage_Popup_TimerId); 
-//        g_ThemeImage_Popup_TimerId = 0;
     }
-
     g_ThemeImage_Popup_fnOnClose = fnOnClose;
-//alert(g_ThemeImage_Popup_fnOnClose)
-
     // first we change the image name according to the requested
     TC_ThemeImage_Popup_SetImgHTML(sImageName)
     // now we move and resize the outer div
