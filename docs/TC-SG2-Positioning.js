@@ -35,7 +35,7 @@ function SG2_Adjust_GridPosition(iGap)
     g_TC_iBiggestBottom += iHeightGrid;
 }
 
-function SG2_SetSizes(iMaxGridWidth)
+function SG2_SetSizes()
 {
     let iButtonSize = 40;
     switch ( g_iGridWidth )
@@ -53,7 +53,6 @@ function SG2_SetSizes(iMaxGridWidth)
             iButtonSize = 50;
             break;
     }
-alert(iButtonSize)    
     g_GRBMS_Square_sClass = 'TC_Button_Square_Base TC_Button_Square_40 TC_Button_Square_Character_40 TC_Button_Square_Absolute';
     g_GRBMS_Square_iSize = 40;
     if ( iButtonSize > 49 )

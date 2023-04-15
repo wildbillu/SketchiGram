@@ -80,8 +80,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 1:
-            let iMaxGridWidth = 0.85 * g_Window_iWidth;
-            SG2_SetSizes(iMaxGridWidth);
+            SG2_SetSizes();
             TC_SetTopMatter();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
