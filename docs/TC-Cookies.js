@@ -103,7 +103,7 @@ var g_Cookie_bAnswersSolved = false;
 var g_Cookie_SA_EB_sWords = '||||||||||||';
 var g_Cookie_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
 var g_Cookie_Puzzle_Version_sV1000 = 'V1.000';
-var g_Cookie_Puzzle_Version_iCount = 14;
+var g_Cookie_Puzzle_Version_iCount = 13;
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
 {
@@ -121,7 +121,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     let sVersion = aOurValues[iIndex++]; //1
     if ( sVersion == g_Cookie_Puzzle_Version_sV1000 && iOurValues == g_Cookie_Puzzle_Version_iCount )
     {
-        g_Cookie_sPuzzle = aOurValues[iIndex++];
+        g_Cookie_sPuzzle = aOurValues[iIndex++]; 
         g_Cookie_sAnswersPlayer = aOurValues[iIndex++];
         g_Cookie_sStatusPlayer = aOurValues[iIndex++];
         g_Cookie_sGridAnswersPlayer = aOurValues[iIndex++];
@@ -144,12 +144,12 @@ function StoreCookie_Puzzle()
     let sAnswersStatusPlayer = g_CAB_aAnswersPlayerStatus.join('|');
     let sGridAnswersPlayer = g_aGridAnswersPlayer.join('')
     let sGridStatusPlayer = g_aGridStatusPlayer.join('')
-    let sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0)
+    let sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)
     document.cookie = sCookieToAdd;
 //    setlineAdd('CPS:' + ++g_iStoredPuzzleCookies);
 }
 
-function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds)
+function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)
 {
     let sCookieName = 'SG2' + '-' + g_sPuzzleNumber;
     let sCookie = '';
@@ -165,8 +165,8 @@ function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnsw
      sCookie += g_cCookieDelimiter;
     sCookie += sGridStatusPlayer//5
      sCookie += g_cCookieDelimiter;
-    sCookie += iSeconds;//6
-     sCookie += g_cCookieDelimiter;
+//    sCookie += iSeconds;//6
+//     sCookie += g_cCookieDelimiter;
     sCookie += g_bPuzzleSolved;//7
      sCookie += g_cCookieDelimiter;
     sCookie += g_bGridSolved;//8

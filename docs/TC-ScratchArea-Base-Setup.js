@@ -70,7 +70,7 @@ function TC_SA_ClearEntries()
     for ( let iEntry = 0; iEntry < g_SA_iMaxEntries; iEntry++ )
     {
         g_SA_aWords[iEntry] = '';
-        g_SA_sWordStatus += 'F';
+        g_SA_sWordStatus += 'X';
     }
 }
 function TC_SA_MakeId(iEntry){return 'TC_SA_' + iEntry;}
