@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="Styles-Info-Content.css">
     <link rel="stylesheet" href="Styles-StatusControl.css">
     <link rel="stylesheet" href="Styles-GRBMS-Base.css">
-    <link rel="stylesheet" href="Styles-GRBMS-CAB.css">
+
     <link rel="stylesheet" href="Styles-GRBMS-Button.css">
     <link rel="stylesheet" href="Styles-SG.css">
     <link rel="stylesheet" href="Styles-ResultMessage.css">
@@ -47,9 +47,11 @@
     <SCRIPT SRC="TC-CA-DisplayHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SyncGridAndCA.js"></SCRIPT>
     
+    <SCRIPT SRC="TC-MakeClasses.js"></SCRIPT>
+
     <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
 
-    <SCRIPT SRC="TC-GRBMS.js"></SCRIPT>
+
     <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-TouchMove.js"></SCRIPT>
@@ -126,9 +128,10 @@
 <SCRIPT SRC="TC-Actions.js"></SCRIPT>
 
 <!--- Deprecated 
+        <SCRIPT SRC="TC-GRBMS.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-SG-ActionMenu.css">
     <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
-
+    <link rel="stylesheet" href="Styles-GRBMS-CAB.css">
     <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
     <SCRIPT SRC="TC-ScratchArea-EditBox.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-LoadClueAnswer.js"></SCRIPT>
@@ -164,7 +167,7 @@
 }
 </STYLE>
 <SCRIPT>
-
+alert('A')
 
 document.onkeypress = function (e) {TC_KeyboardSupport_KeyPress(e);};
 document.onkeyup = function (e) {TC_KeyboardSupport_KeyUp(e);};
@@ -174,15 +177,19 @@ let g_bConnectionIsWebBased = true;
 
 function Dispatch() 
 {
+    alert('B')
     if (window.location.protocol === "file:")
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
     g_TC_iBiggestBottom = 0;
 
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.060';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.070';
 //
+alert('C')
     TC_LoadPuzzleArchive();
+    alert('D')
     SG2_LoadAll(0);
+    
     return;
 }
 
