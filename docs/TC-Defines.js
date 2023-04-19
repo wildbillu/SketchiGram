@@ -13,7 +13,6 @@ var g_sPuzzleCreditDate = 'March 1, 2023';
 
 
 //
-var g_ST_sClue_Intro = 'SketchiToons Clue';
 var g_ST_sClue_Itself = '';
 //
 // these are overall or general

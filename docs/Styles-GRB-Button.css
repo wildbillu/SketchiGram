@@ -12,14 +12,3 @@
     position: relative;
 }
 
-.GRB_Div
-{
-    outline: none; 
-    border-collapse: collapse; 
-    height: 40px;
-    width:200px;
-    padding: 0px;
-    margin:0;
-    font-size:0px;
-}
-

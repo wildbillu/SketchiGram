@@ -1,12 +1,5 @@
 /* Styles-GRBMS-Button.css */
 
-.GRB_GridRows
-{
-    position:absolute;
-    border: 3px solid orange;
-    width:500px;    
-}
-
 .Div_Grid
 {
     border: 1px solid black;

@@ -12,20 +12,17 @@ function TC_MakeStatusControlRow()
     let elemControlStatusRight = document.getElementById("Div_StatusControl_Right");
     elemControlStatusRight.innerHTML = sButtonsHTML;
     elemControlStatusRight.style.width = MakePixelString(iWidthButtons);
-    elemControlStatusRight.style.top = MakePixelString(iEstimatedTop);
-    elemControlStatusRight.style.left = MakePixelString(iWidthButtons + g_TC_Padding_Left_iSize);
     elemControlStatusRight.style.height = MakePixelString(g_GRBMS_TopRow_Buttons_iSize);
+    elemControlStatusRight.style.top = MakePixelString(g_TC_iBiggestBottom);
+    elemControlStatusRight.style.left = MakePixelString(g_Window_iWidth - iWidthButtons);
+    return iWidthButtons;
 }
 
 function TC_SetTopMatter()
 {
-    if ( g_InfoSettingsButtons_bActive )
-        TC_MakeStatusControlRow();
-    // now we add 
     var elemPuzzleType = document.getElementById("Div_PuzzleType");
     elemPuzzleType.style.left = MakePixelString(g_TC_Padding_Left_iSize);
     elemPuzzleType.style.top = MakePixelString(g_TC_Padding_Bottom_iSize);
-    g_TC_iBiggestBottom += 3;
     elemPuzzleType.style.width = MakePixelString(g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize);
     elemPuzzleType.innerHTML = 'SketchiGram&trade; Puzzle from Sketchi Bill at Absolutely Vocabulous&trade;';
     let rectType = GetBoundingClientRectAbsolute(elemPuzzleType);
@@ -33,13 +30,7 @@ function TC_SetTopMatter()
     g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
     let iWidthTitle = g_Window_iWidth - 2 * g_TC_Padding_Left_iSize;
     if ( g_InfoSettingsButtons_bActive )
-    {
-        let elemStatusControlRight = document.getElementById("Div_StatusControl_Right");
-        elemStatusControlRight.style.top = MakePixelString(g_InfoSettingsButtons_iTop);
-        elemStatusControlRight.style.left = MakePixelString(g_InfoSettingsButtons_iLeft);
-        let rectControlRight =  GetBoundingClientRectAbsolute(elemStatusControlRight);
-        iWidthTitle -= rectControlRight.width;
-    }
+        iWidthTitle -= TC_MakeStatusControlRow();
 // determine rows in puzzle title
     let elemPuzzleTitle = document.getElementById("Div_PuzzleTitle");
     let iWidthIfOneLine = GetWidthOfTextInPixels(elemPuzzleTitle, g_sPuzzleTitle);

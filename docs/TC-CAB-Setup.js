@@ -2,30 +2,6 @@
 
 let g_CAB_SpecialClue_bImageExpanded = false;
 
-function CAB_SpecialClueExpandClosed()
-{
-    let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
-    elemSCI.style.cursor = "zoom-in";
-    g_CAB_SpecialClue_bImageExpanded = false;
-}
-
-function CAB_SpecialClueExpandHint()
-{
-    if ( g_CAB_SpecialClue_bImageExpanded )
-    {
-        TC_ThemeImage_Popup_HidePopup();
-        return;
-    }
-    let iTop = 150;
-    let iLeft = g_TC_Padding_Left_iSize;
-    let iWidth = g_Window_iWidth;
-    let iHeight = iWidth/g_ThemeImage_All_fWidthToHeight;
-    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Extra, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed)
-    let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
-    elemSCI.style.cursor = "zoom-out";
-    g_CAB_SpecialClue_bImageExpanded = true;
-}
-
 function CAB_MakeSpecialClueAnswerDiv()
 {
     let elem_SpecialClue_Div = document.getElementById("SpecialClue_Div");
@@ -71,18 +47,35 @@ function CAB_MakeSpecialClueAnswerDiv()
     sClueAnswerRow += '<TABLE Id="SpecialClue_Table" width=' + iFudgedWidth + ' class="SpecialClue_Table" cellspacing=0 cellpadding=0><TR width=100>';
     if ( TC_ForIndexIsClueTypeSpecial(0) )
     {
-        let sAdd = '';
-        sAdd += '<TD Id="SC_Before" class="SpecialClue_Text GRBMS_Clue_Right">' + g_sSpecialClueBefore + '</TD>';
+        if ( g_sSpecialClueBeforeLine2 == '' )
+        {
+            sClueAnswerRow += '<TD Id="SC_Before" class="SpecialClue_Text GRBMS_Clue_Right">' + g_sSpecialClueBefore + '</TD>';
+        }
+        else
+        {
+            let sRight = '';
+            sRight += '<TD Id="SC_Before" class="SG_SpecialClue_Text_DualLine GRBMS_Clue_Right">'
+            sRight += '<DIV>' + g_sSpecialClueBefore + '</DIV>';
+            sRight += '<DIV>' + g_sSpecialClueBeforeLine2 + '</DIV>';
+            sRight +=  '</TD>';
+//            alert(sRight)
+            sClueAnswerRow += sRight;
+        }
+        sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
         let sButtons = CAB_MakeButtonsForAnswer(0);
-        sAdd += '<TD Id="SC_Buttons_0" class="SpecialClue_Button_Div">' + sButtons + '</TD>';
-        sClueAnswerRow += sAdd;
+        sClueAnswerRow += '<TD Id="SC_Buttons_0" class="SpecialClue_Button_Div">' + sButtons + '</TD>';
     }
-    sClueAnswerRow += '<TD Id="SC_Middle" class="SpecialClue_Text GRBMS_Clue_Center">' + g_sSpecialClueMiddle + '</TD>';
+    if ( g_sSpecialClueMiddle != '' )
+    {
+        sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
+        sClueAnswerRow += '<TD Id="SC_Middle" class="SpecialClue_Text GRBMS_Clue_Center">' + g_sSpecialClueMiddle + '</TD>';
+    }
     if (  TC_ForIndexIsClueTypeSpecial(1) )
     {
-        let sAdd = '<TD Id="SC_Buttons_1" class="SpecialClue_Button_Div">' + CAB_MakeButtonsForAnswer(1) + '</TD>';
-        sAdd += '<TD Id="SC_End" class="SpecialClue_Text GRBMS_Clue_Left">' + g_sSpecialClueEnd + '</TD>';
-        sClueAnswerRow += sAdd;
+        sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
+        sClueAnswerRow += '<TD Id="SC_Buttons_1" class="SpecialClue_Button_Div">' + CAB_MakeButtonsForAnswer(1) + '</TD>';
+        sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
+        sClueAnswerRow += '<TD Id="SC_End" class="SpecialClue_Text GRBMS_Clue_Left">' + g_sSpecialClueEnd + '</TD>';
     }
     sClueAnswerRow += '</TR></TABLE>';
     sClueAnswerRow += '</DIV>'
@@ -122,7 +115,7 @@ function CAB_MakeButtonSingleHTML(iRow, iLetter)
     sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
     sInnerRowHTML += ' class="' + g_CAB_Square_sClass + '" ';
     sInnerRowHTML += sFunctionsToCall;
-    sInnerRowHTML += '> </DIV>';
+    sInnerRowHTML += '></DIV>';
     return sInnerRowHTML;
 }
 
@@ -145,13 +138,19 @@ function SpecialClue_AdjustAndGetGetTotalWidth()
         let iWidthElemBefore = GetWidthOfTextInPixels(elemBefore, g_sSpecialClueBefore);
         elemBefore.style.width = MakePixelString(iWidthElemBefore);
         iWidth += iWidthElemBefore;
+        iWidth += 10;
     }
-    let elemMiddle = document.getElementById("SC_Middle");
-    let iWidthElemMiddle = GetWidthOfTextInPixels(elemMiddle, g_sSpecialClueMiddle);
-    elemMiddle.style.width = MakePixelString(iWidthElemMiddle);
-    iWidth += iWidthElemMiddle;
+    if ( g_sSpecialClueMiddle != '' )
+    {
+        iWidth += 10;
+        let elemMiddle = document.getElementById("SC_Middle");
+        let iWidthElemMiddle = GetWidthOfTextInPixels(elemMiddle, g_sSpecialClueMiddle);
+        elemMiddle.style.width = MakePixelString(iWidthElemMiddle);
+        iWidth += iWidthElemMiddle;
+    }
     if ( TC_ForIndexIsClueTypeSpecial(1) )
     {
+        iWidth += 10;
         let elemButton1 = document.getElementById("SC_Buttons_1")
         let iLength = g_CAB_aAnswers[1].length;
         elemButton1.style.width = MakePixelString(iLength * g_CAB_Square_iSize)
@@ -160,7 +159,32 @@ function SpecialClue_AdjustAndGetGetTotalWidth()
         let iWidthElemEnd = GetWidthOfTextInPixels(elemEnd, g_sSpecialClueEnd);
         elemEnd.style.width = MakePixelString(iWidthElemEnd);
         iWidth += iWidthElemEnd;
+        iWidth += 10;
     }
 //
     return iWidth;
+}
+
+function CAB_SpecialClueExpandClosed()
+{
+    let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
+    elemSCI.style.cursor = "zoom-in";
+    g_CAB_SpecialClue_bImageExpanded = false;
+}
+
+function CAB_SpecialClueExpandHint()
+{
+    if ( g_CAB_SpecialClue_bImageExpanded )
+    {
+        TC_ThemeImage_Popup_HidePopup();
+        return;
+    }
+    let iTop = 150;
+    let iLeft = g_TC_Padding_Left_iSize;
+    let iWidth = g_Window_iWidth;
+    let iHeight = iWidth/g_ThemeImage_All_fWidthToHeight;
+    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Extra, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed)
+    let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
+    elemSCI.style.cursor = "zoom-out";
+    g_CAB_SpecialClue_bImageExpanded = true;
 }

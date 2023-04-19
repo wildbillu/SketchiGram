@@ -95,8 +95,10 @@ function TC_MAM_MakeDiv()
 function MAM_SetPosition()
 {
     let elemMAM = document.getElementById("MAM_Div");
-    elemMAM.style.top = g_MAM_iTop;
-    elemMAM.style.left = g_MAM_iLeft;
+    elemMAM.style.top = MakePixelString(g_MAM_iTop);
+    let rectMAM = GetBoundingClientRectAbsolute(elemMAM);
+    let iLeft = g_Window_iWidth - rectMAM.width - g_TC_Padding_Left_iSize;
+    elemMAM.style.left = MakePixelString(iLeft);
     MAM_EnableDisable();
 }
 

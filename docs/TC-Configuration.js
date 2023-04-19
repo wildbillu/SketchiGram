@@ -1,7 +1,7 @@
 // TC-Configuration.js
 
 
-var g_Window_iWidth = 600;
+var g_Window_iWidth = 640;
 var g_InfoSettingsButtons_bActive = true;
 var g_InfoSettingsButtons_iLeft = 500;
 var g_InfoSettingsButtons_iTop  = 20;
@@ -37,11 +37,11 @@ var g_HowTo_bActive = true;  var g_HowTo_iTop = 200;
 
 var g_DM_bActive = true; var g_DM_iTop = 200; var g_DM_iLeft = g_TC_Padding_Left_iSize;
 var g_DM_iWidth = 200;
-var g_MAM_bActive = true; var g_MAM_iTop = 400; var g_MAM_iLeft = g_TC_Padding_Left_iSize;
+var g_MAM_bActive = true; var g_MAM_iTop = 400; // left determined by defined width
 
 var gResultMessage_iTop = 75; 
 
-var g_Timer_bActive = true; var g_Timer_iTop  = 30; var g_Timer_iLeft = 30; var g_Timer_sLabel = 'Elapsed';
+var g_Timer_bActive = true; var g_Timer_iTop  = 30; var g_Timer_sLabel = 'Elapsed'; // left determined by defined puzzle width
 
 var g_TC_ShadeBackgroundOnStatus_bActive = true;
 var g_bResultMessageActive = true;
@@ -105,7 +105,7 @@ function setForPrint_ShowSolution()
     g_SpecialClue_bShowImageButton = false;
 
     g_DM_bActive = false; g_DM_iTop = 200; g_DM_iLeft = g_TC_Padding_Left_iSize;
-    g_MAM_bActive = false; g_MAM_iTop = 400; g_MAM_iLeft = g_TC_Padding_Left_iSize;
+    g_MAM_bActive = false; g_MAM_iTop = 400; 
 
     g_bMessageVisible = false; 
     g_bPrintedFormat = true;
@@ -142,7 +142,7 @@ function setForPrint()
     g_SpecialClue_bShowImageButton = false;
 
     g_DM_bActive = false; g_DM_iTop = 200; g_DM_iLeft = g_TC_Padding_Left_iSize;
-    g_MAM_bActive = false; g_MAM_iTop = 400; g_MAM_iLeft = g_TC_Padding_Left_iSize;
+    g_MAM_bActive = false; g_MAM_iTop = 400; 
 
     g_bMessageVisible = false; 
     g_bPrintedFormat = true;
@@ -165,7 +165,7 @@ function setNew()
     g_Grid_fFractionAvailableWidth = 0.80; g_Grid_sJustification = 'center';
 
     g_DM_bActive = true; g_DM_iTop = 200; g_DM_iLeft = g_TC_Padding_Left_iSize;
-    g_MAM_bActive = true; g_MAM_iTop = 200; g_MAM_iLeft = 500;
+    g_MAM_bActive = true; g_MAM_iTop = 200; // left determined by defined puzzle width
 
     g_bSuppressNonGolden = false;
 
@@ -180,8 +180,7 @@ function setNew()
     g_TC_ShadeBackgroundOnStatus_bActive = true;
 
 
-    g_Timer_bActive = true;  
-    g_Timer_iTop  = 150; g_Timer_iLeft = 490; g_Timer_sLabel = 'Elapsed:';
+    g_Timer_bActive = true; g_Timer_iTop  = 150; g_Timer_sLabel = 'Elapsed:'; // left from defined puzzle width
 
     g_HowTo_bActive = true;    g_HowTo_iTop    = 145;
     g_GR_GridOrInstruction_iTop = 58;

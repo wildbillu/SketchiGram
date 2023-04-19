@@ -74,7 +74,9 @@ function TC_ElapsedTime_Setup()
     const d = new Date();
     g_ElapsedTime_iInitialTimeInSeconds = Math.trunc(d.getTime()/1000);
     g_ElapsedTime_eDiv = document.getElementById("ElapsedTime_Div");
-    g_ElapsedTime_eDiv.style.left = MakePixelString(g_Timer_iLeft);
+    let rect = GetBoundingClientRectAbsolute(g_ElapsedTime_eDiv);
+    let iLeft = g_Window_iWidth - rect.width - g_TC_Padding_Left_iSize;
+    g_ElapsedTime_eDiv.style.left = MakePixelString(iLeft);
     g_ElapsedTime_eDiv.style.top = MakePixelString(g_Timer_iTop);
     TC_ElapsedTime_Process();
     if ( !g_bPuzzleSolved )
