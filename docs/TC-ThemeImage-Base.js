@@ -3,18 +3,19 @@
 let g_ThemeImage_Base_bShown = false;
 let g_ThemeImage_All_fWidthToHeight = 1.0;
 
-function TC_ThemeImage_GetAspectRatio()
+function TC_ThemeImage_GetAspectRatio_ForceLoad()
 {
     let sIdOuter = "ThemeImage_All_GetAspectRatio_Div"
     let elem = document.getElementById(sIdOuter);
     let sImage = '';
     sImage += '<img Id="ThemeImage_All_GetAspectRatio_ImageItself_Div" class="ThemeImage_Base_ImageItself_Div Start_Hidden"  src="' + g_PuzzlePath_sName_Image_Extra + '" alt="BB" height="200">';
     elem.innerHTML = sImage;
+}
+
+function TC_ThemeImage_GetAspectRatio_Calculate()
+{
     let sId = "ThemeImage_All_GetAspectRatio_ImageItself_Div"
     g_ThemeImage_All_fWidthToHeight = GetWidthToHeightRatioOfImageWithId(sId);
-    let elemImage = document.getElementById("ThemeImage_All_GetAspectRatio_ImageItself_Div")
-    elemImage.style.height       = MakePixelString(400);
-    elemImage.style.width         = MakePixelString(400*g_ThemeImage_All_fWidthToHeight);
 }
 
 function TC_ThemeImage_Base_Create()

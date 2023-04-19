@@ -37,12 +37,9 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="ThemeImage_Solved_Div" class="ThemeImage_Solved_Div StartHidden">ThemeImage_Solved_Div</DIV>';
     sMain += '<DIV Id="ThemeImage_Popup_Div" class="ThemeImage_Popup_Div StartHidden">ThemeImage_Popup_Div</DIV>';
     sMain += '<DIV Id="SharedDialog_Div" class="SharedDialog_Div StartHidden">' + 'Box' + '<DIV>';
-
-
 //sMain += TC_Button_V2_InDiv('AAAA', false, 'TC_Text();', 'New');
     document.getElementById("Body_Any").innerHTML = sMain;
 }
-
 
 function TC_Text()
 {
@@ -76,12 +73,12 @@ function SG2_LoadAll(iSection)
             TC_InitializeFromFileOrLoadAsJS();
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
-
             GRBMS_SetAllowedGridLetters()
             GRBMS_ScrambleCorrectAnswersToPlayer(false);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 1:
+            TC_ThemeImage_GetAspectRatio_ForceLoad();
             TC_MakeClassesForSquares();
             TC_SetTopMatter();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
@@ -134,7 +131,7 @@ function SG2_LoadAll(iSection)
 //loaded - Has been loaded
 //interactive - Has loaded enough and the user can interact with it
 //complete - Fully loaded
-            TC_ThemeImage_GetAspectRatio();
+TC_ThemeImage_GetAspectRatio_Calculate();
 
             SG_UpdateAnswersCorrectInGridAndDisplay();
             if ( g_Timer_bActive ) TC_ElapsedTime_Setup();
