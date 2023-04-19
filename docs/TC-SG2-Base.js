@@ -64,7 +64,6 @@ function SG2_LoadAll(iSection)
     switch ( iSection)
     {
         case 0:
-            alert(0)            
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             TC_LoadPuzzleArchive_FromFile();
             g_SG2_CAB_bVisible = false;
