@@ -83,31 +83,23 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 1:
-            alert(1)            
             TC_MakeClassesForSquares();
-            alert(11)            
             TC_SetTopMatter();
-            alert(12)            
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 2:
-            alert(2)            
             GRBMS_MakeGrid();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 3:
-            alert(3)            
-
             GRBMS_SetAllButtons();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 4:
-            alert(4)            
             SG2_Adjust_GridPosition(g_GR_GridOrInstruction_iTop);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 5:
-            alert(5)            
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 6:
