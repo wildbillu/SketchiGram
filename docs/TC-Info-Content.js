@@ -49,17 +49,20 @@ function TC_ShowInfo()
     g_sCABOnInfoClick = g_CAB_Focus_sId;
     g_sGRBOnInfoClick = g_GRBMS_Focus_sId;
     Make_Info_Content_Update()
-    var iWidth = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
-    var elemInfoDiv = document.getElementById("InfoDiv");
-    var iTopAll = 100;
+    let iWidth = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
+    let elemInfoDiv = document.getElementById("InfoDiv");
+    let iTopAll = 100;
+    let fWidthToHeight = 3000/4400;
     elemInfoDiv.style.top = MakePixelString(iTopAll);
-    var rectInfoDiv = elemInfoDiv.getBoundingClientRect()
-    var iWidthInfo = rectInfoDiv.width;
-    var iLeft = (iWidth-iWidthInfo)/2;
-    elemInfoDiv.style.left = MakePixelString(iLeft);
-    var elemInfoCloseDiv = document.getElementById("Button_Close_Div");
+    elemInfoDiv.style.left = MakePixelString(g_TC_Padding_Left_iSize);
+    elemInfoDiv.style.width = MakePixelString(iWidth);
+    elemInfoDiv.style.height = MakePixelString(iWidth/fWidthToHeight);
+    elemInfoDiv.style.backgroundSize = MakePixelString(iWidth);
+
+
+    let elemInfoCloseDiv = document.getElementById("Button_Close_Div");
 // close div is relative
-    var iLeftButton = iWidthInfo - 110
+    let iLeftButton = g_Window_iWidth - 110;
     elemInfoCloseDiv.style.top = MakePixelString(0);
     elemInfoCloseDiv.style.left = MakePixelString(iLeftButton);
 // now make it visibl    
@@ -73,7 +76,3 @@ function Make_Info_Content_Update()
     document.getElementById("Info_Content_PuzzleDate").innerHTML = g_sPuzzleCreditDate;
     document.getElementById("Info_Content_PuzzleVersion").innerHTML = g_sPuzzleVersion;
 }
-
-
-
-
