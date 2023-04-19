@@ -85,7 +85,9 @@ function SG2_LoadAll(iSection)
         case 1:
             alert(1)            
             TC_MakeClassesForSquares();
+            alert(11)            
             TC_SetTopMatter();
+            alert(12)            
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 2:
