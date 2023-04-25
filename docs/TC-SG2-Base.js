@@ -77,7 +77,8 @@ function SG2_LoadAll(iSection)
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
-            GRBMS_ScrambleCorrectAnswersToPlayer(false);
+            if ( !g_bUsedCookie )
+                GRBMS_ScrambleCorrectAnswersToPlayer(false);
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
         case 1:

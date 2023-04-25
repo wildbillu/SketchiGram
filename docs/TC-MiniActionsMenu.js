@@ -61,9 +61,11 @@ function MAM_RevealSquare()
         let iRow = CAB_RowFromId(g_CAB_Focus_sId);
         let iLetter = CAB_LetterFromId(g_CAB_Focus_sId);
         CAB_SetFocusToNext(iRow, iLetter);
+        Status_Check(true);
         return;
     }        
     SG_ShowCheckActiveSquare('Show'); // this will take care of call to sync_gridChange as needed
+    Status_Check(true);
 }
 
 function MAM_ShowClues()

@@ -59,7 +59,6 @@ function TC_GetOverrideName()
     return sStartingPuzzle;
 }
 
-
 function TC_InitializeFromFileOrLoadAsJS()
 {
     if ( !g_bConnectionIsWebBased )
