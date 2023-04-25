@@ -149,9 +149,29 @@ function SG2_LoadAll(iSection)
             if ( g_bNeedToAdjustForInitialDifficultyLevel )
             {
                 if ( g_Difficulty_iLevel_OnNewPuzzle == g_Difficulty_iLevel_Hard )
+                {
                     DM_ChangeToLevelHard();
+                }
                 else if ( g_Difficulty_iLevel_OnNewPuzzle == g_Difficulty_iLevel_Easy )
                     DM_ChangeToLevelEasy()
+                g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_OnNewPuzzle;
+                g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_OnNewPuzzle;
+                DM_SetButtons();
+            }
+            else
+            {
+                if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Hard )
+                { // don't want to show extra stuff, but do want to change visibility
+                    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
+                    TC_SetVisible("ScratchArea");
+                }
+                else if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Easy )
+                {
+                    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Easy;
+                    SG_CA_UpdateAndSetVisibility(true);
+                    if ( g_MAM_bActive ) MAM_EnableDisable();
+                }
+                DM_SetButtons();
             }
             SG2_SetVisibles();
             if ( g_bPrintedFormat ) 

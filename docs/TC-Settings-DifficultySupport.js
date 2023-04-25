@@ -24,18 +24,21 @@ function DS_Expert()
 {
     g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Expert;
     DS_SetButtons();
+    Button_Settings_GetAllAndSaveCookie();
 }
 
 function DS_Hard()
 {
     g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Hard;
     DS_SetButtons();
+    Button_Settings_GetAllAndSaveCookie();
 }
 
 function DS_Easy()
 {
     g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Easy;
     DS_SetButtons();
+    Button_Settings_GetAllAndSaveCookie();
 }
 
 function MakeDifficultySupportDiv()

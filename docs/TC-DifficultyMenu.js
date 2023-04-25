@@ -119,7 +119,6 @@ function DM_ChangeToLevelEasy()
 
 function DM_Difficulty_Level_DefaultLevelHard()
 {
-    g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Hard;
     g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Hard;
     StoreCookie_Settings();
     DM_Difficulty_SetLevelHard();
@@ -127,7 +126,6 @@ function DM_Difficulty_Level_DefaultLevelHard()
 
 function DM_Difficulty_Level_DefaultLevelEasy()
 {
-    g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Easy;
     g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Easy;
     StoreCookie_Settings();
     DM_Difficulty_SetLevelEasy();
@@ -190,6 +188,8 @@ function DM_Difficulty_SetLevelEasy()
     DM_SetMenuItemClass('DM_Easy', g_TC_DM_sClass_Selected);
     DM_ChangeToLevelEasy();
     g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Easy;
+    g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Easy;
+    StoreCookie_Settings();
 }
 
 function DM_Difficulty_SetLevelHard()
@@ -198,6 +198,8 @@ function DM_Difficulty_SetLevelHard()
     DM_SetMenuItemClass('DM_Expert', g_TC_DM_sClass_Disabled);
     DM_SetMenuItemClass('DM_Hard', g_TC_DM_sClass_Selected);
     g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
+    g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Hard;
+    StoreCookie_Settings();
 }
 
 function TC_DM_MakeDiv()
