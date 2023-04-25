@@ -65,20 +65,15 @@ function SG2_LoadAll(iSection)
             g_bGridSolved = false;
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             g_bNeedToAdjustForInitialDifficultyLevel = false;
-            alert('A')            
             TC_LoadPuzzleArchive_FromFile();
             g_SG2_CAB_bVisible = false;
             g_bUsedCookie = false;
             g_TC_Status_bFirstCheck = true;
-            alert('B')            
             GetAndSplitCookies();
-            alert('C')            
             FromCookies_GetCurrentPuzzle();
-            alert('D')            
             getResolution(); 
             while ( document.readyState != "complete") {}
             TC_InitializeFromFileOrLoadAsJS();
-            alert('E')            
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
