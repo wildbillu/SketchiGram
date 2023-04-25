@@ -12,7 +12,8 @@ var g_Difficulty_iLevel_Invalid = -1;
 
 
 var g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert;
-var g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Invalid;
+var g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Expert;
+var g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Expert;
 
 var g_TC_DM_sClass_Enabled = 'DM_MenuItem_Base DM_MenuItem_Enabled';
 var g_TC_DM_sClass_Disabled = 'DM_MenuItem_Base DM_MenuItem_Disabled';
@@ -119,6 +120,7 @@ function DM_ChangeToLevelEasy()
 function DM_Difficulty_Level_DefaultLevelHard()
 {
     g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Hard;
+    g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Hard;
     StoreCookie_Settings();
     DM_Difficulty_SetLevelHard();
 }
@@ -126,6 +128,7 @@ function DM_Difficulty_Level_DefaultLevelHard()
 function DM_Difficulty_Level_DefaultLevelEasy()
 {
     g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Easy;
+    g_Difficulty_iLevel_OnNewPuzzle = g_Difficulty_iLevel_Easy;
     StoreCookie_Settings();
     DM_Difficulty_SetLevelEasy();
 }
@@ -163,7 +166,7 @@ function DM_Dispatch(elem)
             if ( g_bConnectionIsWebBased )
                 DialogBox_SetupAndOpen(g_Dialog_SetDifficultyLevel_iTop, g_Dialog_SetDifficultyLevel_iLeft, 
                 'DM_ConfirmSetting',
-                'Do you want to set \'Easy\' as your default level?', 
+                'Do you want to set \'Easy\' as your default level for new puzzles?', 
                 'Yes', DM_Difficulty_Level_DefaultLevelEasy,
                 'No', DM_Difficulty_SetLevelEasy,
                 '', '')
@@ -200,7 +203,7 @@ function DM_Difficulty_SetLevelHard()
 function TC_DM_MakeDiv()
 {    
     let sDMInner = TC_DM_MakeInnerHTML()
-    let sInner = '<DIV Id="DM_Div" class="DM_Div StartHidden">' + sDMInner + '</DIV>';
+    let sInner = '<DIV Id="DM_Div" class="DM_Div TC_StartHidden">' + sDMInner + '</DIV>';
     return sInner;
 }
 

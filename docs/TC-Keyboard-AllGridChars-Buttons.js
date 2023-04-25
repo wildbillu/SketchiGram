@@ -4,7 +4,7 @@ function KB_AGC_MakeArrowLeftButton()
 {
     let sTextForButton = ' ';
     let sTextForId = 'ArrowLeft';
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonLeftArrow StartHidden';
+    let sClass = 'KB_Mini_Button KB_Mini_ButtonLeftArrow TC_StartHidden';
     let sIdWrapped = ' Id="' + sTextForId + '" ';
     let sClassWrapped = 'class="' + sClass + '" '; 
     let sOnClick = ' onclick="KB_AGC_KeyboardPressArrowLeft();" ';
@@ -16,7 +16,7 @@ function KB_AGC_MakeArrowRightButton()
 {
     let sTextForButton = ' ';
     let sTextForId = 'ArrowRight';
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonRightArrow StartHidden';
+    let sClass = 'KB_Mini_Button KB_Mini_ButtonRightArrow TC_StartHidden';
     let sIdWrapped = ' Id="' + sTextForId + '" ';
     let sClassWrapped = 'class="' + sClass + '" '; 
     let sOnClick = ' onclick="KB_AGC_KeyboardPressArrowRight();" ';
@@ -28,7 +28,7 @@ function KB_AGC_MakeBackspaceButton()
 {
     let sTextForButton = ' ';
     let sTextForId = 'Backspace';
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonBackspace_Disabled StartHidden';
+    let sClass = 'KB_Mini_Button KB_Mini_ButtonBackspace_Disabled TC_StartHidden';
     let sIdWrapped = ' Id="' + sTextForId + '" ';
     let sClassWrapped = 'class="' + sClass + '" '; 
     let sOnClick = ' onclick="KB_AGC_KeyboardPressBackspace();" ';

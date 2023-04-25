@@ -1,6 +1,63 @@
 /* Styles-ScratchArea.css */
 
-.SA_EB_Entry_Base
+.SA_ClearDiv
+{
+   border:1px solid black;
+   position:absolute;
+   top:100px;
+   left:200px;
+}
+
+.SA_ClearBox
+{
+    border:1px solid black;
+    height:35px;
+    width:20px;
+    line-height:30px;
+    z-index:1;
+    background-color:white;
+    font-size:15px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;   
+}
+
+.SA_ClearDiv_DoIt
+{
+    border:1px solid black;
+    height:30px;
+    width:30px;
+    z-index:1;
+    background-color:pink;
+    font-size:15px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;   
+}
+
+.SA_ClearDiv_Cancel
+{
+    border:1px solid black;
+    height:30px;
+    width:30px;
+    z-index:1;
+    background-color:lightgreen;
+    font-size:15px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;   
+}
+
+.SA_ClearDiv_Message
+{
+    border:0px solid black;
+    height:30;
+    width:50;
+    z-index:1;
+    background-color:white;
+    font-size:15px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;   
+}
+
+.SA_Entry_Base
 {
     border:1px solid black;
     font-size:20px;
@@ -13,21 +70,21 @@
     z-index:1;
 }
 
-.SA_EB_Entry_Correct
+.SA_Entry_Correct
 {
     font-weight:bold;
     color:green;
     background-color:white;
 }
 
-.SA_EB_Entry_Focus
+.SA_Entry_Focus
 {
     font-weight:bold;
     color:black;
     background-color:var(--ColorScratchAreaActive);
 }
 
-.SA_EB_Entry_Inactive
+.SA_Entry_Inactive
 {
     font-weight:normal;
     color:black;

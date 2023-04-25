@@ -4,9 +4,7 @@ function TC_SA_Entry_AddChar(keypressed)
 {
     g_SA_bFudgeToKeepFocus = true;
     if ( g_SA_Focus_sId != '')
-    {
         document.getElementById(g_SA_Focus_sId).focus();
-    }
     g_SA_bFudgeToKeepFocus = false;
     if ( g_SA_Focus_sId == '' )
         return;
@@ -102,9 +100,9 @@ function TC_SA_LoseFocus()
         return;
     let elemOldFocus = document.getElementById(g_SA_Focus_sId);
     let iEntry = TC_SA_EntryFromId(g_SA_Focus_sId);
-    let sClassName = "SA_EB_Entry_Base SA_EB_Entry_Inactive";
+    let sClassName = "SA_Entry_Base SA_Entry_Inactive";
     if ( g_SA_sWordStatus.charAt(iEntry) == 'T' )
-        sClassName = "SA_EB_Entry_Base SA_EB_Entry_Correct";
+        sClassName = "SA_Entry_Base SA_Entry_Correct";
     elemOldFocus.className = sClassName;
     let sValue = elemOldFocus.innerHTML;
     let sNewInnerHTML = removeAllChar(sValue, g_SA_cCursor);
@@ -112,29 +110,28 @@ function TC_SA_LoseFocus()
     let elemWithFocus = document.getElementById(g_SA_Focus_sId);
     elemWithFocus.blur();
     g_SA_Focus_sId = '';
-
 }
 
 function TC_SA_Focus(elemInputText)
 {
 // if this element is already correct, do not accept focus
-    let iEntry = TC_SA_EntryFromId(elemInputText.id);
-    if ( g_SA_sWordStatus.charAt(iEntry) == 'T')
-        return;
+//    let iEntry = TC_SA_EntryFromId(elemInputText.id);
+//    if ( g_SA_sWordStatus.charAt(iEntry) == 'T')
+//        return;
     if ( g_SA_Focus_sId != '' )
     { // need to fix previous focus
         let elemOldFocus = document.getElementById(g_SA_Focus_sId);
         let iEntry = TC_SA_EntryFromId(g_SA_Focus_sId);
-        let sClassName = "SA_EB_Entry_Base SA_EB_Entry_Inactive";
+        let sClassName = "SA_Entry_Base SA_Entry_Inactive";
         if ( g_SA_sWordStatus.charAt(iEntry) == 'T' )
-            sClassName = "SA_EB_Entry_Base SA_EB_Entry_Correct";
+            sClassName = "SA_Entry_Base SA_Entry_Correct";
         elemOldFocus.className = sClassName;
         let sValue = elemOldFocus.innerHTML;
         elemOldFocus.innerHTML = removeAllChar(sValue, g_SA_cCursor);
     }        
     g_SA_Focus_sId = elemInputText.id;
     SyncTo_OthersLoseFocus('SA')
-    elemInputText.className = "SA_EB_Entry_Base SA_EB_Entry_Focus";
+    elemInputText.className = "SA_Entry_Base SA_Entry_Focus";
     let sValue = elemInputText.innerHTML;
     sValue = TC_SA_InsertCursorAt(sValue)
     elemInputText.innerHTML = sValue;

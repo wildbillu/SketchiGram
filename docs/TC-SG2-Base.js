@@ -12,31 +12,31 @@ function SG_HowToText()
 function SG2_LoadMainElements()
 {
     var sMain = '';
-    sMain += '<DIV Id="SpecialClue_Div" class="SpecialClue_Div StartHidden">SpecialClue_Div</DIV>';    
+    sMain += '<DIV Id="SpecialClue_Div" class="SpecialClue_Div TC_StartHidden">SpecialClue_Div</DIV>';    
     sMain += TC_Archive_MakeMenu();
-    sMain += '<DIV Id="Div_PuzzleType" class="Div_PuzzleType StartHidden">Div_PuzzleType</DIV>';
-    sMain += '<DIV Id="Div_StatusControl_Left" class="StatusControl_Div_Left StartHidden">Div_StatusControl_Left</DIV>';
-    sMain += '<DIV Id="Div_StatusControl_Right" class="StatusControl_Div_Right StartHidden">Div_StatusControl_Right</DIV>';
-    sMain += '<DIV Id="Div_PuzzleTitle" class="Div_PuzzleTitle StartHidden">Div_PuzzleTitle</DIV>';
-    sMain += '<DIV Id="SG_HowToA_Div" class="SG_HowToA_Div StartHidden">' + SG_HowToText() + '</DIV>';
-    sMain += '<DIV Id="Div_Grid" class="Div_Grid StartHidden">Div_Grid</DIV>';
-    sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_Div StartHidden">notset</DIV>';
-    sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div StartHidden"></DIV>';
-    sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter StartHidden">Div_BottomMatter</DIV>';
+    sMain += '<DIV Id="Div_PuzzleType" class="Div_PuzzleType TC_StartHidden">Div_PuzzleType</DIV>';
+    sMain += '<DIV Id="Div_StatusControl_Left" class="StatusControl_Div_Left TC_StartHidden">Div_StatusControl_Left</DIV>';
+    sMain += '<DIV Id="Div_StatusControl_Right" class="StatusControl_Div_Right TC_StartHidden">Div_StatusControl_Right</DIV>';
+    sMain += '<DIV Id="Div_PuzzleTitle" class="Div_PuzzleTitle TC_StartHidden">Div_PuzzleTitle</DIV>';
+    sMain += '<DIV Id="SG_HowToA_Div" class="SG_HowToA_Div TC_StartHidden">' + SG_HowToText() + '</DIV>';
+    sMain += '<DIV Id="Div_Grid" class="Div_Grid TC_StartHidden">Div_Grid</DIV>';
+    sMain += '<DIV Id="KB_Mini_Div" class="KB_Mini_Div TC_StartHidden">notset</DIV>';
+    sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div TC_StartHidden"></DIV>';
+    sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter TC_StartHidden">Div_BottomMatter</DIV>';
     if ( g_InfoSettingsButtons_bActive ){sMain += MakeInfoDiv(); sMain += MakeSettingsDiv(); }
     if ( g_DM_bActive ) sMain += TC_DM_MakeDiv();
     if ( g_MAM_bActive ) sMain += TC_MAM_MakeDiv();
-    sMain += '<DIV Id="Test" style="ForTest StartHidden"></DIV>';
-    sMain += '<DIV Id="ScratchArea" class="ScratchArea StartHidden">SSSSSSWSSS</DIV>';
-    sMain += '<DIV Id="ResultMessage_Div" class="ResultMessage_Div StartHidden"></DIV>';
-    sMain += '<DIV Id="ElapsedTime_Div" class="ElapsedTime_Div StartHidden"></DIV>';
-    sMain += '<DIV Id="DifficultyLevel_Div" class="DifficultyLevel_Div StartHidden">DifficultyLevel</DIV>';
-    sMain += '<DIV Id="ThemeImage_All_GetAspectRatio_Div" style="ThemeImage_Base_Div StartHidden"></DIV>';
-    sMain += '<DIV Id="ThemeImage_Base_Div" class="ThemeImage_Base_Div StartHidden">ThemeImage_Base_Div</DIV>';
-    sMain += '<DIV Id="ThemeImage_Extra_Div" class="ThemeImage_Extra_Div StartHidden">ThemeImage_Extra_Div</DIV>';
-    sMain += '<DIV Id="ThemeImage_Solved_Div" class="ThemeImage_Solved_Div StartHidden">ThemeImage_Solved_Div</DIV>';
-    sMain += '<DIV Id="ThemeImage_Popup_Div" class="ThemeImage_Popup_Div StartHidden">ThemeImage_Popup_Div</DIV>';
-    sMain += '<DIV Id="SharedDialog_Div" class="SharedDialog_Div StartHidden">' + 'Box' + '<DIV>';
+    sMain += '<DIV Id="Test" style="ForTestTC_StartHidden"></DIV>';
+    sMain += '<DIV Id="ScratchArea" class="ScratchArea TC_StartHidden">SSSSSSWSSS</DIV>';
+    sMain += '<DIV Id="ResultMessage_Div" class="ResultMessage_Div TC_StartHidden"></DIV>';
+    sMain += '<DIV Id="ElapsedTime_Div" class="ElapsedTime_Div TC_StartHidden"></DIV>';
+    sMain += '<DIV Id="DifficultyLevel_Div" class="DifficultyLevel_Div TC_StartHidden">DifficultyLevel</DIV>';
+    sMain += '<DIV Id="ThemeImage_All_GetAspectRatio_Div" style="ThemeImage_Base_Div TC_StartHidden"></DIV>';
+    sMain += '<DIV Id="ThemeImage_Base_Div" class="ThemeImage_Base_Div TC_StartHidden">ThemeImage_Base_Div</DIV>';
+    sMain += '<DIV Id="ThemeImage_Extra_Div" class="ThemeImage_Extra_Div TC_StartHidden">ThemeImage_Extra_Div</DIV>';
+    sMain += '<DIV Id="ThemeImage_Solved_Div" class="ThemeImage_Solved_Div TC_StartHidden">ThemeImage_Solved_Div</DIV>';
+    sMain += '<DIV Id="ThemeImage_Popup_Div" class="ThemeImage_Popup_Div TC_StartHidden">ThemeImage_Popup_Div</DIV>';
+    sMain += '<DIV Id="SharedDialog_Div" class="SharedDialog_Div TC_StartHidden">' + 'Box' + '<DIV>';
 //sMain += TC_Button_V2_InDiv('AAAA', false, 'TC_Text();', 'New');
     document.getElementById("Body_Any").innerHTML = sMain;
 }
@@ -61,7 +61,10 @@ function SG2_LoadAll(iSection)
     switch ( iSection)
     {
         case 0:
+            g_bPuzzleSolved = false;
+            g_bGridSolved = false;
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
+            g_bNeedToAdjustForInitialDifficultyLevel = false;
             TC_LoadPuzzleArchive_FromFile();
             g_SG2_CAB_bVisible = false;
             g_bUsedCookie = false;
@@ -132,13 +135,24 @@ function SG2_LoadAll(iSection)
 //interactive - Has loaded enough and the user can interact with it
 //complete - Fully loaded
 TC_ThemeImage_GetAspectRatio_Calculate();
-
             SG_UpdateAnswersCorrectInGridAndDisplay();
             if ( g_Timer_bActive ) TC_ElapsedTime_Setup();
             if ( g_SpecialClueFrame_bActive ) CAB_MakeSpecialClueAnswerDiv();
             if ( g_DM_bActive) DM_SetPosition();
             if ( g_MAM_bActive) MAM_SetPosition();
             if ( g_SA_bActive ) TC_SA_Setup();
+            if ( g_ThemeImage_Base_bActive )
+            {
+                TC_ThemeImage_Base_SizeAndPosition();
+                TC_ThemeImage_Base_SetVisibility(true);
+            }
+            if ( g_bNeedToAdjustForInitialDifficultyLevel )
+            {
+                if ( g_Difficulty_iLevel_OnNewPuzzle == g_Difficulty_iLevel_Hard )
+                    DM_ChangeToLevelHard();
+                else if ( g_Difficulty_iLevel_OnNewPuzzle == g_Difficulty_iLevel_Easy )
+                    DM_ChangeToLevelEasy()
+            }
             SG2_SetVisibles();
             if ( g_bPrintedFormat ) 
             {
@@ -153,11 +167,6 @@ TC_ThemeImage_GetAspectRatio_Calculate();
                     TC_ThemeImage_Extra_PositionVisibility_Print(true);
                 }
                 ForIdSetVisibility("ThemeImage_Base_Div", false);                
-            }
-            if ( g_ThemeImage_Base_bActive )
-            {
-                TC_ThemeImage_Base_SizeAndPosition();
-                TC_ThemeImage_Base_SetVisibility(true);
             }
 
 //            openFullscreen();

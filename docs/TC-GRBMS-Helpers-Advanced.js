@@ -1,4 +1,51 @@
 // TC-GRBMS-Helpers-Advanced.js
+var g_GRBMS_elemReveal = null;
+
+function TC_GRBMS_Reveal_DoIt()
+{
+    alert('doit')
+}
+function TC_GRBMS_Reveal_Cancel()
+{
+    alert('cancel')
+}
+
+function TC_GRBMS_RevealSquare()
+{
+// we only get here if want to allow it
+    g_GRBMS_elemReveal = document.createElement('div');
+    let sInner = '<TABLE Id="GRBMS_Reveal_Div" cellspacing=0 cellpadding=0 class="SA_ClearDiv"><TR>';
+    sInner +=    ' <TD Id="GRBMS_Reveal_Message" class="SA_ClearDiv_Message" onclick="TC_GRBMS_Reveal_Cancel();">Reveal?</TD>';
+    sInner +=    ' <TD Id="GRBMS_Reveal_DoIt" class="SA_ClearDiv_DoIt" onclick="TC_GRBMS_Reveal_DoIt();">Yes</TD>';
+    sInner +=    ' <TD Id="GRBMS_Reveal_Cancel" class="SA_ClearDiv_Cancel" onclick="TC_GRBMS_Reveal_Cancel();">Cancel</TD>';
+    sInner +=    '</TABLE>';
+    g_GRBMS_elemReveal.innerHTML = sInner;
+    g_GRBMS_elemReveal.style.visibility = "hidden";
+    document.body.appendChild(g_GRBMS_elemReveal);
+// position it next to the element
+    let elemGRBMS = document.getElementById(g_GRBMS_Focus_sId);
+    let rectGRBMS = GetBoundingClientRectAbsolute(elemGRBMS);
+    let elem = document.getElementById("GRBMS_Reveal_Div");
+    elem.style.top = MakePixelString(rectGRBMS.top);
+    elem.style.left = MakePixelString(rectGRBMS.right);
+    elem.style.height = MakePixelString(rectGRBMS.height);
+    g_GRBMS_elemReveal.style.visibility = "visible";
+}
+
+function TC_GRBMS_MakeFixSquarePopup(bRightClick)
+{
+    if ( g_GRBMS_Focus_sId == '' )
+        return;
+// if this is right click here we decide if the right click happen while the mouse is over the Entry
+    if ( bRightClick )
+    {
+        let elemSquare = document.getElementById(g_GRBMS_Focus_sId);
+        let rectSquare = GetBoundingClientRectAbsolute(elemSquare);
+        if ( !IsPointWithinRect(rectSquare, g_MouseClientPosition_x, g_MouseClientPosition_y) )
+            return;
+    }
+    TC_GRBMS_RevealSquare();
+}
 
 function GRBMS_ShowGrid()
 {

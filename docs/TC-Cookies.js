@@ -63,10 +63,7 @@ function GetAndSplitCookies()
 {
     let s = document.cookie;
     if ( s == '' )
-    {
-//        setlineAdd('NoCookies.') 
         return;
-    }
     g_aCookies = s.split(';');
     g_iCookies = g_aCookies.length;
 }
@@ -146,7 +143,6 @@ function StoreCookie_Puzzle()
     let sGridStatusPlayer = g_aGridStatusPlayer.join('')
     let sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)
     document.cookie = sCookieToAdd;
-//    setlineAdd('CPS:' + ++g_iStoredPuzzleCookies);
 }
 
 function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)

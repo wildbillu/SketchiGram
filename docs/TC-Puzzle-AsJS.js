@@ -3,13 +3,15 @@ function TC_Puzzle_Load_AsJS()
 {
     g_sPuzzleDate     = '2022-10-21';
     g_sPuzzleName     = 'EvilTwin';
-    g_sPuzzleTitle    = "Perhaps no longer your favorite Beach Boy Song."
-//    g_sPuzzleTitle    = "A Dr. Jekyll and Mr. Hyde Moment?"
+    g_sPuzzleTitle    = "A Dr. Jekyll and Mr. Hyde Moment?"
+//    g_sPuzzleTitle    = "Perhaps no longer your favorite Beach Boy Song."
+//    g_sSpecialClueBefore = '"Wouldn\'t It Be'; 
+//    g_sSpecialClueBeforeLine2 = 'Nice If We'
+//    g_sSpecialClueEnd = '"'; 
     g_ST_sClue_Itself = 'Doppelg&#228;nger of the worst type?';
-    g_sSpecialClueBefore = '"Wouldn\'t It Be'; 
-    g_sSpecialClueBeforeLine2 = 'Nice If We'
+    g_sSpecialClueBefore = ''; 
     g_sSpecialClueMiddle = ''; 
-    g_sSpecialClueEnd = '"'; 
+    g_sSpecialClueEnd = ''; 
     g_sPuzzleCreditAuthor = 'Puzzle By Sketchi Bill, Images By Sketchi Bill'
     g_sPuzzleCreditDate = 'October 21, 2022'
     g_PuzzlePath_sName_Image          = 'puzzles/puzzle006/puzzle006.jpg';
@@ -18,7 +20,7 @@ function TC_Puzzle_Load_AsJS()
 // CA Stuff
     var sClues                     = 'Extremely not good|Doppelg&#228;nger|Cover with tar|Chooses|Hawaiian goose|Red tag ____|Guitar Pedal (var.)|Actor Wilson';
     var sClueTypes                 = 'S|S|N|N|N|N|N|N'; 
-    var sAnswers                   = 'WERE|OLDER|PAVE|OPTS|NENE|SALE|WAWA|OWEN';
+    var sAnswers                   = 'EVIL|TWIN|PAVE|OPTS|NENE|SALE|WAWA|OWEN';
     var sAnswersPlayer             = '----|----|----|----|----|----|----|----';
     var sStatusPlayer              = 'NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';
     var sAnswersSpecialClueLocations  = 'SSDS|SSDS|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN';

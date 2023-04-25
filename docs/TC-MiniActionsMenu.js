@@ -88,7 +88,7 @@ function MAM_SolvePuzzle()
 function TC_MAM_MakeDiv()
 {    
     let sMAMInner = TC_MAM_MakeInnerHTML();
-    let sInner = '<DIV Id="MAM_Div" class="MAM_Div StartHidden" align=center>' + sMAMInner + '</DIV>';
+    let sInner = '<DIV Id="MAM_Div" class="MAM_Div TC_StartHidden" align=center>' + sMAMInner + '</DIV>';
     return sInner;
 }
 

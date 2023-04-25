@@ -7,15 +7,10 @@
     <link rel="stylesheet" href="Styles-Overall.css">
     <link rel="stylesheet" href="Styles-TC-Button.css">
     <link rel="stylesheet" href="Styles-SpecialClue.css">
-    <link rel="stylesheet" href="Styles-CAB-Headings.css">
-    <link rel="stylesheet" href="Styles-GRB-Button.css">
     <link rel="stylesheet" href="Styles-TopRowControl.css">
     <link rel="stylesheet" href="Styles-Settings.css">
     <link rel="stylesheet" href="Styles-Info-Content.css">
     <link rel="stylesheet" href="Styles-StatusControl.css">
-    <link rel="stylesheet" href="Styles-GRBMS-Base.css">
-
-    <link rel="stylesheet" href="Styles-GRBMS-Button.css">
     <link rel="stylesheet" href="Styles-SG.css">
     <link rel="stylesheet" href="Styles-ResultMessage.css">
     <link rel="stylesheet" href="Styles-ScratchArea.css">
@@ -42,6 +37,10 @@
     <SCRIPT SRC="TC-CAB-ButtonControl.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-Helpers-Answers-Status.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-HandleArrows.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-ContextMenu.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-CAB-Headings.css">
+    <link rel="stylesheet" href="Styles-CAB-ContextMenu.css">
+
 
     <SCRIPT SRC="TC-CA_SetupAndPositioning.js"></SCRIPT>
     <SCRIPT SRC="TC-CA-DisplayHelpers.js"></SCRIPT>
@@ -50,8 +49,6 @@
     <SCRIPT SRC="TC-MakeClasses.js"></SCRIPT>
 
     <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
-
-
     <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-TouchMove.js"></SCRIPT>
@@ -60,6 +57,11 @@
     <SCRIPT SRC="TC-GRBMS-CoreProcessing.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Helpers-Answers-Status.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Helpers-GridClueNumbering.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-GRBMS-Base.css">
+    <link rel="stylesheet" href="Styles-GRBMS-Button.css">
+    <SCRIPT SRC="TC-GRBMS-ContextMenu.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-GRBMS-ContextMenu.css">
+
 
     <SCRIPT SRC="TC-ResultMessage.js"></SCRIPT>
 
@@ -78,8 +80,10 @@
 <!-- these are the 'show/noshow' windows -->
     <SCRIPT SRC="TC-SuccessWindow.js"></SCRIPT>
     <SCRIPT SRC="TC-Info-Content.js"></SCRIPT>
+<!-- Settings -->
     <SCRIPT SRC="TC-Settings-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-Settings-Support.js"></SCRIPT>
+    <SCRIPT SRC="TC-Settings-DifficultySupport.js"></SCRIPT>
+    <SCRIPT SRC="TC-Settings-CookieSupport.js"></SCRIPT>
 <!-- this controls the closing of the show/noshow windows  -->
     <SCRIPT SRC="TC-Popup-Support.js"></SCRIPT>
 
@@ -104,7 +108,6 @@
     <link rel="stylesheet" href="Styles-ElapsedTime.css">
 <!-- Difficulty -->
     <SCRIPT SRC="TC-DifficultyMenu.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-DifficultyLevel.css">
     <link rel="stylesheet" href="Styles-DifficultyMenu.css">
 <!-- MiniActionMenu -->
     <SCRIPT SRC="TC-MiniActionsMenu.js"></SCRIPT>
@@ -127,38 +130,6 @@
 <!-- ActionMenu actions themselves -->
 <SCRIPT SRC="TC-Actions.js"></SCRIPT>
 
-<!--- Deprecated 
-        <SCRIPT SRC="TC-GRBMS.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-SG-ActionMenu.css">
-    <SCRIPT SRC="TC-SG-ActionsMenu.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-GRBMS-CAB.css">
-    <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-ScratchArea-EditBox.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRBMS-LoadClueAnswer.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-Place.css">
-    <link rel="stylesheet" href="Styles-Place-Direct.css">
-    <SCRIPT SRC="TC-SG-Base.js"></SCRIPT>
-    <SCRIPT SRC="TC-YourMove-Base.js"></SCRIPT>
-    <SCRIPT SRC="TC-TwistiCross-Base.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-Direct.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-Draggable.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-TouchMovable.js"></SCRIPT>
-    <SCRIPT SRC="TC-Place-MouseMovable.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-ButtonControl.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-CoreProcessing.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-HandleArrows.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-HandleEntries.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-MoveFocus.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-Defines.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRB-Basic.js"></SCRIPT>
-    <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
-        <SCRIPT SRC="TC-DifficultyLevel.js"></SCRIPT>
-
--->
-
-
 </HEAD>
 <STYLE>
 :root
@@ -175,11 +146,11 @@ let g_bConnectionIsWebBased = true;
 
 function Dispatch() 
 {
+    TC_MouseSupport_RightClick();
     if (window.location.protocol === "file:")
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
     g_TC_iBiggestBottom = 0;
-
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.070';
 //
     TC_LoadPuzzleArchive();
@@ -202,7 +173,7 @@ var iM = 0;
 
 </SCRIPT>
 
-<BODY Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="Dispatch();" >
+<BODY onmousemove="TC_MousePositionSupport(event)" Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="Dispatch();" >
 <DIV Id="Body_Any" class="Body_Any_BeforeLoad" ontouchmove="GRBMS_touchMove(event);" onmousemove="A(event);"></DIV>  
 <DIV Id="Messages" class="Div_Message"></DIV>  
 </BODY>

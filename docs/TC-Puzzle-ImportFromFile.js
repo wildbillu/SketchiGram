@@ -104,6 +104,11 @@ var g_bUsedCookie = false;
 var sGridSpecialClueLocations = '';
 var sAnswersSpecialClueLocations = '';
 var sClueTypes                  = 'S|S|N|N|N|N|N|N'; 
+var g_bNeedToAdjustForInitialDifficultyLevel = false;
+
+//g_Difficulty_iLevel_Settings = parseInt(aOurValues[iOurValue++]);
+//g_Difficulty_iLevel_OnNewPuzzle = parseInt(aOurValues[iOurValue++]);
+
 
 function TC_UseFileContents()
 {   // now we need to figure out whether to use any cookie settings
@@ -119,12 +124,15 @@ function TC_UseFileContents()
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
         g_bUsedCookie = true;
+        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
     }
     if ( !g_bUsedCookie )
     {
         CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes)
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations)
         g_ElapsedTime_iSecondsPrevious = 0;
+        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_OnNewPuzzle;
+        g_bNeedToAdjustForInitialDifficultyLevel = true;
     }
     //    setline(sFilename + '.Updated:' + iUpdated + ';');
     return true;

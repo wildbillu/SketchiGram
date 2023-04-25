@@ -10,8 +10,10 @@ var g_SG_bAnswersCorrectInGridSet = false;
 
 function SG_CA_UpdateAndSetVisibility(bVisible)
 {
-    if ( g_ThemeImage_Base_bActive ) TC_ThemeImage_Base_SetVisibility(!bVisible)
-
+    if ( g_ThemeImage_Base_bActive ) 
+    {
+        TC_ThemeImage_Base_SetVisibility(!bVisible)
+    }
     SG_UpdateAnswersCorrectInGridAndDisplay();
     ForIdSetVisibility("SG_Clues_Div", bVisible);
     if ( g_CA_bShowSpecial )

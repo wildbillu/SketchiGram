@@ -14,7 +14,7 @@ function TC_SA_CheckIfEntryMatchesAnAnswer(iEntry, elemInputText)
 //            SG_UpdateAnswersCorrectInGridAndDisplay();
             let iIndex = parseInt(TC_SA_EntryFromId(g_SA_Focus_sId));
             g_SA_sWordStatus = replaceAt(g_SA_sWordStatus, iIndex, 'T');
-            elemInputText.className = "SA_EB_Entry_Base SA_EB_Entry_Correct";
+            elemInputText.className = "SA_Entry_Base SA_Entry_Correct";
 // move to the next available answer if one not complete otherwise just lose focus
             let bFound = false;
             let iTry = 0;
