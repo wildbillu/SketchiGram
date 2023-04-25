@@ -65,15 +65,20 @@ function SG2_LoadAll(iSection)
             g_bGridSolved = false;
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             g_bNeedToAdjustForInitialDifficultyLevel = false;
+            alert('A')            
             TC_LoadPuzzleArchive_FromFile();
             g_SG2_CAB_bVisible = false;
             g_bUsedCookie = false;
             g_TC_Status_bFirstCheck = true;
+            alert('B')            
             GetAndSplitCookies();
+            alert('C')            
             FromCookies_GetCurrentPuzzle();
+            alert('D')            
             getResolution(); 
             while ( document.readyState != "complete") {}
             TC_InitializeFromFileOrLoadAsJS();
+            alert('E')            
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
             GRBMS_SetAllowedGridLetters()
@@ -134,7 +139,7 @@ function SG2_LoadAll(iSection)
 //loaded - Has been loaded
 //interactive - Has loaded enough and the user can interact with it
 //complete - Fully loaded
-TC_ThemeImage_GetAspectRatio_Calculate();
+            TC_ThemeImage_GetAspectRatio_Calculate();
             SG_UpdateAnswersCorrectInGridAndDisplay();
             if ( g_Timer_bActive ) TC_ElapsedTime_Setup();
             if ( g_SpecialClueFrame_bActive ) CAB_MakeSpecialClueAnswerDiv();

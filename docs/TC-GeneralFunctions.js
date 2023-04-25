@@ -2,6 +2,7 @@
 // 
 // to detect window back forth...
 
+function IsTrue(s){var b = false;if ( s == 'true')b = true;return b;}
 
 function openFullscreen() 
 {

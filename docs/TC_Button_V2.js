@@ -12,7 +12,7 @@ function TC_Button_V2_InDiv(sDivId, bStartHidden, sOnClick, sText)
     let sHTML = '<DIV Id="' + sDivId + '" ';
     sHTML += 'class="TC_Button_V2_InDiv ';
     if ( bStartHidden )
-        sHTML += ' StartHidden';
+        sHTML += 'TC_StartHidden';
     sHTML += '" onclick="' + sOnClick + '">'
     sHTML += sText;
     sHTML += '</DIV>'

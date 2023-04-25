@@ -49,12 +49,12 @@ function CAB_MakeSpecialClueAnswerDiv()
     {
         if ( g_sSpecialClueBeforeLine2 == '' )
         {
-            sClueAnswerRow += '<TD Id="SC_Before" class="SpecialClue_Text GRBMS_Clue_Right">' + g_sSpecialClueBefore + '</TD>';
+            sClueAnswerRow += '<TD Id="SC_Before" class="SpecialClue_Text TC_Right">' + g_sSpecialClueBefore + '</TD>';
         }
         else
         {
             let sRight = '';
-            sRight += '<TD Id="SC_Before" class="SG_SpecialClue_Text_DualLine GRBMS_Clue_Right">'
+            sRight += '<TD Id="SC_Before" class="SG_SpecialClue_Text_DualLine TC_Right">'
             sRight += '<DIV>' + g_sSpecialClueBefore + '</DIV>';
             sRight += '<DIV>' + g_sSpecialClueBeforeLine2 + '</DIV>';
             sRight +=  '</TD>';
@@ -68,14 +68,14 @@ function CAB_MakeSpecialClueAnswerDiv()
     if ( g_sSpecialClueMiddle != '' )
     {
         sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
-        sClueAnswerRow += '<TD Id="SC_Middle" class="SpecialClue_Text GRBMS_Clue_Center">' + g_sSpecialClueMiddle + '</TD>';
+        sClueAnswerRow += '<TD Id="SC_Middle" class="SpecialClue_Text TC_Center">' + g_sSpecialClueMiddle + '</TD>';
     }
     if (  TC_ForIndexIsClueTypeSpecial(1) )
     {
         sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
         sClueAnswerRow += '<TD Id="SC_Buttons_1" class="SpecialClue_Button_Div">' + CAB_MakeButtonsForAnswer(1) + '</TD>';
         sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
-        sClueAnswerRow += '<TD Id="SC_End" class="SpecialClue_Text GRBMS_Clue_Left">' + g_sSpecialClueEnd + '</TD>';
+        sClueAnswerRow += '<TD Id="SC_End" class="SpecialClue_Text TC_Left">' + g_sSpecialClueEnd + '</TD>';
     }
     sClueAnswerRow += '</TR></TABLE>';
     sClueAnswerRow += '</DIV>'

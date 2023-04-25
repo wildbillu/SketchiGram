@@ -8,6 +8,16 @@
 */
 
 ::selection{background-color: #FFEE60}
+
+.TC_Left   {text-align:left;}
+.TC_Center {text-align:center;}
+.TC_Right  {text-align:right;}
+
+.TC_StartHidden {visibility:hidden;}
+
+.InLineAbsolute {display: inline-block;position:absolute;}
+.InLineRelative {display: inline-block;position:relative;}
+
 .MoveCursor
 {
 cursor: url('image/Button_ChangeDirection.cur'),auto;
@@ -38,8 +48,5 @@ cursor: url('image/Button_ChangeDirection.cur'),auto;
     background-color: white;
 }
 
-.StartHidden
-{
-    visibility: hidden;
-}
+
 

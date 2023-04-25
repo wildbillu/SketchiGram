@@ -14,23 +14,9 @@
     z-index:0; 
 }
 
-.DM_MenuItem_Selected
-{
-    color:green;
-    background-color:white;
-}
-
-.DM_MenuItem_Enabled
-{
-    color:blue;
-    background-color:lightblue;
-}
-
-.DM_MenuItem_Disabled
-{
-    color:gray;
-    background-color:lightgray;
-}
+.DM_MenuItem_Selected{color:green;background-color:white;}
+.DM_MenuItem_Enabled {color:blue;background-color:lightblue;}
+.DM_MenuItem_Disabled{color:gray;background-color:lightgray;}
 
 .DM_MenuItem_Base
 {

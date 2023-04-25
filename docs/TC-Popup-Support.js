@@ -5,9 +5,7 @@
 window.onclick = function(event) 
 {
 	var sTargetId = event.target.id;
-	if ( g_TC_Settings_bActive ){if ( sTargetId.indexOf('Settings') == -1 ) TC_HideSettings();
-		else { if ( g_TC_Settings_iActiveCount != 0 )TC_HideSettings();else g_TC_Settings_iActiveCount++;}
-	}
+	if ( g_TC_Settings_bActive && sTargetId.indexOf('Settings') == -1 )TC_HideSettings();
 	if ( g_TC_Archive_Menu_bActive )
 	{   
 		if ( sTargetId != 'Archive_Next' && sTargetId != 'Archive_Previous')

@@ -67,22 +67,6 @@
 .Info_Content_Credits_Version_SG2{position:absolute;text-align:left;font-size: 14px;left:0px;top:860px;}
 .Info_Image_SG2{background-image: url("images/InfoScreens/InfoBackground_SG2.jpg")}
 
-
-.Info_Center
-{
-    text-align: center;
-}
-
-.Info_Left
-{
-    text-align: left;
-}
-
-.Info_Right
-{
-    text-align: right;
-}
-
 .Info_BackgroundColor
 {
     background-color:antiquewhite;

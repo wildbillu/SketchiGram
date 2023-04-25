@@ -180,7 +180,7 @@ function TC_Archive_Activate()
 function TC_Archive_MakeActivationButton()
 {
     let sId = "Archive_Button_Activate";
-    let sArchiveButton = '<BUTTON class="Archive_Button_Activate StartHidden" Id="' + sId + '" onclick="TC_Archive_Activate();">Show Archive</BUTTON>';
+    let sArchiveButton = '<BUTTON class="Archive_Button_Activate TC_StartHidden" Id="' + sId + '" onclick="TC_Archive_Activate();">Show Archive</BUTTON>';
     return sArchiveButton;
 }
 
@@ -194,7 +194,7 @@ function TC_Archive_UpdateMenu()
 function TC_Archive_MakeMenu()
 {   
     let sAll = TC_Archive_MakeMenuInner();
-    var sInner = '<DIV Id="Archive_Div" class="Archive_Div StartHidden" align=center>' + sAll + '</DIV>';
+    var sInner = '<DIV Id="Archive_Div" class="Archive_Div TC_StartHidden" align=center>' + sAll + '</DIV>';
     return sInner;
 }
 
