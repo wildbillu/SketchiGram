@@ -38,13 +38,11 @@ function Action_ResetPuzzle()
     GRBMS_ScrambleCorrectAnswersToPlayer(true);
     GRBMS_SetAllButtons();
     if ( g_HowTo_bActive ) ForIdSetVisibility("SG_HowToA_Div", true);
-
     if ( g_ThemeImage_Base_bActive )
     {
         TC_ThemeImage_Base_SizeAndPosition();
         TC_ThemeImage_Base_SetVisibility(true);
     }
-
     SG_UpdateAnswersCorrectInGridAndDisplay();
     SG_CA_UpdateAndSetVisibility(false);
     ForIdSetVisibility("ScratchArea", false);

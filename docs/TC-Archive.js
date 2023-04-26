@@ -85,9 +85,8 @@ function TC_Archive_Select(elem)
     g_TC_iBiggestBottom = 0;
     g_SG_Clues_bCreated = false;
     SG_UpdateAnswersCorrectInGridAndDisplay();
-    if ( g_DM_bActive ) g_Difficulty_iLevel_Operating = 3;
+    if ( g_DM_bActive ) g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert;
     g_SG_bAnswersCorrectInGridSet = false;
-    g_Difficulty_iLevel_Operating = 3;
     g_bGridAndCA = false;
     g_TC_Status_bFirstCheck = true;
     TC_SA_ClearEntries();

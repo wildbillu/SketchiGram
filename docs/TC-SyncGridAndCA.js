@@ -39,6 +39,7 @@ function TC_SyncGridToSpecialAnswers()
 {
     let bChange = false;
     if ( !g_bGridAndCA ) return bChange;
+    setlineAdd('syncinggridtospecialanswers')
     for ( let i = 0; i < g_CA_aMappingSpecial0ToGrid.length; i++ )
     {
         let cPlayerAnswer = CAB_ForRowLetter_GetAnswerPlayer(0, i);
@@ -50,10 +51,9 @@ function TC_SyncGridToSpecialAnswers()
             let iLetter = GRBMS_LetterFromId(sId);
             let cLetterExisting = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
             if ( cLetterExisting != cAnswer )
-            {
-                GRB_ForRowLetter_SetAnswerPlayer(cAnswer, iRow, iLetter);
-                GRB_ForRowLetter_SetStatusPlayer(g_cCode_Correct, iRow, iLetter);
-                GRBMS_ForRowLetter_SetButton(iRow, iLetter);
+            { // what we want to do is an exchange
+                let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cAnswer, true, cNow)
                 bChange = true;
             }
         }
@@ -70,9 +70,8 @@ function TC_SyncGridToSpecialAnswers()
             let cLetterExisting = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
             if ( cLetterExisting != cAnswer )
             {
-               GRB_ForRowLetter_SetAnswerPlayer(cAnswer, iRow, iLetter)
-                GRB_ForRowLetter_SetStatusPlayer(g_cCode_Correct, iRow, iLetter)            
-                GRBMS_ForRowLetter_SetButton(iRow, iLetter);
+                let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cAnswer, true, cNow)
                 bChange = true;
             }
         }
