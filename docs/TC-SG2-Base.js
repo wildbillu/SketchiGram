@@ -142,7 +142,7 @@ function SG2_LoadAll(iSection)
             if ( g_DM_bActive) DM_SetPosition();
             if ( g_MAM_bActive) MAM_SetPosition();
             if ( g_SA_bActive ) TC_SA_Setup();
-            if ( g_ThemeImage_Base_bActive )
+            if ( g_ThemeImage_Base_bActive && !g_bPuzzleSolved )
             {
                 TC_ThemeImage_Base_SizeAndPosition();
                 TC_ThemeImage_Base_SetVisibility(true);

@@ -12,6 +12,8 @@
 {
     border:1px solid black;
     height:35px;
+    text-align:center;
+    padding:2px;
     width:120px;
     line-height:30px;
     z-index:1;
@@ -26,6 +28,8 @@
     border:1px solid black;
     height:30px;
     width:35px;
+    text-align:center;
+    padding:2px;
     z-index:1;
     background-color:pink;
     font-size:15px;
@@ -38,6 +42,8 @@
     border:1px solid black;
     height:30px;
     width:35px;
+    text-align:center;
+    padding:4px;
     z-index:1;
     background-color:lightgreen;
     font-size:15px;
