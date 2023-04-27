@@ -154,7 +154,10 @@ function SG2_LoadAll(iSection)
                     DM_ChangeToLevelHard();
                 }
                 else if ( g_Difficulty_iLevel_OnNewPuzzle == g_Difficulty_iLevel_Easy )
-                    DM_ChangeToLevelEasy()
+                {
+                    DM_ChangeToLevelEasy();
+                    TC_SetVisible("ScratchArea");
+                }
                 g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_OnNewPuzzle;
                 g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_OnNewPuzzle;
                 DM_SetButtons();

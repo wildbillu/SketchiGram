@@ -38,7 +38,6 @@ function TC_LoadPuzzleArchive_FromFile()
     }
 }
 
-
 function TC_LoadPuzzleArchive()
 {
     TC_Archive_AddPuzzleToArchive('puzzle001', 'Yogi Berra Says!')
