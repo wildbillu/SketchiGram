@@ -110,7 +110,7 @@ function SG2_LoadAll(iSection)
             break;
         case 7:
             // we are going to do the show clues, but not make it visible to get spacing right
-            AnswersCorrectInGridInitialize()
+            AnswersCorrectInGridInitialize();
             SG_SetupClueAnswers();
             TC_ThemeImage_Base_Create(); // these need to wait for load
             TC_ThemeImage_Extra_Create();

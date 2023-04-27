@@ -32,10 +32,11 @@ function TC_ThemeImage_Base_SizeAndPosition()
     let rectKB = GetBoundingClientRectAbsolute(elemKB);
     let iBottomKB = rectKB.bottom;
     // need the size to be height between bottom of KB and top of Archive Button
-    let elemArchiveButton = document.getElementById("Archive_Button_Activate");
-    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton)
-    let iTopArchiveButton = rectArchiveButton.top;
-    let iHeight = iTopArchiveButton - iBottomKB - 2 * g_TC_Padding_Inter_Vertical_iSize;
+    let elemBottomMatter = document.getElementById("Div_BottomMatter");
+    let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter)
+
+    let iTopBottomMatter = g_TC_iBiggestBottom_NoExtras - rectBottomMatter.height;
+    let iHeight = iTopBottomMatter - iBottomKB - 2 * g_TC_Padding_Inter_Vertical_iSize;
     let iWidth = g_ThemeImage_All_fWidthToHeight * iHeight;
     let iTop = iBottomKB + g_TC_Padding_Inter_Vertical_iSize;
     let iLeft = TC_LeftForCentering(iWidth);

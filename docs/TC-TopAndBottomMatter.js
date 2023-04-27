@@ -49,31 +49,54 @@ function TC_SetTopMatter()
 
 function TC_SetBottomMatter()
 {
-    let elemClue_Div = document.getElementById("SG_Clues_Div")
-    let rectClue_Div = GetBoundingClientRectAbsolute(elemClue_Div);
-    let iBottomClueDiv = rectClue_Div.bottom;
-    g_TC_iBiggestBottom = iBottomClueDiv;
+    let iHeight = SG_CA_HeightOrMinimum();
+//
     let elemBottomMatter = document.getElementById("Div_BottomMatter");
-    g_TC_iBiggestBottom += g_TC_Padding_Inter_Vertical_iSize;
-    elemBottomMatter.style.top = MakePixelString(g_TC_iBiggestBottom);
-    let iWidth = g_Window_iWidth - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
-
-    elemBottomMatter.style.width = MakePixelString(iWidth);
-    elemBottomMatter.style.Left = MakePixelString(g_TC_Padding_Left_iSize);
     elemBottomMatter.innerHTML = '&copy; 2023 Northeast by Southwest, Inc.&nbsp;&nbsp;';
     elemBottomMatter.innerHTML += TC_Archive_AddButtonOrExtraSpace();
     elemBottomMatter.innerHTML += '&nbsp;&nbsp;SketchiToons&reg; by Sketchi Bill';
-    rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter);
-    g_TC_iBiggestBottom = rectBottomMatter.bottom + 2 * g_TC_Padding_Inter_Vertical_iSize;
+//
+    let elemKB = document.getElementById("KB_Mini_Div");
+    let rectKB = GetBoundingClientRectAbsolute(elemKB);
+    let iBottomMatterTop = rectKB.bottom + g_TC_Padding_Inter_Vertical_iSize + iHeight; 
+    elemBottomMatter.style.top = MakePixelString(iBottomMatterTop);
+    let iWidth = g_Window_iWidth - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
+    elemBottomMatter.style.width = MakePixelString(iWidth);
+    elemBottomMatter.style.left = MakePixelString(g_TC_Padding_Left_iSize);
+    //
+    let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter);
+    g_TC_iBiggestBottom_NoExtras = rectBottomMatter.bottom;
     let elemMessages = document.getElementById("Messages");
-    elemMessages.style.top = MakePixelString(g_TC_iBiggestBottom);
+    let iMessagesTop = rectBottomMatter.bottom + g_TC_Padding_Inter_Vertical_iSize;
+    elemMessages.style.top = MakePixelString(iMessagesTop);
     elemMessages.style.width = MakePixelString(iWidth);
-    elemMessages.style.Left = MakePixelString( g_TC_Padding_Left_iSize);
-    let rectMessages = elemMessages.getBoundingClientRect();
-    g_TC_iBiggestBottom += rectMessages.height;
+    elemMessages.style.left = MakePixelString( g_TC_Padding_Left_iSize);
+    let rectMessages = GetBoundingClientRectAbsolute(elemMessages)
+    g_TC_iBiggestBottom = rectMessages.bottom;
     TC_SetActiveSize();
 }
 
+function TC_ResetBottomMatter()
+{
+    return;
+    let elemClue_Div = document.getElementById("SG_Clues_Div");
+    let bHidden_Clues = (window.getComputedStyle(elemClue_Div).visibility === "hidden"); 
+    let elemThemeImage = document.getElementById('ThemeImage_Base_Div');
+    let bHidden_ThemeImage = (window.getComputedStyle(elemThemeImage).visibility === "hidden");
+    let elemBottomMatter = document.getElementById("Div_BottomMatter");
+    if ( !bHidden_Clues )
+    {
+        let rectClue = GetBoundingClientRectAbsolute(elemClue_Div);
+        let iTop = rectClue.bottom;
+        elemBottomMatter.style.top = MakePixelString(iTop)
+    } 
+    if ( !bHidden_ThemeImage)
+    { // we should go back to biggest bottom
+        let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter);
+        let iTop = g_TC_iBiggestBottom_NoExtras - rectBottomMatter.height;
+        elemBottomMatter.style.top = MakePixelString(iTop)
+    }
+}
 
 
 

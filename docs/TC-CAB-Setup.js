@@ -58,7 +58,6 @@ function CAB_MakeSpecialClueAnswerDiv()
             sRight += '<DIV>' + g_sSpecialClueBefore + '</DIV>';
             sRight += '<DIV>' + g_sSpecialClueBeforeLine2 + '</DIV>';
             sRight +=  '</TD>';
-//            alert(sRight)
             sClueAnswerRow += sRight;
         }
         sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';

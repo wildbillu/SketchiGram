@@ -64,7 +64,7 @@ var g_bSuppressGridNumbers = false;
 var g_bArchiveShow = true;
 
 var g_ThemeImage_Base_bActive = true;
-
+var g_ThemeImage_Base_iMinimumHeight = 250;
 
 function TC_Configuration_pick()
 {

@@ -19,6 +19,7 @@ var g_ST_sClue_Itself = '';
 // these are to help with positioning
 // they should be updated after each section
 var g_TC_iBiggestBottom = 0;
+var g_TC_iBiggestBottom_NoExtras = 0;
 
 var g_TC_Padding_Left_iSize = 2;
 var g_TC_Padding_Right_iSize = 2;

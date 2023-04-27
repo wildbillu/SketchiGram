@@ -71,7 +71,7 @@ function TC_MoveTopAndAdjustBiggestBottom(sId, iTop)
     let rect = elem.getBoundingClientRect();
     let rectHeight = rect.height;
     elem.style.top = MakePixelString(iTop);
-    g_TC_iBiggestBottom += rectHeight;
+//    g_TC_iBiggestBottom += rectHeight;
     return rectHeight;
 }
 

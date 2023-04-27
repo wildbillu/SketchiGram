@@ -12,6 +12,16 @@ function SG_MakeClueTextId(iRow)
     return 'SG_Clues_Text_' + iRow;
 }
 
+function SG_CA_HeightOrMinimum()
+{
+    let iHeight = g_ThemeImage_Base_iMinimumHeight;
+    let elemClue_Div = document.getElementById("SG_Clues_Div");
+    let rectClue_Div= GetBoundingClientRectAbsolute(elemClue_Div)
+    if ( rectClue_Div.height > iHeight ) 
+        iHeight = rectClue_Div.height;
+    return iHeight;
+}
+
 function SG_SetupClueAnswers()
 {
     SG_PositionClueOverallDiv();

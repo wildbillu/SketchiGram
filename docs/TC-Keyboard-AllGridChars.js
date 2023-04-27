@@ -116,10 +116,9 @@ function KB_AllGridChars_Adjust(bMove)
 
     let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     elemKB_Mini_Div.style.height = MakePixelString(iKBLettersHeight + rectInstructionsDiv.height);
-    
     if ( bMove ) 
     {
-        let rect_KB = elem_KB.getBoundingClientRect();
+        let rect_KB = GetBoundingClientRectAbsolute(elem_KB);
         g_TC_iBiggestBottom += rect_KB.height;
     }
 }

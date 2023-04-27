@@ -37,13 +37,13 @@
 .SG_Clues_Div
 {
     user-select: none;
-    border: 0px solid black;
+    border: 3px solid black;
     visibility:hidden;
     position:absolute;
     text-align:center;
     left:0px;
     top:550px;
-    height:66px;
+    height:20px;
     width:600px;
 }
 

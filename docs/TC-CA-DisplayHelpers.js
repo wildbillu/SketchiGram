@@ -30,6 +30,7 @@ function SG_CA_UpdateAndSetVisibility(bVisible)
             ForIdSetVisibility(sId, bVisible);
         }
     }
+    TC_ResetBottomMatter()
 }
 
 function SG_UpdateAnswersCorrectInGridAndDisplay()

@@ -39,7 +39,6 @@ function TC_SyncGridToSpecialAnswers()
 {
     let bChange = false;
     if ( !g_bGridAndCA ) return bChange;
-    setlineAdd('syncinggridtospecialanswers')
     for ( let i = 0; i < g_CA_aMappingSpecial0ToGrid.length; i++ )
     {
         let cPlayerAnswer = CAB_ForRowLetter_GetAnswerPlayer(0, i);
