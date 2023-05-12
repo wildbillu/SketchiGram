@@ -93,7 +93,7 @@ function TC_SA_Setup()
     elemScratch.style.width = MakePixelString(iWidthDiv);
     let sInner = '';
     sInner += '<DIV Id="ScratchArea_Text" class="Scratch_Text">Use this area for candidate answers</DIV>';
-    sInner += '<TABLE Id="ScratchArea_TABLE" cellpadding=0 cellspacing=1 class="ScratchArea_TABLE">';
+    sInner += '<TABLE Id="ScratchArea_Table" cellpadding=0 cellspacing=1 class="ScratchArea_Table">';
     let iEntry = 0;
     while ( iEntry < g_SA_iMaxEntries )
     {
@@ -110,7 +110,8 @@ function TC_SA_Setup()
         sThisOne += sFunctionsToCall + ' >'
         sThisOne += g_SA_aWords[iEntry];
         sThisOne += '</DIV></TD>';
-        sThisOne += '<TD><DIV class="SA_ClearBox" onclick="TC_SA_ClearEntry(' + iEntry + ');">X</DIV></TD>'
+        let sClearBoxId = TC_SA_ClearBox_MakeId(iEntry)
+        sThisOne += '<TD><DIV Id="' + sClearBoxId + '" class="SA_ClearBox" onclick="TC_SA_ClearEntry(' + iEntry + ');">X</DIV></TD>'
         sThisOne += '</TR>';
         sInner += sThisOne;
         iEntry++;
@@ -125,12 +126,17 @@ function TC_SA_Setup()
         elemEntry.style.width = MakePixelString(iWidthEntry);
         elemEntry.style.left = MakePixelString(iEntry);
     }
-    document.getElementById("ScratchArea_TABLE").style.left = MakePixelString(2);
-    let sId = TC_SA_MakeId(g_SA_iMaxEntries - 1);
-    let elemBottomElement = document.getElementById(sId);
-    let rectBottomElement = GetBoundingClientRectAbsolute(elemBottomElement);
-    let iBottom = rectBottomElement.bottom;
-    let iHeightFull = (iBottom - iTop) + 2;
+    document.getElementById("ScratchArea_Table").style.left = MakePixelString(2);
+
+// bottom right is from the last of the x boxes
+    let sClearBoxId_Last = TC_SA_ClearBox_MakeId(g_SA_iMaxEntries - 1);
+    let elemClearBoxLast = document.getElementById(sClearBoxId_Last)
+    let rectClearBoxLast = GetBoundingClientRectAbsolute(elemClearBoxLast)
+    let rectScratch = GetBoundingClientRectAbsolute(elemScratch)
+    let iWidthFull = (rectClearBoxLast.right - rectScratch.left)
+    elemScratch.style.width = MakePixelString(iWidthFull);
+    rectScratch = GetBoundingClientRectAbsolute(elemScratch)
+    let iHeightFull = 221;//(rectClearBoxLast.bottom - rectScratch.top)
     elemScratch.style.height = MakePixelString(iHeightFull);
 }
 
@@ -143,5 +149,6 @@ function TC_SA_ClearEntries()
         g_SA_sWordStatus += 'X';
     }
 }
+function TC_SA_ClearBox_MakeId(iEntry){return 'TC_SA_ClearBox' + iEntry;}
 function TC_SA_MakeId(iEntry){return 'TC_SA_' + iEntry;}
 function TC_SA_EntryFromId(sId){return sId.charAt(6);}
