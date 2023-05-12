@@ -54,26 +54,6 @@ function MAM_EnableDisable()
     MAM_SetMenuItemClass('MAM_RevealSquare', bRevealSquareEnabled)
 }
 
-function MAM_RevealSquare()
-{
-    if ( CAB_ShowCheckActiveSquare('Show') ) // this will take care of call to sync_CAChange as needed
-    { // want to move focus
-        let iRow = CAB_RowFromId(g_CAB_Focus_sId);
-        let iLetter = CAB_LetterFromId(g_CAB_Focus_sId);
-        CAB_SetFocusToNext(iRow, iLetter);
-        Status_Check(true);
-        return;
-    }        
-    SG_ShowCheckActiveSquare('Show'); // this will take care of call to sync_gridChange as needed
-    Status_Check(true);
-}
-
-function MAM_ShowClues()
-{
-    SG_ResetAnswerFromAnswersCorrectInGrid();
-    SG_CA_UpdateAndSetVisibility(true);
-}
-
 function MAM_SolvePuzzle()
 {
     if ( g_bPuzzleSolved)

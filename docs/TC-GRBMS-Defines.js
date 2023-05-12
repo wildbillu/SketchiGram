@@ -34,7 +34,6 @@ var g_GRBMS_Square_iSize = 40;
 var g_GRBMS_Square_sClass = 'TC_Square_Base TC_Square_Grid_Element TC_Square_Grid_Character TC_Button_Square_Absolute';
 
 var g_GRBMS_Focus_sId = '';
-var g_GBRMS_MM_bAllowEntry = true;
 var g_GBRMS_TM_bAllowEntry = true;
 
 var g_GRBMS_sAllowedGridLetters = '';

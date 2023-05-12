@@ -3,8 +3,16 @@
 function CAB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter)
 {
     let cStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    if ( cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct )
-        return false;
+    if ( !g_bAllowCorrectLettersToChange )
+    {
+        if ( cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct )
+            return false;
+    }
+    else
+    {
+        if ( cStatus == g_cCode_Corrected )
+            return false;
+    }
     return true;
 }
 
@@ -109,8 +117,16 @@ function CAB_SetFocusToNext(iRow, iLetter)
 function CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
 {
     let cInitialStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    if ( TC_CorrectOrGolden(cInitialStatus) ) 
-        return; // if correct already don't allow change and nothing else to do
+    if ( !g_bAllowCorrectLettersToChange )
+    {
+        if ( TC_IsCorrectOrGolden(cInitialStatus) ) 
+            return; // if correct already don't allow change and nothing else to do
+    }
+    else
+    {
+        if ( TC_IsGolden(cInitialStatus) )
+            return;
+    }
     CAB_ForRowLetter_SetAnswerPlayer(cAnswerPlayer, iRow, iLetter);
 //    
     if ( cInitialStatus == g_cCode_Incorrect || cInitialStatus == g_cCode_IncorrectWithOverride)
@@ -165,13 +181,13 @@ function CAB_onkeyup(key, iRow, iLetter)
         let bValidLetter = g_GRBMS_sAllowedGridLetters.includes(sUpper);
         if ( !bValidLetter )
         { // set focus back to this so if 
-            TC_ResultMessage_DisplayForInterval(sUpper + ' Is Nowhere in the Puzzle', g_ResultMessage_sStyle_Warning, 1, 3);
+            TC_ResultMessage_DisplayForInterval(true, sUpper + ' Is Nowhere in the Puzzle', g_ResultMessage_sStyle_Warning, 1, 3);
             document.getElementById(g_CAB_Focus_sId).focus();
             return false;
         }
         CAB_ForRowLetter_DoItAll(sUpper, iRow, iLetter);
         let sMessage = CAB_CheckForCorrectAnswer();
-        if ( sMessage != '' ) TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
+        if ( sMessage != '' ) TC_ResultMessage_DisplayForInterval(false, sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
         CAB_SetFocusToNext(iRow, iLetter);
         return true;
     }

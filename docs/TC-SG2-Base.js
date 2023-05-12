@@ -11,7 +11,7 @@ function SG_HowToText()
 
 function SG2_LoadMainElements()
 {
-    var sMain = '';
+    let sMain = '';
     sMain += '<DIV Id="SpecialClue_Div" class="SpecialClue_Div TC_StartHidden">SpecialClue_Div</DIV>';    
     sMain += TC_Archive_MakeMenu();
     sMain += '<DIV Id="Div_PuzzleType" class="Div_PuzzleType TC_StartHidden">Div_PuzzleType</DIV>';
@@ -24,7 +24,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="SG_Clues_Div" class="SG_Clues_Div TC_StartHidden"></DIV>';
     sMain += '<DIV Id="Div_BottomMatter" class="Div_BottomMatter TC_StartHidden">Div_BottomMatter</DIV>';
     if ( g_InfoSettingsButtons_bActive ){sMain += MakeInfoDiv(); sMain += MakeSettingsDiv(); }
-    if ( g_DM_bActive ) sMain += TC_DM_MakeDiv();
+    if ( g_DM_bActive ) sMain += DM_MakeDiv();
     if ( g_MAM_bActive ) sMain += TC_MAM_MakeDiv();
     sMain += '<DIV Id="Test" style="ForTestTC_StartHidden"></DIV>';
     sMain += '<DIV Id="ScratchArea" class="ScratchArea TC_StartHidden">SSSSSSWSSS</DIV>';
@@ -64,7 +64,7 @@ function SG2_LoadAll(iSection)
             g_bPuzzleSolved = false;
             g_bGridSolved = false;
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
-            g_bNeedToAdjustForInitialDifficultyLevel = false;
+            g_AdjustForInitialDifficultyLevel_bActive = false;
             TC_LoadPuzzleArchive_FromFile();
             g_SG2_CAB_bVisible = false;
             g_bUsedCookie = false;
@@ -105,6 +105,7 @@ function SG2_LoadAll(iSection)
         case 6:
             KB_AllGridChars_Setup();
             KB_AllGridChars_Adjust(true);
+            KB_SetUsageMode(g_KB_Mini_sUsageMode_Idle);
             if ( !g_bPuzzleSolved ) TC_SetVisible("KB_Mini_Div");
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
@@ -147,19 +148,38 @@ function SG2_LoadAll(iSection)
                 TC_ThemeImage_Base_SizeAndPosition();
                 TC_ThemeImage_Base_SetVisibility(true);
             }
-            if ( g_bNeedToAdjustForInitialDifficultyLevel )
+            SG2_SetVisibles();
+            ForIdSetVisibility("SG_Clues_Div", false);
+            TC_ThemeImage_Base_SetVisibility(true);
+            if ( g_bPrintedFormat ) 
             {
-                if ( g_Difficulty_iLevel_OnNewPuzzle == g_Difficulty_iLevel_Hard )
-                {
-                    DM_ChangeToLevelHard();
+                 AdjustForPrintSize();
+                 if ( g_bSolveOnStart ) 
+                 {
+                    Action_SolvePuzzle();
+                    TC_ThemeImage_Solved_PositionVisibility_PrintAndSolve(true);
                 }
-                else if ( g_Difficulty_iLevel_OnNewPuzzle == g_Difficulty_iLevel_Easy )
+                else    
+                { 
+                    TC_ThemeImage_Extra_PositionVisibility_Print(true);
+                }
+                ForIdSetVisibility("ThemeImage_Base_Div", false);                
+            }
+            SG_MakeSpecialCluesAnswerStrings()
+            if ( g_AdjustForInitialDifficultyLevel_bActive )
+            {
+                if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Hard )
                 {
-                    DM_ChangeToLevelEasy();
+                    DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
+                }
+                else if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Easy )
+                {
+                    DM_ChangeToLevelEasy(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
                     TC_SetVisible("ScratchArea");
+                    TC_ThemeImage_Base_SetVisibility(false);
                 }
-                g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_OnNewPuzzle;
-                g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_OnNewPuzzle;
+                g_Difficulty_iLevel_Operating = g_AdjustForInitialDifficultyLevel_iLevel;
+                g_Difficulty_iLevel_Settings = g_AdjustForInitialDifficultyLevel_iLevel;
                 DM_SetButtons();
             }
             else
@@ -177,21 +197,7 @@ function SG2_LoadAll(iSection)
                 }
                 DM_SetButtons();
             }
-            SG2_SetVisibles();
-            if ( g_bPrintedFormat ) 
-            {
-                 AdjustForPrintSize();
-                 if ( g_bSolveOnStart ) 
-                 {
-                    Action_SolvePuzzle();
-                    TC_ThemeImage_Solved_PositionVisibility_PrintAndSolve(true);
-                }
-                else    
-                { 
-                    TC_ThemeImage_Extra_PositionVisibility_Print(true);
-                }
-                ForIdSetVisibility("ThemeImage_Base_Div", false);                
-            }
+
 
 //            openFullscreen();
             break;

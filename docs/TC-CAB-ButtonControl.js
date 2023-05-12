@@ -1,5 +1,21 @@
 // TC-CAB-ButtonControl.js
 
+function CAB_SetAllButtons(cCodeForActivity)
+{       
+    for ( let iRow = 0; iRow < 2; iRow++ )
+    {
+        if ( TC_ForIndexIsClueTypeSpecial(iRow) )
+        {
+            let iLength = g_CAB_aAnswers[iRow].length;
+            for ( let iLetter = 0; iLetter < iLength; iLetter++ )
+            {
+                    CAB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity);
+            }
+        }
+    }
+}
+
+
 function CAB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
 {
     let sId = CAB_MakeId(iRow, iLetter);
@@ -17,11 +33,18 @@ function CAB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
     if ( CharValidEntry(cAnswerPlayer) )
         cToShow = cAnswerPlayer;
     elem.innerHTML = cToShow;
-//alert(iRow + ':' + iLetter + '.len:' + cToShow.length + '|' + elem.innerHTML + '|')
     elem.style.backgroundImage = sStatusImage;
     let cColor = g_Color_sLetterUnknown;
-    if ( cStatusPlayer == g_cCode_Corrected || TC_CorrectOrGolden(cStatusPlayer) )
-        cColor = g_Color_sLetterCorrect;
+    if ( g_bShowCorrectLetters )
+    {
+        if ( cStatusPlayer == g_cCode_Corrected || TC_IsCorrectOrGolden(cStatusPlayer) )
+            cColor = g_Color_sLetterCorrect;
+    }
+    else
+    {
+        if ( cStatusPlayer == g_cCode_Corrected )
+            cColor = g_Color_sLetterCorrect;
+    }
     elem.style.color = cColor;
 }
 

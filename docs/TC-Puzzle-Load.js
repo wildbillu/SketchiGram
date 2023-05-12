@@ -17,7 +17,6 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer,
     g_SA_aWords.length = 0;
     g_SA_aWords          = SA_EB_sWords.split(g_cGeneralDelimiter);
     g_SA_sWordStatus     = SA_EB_sWordStatus;
-
     if ( g_CAB_aClues.length != g_CAB_iClues || g_CAB_aAnswers.length != g_CAB_iClues || g_CAB_aAnswersPlayer.length != g_CAB_iClues || g_CAB_aAnswersPlayerStatus.length != g_CAB_iClues)
         setline('dataProblem.' + g_CAB_iClues + g_CAB_aClues.length + g_CAB_aAnswers.length + g_CAB_aAnswersPlayer.length + g_CAB_aAnswersPlayerStatus.length);
 }

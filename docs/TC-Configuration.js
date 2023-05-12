@@ -1,5 +1,16 @@
 // TC-Configuration.js
+// these are to accommodate various features related to the difficultylevel
+var g_AGC_bAllowRepeats = false;
+var g_bAllowCorrectLettersToChange = true;
+var g_bShowCorrectLetters = false;
+var g_bShowIntermediateToasts = false;
+var g_TC_ShadeBackgroundOnStatus_bActive = false;
+var g_TC_SyncGridAndSpecialClueAnswers_bActive = false;
+var g_TC_ShowScratchArea = false;
+var g_TC_ShowCorrectInScratchArea = false;
 
+var g_Move_bAlterButtonStyleOfActiveSquare = false;
+var g_Move_bSetFocusToDroppedSquare = true;
 
 var g_Window_iWidth = 640;
 var g_InfoSettingsButtons_bActive = true;
@@ -43,7 +54,6 @@ var gResultMessage_iTop = 75;
 
 var g_Timer_bActive = true; var g_Timer_iTop  = 30; var g_Timer_sLabel = 'Elapsed'; // left determined by defined puzzle width
 
-var g_TC_ShadeBackgroundOnStatus_bActive = true;
 var g_bResultMessageActive = true;
 var g_bSettingsActive = true;
 var g_ShowExtraImageButton_bActive = true;
@@ -153,10 +163,18 @@ function setForPrint()
 
 function setNew()
 {
+// the things that depend on DifficultyLevel
+    g_TC_ShadeBackgroundOnStatus_bActive = false;
+    g_AGC_bAllowRepeats = false;
+    g_bAllowCorrectLettersToChange = true;
+    g_bShowCorrectLetters = false;
+    g_bShowIntermediateToasts = false;
+    g_TC_ShadeBackgroundOnStatus_bActive = false;
+//
     g_SA_bActive = true;
     g_ThemeImage_Base_bActive = true;
     g_InfoSettingsButtons_bActive = true;
-
+//
     gResultMessage_iTop = 155;
     g_KB_Buttons_Narrow = false;
     g_KB_sWidthDeterminedBy =  'BiggestRight'; g_KB_fFractionAvailableWidth = 1.00; g_KB_sJustification = 'center';
@@ -177,7 +195,6 @@ function setNew()
     g_bSpecialClueAnswerBoxesActive = true; g_SG_AM_bShowSpecialClueCircles  = true;
     g_SpecialClue_bShowImageButton = true;
 
-    g_TC_ShadeBackgroundOnStatus_bActive = true;
 
 
     g_Timer_bActive = true; g_Timer_iTop  = 150; g_Timer_sLabel = 'Elapsed:'; // left from defined puzzle width

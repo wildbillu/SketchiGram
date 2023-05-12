@@ -1,4 +1,4 @@
-// TC-GRB-MovableSquare.js
+// TC-GRBMS-Basic.js
 
 function GRBMS_MakeId(iRow, iLetter)
 {

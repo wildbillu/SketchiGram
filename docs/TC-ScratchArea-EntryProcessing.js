@@ -10,7 +10,7 @@ function TC_SA_CheckIfEntryMatchesAnAnswer(iEntry, elemInputText)
         if ( sAnswer == sValue )
         {
             let sMessage = sValue + ' is a correct grid answer'
-            TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
+            TC_ResultMessage_DisplayForInterval(false, sMessage, g_ResultMessage_sStyle_Positive, 2, 3);
 //            SG_UpdateAnswersCorrectInGridAndDisplay();
             let iIndex = parseInt(TC_SA_EntryFromId(g_SA_Focus_sId));
             g_SA_sWordStatus = replaceAt(g_SA_sWordStatus, iIndex, 'T');

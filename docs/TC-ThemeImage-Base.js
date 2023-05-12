@@ -50,8 +50,8 @@ function TC_ThemeImage_Base_SizeAndPosition()
     let elemImageItself = document.getElementById("ThemeImage_Base_ImageItself_Div");
     elemImageItself.style.height = MakePixelString(iHeight);
     elemImageItself.style.width  = MakePixelString(iWidth);
-    ForIdSetVisibility('ThemeImage_Base_Div', true)
-    ForIdSetVisibility('ThemeImage_Base_ImageItself_Div', true)
+//    ForIdSetVisibility('ThemeImage_Base_Div', true)
+//    ForIdSetVisibility('ThemeImage_Base_ImageItself_Div', true)
 }
 function TC_ThemeImage_Base_OnClosePopup()
 {

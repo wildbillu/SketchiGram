@@ -5,7 +5,7 @@ var g_ResultMessage_sStyle_Warning = 'Warning';
 var g_ResultMessage_sStyle_Positive = 'Positive';
 var g_ResultMessage_sStyle_InfoOnly = 'InfoOnly';
 
-var g_ResultMessage_sLevel_Genius = 'Genius!!';
+var g_ResultMessage_sLevel_Genius = 'Genius!';
 var g_ResultMessage_sLevel_Excellent = 'Excellent!';
 var g_ResultMessage_sLevel_GoodJob = 'Good Job';
 var g_ResultMessage_sLevel_InfoOnly = 'FYI';
@@ -22,9 +22,11 @@ function TC_ResultMessage_Setup()
     elemResultMessage_Div.style.top = MakePixelString(gResultMessage_iTop);
 }
 
-function TC_ResultMessage_DisplayForInterval(sMessage, sStyle, iNumber, iSeconds)
+function TC_ResultMessage_DisplayForInterval(bShowAlways, sMessage, sStyle, iNumber, iSeconds)
 {
     if ( g_TC_ResultMessage_Active )
+        return;
+    if ( !g_bShowIntermediateToasts && !bShowAlways )
         return;
     let elemResultMessage_Div = document.getElementById("ResultMessage_Div");
 // sStyle determines the class and more

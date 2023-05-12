@@ -1,22 +1,58 @@
 // TC-CodeHelpers.js
 
-function TC_CorrectOrGolden(cLetter)
+function TC_IsCorrect(cStatus)
 {
-    if (cLetter == g_cCode_Correct || cLetter == g_cCode_Golden )
+    if (cStatus == g_cCode_Correct )
         return true;
     return false;
 }
 
-function TC_IsBlackSquare(cLetter)
+function TC_IsGoldenOrBlackSquare(cStatus)
 {
-    if (cLetter == g_cCode_BlackSquare )
+    if ( TC_IsGolden(cStatus) )
+        return true;
+    if ( TC_IsBlackSquare(cStatus) )
+        return true;
+}
+
+function TC_IsGolden(cStatus)
+{
+    if ( cStatus == g_cCode_Golden )
         return true;
     return false;
 }
 
-function TC_CorrectCorrectedOrGolden(cLetter)
+function TC_IsCorrectOrGolden(cStatus)
 {
-    if ( cLetter == g_cCode_Corrected || cLetter == g_cCode_Correct || cLetter == g_cCode_Golden )
+    if (cStatus == g_cCode_Correct || cStatus == g_cCode_Golden )
+        return true;
+    return false;
+}
+
+function TC_IsCorrectOrCorrected(cStatus)
+{
+    if (cStatus == g_cCode_Correct || cStatus == g_cCode_Corrected )
+        return true;
+    return false;
+}
+
+function TC_IsBlackSquare(cStatus)
+{
+    if (cStatus == g_cCode_BlackSquare )
+        return true;
+    return false;
+}
+
+function TC_IsCorrectCorrectedOrGolden(cStatus)
+{
+    if ( cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct || cStatus == g_cCode_Golden )
+        return true;
+    return false;
+}
+
+function TC_IsCorrected(cStatus)
+{
+    if ( cStatus == g_cCode_Corrected )
         return true;
     return false;
 }

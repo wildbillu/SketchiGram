@@ -8,12 +8,90 @@ var g_SG_SC_ShowAll     = -2;
 var g_SG_aAnswersCorrectInGrid = [];
 var g_SG_bAnswersCorrectInGridSet = false;
 
+function SG_MakeSpecialCluesAnswerStrings()
+{
+    let elem = document.getElementById("SG_SpecialClue_AnswerItselfText_Div")
+    let sSpecialAnswerRow0 = '';
+    let bCorrectInGrid0 = false;
+    let bShowCorrectResults = false;
+    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Easy || g_bPuzzleSolved )
+        bShowCorrectResults = true;
+    if ( TC_ForIndexIsClueTypeSpecial(0) )
+    {
+        if ( g_SG_aAnswersCorrectInGrid[0] ) bCorrectInGrid0 = true;
+        if ( bShowCorrectResults && bCorrectInGrid0 )
+        {
+            sSpecialAnswerRow0 += SG_Position_Answer(0);
+            sSpecialAnswerRow0 += g_CAB_aAnswers[0];
+            sSpecialAnswerRow0 += g_sSpecialClueBefore;
+        }
+        else
+        {
+            sSpecialAnswerRow0 += g_sSpecialClueBefore;
+            sSpecialAnswerRow0 += SG_Size_Answer(0);
+        }
+    }
+    let sSpecialAnswerRow1 = '';
+    let bCorrectInGrid1 = false;
+    sSpecialAnswerRow1 += g_sSpecialClueMiddle;
+    if ( TC_ForIndexIsClueTypeSpecial(1) )
+    {
+        if ( g_SG_aAnswersCorrectInGrid[1] ) bCorrectInGrid1 = true;
+        if ( bShowCorrectResults && bCorrectInGrid1 )
+        {
+            sSpecialAnswerRow1 += g_CAB_aAnswers[1];
+            sSpecialAnswerRow1 += g_sSpecialClueEnd;
+            sSpecialAnswerRow1 += SG_Position_Answer(1);
+        }
+        else
+        {
+            sSpecialAnswerRow1 += g_sSpecialClueEnd;
+            sSpecialAnswerRow1 += SG_Size_Answer(1);
+        }
+    }
+    let sClueAnswer = '';
+    if ( sSpecialAnswerRow0 != '' )
+        sClueAnswer += sSpecialAnswerRow0; 
+    if ( sSpecialAnswerRow1 != '' )        
+        sClueAnswer += sSpecialAnswerRow1; 
+    elem.innerHTML = sClueAnswer;
+}
+
+function SG_MakeNormalCluesAnswerStringAndVisibility(iClue)
+{
+    let sCluePlus = '';
+    let bShowCorrectResults = false;
+    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Easy  || g_bPuzzleSolved )
+        bShowCorrectResults = true;
+    let bCorrectInGrid = g_SG_aAnswersCorrectInGrid[iClue];
+    if ( bShowCorrectResults && bCorrectInGrid )
+    {
+        sCluePlus += SG_Position_Answer(iClue);
+        sCluePlus += g_CAB_aClues[iClue];
+        sCluePlus += ' : ';
+        sCluePlus += g_CAB_aAnswers[iClue];
+
+    }
+    else
+    {
+        sCluePlus += g_CAB_aClues[iClue];
+        sCluePlus += SG_Size_Answer(iClue);
+    }     
+    let sId = SG_MakeClueTextId(iClue);
+    let elemClueText = document.getElementById(sId);
+    elemClueText.innerHTML = sCluePlus;
+    if ( bCorrectInGrid ) 
+    {
+        ForIdSetVisibility(sId, true);
+        ForIdSetVisibility("SG_Clues_Div", true);
+    }
+}
+
 function SG_CA_UpdateAndSetVisibility(bVisible)
 {
+    SG_MakeSpecialCluesAnswerStrings();
     if ( g_ThemeImage_Base_bActive ) 
-    {
         TC_ThemeImage_Base_SetVisibility(!bVisible)
-    }
     SG_UpdateAnswersCorrectInGridAndDisplay();
     ForIdSetVisibility("SG_Clues_Div", bVisible);
     if ( g_CA_bShowSpecial )
@@ -39,6 +117,17 @@ function SG_UpdateAnswersCorrectInGridAndDisplay()
         SG_ResetAnswerFromAnswersCorrectInGrid()
 }
 
+function SG_SetNormalClues()
+{
+    for ( let iClue = 0; iClue < g_CAB_aAnswers.length; iClue++ )
+    {
+        if ( !TC_ForIndexIsClueTypeSpecial(iClue) )
+        {
+            SG_MakeNormalCluesAnswerStringAndVisibility(iClue);
+        }
+    }
+}
+
 function SG_ResetAnswerFromAnswersCorrectInGrid()
 {
     if ( g_CA_bShowSpecial ) SG_MakeSpecialCluesAnswerStringAndVisibility();
@@ -57,24 +146,6 @@ function AnswersCorrectInGridInitialize()
     for ( let i = 0; i < iAnswers; i++ ) g_SG_aAnswersCorrectInGrid.push(false);
 }
 
-function SG_MakeNormalCluesAnswerStringAndVisibility(iClue)
-{
-    let sCluePlus = '';
-    let bCorrectInGrid = g_SG_aAnswersCorrectInGrid[iClue];
-    if ( bCorrectInGrid ) sCluePlus += SG_Position_Answer(iClue);
-    sCluePlus += g_CAB_aClues[iClue];
-    if ( bCorrectInGrid ) sCluePlus += ' : ';
-    if ( bCorrectInGrid ) sCluePlus += g_CAB_aAnswers[iClue];
-    if ( !bCorrectInGrid ) sCluePlus += SG_Size_Answer(iClue);
-    let sId = SG_MakeClueTextId(iClue);
-    let elemClueText = document.getElementById(sId);
-    elemClueText.innerHTML = sCluePlus;
-    if ( bCorrectInGrid ) 
-    {
-        ForIdSetVisibility(sId, true);
-        ForIdSetVisibility("SG_Clues_Div", true);
-    }
-}
 
 function SG_Position_Answer(iRow)
 {
@@ -90,47 +161,24 @@ function SG_Size_Answer(iRow)
 
 function SG_MakeSpecialCluesAnswerStringAndVisibility()
 {
-    let sSpecialAnswerRow0 = '';
+    SG_MakeSpecialCluesAnswerStrings()
     let bCorrectInGrid0 = false;
-    if ( TC_ForIndexIsClueTypeSpecial(0) )
-    {
-        if ( g_SG_aAnswersCorrectInGrid[0] ) bCorrectInGrid0 = true;
-        if ( bCorrectInGrid0 ) sSpecialAnswerRow0 += SG_Position_Answer(0);
-        if ( bCorrectInGrid0 ) sSpecialAnswerRow0 += g_CAB_aAnswers[0];
-        sSpecialAnswerRow0 += g_sSpecialClueBefore;
-        if ( !bCorrectInGrid0 ) sSpecialAnswerRow0 += SG_Size_Answer(0);
-    }
-    let sSpecialAnswerRow1 = '';
+    if (g_SG_aAnswersCorrectInGrid[0] ) bCorrectInGrid0 = true;
     let bCorrectInGrid1 = false;
-    if ( TC_ForIndexIsClueTypeSpecial(1) )
-    {
-        if ( g_SG_aAnswersCorrectInGrid[1] ) bCorrectInGrid1 = true;
-        sSpecialAnswerRow1 += g_sSpecialClueMiddle;
-        if ( bCorrectInGrid1 ) sSpecialAnswerRow1 += g_CAB_aAnswers[1];
-        if ( !bCorrectInGrid1 ) sSpecialAnswerRow1 += SG_Size_Answer(1);
-        sSpecialAnswerRow1 += g_sSpecialClueEnd;
-        if ( bCorrectInGrid1 ) sSpecialAnswerRow1 += SG_Position_Answer(1);
-    }
-    let sClueAnswer = '';
-    if ( sSpecialAnswerRow0 != '' )
-        sClueAnswer += sSpecialAnswerRow0; 
-    if ( sSpecialAnswerRow1 != '' )        
-        sClueAnswer += sSpecialAnswerRow1; 
-    let elem = document.getElementById("SG_SpecialClue_AnswerItselfText_Div")
-    elem.innerHTML = sClueAnswer;
+    if (g_SG_aAnswersCorrectInGrid[1] ) bCorrectInGrid1 = true;
     if ( bCorrectInGrid0 || bCorrectInGrid1 )
     {
-        let elemSpecial = document.getElementById("SG_SpecialClue_AnswerItselfText_Div")
-        elemSpecial.innerHTML = sClueAnswer;
-        ForIdSetVisibility("SG_SpecialClue_AnswerItselfText_Div", true);
-        if ( g_CA_bShowSpecial )
+        if ( g_Difficulty_iLevel_Operating != g_Difficulty_iLevel_Expert || g_bPuzzleSolved )
         {
-            ForIdSetVisibility("SG_SpecialClue_Outer_Div", true);
-            ForIdSetVisibility("SG_SpecialClue_ClueItselfText_Div", true);
-        }
-        ForIdSetVisibility("SG_Clues_Div", true);
+            ForIdSetVisibility("SG_SpecialClue_AnswerItselfText_Div", true);
+            if ( g_CA_bShowSpecial )
+            {   
+                ForIdSetVisibility("SG_SpecialClue_Outer_Div", true);
+                ForIdSetVisibility("SG_SpecialClue_ClueItselfText_Div", true);
+            }
+            ForIdSetVisibility("SG_Clues_Div", true);
+        }            
     }
-    return sClueAnswer;
 }
 
 function SG_SetAnswersCorrectInGrid()

@@ -1,5 +1,55 @@
 // TC-GRBMS-CoreProcessing.js
 
+function GRBMS_MoveToNextAvailable(iRow, iLetter)
+{
+    let iRow_New = iRow;
+    let iLetter_New = iLetter;
+    let bFoundAvailableNext = false;
+    let iNumberChecked = 0;
+    while ( !bFoundAvailableNext && iNumberChecked < g_iGridHeight*g_iGridWidth)
+    {
+        iLetter_New++;
+        if ( iLetter_New == g_iGridWidth ) {iRow_New++; iLetter_New = 0;}
+        if ( iRow_New == g_iGridHeight ) {iRow_New = 0; iLetter_New = 0;}
+        let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow_New, iLetter_New)
+        if ( g_bAllowCorrectLettersToChange )
+        {
+            if ( !TC_IsBlackSquare(cStatus) && !TC_IsCorrectCorrectedOrGolden(cStatus) )
+                bFoundAvailableNext = true;
+        }
+        else
+        {
+            if ( !TC_IsGoldenOrBlackSquare(cStatus) ) 
+                bFoundAvailableNext = true;
+        }
+        iNumberChecked++;
+    }
+    if ( bFoundAvailableNext )
+    {
+        GRBMS_onfocus(document.getElementById(GRBMS_MakeId(iRow_New, iLetter_New)));
+    }
+    else
+    { // best we can do is to lose focus
+        GRBMS_LoseCurrentFocus();
+    }
+}
+
+function GRBMS_onfocus(elem)
+{
+    GRBMS_LoseCurrentFocus();
+    let sThisId = elem.id;
+    let iThisRow     = GRBMS_RowFromId(sThisId);
+    let iThisLetter  = GRBMS_LetterFromId(sThisId);
+    if ( !GRB_ForRowLetter_IsSquareValidForFocus(iThisRow, iThisLetter) )
+    {
+        setlineAdd('INVALID:' + sThisId)        
+        return;
+    }
+    GRBMS_ForRowLetter_SetButton(iThisRow, iThisLetter,  g_cCode_HasFocus);
+    SyncTo_OthersLoseFocus('GR');
+    g_GRBMS_Focus_sId = sThisId;
+}    
+
 function GRBMS_LoseCurrentFocus()
 {
     if ( g_GRBMS_Focus_sId == '')
@@ -28,7 +78,7 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     let bValidLetter = g_GRBMS_sAllowedGridLetters.includes(sUpper);
     if ( !bValidLetter )
     { // set focus back to this so if 
-        TC_ResultMessage_DisplayForInterval(sUpper + ' Is Nowhere in the Puzzle', g_ResultMessage_sStyle_Warning, 1, 3);
+        TC_ResultMessage_DisplayForInterval(true, sUpper + ' Is Nowhere in the Puzzle', g_ResultMessage_sStyle_Warning, 1, 3);
         document.getElementById(g_GRBMS_Focus_sId).focus();
         return false;
     }
@@ -38,7 +88,6 @@ function GRBMS_onkeyup(key, iRow, iLetter)
         bValidLetter = false;
     if ( !bValidLetter )
     {
-        alert('invalidkeyup')
         KB_Mini_SetInstructionLine('');  
         GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
         g_GRBMS_Focus_sId = '';
@@ -47,18 +96,19 @@ function GRBMS_onkeyup(key, iRow, iLetter)
     }
     // we want to switch with square that has iLetter
 // for now just pick first one (even if more than one)
-    var bRejectCorrectSquares = true;
+    let bRejectCorrectSquares = true;
     let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     let sFoundId = GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, sUpper, bRejectCorrectSquares, cNow)
     if ( sFoundId == '' )
     {
         let sMessage = "All the " + sUpper + "\'s are Correctly Placed";
-        TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Warning, 1, 3);
+        TC_ResultMessage_DisplayForInterval(true, sMessage, g_ResultMessage_sStyle_Warning, 1, 3);
         return false;
     }
     g_GRBMS_Focus_sId = '';
     Status_Check(false);
     SyncTo_OthersLoseFocus('GR')
+    GRBMS_MoveToNextAvailable(iRow, iLetter)
     return false;
 }
 
@@ -95,26 +145,25 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
     return 'exchanged';
 }
 
-function GRBMS_onfocus(elem)
-{
-    let sThisId = elem.id;
-    let iThisRow     = GRBMS_RowFromId(sThisId);
-    let iThisLetter  = GRBMS_LetterFromId(sThisId);
-    if ( !GRB_ForRowLetter_IsSquareValidForFocus(iThisRow, iThisLetter) )
-        return;
-//    SyncTo_OthersLoseFocus('GR');
-    g_GRBMS_Focus_sId = sThisId;
-}    
 
 function GRBMS_onkeypress(event)
 {
     return false;
 }
 
-function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceMe, bRejectDual)
+function GRBMS_WouldPlacingWithThisLetterNeedToMoveGoldenSquare(cReplaceWithMe)
 {
-    let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-    var sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cReplaceMe, bRejectDual, cNow);
+
+}
+
+
+function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceWithMe, bRejectDual, cNow)
+{
+    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Expert ) 
+    { // in this case we just check to see if the 
+
+    }
+    var sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cReplaceWithMe, bRejectDual, cNow);
     if ( sFoundId == '')
         return sFoundId;
     let B_iRow = GRBMS_RowFromId(sFoundId);

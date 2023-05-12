@@ -48,7 +48,7 @@ function TC_SA_Entry_AddChar(keypressed)
         if ( iLength > g_iGridHeight && iLength > g_iGridWidth )
         {
             let sMessage = 'No Words ' + iLength + ' letters long';
-            TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
+            TC_ResultMessage_DisplayForInterval(true, sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
             return;
         }
         let sUpper = keypressed.toUpperCase();
@@ -57,6 +57,7 @@ function TC_SA_Entry_AddChar(keypressed)
     TC_SA_ForEntrySetWord(iEntry, sValue);
     elemInputText.innerHTML = sValue;
     TC_SA_CheckIfEntryMatchesAnAnswer(iEntry, elemInputText);
+    TC_SA_SetColors()
 }
 
 function TC_SA_onkeypress(e)
@@ -71,7 +72,7 @@ function TC_SA_onkeypress(e)
     let sMessage = 'Invalid key';
     if ( eKey.match(letters) ) 
         sMessage = cKey + ' Is Not In the puzzle';
-    TC_ResultMessage_DisplayForInterval(sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
+    TC_ResultMessage_DisplayForInterval(true, sMessage, g_ResultMessage_sStyle_Warning, 0, 3);
     e.preventDefault();
     return false;
 }
@@ -94,16 +95,26 @@ function TC_SA_onkeyup(e, key)
     return true;
 }
 
+function TC_SA_SetColors()
+{
+    for ( let i = 0; i < g_SA_iMaxEntries; i++ )
+    {
+        let sClassName = "SA_Entry_Base SA_Entry_Inactive";
+        if ( g_TC_ShowCorrectInScratchArea )
+        {
+            if ( g_SA_sWordStatus.charAt(i) == 'T' )
+                sClassName = "SA_Entry_Base SA_Entry_Correct";
+        }
+        document.getElementById(TC_SA_MakeId(i)).className = sClassName;
+    }
+}
+
 function TC_SA_LoseFocus()
 {
     if ( g_SA_Focus_sId == '' )
         return;
     let elemOldFocus = document.getElementById(g_SA_Focus_sId);
-    let iEntry = TC_SA_EntryFromId(g_SA_Focus_sId);
-    let sClassName = "SA_Entry_Base SA_Entry_Inactive";
-    if ( g_SA_sWordStatus.charAt(iEntry) == 'T' )
-        sClassName = "SA_Entry_Base SA_Entry_Correct";
-    elemOldFocus.className = sClassName;
+    TC_SA_SetColors()
     let sValue = elemOldFocus.innerHTML;
     let sNewInnerHTML = removeAllChar(sValue, g_SA_cCursor);
     elemOldFocus.innerHTML = sNewInnerHTML;
@@ -114,10 +125,7 @@ function TC_SA_LoseFocus()
 
 function TC_SA_Focus(elemInputText)
 {
-// if this element is already correct, do not accept focus
-//    let iEntry = TC_SA_EntryFromId(elemInputText.id);
-//    if ( g_SA_sWordStatus.charAt(iEntry) == 'T')
-//        return;
+// allow focus to correct so can erase it
     if ( g_SA_Focus_sId != '' )
     { // need to fix previous focus
         let elemOldFocus = document.getElementById(g_SA_Focus_sId);
@@ -142,7 +150,6 @@ function TC_SA_LoseTheFocusAndCleanup(bCheck)
 { // we are going to wait until another focus is selected before doing things on lost focus
     if ( g_SA_Focus_sId ) // != '' && bCheck )
     {
-        KB_AGC_EnabledStateAllButtons(false);
         TC_SA_LoseFocus();
     }
     g_SA_Focus_sId = '';

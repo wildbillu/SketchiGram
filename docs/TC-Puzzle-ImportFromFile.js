@@ -103,7 +103,9 @@ var g_bUsedCookie = false;
 var sGridSpecialClueLocations = '';
 var sAnswersSpecialClueLocations = '';
 var sClueTypes                  = 'S|S|N|N|N|N|N|N'; 
-var g_bNeedToAdjustForInitialDifficultyLevel = false;
+var g_AdjustForInitialDifficultyLevel_bNewPuzzle = false;
+var g_AdjustForInitialDifficultyLevel_bActive = false;
+var g_AdjustForInitialDifficultyLevel_iLevel = 3;
 
 //g_Difficulty_iLevel_Settings = parseInt(aOurValues[iOurValue++]);
 //g_Difficulty_iLevel_OnNewPuzzle = parseInt(aOurValues[iOurValue++]);
@@ -124,14 +126,19 @@ function TC_UseFileContents()
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
         g_bUsedCookie = true;
         g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
+        g_AdjustForInitialDifficultyLevel_bActive = true;
+        g_AdjustForInitialDifficultyLevel_bNewPuzzle = false;
+        g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_Settings;
     }
     if ( !g_bUsedCookie )
     {
         CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes)
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations)
         g_ElapsedTime_iSecondsPrevious = 0;
-        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_OnNewPuzzle;
-        g_bNeedToAdjustForInitialDifficultyLevel = true;
+        g_AdjustForInitialDifficultyLevel_bActive = true;
+        g_AdjustForInitialDifficultyLevel_bNewPuzzle = true;
+        g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_OnNewPuzzle;
+        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert; // so we do all the appropriate changes
     }
     //    setline(sFilename + '.Updated:' + iUpdated + ';');
     return true;

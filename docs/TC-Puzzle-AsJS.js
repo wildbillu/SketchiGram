@@ -10,7 +10,7 @@ function TC_Puzzle_Load_AsJS()
 //    g_sSpecialClueEnd = '"'; 
     g_ST_sClue_Itself = 'Doppelg&#228;nger of the worst type?';
     g_sSpecialClueBefore = ''; 
-    g_sSpecialClueMiddle = ''; 
+    g_sSpecialClueMiddle = '    '; 
     g_sSpecialClueEnd = ''; 
     g_sPuzzleCreditAuthor = 'Puzzle By Sketchi Bill, Images By Sketchi Bill'
     g_sPuzzleCreditDate = 'October 21, 2022'

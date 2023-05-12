@@ -29,7 +29,7 @@ function SG_SetupClueAnswers()
     let iWidthClues = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     let elemClue_Div = document.getElementById("SG_Clues_Div");
     let sFinalInner = '';
-    if ( TC_ForIndexIsClueTypeSpecial(0) && TC_ForIndexIsClueTypeSpecial(1) )
+    if ( TC_ForIndexIsClueTypeSpecial(0) || TC_ForIndexIsClueTypeSpecial(1) )
         g_CA_bShowSpecial = true;
 //
     sFinalInner += '<DIV Id="CA_Title" class="SG_Clues_Text">Clues (not in order)</DIV>'
@@ -37,9 +37,9 @@ function SG_SetupClueAnswers()
     {
         let sInnerFullSpecialClue = '';
         sInnerFullSpecialClue += '<DIV Id="SG_SpecialClue_Outer_Div" class="SG_SpecialClue_Outer_Div TC_StartHidden InLineRelative">';
-        sInnerFullSpecialClue += '<DIV Id="SG_SpecialClue_ClueItselfText_Div" class="SG_SpecialClue_Text">' + g_ST_sClue_Itself + '</DIV>';
-        let sWrappedSpecialClueItself = '<DIV Id="SG_SpecialClue_AnswerItselfText_Div" class="SG_SpecialClue_Text">'
-        sWrappedSpecialClueItself += 'DUMMY'; 
+        sInnerFullSpecialClue += '<DIV Id="SG_SpecialClue_ClueItselfText_Div" class="SG_SpecialClue_Text TC_StartHidden">' + g_ST_sClue_Itself + '</DIV>';
+        let sWrappedSpecialClueItself = '<DIV Id="SG_SpecialClue_AnswerItselfText_Div" class="SG_SpecialClue_Text TC_StartHidden">'
+        sWrappedSpecialClueItself += 'dummy1'; 
         sWrappedSpecialClueItself += '</DIV>'
         sInnerFullSpecialClue += sWrappedSpecialClueItself;
         sInnerFullSpecialClue += '</DIV>';
@@ -50,7 +50,7 @@ function SG_SetupClueAnswers()
     {
         if ( !g_CA_bShowSpecial || !TC_ForIndexIsClueTypeSpecial(iRow) )
         {
-            let sCluePlus = 'dummy';
+            let sCluePlus = 'dummy2';
             let sWrapped = '<DIV Id="' + SG_MakeClueTextId(iRow) + '" class="SG_Clues_Text TC_StartHidden">' + sCluePlus + '</DIV>'
             sFinalInner += sWrapped;
         }
@@ -98,12 +98,8 @@ function SG_PositionClueOverallDiv()
     let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
     let rectKB = GetBoundingClientRectAbsolute(elemKB);
     if ( window.getComputedStyle(elemKB).visibility === "hidden" ) 
-    {
         iStartTop = rectGrid.bottom + g_TC_Padding_Inter_Vertical_iSize;
-    }
     else
-    {
         iStartTop = rectKB.bottom + g_TC_Padding_Inter_Vertical_iSize;
-    }
     elemClues.style.top = MakePixelString(iStartTop);
 }

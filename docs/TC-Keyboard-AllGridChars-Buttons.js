@@ -1,5 +1,194 @@
 // TC-Keyboard-AllGridChars-Buttons.js
 
+let g_aArrayOfLetterStatusAllow_InAlphaOrder = [];
+let g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats = [];
+
+function KB_AGC_SetBackspaceArrows(bBackspaceArrowsActive)
+{
+    ForIdSetVisibility('Backspace', bBackspaceArrowsActive)
+    ForIdSetVisibility('ArrowRight', bBackspaceArrowsActive)
+    ForIdSetVisibility('ArrowLeft', bBackspaceArrowsActive)
+}
+
+function KB_AGC_SetKeyboardButtons()
+{
+// deal with the extra keys
+    let bBackspaceArrowsActive = false;
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords )
+        bBackspaceArrowsActive = true;
+    KB_AGC_SetBackspaceArrows(bBackspaceArrowsActive);
+//    
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_Idle )
+    {
+        let iCount = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length;
+        let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
+        for ( let iButton = 0; iButton < iCount; iButton++ )
+            document.getElementById(KB_AllGridChars_MakeButtonId(iButton)).className = sClass;
+        return;
+    }
+//
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords || 
+        g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_SpecialClue )
+    { // in these cases all the characters are allowed
+        let iCount = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length;
+        let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
+        for ( let iButton = 0; iButton < iCount; iButton++ )
+            document.getElementById(KB_AllGridChars_MakeButtonId(iButton)).className = sClass;
+        return;
+    }
+// this is the case where grid is active   
+
+    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveGrid )
+    {
+        KB_AlphaOrderWithStatus(); // update the codes
+        if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Expert )
+        { // we need to determine if a letter is only golden squares
+            KB_AGC_SetKeyboardButtons_NoGolden()
+            return;
+        }
+        KB_AGC_SetKeyboardButtons_NoGoldenCorrectOrCorrected();
+        return;
+    }
+    alert('bad mode')
+}
+
+function KB_AGC_SetKeyboardButtons_NoGoldenCorrectOrCorrected()
+{
+    let iCountB = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length;
+    for ( let iButton = 0; iButton < iCountB; iButton++ )
+    {
+        let aLetterStatusAllow = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats[iButton];
+        let cLetter_NoRepeats = aLetterStatusAllow[0];
+        // need to loop through letters with repeats and count the number of this character and the number of not golden squares
+        let iAllows = 0;
+        let cLetter = 'X';
+        for ( let i = 0; i < g_aArrayOfLetterStatusAllow_InAlphaOrder.length; i++ )
+        {
+            let aLSA_all = g_aArrayOfLetterStatusAllow_InAlphaOrder[i];
+            cLetter = aLSA_all[0];
+            let cAllow = aLSA_all[2];
+            if ( cLetter == cLetter_NoRepeats )
+            {
+                if ( cAllow == g_cCode_MoveNotAllowed_Golden || cAllow == g_cCode_MoveNotAllowed_CorrectOrCorrected )
+                {
+                    // do nothing
+                }
+                else
+                {
+                    iAllows++;
+                }
+            }
+        }
+        let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
+        if ( iAllows == 0 )
+            sClass += '_Disabled'
+        document.getElementById(KB_AllGridChars_MakeButtonId(iButton)).className = sClass;
+    }
+}
+
+
+function KB_AGC_SetKeyboardButtons_NoGolden()
+{
+    let iCountB = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length;
+    for ( let iButton = 0; iButton < iCountB; iButton++ )
+    {
+        let aLetterStatusAllow = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats[iButton];
+        let cLetter_NoRepeats = aLetterStatusAllow[0];
+        // need to loop through letters with repeats and count the number of this character and the number of not golden squares
+        let iAllows = 0;
+        let cLetter = 'X';
+        for ( let i = 0; i < g_aArrayOfLetterStatusAllow_InAlphaOrder.length; i++ )
+        {
+            let aLSA_all = g_aArrayOfLetterStatusAllow_InAlphaOrder[i];
+            cLetter = aLSA_all[0];
+            let cAllow = aLSA_all[2];
+            if ( cLetter == cLetter_NoRepeats )
+            {
+                if ( cAllow != g_cCode_MoveNotAllowed_Golden )
+                    iAllows++;
+            }
+        }
+        let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
+        if ( iAllows == 0 )
+            sClass += '_Disabled'
+        document.getElementById(KB_AllGridChars_MakeButtonId(iButton)).className = sClass;
+    }
+}
+
+function KB_AllGridChars_MakeButtons()
+{// buttons will be created enabled
+    g_KB_Buttons_a_of_cLetters.length = 0;
+    g_KB_Buttons_a_of_sButtonInner.length = 0;
+// want letters to be in alphabetical order
+    KB_AlphaOrderWithStatus();
+    KB_AlphaOrderWithStatus_NoRepeats();
+    let iCount = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length
+    if ( g_AGC_bAllowRepeats )
+        iCount = g_aArrayOfLetterStatusAllow_InAlphaOrder.length
+    for ( let iButton = 0; iButton < iCount; iButton++ )
+    {
+        let aLetterStatusAllow = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats[iButton];
+        if ( g_AGC_bAllowRepeats )
+            aLetterStatusAllow = g_aArrayOfLetterStatusAllow_InAlphaOrder[iButton];
+        let cLetter = aLetterStatusAllow[0];
+        let s = KB_AllGridChars_MakeButtonInTD(iButton, cLetter);
+        g_KB_Buttons_a_of_sButtonInner.push(s);
+        g_KB_Buttons_a_of_cLetters.push(cLetter);
+    }
+}
+
+
+function KB_AlphaOrderWithStatus()
+{
+    let aArrayOfLetterStatusAllow = [];
+    sAnswersPlayer = g_aGridAnswersPlayer.join('');
+    sStatusPlayer  = g_aGridStatusPlayer.join('');
+    for ( let i = 0; i < sAnswersPlayer.length; i++ )
+    {
+        let cLetter = sAnswersPlayer.charAt(i)
+        let cStatus = sStatusPlayer.charAt(i)
+        if ( cLetter != g_cCode_BlackSquare )
+        {
+            let aLetterStatusAllow = new Array(3);
+            aLetterStatusAllow[0] = cLetter;
+            aLetterStatusAllow[1] = cStatus;
+            let cAllow = g_cCode_MoveAllowed;
+            if ( TC_IsGolden(cStatus) ) cAllow = g_cCode_MoveNotAllowed_Golden;
+            else if ( TC_IsCorrectOrCorrected(cStatus) ) cAllow = g_cCode_MoveNotAllowed_CorrectOrCorrected;
+            aLetterStatusAllow[2] = cAllow;
+            aArrayOfLetterStatusAllow.push(aLetterStatusAllow)
+        }
+    }
+// stupid way to sort...but
+    g_aArrayOfLetterStatusAllow_InAlphaOrder.length = 0;
+    for ( let i = 65; i <= 92; i++)    
+    {
+        let c = String.fromCharCode(i)
+        for ( let iL = 0; iL < aArrayOfLetterStatusAllow.length; iL++)
+        {
+            let aLetterStatusAllow = aArrayOfLetterStatusAllow[iL];
+            if ( aLetterStatusAllow[0] == c )
+            {
+                g_aArrayOfLetterStatusAllow_InAlphaOrder.push(aLetterStatusAllow)
+            }
+        }
+    }
+}
+
+function KB_AlphaOrderWithStatus_NoRepeats()
+{
+    g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length = 0;
+    let cLast = 'x'
+    for ( let i = 0; i < g_aArrayOfLetterStatusAllow_InAlphaOrder.length; i++ )
+    {
+        let aLetterStatus = g_aArrayOfLetterStatusAllow_InAlphaOrder[i];
+        let cThis = aLetterStatus[0]
+        if ( cThis != cLast )
+            g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.push(aLetterStatus)
+        cLast = cThis;
+    }
+}
+
 function KB_AGC_MakeArrowLeftButton()
 {
     let sTextForButton = ' ';
@@ -74,44 +263,12 @@ function KB_AGC_FindBoundsOfButtons()
     return r;
 }
 
-function KB_AGC_EnabledStateAllButtons(bOverrideAllToBeEnabled)
-{
-    g_KB_AGC_AllButtonsEnabled = bOverrideAllToBeEnabled;
-    for ( let i = 0; i < g_KB_Buttons_a_of_cLetters.length; i++)
-    {
-        let bEnabled = true;
-        if ( !bOverrideAllToBeEnabled )
-           bEnabled = !g_KB_Buttons_a_of_bPlacedCorrectly[i];
-        KB_AGC_SetButtonEnabledClass(i, bEnabled)
-    }
-    let bBackspaceVisible = false;
-    let sClassBackspace = 'KB_Mini_Button KB_Mini_ButtonBackspace_Disabled';
-    if ( bOverrideAllToBeEnabled )
-    {
-        bBackspaceVisible = true;
-        sClassBackspace = 'KB_Mini_Button KB_Mini_ButtonBackspace';
-    }
-    if ( g_KB_bBackspaceKeyActive )
-    {
-        let elemBackspace = document.getElementById('Backspace');
-        ForIdSetVisibility('Backspace', bBackspaceVisible)
-        elemBackspace.className = sClassBackspace;
-    }
-    if ( g_KB_bArrowKeysActive )
-    {
-        ForIdSetVisibility('ArrowRight', bBackspaceVisible)
-        ForIdSetVisibility('ArrowLeft', bBackspaceVisible)
-    }
-}
-
-function KB_AllGridChars_MakeButtonInTD(iButton, cLetter, bPlacedCorrectly)
+function KB_AllGridChars_MakeButtonInTD(iButton, cLetter)
 {
     let sId = KB_AllGridChars_MakeButtonId(iButton)
     let sIdWrapped = ' Id="' + sId + '" ';
     let sTextForButton = cLetter;
     let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
-    if ( bPlacedCorrectly )
-        sClass += '_Disabled'
     if ( g_KB_Buttons_Narrow )
         sClass += '_Narrow'
     let sClassWrapped = 'class="' + sClass + '" '; 
@@ -134,7 +291,8 @@ function KB_AGC_SetButtonEnabledClass(iButton, bEnabled)
 
 function KB_AGC_SetButtonPlacedCorrectly(iButton)
 {
-    g_KB_Buttons_a_of_bPlacedCorrectly[iButton] = true;
+    setlineAdd('fm2')
+    return;
     let sId = KB_AllGridChars_MakeButtonId(iButton);
     let elemButton = document.getElementById(sId);
     let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
@@ -143,41 +301,11 @@ function KB_AGC_SetButtonPlacedCorrectly(iButton)
     elemButton.className = sClass;
 }
 
-function KB_AllGridChars_MakeButtons()
-{
-    g_KB_Buttons_a_of_cLetters.length = 0;
-    g_KB_Buttons_a_of_bPlacedCorrectly.length = 0;
-    g_KB_Buttons_a_of_sButtonInner.length = 0;
-//    
-    let sAnswersPlayer = g_aGridAnswersPlayer.join('');
-    let sStatusPlayer  = g_aGridStatusPlayer.join('');
-    let iButtons = sAnswersPlayer.length;
-    let iButtonActive = 0;
-    for ( let iButton = 0; iButton < iButtons; iButton++ )
-    {
-        let cStatusPlayer = sStatusPlayer.charAt(iButton);
-        let cAnswer = sAnswersPlayer.charAt(iButton)
-        if ( cAnswer != g_cCode_BlackSquare )
-        {
-            let bProperlyPlaced = false;
-            if ( cStatusPlayer == g_cCode_Corrected && !g_bPrintedFormat ) bProperlyPlaced = true;
-            if ( cStatusPlayer == g_cCode_Correct   && !g_bPrintedFormat ) bProperlyPlaced = true;
-            if ( cStatusPlayer == g_cCode_Golden ) bProperlyPlaced = true;
-            let cLetter = sAnswersPlayer.charAt(iButton);
-            let s = KB_AllGridChars_MakeButtonInTD(iButtonActive, cLetter, bProperlyPlaced);
-            g_KB_Buttons_a_of_sButtonInner.push(s);
-            g_KB_Buttons_a_of_cLetters.push(cLetter);
-            g_KB_Buttons_a_of_bPlacedCorrectly.push(bProperlyPlaced);
-            iButtonActive++
-        }
-    }
-}
-
 function KB_GetButtonWidth()
 {
     let elemTest = document.getElementById("Test")
     let cLetter = 'W';
-    let sInnerLetter = KB_AllGridChars_MakeButtonInTD(0, cLetter, true);
+    let sInnerLetter = KB_AllGridChars_MakeButtonInTD(0, cLetter);
     elemTest.innerHTML = sInnerLetter;
     let sId = KB_AllGridChars_MakeButtonId(0);
     let elemLetter = document.getElementById(sId)

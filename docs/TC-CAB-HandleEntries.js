@@ -79,7 +79,7 @@ function CAB_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, cCodeFocusActiveI
     let cInitialStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     if ( cInitialStatus == g_cCode_Corrected )
         return; 
-    if ( TC_CorrectOrGolden(cInitialStatus) )
+    if ( TC_IsCorrectOrGolden(cInitialStatus) )
         return;
     let bChanged = false;
     let bSetLetter = CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)

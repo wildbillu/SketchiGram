@@ -1,4 +1,9 @@
 // TC-Defines.js
+
+var g_cCode_MoveAllowed = 'A';
+var g_cCode_MoveNotAllowed_Golden = 'G';
+var g_cCode_MoveNotAllowed_CorrectOrCorrected = 'C';
+
 var g_cCode_HasFocus  = 'F';
 var g_cCode_ActiveRow = 'A';
 var g_cCode_Inactive  = 'I';

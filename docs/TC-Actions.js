@@ -41,7 +41,7 @@ function Action_ResetPuzzle()
     if ( g_HowTo_bActive ) ForIdSetVisibility("SG_HowToA_Div", true);
     if ( g_ThemeImage_Base_bActive )
     {
-//        TC_ThemeImage_Base_SizeAndPosition();
+        TC_ThemeImage_Base_SizeAndPosition();
         TC_ThemeImage_Base_SetVisibility(true);
     }
     SG_UpdateAnswersCorrectInGridAndDisplay();
@@ -60,11 +60,10 @@ function Action_ResetPuzzle()
     g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_OnNewPuzzle;
     g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_OnNewPuzzle;
     if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Hard )
-        DM_ChangeToLevelHard();
+        DM_ChangeToLevelHard(true);
     else if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Easy )
-        DM_ChangeToLevelEasy()
+        DM_ChangeToLevelEasy(false)
     DM_SetButtons();
-
 
     Action_Finishup(true);
 
@@ -73,15 +72,14 @@ function Action_ResetPuzzle()
 
 function Action_SolvePuzzle()
 {
+    GRBMS_SolveGrid();
+    g_bGridSolved = true;    
+    g_bPuzzleSolved = true;    
     CAB_ShowCheckAnswers('Show');
-    Action_SolveGrid();
+    SG_SetAnswersCorrectInGrid();    
+    SG_SetNormalClues();
     SG_CA_UpdateAndSetVisibility(true);
     if ( !g_bPrintedFormat ) TC_ThemeImage_Solved_ShowPopup();    
     Status_Check(true);
-}
-
-function Action_SolveGrid()
-{
-    GRBMS_ShowGrid();
     Action_Finishup(true);
 }

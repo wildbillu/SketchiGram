@@ -1,6 +1,29 @@
 // TC-GRBMS-Helpers-Advanced.js
 
-function GRBMS_ShowGrid()
+function GRBMS_ForAll_SetStatusFromState()
+{
+    for ( let iR = 0; iR < g_iGridWidth; iR++ )
+        for ( let iL = 0; iL < g_iGridHeight; iL ++)
+            GRBMS_ForRowLetter_SetStatusFromState(iR, iL)
+}
+
+function GRBMS_ForRowLetter_SetStatusFromState(iR, iL)
+{
+    let cInitialStatus = GRB_ForRowLetter_GetStatusPlayer(iR, iL);
+    if ( TC_IsGoldenOrBlackSquare(cInitialStatus) || TC_IsCorrected(cInitialStatus))
+    {
+        return;
+    }
+    let cAnswer = GRB_ForRowLetter_GetAnswer(iR, iL);
+    let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iR, iL);
+    let cStatus = g_cCode_Correct;
+    if ( cAnswer != cAnswerPlayer )
+        cStatus = g_cCode_Incorrect;
+    GRB_ForRowLetter_SetStatusPlayer(cStatus, iR, iL);
+    GRBMS_ForRowLetter_SetButton(iR, iL, g_cCode_Inactive);
+}
+
+function GRBMS_SolveGrid()
 {
     GRBMS_LoseCurrentFocus();
     for ( let iR = 0; iR < g_iGridHeight; iR++)
@@ -63,12 +86,18 @@ function GRB_ForRowLetter_IsSquareGoldenOrBlack(iRow, iLetter)
 
 function GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter)
 {
+    let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     if ( GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
         return false;
     if ( GRB_ForRowLetter_IsGoldenSquare(iRow, iLetter) )
         return false;
-    if ( GRB_ForRowLetter_IsPlayerAnswerCorrect(iRow, iLetter) )
+    if ( TC_IsCorrected(cStatus) )
         return false;
+    if ( !g_bAllowCorrectLettersToChange )
+    {
+        if ( GRB_ForRowLetter_IsPlayerAnswerCorrect(iRow, iLetter) )
+            return false;
+    }
     if ( GRB_ForRowLetter_IsPlayerAnswerCorrected(iRow, iLetter) )
         return false;
     return true;
@@ -76,25 +105,17 @@ function GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter)
 
 function GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter)
 {
-    var cAnswerPlayer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
-    if ( TC_IsBlackSquare(cAnswerPlayer) )
-        return true;
-    return false;
+    return TC_IsBlackSquare(GRB_ForRowLetter_GetAnswer(iRow, iLetter));
 }
 
 function GRB_ForRowLetter_IsGoldenSquare(iRow, iLetter)
 {
-    if ( GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter) == g_cCode_Golden )
-        return true;
-    return false;
+    return TC_IsGolden(GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter));
 }
 
 function GRB_ForRowLetter_IsPlayerAnswerCorrected(iRow, iLetter)
 {
-    let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    if ( cStatus == g_cCode_Corrected )
-        return true;
-    return false;
+    TC_IsCorrected(GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter));
 }
 
 function GRB_ForRowLetter_IsPlayerAnswerCorrect(iRow, iLetter)
@@ -122,56 +143,6 @@ function GRB_AddWrappedUrlToString(sStarting, sNew)
     return sFinal;
 }
 
-function GRBMS_ButtonBackgroundImage(cLetter, cStatus, iGridNumber, cCodeForActivity, cSpecialClueCode)
-{
-    let sStatusImage = '';
-    if ( TC_IsBlackSquare(cLetter) )
-        return sStatusImage;
-    if ( cCodeForActivity != g_cCode_HasFocusBeingMoved )
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetButtonFrameImagePathAndName());
-    sStatusImage = GRB_AddWrappedUrlToString(sStatusImage,TC_GetStatusOverlayImagePathAndName(cStatus));
-    if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_cCode_HasFocusBeingMoved )
-    {
-        let sGridNumber = iGridNumber.toString();
-        if ( sGridNumber.length == 1 )
-            sGridNumber = '0' + sGridNumber;
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetGridNumberImagePathAndName(sGridNumber));
-        }
-// now we do the special clue overlay if needed
-    if ( g_SG_AM_bShowSpecialClueCircles )
-    {
-        let sRound = '';
-        if ( cSpecialClueCode == g_cCode_AnswerType_Single )
-        {
-            sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNoNumberSquares
-            if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_cCode_HasFocusBeingMoved )
-                sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_Rounded_ForNumberSquares
-        }
-        else if ( cSpecialClueCode == g_cCode_AnswerType_Double )
-        {
-            sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNoNumberSquares;
-            if ( !g_bSuppressGridNumbers && iGridNumber != 0 && cCodeForActivity != g_cCode_HasFocusBeingMoved )
-                sRound = g_sImagePath_GridNumbersAndFrames + g_sStatusButtonName_Frame_DoubleRounded_ForNumberSquares;
-        }
-        if ( sRound != '' ) sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, sRound);
-    }
-    if ( g_bPuzzleSolved  && ( cSpecialClueCode == g_cCode_AnswerType_Double || cSpecialClueCode == g_cCode_AnswerType_Single ) )
-    {
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, g_sImagePath_StatusIndicators + g_sStatusButtonName_SolvedSpecial);
-    }
-    else if ( cStatus == g_cCode_Golden && !g_bPuzzleSolved )
-    {
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, g_sImagePath_StatusIndicators + g_sStatusButtonName_GoldenSquare);
-    }
-    else
-    {
-        if ( cCodeForActivity == g_cCode_HasFocusBeingMoved )
-            sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, g_sImagePath_StatusIndicators + g_sStatusButtonName_BeingMoved);
-        sStatusImage = GRB_AddWrappedUrlToString(sStatusImage, TC_GetStatusImagePathAndName(cCodeForActivity));
-    }
-    return sStatusImage;
-}
-
 function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
 {
     var A_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(A_iRow, A_iLetter);
@@ -192,7 +163,7 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     }
     GRBMS_ForRowLetter_SetButton(A_iRow, A_iLetter, g_cCode_Inactive);
     GRBMS_ForRowLetter_SetButton(B_iRow, B_iLetter, g_cCode_Inactive);
-    KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter);
+    KB_AGC_SetKeyboardButtons()
     Sync_GridChange();
     SyncTo_OthersLoseFocus('NoOne');
 }
@@ -200,9 +171,9 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
 function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
 {
     let aPossibles = [];
-    for ( var iRow = 0; iRow < g_iGridHeight; iRow++ )
+    for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
     {
-        for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
         {
             if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
             {
@@ -277,57 +248,6 @@ function GRBMS_MakeGrid()
     elem.innerHTML = sButtons;
 }
 
-function TC_GRBMS_MakeButton(iRow, iLetter)
-{ // will determine itself whether blacksquare or has number
-    var sHTMLId = GRBMS_MakeHTMLId(iRow, iLetter);
-    var sInner = '';
-    var sFunctionsToCall = '';
-    sFunctionsToCall += TC_GRBMS_MouseFunctions(iRow, iLetter);
-    sFunctionsToCall += TC_GRBMS_TouchFunctions(iRow, iLetter);
-//    sFunctionsToCall += ' onMouseDown="return GRB_onmousedown(' + iRow + ',' + iLetter + ');"'
-    sFunctionsToCall += ' onkeypress="return GRBMS_onkeypress(event);"';
-    sFunctionsToCall += ' onkeyup="return GRBMS_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
-    sFunctionsToCall += ' onfocus="GRBMS_onfocus(this);"';
-    sFunctionsToCall += ' onclick="GRBMS_onfocus(this);"'
-    sInner += '<DIV tabindex="0" ';
-    sInner += sHTMLId;
-    sInner += ' class="' + g_GRBMS_Square_sClass + '" '; 
-    sInner += sFunctionsToCall;
-    sInner += '></DIV>'
-    return sInner;
-}
-
-function GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
-{
-    let sId = GRBMS_MakeId(iRow, iLetter);
-    let elem = document.getElementById(sId);
-   let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-   let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-   let cSpecialClueCode = GRB_ForRowLetter_GetSpecialClueCode(iRow, iLetter);
-    elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
-    elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
-    if ( cAnswerPlayer == g_cCode_BlackSquare )
-    {
-        elem.style.backgroundColor = 'black'
-        return;
-    }
-    if ( g_bSuppressNonGolden && cStatusPlayer != 'G' && cAnswerPlayer != g_cCode_BlackSquare )
-        cAnswerPlayer = ' ';
-    let iGridNumber = g_aGridNumbers[iRow*g_iGridWidth+iLetter];
-    let sStatusImage = '';
-    sStatusImage = GRBMS_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, iGridNumber, cCodeForActivity, cSpecialClueCode);
-    elem.style.backgroundImage = sStatusImage;
-//    
-    elem.style.left = MakePixelString(iLetter*g_GRBMS_Square_iSize)
-    elem.style.top = MakePixelString(iRow*g_GRBMS_Square_iSize)
-    if ( CharValidEntry(cAnswerPlayer) )
-        elem.innerHTML = cAnswerPlayer;    
-    let cColor = g_Color_sLetterUnknown;
-    if ( cStatusPlayer == g_cCode_Corrected || TC_CorrectOrGolden(cStatusPlayer) )
-        cColor = g_Color_sLetterCorrect;
-    elem.style.color = cColor;
-}
-
 function GRBMS_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, bIncorrectOverride)
 {
     if ( !GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
@@ -358,21 +278,3 @@ function GRBMS_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, bIncorrectOverr
             GRB_ForRowLetter_SetStatusPlayer(g_cCode_Corrected, iRow, iLetter);
     }
 }
-
-function GRBMS_ForLetter_SetButtons(iLetter, cCode)
-{
-    for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
-    {
-        GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCode);
-    }
-}
-
-function GRBMS_ForRow_SetButtons(iRow, cCode)
-{
-    for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
-    {
-        GRBMS_ForRowLetter_SetButton(iRow, iLetter, cCode);
-    }
-}
-
-

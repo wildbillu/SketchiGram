@@ -76,7 +76,7 @@ function KB_AGC_KeyboardPress_SA_EB(keypressed)
 function KB_AGC_KeyboardPress(iButton)
 {
     let cLetter = g_KB_Buttons_a_of_cLetters[iButton];
-    let bPlacedCorrectly = g_KB_Buttons_a_of_bPlacedCorrectly[iButton];
+    let bPlacedCorrectly = false;//
     if ( bPlacedCorrectly && !g_KB_AGC_AllButtonsEnabled )
         return;
     g_KB_AGC_PendingPressedButton = iButton;

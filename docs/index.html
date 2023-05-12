@@ -50,8 +50,9 @@
 
     <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT>
-    <SCRIPT SRC="TC-GRBMS-TouchMove.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-ButtonControl.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-ConsolidatedMouseTouchMove.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRBMS-ConsolidatedMouseTouchSetup.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-SetupHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Helpers-Advanced.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-CoreProcessing.js"></SCRIPT>
@@ -71,7 +72,7 @@
     <SCRIPT SRC="TC-DisplaySpecialClue.js"></SCRIPT>
 
 <!-- keyboard -->
-    <SCRIPT SRC="TC-Keyboard-AllGridChars.js"></SCRIPT>
+<SCRIPT SRC="TC-Keyboard-AllGridChars.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard-AllGridChars-Buttons.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard-AllGridChars-HandleKeypress.js"></SCRIPT>
 
@@ -107,7 +108,9 @@
     <SCRIPT SRC="TC-ElapsedTime.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-ElapsedTime.css">
 <!-- Difficulty -->
-    <SCRIPT SRC="TC-DifficultyMenu.js"></SCRIPT>
+    <SCRIPT SRC="TC-DifficultyMenu-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-DifficultyMenu-Actions.js"></SCRIPT>
+    <SCRIPT SRC="TC-MiniActionsMenu-AffectingDifficultyLevel.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-DifficultyMenu.css">
 <!-- MiniActionMenu -->
     <SCRIPT SRC="TC-MiniActionsMenu.js"></SCRIPT>
@@ -129,6 +132,11 @@
 
 <!-- ActionMenu actions themselves -->
 <SCRIPT SRC="TC-Actions.js"></SCRIPT>
+
+<!-- deprecated -->
+<!-- <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT> -->
+<!-- <SCRIPT SRC="TC-GRBMS-TouchMove.js"></SCRIPT> -->
+
 
 </HEAD>
 <STYLE>
@@ -167,13 +175,13 @@ function TC_SetActiveSize()
 
 function A(e)
 {
-    GRBMS_mouseMove(e)
+    GRBMS_mouseMove_New(e)
 }
 var iM = 0;
 
 </SCRIPT>
 
-<BODY onmousemove="TC_MousePositionSupport(event)" Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="Dispatch();" >
+<BODY onmousemove="TC_MousePositionSupport(event)" Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0"  OnLoad="Dispatch();">
 <DIV Id="Body_Any" class="Body_Any_BeforeLoad" ontouchmove="GRBMS_touchMove(event);" onmousemove="A(event);"></DIV>  
 <DIV Id="Messages" class="Div_Message"></DIV>  
 </BODY>

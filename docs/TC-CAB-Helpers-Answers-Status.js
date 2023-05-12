@@ -59,9 +59,9 @@ function CAB_CheckForCorrectAnswer()
         sMessage += asWord[1];
     }
     if ( iCorrect == 1 )
-        sMessage += ' is a correct special clue answer'
+        sMessage += ' is a correct special clue answer '
     else
-        sMessage + ' are correct special clue answers'
+        sMessage + ' are correct special clue answers '
     return sMessage
 }
 

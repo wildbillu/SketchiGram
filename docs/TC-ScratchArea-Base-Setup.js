@@ -2,7 +2,7 @@
 
 var g_SA_aWords = [];
 var g_SA_iMaxEntries = 5;
-var g_SA_sWordStatus = 'XXXX';
+var g_SA_sWordStatus = 'XXXXX';
 var g_SA_Focus_sId = '';
 var g_SA_iCursorPosition = 0;
 var g_SA_cCursor = '|';
@@ -35,7 +35,6 @@ function TC_SA_Erase_Cancel()
 
 function TC_SA_MakeErasePopup(bRightClick)
 {
-    
     if ( g_SA_Focus_sId == '' )
         return;
 // if this is right click here we decide if the right click happen while the mouse is over the Entry
@@ -79,7 +78,7 @@ function TC_SA_ClearEntry(iEntry)
 
 function TC_SA_Setup()
 {
-    var r = document.querySelector(':root');
+    let r = document.querySelector(':root');
     r.style.setProperty('--ColorScratchAreaActive', g_Color_sScratchAreaActive);
 //
     let elemDM = document.getElementById("DM_Div");

@@ -1,7 +1,6 @@
 // TC-Keyboard-AllGridChars.js
 
 var g_KB_Buttons_a_of_cLetters = [];
-var g_KB_Buttons_a_of_bPlacedCorrectly = [];
 var g_KB_Buttons_a_of_sButtonInner = [];
 var g_KB_AGC_AllButtonsEnabled = false;
 var g_KB_AGC_PendingPressedButton = -1;
@@ -10,7 +9,7 @@ var g_KB_AGC_Backspace_bActive = false;
 var g_KB_Mini_sUsageMode_Idle = 'Idle';
 var g_KB_Mini_sUsageMode_ActiveGrid = 'Active_Grid';
 var g_KB_Mini_sUsageMode_ActiveWords = 'Active_Words';
-var g_KB_Mini_sUsageMode_SpecialClue = 'SpecialClue';
+var g_KB_Mini_sUsageMode_SpecialClue = 'Active_SpecialClue';
 var g_KB_Mini_sUsageMode = g_KB_Mini_sUsageMode_Idle;
 var g_KB_Mini_bBackspaceEnabled = false;
 
@@ -26,7 +25,7 @@ function KB_SetUsageMode(sUsageMode)
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
-        KB_AGC_EnabledStateAllButtons(false);
+        KB_AGC_SetKeyboardButtons();
         return;
     }
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveGrid )
@@ -35,7 +34,7 @@ function KB_SetUsageMode(sUsageMode)
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
-        KB_AGC_EnabledStateAllButtons(false);
+        KB_AGC_SetKeyboardButtons();
         return;
     }
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_SpecialClue )
@@ -45,7 +44,7 @@ function KB_SetUsageMode(sUsageMode)
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
-        KB_AGC_EnabledStateAllButtons(true);
+        KB_AGC_SetKeyboardButtons();
         return;
     }
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords )
@@ -54,7 +53,7 @@ function KB_SetUsageMode(sUsageMode)
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
-        KB_AGC_EnabledStateAllButtons(true);
+        KB_AGC_SetKeyboardButtons();
         return;
     }
 setlineAdd('badUsageMode:' + g_KB_Mini_sUsageMode);
@@ -171,6 +170,7 @@ function KB_AllGridChars_Setup()
 //    
     let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
     elemKB_Mini_Div.innerHTML = sInner;
+//    KB_AGC_SetKeyboardButtons();
     return iRows;
 }
 
@@ -181,38 +181,13 @@ function KB_AGC_FindAndChangeFirstNotYetCorrect(cLetter)
     while ( i < g_KB_Buttons_a_of_cLetters.length && !bFound )
     {
         let cButtonLetter = g_KB_Buttons_a_of_cLetters[i];
-        let bCorrect = g_KB_Buttons_a_of_bPlacedCorrectly[i];
+        let bCorrect = false;
         if ( cButtonLetter == cLetter && !bCorrect )
         {
             KB_AGC_SetButtonPlacedCorrectly(i)
             bFound = true;
         }
         i++;
-    }
-}
-
-function KB_AGC_Changed(A_iRow, A_iLetter, B_iRow, B_iLetter)
-{
-// either location is now correct we need to disable correct keyboard letter
-    let A_cStatus = GRB_ForRowLetter_GetStatusPlayer(A_iRow, A_iLetter);
-    if ( A_cStatus == g_cCode_Correct )
-    {
-        if ( g_KB_AGC_PendingPressedButton != -1 )
-        {
-            KB_AGC_SetButtonPlacedCorrectly(g_KB_AGC_PendingPressedButton);
-            g_KB_AGC_PendingPressedButton = -1;
-        }
-        else
-        {
-            let A_cLetter = GRB_ForRowLetter_GetAnswerPlayer(A_iRow, A_iLetter);
-            KB_AGC_FindAndChangeFirstNotYetCorrect(A_cLetter)
-        }
-    }
-    let B_cStatus = GRB_ForRowLetter_GetStatusPlayer(B_iRow, B_iLetter);
-    if ( B_cStatus == g_cCode_Correct )
-    {
-            let B_cLetter = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
-            KB_AGC_FindAndChangeFirstNotYetCorrect(B_cLetter)
     }
 }
 
