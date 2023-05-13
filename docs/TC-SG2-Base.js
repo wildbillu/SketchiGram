@@ -61,14 +61,16 @@ function SG2_LoadAll(iSection)
     switch ( iSection)
     {
         case 0:
+// these reset global variables on reload or archive            
             g_bPuzzleSolved = false;
             g_bGridSolved = false;
-            document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             g_AdjustForInitialDifficultyLevel_bActive = false;
-            TC_LoadPuzzleArchive_FromFile();
             g_SG2_CAB_bVisible = false;
             g_bUsedCookie = false;
             g_TC_Status_bFirstCheck = true;
+            DM_AdjustSettingsForDifficultyLevel_ExpertValuesOnly();
+            document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
+            TC_LoadPuzzleArchive_FromFile();
             GetAndSplitCookies();
             FromCookies_GetCurrentPuzzle();
             getResolution(); 
@@ -166,39 +168,7 @@ function SG2_LoadAll(iSection)
                 ForIdSetVisibility("ThemeImage_Base_Div", false);                
             }
             SG_MakeSpecialCluesAnswerStrings()
-            if ( g_AdjustForInitialDifficultyLevel_bActive )
-            {
-                if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Hard )
-                {
-                    DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
-                }
-                else if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Easy )
-                {
-                    DM_ChangeToLevelEasy(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
-                    TC_SetVisible("ScratchArea");
-                    TC_ThemeImage_Base_SetVisibility(false);
-                }
-                g_Difficulty_iLevel_Operating = g_AdjustForInitialDifficultyLevel_iLevel;
-                g_Difficulty_iLevel_Settings = g_AdjustForInitialDifficultyLevel_iLevel;
-                DM_SetButtons();
-            }
-            else
-            {
-                if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Hard )
-                { // don't want to show extra stuff, but do want to change visibility
-                    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
-                    TC_SetVisible("ScratchArea");
-                }
-                else if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Easy )
-                {
-                    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Easy;
-                    SG_CA_UpdateAndSetVisibility(true);
-                    if ( g_MAM_bActive ) MAM_EnableDisable();
-                }
-                DM_SetButtons();
-            }
-
-
+            AdjustForInitialDifficultyLevel()
 //            openFullscreen();
             break;
         default:

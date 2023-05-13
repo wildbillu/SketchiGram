@@ -82,8 +82,8 @@ function DM_MakeInnerHTML()
     let sDM = '';
     let sId = '';
     let sClass = ''
-    if ( g_Difficulty_iLevel_Settings != g_Difficulty_iLevel_Invalid )
-        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
+//    if ( g_Difficulty_iLevel_Settings != g_Difficulty_iLevel_Invalid )
+//        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
 
     sDM += '<DIV Id="DM_Header" class="DM_Header">Difficulty</DIV>';
     sId = 'DM_Expert';

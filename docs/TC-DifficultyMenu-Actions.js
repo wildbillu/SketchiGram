@@ -1,5 +1,49 @@
 // TC-DifficultyMenu-Actions.js
 //
+function AdjustForInitialDifficultyLevel()
+{
+    if ( g_AdjustForInitialDifficultyLevel_bActive )
+    {
+        setlineAdd('Adj')
+        if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Hard )
+        {
+            setlineAdd('H')
+            setlineAdd(g_AdjustForInitialDifficultyLevel_bNewPuzzle)
+            DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
+        }
+        else if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Easy )
+        {
+            setlineAdd('E')
+            setlineAdd(g_Difficulty_iLevel_Operating)
+            setlineAdd(g_AdjustForInitialDifficultyLevel_bNewPuzzle)
+            DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
+            DM_ChangeToLevelEasy(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
+            TC_SetVisible("ScratchArea");
+            TC_ThemeImage_Base_SetVisibility(false);
+        }
+    // shouldn't need to do these                
+    //                g_Difficulty_iLevel_Operating = g_AdjustForInitialDifficultyLevel_iLevel;
+    //                g_Difficulty_iLevel_Settings = g_AdjustForInitialDifficultyLevel_iLevel;
+    //                DM_SetButtons();
+    }
+    else
+    {
+    setlineAdd('notadjustfordifficulty')                
+        if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Hard )
+        { // don't want to show extra stuff, but do want to change visibility
+            g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
+            TC_SetVisible("ScratchArea");
+        }
+        else if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Easy )
+        {
+            g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Easy;
+            SG_CA_UpdateAndSetVisibility(true);
+            if ( g_MAM_bActive ) MAM_EnableDisable();
+        }
+        DM_SetButtons();
+    }
+}
+
 function DM_UpdatesAfterDifficultyLevelChange()
 {
     if ( g_TC_ShowScratchArea )
@@ -19,6 +63,22 @@ function DM_UpdatesAfterDifficultyLevelChange()
         Status_ShadeBackground()
     if ( g_MAM_bActive ) MAM_EnableDisable();
     DM_SetButtons();
+}
+
+function DM_AdjustSettingsForDifficultyLevel_ExpertValuesOnly()
+{
+    g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert;
+    g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_Expert;
+//    StoreCookie_Settings();
+    g_AGC_bAllowRepeats = false;
+    g_bAllowCorrectLettersToChange = true;
+    g_bShowCorrectLetters = false;
+    g_bShowIntermediateToasts = false;
+    g_TC_ShadeBackgroundOnStatus_bActive = false;
+    g_TC_SyncGridAndSpecialClueAnswers_bActive = false;
+    g_TC_ShowScratchArea = false;
+    g_TC_ShowCorrectInScratchArea = false;
+//    DM_UpdatesAfterDifficultyLevelChange()
 }
 
 function DM_AdjustSettingsForDifficultyLevel_Expert()

@@ -125,7 +125,7 @@ function TC_UseFileContents()
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
         g_bUsedCookie = true;
-        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
+//        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
         g_AdjustForInitialDifficultyLevel_bActive = true;
         g_AdjustForInitialDifficultyLevel_bNewPuzzle = false;
         g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_Settings;
@@ -138,7 +138,7 @@ function TC_UseFileContents()
         g_AdjustForInitialDifficultyLevel_bActive = true;
         g_AdjustForInitialDifficultyLevel_bNewPuzzle = true;
         g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_OnNewPuzzle;
-        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert; // so we do all the appropriate changes
+//        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert; // so we do all the appropriate changes
     }
     //    setline(sFilename + '.Updated:' + iUpdated + ';');
     return true;
