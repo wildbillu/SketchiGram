@@ -4,27 +4,17 @@ function AdjustForInitialDifficultyLevel()
 {
     if ( g_AdjustForInitialDifficultyLevel_bActive )
     {
-        setlineAdd('Adj')
         if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Hard )
         {
-            setlineAdd('H')
-            setlineAdd(g_AdjustForInitialDifficultyLevel_bNewPuzzle)
             DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
         }
         else if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Easy )
         {
-            setlineAdd('E')
-            setlineAdd(g_Difficulty_iLevel_Operating)
-            setlineAdd(g_AdjustForInitialDifficultyLevel_bNewPuzzle)
             DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
             DM_ChangeToLevelEasy(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
             TC_SetVisible("ScratchArea");
             TC_ThemeImage_Base_SetVisibility(false);
         }
-    // shouldn't need to do these                
-    //                g_Difficulty_iLevel_Operating = g_AdjustForInitialDifficultyLevel_iLevel;
-    //                g_Difficulty_iLevel_Settings = g_AdjustForInitialDifficultyLevel_iLevel;
-    //                DM_SetButtons();
     }
     else
     {
