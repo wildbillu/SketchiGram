@@ -19,7 +19,7 @@ function TC_MakeClassesForSquares()
             g_GRBMS_Square_iSize = 76; iFontSize = 50; iLineHeight = 76;
             break;
         case 6:
-            g_GRBMS_Square_iSize = 66; iFontSize = 40; iLineHeight = 66;
+            g_GRBMS_Square_iSize = 64; iFontSize = 40; iLineHeight = 64;
             break;
         case 7:
             g_GRBMS_Square_iSize = 54; iFontSize = 35; iLineHeight = 54;
