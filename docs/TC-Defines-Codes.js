@@ -1,6 +1,7 @@
 // TC-Defines.js
 
 var g_cCode_MoveAllowed = 'A';
+var g_cCode_MoveNotAllowed = 'N';
 var g_cCode_MoveNotAllowed_Golden = 'G';
 var g_cCode_MoveNotAllowed_CorrectOrCorrected = 'C';
 

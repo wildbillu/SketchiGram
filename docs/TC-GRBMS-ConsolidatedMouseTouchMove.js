@@ -68,9 +68,6 @@ function GRBMS_ondown(e, iRow, iLetter)
         g_GRBMS_TM_iInitialX = Math.round(e.touches[0].clientX);
         g_GRBMS_TM_iInitialY = Math.round(e.touches[0].clientY);
     }
-    else
-        setlineAdd('notmouseortouch')
-
     rect = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
     rectBox = document.getElementById("Div_Grid").getBoundingClientRect();
     g_GRBMS_MM_Picked_Start_iLeft = Math.round(rect.left) - Math.round(rectBox.left);
@@ -157,9 +154,6 @@ function GRBMS_mouseMove_New(e)
         yMoved = y - g_GRBMS_TM_iInitialY;
     }
     else
-    {
-        setlineAdd('movenoone')
-    }
     g_GRBMS_MM_Picked_elem.style.position = "absolute";
     let iLeftRelative = g_GRBMS_MM_Picked_Start_iLeft + xMoved;
     let iTopRelative = g_GRBMS_MM_Picked_Start_iTop + yMoved;

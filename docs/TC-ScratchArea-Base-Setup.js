@@ -6,7 +6,6 @@ var g_SA_sWordStatus = 'XXXXX';
 var g_SA_Focus_sId = '';
 var g_SA_iCursorPosition = 0;
 var g_SA_cCursor = '|';
-var g_SA_bFudgeToKeepFocus = false;
 var g_SA_elemErase = null;
 
 function TC_SA_Erase_DoIt()
@@ -78,8 +77,8 @@ function TC_SA_ClearEntry(iEntry)
 
 function TC_SA_Setup()
 {
-    let r = document.querySelector(':root');
-    r.style.setProperty('--ColorScratchAreaActive', g_Color_sScratchAreaActive);
+//    let r = document.querySelector(':root');
+//    r.style.setProperty('--ColorScratchAreaActive', g_Color_sScratchAreaActive);
 //
     let elemDM = document.getElementById("DM_Div");
     let rectDM = GetBoundingClientRectAbsolute(elemDM);

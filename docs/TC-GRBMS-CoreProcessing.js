@@ -1,43 +1,11 @@
 // TC-GRBMS-CoreProcessing.js
 
-function GRBMS_MoveToNextAvailable(iRow, iLetter)
-{
-    let iRow_New = iRow;
-    let iLetter_New = iLetter;
-    let bFoundAvailableNext = false;
-    let iNumberChecked = 0;
-    while ( !bFoundAvailableNext && iNumberChecked < g_iGridHeight*g_iGridWidth)
-    {
-        iLetter_New++;
-        if ( iLetter_New == g_iGridWidth ) {iRow_New++; iLetter_New = 0;}
-        if ( iRow_New == g_iGridHeight ) {iRow_New = 0; iLetter_New = 0;}
-        let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow_New, iLetter_New)
-        if ( g_bAllowCorrectLettersToChange )
-        {
-            if ( !TC_IsBlackSquare(cStatus) && !TC_IsCorrectCorrectedOrGolden(cStatus) )
-                bFoundAvailableNext = true;
-        }
-        else
-        {
-            if ( !TC_IsGoldenOrBlackSquare(cStatus) ) 
-                bFoundAvailableNext = true;
-        }
-        iNumberChecked++;
-    }
-    if ( bFoundAvailableNext )
-    {
-        GRBMS_onfocus(document.getElementById(GRBMS_MakeId(iRow_New, iLetter_New)));
-    }
-    else
-    { // best we can do is to lose focus
-        GRBMS_LoseCurrentFocus();
-    }
-}
 
 function GRBMS_onfocus(elem)
 {
-    GRBMS_LoseCurrentFocus();
     let sThisId = elem.id;
+    GRBMS_DirectionControl(sThisId);
+    GRBMS_LoseCurrentFocus();
     let iThisRow     = GRBMS_RowFromId(sThisId);
     let iThisLetter  = GRBMS_LetterFromId(sThisId);
     if ( !GRB_ForRowLetter_IsSquareValidForFocus(iThisRow, iThisLetter) )
@@ -46,6 +14,10 @@ function GRBMS_onfocus(elem)
         return;
     }
     GRBMS_ForRowLetter_SetButton(iThisRow, iThisLetter,  g_cCode_HasFocus);
+    if ( g_GRBMS_bAcross )
+        GRBMS_SetActiveRow(sThisId)
+    else
+        GRBMS_SetActiveColumn(sThisId)
     SyncTo_OthersLoseFocus('GR');
     g_GRBMS_Focus_sId = sThisId;
 }    
@@ -85,6 +57,11 @@ function GRBMS_onkeyup(key, iRow, iLetter)
 // now reject if same as square with focus
     let sAnswerSquareWithFocus = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     if ( sUpper == sAnswerSquareWithFocus )
+    {
+        GRBMS_MoveToNextAvailable(iRow, iLetter);
+        return;
+    }
+/*
         bValidLetter = false;
     if ( !bValidLetter )
     {
@@ -94,11 +71,11 @@ function GRBMS_onkeyup(key, iRow, iLetter)
         SyncTo_OthersLoseFocus('GR');
         return false;
     }
+*/    
     // we want to switch with square that has iLetter
 // for now just pick first one (even if more than one)
-    let bRejectCorrectSquares = true;
     let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-    let sFoundId = GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, sUpper, bRejectCorrectSquares, cNow)
+    let sFoundId = GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, sUpper, !g_bAllowCorrectLettersToChange, cNow)
     if ( sFoundId == '' )
     {
         let sMessage = "All the " + sUpper + "\'s are Correctly Placed";

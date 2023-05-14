@@ -43,6 +43,14 @@ function TC_IsBlackSquare(cStatus)
     return false;
 }
 
+function TC_IsGoldenBlackSquareCorrectOrCorrected(cStatus)
+{
+    if ( cStatus == g_cCode_BlackSquare || cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct || cStatus == g_cCode_Golden )
+        return true;
+    return false;
+}
+
+
 function TC_IsCorrectCorrectedOrGolden(cStatus)
 {
     if ( cStatus == g_cCode_Corrected || cStatus == g_cCode_Correct || cStatus == g_cCode_Golden )

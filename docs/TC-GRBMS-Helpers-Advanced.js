@@ -84,25 +84,6 @@ function GRB_ForRowLetter_IsSquareGoldenOrBlack(iRow, iLetter)
     return false;
 }
 
-function GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter)
-{
-    let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
-        return false;
-    if ( GRB_ForRowLetter_IsGoldenSquare(iRow, iLetter) )
-        return false;
-    if ( TC_IsCorrected(cStatus) )
-        return false;
-    if ( !g_bAllowCorrectLettersToChange )
-    {
-        if ( GRB_ForRowLetter_IsPlayerAnswerCorrect(iRow, iLetter) )
-            return false;
-    }
-    if ( GRB_ForRowLetter_IsPlayerAnswerCorrected(iRow, iLetter) )
-        return false;
-    return true;
-}
-
 function GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter)
 {
     return TC_IsBlackSquare(GRB_ForRowLetter_GetAnswer(iRow, iLetter));
@@ -176,15 +157,9 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
         for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
         {
             if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
-            {
+            { // shouldnt get here unless it is okay to change character
                 let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-                let cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-                let bCorrectOrCorrected = false;
-                if ( cStatusPlayer == g_cCode_Correct )
-                    bCorrectOrCorrected = true;
-                if ( cStatusPlayer == g_cCode_Corrected )
-                    bCorrectOrCorrected = true;
-                if ( !bCorrectOrCorrected && ( cAnswerPlayer == sUpper ) ) 
+                if ( cAnswerPlayer == sUpper )  
                 {
                     aPossibles.push(GRBMS_MakeId(iRow, iLetter));
                 }

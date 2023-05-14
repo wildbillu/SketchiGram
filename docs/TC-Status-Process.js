@@ -32,7 +32,6 @@ function Status_Check(bNonPlayerFixes)
 
     g_bPuzzleSolved = g_bGridSolved;  
     Status_ShadeBackground();
-//setline(bInitiallySolved + '|' + g_bPuzzleSolved + '|' + g_bSettings_CAGR_Display_Complete + '|' + g_bPrintedFormat )
     if ( !bInitiallySolved && g_bPuzzleSolved && g_bSettings_CAGR_Display_Complete && !g_bPrintedFormat )
     {
         TC_ThemeImage_Solved_ShowPopup();

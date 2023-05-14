@@ -75,6 +75,7 @@
     width:110px;
     height:30px;
     z-index:1;
+    background-color: lightgreen;
 }
 
 .SA_Entry_Correct
@@ -88,7 +89,7 @@
 {
     font-weight:bold;
     color:black;
-    background-color:var(--ColorScratchAreaActive);
+    background-color:lightgreen;
 }
 
 .SA_Entry_Inactive

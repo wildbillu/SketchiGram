@@ -61,7 +61,10 @@ function SG2_LoadAll(iSection)
     switch ( iSection)
     {
         case 0:
-// these reset global variables on reload or archive            
+// these reset global variables on reload or archive        
+            g_GRBMS_bAcross = true;
+            g_GRBMS_ActiveId_sAcross = '';
+            g_GRBMS_ActiveId_sDown = '';
             g_bPuzzleSolved = false;
             g_bGridSolved = false;
             g_AdjustForInitialDifficultyLevel_bActive = false;

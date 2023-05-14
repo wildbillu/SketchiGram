@@ -2,10 +2,8 @@
 
 function TC_SA_Entry_AddChar(keypressed)
 {
-    g_SA_bFudgeToKeepFocus = true;
     if ( g_SA_Focus_sId != '')
         document.getElementById(g_SA_Focus_sId).focus();
-    g_SA_bFudgeToKeepFocus = false;
     if ( g_SA_Focus_sId == '' )
         return;
     let elemInputText = document.getElementById(g_SA_Focus_sId);
@@ -52,12 +50,11 @@ function TC_SA_Entry_AddChar(keypressed)
             return;
         }
         let sUpper = keypressed.toUpperCase();
-        sValue = TC_SA_AddCharFixup(sValue, sUpper)
+        sValue = TC_SA_AddCharFixup(sValue, sUpper);
     }
     TC_SA_ForEntrySetWord(iEntry, sValue);
     elemInputText.innerHTML = sValue;
     TC_SA_CheckIfEntryMatchesAnAnswer(iEntry, elemInputText);
-    TC_SA_SetColors()
 }
 
 function TC_SA_onkeypress(e)
@@ -95,7 +92,7 @@ function TC_SA_onkeyup(e, key)
     return true;
 }
 
-function TC_SA_SetColors()
+function TC_SA_SetAllInactiveOrCorrect()
 {
     for ( let i = 0; i < g_SA_iMaxEntries; i++ )
     {
@@ -114,7 +111,7 @@ function TC_SA_LoseFocus()
     if ( g_SA_Focus_sId == '' )
         return;
     let elemOldFocus = document.getElementById(g_SA_Focus_sId);
-    TC_SA_SetColors()
+    TC_SA_SetAllInactiveOrCorrect();
     let sValue = elemOldFocus.innerHTML;
     let sNewInnerHTML = removeAllChar(sValue, g_SA_cCursor);
     elemOldFocus.innerHTML = sNewInnerHTML;
@@ -146,12 +143,4 @@ function TC_SA_Focus(elemInputText)
     KB_AGC_SpecialButtonEnable(true);
 }
 
-function TC_SA_LoseTheFocusAndCleanup(bCheck)
-{ // we are going to wait until another focus is selected before doing things on lost focus
-    if ( g_SA_Focus_sId ) // != '' && bCheck )
-    {
-        TC_SA_LoseFocus();
-    }
-    g_SA_Focus_sId = '';
-}
 

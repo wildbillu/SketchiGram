@@ -75,6 +75,14 @@ function KB_AGC_KeyboardPress_SA_EB(keypressed)
 
 function KB_AGC_KeyboardPress(iButton)
 {
+// if button is disabled state dont do anything
+    let sId = KB_AllGridChars_MakeButtonId(iButton)
+    let elem = document.getElementById(sId)
+    if ( !elem )
+        return;
+    let sClass = elem.className;
+    if ( sClass.indexOf('Disabled') != -1 )
+        return;
     let cLetter = g_KB_Buttons_a_of_cLetters[iButton];
     let bPlacedCorrectly = false;//
     if ( bPlacedCorrectly && !g_KB_AGC_AllButtonsEnabled )

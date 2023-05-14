@@ -50,7 +50,7 @@ var g_DM_bActive = true; var g_DM_iTop = 200; var g_DM_iLeft = g_TC_Padding_Left
 var g_DM_iWidth = 200;
 var g_MAM_bActive = true; var g_MAM_iTop = 400; // left determined by defined width
 
-var gResultMessage_iTop = 75; 
+var gResultMessage_iTop = 70; 
 
 var g_Timer_bActive = true; var g_Timer_iTop  = 30; var g_Timer_sLabel = 'Elapsed'; // left determined by defined puzzle width
 
@@ -175,7 +175,7 @@ function setNew()
     g_ThemeImage_Base_bActive = true;
     g_InfoSettingsButtons_bActive = true;
 //
-    gResultMessage_iTop = 155;
+    gResultMessage_iTop = 150;
     g_KB_Buttons_Narrow = false;
     g_KB_sWidthDeterminedBy =  'BiggestRight'; g_KB_fFractionAvailableWidth = 1.00; g_KB_sJustification = 'center';
     g_KB_bBackspaceKeyActive = true; g_KB_bArrowKeysActive = true;
@@ -194,10 +194,7 @@ function setNew()
     g_SpecialClueFrame_bActive = true; g_SpecialClueFrame_iTop = 70; 
     g_bSpecialClueAnswerBoxesActive = true; g_SG_AM_bShowSpecialClueCircles  = true;
     g_SpecialClue_bShowImageButton = true;
-
-
-
-    g_Timer_bActive = true; g_Timer_iTop  = 150; g_Timer_sLabel = 'Elapsed:'; // left from defined puzzle width
+    g_Timer_bActive = true; g_Timer_iTop  = 150; g_Timer_sLabel = ''; // left from defined puzzle width
 
     g_HowTo_bActive = true;    g_HowTo_iTop    = 145;
     g_GR_GridOrInstruction_iTop = 58;

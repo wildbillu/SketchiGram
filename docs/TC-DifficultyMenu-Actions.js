@@ -18,7 +18,6 @@ function AdjustForInitialDifficultyLevel()
     }
     else
     {
-    setlineAdd('notadjustfordifficulty')                
         if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Hard )
         { // don't want to show extra stuff, but do want to change visibility
             g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
