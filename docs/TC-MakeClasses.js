@@ -22,7 +22,7 @@ function TC_MakeClassesForSquares()
             g_GRBMS_Square_iSize = 66; iFontSize = 40; iLineHeight = 66;
             break;
         case 7:
-            g_GRBMS_Square_iSize = 56; iFontSize = 35; iLineHeight = 56;
+            g_GRBMS_Square_iSize = 54; iFontSize = 35; iLineHeight = 54;
             break;
     }
 // first for the Grid
