@@ -35,6 +35,9 @@ function GRBMS_LoseCurrentFocus()
     elem.style.cursor="default";
     let elemWithFocus = document.getElementById(g_GRBMS_Focus_sId);
     elemWithFocus.blur();
+
+    document.getElementById("ScratchArea_Text").style.backgroundColor = 'white';
+
     g_GRBMS_Focus_sId = '';
 }
 
