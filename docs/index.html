@@ -88,11 +88,10 @@
 <!-- this controls the closing of the show/noshow windows  -->
     <SCRIPT SRC="TC-Popup-Support.js"></SCRIPT>
 
-
     <SCRIPT SRC="TC-TopRowButton-Setup-Process.js"></SCRIPT>
     <SCRIPT SRC="TC-Cookies.js"></SCRIPT>
  
-     <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
+    <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
     <SCRIPT SRC="TC-Puzzle-AsJS.js"></SCRIPT>
 
     <SCRIPT SRC="TC-Status-Process.js"></SCRIPT>
@@ -132,19 +131,8 @@
 
 <!-- ActionMenu actions themselves -->
 <SCRIPT SRC="TC-Actions.js"></SCRIPT>
-
-<!-- deprecated -->
-<!-- <SCRIPT SRC="TC-GRBMS-MouseMove.js"></SCRIPT> -->
-<!-- <SCRIPT SRC="TC-GRBMS-TouchMove.js"></SCRIPT> -->
-
-
 </HEAD>
-<STYLE>
-:root
-{
-    --ColorScratchAreaActive: #F00000;
-}
-</STYLE>
+
 <SCRIPT>
 document.onkeypress = function (e) {TC_KeyboardSupport_KeyPress(e);};
 document.onkeyup = function (e) {TC_KeyboardSupport_KeyUp(e);};
@@ -159,7 +147,7 @@ function Dispatch()
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
     g_TC_iBiggestBottom = 0;
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.072';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.080';
 //
     TC_LoadPuzzleArchive();
     SG2_LoadAll(0);

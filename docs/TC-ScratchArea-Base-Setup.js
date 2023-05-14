@@ -77,9 +77,6 @@ function TC_SA_ClearEntry(iEntry)
 
 function TC_SA_Setup()
 {
-//    let r = document.querySelector(':root');
-//    r.style.setProperty('--ColorScratchAreaActive', g_Color_sScratchAreaActive);
-//
     let elemDM = document.getElementById("DM_Div");
     let rectDM = GetBoundingClientRectAbsolute(elemDM);
     let iTop = rectDM.bottom + g_TC_Padding_Inter_Vertical_iSize;

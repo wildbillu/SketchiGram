@@ -26,6 +26,8 @@ function GRBMS_LoseCurrentFocus()
 {
     if ( g_GRBMS_Focus_sId == '')
         return;
+    GRBMS_ClearOldActiveRow(g_GRBMS_Focus_sId);
+    GRBMS_ClearOldActiveColumn(g_GRBMS_Focus_sId);
     let iRow = GRBMS_RowFromId(g_GRBMS_Focus_sId);
     let iLetter = GRBMS_LetterFromId(g_GRBMS_Focus_sId);
     GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
