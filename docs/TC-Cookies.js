@@ -55,7 +55,7 @@ function FromCookieParseContents(sCookie)
 
 function StoreCookie_Settings()
 {
-    var sCookieToAdd = MakeCookie_Settings()
+    let sCookieToAdd = MakeCookie_Settings()
     document.cookie = sCookieToAdd;
 }
 

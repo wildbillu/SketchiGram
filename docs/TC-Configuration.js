@@ -53,7 +53,7 @@ var g_MAM_bActive = true; var g_MAM_iTop = 400; // left determined by defined wi
 var gResultMessage_iTop = 70; 
 
 var g_Timer_bActive = true; var g_Timer_iTop  = 30; var g_Timer_sLabel = 'Elapsed'; // left determined by defined puzzle width
-
+var g_Archive_iTop = 100;
 var g_bResultMessageActive = true;
 var g_bSettingsActive = true;
 var g_ShowExtraImageButton_bActive = true;

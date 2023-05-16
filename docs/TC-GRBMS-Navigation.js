@@ -77,7 +77,12 @@ function GRBMS_MoveToNextAvailable(iRow, iLetter)
     if ( g_GRBMS_bAcross )
         GRBMS_NextSquare_Across(iRow, iLetter)
     else
-        GRBMS_NextSquare_Down(iRow, iLetter)
+        GRBMS_NextSquare_Down(iRow, iLetter);
+    let iRowNext = GRBMS_RowFromId(g_GRBMS_Focus_sId)
+    let iLetterNext = GRBMS_LetterFromId(g_GRBMS_Focus_sId)
+    let cLetterOfNextSquare = GRB_ForRowLetter_GetAnswerPlayer(iRowNext, iLetterNext)
+    KB_Mini_SetInstructionLine(cLetterOfNextSquare);
+
 }
 
 function GRBMS_NextSquare_Across(iRow, iLetter)

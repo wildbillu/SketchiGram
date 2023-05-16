@@ -66,18 +66,7 @@ function GRBMS_onkeyup(key, iRow, iLetter)
         GRBMS_MoveToNextAvailable(iRow, iLetter);
         return;
     }
-/*
-        bValidLetter = false;
-    if ( !bValidLetter )
-    {
-        KB_Mini_SetInstructionLine('');  
-        GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
-        g_GRBMS_Focus_sId = '';
-        SyncTo_OthersLoseFocus('GR');
-        return false;
-    }
-*/    
-    // we want to switch with square that has iLetter
+// we want to switch with square that has iLetter
 // for now just pick first one (even if more than one)
     let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     let sFoundId = GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, sUpper, !g_bAllowCorrectLettersToChange, cNow)
@@ -101,14 +90,14 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
     var bValidLetter = g_GRBMS_sAllowedGridLetters.includes(cLetter);
     if ( !bValidLetter )
     {
-        KB_Mini_SetInstructionLine('');   
+//        KB_Mini_SetInstructionLine('');   
         return 'letter (' + cLetter + ' ) not in grid'
     }
 // now reject if same as square with focus
     var cAnswerThisSquare = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     if ( cLetter == cAnswerThisSquare )
     {
-        KB_Mini_SetInstructionLine('');   
+//        KB_Mini_SetInstructionLine('');   
         return 'Letter Same as Exising';
     }
 // we want to switch with square that has iLetter

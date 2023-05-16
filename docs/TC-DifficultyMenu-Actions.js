@@ -7,6 +7,8 @@ function AdjustForInitialDifficultyLevel()
         if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Hard )
         {
             DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
+            TC_SetVisible("ScratchArea");
+            SG_CA_UpdateAndSetVisibility(false);
         }
         else if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Easy )
         {
@@ -22,6 +24,7 @@ function AdjustForInitialDifficultyLevel()
         { // don't want to show extra stuff, but do want to change visibility
             g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
             TC_SetVisible("ScratchArea");
+            SG_CA_UpdateAndSetVisibility(false);
         }
         else if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Easy )
         {

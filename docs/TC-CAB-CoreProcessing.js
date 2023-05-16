@@ -128,6 +128,7 @@ function CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
             return;
     }
     CAB_ForRowLetter_SetAnswerPlayer(cAnswerPlayer, iRow, iLetter);
+    TC_History_Add_SpecialClueLetterPlaced(cAnswerPlayer, iRow, iLetter);
 //    
     if ( cInitialStatus == g_cCode_Incorrect || cInitialStatus == g_cCode_IncorrectWithOverride)
     { // since a letter was typed we no longer know it is incorrect so set back to Normal
@@ -200,6 +201,7 @@ function CAB_onkeyup(key, iRow, iLetter)
 
 function CAB_SetBackground(bActive)
 {
+return;
     let elemFrame = document.getElementById("SpecialClue_Div");
     if ( bActive )
         elemFrame.style.backgroundColor = g_Color_sAbvocabBlue;

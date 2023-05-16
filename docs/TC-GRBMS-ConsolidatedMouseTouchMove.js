@@ -107,9 +107,6 @@ function GRBMS_mouseUp(event)
     GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocus);
     GRBMS_ForAll_SetStatusFromState()
     GRBMS_MoveToNextAvailable(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter)
-//    if ( g_Move_bSetFocusToDroppedSquare )
-//        GRBMS_onfocus(document.getElementById(g_GRBMS_MM_Found_sId));
-//
     GRBMS_clearPickedAndFoundVariables();
     Status_Check(false);
 }

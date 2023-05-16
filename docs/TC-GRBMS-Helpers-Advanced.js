@@ -126,10 +126,11 @@ function GRB_AddWrappedUrlToString(sStarting, sNew)
 
 function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
 {
-    var A_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(A_iRow, A_iLetter);
-    var B_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
+    let A_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(A_iRow, A_iLetter);
+    let B_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
     // switch
     GRB_ForRowLetter_SetAnswerPlayer(A_cAnswerPlayer, B_iRow, B_iLetter);
+    TC_History_Add_GridLetterPlaced(A_cAnswerPlayer, B_iRow, B_iLetter)
     GRB_ForRowLetter_SetAnswerPlayer(B_cAnswerPlayer, A_iRow, A_iLetter);
     // since we moved letters we no longer if the status is correct
     if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
@@ -144,7 +145,7 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     }
     GRBMS_ForRowLetter_SetButton(A_iRow, A_iLetter, g_cCode_Inactive);
     GRBMS_ForRowLetter_SetButton(B_iRow, B_iLetter, g_cCode_Inactive);
-    KB_AGC_SetKeyboardButtons()
+    KB_AGC_SetKeyboardButtons();
     Sync_GridChange();
     SyncTo_OthersLoseFocus('NoOne');
 }

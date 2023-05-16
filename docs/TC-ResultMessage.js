@@ -42,7 +42,6 @@ function TC_ResultMessage_DisplayForInterval(bShowAlways, sMessage, sStyle, iNum
     }    
     let sClassName = 'ResultMessage_Div';
     let aMessages = sMessage.split('|');
-    let iMessages = aMessages.length;
     var sTop = g_ResultMessage_sLevel_GoodJob;
     if ( iNumber > 1 )
         sTop = g_ResultMessage_sLevel_Excellent;
@@ -56,17 +55,24 @@ function TC_ResultMessage_DisplayForInterval(bShowAlways, sMessage, sStyle, iNum
     elemResultMessage_Div.className = sClassName;
     let sInner = '';
     sInner += '<DIV Id="RM" class="ResultMessage_Div_TitleLine">' + sTop + '</DIV>';
+    let iMessages = aMessages.length;
+    let iActualMessages = 0;
     for ( let i = 0; i < iMessages; i++ )
     {
-        let sIdHTML = 'Id="RM' + i + '" ';
-        sInner += '<DIV ' + sIdHTML + ' class="ResultMessage_Div_AdditionalLines">' + aMessages[i] + '</DIV>';
+        let sThisMessage = aMessages[i];
+        if ( sThisMessage != '' )
+        {
+            let sIdHTML = 'Id="RM' + iActualMessages + '" ';
+            sInner += '<DIV ' + sIdHTML + ' class="ResultMessage_Div_AdditionalLines">' + aMessages[i] + '</DIV>';
+            iActualMessages++;
+        }
     }
     let iTotalHeight = 0;
     elemResultMessage_Div.innerHTML = sInner;
     let elemRM = document.getElementById("RM");
     let rectRM = elemRM.getBoundingClientRect();
     iTotalHeight += rectRM.height;
-    for ( let i = 0; i < iMessages; i++ )
+    for ( let i = 0; i < iActualMessages; i++ )
     {
         let sId = 'RM' + i;
         let elemRMi = document.getElementById(sId);

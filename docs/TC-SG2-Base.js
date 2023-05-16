@@ -72,6 +72,8 @@ function SG2_LoadAll(iSection)
             g_bUsedCookie = false;
             g_TC_Status_bFirstCheck = true;
             DM_AdjustSettingsForDifficultyLevel_ExpertValuesOnly();
+            TC_History_Clear();
+// want to start things invisible
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             TC_LoadPuzzleArchive_FromFile();
             GetAndSplitCookies();

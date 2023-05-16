@@ -35,7 +35,6 @@ function Action_ResetPuzzle()
 {
     g_bPuzzleSolved = false;
     g_bGridSolved = false;
-    DM_SetButtons();
     GRBMS_ScrambleCorrectAnswersToPlayer(true);
     GRBMS_SetAllButtons();
     if ( g_HowTo_bActive ) ForIdSetVisibility("SG_HowToA_Div", true);
@@ -56,7 +55,6 @@ function Action_ResetPuzzle()
     KB_AllGridChars_Adjust(false);
     g_CAB_abSetCorrect.length = 0;
     ForIdSetVisibility("KB_Mini_Div", true);
-
     g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_OnNewPuzzle;
     g_Difficulty_iLevel_Settings = g_Difficulty_iLevel_OnNewPuzzle;
     if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Hard )
@@ -64,9 +62,7 @@ function Action_ResetPuzzle()
     else if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Easy )
         DM_ChangeToLevelEasy(false)
     DM_SetButtons();
-
     Action_Finishup(true);
-
     TC_ResetBottomMatter()
 }
 

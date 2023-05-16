@@ -50,6 +50,7 @@ function KB_SetUsageMode(sUsageMode)
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords )
     {
         let sBackgroundColor = g_Color_sScratchAreaActive;
+        eInstructions.innerHTML = "Type letters to make candidate words"
         eInstructions.style.backgroundColor = sBackgroundColor;
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
@@ -201,7 +202,10 @@ function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
         KB_SetUsageMode(g_KB_Mini_sUsageMode_ActiveGrid)
     }
     else
+    {
+        sInstructions = 'fix me'
         KB_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
+    }
     eInstructions.innerHTML = sInstructions;
 }
 

@@ -50,12 +50,12 @@ function Status_Check(bNonPlayerFixes)
         SG_UpdateAnswersCorrectInGridAndDisplay();
     if ( SG_SetAnswersCorrectInGrid() ) 
         SG_ResetAnswerFromAnswersCorrectInGrid();
-    StoreCookie_Puzzle();
     FeaturesDependingOnPuzzleSolved();
     SG_PositionClueOverallDiv();
     if ( g_MAM_bActive ) MAM_EnableDisable();
     g_TC_Status_bFirstCheck = false;
     if ( g_bPuzzleSolved ) GRBMS_SetAllButtons();
+    StoreCookie_Puzzle();
 }
 
 function TC_ClearSpecialClueAnswers()
@@ -176,9 +176,9 @@ function Status_Check_Grid()
     if ( g_TC_iGridAnswers_Correct > iGridAnswers_Correct_Starting )
     {
         let iNew = g_TC_iGridAnswers_Correct - iGridAnswers_Correct_Starting;
-        let sMessage = iNew + ' Grid Word Solved';
+        let sMessage = iNew + ' Grid Word Solved ';
         if ( iNew > 1 )
-            sMessage = iNew + ' Grid Words Solved';
+            sMessage = iNew + ' Grid Words Solved ';
         Status_Check_AddChange(sMessage);
         g_TC_Status_iChanges += iNew;
     }

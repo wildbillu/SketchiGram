@@ -33,13 +33,14 @@ function TC_LoadPuzzleArchive_FromFile()
         {
             let sPuzzleName = aEntriesThisLine[0];
             let sPuzzleTitle = aEntriesThisLine[1];
-            TC_Archive_AddPuzzleToArchive(sPuzzleName, sPuzzleTitle)
+            if ( sPuzzleName.startsWith('puzzle') )
+                TC_Archive_AddPuzzleToArchive(sPuzzleName, sPuzzleTitle)
         }
     }
 }
 
 function TC_LoadPuzzleArchive()
-{
+{ // in case file missing or local
     TC_Archive_AddPuzzleToArchive('puzzle001', 'Yogi Berra Says!')
     TC_Archive_AddPuzzleToArchive('puzzle002', 'Beware The Ides!')
     TC_Archive_AddPuzzleToArchive('puzzle003', "How's Your Aim?")
@@ -63,9 +64,9 @@ function TC_LoadPuzzleArchive()
     TC_Archive_AddPuzzleToArchive('puzzle017', 'Seedy Neighborhood')
     TC_Archive_AddPuzzleToArchive('puzzle018', 'Fried Southern Treat')
     TC_Archive_AddPuzzleToArchive('puzzle023', 'John Prine Sings To Her')
-//    TC_Archive_AddPuzzleToArchive('puzzle024', 'Odes do this')
+    TC_Archive_AddPuzzleToArchive('puzzle024', 'Odes do this')
     TC_Archive_AddPuzzleToArchive('puzzle025', 'Glory? Ore bust?')
-//    TC_Archive_AddPuzzleToArchive('puzzle026', 'Like the cat that swallowed the canary')
+    TC_Archive_AddPuzzleToArchive('puzzle026', 'Like the cat that swallowed the canary')
 }
 
 function TC_Archive_AddButtonOrExtraSpace()
@@ -96,7 +97,6 @@ function TC_Archive_Select(elem)
 function TC_Archive_Previous()
 {
     g_TC_Archive_Menu_iStartAt -= g_TC_Archive_Menu_iMaxItems;
-//    g_TC_Archive_Menu_iStartAt -= g_TC_Archive_Menu_aActiveIds.length;
     if ( g_TC_Archive_Menu_iStartAt < 0 )
         g_TC_Archive_Menu_iStartAt = 0;
     TC_Archive_UpdateMenu();
@@ -108,7 +108,7 @@ function TC_Archive_Next()
     g_TC_Archive_Menu_iStartAt += g_TC_Archive_Menu_aActiveIds.length;
     if ( g_TC_Archive_Menu_iStartAt > g_TC_Archive_aPuzzleTitles.length - 1 )
         return;
-        TC_Archive_UpdateMenu();
+    TC_Archive_UpdateMenu();
     TC_Archive_AdjustMenu();
 }
 
@@ -120,32 +120,31 @@ function TC_Archive_AdjustMenu()
     let iHeight = 0;
     let elemTitle = document.getElementById("Archive_Title");
     elemTitle.style.width = sWidest;
-    iHeight += elemTitle.getBoundingClientRect().height;    
+    iHeight += GetBoundingClientRectAbsolute(elemTitle).height;    
     let elemPrevious = document.getElementById("Archive_Previous");
     if ( elemPrevious )
     {
         elemPrevious.style.width = sWidest;
-        iHeight += elemPrevious.getBoundingClientRect().height;
+        iHeight += GetBoundingClientRectAbsolute(elemPrevious).height;
     }
     let iIds = g_TC_Archive_Menu_aActiveIds.length;
     for ( let iId = 0; iId < iIds; iId++ )
     {
         let elem = document.getElementById(g_TC_Archive_Menu_aActiveIds[iId]); //  all have same font
         elem.style.width = sWidest;
-        iHeight += elem.getBoundingClientRect().height;    
+        iHeight += GetBoundingClientRectAbsolute(elem).height;    
     }
     let elemNext = document.getElementById("Archive_Next");
     if ( elemNext )
     {
         elemNext.style.width = sWidest;
-        iHeight += elemNext.getBoundingClientRect().height;
+        iHeight += GetBoundingClientRectAbsolute(elemNext).height;
     }
     let elemDiv = document.getElementById("Archive_Div");
     elemDiv.style.width = sWidest;
     elemDiv.style.height = MakePixelString(iHeight + 2);
-// now center it just above the activate button
-    let iTop = g_TC_iBiggestBottom - iHeight - 65;
-    elemDiv.style.top = MakePixelString(iTop);
+// now center it at defined top
+    elemDiv.style.top = MakePixelString(g_Archive_iTop);
     let iLeft = TC_LeftForCentering(iWidest)
     elemDiv.style.left = MakePixelString(iLeft);
 }
