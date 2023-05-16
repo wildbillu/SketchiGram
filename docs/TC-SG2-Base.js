@@ -157,7 +157,6 @@ function SG2_LoadAll(iSection)
             }
             SG2_SetVisibles();
             ForIdSetVisibility("SG_Clues_Div", false);
-            TC_ThemeImage_Base_SetVisibility(true);
             if ( g_bPrintedFormat ) 
             {
                  AdjustForPrintSize();
