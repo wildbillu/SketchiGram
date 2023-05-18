@@ -1,5 +1,13 @@
 // TC-Keyboard-AllGridChars-HandleKeypress.js
 
+function KB_AGC_KeyboardPressButtonChangeDirection()
+{
+    if ( g_GRBMS_Focus_sId == '' )
+        return;
+    let elem = document.getElementById(g_GRBMS_Focus_sId)
+    GRBMS_onfocus(elem)
+}
+
 function KB_AGC_KeyboardPressArrowLeft()
 {
     if ( g_SA_Focus_sId )
@@ -17,7 +25,6 @@ function KB_AGC_KeyboardPressArrowRight()
         return;
     }
 }
-
 
 function KB_AGC_KeyboardPressBackspace()
 {

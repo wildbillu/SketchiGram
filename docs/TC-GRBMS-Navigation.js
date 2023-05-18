@@ -28,6 +28,17 @@ function GRBMS_ClearOldActiveColumn(sId)
     g_GRBMS_ActiveId_sDown = '';
 }
 
+function GRBMS_DirectionControl_Button(sId)
+{
+    if ( sId == g_GRBMS_Focus_sId )
+    {
+        g_GRBMS_bAcross = !g_GRBMS_bAcross;
+        GRBMS_ClearOldActiveRow(g_GRBMS_Focus_sId);
+        GRBMS_ClearOldActiveColumn(g_GRBMS_Focus_sId);
+    }
+}
+
+
 function GRBMS_DirectionControl(sId)
 {
     if ( sId == g_GRBMS_Focus_sId )

@@ -3,6 +3,11 @@
 let g_aArrayOfLetterStatusAllow_InAlphaOrder = [];
 let g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats = [];
 
+function KB_AGC_SetChangeDirection(bChangeDirectionActive)
+{
+    ForIdSetVisibility('ChangeDirection', bChangeDirectionActive)
+}
+
 function KB_AGC_SetBackspaceArrows(bBackspaceArrowsActive)
 {
     ForIdSetVisibility('Backspace', bBackspaceArrowsActive)
@@ -12,28 +17,24 @@ function KB_AGC_SetBackspaceArrows(bBackspaceArrowsActive)
 
 function KB_AGC_SetKeyboardButtons()
 {
-// deal with the extra keys
-    let bBackspaceArrowsActive = false;
-    if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords )
-        bBackspaceArrowsActive = true;
-    KB_AGC_SetBackspaceArrows(bBackspaceArrowsActive);
-//    
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_Idle )
     {
         let iCount = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length;
         let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
         for ( let iButton = 0; iButton < iCount; iButton++ )
             document.getElementById(KB_AllGridChars_MakeButtonId(iButton)).className = sClass;
+        KB_AGC_SetBackspaceArrows(false);
         return;
     }
 //
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords || 
-        g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_SpecialClue )
+         g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_SpecialClue )
     { // in these cases all the characters are allowed
         let iCount = g_aArrayOfLetterStatusAllow_InAlphaOrder_NoRepeats.length;
         let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter';
         for ( let iButton = 0; iButton < iCount; iButton++ )
             document.getElementById(KB_AllGridChars_MakeButtonId(iButton)).className = sClass;
+        KB_AGC_SetBackspaceArrows(true);
         return;
     }
 // this is the case where grid is active   
@@ -42,6 +43,7 @@ function KB_AGC_SetKeyboardButtons()
     {
         KB_AlphaOrderWithStatus(); // update the codes
         KB_AGC_SetKeyboardButtons_Consolidated();
+        KB_AGC_SetBackspaceArrows(false);
         return;
     }
     alert('bad mode')
@@ -173,6 +175,26 @@ function KB_AGC_MakeArrowRightButton()
     return sButton;
 }
 
+function KB_AGC_KeyboardPressButtonChangeDirection()
+{
+    if ( g_GRBMS_Focus_sId == '' )
+        return;
+    let elem = document.getElementById(g_GRBMS_Focus_sId)
+    GRBMS_onfocus(elem)
+}
+
+function KB_AGC_MakeChangeDirectionButton()
+{
+    let sTextForButton = ' ';
+    let sTextForId = 'ChangeDirection';
+    let sClass = 'KB_Mini_Button KB_Mini_ButtonChangeDirection TC_StartHidden ';
+    let sIdWrapped = ' Id="' + sTextForId + '" ';
+    let sClassWrapped = 'class="' + sClass + '" '; 
+    let sOnClick = ' onclick="KB_AGC_KeyboardPressButtonChangeDirection();" ';
+    let sButton = '<TD><DIV '+ sIdWrapped + sClassWrapped + sOnClick + '>' + sTextForButton + '</DIV></TD>';
+    return sButton;
+}
+
 function KB_AGC_MakeBackspaceButton()
 {
     let sTextForButton = ' ';
@@ -282,9 +304,10 @@ function KB_AllGridChars_MakeThisRow(iStart, iFinish, bLastRow)
         sButtonRow += g_KB_Buttons_a_of_sButtonInner[iButton];
     if ( bLastRow )
     {
+        if ( g_KB_bChangeDirectionKeyActive )
+            sButtonRow += KB_AGC_MakeChangeDirectionButton();
         if ( g_KB_bBackspaceKeyActive )
             sButtonRow += KB_AGC_MakeBackspaceButton();
-
         if ( g_KB_bArrowKeysActive )
         {
             let s = KB_AGC_MakeArrowLeftButton();

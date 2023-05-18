@@ -19,6 +19,15 @@
     background-color:#DDDDDD;
 }
 
+.KB_Mini_ButtonChangeDirection
+{
+    width:38px;
+    background-image: url("images/Buttons/Button_ChangeDirection.png");
+    background-size:38px;
+    background-repeat:no-repeat;
+    background-color:#DDDDDD;
+}
+
 .KB_Mini_ButtonBackspace 
 {
     width:38px;

@@ -98,7 +98,8 @@ function FeaturesDependingOnPuzzleSolved()
         return;
     TC_ElapsedTime_Clear();
     ForIdSetVisibility("KB_Mini_Div", false);
-    if ( g_KB_bBackspaceKeyActive ) ForIdSetVisibility("Backspace", false);
+    if ( g_KB_bChangeDirectionKeyActive ) ForIdSetVisibility('ChangeDirection', false);
+    if ( g_KB_bBackspaceKeyActive ) ForIdSetVisibility('Backspace', false);
     if ( g_KB_bArrowKeysActive )
     {
         ForIdSetVisibility("ArrowLeft", false);

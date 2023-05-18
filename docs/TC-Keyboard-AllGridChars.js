@@ -26,6 +26,7 @@ function KB_SetUsageMode(sUsageMode)
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
         KB_AGC_SetKeyboardButtons();
+        KB_AGC_SetChangeDirection(false);
         return;
     }
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveGrid )
@@ -35,6 +36,7 @@ function KB_SetUsageMode(sUsageMode)
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
         KB_AGC_SetKeyboardButtons();
+        KB_AGC_SetChangeDirection(true);
         return;
     }
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_SpecialClue )
@@ -45,6 +47,7 @@ function KB_SetUsageMode(sUsageMode)
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
         KB_AGC_SetKeyboardButtons();
+        KB_AGC_SetChangeDirection(false);
         return;
     }
     if ( g_KB_Mini_sUsageMode == g_KB_Mini_sUsageMode_ActiveWords )
@@ -55,6 +58,7 @@ function KB_SetUsageMode(sUsageMode)
         eButtonRow.style.backgroundColor = sBackgroundColor;
         elemKB_Mini_Div.style.backgroundColor = sBackgroundColor;
         KB_AGC_SetKeyboardButtons();
+        KB_AGC_SetChangeDirection(false);
         return;
     }
 setlineAdd('badUsageMode:' + g_KB_Mini_sUsageMode);
@@ -137,6 +141,7 @@ function KB_AllGridChars_Setup()
     let iTotalButtons = iLetters;
     if ( g_KB_bBackspaceKeyActive ) iTotalButtons += 1;
     if ( g_KB_bArrowKeysActive ) iTotalButtons += 2; 
+    if ( g_KB_bChangeDirectionKeyActive ) iTotalButtons += 1;
     let iButtonWidth = KB_GetButtonWidth();
     let iEstimatedWidth = iTotalButtons * (iButtonWidth + 10); 
     let fRows = Math.ceil(iEstimatedWidth / iWidthMax);

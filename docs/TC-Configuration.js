@@ -36,6 +36,7 @@ var g_KB_fFractionAvailableWidth = 1.00; //
 var g_KB_sJustification = 'center'; // 'right' // 'grid'
 var g_KB_bBackspaceKeyActive = true;
 var g_KB_bArrowKeysActive = true;
+var g_KB_bChangeDirectionKeyActive = true;
 
 var g_bSolveOnStart = false;
 var g_bSolveOnStart_SuppressCorrectedIndicators = false;
