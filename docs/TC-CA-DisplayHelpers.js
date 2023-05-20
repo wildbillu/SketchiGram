@@ -22,8 +22,8 @@ function SG_MakeSpecialCluesAnswerStrings()
         if ( bShowCorrectResults && bCorrectInGrid0 )
         {
             sSpecialAnswerRow0 += SG_Position_Answer(0);
-            sSpecialAnswerRow0 += g_CAB_aAnswers[0];
             sSpecialAnswerRow0 += g_sSpecialClueBefore;
+            sSpecialAnswerRow0 += g_CAB_aAnswers[0];
         }
         else
         {
@@ -40,13 +40,13 @@ function SG_MakeSpecialCluesAnswerStrings()
         if ( bShowCorrectResults && bCorrectInGrid1 )
         {
             sSpecialAnswerRow1 += g_CAB_aAnswers[1];
-            sSpecialAnswerRow1 += g_sSpecialClueEnd;
             sSpecialAnswerRow1 += SG_Position_Answer(1);
+            sSpecialAnswerRow1 += g_sSpecialClueEnd;
         }
         else
         {
-            sSpecialAnswerRow1 += g_sSpecialClueEnd;
             sSpecialAnswerRow1 += SG_Size_Answer(1);
+            sSpecialAnswerRow1 += g_sSpecialClueEnd;
         }
     }
     let sClueAnswer = '';

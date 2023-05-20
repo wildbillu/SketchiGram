@@ -130,7 +130,8 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     let B_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
     // switch
     GRB_ForRowLetter_SetAnswerPlayer(A_cAnswerPlayer, B_iRow, B_iLetter);
-    TC_History_Add_GridLetterPlaced(A_cAnswerPlayer, B_iRow, B_iLetter)
+//    TC_History_Add_GridLetterPlaced(A_cAnswerPlayer, B_iRow, B_iLetter);
+    TC_History_Add_GridLetterPlaced(B_cAnswerPlayer, A_iRow, A_iLetter);
     GRB_ForRowLetter_SetAnswerPlayer(B_cAnswerPlayer, A_iRow, A_iLetter);
     // since we moved letters we no longer if the status is correct
     if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
@@ -150,9 +151,27 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     SyncTo_OthersLoseFocus('NoOne');
 }
 
+function PlacedByPlayer(cLetter, iRow, iLetter)
+{ // the moves actually represent letters placed by the player
+    let iGridMoves = TC_aHistory_GridMoves.length;
+    let bPlaced = false;
+    for ( let i = 0; i < iGridMoves; i++ )
+    {       
+        let sEntry = TC_aHistory_GridMoves[i];
+        let iRowMove = TC_History_GridEntry_iRow(sEntry);
+        let iLetterMove = TC_History_GridEntry_iLetter(sEntry);
+        let cLetterMove = TC_History_GridEntry_cLetter(sEntry);
+        if ( iRowMove == iRow && iLetterMove == iLetter && cLetterMove == cLetter )
+            bPlaced = true;
+    }
+    return bPlaced;
+}
+
+
 function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
 {
-    let aPossibles = [];
+    let aPossibles_All = [];
+    let aPossibles_NotPlaced = [];
     for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
     {
         for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
@@ -162,25 +181,32 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
                 let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
                 if ( cAnswerPlayer == sUpper )  
                 {
-                    aPossibles.push(GRBMS_MakeId(iRow, iLetter));
+                    let sId = GRBMS_MakeId(iRow, iLetter);
+                    aPossibles_All.push(sId);
+                    if ( !PlacedByPlayer(cAnswerPlayer, iRow, iLetter) )
+                        aPossibles_NotPlaced.push(sId);
                 }
             }
         }
     }
-    let iPossibles = aPossibles.length;
-    if ( iPossibles == 0 )
+    let iPossibles_All = aPossibles_All.length;
+    let iPossibles_NotPlaced = aPossibles_NotPlaced.length;
+    setlineAdd('A:' + iPossibles_All +'$')
+    setlineAdd('NP:' + iPossibles_NotPlaced +'$')
+    if ( iPossibles_All == 0 )
         return '';
-    if ( iPossibles == 1 || !bRejectSquaresThatMake2Changes )
-        return aPossibles[0];
-    for ( let iC = 0; iC < iPossibles; iC++ )
-    {
-        let iRow    = GRBMS_RowFromId(aPossibles[iC])
-        let iLetter = GRBMS_LetterFromId(aPossibles[iC]);
-        let cThisOne = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
-        if ( cThisOne != cLetterOfSquareBeingFixed )
-            return aPossibles[iC];
-    }
-    return aPossibles[0];
+    if ( iPossibles_All == 1 )
+        return aPossibles_All[0];
+    if ( iPossibles_NotPlaced != 0 )
+        return GRBMS_PickOne(aPossibles_NotPlaced);
+    return GRBMS_PickOne(aPossibles_All)
+}
+
+function GRBMS_PickOne(aPossibles)
+{
+    let iPossibles = aPossibles.length;
+    let iPicked = TC_GetRandomInt(iPossibles);
+    return aPossibles[iPicked];
 }
 
 function GRBMS_SetAllowedGridLetters()
