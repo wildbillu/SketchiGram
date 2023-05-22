@@ -191,8 +191,6 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
     }
     let iPossibles_All = aPossibles_All.length;
     let iPossibles_NotPlaced = aPossibles_NotPlaced.length;
-    setlineAdd('A:' + iPossibles_All +'$')
-    setlineAdd('NP:' + iPossibles_NotPlaced +'$')
     if ( iPossibles_All == 0 )
         return '';
     if ( iPossibles_All == 1 )
