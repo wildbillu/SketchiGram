@@ -69,7 +69,7 @@ function GRBMS_ondown(e, iRow, iLetter)
         g_GRBMS_TM_iInitialY = Math.round(e.touches[0].clientY);
     }
     rect = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
-    rectBox = document.getElementById("Div_Grid").getBoundingClientRect();
+    rectBox = GetBoundingClientRectAbsolute(document.getElementById("Div_Grid"));
     g_GRBMS_MM_Picked_Start_iLeft = Math.round(rect.left) - Math.round(rectBox.left);
     g_GRBMS_MM_Picked_Start_iTop = Math.round(rect.top) - Math.round(rectBox.top);
 //
@@ -111,10 +111,6 @@ function GRBMS_mouseUp(event)
     Status_Check(false);
 }
 
-function GRBMS_PickFromCenter(Picked_iRow, Picked_iLetter, Candidate_iRow, Candidate_iLetter)
-{
-    return true;
-}
 
 function GRBMS_mouseMove_New(e)
 {
@@ -122,15 +118,9 @@ function GRBMS_mouseMove_New(e)
         return;
     if ( !g_GRBMS_MM_Picked_elem )
         return;
-// change style fo      
-//    if ( g_Move_bAlterButtonStyleOfActiveSquare )
-    {
-        if ( !g_GRBMS_MM_Picked_bAlteredForMove )
-            TC_GRBMS_SetPickedForMove(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter)
-
-            //GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocusBeingMoved);
-        g_GRBMS_MM_Picked_bAlteredForMove = true;
-    }
+    if ( !g_GRBMS_MM_Picked_bAlteredForMove )
+       TC_GRBMS_SetPickedForMove(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter)
+    g_GRBMS_MM_Picked_bAlteredForMove = true;
 // this is the part that moves the active square    
     let x = 0.0;
     let y = 0.0;
@@ -158,31 +148,36 @@ function GRBMS_mouseMove_New(e)
     g_GRBMS_MM_Picked_elem.style.top =  MakePixelString(iTopRelative);
 // now we look to see what is over the top     
     let rectActive = GetBoundingClientRectAbsolute(g_GRBMS_MM_Picked_elem);
-// 
+// this is where it gets the point to the middle
     let FindElements_iX = rectActive.left + g_GRBMS_Square_iSize/2; 
     let FindElements_iY = rectActive.top + g_GRBMS_Square_iSize/2; 
+
+
+
     a_elem = document.elementsFromPoint(FindElements_iX, FindElements_iY)
     let iE = 0;
     let bFound = false;
     while ( iE < a_elem.length && !bFound )
     {
         let sId = a_elem[iE].id;
-        if ( sId.startsWith('GRBMSID_') && sId != g_GRBMS_MM_Picked_sId && sId != g_GRBMS_MM_Found_sId )
+        if ( sId.startsWith('GRBMSID_') && sId != g_GRBMS_MM_Picked_sId ) //&& sId != g_GRBMS_MM_Found_sId )
         {
-            let iRow = GRBMS_RowFromId(sId);
+            let iRow    = GRBMS_RowFromId(sId);
             let iLetter = GRBMS_LetterFromId(sId);
             if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
             {
-                if ( g_Move_bAlterButtonStyleOfActiveSquare && g_GRBMS_MM_Found_sId != '' )
-                    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_cCode_Inactive);
-                if ( GRBMS_PickFromCenter(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, iRow, iLetter) )
+                if ( IsLocationInGridSquareWithBuffer(iRow, iLetter, FindElements_iX, FindElements_iY) )
                 {
                     bFound = true;
                     g_GRBMS_MM_Found_iRow = iRow;
                     g_GRBMS_MM_Found_iLetter = iLetter;
                     g_GRBMS_MM_Found_sId = GRBMS_MakeId(iRow, iLetter);
-                    if ( g_Move_bAlterButtonStyleOfActiveSquare )
-                        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_cCode_ActiveRow);
+                }
+                else
+                { // we are over the square, but not within the bound
+                    g_GRBMS_MM_Found_iRow = -1;
+                    g_GRBMS_MM_Found_iLetter = -1;
+                    g_GRBMS_MM_Found_sId = '';
                 }
             }
         }
@@ -190,8 +185,6 @@ function GRBMS_mouseMove_New(e)
     }
     e.preventDefault();
 }
-
-
 
 function TC_GRBMS_IsPickedLetterCorrectForFoundLocation(iPickedRow, iPickedLetter, iFoundRow, iFoundLetter)
 {

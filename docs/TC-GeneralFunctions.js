@@ -2,24 +2,41 @@
 // 
 // to detect window back forth...
 
-function GRBMS_PickingAdjustment(iRow, iLetter, iPickedX, iPickedY)
-{
-    let iBuffer = 6;
-    let elemGrid = document.getElementById('Div_Grid');
-    let rectGrid = elemGrid.getBoundingClientRect();
-    let sId = GRBMS_MakeId(iRow, iLetter);
-    let elemFound = document.getElementById(sId);
-    let rectFound = elemFound.getBoundingClientRect();
-    let elemFound_iLeft = Math.round(rectFound.left - rectGrid.left);
-    let elemFound_iTop  = Math.round(rectFound.top -  rectGrid.top);
-    let elemFound_iWidth = Math.round(rectFound.width);
-    let elemFound_iHeight = Math.round(rectFound.height);
+var g_GBRMS_fBufferFraction = .1;
+
+function IsLocationInGridSquareWithBuffer(iRow, iLetter, iPickedX, iPickedY)
+{ // use global coordinates
+    let fBuffer = g_GBRMS_fBufferFraction * g_GRBMS_Square_iSize;
+    let rectFoundSquare = GetBoundingClientRectAbsolute(document.getElementById(GRBMS_MakeId(iRow, iLetter)));
+// we need square relative to the grid top left
+    let elemFound_iLeft   = Math.round(rectFoundSquare.left);
+    let elemFound_iTop    = Math.round(rectFoundSquare.top );
+    let elemFound_iWidth  = Math.round(rectFoundSquare.width);
+    let elemFound_iHeight = Math.round(rectFoundSquare.height);
     let rectFoundRelative = new DOMRect(elemFound_iLeft, elemFound_iTop, elemFound_iWidth, elemFound_iHeight)
-    let rectFoundRelativeWithBuffer = MakeRectWithBuffer(rectFoundRelative, iBuffer);
+    let rectFoundRelativeWithBuffer = MakeRectWithBuffer(rectFoundRelative, fBuffer);
     let bWithin = IsPointWithinRect(rectFoundRelativeWithBuffer, iPickedX, iPickedY);
     return bWithin;
 }
 
+function MakeRectWithBuffer(rect, fBuffer)
+{
+    let iLeft   = rect.left + fBuffer;
+    let iTop    = rect.top  + fBuffer;
+    let iWidth  = rect.width - 2 * fBuffer;
+    let iHeight = rect.height - 2 * fBuffer;
+    let rectWithBuffer = new DOMRect(iLeft, iTop, iWidth, iHeight);
+    return rectWithBuffer;
+}
+
+function IsPointWithinRect(rect, iX, iY)
+{
+    if ( iX < rect.left ) return false;
+    if ( iX > rect.right ) return false;
+    if ( iY < rect.top ) return false;
+    if ( iY > rect.bottom ) return false;
+    return true;
+}
 
 function IsTrue(s){var b = false;if ( s == 'true')b = true;return b;}
 
@@ -48,24 +65,6 @@ function ForIdSetVisibility(sId, bVisible)
     document.getElementById(sId).style.visibility = sVisible;
 }
 
-function MakeRectWithBuffer(rect, iBuffer)
-{
-    let iLeft = rect.left + iBuffer;
-    let iTop  = rect.top  + iBuffer;
-    let iWidth = rect.width - 2 * iBuffer;
-    let iHeight = rect.height - 2 * iBuffer;
-    let rectWithBuffer = new DOMRect(iLeft, iTop, iWidth, iHeight);
-    return rectWithBuffer;
-}
-
-function IsPointWithinRect(rect, iX, iY)
-{
-if ( iX < rect.left ) return false;
-    if ( iX > rect.right ) return false;
-    if ( iY < rect.top ) return false;
-    if ( iY > rect.bottom ) return false;
-    return true;
-}
 
 function TC_LeftForCentering(iWidthElement)
 {

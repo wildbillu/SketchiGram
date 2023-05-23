@@ -9,7 +9,6 @@ var g_TC_SyncGridAndSpecialClueAnswers_bActive = false;
 var g_TC_ShowScratchArea = false;
 var g_TC_ShowCorrectInScratchArea = false;
 
-var g_Move_bAlterButtonStyleOfActiveSquare = false;
 var g_Move_bSetFocusToDroppedSquare = true;
 
 var g_Window_iWidth = 640;
