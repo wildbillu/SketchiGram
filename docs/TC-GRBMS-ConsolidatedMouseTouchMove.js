@@ -191,23 +191,7 @@ function GRBMS_mouseMove_New(e)
     e.preventDefault();
 }
 
-function GRBMS_PickingAdjustment(iRow, iLetter, iPickedX, iPickedY)
-{
-    let iBuffer = 6;
-    let elemGrid = document.getElementById('Div_Grid');
-    let rectGrid = elemGrid.getBoundingClientRect();
-    let sId = GRBMS_MakeId(iRow, iLetter);
-    let elemFound = document.getElementById(sId);
-    let rectFound = elemFound.getBoundingClientRect();
-    let elemFound_iLeft = Math.round(rectFound.left - rectGrid.left);
-    let elemFound_iTop  = Math.round(rectFound.top -  rectGrid.top);
-    let elemFound_iWidth = Math.round(rectFound.width);
-    let elemFound_iHeight = Math.round(rectFound.height);
-    let rectFoundRelative = new DOMRect(elemFound_iLeft, elemFound_iTop, elemFound_iWidth, elemFound_iHeight)
-    let rectFoundRelativeWithBuffer = MakeRectWithBuffer(rectFoundRelative, iBuffer);
-    let bWithin = IsPointWithinRect(rectFoundRelativeWithBuffer, iPickedX, iPickedY);
-    return bWithin;
-}
+
 
 function TC_GRBMS_IsPickedLetterCorrectForFoundLocation(iPickedRow, iPickedLetter, iFoundRow, iFoundLetter)
 {
