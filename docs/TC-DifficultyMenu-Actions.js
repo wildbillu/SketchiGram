@@ -6,9 +6,19 @@ function AdjustForInitialDifficultyLevel()
     {
         if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Hard )
         {
-            DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
-            TC_SetVisible("ScratchArea");
-            SG_CA_UpdateAndSetVisibility(false);
+            if ( g_bPuzzleSolved )
+            {
+                DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
+                SG_CA_UpdateAndSetVisibility(true);
+                TC_ThemeImage_Base_SetVisibility(false);
+            }
+            else
+            {
+                DM_ChangeToLevelHard(!g_AdjustForInitialDifficultyLevel_bNewPuzzle);
+                TC_SetVisible("ScratchArea");
+                SG_CA_UpdateAndSetVisibility(false);
+                TC_ThemeImage_Base_SetVisibility(true);
+            }
         }
         else if ( g_AdjustForInitialDifficultyLevel_iLevel == g_Difficulty_iLevel_Easy )
         {
@@ -25,6 +35,7 @@ function AdjustForInitialDifficultyLevel()
             g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Hard;
             TC_SetVisible("ScratchArea");
             SG_CA_UpdateAndSetVisibility(false);
+            TC_ThemeImage_Base_SetVisibility(false);            
         }
         else if ( g_Difficulty_iLevel_Settings == g_Difficulty_iLevel_Easy )
         {
