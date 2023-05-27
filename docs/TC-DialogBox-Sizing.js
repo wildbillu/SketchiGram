@@ -45,7 +45,7 @@ function DialogBox_OverallSizing()
     let iHeightButtons = iButtonHeightSingleRow;
     if ( iWidthButtons > g_DialogBox_Width_iMax )
     {
-        alert('need to make double row buttons');
+        setlineAdd('need to make double row buttons');
     }
     if ( iWidthButtons > iDialogWidth ) iDialogWidth = iWidthButtons;
 // whole dialog
@@ -94,7 +94,7 @@ function DialogBox_GetRectButton(sId, sText)
 // allow width to be 90% of max dialog width
     let iRows = Math.ceil(iButtonWidth / g_DialogBox_Button_Width_iMax );
     if ( iRows != 1 )
-        alert('need multirowbutton:' + sId)
+       setlineAdd('need multirowbutton:' + sId)
     let iFontSize = parseInt(window.getComputedStyle(elemButton, null).getPropertyValue('font-size'));    
     let iHeight = iFontSize * 1.2 * iRows;
     let rectButton = new DOMRect(0, 0, iButtonWidth, iHeight);

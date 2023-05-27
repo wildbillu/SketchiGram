@@ -37,13 +37,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="ThemeImage_Solved_Div" class="ThemeImage_Solved_Div TC_StartHidden">ThemeImage_Solved_Div</DIV>';
     sMain += '<DIV Id="ThemeImage_Popup_Div" class="ThemeImage_Popup_Div TC_StartHidden">ThemeImage_Popup_Div</DIV>';
     sMain += '<DIV Id="SharedDialog_Div" class="SharedDialog_Div TC_StartHidden">' + 'Box' + '<DIV>';
-//sMain += TC_Button_V2_InDiv('AAAA', false, 'TC_Text();', 'New');
     document.getElementById("Body_Any").innerHTML = sMain;
-}
-
-function TC_Text()
-{
-    alert('TC')
 }
 
 function TC_ActOnVisibilityChange(e)
@@ -61,7 +55,8 @@ function SG2_LoadAll(iSection)
     switch ( iSection)
     {
         case 0:
-// these reset global variables on reload or archive        
+// these reset global variables on reload or archive    
+            TC_SquaresPlaced_Initialize();
             g_GRBMS_bAcross = true;
             g_GRBMS_ActiveId_sAcross = '';
             g_GRBMS_ActiveId_sDown = '';

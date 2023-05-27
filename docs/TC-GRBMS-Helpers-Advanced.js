@@ -1,5 +1,89 @@
 // TC-GRBMS-Helpers-Advanced.js
 
+var g_bUseSquaresPlaced = true;
+
+function PlacedByPlayer_SquaresPlaced(iRow, iLetter)
+{
+    return TC_SquaresPlaced_IsSet(iRow, iLetter)
+}
+
+function PlacedByPlayer_History(cLetter, iRow, iLetter)
+{ // the moves actually represent letters placed by the player
+    let iGridMoves = TC_aHistory_GridMoves.length;
+    let bPlaced = false;
+    for ( let i = 0; i < iGridMoves; i++ )
+    {       
+        let sEntry = TC_aHistory_GridMoves[i];
+        let iRowMove = TC_History_GridEntry_iRow(sEntry);
+        let iLetterMove = TC_History_GridEntry_iLetter(sEntry);
+        let cLetterMove = TC_History_GridEntry_cLetter(sEntry);
+        if ( iRowMove == iRow && iLetterMove == iLetter && cLetterMove == cLetter )
+            bPlaced = true;
+    }
+    return bPlaced;
+}
+
+function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceWithMe, bRejectDual, cNow)
+{ 
+    // called on key up
+    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Expert ) 
+    { // in this case we just check to see if the 
+
+    }
+    let sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cReplaceWithMe, bRejectDual, cNow);
+    if ( sFoundId == '')
+        return sFoundId;
+    let B_iRow = GRBMS_RowFromId(sFoundId);
+    let B_iLetter = GRBMS_LetterFromId(sFoundId);
+    GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
+    return sFoundId;
+}
+
+function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
+{
+    let aPossibles_All = [];
+    let aPossibles_NotPlaced = [];
+    for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
+    {
+        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+        {
+            if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
+            { // shouldnt get here unless it is okay to change character
+                let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                if ( cAnswerPlayer == sUpper )  
+                {
+                    let sId = GRBMS_MakeId(iRow, iLetter);
+                    aPossibles_All.push(sId);
+                    let bPlaced = false;
+                    if ( g_bUseSquaresPlaced )
+                        bPlaced = PlacedByPlayer_SquaresPlaced(iRow, iLetter)
+                    else
+                        bPlaced = PlacedByPlayer_History(cAnswerPlayer, iRow, iLetter);
+                    if ( !bPlaced )
+                        aPossibles_NotPlaced.push(sId);
+                }
+            }
+        }
+    }
+    let iPossibles_All = aPossibles_All.length;
+    let iPossibles_NotPlaced = aPossibles_NotPlaced.length;
+    if ( iPossibles_All == 0 )
+        return '';
+    if ( iPossibles_All == 1 )
+        return aPossibles_All[0];
+    if ( iPossibles_NotPlaced != 0 )
+        return GRBMS_PickOne(aPossibles_NotPlaced);
+    return GRBMS_PickOne(aPossibles_All)
+}
+
+function GRBMS_PickOne(aPossibles)
+{
+    let iPossibles = aPossibles.length;
+    let iPicked = TC_GetRandomInt(iPossibles);
+    return aPossibles[iPicked];
+}
+
+
 function GRBMS_ForAll_SetStatusFromState()
 {
     for ( let iR = 0; iR < g_iGridWidth; iR++ )
@@ -130,8 +214,9 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     let B_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
     // switch
     GRB_ForRowLetter_SetAnswerPlayer(A_cAnswerPlayer, B_iRow, B_iLetter);
-//    TC_History_Add_GridLetterPlaced(A_cAnswerPlayer, B_iRow, B_iLetter);
     TC_History_Add_GridLetterPlaced(B_cAnswerPlayer, A_iRow, A_iLetter);
+    TC_SquaresPlaced_Set(A_iRow, A_iLetter)
+    TC_SquaresPlaced_Unset(B_iRow, B_iLetter)
     GRB_ForRowLetter_SetAnswerPlayer(B_cAnswerPlayer, A_iRow, A_iLetter);
     // since we moved letters we no longer if the status is correct
     if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
@@ -151,61 +236,7 @@ function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     SyncTo_OthersLoseFocus('NoOne');
 }
 
-function PlacedByPlayer(cLetter, iRow, iLetter)
-{ // the moves actually represent letters placed by the player
-    let iGridMoves = TC_aHistory_GridMoves.length;
-    let bPlaced = false;
-    for ( let i = 0; i < iGridMoves; i++ )
-    {       
-        let sEntry = TC_aHistory_GridMoves[i];
-        let iRowMove = TC_History_GridEntry_iRow(sEntry);
-        let iLetterMove = TC_History_GridEntry_iLetter(sEntry);
-        let cLetterMove = TC_History_GridEntry_cLetter(sEntry);
-        if ( iRowMove == iRow && iLetterMove == iLetter && cLetterMove == cLetter )
-            bPlaced = true;
-    }
-    return bPlaced;
-}
 
-
-function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
-{
-    let aPossibles_All = [];
-    let aPossibles_NotPlaced = [];
-    for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
-    {
-        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
-        {
-            if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
-            { // shouldnt get here unless it is okay to change character
-                let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-                if ( cAnswerPlayer == sUpper )  
-                {
-                    let sId = GRBMS_MakeId(iRow, iLetter);
-                    aPossibles_All.push(sId);
-                    if ( !PlacedByPlayer(cAnswerPlayer, iRow, iLetter) )
-                        aPossibles_NotPlaced.push(sId);
-                }
-            }
-        }
-    }
-    let iPossibles_All = aPossibles_All.length;
-    let iPossibles_NotPlaced = aPossibles_NotPlaced.length;
-    if ( iPossibles_All == 0 )
-        return '';
-    if ( iPossibles_All == 1 )
-        return aPossibles_All[0];
-    if ( iPossibles_NotPlaced != 0 )
-        return GRBMS_PickOne(aPossibles_NotPlaced);
-    return GRBMS_PickOne(aPossibles_All)
-}
-
-function GRBMS_PickOne(aPossibles)
-{
-    let iPossibles = aPossibles.length;
-    let iPicked = TC_GetRandomInt(iPossibles);
-    return aPossibles[iPicked];
-}
 
 function GRBMS_SetAllowedGridLetters()
 {

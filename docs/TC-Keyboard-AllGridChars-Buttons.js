@@ -46,7 +46,7 @@ function KB_AGC_SetKeyboardButtons()
         KB_AGC_SetBackspaceArrows(false);
         return;
     }
-    alert('bad mode')
+    setlineAdd('bad mode')
 }
 
 function KB_AGC_SetKeyboardButtons_Consolidated()

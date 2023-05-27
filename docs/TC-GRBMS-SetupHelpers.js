@@ -110,6 +110,6 @@ function GRBMS_ScrambleCorrectAnswersToPlayer(bReplaceCorrectAndCorrected)
     let iLettersPlaced = sPlaced.length;
     let iAllLettersToPlace = sAllLettersToPlace.length;
     if ( iLettersPlaced != iAllLettersToPlace)
-        alert('Mismatch.Placed:' + iLettersPlaced + 'ToPlace:' + iAllLettersToPlace)
+        setlineAdd('Mismatch.Placed:' + iLettersPlaced + 'ToPlace:' + iAllLettersToPlace)
 }
 

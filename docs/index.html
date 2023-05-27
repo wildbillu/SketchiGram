@@ -114,9 +114,6 @@
 <!-- MiniActionMenu -->
     <SCRIPT SRC="TC-MiniActionsMenu.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-MiniActionsMenu.css">
- <!-- Button -->
- <SCRIPT SRC="TC_Button_V2.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-TC-Button-V2.css">
 <!-- NewThemeImage -->
 <SCRIPT SRC="TC-ThemeImage-Base.js"></SCRIPT>
 <SCRIPT SRC="TC-ThemeImage-Extra.js"></SCRIPT>
@@ -134,6 +131,7 @@
 
 <!-- History -->
 <SCRIPT SRC="TC-History.js"></SCRIPT>
+<SCRIPT SRC="TC-SquaresPlaced.js"></SCRIPT>
 
 </HEAD>
 
@@ -151,7 +149,7 @@ function Dispatch()
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
     g_TC_iBiggestBottom = 0;
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.081';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.082';
 //
     TC_LoadPuzzleArchive();
     SG2_LoadAll(0);

@@ -100,6 +100,9 @@ var g_Cookie_bAnswersSolved = false;
 var g_Cookie_SA_EB_sWords = '||||||||||||';
 var g_Cookie_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
 var g_Cookie_Puzzle_Version_sV1000 = 'V1.000';
+var g_Cookie_Puzzle_Version_sV1000_iCount = 13;
+var g_Cookie_Puzzle_Version_sV1001 = 'V1.001';
+var g_Cookie_Puzzle_Version_sV1001_iCount = 14;
 var g_Cookie_Puzzle_Version_iCount = 13;
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
@@ -110,13 +113,24 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     let iEqual = sOurCookie_Puzzle.indexOf("=");
     if ( iEqual == -1 )
         return;
+//alert(sOurCookie_Puzzle)
+
     let sCookieValue = sOurCookie_Puzzle.substring(iEqual + 1);
+//alert(sCookieValue)
     let aOurValues = [];
     aOurValues = sCookieValue.split(g_cCookieDelimiter);
     let iOurValues = aOurValues.length;
     let iIndex = 0;
     let sVersion = aOurValues[iIndex++]; //1
-    if ( sVersion == g_Cookie_Puzzle_Version_sV1000 && iOurValues == g_Cookie_Puzzle_Version_iCount )
+    let bValidCookieVersionAndCount = false;
+    if ( sVersion == g_Cookie_Puzzle_Version_sV1000 && iOurValues == g_Cookie_Puzzle_Version_sV1000_iCount )
+        bValidCookieVersionAndCount = true;
+    if ( sVersion == g_Cookie_Puzzle_Version_sV1001 && iOurValues == g_Cookie_Puzzle_Version_sV1001_iCount )
+    bValidCookieVersionAndCount = true;
+//alert(sVersion)    
+//alert(iOurValues)    
+//alert(bValidCookieVersionAndCount)
+    if ( bValidCookieVersionAndCount )
     {
         g_Cookie_sPuzzle = aOurValues[iIndex++]; 
         g_Cookie_sAnswersPlayer = aOurValues[iIndex++];
@@ -129,6 +143,11 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
         g_Cookie_SA_EB_sWords = aOurValues[iIndex++];
         g_Cookie_SA_EB_sWordStatus =  aOurValues[iIndex++];
         g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(aOurValues[iIndex++]);
+        if ( sVersion == g_Cookie_Puzzle_Version_sV1001 ) // we can set this directly
+            g_SquaresPlaced_sStatus = aOurValues[iIndex++];
+        else
+            g_SquaresPlaced_sStatus = TC_SquaresPlaced_Initialize();
+//setline('SP:' + g_SquaresPlaced_sStatus)
         g_Cookie_bValid = true;
         return;
     }
@@ -149,7 +168,7 @@ function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnsw
 {
     let sCookieName = 'SG2' + '-' + g_sPuzzleNumber;
     let sCookie = '';
-    sCookie += g_Cookie_Puzzle_Version_sV1000; //0
+    sCookie += g_Cookie_Puzzle_Version_sV1001; //0
      sCookie += g_cCookieDelimiter;
     sCookie += sPuzzleName;//1
      sCookie += g_cCookieDelimiter;
@@ -176,8 +195,11 @@ function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnsw
      sCookie += g_cCookieDelimiter;
     let iTotalTime = (g_ElapsedTime_iSecondsPrevious + g_ElapsedTime_iSecondsThisAttempt);
     sCookie += iTotalTime.toString();//12
-     sCookie += g_cCookieDelimiter;
+    sCookie += g_cCookieDelimiter;
+    sCookie += g_SquaresPlaced_sStatus;
+    sCookie += g_cCookieDelimiter;
     sCookie += 99;
+//alert(sCookie)
 //
     var exdays = 365;
     const d = new Date();
