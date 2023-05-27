@@ -29,7 +29,7 @@ function TC_SetFinalPuzzleFileNames(sName)
     g_sPuzzleNumber = sName;
 }
 
-var g_File_iMinimumLines = 26;
+var g_File_iMinimumLines = 20;
 
 function TC_FullButtonName(sButton)
 {
