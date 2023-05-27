@@ -113,10 +113,7 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     let iEqual = sOurCookie_Puzzle.indexOf("=");
     if ( iEqual == -1 )
         return;
-//alert(sOurCookie_Puzzle)
-
     let sCookieValue = sOurCookie_Puzzle.substring(iEqual + 1);
-//alert(sCookieValue)
     let aOurValues = [];
     aOurValues = sCookieValue.split(g_cCookieDelimiter);
     let iOurValues = aOurValues.length;
@@ -127,9 +124,6 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
         bValidCookieVersionAndCount = true;
     if ( sVersion == g_Cookie_Puzzle_Version_sV1001 && iOurValues == g_Cookie_Puzzle_Version_sV1001_iCount )
     bValidCookieVersionAndCount = true;
-//alert(sVersion)    
-//alert(iOurValues)    
-//alert(bValidCookieVersionAndCount)
     if ( bValidCookieVersionAndCount )
     {
         g_Cookie_sPuzzle = aOurValues[iIndex++]; 
@@ -147,7 +141,6 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
             g_SquaresPlaced_sStatus = aOurValues[iIndex++];
         else
             g_SquaresPlaced_sStatus = TC_SquaresPlaced_Initialize();
-//setline('SP:' + g_SquaresPlaced_sStatus)
         g_Cookie_bValid = true;
         return;
     }
@@ -199,8 +192,6 @@ function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnsw
     sCookie += g_SquaresPlaced_sStatus;
     sCookie += g_cCookieDelimiter;
     sCookie += 99;
-//alert(sCookie)
-//
     var exdays = 365;
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));

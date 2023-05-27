@@ -65,8 +65,8 @@ function GRBMS_ondown(e, iRow, iLetter)
     }
     else if ( g_GRBMS_Move_sActive == g_GRBMS_MoveActive_sTouch )
     {
-        g_GRBMS_TM_iInitialX = Math.round(e.touches[0].clientX);
-        g_GRBMS_TM_iInitialY = Math.round(e.touches[0].clientY);
+        g_GRBMS_MM_iInitialX = Math.round(e.touches[0].clientX);
+        g_GRBMS_MM_iInitialY = Math.round(e.touches[0].clientY);
     }
     rect = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
     rectBox = GetBoundingClientRectAbsolute(document.getElementById("Div_Grid"));
@@ -89,10 +89,11 @@ function GRBMS_mouseUp(event)
         g_GRBMS_MM_Picked_elem.style.left = MakePixelString(g_GRBMS_MM_Picked_iLetter*g_GRBMS_Square_iSize);
         g_GRBMS_MM_Picked_elem.style.top = MakePixelString(g_GRBMS_MM_Picked_iRow*g_GRBMS_Square_iSize);
         g_GRBMS_MM_Picked_elem.style.zIndex = 0;
+        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocus);
         GRBMS_clearPickedAndFoundVariables();
         return;   
     }
-    GRBMS_SwitchAnswers(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter);
+    GRBMS_SwitchAnswers(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter); // new
     bDropped = true;
     GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_cCode_Inactive);
     let elemFound = document.getElementById(GRBMS_MakeId(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter));
@@ -110,7 +111,6 @@ function GRBMS_mouseUp(event)
     GRBMS_clearPickedAndFoundVariables();
     Status_Check(false);
 }
-
 
 function GRBMS_mouseMove_New(e)
 {
@@ -137,8 +137,8 @@ function GRBMS_mouseMove_New(e)
     {
         x = Math.round(e.touches[0].clientX);
         y = Math.round(e.touches[0].clientY);
-        xMoved = x - g_GRBMS_TM_iInitialX;
-        yMoved = y - g_GRBMS_TM_iInitialY;
+        xMoved = x - g_GRBMS_MM_iInitialX;
+        yMoved = y - g_GRBMS_MM_iInitialY;
     }
     else
     g_GRBMS_MM_Picked_elem.style.position = "absolute";
@@ -151,13 +151,16 @@ function GRBMS_mouseMove_New(e)
 // this is where it gets the point to the middle
     let FindElements_iX = rectActive.left + g_GRBMS_Square_iSize/2; 
     let FindElements_iY = rectActive.top + g_GRBMS_Square_iSize/2; 
-
-
-
+    FindElements_iX += window.scrollX;
+    FindElements_iY += window.scrollY;
+//
     a_elem = document.elementsFromPoint(FindElements_iX, FindElements_iY)
     let iE = 0;
     let bFound = false;
-    while ( iE < a_elem.length && !bFound )
+    let iElements = a_elem.length;
+    let sElemId = ""
+    for( let ii = 0; ii < iElements; ii++){sElemId += a_elem[ii].id + '|';}
+    while ( iE < iElements && !bFound )
     {
         let sId = a_elem[iE].id;
         if ( sId.startsWith('GRBMSID_') && sId != g_GRBMS_MM_Picked_sId ) //&& sId != g_GRBMS_MM_Found_sId )

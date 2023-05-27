@@ -147,16 +147,11 @@ function TC_ProcessFileContents(sFileContents)
 {
     let iUpdated = 0;
     let aLines = sFileContents.split('\n');
-//alert(sFileContents)    
     let iLines = aLines.length;
-//    alert(iLines)
     for ( let iLine = 0; iLine < iLines; iLine++)
     {
-//alert(iLine)
         let sLine = aLines[iLine];
-//alert(sLine)        
         sLine = sLine.substring(0, sLine.length - 1)
-//        alert(sLine)        
 // the first are ones we will use as locals                
         if ( sLine.startsWith('sGridAnswers=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswers = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('iGridWidth=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){iGridWidth = parseInt(aEntries[1]); iUpdated++;}}
@@ -191,7 +186,6 @@ function TC_ProcessFileContents(sFileContents)
     if ( iUpdated < g_File_iMinimumLines )
      {
         setlineAdd('F.Update:' + iUpdated + '.Need:' + g_File_iMinimumLines)
-//        alert('F.Update:' + iUpdated + '.Need:' + g_File_iMinimumLines)
         return false;
      }   
 
