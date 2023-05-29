@@ -2,7 +2,7 @@
 // 
 // to detect window back forth...
 
-var g_GBRMS_fBufferFraction = .1;
+var g_GBRMS_fBufferFraction = .05;
 
 function IsLocationInGridSquareWithBuffer(iRow, iLetter, iPickedX, iPickedY)
 { // use global coordinates
@@ -169,8 +169,6 @@ function ScreenSizes()
     g_iHTML_Height= Math.round(document.documentElement.getBoundingClientRect().height);
 }
 
-
-
 function setlineAdd(sAdd)
 {
     if ( !g_bDisplayMessages)
@@ -200,6 +198,23 @@ function replaceAt(sOriginal, index, sReplacement)
     let sNew = sOriginal.substring(0, index);
     sNew += sReplacement
     sNew += sOriginal.substring(index + sReplacement.length);
+    return sNew;
+}
+
+function FixSpecialCharacters(sOriginal)
+{
+    iTM = sOriginal.indexOf('%26');
+    if ( iTM == -1 )
+        return sOriginal;
+    let sNow = replaceMultiAt(sOriginal, iTM, '%26', '&trade;')
+    return sNow;
+}
+
+function replaceMultiAt(sOriginal, index, sOld, sReplacement) 
+{
+    let sNew = sOriginal.substring(0, index);
+    sNew += sReplacement
+    sNew += sOriginal.substring(index + sOld.length - 1 + sReplacement.length);
     return sNew;
 }
 

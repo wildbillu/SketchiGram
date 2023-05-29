@@ -189,10 +189,7 @@ function KB_AGC_FindAndChangeFirstNotYetCorrect(cLetter)
         let cButtonLetter = g_KB_Buttons_a_of_cLetters[i];
         let bCorrect = false;
         if ( cButtonLetter == cLetter && !bCorrect )
-        {
-            KB_AGC_SetButtonPlacedCorrectly(i)
             bFound = true;
-        }
         i++;
     }
 }

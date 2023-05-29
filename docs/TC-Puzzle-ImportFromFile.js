@@ -125,7 +125,6 @@ function TC_UseFileContents()
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
         g_bUsedCookie = true;
-//        g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Settings;
         g_AdjustForInitialDifficultyLevel_bActive = true;
         g_AdjustForInitialDifficultyLevel_bNewPuzzle = false;
         g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_Settings;
@@ -139,13 +138,14 @@ function TC_UseFileContents()
         g_AdjustForInitialDifficultyLevel_bNewPuzzle = true;
         g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_OnNewPuzzle;
     }
-    //    setline(sFilename + '.Updated:' + iUpdated + ';');
     return true;
 }
 
 function TC_ProcessFileContents(sFileContents)
 {
     let iUpdated = 0;
+    let iTM = 0;
+    let bAll = false;
     let aLines = sFileContents.split('\n');
     let iLines = aLines.length;
     for ( let iLine = 0; iLine < iLines; iLine++)
@@ -173,15 +173,15 @@ function TC_ProcessFileContents(sFileContents)
         else if ( sLine.startsWith('sClueTypes=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sClueTypes = aEntries[1]; iUpdated++;}}
         // these we set directly
         else if ( sLine.startsWith('sPuzzleDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleDate = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sPuzzleName=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleName = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sPuzzleTitle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleTitle = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('ST_sClue_Itself=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_ST_sClue_Itself = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sSpecialClueBefore=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueBefore = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sSpecialClueBeforeLine2=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueBeforeLine2 = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sSpecialClueMiddle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueMiddle = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sSpecialClueEnd=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueEnd = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sPuzzleCreditAuthor=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditAuthor = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sPuzzleCreditDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditDate = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sPuzzleName=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleName = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('sPuzzleTitle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleTitle = FixSpecialCharacters(aEntries[1]); iUpdated++;;}}
+        else if ( sLine.startsWith('ST_sClue_Itself=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_ST_sClue_Itself = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('sSpecialClueBefore=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueBefore = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('sSpecialClueBeforeLine2=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueBeforeLine2 = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('sSpecialClueMiddle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueMiddle = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('sSpecialClueEnd=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueEnd = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('sPuzzleCreditAuthor=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditAuthor = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('sPuzzleCreditDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditDate = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
     }
     if ( iUpdated < g_File_iMinimumLines )
      {

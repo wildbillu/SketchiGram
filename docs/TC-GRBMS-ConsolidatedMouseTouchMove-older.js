@@ -153,12 +153,10 @@ function GRBMS_mouseMove_New(e)
 //        g_GRBMS_MM_Picked_elem.style.position = "absolute";
     let iLeftRelative = g_GRBMS_MM_Picked_Start_iLeft + xMoved;
     let iTopRelative = g_GRBMS_MM_Picked_Start_iTop + yMoved;
-
     g_GRBMS_MM_Picked_elem.style.left = MakePixelString(iLeftRelative);
     g_GRBMS_MM_Picked_elem.style.top =  MakePixelString(iTopRelative);
 // now we look to see what is over the top     
-//let rectActive = GetBoundingClientRectAbsolute(g_GRBMS_MM_Picked_elem);
-let rectActive = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
+    let rectActive = GetBoundingClientRectAbsolute(g_GRBMS_MM_Picked_elem);
 // 
     let FindElements_iX = rectActive.left + g_GRBMS_Square_iSize/2; 
     let FindElements_iY = rectActive.top + g_GRBMS_Square_iSize/2; 
@@ -170,14 +168,11 @@ let rectActive = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
         let sId = a_elem[iE].id;
         if ( sId.startsWith('GRBMSID_') && sId != g_GRBMS_MM_Picked_sId && sId != g_GRBMS_MM_Found_sId )
         {
-
             let iRow = GRBMS_RowFromId(sId);
             let iLetter = GRBMS_LetterFromId(sId);
             if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
-            { // this one uses absolute position 
-                let FindElements_iX_Scroll = FindElements_iX + window.scrollX;
-                let FindElements_iY_Scroll = FindElements_iY + window.scrollY;
-                if ( IsLocationInGridSquareWithBuffer(iRow, iLetter, FindElements_iX_Scroll, FindElements_iY_Scroll) )
+            {
+                if ( IsLocationInGridSquareWithBuffer(iRow, iLetter, FindElements_iX, FindElements_iY) )
                 {
                     bFound = true;
                     g_GRBMS_MM_Found_iRow = iRow;

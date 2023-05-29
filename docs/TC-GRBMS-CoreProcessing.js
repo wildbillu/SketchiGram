@@ -1,6 +1,8 @@
 // TC-GRBMS-CoreProcessing.js
 
 
+
+
 function GRBMS_onfocus(elem)
 {
     let sThisId = elem.id;
@@ -67,7 +69,6 @@ function GRBMS_onkeyup(key, iRow, iLetter)
         return;
     }
 // we want to switch with square that has iLetter
-// for now just pick first one (even if more than one)
     let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     let sFoundId = GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, sUpper, !g_bAllowCorrectLettersToChange, cNow)
     if ( sFoundId == '' )
@@ -89,26 +90,20 @@ function GRBMS_ReplaceAt(cLetter, iRow, iLetter)
         return 'Not Valid For Focus/Change'
     var bValidLetter = g_GRBMS_sAllowedGridLetters.includes(cLetter);
     if ( !bValidLetter )
-    {
-//        KB_Mini_SetInstructionLine('');   
         return 'letter (' + cLetter + ' ) not in grid'
-    }
 // now reject if same as square with focus
     var cAnswerThisSquare = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     if ( cLetter == cAnswerThisSquare )
-    {
-//        KB_Mini_SetInstructionLine('');   
         return 'Letter Same as Exising';
-    }
 // we want to switch with square that has iLetter
 // for now just pick first one (even if more than one)
-    var bRejectDoubleSwap = true;
+    let bRejectDoubleSwap = true;
     let cLetterOfSquareBeingReplaced = GRB_ForRowLetter_GetAnswer(iRow, iLetter)
-    var sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cLetter, bRejectDoubleSwap, cLetterOfSquareBeingReplaced);
+    let sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cLetter, bRejectDoubleSwap, cLetterOfSquareBeingReplaced);
     if ( sFoundId == '' )
         return 'NoValidChoiceFor:' + cLetter
-    var B_iRow = GRBMS_RowFromId(sFoundId);
-    var B_iLetter = GRBMS_LetterFromId(sFoundId);
+    let B_iRow = GRBMS_RowFromId(sFoundId);
+    let B_iLetter = GRBMS_LetterFromId(sFoundId);
     GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
     KB_Mini_SetInstructionLine('');   
     Status_Check();
@@ -122,23 +117,4 @@ function GRBMS_onkeypress(event)
     return false;
 }
 
-function GRBMS_WouldPlacingWithThisLetterNeedToMoveGoldenSquare(cReplaceWithMe)
-{
 
-}
-
-
-function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceWithMe, bRejectDual, cNow)
-{
-    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Expert ) 
-    { // in this case we just check to see if the 
-
-    }
-    var sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cReplaceWithMe, bRejectDual, cNow);
-    if ( sFoundId == '')
-        return sFoundId;
-    let B_iRow = GRBMS_RowFromId(sFoundId);
-    let B_iLetter = GRBMS_LetterFromId(sFoundId);
-    GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
-    return sFoundId;
-}

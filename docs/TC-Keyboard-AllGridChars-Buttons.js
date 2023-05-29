@@ -271,18 +271,6 @@ function KB_AGC_SetButtonEnabledClass(iButton, bEnabled)
     elemButton.className = sClass;
 }
 
-function KB_AGC_SetButtonPlacedCorrectly(iButton)
-{
-    setlineAdd('fm2')
-    return;
-    let sId = KB_AllGridChars_MakeButtonId(iButton);
-    let elemButton = document.getElementById(sId);
-    let sClass = 'KB_Mini_Button KB_Mini_ButtonLetter_Disabled';
-    if ( g_KB_Buttons_Narrow )
-        sClass += '_Narrow'
-    elemButton.className = sClass;
-}
-
 function KB_GetButtonWidth()
 {
     let elemTest = document.getElementById("Test")

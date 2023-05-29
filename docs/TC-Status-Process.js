@@ -37,7 +37,7 @@ function Status_Check(bNonPlayerFixes)
         TC_ThemeImage_Solved_ShowPopup();
         if ( g_SpecialClueFrame_bActive ) TC_ShowSpecialClueAnswers();
     }
-    else if ( !g_TC_Status_bFirstCheck && ( g_TC_Status_iChanges > 0 ) && !g_bPrintedFormat )
+    else if ( !g_bPuzzleSolved && !g_TC_Status_bFirstCheck && ( g_TC_Status_iChanges > 0 ) && !g_bPrintedFormat )
     {
         let sMessageStyle = g_ResultMessage_sStyle_Positive;
         if ( bNonPlayerFixes )
@@ -169,8 +169,7 @@ function Status_Check_Grid()
     let sMessage = CAB_CheckForCorrectAnswer();
     if ( sMessage != '' )
         Status_Check_AddChange(sMessage);
-//        setline(g_TC_iGridAnswers_Correct + '|' + g_TC_iGridAnswers)
-        if ( g_TC_iGridAnswers_Correct == g_TC_iGridAnswers )
+    if ( g_TC_iGridAnswers_Correct == g_TC_iGridAnswers )
         g_bGridSolved = true;
     else
         g_bGridSolved = false;
