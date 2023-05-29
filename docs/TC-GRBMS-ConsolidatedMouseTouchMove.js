@@ -88,6 +88,7 @@ function GRBMS_mouseUp(event)
         g_GRBMS_MM_Picked_elem.style.left = MakePixelString(g_GRBMS_MM_Picked_iLetter*g_GRBMS_Square_iSize);
         g_GRBMS_MM_Picked_elem.style.top = MakePixelString(g_GRBMS_MM_Picked_iRow*g_GRBMS_Square_iSize);
         g_GRBMS_MM_Picked_elem.style.zIndex = 0;
+        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocus);
         GRBMS_clearPickedAndFoundVariables();
         return;   
     }
@@ -102,7 +103,7 @@ function GRBMS_mouseUp(event)
     g_GRBMS_MM_Picked_elem.style.left = MakePixelString(g_GRBMS_MM_Picked_iLetter*g_GRBMS_Square_iSize);
     g_GRBMS_MM_Picked_elem.style.top = MakePixelString(g_GRBMS_MM_Picked_iRow*g_GRBMS_Square_iSize);
     g_GRBMS_MM_Picked_elem.style.zIndex = 0;
-    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_Inactive);
+    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_cCode_Inactive);
     GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocus);
     GRBMS_ForAll_SetStatusFromState()
     GRBMS_MoveToNextAvailable(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter)
@@ -158,7 +159,7 @@ function GRBMS_mouseMove_New(e)
     g_GRBMS_MM_Picked_elem.style.top =  MakePixelString(iTopRelative);
 // now we look to see what is over the top     
 //let rectActive = GetBoundingClientRectAbsolute(g_GRBMS_MM_Picked_elem);
-let rectActive = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
+    let rectActive = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
 // 
     let FindElements_iX = rectActive.left + g_GRBMS_Square_iSize/2; 
     let FindElements_iY = rectActive.top + g_GRBMS_Square_iSize/2; 

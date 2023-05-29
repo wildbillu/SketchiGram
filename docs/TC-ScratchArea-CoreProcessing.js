@@ -118,7 +118,6 @@ function TC_SA_LoseFocus()
     let elemWithFocus = document.getElementById(g_SA_Focus_sId);
     elemWithFocus.blur();
     document.getElementById("ScratchArea_Text").style.backgroundColor = 'white';
-
     g_SA_Focus_sId = '';
 }
 
@@ -143,7 +142,7 @@ function TC_SA_Focus(elemInputText)
     sValue = TC_SA_InsertCursorAt(sValue)
     elemInputText.innerHTML = sValue;
     document.getElementById("ScratchArea_Text").style.backgroundColor = 'lightgreen';
-    KB_AGC_SpecialButtonEnable(true);
+    KB_AGC_SpecialButtonsEnable();
 }
 
 

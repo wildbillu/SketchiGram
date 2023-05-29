@@ -86,10 +86,10 @@ function KB_AllGridChars_Adjust(bMove)
         if ( iWidthOfText > iKBCandidateWidth )
             iKBCandidateWidth = iWidthOfText;
         let rect = KB_AGC_FindBoundsOfButtons()
-        let iWidthLetters = rect.width + 10; //for padding
+        let iWidthLetters = rect.width + 30; //for padding
         if ( iWidthLetters > iKBCandidateWidth )
             iKBCandidateWidth = iWidthLetters;
-        iKBLettersHeight = rect.height + 10;
+        iKBLettersHeight = rect.height + 20;
         iKBWidth = iKBCandidateWidth;
     }
     let iKBLeft = 0;
@@ -117,9 +117,6 @@ function KB_AllGridChars_Adjust(bMove)
     elemInstructionsDiv.style.width = MakePixelString(iKBWidth);
     let rectInstructionsDiv = elemInstructionsDiv.getBoundingClientRect();
     elem_KB.style.height = MakePixelString(iKBLettersHeight + rectInstructionsDiv.height);
-
-    let elemKB_Mini_Div = document.getElementById('KB_Mini_Div');
-    elemKB_Mini_Div.style.height = MakePixelString(iKBLettersHeight + rectInstructionsDiv.height);
     if ( bMove ) 
     {
         let rect_KB = GetBoundingClientRectAbsolute(elem_KB);
@@ -180,20 +177,6 @@ function KB_AllGridChars_Setup()
     return iRows;
 }
 
-function KB_AGC_FindAndChangeFirstNotYetCorrect(cLetter)
-{
-    let bFound = false;
-    let i = 0;
-    while ( i < g_KB_Buttons_a_of_cLetters.length && !bFound )
-    {
-        let cButtonLetter = g_KB_Buttons_a_of_cLetters[i];
-        let bCorrect = false;
-        if ( cButtonLetter == cLetter && !bCorrect )
-            bFound = true;
-        i++;
-    }
-}
-
 function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
 {
     let eInstructions = document.getElementById("KB_Mini_Instructions_Div");
@@ -211,7 +194,7 @@ function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
     eInstructions.innerHTML = sInstructions;
 }
 
-function KB_AGC_SpecialButtonEnable(bEnabled)
+function KB_AGC_SpecialButtonsEnable()
 { 
     let bVisible = false;
     if ( g_SA_Focus_sId != '' )
