@@ -56,6 +56,7 @@ function SG2_LoadAll(iSection)
     {
         case 0:
 // these reset global variables on reload or archive    
+            g_CAB_Square_iSize  = 40;
             TC_SquaresPlaced_Initialize();
             g_GRBMS_bAcross = true;
             g_GRBMS_ActiveId_sAcross = '';
@@ -68,7 +69,6 @@ function SG2_LoadAll(iSection)
             g_TC_Status_bFirstCheck = true;
             DM_AdjustSettingsForDifficultyLevel_ExpertValuesOnly();
             TC_History_Clear();
-// want to start things invisible
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             TC_LoadPuzzleArchive_FromFile();
             GetAndSplitCookies();
@@ -168,7 +168,15 @@ function SG2_LoadAll(iSection)
             }
             SG_MakeSpecialCluesAnswerStrings()
             AdjustForInitialDifficultyLevel()
-//            openFullscreen();
+            if ( !g_bPuzzleSolved ) 
+            {
+                ForIdSetVisibility('SG_Clues_Div', false);
+                for ( let iClue = 0; iClue < g_CAB_aAnswers.length; iClue++ )
+                {
+                    if ( !g_CA_bShowSpecial || !TC_ForIndexIsClueTypeSpecial(iClue) )
+                        ForIdSetVisibility(SG_MakeClueTextId(iClue), false);
+                }
+            }
             break;
         default:
             alert('error section:' + iSection)                    
@@ -178,6 +186,7 @@ function SG2_LoadAll(iSection)
 
 function SG2_SetVisibles()
 {
+
     let elemBody_Any = document.getElementById("Body_Any");
     elemBody_Any.className = 'Body_Any_AfterLoad'
     elemBody_Any.style.backgroundColor = 'white'

@@ -44,6 +44,14 @@ function GetQueryLinePuzzleName()
 
 function TC_GetOverrideName()
 {
+// first see if there is a puzzle in the archive for the date
+    let sToday = TC_Archive_MakeTodayDateString();
+    let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
+    if ( iArchiveIndex != -1 )
+    {
+        let sName = g_TC_Archive_aPuzzleNames[iArchiveIndex];
+        return sName;
+    }
     let sTextFileToLookFor = 'StartingPuzzle.txt'; 
     let sStartingPuzzle = '';
     let sFileContents = TC_GetFile(sTextFileToLookFor, 'puzzle');
@@ -115,7 +123,7 @@ function TC_UseFileContents()
 {   // now we need to figure out whether to use any cookie settings
     HandleCookiesOnStart();    
     g_bUsedCookie = false;
-    if ( g_Cookie_bValid && g_Cookie_sPuzzle == g_sPuzzleName )
+    if ( g_Cookie_bValid )
     { 
         CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, 
             g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes);
@@ -173,8 +181,7 @@ function TC_ProcessFileContents(sFileContents)
         else if ( sLine.startsWith('sClueTypes=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sClueTypes = aEntries[1]; iUpdated++;}}
         // these we set directly
         else if ( sLine.startsWith('sPuzzleDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleDate = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sPuzzleName=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleName = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
-        else if ( sLine.startsWith('sPuzzleTitle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleTitle = FixSpecialCharacters(aEntries[1]); iUpdated++;;}}
+        else if ( sLine.startsWith('sPuzzleTitle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleTitle = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
         else if ( sLine.startsWith('ST_sClue_Itself=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_ST_sClue_Itself = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
         else if ( sLine.startsWith('sSpecialClueBefore=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueBefore = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
         else if ( sLine.startsWith('sSpecialClueBeforeLine2=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueBeforeLine2 = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
@@ -182,6 +189,7 @@ function TC_ProcessFileContents(sFileContents)
         else if ( sLine.startsWith('sSpecialClueEnd=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sSpecialClueEnd = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
         else if ( sLine.startsWith('sPuzzleCreditAuthor=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditAuthor = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
         else if ( sLine.startsWith('sPuzzleCreditDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditDate = FixSpecialCharacters(aEntries[1]); iUpdated++;}}
+        else if ( sLine.startsWith('iCAB_SquareHeight=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_CAB_Square_iSize = parseInt(aEntries[1]); iUpdated++;}}
     }
     if ( iUpdated < g_File_iMinimumLines )
      {
