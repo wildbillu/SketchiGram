@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle041
 sPuzzleDate=2023-05-31
-sPuzzleTitle=The animals are in charge
+sPuzzleTitle=A Fractured Idiom by Commander Literal%26
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=RAIDORSOTINGCATS
@@ -16,7 +16,7 @@ sAnswersSpecialClueLocations=SSSD|SSSD|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN;
 sAnswersPlayer=----|----|----|----|----|----|----|----
 sAnswersPlayerStatus=NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
 sAnswerLocations=7 Across|4 Down|1 Across|1 Down|5 Across|3 Down|6 Across|2 Down
-ST_sClue_Itself=A Fractured Idiom by Commander Literal%26trade
+ST_sClue_Itself=The animals are in charge
 ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=Reigning 
 sSpecialClueMiddle= and 

@@ -1,7 +1,6 @@
 sPuzzleNumber=puzzle042
 sPuzzleDate=2023-05-31
-sPuzzleName=Go forth and prosper
-sPuzzleTitle=Go forth and prosper
+sPuzzleTitle=A Fractured Adage by Commander Literal%26
 iGridWidth=4
 iGridHeight=4
 sGridAnswers=TREEWILDACAISENT
@@ -17,7 +16,7 @@ sAnswersSpecialClueLocations=SDSS|SDSS
 sAnswersPlayer=----|----|----|----|----|----|----|----
 sAnswersPlayerStatus=NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
 sAnswerLocations=5 Across|2 Down|7 Across|3 Down|1 Across|4 Down|1 Down|6 Across
-ST_sClue_Itself=A Fractured Adage by Commander Literal%26trade
+ST_sClue_Itself=Go forth and prosper
 ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=Sow your 
 sSpecialClueMiddle= 

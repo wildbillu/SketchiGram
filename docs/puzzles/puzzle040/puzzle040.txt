@@ -1,6 +1,5 @@
 sPuzzleNumber=puzzle040
 sPuzzleDate=2023-05-31
-sPuzzleName=Flutters in the breeze
 sPuzzleTitle=Flutters in the breeze
 iGridWidth=5
 iGridHeight=5
@@ -17,7 +16,7 @@ sAnswersPlayerStatus=NNNNN|NNNNN|NNNNN|NNNNN|NNNNN|NNNNN|NNNNN|NNNNN|NNNNN|NNNNN
 sAnswersSpecialClueLocations=SSSSS|NNNNN
 sAnswerLocations=4 Down|7 Across|9 Across|5 Down|1 Across|8 Across|2 Down|1 Down|6 Across|3 Down
 sClueTypes=S|N|N|N|N|N|N|N|N|N|N|N
-ST_sClue_Itself=A Fractured Adage by Commander Literal%26trade
+ST_sClue_Itself=A Fractured Adage by Commander Literal%26
 ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=Life's a 
 sSpecialClueMiddle=
