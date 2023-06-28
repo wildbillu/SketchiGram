@@ -8,7 +8,7 @@ function TC_ThemeImage_GetAspectRatio_ForceLoad()
     let sIdOuter = "ThemeImage_All_GetAspectRatio_Div"
     let elem = document.getElementById(sIdOuter);
     let sImage = '';
-    sImage += '<img Id="ThemeImage_All_GetAspectRatio_ImageItself_Div" class="ThemeImage_Base_ImageItself_Div Start_Hidden"  src="' + g_PuzzlePath_sName_Image_Extra + '" alt="BB" height="200">';
+    sImage += '<img Id="ThemeImage_All_GetAspectRatio_ImageItself_Div" class="ThemeImage_Base_ImageItself_Div TC_StartHidden"  src="' + g_PuzzlePath_sName_Image_Extra + '" alt="BB" height="200">';
     elem.innerHTML = sImage;
 }
 
@@ -21,7 +21,7 @@ function TC_ThemeImage_GetAspectRatio_Calculate()
 function TC_ThemeImage_Base_Create()
 {
     let sImage = '';
-    sImage += '<img Id="ThemeImage_Base_ImageItself_Div" onclick="TC_ThemeImage_Base_TogglePopup()" class="ThemeImage_Base_ImageItself_Div Start_Hidden"  src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200">';
+    sImage += '<img Id="ThemeImage_Base_ImageItself_Div" onclick="TC_ThemeImage_Base_TogglePopup()" class="ThemeImage_Base_ImageItself_Div TC_StartHidden"  src="' + g_PuzzlePath_sName_Image + '" alt="BB" height="200">';
     let elemDivGridImage = document.getElementById('ThemeImage_Base_Div');
     elemDivGridImage.innerHTML = sImage;
 }
@@ -34,7 +34,6 @@ function TC_ThemeImage_Base_SizeAndPosition()
     // need the size to be height between bottom of KB and top of Archive Button
     let elemBottomMatter = document.getElementById("Div_BottomMatter");
     let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter)
-
     let iTopBottomMatter = g_TC_iBiggestBottom_NoExtras - rectBottomMatter.height;
     let iHeight = iTopBottomMatter - iBottomKB - 2 * g_TC_Padding_Inter_Vertical_iSize;
     let iWidth = g_ThemeImage_All_fWidthToHeight * iHeight;
@@ -50,8 +49,6 @@ function TC_ThemeImage_Base_SizeAndPosition()
     let elemImageItself = document.getElementById("ThemeImage_Base_ImageItself_Div");
     elemImageItself.style.height = MakePixelString(iHeight);
     elemImageItself.style.width  = MakePixelString(iWidth);
-//    ForIdSetVisibility('ThemeImage_Base_Div', true)
-//    ForIdSetVisibility('ThemeImage_Base_ImageItself_Div', true)
 }
 function TC_ThemeImage_Base_OnClosePopup()
 {

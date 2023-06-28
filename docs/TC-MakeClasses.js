@@ -3,7 +3,7 @@
 function TC_MakeClassesForSquares()
 {
     let sheetBase = document.createElement('style')
-    let sBaseInner = '.TC_Square_Base{left:0px;top:0px;background-color:white;border-collapse:collapse;outline:none;border:0px solid black;caret-color:transparent;background-repeat:no-repeat;display:table-cell;}'
+    let sBaseInner = '.TC_Square_Base{left:0px;top:0px;background-color:white;padding:0px;border-collapse:collapse;outline:none;border:0px solid black;caret-color:transparent;background-repeat:no-repeat;display:table-cell;}'
     sheetBase.innerHTML = sBaseInner;
     document.body.appendChild(sheetBase);
 // now determine the sizes based on gridwidth
@@ -24,6 +24,9 @@ function TC_MakeClassesForSquares()
         case 7:
             g_GRBMS_Square_iSize = 54; iFontSize = 35; iLineHeight = 54;
             break;
+        case 8:
+            g_GRBMS_Square_iSize = 50; iFontSize = 32; iLineHeight = 50;
+            break;
     }
 // first for the Grid
     let sheetElement = document.createElement('style')
@@ -38,17 +41,17 @@ function TC_MakeClassesForSquares()
     document.body.appendChild(sheetCharacter);
 // now for the CAB / Special Clue 
 // right now this is always size 40 - but done so could change in the future
-    g_CAB_Square_iSize  = 40;
-    iFontSize = 31;
-    iLineHeight = 40;
     let sheetCABElement = document.createElement('style')
     let sElementCABInner = '.TC_Square_CAB_Element{width:' + g_CAB_Square_iSize + 'px;height:' + g_CAB_Square_iSize + 'px;background-size:' + g_CAB_Square_iSize + 'px;}';
     sheetCABElement.innerHTML = sElementCABInner;
     document.body.appendChild(sheetCABElement);
 // the character
     let sheetCABCharacter = document.createElement('style')
+    let CAB_iLineHeight = g_CAB_Square_iSize;
+    let CAB_iFontSize   = g_CAB_Square_iSize * .8;
+
     let sCharacterCABInner = '.TC_Square_CAB_Character{text-align:center;font-family:Arial, Helvetica, sans-serif;font-style:normal;'
-    sCharacterCABInner += 'line-height:' + iLineHeight + 'px;font-size:' + iFontSize + 'px;}'
+    sCharacterCABInner += 'line-height:' + CAB_iLineHeight + 'px;font-size:' + CAB_iFontSize + 'px;}'
     sheetCABCharacter.innerHTML = sCharacterCABInner;
     document.body.appendChild(sheetCABCharacter);
 }

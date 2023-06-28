@@ -152,7 +152,7 @@ function KB_AllGridChars_Setup()
     if ( g_bPrintedFormat )
         sInner += ' Grid Letters - Greyed Are Placed Correctly ';
     else
-        sInner += ' Exchange Highlighted Letter with Selection ';
+        sInner += ' Select Entry Area Then Use Keyboard ';
     sInner += '</DIV>'
     sInner += '<TABLE Id="KB_Mini_ButtonRow_Div" class="KB_Mini_ButtonRow">';
     for (let iRow = 0; iRow < iRows; iRow ++ )
@@ -188,7 +188,7 @@ function KB_Mini_SetInstructionLine(cLetterBeingReplaced)
     }
     else
     {
-        sInstructions = 'fix me'
+        sInstructions = 'Select Entry Area Then Use Keyboard';
         KB_SetUsageMode(g_KB_Mini_sUsageMode_Idle)
     }
     eInstructions.innerHTML = sInstructions;

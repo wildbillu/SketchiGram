@@ -6,12 +6,9 @@ var g_bAnswersSolved = false;
 
 // base defines
 var g_sPuzzleDate = '';
-var g_sPuzzleName = ''; // not used
 var g_sPuzzleTitle = '';
 var g_sPuzzleCreditAuthor = 'By Sketchi Bill';
 var g_sPuzzleCreditDate = 'March 1, 2023';
-
-
 //
 var g_ST_sClue_Itself = '';
 //
@@ -26,7 +23,7 @@ var g_TC_Padding_Right_iSize = 2;
 var g_TC_Padding_Top_iSize = 2;
 var g_TC_Padding_Bottom_iSize = 2;
 var g_TC_Padding_Inter_Horizontal_iSize = 2;
-var g_TC_Padding_Inter_Vertical_iSize = 2;
+var g_TC_Padding_Inter_Vertical_iSize = 8;
 
 var g_sToDisplay = '';
 

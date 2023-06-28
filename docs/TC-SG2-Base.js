@@ -13,7 +13,9 @@ function SG2_LoadMainElements()
 {
     let sMain = '';
     sMain += '<DIV Id="SpecialClue_Div" class="SpecialClue_Div TC_StartHidden">SpecialClue_Div</DIV>';    
-    sMain += TC_Archive_MakeMenu();
+//    sMain += TC_Archive_MakeMenu();
+    sMain += TC_Archive_MakeActivationButton();
+    sMain += TC_Archive_Consolidated_Make_Div();
     sMain += '<DIV Id="Div_PuzzleType" class="Div_PuzzleType TC_StartHidden">Div_PuzzleType</DIV>';
     sMain += '<DIV Id="Div_StatusControl_Left" class="StatusControl_Div_Left TC_StartHidden">Div_StatusControl_Left</DIV>';
     sMain += '<DIV Id="Div_StatusControl_Right" class="StatusControl_Div_Right TC_StartHidden">Div_StatusControl_Right</DIV>';
@@ -58,6 +60,8 @@ function SG2_LoadAll(iSection)
 // these reset global variables on reload or archive    
             g_CAB_Square_iSize  = 40;
             TC_SquaresPlaced_Initialize();
+            TC_Archive_ByDate_Clear();
+            g_TC_Archive_Menu_bActive = false;
             g_GRBMS_bAcross = true;
             g_GRBMS_ActiveId_sAcross = '';
             g_GRBMS_ActiveId_sDown = '';
@@ -70,6 +74,7 @@ function SG2_LoadAll(iSection)
             DM_AdjustSettingsForDifficultyLevel_ExpertValuesOnly();
             TC_History_Clear();
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
+            TC_LoadPuzzleArchive();
             TC_LoadPuzzleArchive_FromFile();
             GetAndSplitCookies();
             FromCookies_GetCurrentPuzzle();
@@ -78,6 +83,9 @@ function SG2_LoadAll(iSection)
             TC_InitializeFromFileOrLoadAsJS();
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
+            TC_Archive_ByDate_MakeAvailableButtons()
+            TC_Archive_ByDate_FillDivWithButtons();
+            TC_Archive_BySize_BaseMenu_SelectFromSize(6);
             GRBMS_SetAllowedGridLetters()
             if ( !g_bUsedCookie )
                 GRBMS_ScrambleCorrectAnswersToPlayer(false);
@@ -120,7 +128,7 @@ function SG2_LoadAll(iSection)
             TC_ThemeImage_Solved_Create();
             TC_ThemeImage_Popup_Create();
             TC_SetBottomMatter();
-            TC_Archive_AdjustMenu();
+            TC_Archive_Consolidated_Position_Div();
 // want to be just below             
             TC_ResultMessage_Setup();
             Status_Check(true);

@@ -2,12 +2,7 @@
 function TC_Puzzle_Load_AsJS()
 {
     g_sPuzzleDate     = '2022-10-21';
-    g_sPuzzleName     = 'EvilTwin';
     g_sPuzzleTitle    = "A Dr. Jekyll and Mr. Hyde Moment?"
-//    g_sPuzzleTitle    = "Perhaps no longer your favorite Beach Boy Song."
-//    g_sSpecialClueBefore = '"Wouldn\'t It Be'; 
-//    g_sSpecialClueBeforeLine2 = 'Nice If We'
-//    g_sSpecialClueEnd = '"'; 
     g_ST_sClue_Itself = 'Doppelg&#228;nger of the worst type?';
     g_sSpecialClueBefore = ''; 
     g_sSpecialClueMiddle = '    '; 
@@ -37,4 +32,5 @@ function TC_Puzzle_Load_AsJS()
     var sGridStatusPlayer           = 'GNNNNNNNNNNNNNGN';
     var sGridNumbering              = '1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0';
     GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations)
+    g_CAB_Square_iSize = 40;
 }

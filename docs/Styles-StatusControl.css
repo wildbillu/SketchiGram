@@ -2,7 +2,7 @@
 
 .StatusControl_Div_Left
 {
-    border: 0px solid  red;
+    border:0px solid red;
     position:absolute;
     vertical-align: middle;
     left:0px;
@@ -15,7 +15,7 @@
 
 .StatusControl_Div_Right
 {
-    border: 0px solid blue;
+    border:0px solid blue;
     position:absolute;
     vertical-align: middle;
     left:0px;
@@ -24,33 +24,4 @@
     width:100px;
     padding:0px;
     background-color:white;
-}
-
-.StatusControl_Title
-{
-    border:0px solid green;
-    width:90px;
-    position: relative;
-    text-align: center;
-    padding-top: 3px;
-    height: 26px;
-    color:blue;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-    font-size:20px;
-}
-
-.StatusControl_GR_CA_Stats
-{
-    width: 140px;
-    border:2px solid black;
-    position: absolute;
-    text-align: center;
-    padding-top: 3px;
-    height: 26px;
-    color:blue;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-    font-size:20px;
-    visibility: hidden;
 }

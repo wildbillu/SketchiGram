@@ -4,6 +4,87 @@
 
 var g_GBRMS_fBufferFraction = .05;
 
+function TC_MonthInWordsPlusYear(sYearMonth)
+{
+    let sYear = sYearMonth.slice(0, 4);
+    let sMonth = MonthYearToNameOfMonth(sYearMonth)
+    let sYearMonthName = sMonth + ' ' + sYear;
+    return sYearMonthName;
+}
+
+function MonthYearToNameOfMonth(sYearMonth)
+{
+    if ( sYearMonth.includes('-01') )
+        return 'January';
+    if ( sYearMonth.includes('-02') )
+        return 'Februar';
+    if ( sYearMonth.includes('-03') )
+        return 'March';
+    if ( sYearMonth.includes('-04') )
+        return 'April';
+    if ( sYearMonth.includes('-05') )
+        return 'May';
+    if ( sYearMonth.includes('-06') )
+        return 'June';
+    if ( sYearMonth.includes('-07') )
+        return 'July';
+    if ( sYearMonth.includes('-08') )
+        return 'August'
+    if ( sYearMonth.includes('-09') )
+        return 'September'
+    if ( sYearMonth.includes('-10') )
+        return 'October'
+    if ( sYearMonth.includes('-11') )
+        return 'November'
+    if ( sYearMonth.includes('-12') )
+        return 'December'
+}
+
+
+function TC_GetYearFromDate(sDate)
+{
+    iYear = parseInt(sDate.slice(0, 4));
+    return iYear;
+}
+
+function TC_GetMonthFromDate(sDate)
+{
+    iMonth = parseInt(sDate.slice(5, 7));
+    return iMonth;
+}
+
+function TC_GetDayFromDate(sDate)
+{
+    iMonth = parseInt(sDate.slice(8, 10));
+    return iMonth;
+}
+
+function TC_GetBoundingClientRectAbsoluteFromId(sId)
+{
+    return GetBoundingClientRectAbsolute(document.getElementById(sId));
+}
+
+function TC_SetWidthOfElementByIdIfExists(sId, iWidth)
+{
+    let elem = document.getElementById(sId)
+    if ( !elem )
+        return;
+    elem.style.width = MakePixelString(iWidth)
+}
+
+function TC_GetWidthOfInnerTextInPixels(sId)
+{
+    let elem = document.getElementById(sId)
+    return GetWidthOfTextInPixels(elem, elem.innerHTML);
+}
+
+function TC_GetHeightOfElementById(sId)
+{
+    let elem = document.getElementById(sId)
+    let rect = GetBoundingClientRectAbsolute(elem);
+    return rect.height;
+}
+
 function IsLocationInGridSquareWithBuffer(iRow, iLetter, iPickedX, iPickedY)
 { // use global coordinates
     let fBuffer = g_GBRMS_fBufferFraction * g_GRBMS_Square_iSize;
@@ -206,15 +287,37 @@ function FixSpecialCharacters(sOriginal)
     iTM = sOriginal.indexOf('%26');
     if ( iTM == -1 )
         return sOriginal;
-    let sNow = replaceMultiAt(sOriginal, iTM, '%26', '&trade;')
-    return sNow;
+    let bGotThemAll = false;
+    let sNew = sOriginal;  
+    while ( !bGotThemAll ) 
+    {
+        iTM = sNew.indexOf('%26');
+        if ( iTM == -1 )
+            bGotThemAll = true;
+        else 
+            sNew = replaceMultiAt(sNew, iTM, '%26', '&trade;')
+    }
+    return sNew;
+}
+
+function replaceMultiAtString(sOriginal, sOld, sReplacement) 
+{
+    let iIndex = sOriginal.indexOf(sOld);
+    if ( iIndex == -1 )
+        return sOriginal;
+    let sNew = sOriginal.substring(0, iIndex);
+    sNew += sReplacement;
+    let sEnd = sOriginal.substring(iIndex + sOld.length);
+    sNew += sEnd;
+    return sNew;
 }
 
 function replaceMultiAt(sOriginal, index, sOld, sReplacement) 
 {
     let sNew = sOriginal.substring(0, index);
-    sNew += sReplacement
-    sNew += sOriginal.substring(index + sOld.length - 1 + sReplacement.length);
+    sNew += sReplacement;
+    let sEnd = sOriginal.substring(index + sOld.length);
+    sNew += sEnd;
     return sNew;
 }
 

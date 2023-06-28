@@ -76,6 +76,8 @@ var g_bArchiveShow = true;
 var g_ThemeImage_Base_bActive = true;
 var g_ThemeImage_Base_iMinimumHeight = 250;
 
+var g_Archive_iTop = 100;
+
 function TC_Configuration_pick()
 {
   setNew();
@@ -175,7 +177,7 @@ function setNew()
     g_ThemeImage_Base_bActive = true;
     g_InfoSettingsButtons_bActive = true;
 //
-    gResultMessage_iTop = 150;
+    gResultMessage_iTop = 160;
     g_KB_Buttons_Narrow = false;
     g_KB_sWidthDeterminedBy =  'BiggestRight'; g_KB_fFractionAvailableWidth = 1.00; g_KB_sJustification = 'center';
     g_KB_bBackspaceKeyActive = true; g_KB_bArrowKeysActive = true;
@@ -191,12 +193,12 @@ function setNew()
     g_bSettingsActive = true;
     g_ShowExtraImageButton_bActive = false;
 
-    g_SpecialClueFrame_bActive = true; g_SpecialClueFrame_iTop = 70; 
+    g_SpecialClueFrame_bActive = true; g_SpecialClueFrame_iTop = 72; 
     g_bSpecialClueAnswerBoxesActive = true; g_SG_AM_bShowSpecialClueCircles  = true;
     g_SpecialClue_bShowImageButton = true;
-    g_Timer_bActive = true; g_Timer_iTop  = 150; g_Timer_sLabel = ''; // left from defined puzzle width
+    g_Timer_bActive = true; g_Timer_iTop  = 160; g_Timer_sLabel = ''; // left from defined puzzle width
 
-    g_HowTo_bActive = true;    g_HowTo_iTop    = 145;
+    g_HowTo_bActive = true;    g_HowTo_iTop    = 155;
     g_GR_GridOrInstruction_iTop = 58;
 
     g_bMessageVisible = true; 

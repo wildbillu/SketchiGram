@@ -9,16 +9,20 @@ function CAB_MakeSpecialClueAnswerDiv()
     elem_SpecialClue_Div.style.top = MakePixelString(g_SpecialClueFrame_iTop);
     let iSpecialClueWidth = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     elem_SpecialClue_Div.style.width = MakePixelString(iSpecialClueWidth);
-    let iHeight = g_TC_Padding_Top_iSize + 70;
+    let iHeight = g_TC_Padding_Top_iSize + 82;
     elem_SpecialClue_Div.style.height = MakePixelString(iHeight);
 // so now we add the ClueAnswer and Image Divs
     let sClueAnswerAndImageDivs = ''
-    sClueAnswerAndImageDivs += '<TABLE  cellpadding=0 cellspacing=0 class="SpecialClue_Table"><TR>'
+    sClueAnswerAndImageDivs += '<TABLE cellpadding=0 cellspacing=0 class="SpecialClue_Table"><TR>'
     sClueAnswerAndImageDivs += '<TD><DIV id="SpecialClue_ClueAnswer_Div" class="SpecialClue_ClueAnswer_Div">ClueAnswer</DIV></TD>';
     if ( g_SpecialClue_bShowImageButton )
         sClueAnswerAndImageDivs += '<TD><DIV id="SpecialClue_Image_Div" class="SpecialClue_Image_Div"></DIV></TD>';
     sClueAnswerAndImageDivs += '</TR></TABLE>'
     elem_SpecialClue_Div.innerHTML = sClueAnswerAndImageDivs;
+// now adjust in case one line
+
+
+
 // now fill the image section
     let iImageWidth = 0;
     if ( g_SpecialClue_bShowImageButton )
@@ -39,7 +43,8 @@ function CAB_MakeSpecialClueAnswerDiv()
     elemClueAnswer.style.width = MakePixelString(iClueAnswerWidth);
     elemClueAnswer.style.height = MakePixelString(iHeight);
     let sClueAnswerRow = '';
-    sClueAnswerRow += '<DIV Id="SpecialClueItself_Div" class="SpecialClueItself CA_Color_InActive">' + g_ST_sClue_Itself + '</DIV>'
+    // 
+    sClueAnswerRow += '<DIV Id="SpecialClueItself_Div" class="SpecialClueItself_Top_OneLine CA_Color_InActive">' + g_ST_sClue_Itself + '</DIV>'
     // we need to adjust the height of the Special clue depending on the size of the buttons
     // now we need to make the Special clue
     let iFudgedWidth = iClueAnswerWidth * .8;
@@ -80,6 +85,12 @@ function CAB_MakeSpecialClueAnswerDiv()
     sClueAnswerRow += '</DIV>'
     let elemSpecialClue_ClueAnswer_Div = document.getElementById("SpecialClue_ClueAnswer_Div");
     elemSpecialClue_ClueAnswer_Div.innerHTML = sClueAnswerRow;
+
+// now we adjust the Id="SpecialClueItself_Div"
+    let elemSpecialClueItself_Div = document.getElementById("SpecialClueItself_Div");
+// need to determine if need two lines
+    if ( g_ST_sClue_Itself.indexOf('<br>') != -1 )
+        elemSpecialClueItself_Div.className = "SpecialClueItself_Top_TwoLines";
 // now we need to set the table width so stuff is not spread out
     iSpecialClueWidth = SpecialClue_AdjustAndGetGetTotalWidth();
     let elemTable = document.getElementById("SpecialClue_Table");
@@ -109,7 +120,6 @@ function CAB_MakeButtonSingleHTML(iRow, iLetter)
     sFunctionsToCall += ' onclick="CAB_onfocus(this);"'
     sFunctionsToCall += ' onkeypress="return CAB_onkeypress(event);"';
     sFunctionsToCall += ' onkeyup="return CAB_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
-//    sFunctionsToCall += ' onfocus="CAB_onfocus(this);"';
     sInnerRowHTML += '<DIV tabindex="0" '
     sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
     sInnerRowHTML += ' class="' + g_CAB_Square_sClass + '" ';

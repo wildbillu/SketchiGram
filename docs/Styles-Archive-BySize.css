@@ -1,0 +1,42 @@
+/* Styles-Archive-BySize.css */
+
+.Archive_BySize_Preamble
+{
+  border:1px solid black;
+  padding:2px;
+  text-align:center;
+  width:100px;
+  font-size:16px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: black;
+  background-color: #eeeeee;
+}
+
+.Archive_Button_Selection_BySize_BaseMenu
+{
+  border:1px solid black;
+  padding:2px;
+  text-align:center;
+  width:60px;
+  font-size:16px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: black;
+  background-color: #eeeeee;
+}
+.Archive_Button_Selection_BySize_BaseMenu:hover{background-color: lightblue;}
+
+.Archive_Button_Selection_BySize_BaseMenu_Selected
+{
+  border:1px solid black;
+  padding:2px;
+  text-align:center;
+  width:60px;
+  font-size:16px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color: red;
+  background-color: #eeeeee;
+}
+

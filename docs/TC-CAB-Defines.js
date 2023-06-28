@@ -18,3 +18,4 @@ var g_CAB_abSetCorrect = [];
 // the classes and square size are defined in TC-MakeClasses
 var g_CAB_Square_sClass = 'TC_Square_Base TC_Square_CAB_Element TC_Square_CAB_Character TC_Button_Relative ';
 var g_CAB_Square_iSize  = 40;
+

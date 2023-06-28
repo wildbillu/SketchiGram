@@ -52,18 +52,27 @@ function TC_SetBottomMatter()
     let iHeight = SG_CA_HeightOrMinimum();
 //
     let elemBottomMatter = document.getElementById("Div_BottomMatter");
-    elemBottomMatter.innerHTML = '&copy; 2023 Northeast by Southwest, Inc.&nbsp;&nbsp;';
-    elemBottomMatter.innerHTML += TC_Archive_AddButtonOrExtraSpace();
-    elemBottomMatter.innerHTML += '&nbsp;&nbsp;SketchiToons&reg; by Sketchi Bill';
+    elemBottomMatter.innerHTML = '<DIV Id="BottomLeft" class="Div_BottomMatter_Left">&copy; 2023 Northeast by Southwest, Inc.&nbsp;&nbsp;</DIV>';
+    elemBottomMatter.innerHTML += TC_Archive_MakeActivationButton();
+    elemBottomMatter.innerHTML += '<DIV Id="BottomRight" class="Div_BottomMatter_Right">&nbsp;&nbsp;SketchiToons&reg; by Sketchi Bill</DIV>';
 //
     let elemKB = document.getElementById("KB_Mini_Div");
     let rectKB = GetBoundingClientRectAbsolute(elemKB);
     let iBottomMatterTop = rectKB.bottom + g_TC_Padding_Inter_Vertical_iSize + iHeight; 
     elemBottomMatter.style.top = MakePixelString(iBottomMatterTop);
+
+    let elemLeft = document.getElementById("BottomLeft");
+    elemLeft.style.left = MakePixelString(0);
+    let elemRight = document.getElementById("BottomRight");
     let iWidth = g_Window_iWidth - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
-    elemBottomMatter.style.width = MakePixelString(iWidth);
-    elemBottomMatter.style.left = MakePixelString(g_TC_Padding_Left_iSize);
-    //
+    elemRight.style.left = MakePixelString(iWidth-200); // specified width
+    elemBottomMatter.style.top = MakePixelString(iBottomMatterTop);
+
+    TC_Archive_ActivationButtonSetPosition(iBottomMatterTop)
+
+//    elemBottomMatter.style.width = MakePixelString(iWidth);
+//    elemBottomMatter.style.left = MakePixelString(g_TC_Padding_Left_iSize);
+//
     let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter);
     g_TC_iBiggestBottom_NoExtras = rectBottomMatter.bottom;
     let elemMessages = document.getElementById("Messages");

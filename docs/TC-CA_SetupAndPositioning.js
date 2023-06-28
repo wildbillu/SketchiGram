@@ -37,7 +37,9 @@ function SG_SetupClueAnswers()
     {
         let sInnerFullSpecialClue = '';
         sInnerFullSpecialClue += '<DIV Id="SG_SpecialClue_Outer_Div" class="SG_SpecialClue_Outer_Div TC_StartHidden InLineRelative">';
-        sInnerFullSpecialClue += '<DIV Id="SG_SpecialClue_ClueItselfText_Div" class="SG_SpecialClue_Text TC_StartHidden">' + g_ST_sClue_Itself + '</DIV>';
+// we remove any line break
+        let sClueItselfNoBreak = replaceMultiAtString(g_ST_sClue_Itself, '<br>', '');
+        sInnerFullSpecialClue += '<DIV Id="SG_SpecialClue_ClueItselfText_Div" class="SG_SpecialClue_Text TC_StartHidden">' + sClueItselfNoBreak + '</DIV>';
         let sWrappedSpecialClueItself = '<DIV Id="SG_SpecialClue_AnswerItselfText_Div" class="SG_SpecialClue_Text TC_StartHidden">'
         sWrappedSpecialClueItself += 'dummy1'; 
         sWrappedSpecialClueItself += '</DIV>'

@@ -153,17 +153,17 @@ function StoreCookie_Puzzle()
     let sAnswersStatusPlayer = g_CAB_aAnswersPlayerStatus.join('|');
     let sGridAnswersPlayer = g_aGridAnswersPlayer.join('')
     let sGridStatusPlayer = g_aGridStatusPlayer.join('')
-    let sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)
+    let sCookieToAdd = MakeCookie_Puzzle('Dummy', sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)
     document.cookie = sCookieToAdd;
 }
 
-function MakeCookie_Puzzle(sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)
+function MakeCookie_Puzzle(sDummy, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer)
 {
     let sCookieName = 'SG2' + '-' + g_sPuzzleNumber;
     let sCookie = '';
     sCookie += g_Cookie_Puzzle_Version_sV1001; //0
      sCookie += g_cCookieDelimiter;
-    sCookie += sPuzzleName;//1
+    sCookie += sDummy;//1
      sCookie += g_cCookieDelimiter;
     sCookie += sAnswersPlayer;//2
      sCookie += g_cCookieDelimiter;
