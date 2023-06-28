@@ -5,6 +5,14 @@ var g_TC_Archive_BySize_BaseMenu_iSizeMin = 4;
 var g_TC_Archive_BySize_BaseMenu_iSizeMax = 8;
 var g_TC_Archive_BySize_BaseMenu_aId   = [];
 
+function TC_Archive_BySize_Clear()
+{
+    g_TC_Archive_BySize_BaseMenu_iActiveSize = 4;
+    g_TC_Archive_BySize_BaseMenu_iSizeMin = 4;
+    g_TC_Archive_BySize_BaseMenu_iSizeMax = 8;
+    g_TC_Archive_BySize_BaseMenu_aId.length = 0;
+}
+
 function TC_Archive_BySize_SetWidths(iWidth)
 {
     let iSizeButtons = g_TC_Archive_BySize_BaseMenu_aId.length;

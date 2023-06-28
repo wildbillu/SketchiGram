@@ -61,6 +61,7 @@ function SG2_LoadAll(iSection)
             g_CAB_Square_iSize  = 40;
             TC_SquaresPlaced_Initialize();
             TC_Archive_ByDate_Clear();
+            TC_Archive_BySize_Clear()
             g_TC_Archive_Menu_bActive = false;
             g_GRBMS_bAcross = true;
             g_GRBMS_ActiveId_sAcross = '';
