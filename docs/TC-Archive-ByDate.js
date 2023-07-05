@@ -6,14 +6,15 @@ var TC_Archive_ByDate_YearMonths_iMaxToShow = 2;
 var TC_Archive_ByDate_YearMonths_sButtonText = [];
 var TC_Archive_ByDate_YearMonths_sButtonId   = [];
 var TC_Archive_ByDate_YearMonths_iActive   = -1;
-
 function TC_Archive_ByDate_SetWidths(iWidth)
 {
     let iWidthByDate = ( iWidth - 100 - 2 * 16 )/2;
-//    for ( let i = 0; i < TC_Archive_ByDate_YearMonths_sButtonText.length; i++ )
-    for ( let i = TC_Archive_ByDate_YearMonths_iStartAt; i < TC_Archive_ByDate_YearMonths_iStartAt + TC_Archive_ByDate_YearMonths_iMaxToShow; i++)
+    for ( let i = 0; i < TC_Archive_ByDate_YearMonths_sButtonText.length; i++ )
+//    for ( let i = TC_Archive_ByDate_YearMonths_iStartAt; i < TC_Archive_ByDate_YearMonths_iStartAt + TC_Archive_ByDate_YearMonths_iMaxToShow; i++)
     {
-        document.getElementById(TC_Archive_ByDate_YearMonths_sButtonId[i]).style.width = MakePixelString(iWidthByDate);
+        let elem = document.getElementById(TC_Archive_ByDate_YearMonths_sButtonId[i]);
+        if ( elem )
+            elem.style.width = MakePixelString(iWidthByDate);
     }
 }
 
@@ -119,14 +120,16 @@ function TC_Archive_ShowByDate_Later()
         return;
     TC_Archive_ByDate_YearMonths_iStartAt++;
     TC_Archive_ByDate_FillDivWithButtons()
+    TC_Archive_ByDate_SetWidths(g_TC_Archive_Menu_iWidth)
 }
 
 function TC_Archive_ShowByDate_Earlier()
 {
     if ( TC_Archive_ByDate_YearMonths_iStartAt == 0 )
         return;
-    TC_Archive_ByDate_YearMonths_iStartAt--;
+    iRestore = TC_Archive_ByDate_YearMonths_iStartAt--;
     TC_Archive_ByDate_FillDivWithButtons()
+    TC_Archive_ByDate_SetWidths(g_TC_Archive_Menu_iWidth)
 }        
 
 function TC_Archive_ByDate_BaseMenu_Id(i){let sId = 'A_ByDate_BaseMenu_' + i.toString();return sId;}

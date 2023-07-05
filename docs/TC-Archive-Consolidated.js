@@ -114,6 +114,7 @@ function TC_Archive_Consolidated_FillSelect_Div()
     }
     // now set all the widths
     let sWidth = MakePixelString(iBiggestWidth);
+    g_TC_Archive_Menu_iWidth = iBiggestWidth;
     let elemTitle = document.getElementById("Archive_Consolidated_Title")
     elemTitle.style.width = sWidth;
     let elemSelect = document.getElementById("Archive_Selections")
