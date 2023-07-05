@@ -1,6 +1,6 @@
 // TC-Archive-BySize.js
 
-var g_TC_Archive_BySize_BaseMenu_iActiveSize = 4;
+var g_TC_Archive_BySize_BaseMenu_iActiveSize = -1;
 var g_TC_Archive_BySize_BaseMenu_iSizeMin = 4;
 var g_TC_Archive_BySize_BaseMenu_iSizeMax = 8;
 var g_TC_Archive_BySize_BaseMenu_aId   = [];
@@ -44,13 +44,13 @@ function TC_Archive_BySize_BaseMenu_Select(e)
 {
     TC_Archive_ByDate_SetInactive();
     let iSize = TC_Archive_BySize_BaseMenu_SizeFromId(e.id)
-    TC_Archive_BySize_BaseMenu_SelectFromSize(iSize);
+    TC_Archive_BySize_BaseMenu_SelectFromSize(iSize, false);
     e.className = "Archive_Button_Selection_BySize_BaseMenu_Selected";
 }
 
-function TC_Archive_BySize_BaseMenu_SelectFromSize(iSize)
+function TC_Archive_BySize_BaseMenu_SelectFromSize(iSize, bForce)
 {
-    if ( iSize == g_TC_Archive_BySize_BaseMenu_iActiveSize )
+    if ( iSize == g_TC_Archive_BySize_BaseMenu_iActiveSize && !bForce )
         return; // don't do anything
     g_TC_Archive_BySize_BaseMenu_iActiveSize = iSize;
     TC_Archive_BySize_SetClasses()

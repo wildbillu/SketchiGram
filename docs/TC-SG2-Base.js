@@ -61,7 +61,7 @@ function SG2_LoadAll(iSection)
             g_CAB_Square_iSize  = 40;
             TC_SquaresPlaced_Initialize();
             TC_Archive_ByDate_Clear();
-            TC_Archive_BySize_Clear()
+            TC_Archive_BySize_Clear();
             g_TC_Archive_Menu_bActive = false;
             g_GRBMS_bAcross = true;
             g_GRBMS_ActiveId_sAcross = '';
@@ -86,7 +86,10 @@ function SG2_LoadAll(iSection)
             SG2_LoadMainElements();
             TC_Archive_ByDate_MakeAvailableButtons()
             TC_Archive_ByDate_FillDivWithButtons();
-            TC_Archive_BySize_BaseMenu_SelectFromSize(6);
+            let iSize = g_TC_Archive_BySize_BaseMenu_iActiveSize;
+            if ( iSize == -1 )
+                iSize = 4;
+            TC_Archive_BySize_BaseMenu_SelectFromSize(iSize, true);
             GRBMS_SetAllowedGridLetters()
             if ( !g_bUsedCookie )
                 GRBMS_ScrambleCorrectAnswersToPlayer(false);

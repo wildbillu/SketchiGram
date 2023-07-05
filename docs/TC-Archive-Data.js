@@ -1,5 +1,6 @@
 // TC-Archive-Data.js
 var g_TC_Archive_Menu_bActive = false;
+var g_TC_Archive_Menu_iWidth = 0;
 // these are the available puzzles of all sizes and dates
 var g_TC_Archive_aPuzzleNames = [];
 var g_TC_Archive_aPuzzleTitles = [];
@@ -57,14 +58,16 @@ function TC_Archive_MakeTodayDateString()
 
 function TC_Archive_FindPuzzleForDate(sDateToFind)
 {
-    let iEntries = g_TC_Archive_aPuzzleSizes.length;
+    let iEntries = g_TC_Archive_aPuzzleReleaseDate.length;
     if ( iEntries == 0 )
         return -1;
     for ( let i = 0; i < iEntries; i++ )
     {
         let sThisDate = g_TC_Archive_aPuzzleReleaseDate[i];
         if ( sThisDate == sDateToFind )
+        {
             return i;
+        }
     }
     return -1;
 }
