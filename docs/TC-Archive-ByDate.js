@@ -44,6 +44,8 @@ function TC_Archive_ShowByDate(e)
 {
     let iIndex = TC_Archive_ByDate_BaseMenu_DateIndexFromId(e.id)
     let sDesiredYearMonth = TC_Archive_ByDate_aYearMonths[iIndex];
+    g_TC_Archive_Cookie_sYearMonth = sDesiredYearMonth;
+    StoreCookie_Settings()
     TC_Archive_ByDate_YearMonths_iActive   = iIndex;
     TC_Archive_ClearActivePuzzles();
 // now we reset the Actives then get the menu rewritten

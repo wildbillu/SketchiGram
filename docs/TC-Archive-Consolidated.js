@@ -1,4 +1,24 @@
 // TC-Archive-Consolidated.js
+
+function Archive_PlayToday()
+{
+    let sToday = TC_Archive_MakeTodayDateString();
+    let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
+    if ( iArchiveIndex == -1 )
+        return;
+    g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iArchiveIndex];
+    g_TC_iBiggestBottom = 0;
+    g_SG_Clues_bCreated = false;
+    SG_UpdateAnswersCorrectInGridAndDisplay();
+    if ( g_DM_bActive ) g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert;
+    g_SG_bAnswersCorrectInGridSet = false;
+    g_bGridAndCA = false;
+    g_TC_Status_bFirstCheck = true;
+    TC_SA_ClearEntries();
+//
+    SG2_LoadAll(0);
+}
+
 function TC_Archive_Hide()
 {
     ForIdSetVisibility("Archive_Consolidated_Div", false);
@@ -139,6 +159,8 @@ function TC_Archive_Consolidated_FillSelect_Div()
 // now add the top element heights 
     iHeight += TC_GetHeightOfElementById("Archive_Consolidated_Title")
     iHeight += TC_GetHeightOfElementById("Archive_Button_Header")
+    if ( !g_TC_Archive_bDoingTodaysPuzzle )
+        iHeight += TC_GetHeightOfElementById("Archive_PlayToday")
     iHeight += TC_GetHeightOfElementById("ByDateButtons");
     iHeight += TC_GetHeightOfElementById("BySizeButtons");
     document.getElementById("Archive_Consolidated_Div").style.height = MakePixelString(iHeight);
@@ -154,13 +176,19 @@ function TC_Archive_Consolidated_Position_Div()
     elem.style.top = MakePixelString(g_Archive_iTop);
 }
 
+
 function TC_Archive_Consolidated_Make_Div()
 {
     let sArchive = ""
     sArchive += '<DIV Id="Archive_Consolidated_Div" class="Archive_Consolidated_Div TC_StartHidden" align=center>'
+    if ( !g_TC_Archive_bDoingTodaysPuzzle )
+    {
+        let sPlay = 'Play today\'s puzzle';
+        sArchive += '<DIV Id="Archive_PlayToday" class="Archive_PlayToday" onclick="Archive_PlayToday();" align=center>' + sPlay + '</DIV>';
+    }
     let sMainTitle = 'Archive'
     sArchive == sMainTitle;
-    sArchive += '<DIV Id="Archive_Consolidated_Title" class="Archive_Consolidated_Title" align=center>' + sMainTitle + '</DIV>'
+    sArchive += '<DIV Id="Archive_Consolidated_Title" class="Archive_Consolidated_Title" align=center>' + sMainTitle + '</DIV>';
     sArchive += '<DIV Id="Archive_Selections">';
     sArchive += TC_Archive_BySize_MakeButtons(); 
     sArchive += TC_Archive_ByDate_MakeButtonDiv();

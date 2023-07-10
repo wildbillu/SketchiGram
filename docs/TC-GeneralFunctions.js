@@ -253,25 +253,27 @@ function ScreenSizes()
 function setlineAdd(sAdd)
 {
     if ( !g_bDisplayMessages)
-        return;
+        return 0;
     g_sToDisplay += sAdd;
-    var elem = document.getElementById("Messages");
+    let elem = document.getElementById("Messages");
     if ( !elem )
-        return
+        return 1;
     elem.style.visibility = 'visible';
     elem.innerHTML = g_sToDisplay;
+    return 2;
 }
 
 function setline(sAdd)
 {
     if ( !g_bDisplayMessages)
-        return;
-    var elem = document.getElementById("Messages");
+        return 0;
+    let elem = document.getElementById("Messages");
     if ( !elem )
-        return;
+        return 1;
     elem.style.visibility = 'visible';
     g_sToDisplay = sAdd;
     elem.innerHTML = g_sToDisplay;
+    return 2;
 }
 
 function replaceAt(sOriginal, index, sReplacement) 

@@ -44,7 +44,6 @@ function CAB_onfocus(elem)
     return true;
 }
 
-
 function CAB_MoveFocus(iNewRow, iNewLetter)
 {
     if ( iNewRow > 1 )
@@ -70,9 +69,9 @@ function CAB_SetFocusToNext(iRow, iLetter)
     let bLastLetter = CAB_ForRowLetter_IsLastLetter(iRow, iLetter);
     if ( !bLastLetter && g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares )
     {
-        for (let  iL = iLetter + 1; iL < iLength; iL++)
+        for ( let  iL = iLetter + 1; iL < iLength; iL++ )
         {
-            if ( !CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
+//            if ( !CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
             {
                 CAB_MoveFocus(iRow, iL);
                 return;

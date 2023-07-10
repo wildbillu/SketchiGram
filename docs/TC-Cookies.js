@@ -5,6 +5,28 @@ var g_iStoredPuzzleCookies = 0;
 var g_aCookies = [];
 var g_iCookies = 0;
 
+var g_Cookie_bValid = false;
+var g_Cookie_sPuzzle = '';
+var g_Cookie_sAnswersPlayer = '';
+var g_Cookie_sStatusPlayer = '';
+var g_Cookie_sGridAnswersPlayer = '';
+var g_Cookie_sGridStatusPlayer = '';
+var g_Cookie_bPuzzleSolved = false;
+var g_Cookie_bGridSolved = false;
+var g_Cookie_bAnswersSolved = false;
+var g_Cookie_CAB_sAnswerType = 'S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N'
+var g_Cookie_SA_EB_sWords = '||||||||||||';
+var g_Cookie_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
+
+var g_Cookie_Puzzle_Version_sV1000 = 'V1.000';
+var g_Cookie_Puzzle_Version_sV1000_iCount = 13;
+var g_Cookie_Puzzle_Version_sV1001 = 'V1.001';
+var g_Cookie_Puzzle_Version_sV1001_iCount = 14;
+var g_Cookie_Puzzle_Version_sV1002 = 'V1.002';
+var g_Cookie_Puzzle_Version_sV1002_iCount = 15;
+
+var g_Cookie_Puzzle_Version_sCurrent = g_Cookie_Puzzle_Version_sV1002;
+
 function MakeAndStoreCookie_CurrentPuzzle()
 {
     let sValue = g_sPuzzleNumber;
@@ -88,22 +110,6 @@ function HandleCookiesOnStart()
     HandleCookie_Puzzle(sOurCookie_Puzzle);
     HandleCookie_Settings(sOurCookie_Settings);
 }
-var g_Cookie_bValid = false;
-var g_Cookie_sPuzzle = '';
-var g_Cookie_sAnswersPlayer = '';
-var g_Cookie_sStatusPlayer = '';
-var g_Cookie_sGridAnswersPlayer = '';
-var g_Cookie_sGridStatusPlayer = '';
-var g_Cookie_bPuzzleSolved = false;
-var g_Cookie_bGridSolved = false;
-var g_Cookie_bAnswersSolved = false;
-var g_Cookie_SA_EB_sWords = '||||||||||||';
-var g_Cookie_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
-var g_Cookie_Puzzle_Version_sV1000 = 'V1.000';
-var g_Cookie_Puzzle_Version_sV1000_iCount = 13;
-var g_Cookie_Puzzle_Version_sV1001 = 'V1.001';
-var g_Cookie_Puzzle_Version_sV1001_iCount = 14;
-var g_Cookie_Puzzle_Version_iCount = 13;
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
 {
@@ -123,27 +129,32 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     if ( sVersion == g_Cookie_Puzzle_Version_sV1000 && iOurValues == g_Cookie_Puzzle_Version_sV1000_iCount )
         bValidCookieVersionAndCount = true;
     if ( sVersion == g_Cookie_Puzzle_Version_sV1001 && iOurValues == g_Cookie_Puzzle_Version_sV1001_iCount )
-    bValidCookieVersionAndCount = true;
-    if ( bValidCookieVersionAndCount )
-    {
-        g_Cookie_sPuzzle = aOurValues[iIndex++]; 
-        g_Cookie_sAnswersPlayer = aOurValues[iIndex++];
-        g_Cookie_sStatusPlayer = aOurValues[iIndex++];
-        g_Cookie_sGridAnswersPlayer = aOurValues[iIndex++];
-        g_Cookie_sGridStatusPlayer = aOurValues[iIndex++];
-        g_Cookie_bPuzzleSolved = IsTrue(aOurValues[iIndex++]);
-        g_Cookie_bGridSolved = IsTrue(aOurValues[iIndex++]);
-        g_Cookie_bAnswersSolved = IsTrue(aOurValues[iIndex++]);
-        g_Cookie_SA_EB_sWords = aOurValues[iIndex++];
-        g_Cookie_SA_EB_sWordStatus =  aOurValues[iIndex++];
-        g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(aOurValues[iIndex++]);
-        if ( sVersion == g_Cookie_Puzzle_Version_sV1001 ) // we can set this directly
-            g_SquaresPlaced_sStatus = aOurValues[iIndex++];
-        else
-            g_SquaresPlaced_sStatus = TC_SquaresPlaced_Initialize();
-        g_Cookie_bValid = true;
-        return;
+        bValidCookieVersionAndCount = true;
+    if ( sVersion == g_Cookie_Puzzle_Version_sV1002 && iOurValues == g_Cookie_Puzzle_Version_sV1002_iCount )
+        bValidCookieVersionAndCount = true;
+    if ( !bValidCookieVersionAndCount )
+        return; // cookie not valid wont be used
+    g_Cookie_sPuzzle = aOurValues[iIndex++]; 
+    g_Cookie_sAnswersPlayer = aOurValues[iIndex++];
+    g_Cookie_sStatusPlayer = aOurValues[iIndex++];
+    g_Cookie_sGridAnswersPlayer = aOurValues[iIndex++];
+    g_Cookie_sGridStatusPlayer = aOurValues[iIndex++];
+    g_Cookie_bPuzzleSolved = IsTrue(aOurValues[iIndex++]);
+    g_Cookie_bGridSolved = IsTrue(aOurValues[iIndex++]);
+    g_Cookie_bAnswersSolved = IsTrue(aOurValues[iIndex++]);
+    g_Cookie_SA_EB_sWords = aOurValues[iIndex++];
+    g_Cookie_SA_EB_sWordStatus =  aOurValues[iIndex++];
+    g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(aOurValues[iIndex++]);
+
+    if ( sVersion == g_Cookie_Puzzle_Version_sV1000 ) // we can set this directly
+        g_SquaresPlaced_sStatus = TC_SquaresPlaced_Initialize();
+    else
+        g_SquaresPlaced_sStatus = aOurValues[iIndex++];
+    if ( sVersion == g_Cookie_Puzzle_Version_sV1002 ) 
+    { // really dont need this as the answer type is part of file 
+        g_Cookie_CAB_sAnswerType = aOurValues[iIndex++];
     }
+    g_Cookie_bValid = true;
 }
 
 function StoreCookie_Puzzle()
@@ -161,7 +172,7 @@ function MakeCookie_Puzzle(sDummy, sAnswersPlayer, sStatusPlayer, sGridAnswersPl
 {
     let sCookieName = 'SG2' + '-' + g_sPuzzleNumber;
     let sCookie = '';
-    sCookie += g_Cookie_Puzzle_Version_sV1001; //0
+    sCookie += g_Cookie_Puzzle_Version_sCurrent; //0
      sCookie += g_cCookieDelimiter;
     sCookie += sDummy;//1
      sCookie += g_cCookieDelimiter;
@@ -173,23 +184,23 @@ function MakeCookie_Puzzle(sDummy, sAnswersPlayer, sStatusPlayer, sGridAnswersPl
      sCookie += g_cCookieDelimiter;
     sCookie += sGridStatusPlayer//5
      sCookie += g_cCookieDelimiter;
-//    sCookie += iSeconds;//6
-//     sCookie += g_cCookieDelimiter;
-    sCookie += g_bPuzzleSolved;//7
+    sCookie += g_bPuzzleSolved;//6
      sCookie += g_cCookieDelimiter;
-    sCookie += g_bGridSolved;//8
+    sCookie += g_bGridSolved;//7
      sCookie += g_cCookieDelimiter;
-    sCookie += g_bAnswersSolved;//9
+    sCookie += g_bAnswersSolved;//8
      sCookie += g_cCookieDelimiter;
     let SA_EB_sWords = g_SA_aWords.join(g_cGeneralDelimiter);
-    sCookie += SA_EB_sWords;//10
+    sCookie += SA_EB_sWords;//9
      sCookie += g_cCookieDelimiter;
-    sCookie += g_SA_sWordStatus//11
+    sCookie += g_SA_sWordStatus//10
      sCookie += g_cCookieDelimiter;
     let iTotalTime = (g_ElapsedTime_iSecondsPrevious + g_ElapsedTime_iSecondsThisAttempt);
-    sCookie += iTotalTime.toString();//12
+    sCookie += iTotalTime.toString();//11
     sCookie += g_cCookieDelimiter;
-    sCookie += g_SquaresPlaced_sStatus;
+    sCookie += g_SquaresPlaced_sStatus;//12
+    sCookie += g_cCookieDelimiter;
+    sCookie += g_CAB_aAnswerType.join(g_cGeneralDelimiter); //02 version
     sCookie += g_cCookieDelimiter;
     sCookie += 99;
     var exdays = 365;

@@ -59,9 +59,11 @@ function SG2_LoadAll(iSection)
         case 0:
 // these reset global variables on reload or archive    
             g_CAB_Square_iSize  = 40;
+            Settings_SetupVersions();
             TC_SquaresPlaced_Initialize();
             TC_Archive_ByDate_Clear();
             TC_Archive_BySize_Clear();
+            g_TC_Archive_bDoingTodaysPuzzle = false;
             g_TC_Archive_Menu_bActive = false;
             g_GRBMS_bAcross = true;
             g_GRBMS_ActiveId_sAcross = '';
@@ -88,7 +90,12 @@ function SG2_LoadAll(iSection)
             TC_Archive_ByDate_FillDivWithButtons();
             let iSize = g_TC_Archive_BySize_BaseMenu_iActiveSize;
             if ( iSize == -1 )
-                iSize = 4;
+            {
+                if ( g_TC_Archive_Cookie_iSize != -1 )
+                    iSize = g_TC_Archive_Cookie_iSize;
+                else
+                    iSize = 4;
+            }
             TC_Archive_BySize_BaseMenu_SelectFromSize(iSize, true);
             GRBMS_SetAllowedGridLetters()
             if ( !g_bUsedCookie )

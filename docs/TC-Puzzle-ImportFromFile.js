@@ -50,6 +50,7 @@ function TC_GetOverrideName()
     if ( iArchiveIndex != -1 )
     {
         let sName = g_TC_Archive_aPuzzleNames[iArchiveIndex];
+        g_TC_Archive_bDoingTodaysPuzzle = true;
         return sName;
     }
     let sTextFileToLookFor = 'StartingPuzzle.txt'; 
@@ -139,7 +140,8 @@ function TC_UseFileContents()
     }
     if ( !g_bUsedCookie )
     {
-        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, SA_EB_sWords, SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes)
+        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, 
+                            SA_EB_sWords, SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes)
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations)
         g_ElapsedTime_iSecondsPrevious = 0;
         g_AdjustForInitialDifficultyLevel_bActive = true;

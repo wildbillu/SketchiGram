@@ -25,7 +25,7 @@ function CA_ClearIncorrect()
 function CAB_CheckForCorrectAnswer()
 {
     if ( g_CAB_abSetCorrect.length == 0)
-    { g_CAB_abSetCorrect.push(false);g_CAB_abSetCorrect.push(false);}
+        { g_CAB_abSetCorrect.push(false);g_CAB_abSetCorrect.push(false);}
 //
     let sMessage = '';
     let abCorrect = [];
@@ -71,14 +71,6 @@ function CAB_ForRowLetter_GetSpecialClueType(iRow, iLetter)
         return g_cCode_AnswerType_Normal;
     let sSpecialClueCodes = g_CAB_aAnswerSpecialClueType[iRow];
     return sSpecialClueCodes.charAt(iLetter);
-}
-
-function CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)
-{
-    var sAnswerPlayer = g_CAB_aAnswersPlayer[iRow];
-    var cAnswerPlayer = sAnswerPlayer.charAt(iLetter)
-    var bValid = CharValidEntry(cAnswerPlayer);
-    return bValid
 }
 
 function CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)

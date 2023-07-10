@@ -1,4 +1,7 @@
 // TC-Archive-Data.js
+var g_TC_Archive_Cookie_iSize = -1;
+var g_TC_Archive_Cookie_sYearMonth = '';
+var g_TC_Archive_bDoingTodaysPuzzle = false;
 var g_TC_Archive_Menu_bActive = false;
 var g_TC_Archive_Menu_iWidth = 0;
 // these are the available puzzles of all sizes and dates
@@ -140,7 +143,7 @@ function TC_LoadPuzzleArchive()
     TC_Archive_AddPuzzleToArchive_All('puzzle021', 'Store in Quaint New England', 6, '2023-06-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle017', 'Seedy Neighborhood', 4, '2023-06-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle018', 'Fried Southern Treat', 4, '2023-06-26')
-    TC_Archive_AddPuzzleToArchive_All('puzzle023', 'John Prine Sings To Her', 4, '2023-06-26')
+    TC_Archive_AddPuzzleToArchive_All('puzzle023', 'John Prine Sings To Her', 4, '2023-07-06')
     TC_Archive_AddPuzzleToArchive_All('puzzle025', 'Glory? Ore bust?', 5, '2023-08-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle026', 'Like the cat that swallowed the canary', 4, '2023-09-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle024', 'Odes do this', 4, '2023-10-26')
