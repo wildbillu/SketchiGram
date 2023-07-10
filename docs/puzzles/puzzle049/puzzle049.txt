@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle049
 sPuzzleDate=2023-06-25
-sPuzzleTitle=Life advice from Commander Literal%26
+sPuzzleTitle=Life advice 1 from Commander Literal%26
 iGridWidth=7
 iGridHeight=7
 sGridAnswers=..BSE...DATUM..ELOPE..MAGHA.CANYONSANC.NISDDE.YEN
