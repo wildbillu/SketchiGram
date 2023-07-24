@@ -53,3 +53,4 @@ xpuzzle053=Careful who you follow|7|2023-07-29
 puzzle054=Metaphor and Personification by Commander Literal&trade|6|2023-07-30
 puzzle051=Commander Literal&trade; embraces homonyms|4|2023-07-31
 puzzle036=It's not just for teens|5|2023-08-01
+puzzle055=Commander Literal&trade; is not much of an artisan|5|2023-08-02
