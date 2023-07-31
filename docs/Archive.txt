@@ -58,3 +58,4 @@ puzzle056=Holy Toledo, Commander Literal&trade; needs a new sweater|4|2023-08-03
 puzzle056=Holy Toledo, Commander Literal&trade; needs a new sweater|4|2023-08-03
 puzzle057=Commander Literal&trade; reaches for the skies|5|2023-08-04
 puzzle058=Commander Literal&trade; tackles the space-time continuum|4|2023-08-05
+xpuzzle059=Commander Literal&trade; shows his|5|2023-08-06
