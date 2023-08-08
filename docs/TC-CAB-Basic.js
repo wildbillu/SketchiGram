@@ -15,7 +15,7 @@ function CAB_ForRow_SetToInactive(iRow)
     if ( !TC_ForIndexIsClueTypeSpecial(iRow) )
         return;
     let iLength = g_CAB_aAnswers[iRow].length;
-    for (let iL = 0; iL < iLength; iL++ )
+    for ( let iL = 0; iL < iLength; iL++ )
         CAB_ForRowLetter_SetButton(iRow, iL, g_cCode_Inactive)
 }
 

@@ -20,9 +20,6 @@ function CAB_MakeSpecialClueAnswerDiv()
     sClueAnswerAndImageDivs += '</TR></TABLE>'
     elem_SpecialClue_Div.innerHTML = sClueAnswerAndImageDivs;
 // now adjust in case one line
-
-
-
 // now fill the image section
     let iImageWidth = 0;
     if ( g_SpecialClue_bShowImageButton )
@@ -77,7 +74,8 @@ function CAB_MakeSpecialClueAnswerDiv()
     if (  TC_ForIndexIsClueTypeSpecial(1) )
     {
         sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
-        sClueAnswerRow += '<TD Id="SC_Buttons_1" class="SpecialClue_Button_Div">' + CAB_MakeButtonsForAnswer(1) + '</TD>';
+        let sA1 = CAB_MakeButtonsForAnswer(1);
+        sClueAnswerRow += '<TD Id="SC_Buttons_1" class="SpecialClue_Button_Div">' + sA1 + '</TD>';
         sClueAnswerRow += '<TD class="SpecialClue_Padding">&nbsp;</TD>';
         sClueAnswerRow += '<TD Id="SC_End" class="SpecialClue_Text TC_Left">' + g_sSpecialClueEnd + '</TD>';
     }

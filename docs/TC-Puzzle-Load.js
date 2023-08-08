@@ -11,7 +11,7 @@ function CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer,
     g_CAB_aAnswersPlayer        = sAnswersPlayer.split(g_cGeneralDelimiter);
     g_CAB_aAnswersPlayerStatus  = sStatusPlayer.split(g_cGeneralDelimiter);
     g_CAB_aAnswerLocations      = sAnswerLocations.split(g_cGeneralDelimiter);
-    g_CAB_aAnswerType           = sClueTypes.split(g_cGeneralDelimiter)
+    g_CAB_aAnswerType           = sClueTypes.split(g_cGeneralDelimiter);
     g_CAB_aAnswerSpecialClueType   = sAnswersSpecialClueLocations.split(g_cGeneralDelimiter);
     g_SA_aWords.length = 0;
     g_SA_aWords          = SA_EB_sWords.split(g_cGeneralDelimiter);

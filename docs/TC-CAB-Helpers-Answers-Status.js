@@ -70,6 +70,7 @@ function CAB_ForRowLetter_GetSpecialClueType(iRow, iLetter)
     if ( g_CAB_aAnswerSpecialClueType.length == 0 )
         return g_cCode_AnswerType_Normal;
     let sSpecialClueCodes = g_CAB_aAnswerSpecialClueType[iRow];
+    
     return sSpecialClueCodes.charAt(iLetter);
 }
 
