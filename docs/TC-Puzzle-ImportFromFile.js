@@ -154,8 +154,6 @@ function TC_UseFileContents()
 function TC_ProcessFileContents(sFileContents)
 {
     let iUpdated = 0;
-    let iTM = 0;
-    let bAll = false;
     let aLines = sFileContents.split('\n');
     let iLines = aLines.length;
     for ( let iLine = 0; iLine < iLines; iLine++)
