@@ -89,7 +89,7 @@ function TC_LoadPuzzleArchive_FromFile()
         return;
     TC_Archive_ClearAvailablePuzzles();
     for ( let iLine = 0; iLine < iLines; iLine++)
-    {
+    {//puzzle059=Commander Literal&trade;'s hats have this|5|2023-08-11|style
         let sLine = aLines[iLine];
         sLine = sLine.substring(0, sLine.length - 1)
         let aEntriesThisLine = sLine.split('=');
@@ -105,7 +105,7 @@ function TC_LoadPuzzleArchive_FromFile()
                 let sSize = 4;
                 let sDate = '2023-01-01'
                 let aParts = sPuzzleArchiveTitleSizeDate.split('|');
-                if ( aParts.length == 3 )
+                if ( aParts.length >= 3 ) // either with or without the word at the end
                 {
                     sPuzzleArchiveTitle = aParts[0];
                     sSize = aParts[1];
