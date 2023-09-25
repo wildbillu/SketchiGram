@@ -1,20 +1,21 @@
 sPuzzleNumber=puzzle007
 sPuzzleDate=2022-11-22
-sPuzzleName=HugeShot
 sPuzzleTitle=A Buzzer Beater?
 iGridWidth=4
 iGridHeight=4
-sGridAnswers=SAIDHUGEOTOETORT
-sGridSpecialClueLocations=SNNNDSSSSNNNSNNN
-sGridAnswersPlayer=--------OT------
-sGridStatusPlayer=NNNNNNNNGGNNNNNN
+grid
+sGSL=SNNNDSSSSNNNSNNN
+sGAs=SAIDHUGEOTOETORT
+sGAP=---DH----T-E----
+sGSP=NNNGGNNNNGNGNNNN
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
 iClueAnswers=8
 sClues=Definitely not little|Tried to get 3 pointer|Semi-Nomadic people on the CentralPlains|Frankenstein helper|It keeps away mosquitos|He ____, She _____|Wrongful act|____-correct
-sAnswers=HUGE|SHOT|OTOE|IGOR|DEET|SAID|TORT|AUTO
-sAnswersSpecialClueLocations=DSSS|SDSS|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN;
-sAnswersPlayer=----|----|----|----|----|----|----|----
-sAnswersPlayerStatus=NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
+answers
+sAns=HUGE|SHOT|OTOE|IGOR|DEET|SAID|TORT|AUTO
+sASL=DSSS|SDSS|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
+sAPl=H---|-H--|----|----|----|----|----|----
+sAPS=GNNN|NGNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
 sClueTypes=S|S|N|N|N|N|N|N
 ST_sClue_Itself=A Big Moment in Sports?
 ST_sClue_Intro=SketchiToons Clue
