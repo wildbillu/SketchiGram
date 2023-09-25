@@ -2,10 +2,12 @@
 
 .Archive_Button_Activate
 {
+  user-select:none;
   position:absolute;
   border:1px solid black;
   text-align:center;
   font-size:26px;
+  line-height:26px;
   height:30px;
   width:200px;
   font-family:Arial, Helvetica, sans-serif;
@@ -16,6 +18,7 @@
 
 .Archive_Consolidated_Div
 {
+  user-select:none;
     border:1px solid black;
     top:600px;
     left:0px;
@@ -28,6 +31,7 @@
 
 .Archive_PlayToday
 {
+  user-select:none;
   border: 1px solid black;
   text-align:center;
   font-size:20px;
@@ -42,6 +46,7 @@
 
 .Archive_Consolidated_Title
 {
+  user-select:none;
   border: 1px solid black;
   text-align:center;
   font-size: 20px;
@@ -76,6 +81,7 @@
 
 .Archive_Button_Selection
 {
+  user-select:none;
   border:1px solid black;
   padding:2px;
   text-align:center;
@@ -83,7 +89,7 @@
   font-size:20px;
   font-family:Arial, Helvetica, sans-serif;
   font-style:normal;  
-  color: black;
+  color:black;
   background-color: #eeeeee;
 }
 .Archive_Button_Selection:hover{background-color: lightblue;}

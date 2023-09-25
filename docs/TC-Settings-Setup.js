@@ -33,8 +33,6 @@ function MakeSettingsInner()
     g_TC_Settings_aVariables.push(g_TC_Settings_bDummy);g_TC_Settings_aVariables.push(g_TC_Settings_bDummy);g_TC_Settings_aIds.push("Settings_STCD"); g_TC_Settings_aTypes.push("SubTitle");
     let sCheckBox = MakeCheckBox(g_bSettings_CAGR_Display_Complete, 'Settings_CAGR_Display_Complete', 'Show Completion(s)');
     sSettingsWindow += sCheckBox;
-    let sDifficulty = MakeDifficultySupportDiv();
-    sSettingsWindow += sDifficulty;
     sSettingsWindow += '</TABLE>';
     g_TC_Settings_aVariables.push(g_bSettings_CAGR_Display_Complete);g_TC_Settings_aIds.push("Settings_CAGR_Display_Complete"); g_TC_Settings_aTypes.push("Button");
     return sSettingsWindow;
@@ -42,8 +40,6 @@ function MakeSettingsInner()
 
 function TC_AdjustSettings()
 {
-    let elemDifficultyDiv = document.getElementById("SettingsDifficultyDiv");
-    elemDifficultyDiv.style.left = MakePixelString(90);
     let elemSettingsDiv = document.getElementById("SettingsDiv");
     elemSettingsDiv.visibility = 'visible';
 }
@@ -108,15 +104,13 @@ function TC_HideSettings()
         document.getElementById(g_sGRBOnSettingsClick).focus();
     g_sCABOnSettingsClick = '';
     g_sGRBOnSettingsClick = '';
-    DM_SetButtons();
 }
 
 function TC_ShowSettings()
 {
-    DS_SetButtons()
     let elemSettingDiv = document.getElementById("SettingsDiv");
     elemSettingDiv.style.visibility = 'visible'
     g_sCABOnSettingsClick = g_CAB_Focus_sId;
-    g_sGRBOnSettingsClick = g_GRBMS_Focus_sId;
+    g_sGRBOnSettingsClick = g_GRB_Focus_sId;
     g_TC_Settings_bActive = true;
 }

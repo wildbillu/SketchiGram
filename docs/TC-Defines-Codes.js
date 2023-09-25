@@ -8,7 +8,7 @@ var g_cCode_MoveNotAllowed_CorrectOrCorrected = 'C';
 var g_cCode_HasFocus  = 'F';
 var g_cCode_ActiveRow = 'A';
 var g_cCode_Inactive  = 'I';
-var g_cCode_HasFocusBeingMoved  = 'M';
+var g_cCode_HasFocusBeingSwiped  = 'S';
 
 var g_cCode_ClueType_Normal  = 'N';
 var g_cCode_ClueType_Special = 'S';

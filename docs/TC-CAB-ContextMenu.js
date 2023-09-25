@@ -3,7 +3,6 @@ var g_CAB_elemReveal = null;
 
 function TC_CAB_Reveal_DoIt()
 {
-    MAM_RevealSquare();
     g_CAB_elemReveal.remove();
 }
 

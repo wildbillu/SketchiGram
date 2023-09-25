@@ -15,12 +15,7 @@ function Settings_SetupVersions()
 }
 
 var g_bSettings_DeleteCookiesOnStartUp = false;
-var g_bSettings_CAGR_Answers_CheckRow = false;
 var g_bSettings_ShowInfoOnStart = false;//true; 
-var g_bSettings_CAGR_Answers_ShowCorrectLetters = true;
-var g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares = true;
-var g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare = true;
-var g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue = true;
 var g_bSettings_CA_Display_ShowProgress = true; // not used now
 var g_bSettings_GR_Display_ShowProgress = true; // not used now
 var g_bSettings_CAGR_Display_Complete = true;
@@ -55,24 +50,25 @@ function HandleCookie_Settings(sOurCookie_Settings)
         setline('CS:WrongNumberOfValues. Have:' + iOurValues + '.Need:' + g_sSettings_Versions_aCounts[iVersionIndex])
         return false;
     }
+    let bDummy = false;
     let iOurValue = 1;
     g_bSettings_DeleteCookiesOnStartUp = IsTrue(aOurValues[iOurValue++]);
-    g_bSettings_CAGR_Answers_CheckRow = IsTrue(aOurValues[iOurValue++]);
+    bDummy = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_ShowInfoOnStart = IsTrue(aOurValues[iOurValue++]);
-    g_bSettings_CAGR_Answers_ShowCorrectLetters = IsTrue(aOurValues[iOurValue++]);
-    g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares = IsTrue(aOurValues[iOurValue++]);
-    g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare = IsTrue(aOurValues[iOurValue++]);
-    g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue = IsTrue(aOurValues[iOurValue++]);
+    bDummy = IsTrue(aOurValues[iOurValue++]);
+    bDummy = IsTrue(aOurValues[iOurValue++]);
+    bDummy = IsTrue(aOurValues[iOurValue++]);
+    bDummy = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_CA_Display_ShowProgress = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_GR_Display_ShowProgress = IsTrue(aOurValues[iOurValue++]);
     if ( iVersionIndex >= 2)
     {
         g_bSettings_CAGR_Display_Complete = IsTrue(aOurValues[iOurValue++]);
-        g_Difficulty_iLevel_Settings = parseInt(aOurValues[iOurValue++]);
+        iDummy = parseInt(aOurValues[iOurValue++]);
     }
     if ( iVersionIndex >= 3 )
     {
-        g_Difficulty_iLevel_OnNewPuzzle = parseInt(aOurValues[iOurValue++]);
+        iDummy = parseInt(aOurValues[iOurValue++]);
         g_iSettings_DaysToExpire = parseInt(aOurValues[iOurValue++]);
     }
     if ( iVersionIndex >= 4 )
@@ -86,19 +82,20 @@ function MakeCookie_Settings()
 {
     let sCookieName = 'SG2' + '-Settings'; 
     let sCookie = '';
+    let bDummy = false;
     sCookie += g_sSettings_Versions_aNames[g_sSettings_Version_Current_iIndex];
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_DeleteCookiesOnStartUp;
-    sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Answers_CheckRow;
+    sCookie += g_cCookieDelimiter; sCookie += bDummy;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_ShowInfoOnStart;
-    sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Answers_ShowCorrectLetters;
-    sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares;
-    sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare;
-    sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue;
+    sCookie += g_cCookieDelimiter; sCookie += bDummy;
+    sCookie += g_cCookieDelimiter; sCookie += bDummy;
+    sCookie += g_cCookieDelimiter; sCookie += bDummy;
+    sCookie += g_cCookieDelimiter; sCookie += bDummy;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CA_Display_ShowProgress;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_GR_Display_ShowProgress;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Display_Complete;
-    sCookie += g_cCookieDelimiter; sCookie += g_Difficulty_iLevel_Settings;
-    sCookie += g_cCookieDelimiter; sCookie += g_Difficulty_iLevel_OnNewPuzzle;
+    sCookie += g_cCookieDelimiter; sCookie += 1;
+    sCookie += g_cCookieDelimiter; sCookie += 1;
     sCookie += g_cCookieDelimiter; sCookie += g_iSettings_DaysToExpire;
     sCookie += g_cCookieDelimiter; sCookie += g_TC_Archive_Cookie_iSize;
     sCookie += g_cCookieDelimiter; sCookie += g_TC_Archive_Cookie_sYearMonth;

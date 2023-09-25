@@ -26,37 +26,6 @@ function TC_ThemeImage_Base_Create()
     elemDivGridImage.innerHTML = sImage;
 }
 
-function TC_ThemeImage_Base_SizeAndPosition()
-{
-    let elemKB = document.getElementById("KB_Mini_Div");
-    let rectKB = GetBoundingClientRectAbsolute(elemKB);
-    let iBottomKB = rectKB.bottom;
-    // need the size to be height between bottom of KB and top of Archive Button
-    let elemBottomMatter = document.getElementById("Div_BottomMatter");
-    let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter)
-    let iTopBottomMatter = g_TC_iBiggestBottom_NoExtras - rectBottomMatter.height;
-    let iHeight = iTopBottomMatter - iBottomKB - 2 * g_TC_Padding_Inter_Vertical_iSize;
-    let iWidth = g_ThemeImage_All_fWidthToHeight * iHeight;
-    let iTop = iBottomKB + g_TC_Padding_Inter_Vertical_iSize;
-    let iLeft = TC_LeftForCentering(iWidth);
-//    
-    let elemDiv = document.getElementById('ThemeImage_Base_Div');
-    elemDiv.style.top          = MakePixelString(iTop);
-    elemDiv.style.height       = MakePixelString(iHeight);
-    elemDiv.style.left         = MakePixelString(iLeft);
-    elemDiv.style.width         = MakePixelString(iWidth);
-//    
-    let elemImageItself = document.getElementById("ThemeImage_Base_ImageItself_Div");
-    elemImageItself.style.height = MakePixelString(iHeight);
-    elemImageItself.style.width  = MakePixelString(iWidth);
-}
-function TC_ThemeImage_Base_OnClosePopup()
-{
-    let elem = document.getElementById("ThemeImage_Base_ImageItself_Div");
-    elem.style.cursor = "zoom-in";
-    g_ThemeImage_Base_bShown = false;
-}
-
 function TC_ThemeImage_Base_TogglePopup()
 {
     if ( g_ThemeImage_Base_bShown )
@@ -74,9 +43,4 @@ function TC_ThemeImage_Base_TogglePopup()
     g_ThemeImage_Base_bShown = true;
 }
 
-function TC_ThemeImage_Base_SetVisibility(bVisible)
-{
-    ForIdSetVisibility('ThemeImage_Base_Div', bVisible)
-    ForIdSetVisibility('ThemeImage_Base_ImageItself_Div', bVisible)
-}
 

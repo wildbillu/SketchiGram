@@ -1,8 +1,40 @@
 /* Styles-GRBMS-Base.css */
 
-.Div_BottomMatter
+.OneLineDirection_Div
 {
     user-select: none;
+    color:#000000;
+    font-size:20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+    border: 0px solid black;
+    position:absolute;
+    left:0px;
+    top:15px;
+    height:15px;
+    width:600px;
+}
+
+.Div_PuzzleType
+{
+    user-select: none;
+    color:#000000;
+    font-size:20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:center;
+    border: 0px solid black;
+    position:absolute;
+    left:0px;
+    top:15px;
+    height:15px;
+    width:100px;
+}
+
+.Div_BottomMatter
+{
+    user-select:none;
     text-align:left;
     border:0px solid orange;
     width:250px;
@@ -54,16 +86,7 @@
     font-style:normal;    
 }
 
-.Div_StatusControl_Right
-{
-    user-select: none;
-    border: 0px solid green;
-    position:absolute;
-    left:300px;
-    top:0px;
-    height:55px;
-    width:100px;
-}
+
 
 .Div_Message
 {
@@ -81,21 +104,6 @@
     visibility: hidden;
 }
 
-.Div_PuzzleType
-{
-    user-select: none;
-    color:#000000;
-    font-size: 12px;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-    text-align:center;
-    border: 0px solid black;
-    position:absolute;
-    left:0px;
-    top:15px;
-    height:15px;
-    width:100px;
-}
 
 .Div_PuzzleTitle
 {

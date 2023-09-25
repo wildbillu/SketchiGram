@@ -101,4 +101,3 @@ function TC_Archive_BySize_MakeButtons()
 
 function TC_Archive_BySize_BaseMenu_Id(iSize){let sId = 'A_BySize_BaseMenu_' + iSize.toString();return sId;}
 function TC_Archive_BySize_BaseMenu_SizeFromId(sId){return sId.charAt(18);}
-

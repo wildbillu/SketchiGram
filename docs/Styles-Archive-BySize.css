@@ -2,6 +2,7 @@
 
 .Archive_BySize_Preamble
 {
+  user-select:none;
   border:1px solid black;
   padding:2px;
   text-align:center;
@@ -15,6 +16,7 @@
 
 .Archive_Button_Selection_BySize_BaseMenu
 {
+  user-select:none;
   border:1px solid black;
   padding:2px;
   text-align:center;

@@ -1,50 +1,65 @@
 // TC-History.js
 
 var TC_aHistory_GridMoves = [];
-var TC_aHistory_SpecialClueMoves = [];
+
+var TC_aHistory_Exchanges = [];
+var TC_History_bUndoAllowed = false;
+
+function TC_History_UndoLast()
+{
+    if ( TC_aHistory_Exchanges.length == 0 )
+        return;
+    let a = TC_aHistory_Exchanges.pop();
+    if ( a[0] == 'GE' )
+    {
+        GRB_SwitchAnswers(a[3], a[4], a[1], a[2]);
+        let elem = document.getElementById(GRB_MakeId(a[1], a[2]));
+        GRB_onfocus(elem);
+        TC_aHistory_Exchanges.pop();// pop so it doesnt become a redo
+        TC_CR_SetStatus('Undo', !(TC_aHistory_Exchanges.length == 0));
+        return;
+    }
+    if ( a[0] == 'SC' )
+    {
+        CAB_ForRowLetter_DoItAll(a[4], a[1], a[2]);
+        let elem = document.getElementById(CAB_MakeId(a[1], a[2]));
+        CAB_onfocus(elem);
+        TC_aHistory_Exchanges.pop();// pop so it doesnt become a redo
+        TC_CR_SetStatus('Undo', !(TC_aHistory_Exchanges.length == 0));
+        return;
+    }
+}
+
+function TC_History_AddEntry_GridExchange(iRow_A, iLetter_A, iRow_B, iLetter_B)
+{
+    let aGE = [];
+    aGE.push('GE')
+    aGE.push(iRow_A);
+    aGE.push(iLetter_A);
+    aGE.push(iRow_B);
+    aGE.push(iLetter_B);
+    TC_aHistory_Exchanges.push(aGE);
+    TC_History_bUndoAllowed = true;
+    TC_CR_SetStatus('Undo', !(TC_aHistory_Exchanges.length == 0))
+}
 
 function TC_History_Clear()
 {
-    TC_aHistory_GridMoves.length;
-    TC_aHistory_SpecialClueMoves.length;
+    TC_aHistory_GridMoves.length = 0;
+    TC_aHistory_Exchanges.length = 0;
 }
 
-function TC_History_MakeEntry_Grid(cLetter, iRow, iLetter)
+function TC_History_Add_SpecialClueLetterPlaced(cLetter, iRow, iLetter, cInitialLetter)
 {
-    let sEntry = '';
-    sEntry = 'GP[' + cLetter + ':' + iRow + ':' + iLetter + ']';
-    return sEntry;
-}
+    let aSC = [];
+    aSC.push('SC')
+    aSC.push(iRow);
+    aSC.push(iLetter);
+    aSC.push(cLetter);
+    aSC.push(cInitialLetter);
+    TC_aHistory_Exchanges.push(aSC);
+    TC_History_bUndoAllowed = true;
+    TC_CR_SetStatus('Undo', !(TC_aHistory_Exchanges.length == 0))
 
-function TC_History_GridEntry_iRow(sEntry)
-{
-    return parseInt(sEntry.charAt(5))
-}
-function TC_History_GridEntry_iLetter(sEntry)
-{
-    return parseInt(sEntry.charAt(7))
-}
-
-function TC_History_GridEntry_cLetter(sEntry)
-{
-    return sEntry.charAt(3);
-}
-
-function TC_History_Add_GridLetterPlaced(cLetter, iRow, iLetter)
-{   
-    let sEntry = TC_History_MakeEntry_Grid(cLetter, iRow, iLetter);
-    TC_aHistory_GridMoves.push(sEntry);
-}
-
-function TC_History_MakeEntry_SpecialClue(cLetter, iRow, iLetter)
-{
-    let sEntry = 'SC[' + cLetter + ':' + iRow + ':' + iLetter + ']';
-    return sEntry;
-}
-
-function TC_History_Add_SpecialClueLetterPlaced(cLetter, iRow, iLetter)
-{
-    let sEntry = TC_History_MakeEntry_SpecialClue(cLetter, iRow, iLetter);
-    TC_aHistory_SpecialClueMoves.push(sEntry);
 }
 

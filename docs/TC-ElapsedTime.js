@@ -67,6 +67,8 @@ function TC_ElapsedTime_Process()
     sFormatted += iSeconds.toString();
     StoreCookie_Puzzle();
     g_ElapsedTime_eDiv.innerHTML = g_Timer_sLabel + sFormatted;
+    MII_Grid_Handler(iTotalTimeInSeconds);
+    MII_Hint_Handler(iTotalTimeInSeconds);
 }
 
 function TC_ElapsedTime_Setup()
@@ -74,9 +76,7 @@ function TC_ElapsedTime_Setup()
     const d = new Date();
     g_ElapsedTime_iInitialTimeInSeconds = Math.trunc(d.getTime()/1000);
     g_ElapsedTime_eDiv = document.getElementById("ElapsedTime_Div");
-    let rect = GetBoundingClientRectAbsolute(g_ElapsedTime_eDiv);
-    let iLeft = g_Window_iWidth - rect.width - g_TC_Padding_Left_iSize;
-    g_ElapsedTime_eDiv.style.left = MakePixelString(iLeft);
+    g_ElapsedTime_eDiv.style.left = MakePixelString(g_Timer_iLeft);
     g_ElapsedTime_eDiv.style.top = MakePixelString(g_Timer_iTop);
     TC_ElapsedTime_Process();
     if ( !g_bPuzzleSolved )

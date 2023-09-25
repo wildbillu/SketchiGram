@@ -1,0 +1,85 @@
+/* Styles-FullInstructions.css */
+
+.FullInstructions_Div
+{
+    position:absolute;
+    user-select:none;
+    color:#000000;
+    background-color:white;
+    border:1px solid black;
+    left:0px;top:0px;height:0px;width:0px;
+    z-index:10;
+}
+
+.FI_Title
+{
+    position:relative;
+    user-select:none;
+    color:#000000;
+    background-color:white;
+    font-size:30px;font-family:Arial, Helvetica, sans-serif;font-style:normal;font-weight:bold;
+    text-align:center;
+    border:0px solid blue;
+    left:0px;top:0px;height:0px;width:0px;
+    z-index:10;
+}
+
+.FI_Intro
+{
+    position:relative;
+    user-select:none;
+    color:#000000;
+    background-color:white;
+    font-size:20px;font-family:Arial, Helvetica, sans-serif;font-style:normal;
+    text-align:center;
+    border:0px solid blue;
+    left:0px;top:0px;height:0px;width:0px;
+    z-index:10;
+}
+.FI_Grid
+{
+    position:relative;
+    user-select:none;
+    color:#000000;
+    background-color:white;
+    border:0px solid green;
+    left:0px;top:0px;height:0px;width:0px;
+    z-index:10;
+}
+
+.FI_Hint
+{
+    position:relative;
+    user-select:none;
+    color:#000000;
+    background-color:white;
+    border:0px solid yellow;
+    left:0px;top:0px;height:0px;width:0px;
+    z-index:10;
+}
+
+.FI_CopyrightEtc
+{
+    position:relative;
+    user-select:none;
+    color:#000000;
+    background-color:white;
+    font-size:16px;font-family:Arial, Helvetica, sans-serif;font-style:normal;
+    text-align:center;
+    border:0px solid blue;
+    left:0px;top:0px;height:0px;width:0px;
+    z-index:10;
+}
+
+.FI_Credits
+{
+    position:relative;
+    user-select:none;
+    color:#000000;
+    background-color:white;
+    font-size:20px;font-family:Arial, Helvetica, sans-serif;font-style:normal;
+    text-align:center;
+    border:0px solid darkgreen;
+    left:0px;top:0px;height:0px;width:0px;
+    z-index:10;
+}

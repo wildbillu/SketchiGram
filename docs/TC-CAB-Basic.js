@@ -7,7 +7,6 @@ function CAB_FocusLostSetActiveToInActive()
     let iRow = CAB_RowFromId(g_CAB_Focus_sId);
     if ( TC_ForIndexIsClueTypeSpecial(iRow) ) CAB_ForRow_SetToInactive(iRow);
     g_CAB_Focus_sId = '';
-    CAB_SetBackground(false)
 }
 
 function CAB_ForRow_SetToInactive(iRow)
@@ -16,7 +15,7 @@ function CAB_ForRow_SetToInactive(iRow)
         return;
     let iLength = g_CAB_aAnswers[iRow].length;
     for ( let iL = 0; iL < iLength; iL++ )
-        CAB_ForRowLetter_SetButton(iRow, iL, g_cCode_Inactive)
+        CAB_ForRowLetter_SetButton(iRow, iL, g_cCode_Inactive);
 }
 
 function CAB_ForRow_SetToActive(iRow, iActiveLetter)

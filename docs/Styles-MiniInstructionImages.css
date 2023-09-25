@@ -1,0 +1,45 @@
+/* Styles-MiniInstructionsImage.css */
+
+.MII_Grid_Div
+{
+  position:absolute;
+  border:0px solid green;
+  left:0px;top:0px;width:0px;height:0px;
+  z-index:2;
+}
+
+.MII_Grid_Image
+{
+    border:0px solid red;
+    position:relative;
+    left:0px;top:0px;width:50px;height:50px;
+    outline:none; 
+    border-collapse: collapse; 
+    padding:0px;
+    margin:0;
+    vertical-align:center;
+    align-items:center;
+    z-index:2;
+}
+
+.MII_Hint_Div
+{
+  position:absolute;
+  border:0px solid blue;
+  left:0px;top:0px;width:100px;height:1000px;
+  z-index:2;
+}
+
+.MII_Hint_Image
+{
+    border:0px solid orange;
+    position:relative;
+    left:0px;top:0px;width:100px;height:100px;
+    outline:none; 
+    border-collapse: collapse; 
+    padding:0px;
+    margin:0;
+    vertical-align:center;
+    align-items:center;
+    z-index:2;
+}

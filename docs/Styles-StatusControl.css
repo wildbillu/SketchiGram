@@ -1,27 +1,3 @@
 /* Styles-StatusControl.css */
 
-.StatusControl_Div_Left
-{
-    border:0px solid red;
-    position:absolute;
-    vertical-align: middle;
-    left:0px;
-    top:0px;
-    height:50px;
-    width:100px;
-    padding:0px;
-    background-color:white;
-}
 
-.StatusControl_Div_Right
-{
-    border:0px solid blue;
-    position:absolute;
-    vertical-align: middle;
-    left:0px;
-    top:0px;
-    height:50px;
-    width:100px;
-    padding:0px;
-    background-color:white;
-}

@@ -2,6 +2,7 @@
 
 let g_CAB_SpecialClue_bImageExpanded = false;
 
+
 function CAB_MakeSpecialClueAnswerDiv()
 {
     let elem_SpecialClue_Div = document.getElementById("SpecialClue_Div");
@@ -10,10 +11,12 @@ function CAB_MakeSpecialClueAnswerDiv()
     let iSpecialClueWidth = g_Window_iWidth - g_TC_Padding_Left_iSize - g_TC_Padding_Right_iSize;
     elem_SpecialClue_Div.style.width = MakePixelString(iSpecialClueWidth);
     let iHeight = g_TC_Padding_Top_iSize + 82;
-    elem_SpecialClue_Div.style.height = MakePixelString(iHeight);
+    elem_SpecialClue_Div.style.height = MakePixelString(g_SpecialClueFrame_iHeight);
+
 // so now we add the ClueAnswer and Image Divs
     let sClueAnswerAndImageDivs = ''
-    sClueAnswerAndImageDivs += '<TABLE cellpadding=0 cellspacing=0 class="SpecialClue_Table"><TR>'
+    sClueAnswerAndImageDivs += '<TD><DIV id="ST_Div" class="SpecialClue_Header_Div">SketchiGram Hint</DIV></TD>';
+    sClueAnswerAndImageDivs += '<TABLE cellpadding=0 cellspacing=0 class="SpecialClue_Table"><TR>';
     sClueAnswerAndImageDivs += '<TD><DIV id="SpecialClue_ClueAnswer_Div" class="SpecialClue_ClueAnswer_Div">ClueAnswer</DIV></TD>';
     if ( g_SpecialClue_bShowImageButton )
         sClueAnswerAndImageDivs += '<TD><DIV id="SpecialClue_Image_Div" class="SpecialClue_Image_Div"></DIV></TD>';
@@ -33,10 +36,12 @@ function CAB_MakeSpecialClueAnswerDiv()
         elemImageItself.style.width = MakePixelString(iImageWidth);
         elemImageItself.style.height = MakePixelString(iHeight);
     }
-// now fill the clue div
+    // now fill the clue div
     let elemClueAnswer = document.getElementById("SpecialClue_ClueAnswer_Div")
     let iClueAnswerWidth = iSpecialClueWidth - iImageWidth;
 
+    let elemHintLine = document.getElementById("ST_Div");
+    elemHintLine.style.width = MakePixelString(iClueAnswerWidth);
     elemClueAnswer.style.width = MakePixelString(iClueAnswerWidth);
     elemClueAnswer.style.height = MakePixelString(iHeight);
     let sClueAnswerRow = '';
@@ -83,7 +88,6 @@ function CAB_MakeSpecialClueAnswerDiv()
     sClueAnswerRow += '</DIV>'
     let elemSpecialClue_ClueAnswer_Div = document.getElementById("SpecialClue_ClueAnswer_Div");
     elemSpecialClue_ClueAnswer_Div.innerHTML = sClueAnswerRow;
-
 // now we adjust the Id="SpecialClueItself_Div"
     let elemSpecialClueItself_Div = document.getElementById("SpecialClueItself_Div");
 // need to determine if need two lines
@@ -97,7 +101,6 @@ function CAB_MakeSpecialClueAnswerDiv()
     let elemClue = document.getElementById("SpecialClueItself_Div");
     elemClue.style.top = MakePixelString(g_TC_Padding_Top_iSize + 30);
     elemClue.style.left = MakePixelString(100);
-    g_TC_iBiggestBottom += iHeight;
     if ( TC_ForIndexIsClueTypeSpecial(0) ) CAB_ForRow_SetToInactive(0);
     if ( TC_ForIndexIsClueTypeSpecial(1) ) CAB_ForRow_SetToInactive(1);
 }
@@ -108,16 +111,14 @@ function CAB_MakeButtonsForAnswer(iRow)
     let iLength = g_CAB_aAnswers[iRow].length;
     for ( let iLetter = 0; iLetter < iLength; iLetter++ )
         sInnerHTML += CAB_MakeButtonSingleHTML(iRow, iLetter);
-    return sInnerHTML;
+        return sInnerHTML;
 }
 
 function CAB_MakeButtonSingleHTML(iRow, iLetter)
 {
     let sInnerRowHTML = '';
     let sFunctionsToCall = '';
-    sFunctionsToCall += ' onclick="CAB_onfocus(this);"'
-    sFunctionsToCall += ' onkeypress="return CAB_onkeypress(event);"';
-    sFunctionsToCall += ' onkeyup="return CAB_onkeyup(event.key,' + iRow + ',' + iLetter + ');"';
+    sFunctionsToCall += ' onclick="CAB_onfocus(this);" onmouseover="CAB_MouseOver(event);"'
     sInnerRowHTML += '<DIV tabindex="0" '
     sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
     sInnerRowHTML += ' class="' + g_CAB_Square_sClass + '" ';
@@ -175,6 +176,7 @@ function SpecialClue_AdjustAndGetGetTotalWidth()
 function CAB_SpecialClueExpandClosed()
 {
     let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
+    if ( elemSCI == null ) return;
     elemSCI.style.cursor = "zoom-in";
     g_CAB_SpecialClue_bImageExpanded = false;
 }
@@ -192,6 +194,7 @@ function CAB_SpecialClueExpandHint()
     let iHeight = iWidth/g_ThemeImage_All_fWidthToHeight;
     TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Extra, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed)
     let elemSCI = document.getElementById("SpecialClue_ImageItself_Img");
+    if ( elemSCI == null ) return;
     elemSCI.style.cursor = "zoom-out";
     g_CAB_SpecialClue_bImageExpanded = true;
 }

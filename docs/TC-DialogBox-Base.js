@@ -11,21 +11,6 @@ var g_DialogBox_aButtons_sId = [];
 var g_DialogBox_aButtons_fn = [];
 var g_DialogBox_aButtons_rect = [];
 
-/*
-var g_DialogBox_ButtonA_sText = '';
-var g_DialogBox_ButtonB_sText = '';
-var g_DialogBox_ButtonC_sText = '';
-
-var g_DialogBox_ButtonA_sId = '';
-var g_DialogBox_ButtonB_sId = '';
-var g_DialogBox_ButtonC_sId = '';
-
-var g_DialogBox_ButtonA_fn;
-var g_DialogBox_ButtonB_fn;
-var g_DialogBox_ButtonC_fn;
-*/
-
-
 function DialogBox_CloseAndHide()
 {
     let elemSharedDialog_Div = document.getElementById("SharedDialog_Div");

@@ -7,16 +7,11 @@ function Archive_PlayToday()
     if ( iArchiveIndex == -1 )
         return;
     g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iArchiveIndex];
-    g_TC_iBiggestBottom = 0;
-    g_SG_Clues_bCreated = false;
-    SG_UpdateAnswersCorrectInGridAndDisplay();
-    if ( g_DM_bActive ) g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert;
     g_SG_bAnswersCorrectInGridSet = false;
     g_bGridAndCA = false;
     g_TC_Status_bFirstCheck = true;
-    TC_SA_ClearEntries();
 //
-    SG2_LoadAll(0);
+    Restart();
 }
 
 function TC_Archive_Hide()
@@ -61,16 +56,9 @@ function TC_Archive_Select(elem)
 {
     let iPuzzle = TC_Archive_IndexFromId(elem.id)
     g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iPuzzle];
-    g_TC_iBiggestBottom = 0;
-    g_SG_Clues_bCreated = false;
-    SG_UpdateAnswersCorrectInGridAndDisplay();
-    if ( g_DM_bActive ) g_Difficulty_iLevel_Operating = g_Difficulty_iLevel_Expert;
     g_SG_bAnswersCorrectInGridSet = false;
-    g_bGridAndCA = false;
     g_TC_Status_bFirstCheck = true;
-    TC_SA_ClearEntries();
-//
-    SG2_LoadAll(0);
+    Restart();
 }
 
 function TC_Archive_Previous_Con()

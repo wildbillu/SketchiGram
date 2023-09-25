@@ -17,7 +17,7 @@
 .ThemeImage_Popup_ImageItself_Div
 {
     border: 0px solid green;
-    position:relative;
+    position:absolute;
     left:0px;top:0px;height:500px;width:500px;
     outline: none; 
     border-collapse: collapse; 
@@ -45,7 +45,7 @@
 .ThemeImage_Base_ImageItself_Div
 {
     border: 0px solid green;
-    position:relative;
+    position:absolute;
     left:0px;top:0px;height:300px;width:300px;
     outline: none; 
     border-collapse: collapse; 

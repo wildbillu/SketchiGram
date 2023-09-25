@@ -1,6 +1,6 @@
 /* Styles-GRBMS-ContextMenu.css */
 
-.GRBMS_ContextMenu_Div
+.GRB_ContextMenu_Div
 {
    border:1px solid black;
    position:absolute;
@@ -8,7 +8,7 @@
    left:200px;
 }
 
-.GRBMS_ContextMenu_Reveal_Title
+.GRB_ContextMenu_Reveal_Title
 {
     border:1px solid black;
     height:35px;
@@ -23,7 +23,7 @@
     font-style:normal;   
 }
 
-.GRBMS_ContextMenu_Reveal_DoIt
+.GRB_ContextMenu_Reveal_DoIt
 {
     border:1px solid black;
     height:30px;
@@ -37,7 +37,7 @@
     font-style:normal;   
 }
 
-.GRBMS_ContextMenu_Reveal_Cancel
+.GRB_ContextMenu_Reveal_Cancel
 {
     border:1px solid black;
     height:30px;

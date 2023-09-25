@@ -2,6 +2,84 @@
 
 var g_bUseSquaresPlaced = true;
 
+function GRB_ScrambleCorrectAnswersToPlayer(bReplaceCorrectAndCorrected)
+{ // reconstitute the string
+    let sPlaced = '';
+    let sGridAsString = g_aGridAnswers.join('');
+    let sAllLettersToPlace = sGridAsString;
+    sGridAsString = GRB_ChangeForbiddenCharactersToDot(sGridAsString, bReplaceCorrectAndCorrected)
+    let sNoDots = '';
+    let iMaxCheck = 0;
+    sNoDots = removeAllChar(sGridAsString, '.');
+    for ( let iRow = 0; iRow < g_iGridHeight; iRow++)
+    {
+        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+        {
+            let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter)
+            let bMoveThisOne = true;
+            if ( !bReplaceCorrectAndCorrected )
+            {
+                if ( cStatus == g_cCode_Corrected )
+                    bMoveThisOne = false;
+                if ( cStatus == g_cCode_Correct )
+                    bMoveThisOne = false;
+            }
+            if ( GRB_ForRowLetter_IsSquareGoldenOrBlack(iRow, iLetter) )
+                bMoveThisOne = false;
+            if ( bMoveThisOne )
+            {
+                let iCheck = 0;
+                let bReplaced = false;
+                while ( !bReplaced )
+                {
+                    let iV = sNoDots.length;
+                    let iP = Math.floor(Math.random() * iV);
+                    let cLetter = sNoDots.charAt(iP)
+                    let sAnswerPlayer = g_aGridAnswersPlayer[iRow];
+                    let cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+                    if ( cLetter != cAnswer || iCheck > 200)
+                    {
+                        sPlaced += cLetter;
+                        g_aGridAnswersPlayer[iRow] = replaceAt(sAnswerPlayer, iLetter, cLetter);
+                        let sNew = sNoDots.substring(0, iP);
+                        sNew += sNoDots.substring(iP+1)
+                        sNoDots = sNew;
+                        GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, iRow, iLetter);
+                        bReplaced = true;
+                    }
+                    iCheck++;
+                }
+                if ( iCheck > iMaxCheck )
+                    iMaxCheck = iCheck;
+            }
+            else
+            {
+                sPlaced += GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+            }
+        }
+    }         
+    let iLettersPlaced = sPlaced.length;
+    let iAllLettersToPlace = sAllLettersToPlace.length;
+    if ( iLettersPlaced != iAllLettersToPlace)
+        setlineAdd('Mismatch.Placed:' + iLettersPlaced + 'ToPlace:' + iAllLettersToPlace)
+}
+
+function GRB_SetAllowedGridLetters()
+{
+    var sAllowedLetters = '';
+    var sLocalGridSolution = g_aGridAnswers.join('');
+    for ( var i = 0; i < sLocalGridSolution.length; i++ )
+    {
+        var cLetter = sLocalGridSolution.charAt(i);
+        if ( !TC_IsBlackSquare(cLetter) && !sAllowedLetters.includes(cLetter))
+            sAllowedLetters += cLetter;
+    }
+    g_GRB_sAllowedGridLetters = sAllowedLetters;
+    let iLength = g_GRB_sAllowedGridLetters.length;
+    for ( let i = 0; i < iLength; i++ )
+        g_GRB_sAllowedGridLetters_Selectable += 'T';
+}
+
 function PlacedByPlayer_SquaresPlaced(iRow, iLetter)
 {
     return TC_SquaresPlaced_IsSet(iRow, iLetter)
@@ -23,23 +101,19 @@ function PlacedByPlayer_History(cLetter, iRow, iLetter)
     return bPlaced;
 }
 
-function GRBMS_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceWithMe, bRejectDual, cNow)
+function GRB_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceWithMe, bRejectDual, cNow)
 { 
-    // called on key up
-    if ( g_Difficulty_iLevel_Operating == g_Difficulty_iLevel_Expert ) 
-    { // in this case we just check to see if the 
-
-    }
-    let sFoundId = GRBMS_FindFirstSquareWithPlayerAnswer(cReplaceWithMe, bRejectDual, cNow);
+// used to sync CA and GRB
+    let sFoundId = GRB_FindFirstSquareWithPlayerAnswer(cReplaceWithMe, bRejectDual, cNow);
     if ( sFoundId == '')
         return sFoundId;
-    let B_iRow = GRBMS_RowFromId(sFoundId);
-    let B_iLetter = GRBMS_LetterFromId(sFoundId);
-    GRBMS_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
+    let B_iRow = GRB_RowFromId(sFoundId);
+    let B_iLetter = GRB_LetterFromId(sFoundId);
+    GRB_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
     return sFoundId;
 }
 
-function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
+function GRB_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
 {
     let aPossibles_All = [];
     let aPossibles_NotPlaced = [];
@@ -52,7 +126,7 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
                 let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
                 if ( cAnswerPlayer == sUpper )  
                 {
-                    let sId = GRBMS_MakeId(iRow, iLetter);
+                    let sId = GRB_MakeId(iRow, iLetter);
                     aPossibles_All.push(sId);
                     let bPlaced = false;
                     if ( g_bUseSquaresPlaced )
@@ -72,11 +146,11 @@ function GRBMS_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Ch
     if ( iPossibles_All == 1 )
         return aPossibles_All[0];
     if ( iPossibles_NotPlaced != 0 )
-        return GRBMS_PickOne(aPossibles_NotPlaced);
-    return GRBMS_PickOne(aPossibles_All)
+        return GRB_PickOne(aPossibles_NotPlaced);
+    return GRB_PickOne(aPossibles_All)
 }
 
-function GRBMS_PickOne(aPossibles)
+function GRB_PickOne(aPossibles)
 {
     let iPossibles = aPossibles.length;
     let iPicked = TC_GetRandomInt(iPossibles);
@@ -84,14 +158,14 @@ function GRBMS_PickOne(aPossibles)
 }
 
 
-function GRBMS_ForAll_SetStatusFromState()
+function GRB_ForAll_SetStatusFromState()
 {
     for ( let iR = 0; iR < g_iGridWidth; iR++ )
         for ( let iL = 0; iL < g_iGridHeight; iL ++)
-            GRBMS_ForRowLetter_SetStatusFromState(iR, iL)
+            GRB_ForRowLetter_SetStatusFromState(iR, iL)
 }
 
-function GRBMS_ForRowLetter_SetStatusFromState(iR, iL)
+function GRB_ForRowLetter_SetStatusFromState(iR, iL)
 {
     let cInitialStatus = GRB_ForRowLetter_GetStatusPlayer(iR, iL);
     if ( TC_IsGoldenOrBlackSquare(cInitialStatus) || TC_IsCorrected(cInitialStatus))
@@ -104,12 +178,12 @@ function GRBMS_ForRowLetter_SetStatusFromState(iR, iL)
     if ( cAnswer != cAnswerPlayer )
         cStatus = g_cCode_Incorrect;
     GRB_ForRowLetter_SetStatusPlayer(cStatus, iR, iL);
-    GRBMS_ForRowLetter_SetButton(iR, iL, g_cCode_Inactive);
+    GRB_ForRowLetter_SetButton(iR, iL, g_cCode_Inactive);
 }
 
-function GRBMS_SolveGrid()
+function GRB_SolveGrid()
 {
-    GRBMS_LoseCurrentFocus();
+    GRB_LoseCurrentFocus();
     for ( let iR = 0; iR < g_iGridHeight; iR++)
     {
         for ( let iL = 0; iL < g_iGridWidth; iL++ )
@@ -120,7 +194,7 @@ function GRBMS_SolveGrid()
             {
                 GRB_ForRowLetter_UpdateAnswersPlayer(cAnswer, iR, iL);
                 GRB_ForRowLetter_SetStatusPlayer(TC_CodeCorrected(), iR, iL)
-                GRBMS_ForRowLetter_SetButton(iR, iL, g_cCode_Inactive);
+                GRB_ForRowLetter_SetButton(iR, iL, g_cCode_Inactive);
             }
         }
     }
@@ -128,7 +202,7 @@ function GRBMS_SolveGrid()
     return true;
 }
 
-function GRBMS_ForRowLetterShowSquare(iRow, iLetter, sToDo, bIncorrectOverride)
+function GRB_ForRowLetterShowSquare(iRow, iLetter, sToDo, bIncorrectOverride)
 {
     if ( !GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
         return; // actually we should never get here
@@ -208,78 +282,52 @@ function GRB_AddWrappedUrlToString(sStarting, sNew)
     return sFinal;
 }
 
-function GRBMS_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
+function GRB_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
 {
+    g_TC_bMoveMade_Grid = true;
     let A_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(A_iRow, A_iLetter);
     let B_cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(B_iRow, B_iLetter);
+    TC_History_AddEntry_GridExchange(A_iRow, A_iLetter, B_iRow, B_iLetter);
     // switch
     GRB_ForRowLetter_SetAnswerPlayer(A_cAnswerPlayer, B_iRow, B_iLetter);
-    TC_History_Add_GridLetterPlaced(B_cAnswerPlayer, A_iRow, A_iLetter);
     TC_SquaresPlaced_Set(A_iRow, A_iLetter)
     TC_SquaresPlaced_Unset(B_iRow, B_iLetter)
     GRB_ForRowLetter_SetAnswerPlayer(B_cAnswerPlayer, A_iRow, A_iLetter);
     // since we moved letters we no longer if the status is correct
-    if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
-    {
-        GRBMS_ForRowLetterShowCheckSquare(A_iRow, A_iLetter, 'Check', false)
-        GRBMS_ForRowLetterShowCheckSquare(B_iRow, B_iLetter, 'Check', false)
-    }
-    else
-    {
-        GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, B_iRow, B_iLetter);
-        GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, A_iRow, A_iLetter);
-    }
-    GRBMS_ForRowLetter_SetButton(A_iRow, A_iLetter, g_cCode_Inactive);
-    GRBMS_ForRowLetter_SetButton(B_iRow, B_iLetter, g_cCode_Inactive);
-    KB_AGC_SetKeyboardButtons();
+    GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, B_iRow, B_iLetter);
+    GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, A_iRow, A_iLetter);
+    GRB_ForRowLetter_SetButton(A_iRow, A_iLetter, g_cCode_Inactive);
+    GRB_ForRowLetter_SetButton(B_iRow, B_iLetter, g_cCode_Inactive);
     Sync_GridChange();
     SyncTo_OthersLoseFocus('NoOne');
 }
 
-
-
-function GRBMS_SetAllowedGridLetters()
-{
-    var sAllowedLetters = '';
-    var sLocalGridSolution = g_aGridAnswers.join('');
-    for ( var i = 0; i < sLocalGridSolution.length; i++ )
-    {
-        var cLetter = sLocalGridSolution.charAt(i);
-        if ( !TC_IsBlackSquare(cLetter) && !sAllowedLetters.includes(cLetter))
-            sAllowedLetters += cLetter;
-    }
-    g_GRBMS_sAllowedGridLetters = sAllowedLetters;
-    let iLength = g_GRBMS_sAllowedGridLetters.length;
-    for ( let i = 0; i < iLength; i++ )
-        g_GRBMS_sAllowedGridLetters_Selectable += 'T';
-}
-
-function GRBMS_SetAllButtons()
+function GRB_SetAllButtons_Inactive()
 {
     for ( let iRow = 0; iRow < g_iGridHeight; iRow++)
     {
         for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
         {
-            GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive)
+            GRB_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive)
         }
     }
 }
 
-function GRBMS_MakeGrid()
+function GRB_MakeGrid()
 {
     let sButtons = ''
     for ( let iRow = 0; iRow < g_iGridHeight; iRow++)
     {
         for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
         {
-            sButtons += TC_GRBMS_MakeButton(iRow, iLetter, g_cCode_Normal);
+            sButtons += TC_GRB_MakeButton(iRow, iLetter, g_cCode_Normal);
         }
     }
     let elem = document.getElementById("Div_Grid");
     elem.innerHTML = sButtons;
 }
 
-function GRBMS_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, bIncorrectOverride)
+function GRB_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, bIncorrectOverride)
 {
     if ( !GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
         return; // actually we should never get here

@@ -1,18 +1,39 @@
 /* Styles-TopRowControl.css */
-.NewTitle
+
+.Div_StatusControl_Right
 {
-    text-align: center;
-    padding: 0px;
-    border: 0px;
+    user-select: none;
+    border:0px solid green;
+    position:absolute;
+    left:0px;
+    top:0px;
+    height:0px;
+    width:0px;
+}
+
+.TopRowHint
+{
+    position:absolute;
+    text-align:center;
+    top:0px;
+    left:0px;
+    user-select:none;
+    padding:0px;
+    width:100px;
+    line-height:24px;
+    height:24px;
+    border:1px solid black;
     color:red;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
     font-size:22px;
     background-color:white;
+    z-index:3;
 }
 
 .TopRowControlClass
 {
+    user-select:none;
     padding: 0px;
     height: 3%;
     width: 100%;
@@ -21,21 +42,24 @@
     text-align: right;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    background-color:aliceblue;
-    caret-color: aliceblue;
+    background-color:white;
+    caret-color: white;
     color:black;
+    z-index:1;
 }
 
-.TopRowControl_Button
+.TopRowControl_Info
 {
+    user-select:none;
     position:relative;
-    border: 0px;
-    background-color:aliceblue;
-    padding: 0px;
-    height: 50px;
+    border:0px solid red;
+    background-color:white;
+    padding:0px;
+    height:50px;
     width:50px;
-    outline: none;
-    caret-color: transparent;
-    color:black;
+    outline:none;
+    caret-color:transparent;
+    color:red;
+    z-index:1;
 }
-
+.TopRowControl_Info:hover{background-color:blue;border:0px solid green;}

@@ -117,7 +117,7 @@ function TC_LoadPuzzleArchive_FromFile()
     }
 }
 
-function TC_LoadPuzzleArchive()
+function TC_LoadPuzzleArchiveDefault()
 { // in case file missing or local
     TC_Archive_ClearAvailablePuzzles();
     TC_Archive_AddPuzzleToArchive_All('puzzle001', 'Yogi Berra Says!', 4, '2023-06-26')

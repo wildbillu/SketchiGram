@@ -1,8 +1,15 @@
 // TC-GeneralFunctions
 // 
+// function TC_LeftForCentering(iWidthElement)
+// function ForIdSetVisibility(sId, bVisible)
+
+
+
 // to detect window back forth...
 
 var g_GBRMS_fBufferFraction = .05;
+
+
 
 function TC_MonthInWordsPlusYear(sYearMonth)
 {
@@ -87,8 +94,8 @@ function TC_GetHeightOfElementById(sId)
 
 function IsLocationInGridSquareWithBuffer(iRow, iLetter, iPickedX, iPickedY)
 { // use global coordinates
-    let fBuffer = g_GBRMS_fBufferFraction * g_GRBMS_Square_iSize;
-    let rectFoundSquare = GetBoundingClientRectAbsolute(document.getElementById(GRBMS_MakeId(iRow, iLetter)));
+    let fBuffer = g_GBRMS_fBufferFraction * g_GRB_Square_iSize;
+    let rectFoundSquare = GetBoundingClientRectAbsolute(document.getElementById(GRB_MakeId(iRow, iLetter)));
 // we need square relative to the grid top left
     let elemFound_iLeft   = Math.round(rectFoundSquare.left);
     let elemFound_iTop    = Math.round(rectFoundSquare.top );
@@ -123,7 +130,7 @@ function IsTrue(s){var b = false;if ( s == 'true')b = true;return b;}
 
 function openFullscreen() 
 {
-    let elem = document.getElementById("Body_Any");
+    let elem = document.getElementById("Body_Intro");
     if (elem.requestFullscreen) 
     {
       elem.requestFullscreen();
@@ -219,7 +226,9 @@ function GetWidthOfTextInPixels(elem, sText)
     canvas = document.createElement("canvas");
     context = canvas.getContext("2d");
     context.font = sFont;
-    return context.measureText(sText).width;
+    let text = context.measureText(sText);
+    let iWidth = text.width;
+    return iWidth;
 }
 
 var g_iScreen_Width = 600;

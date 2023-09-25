@@ -1,218 +1,148 @@
 // TC-GRBMS-ConsolidatedMouseTouchMove.js
 
-var g_GRBMS_MoveActive_sMouse = 'Mouse';
-var g_GRBMS_MoveActive_sTouch = 'Touch';
-var g_GRBMS_MoveActive_sNoOne = 'NoOne';
+var g_TM_bMoved = false;
 
-var g_GRBMS_Move_sActive = g_GRBMS_MoveActive_sNoOne;
-
-var g_GRBMS_MM_Picked_Start_iLeft = 0;
-var g_GRBMS_MM_Picked_Start_iTop = 0;
-
-var g_GRBMS_MM_Picked_elem = null;
-var g_GRBMS_MM_Picked_sId = '';
-var g_GRBMS_MM_Picked_iRow = 0;
-var g_GRBMS_MM_Picked_iLetter = 0;
-var g_GRBMS_MM_Picked_bAlteredForMove = false;
-
-var g_GRBMS_MM_iInitialX = 0;
-var g_GRBMS_MM_iInitialY = 0;
-//
-var g_GRBMS_MM_Found_iRow = -1;
-var g_GRBMS_MM_Found_iLetter = -1;
-var g_GRBMS_MM_Found_sId = '';
-var g_GRBMS_MM_Found_bMouseOut = false;
-
-function GRBMS_MT_Down(e, iRow, iLetter, sWho)
+function GRB_MT_Over(e)
 {
-    g_GRBMS_Move_sActive = sWho;
-    GRBMS_ondown(e, iRow, iLetter);
+
 }
 
-function GRBMS_ondown(e, iRow, iLetter)
+function GRB_MT_Down(e, iRow, iLetter, sWho)
 {
+    g_TM_bMoved = false;
+//
     e.preventDefault();
+    g_PointerDown_sWhere = g_PointerDown_sWhere_GRB;
+    g_Pointer_sWho       = sWho;
     if ( g_bGridSolved )
         return;
-// can never pick up black square or golden square
     let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter)
-    if ( TC_IsGoldenOrBlackSquare(cStatus) )
+// can never pick black squares
+    if ( TC_IsBlackSquare(cStatus) )
         return;
-// can never pick up a corrected square (they will not exist in Expert Mode)        
-    if ( TC_IsCorrected(cStatus) )
+// if CAB square does not have the focus, then we cannot pick golden or corrected
+    if ( g_CAB_Focus_sId == '' && ( TC_IsGolden(cStatus) || TC_IsCorrected(cStatus) ) )
         return;
-    if ( !g_bAllowCorrectLettersToChange && TC_IsCorrect(cStatus) )
+// if neither CAB or GRB has focus, we just want to set the GRB Focus to this and not consider swipe?
+    let sId_GRB = GRB_MakeId(iRow, iLetter)
+    if ( g_CAB_Focus_sId == '' && g_GRB_Focus_sId == '' )
     {
+        let elem = document.getElementById(sId_GRB);
+        GRB_onfocus(elem);
         return;
     }
-    let sId = GRBMS_MakeId(iRow, iLetter)
-    let elem = document.getElementById(sId);
-    GRBMS_onfocus(elem);
-    g_GRBMS_MM_Found_bMouseOut = false;
-    GRBMS_ForRowLetter_SetButton(iRow, iLetter, g_cCode_HasFocus);
-    let cLetterBeingReplaced = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-    KB_Mini_SetInstructionLine(cLetterBeingReplaced);
-//
-    g_GRBMS_MM_Picked_iRow = iRow;
-    g_GRBMS_MM_Picked_iLetter = iLetter;
-    g_GRBMS_MM_Picked_sId = GRBMS_MakeId(iRow, iLetter);
-    g_GRBMS_MM_Picked_elem = document.getElementById(g_GRBMS_MM_Picked_sId);
-    g_GRBMS_MM_Picked_elem.style.cursor="move";
-    if ( g_GRBMS_Move_sActive == g_GRBMS_MoveActive_sMouse )
+// if the square selected to swipe is the one with the focus we just want to do onfocus - will alter direction?
+    if ( g_GRB_Focus_sId == sId_GRB )
     {
-        g_GRBMS_MM_iInitialX = Math.round(e.clientX);
-        g_GRBMS_MM_iInitialY = Math.round(e.clientY);
+        let elem = document.getElementById(sId_GRB);
+        GRB_onfocus(elem);
+        return;
     }
-    else if ( g_GRBMS_Move_sActive == g_GRBMS_MoveActive_sTouch )
-    {
-        g_GRBMS_TM_iInitialX = Math.round(e.touches[0].clientX);
-        g_GRBMS_TM_iInitialY = Math.round(e.touches[0].clientY);
-    }
-    rect = GetBoundingClientRectAbsolute(g_GRBMS_MM_Picked_elem)
-    rectBox = GetBoundingClientRectAbsolute(document.getElementById("Div_Grid"));
-    g_GRBMS_MM_Picked_Start_iLeft = Math.round(rect.left) - Math.round(rectBox.left);
-    g_GRBMS_MM_Picked_Start_iTop = Math.round(rect.top) - Math.round(rectBox.top);
-    g_GRBMS_MM_Picked_elem.style.zIndex  =  5;
-    SyncTo_OthersLoseFocus('GR')
+    g_Pointer_sWho = sWho;
+    g_GRBSwipe_sIdActive = sId_GRB;
+    let iX = GRB_GetXFromEvent(e);
+    let iY = GRB_GetYFromEvent(e)
+    TC_GRBSwipe_Start(iX, iY)    
+    TC_GRBSwipe_SetButtonStyle(true, iRow, iLetter);
 }
 
-function GRBMS_mouseUp(event)
+function GRB_GetXFromEvent(e)
 {
-    if ( g_bGridSolved )
-        return;
-    if ( !g_GRBMS_MM_Picked_elem )
-        return;
-    if ( g_GRBMS_MM_Found_sId == '' || g_GRBMS_MM_Found_bMouseOut )
+    if ( g_Pointer_sWho == g_Pointer_sMouse )
+        return Math.round(e.clientX);
+    if ( g_Pointer_sWho == g_Pointer_sTouch )
     {
-        g_GRBMS_MM_Picked_elem.style.cursor="default";
-        g_GRBMS_MM_Picked_elem.style.left = MakePixelString(g_GRBMS_MM_Picked_iLetter*g_GRBMS_Square_iSize);
-        g_GRBMS_MM_Picked_elem.style.top = MakePixelString(g_GRBMS_MM_Picked_iRow*g_GRBMS_Square_iSize);
-        g_GRBMS_MM_Picked_elem.style.zIndex = 0;
-        GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocus);
-        GRBMS_clearPickedAndFoundVariables();
-        return;   
-    }
-    GRBMS_SwitchAnswers(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter);
-    bDropped = true;
-    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_cCode_Inactive);
-    let elemFound = document.getElementById(GRBMS_MakeId(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter));
-    elemFound.style.cursor="default";
-    KB_Mini_SetInstructionLine('');        
-    // fix up the picked square then make nothing picked
-    g_GRBMS_MM_Picked_elem.style.cursor="default";
-    g_GRBMS_MM_Picked_elem.style.left = MakePixelString(g_GRBMS_MM_Picked_iLetter*g_GRBMS_Square_iSize);
-    g_GRBMS_MM_Picked_elem.style.top = MakePixelString(g_GRBMS_MM_Picked_iRow*g_GRBMS_Square_iSize);
-    g_GRBMS_MM_Picked_elem.style.zIndex = 0;
-    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter, g_cCode_Inactive);
-    GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocus);
-    GRBMS_ForAll_SetStatusFromState()
-    GRBMS_MoveToNextAvailable(g_GRBMS_MM_Found_iRow, g_GRBMS_MM_Found_iLetter)
-    GRBMS_clearPickedAndFoundVariables();
-    Status_Check(false);
-}
-
-function GRBMS_PickFromCenter(Picked_iRow, Picked_iLetter, Candidate_iRow, Candidate_iLetter)
-{
-    return true;
-}
-
-function GRBMS_mouseMove_New(e)
-{
-    if ( g_bGridSolved )
-        return;
-    if ( !g_GRBMS_MM_Picked_elem )
-        return;
-// change style fo      
-//    if ( g_Move_bAlterButtonStyleOfActiveSquare )
-    {
-        if ( !g_GRBMS_MM_Picked_bAlteredForMove )
-            TC_GRBMS_SetPickedForMove(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter)
-
-            //GRBMS_ForRowLetter_SetButton(g_GRBMS_MM_Picked_iRow, g_GRBMS_MM_Picked_iLetter, g_cCode_HasFocusBeingMoved);
-        g_GRBMS_MM_Picked_bAlteredForMove = true;
-    }
-// this is the part that moves the active square    
-    let x = 0.0;
-    let y = 0.0;
-    let xMoved = 0;
-    let yMoved = 0;
-    if ( g_GRBMS_Move_sActive == g_GRBMS_MoveActive_sMouse )
-    {
-        x = Math.round(e.clientX);
-        y = Math.round(e.clientY);
-        xMoved = x - g_GRBMS_MM_iInitialX;
-        yMoved = y - g_GRBMS_MM_iInitialY;
-    }
-    else if ( g_GRBMS_Move_sActive == g_GRBMS_MoveActive_sTouch )
-    {
-        x = Math.round(e.touches[0].clientX);
-        y = Math.round(e.touches[0].clientY);
-        xMoved = x - g_GRBMS_TM_iInitialX;
-        yMoved = y - g_GRBMS_TM_iInitialY;
-    }
-//    else
-//        g_GRBMS_MM_Picked_elem.style.position = "absolute";
-    let iLeftRelative = g_GRBMS_MM_Picked_Start_iLeft + xMoved;
-    let iTopRelative = g_GRBMS_MM_Picked_Start_iTop + yMoved;
-
-    g_GRBMS_MM_Picked_elem.style.left = MakePixelString(iLeftRelative);
-    g_GRBMS_MM_Picked_elem.style.top =  MakePixelString(iTopRelative);
-// now we look to see what is over the top     
-//let rectActive = GetBoundingClientRectAbsolute(g_GRBMS_MM_Picked_elem);
-    let rectActive = g_GRBMS_MM_Picked_elem.getBoundingClientRect();
-// 
-    let FindElements_iX = rectActive.left + g_GRBMS_Square_iSize/2; 
-    let FindElements_iY = rectActive.top + g_GRBMS_Square_iSize/2; 
-    a_elem = document.elementsFromPoint(FindElements_iX, FindElements_iY)
-    let iE = 0;
-    let bFound = false;
-    while ( iE < a_elem.length && !bFound )
-    {
-        let sId = a_elem[iE].id;
-        if ( sId.startsWith('GRBMSID_') && sId != g_GRBMS_MM_Picked_sId && sId != g_GRBMS_MM_Found_sId )
+        if ( e.touches.length != 0 )
         {
-
-            let iRow = GRBMS_RowFromId(sId);
-            let iLetter = GRBMS_LetterFromId(sId);
-            if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
-            { // this one uses absolute position 
-                let FindElements_iX_Scroll = FindElements_iX + window.scrollX;
-                let FindElements_iY_Scroll = FindElements_iY + window.scrollY;
-                if ( IsLocationInGridSquareWithBuffer(iRow, iLetter, FindElements_iX_Scroll, FindElements_iY_Scroll) )
-                {
-                    bFound = true;
-                    g_GRBMS_MM_Found_iRow = iRow;
-                    g_GRBMS_MM_Found_iLetter = iLetter;
-                    g_GRBMS_MM_Found_sId = GRBMS_MakeId(iRow, iLetter);
-                }
-                else
-                { // we are over the square, but not within the bound
-                    g_GRBMS_MM_Found_iRow = -1;
-                    g_GRBMS_MM_Found_iLetter = -1;
-                    g_GRBMS_MM_Found_sId = '';
-                }
-            }
+            let iX = Math.round(e.touches[0].clientX);
+            return iX;
         }
-        iE++;
+        return TM_iFinalX;
     }
+    return -2;
+}
+
+function GRB_GetYFromEvent(e)
+{
+    if ( g_Pointer_sWho == g_Pointer_sMouse )
+        return Math.round(e.clientY);
+    if ( g_Pointer_sWho == g_Pointer_sTouch )
+    {
+        if ( e.touches.length != 0 )
+            return Math.round(e.touches[0].clientY);
+        return TM_iFinalY;
+    }
+    return -1;
+}
+
+function GRB_MT_Up(e)
+{
+    if ( g_bGridSolved )
+        return;
+    if ( g_GRBSwipe_sIdActive == '' )
+        return;
+    let sSwipe = 'none';
+    if ( g_TM_bMoved )
+    {
+        let iFinalX = GRB_GetXFromEvent(e);
+        let iFinalY = GRB_GetYFromEvent(e);
+        sSwipe = TC_GRBSwipe_Finish(iFinalX, iFinalY);
+        if ( sSwipe == 'right' )
+        {
+            g_Pointer_sWho = g_Pointer_sNoOne;
+            let iRow_Swiped    = GRB_RowFromId   (g_GRBSwipe_sIdActive)
+            let iLetter_Swiped = GRB_LetterFromId(g_GRBSwipe_sIdActive)
+            // remove the swiped symbol - early so it can be reset if needed
+            TC_GRBSwipe_SetButtonStyle(false, iRow_Swiped, iLetter_Swiped);
+            if ( g_GRB_Focus_sId != '' )
+            {
+                let iRow    = GRB_RowFromId(g_GRB_Focus_sId);
+                let iLetter = GRB_LetterFromId(g_GRB_Focus_sId);
+                GRB_SwitchAnswers(iRow, iLetter, iRow_Swiped, iLetter_Swiped);
+                GRB_MoveToNextAvailable(iRow, iLetter)
+                // want to go to the next in GRB
+            }
+            if ( g_CAB_Focus_sId != '' )
+            {
+                let iRow          = CAB_RowFromId(g_CAB_Focus_sId);
+                let iLetter       = CAB_LetterFromId(g_CAB_Focus_sId);
+                let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow_Swiped, iLetter_Swiped)
+                CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
+            }
+            // cleanup for next
+            g_GRBSwipe_sIdActive = '';
+            Status_Check();
+            return;
+        }
+    }        
+// clear swiped and undo if needed
+    let iRow_Swiped    = GRB_RowFromId   (g_GRBSwipe_sIdActive)
+    let iLetter_Swiped = GRB_LetterFromId(g_GRBSwipe_sIdActive)
+    TC_GRBSwipe_SetButtonStyle(false, iRow_Swiped, iLetter_Swiped);
+    let elem = document.getElementById(g_GRBSwipe_sIdActive);
+    g_GRBSwipe_sIdActive = '';
+    GRB_onfocus(elem);
+    if ( sSwipe == 'left' )
+    {
+        TC_History_UndoLast();
+    }       
+}
+
+function GRB_MT_Move(e)
+{
+    if ( g_bGridSolved )
+        return;
+    if ( g_GRBSwipe_sIdActive == '' )
+        return;
+    g_TM_bMoved = true;
+    TM_iFinalX = GRB_GetXFromEvent(e);
+    TM_iFinalY = GRB_GetYFromEvent(e);
     e.preventDefault();
 }
 
-function GRBMS_mouseOut(e)
+function GRB_MT_Out(e)
 {
-    if (!g_GRBMS_MM_Picked_elem) return;
-        g_GRBMS_MM_Found_bMouseOut = true;
-    GRBMS_mouseUp(e)
-}
-
-function GRBMS_clearPickedAndFoundVariables()
-{
-    g_GRBMS_MM_Picked_iRow = -1;
-    g_GRBMS_MM_Picked_iLetter = -1;
-    g_GRBMS_MM_Picked_sId = '';
-    g_GRBMS_MM_Picked_elem = null;
-    g_GRBMS_MM_Picked_bAlteredForMove = false;
-    g_GRBMS_MM_Found_iRow = -1;
-    g_GRBMS_MM_Found_iLetter = -1;
-    g_GRBMS_MM_Found_sId = '';
+    if ( g_GRBSwipe_sIdActive == '' )
+        return;
+    GRB_MT_Up(e)
 }

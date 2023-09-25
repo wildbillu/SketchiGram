@@ -2,9 +2,9 @@
 
 /* zIndexes
 - 0 most things
-- 1 result message
 - 2 popup images
-- 3 popup dialogs
+    width:450px;
+    height:810px;
 */
 
 ::selection{background-color: #FFEE60}
@@ -23,30 +23,41 @@
 cursor: url('image/Button_ChangeDirection.cur'),auto;
 }
 
-.ForTest
+.Body_Real
 {
-    visibility: hidden;
-}
-
-.Body_Any_BeforeLoad
-{
-    border: 1px solid green;
-    background-color: #A7D8FF;
-    color: #fff;
-    width:700px;
-    height:1200px;
-    background-image:url("images/InfoScreens/StartingScreen_SG2.jpg");
-    background-repeat:no-repeat;
-    background-position: center;
-}
-
-.Body_Any_AfterLoad
-{
+    position:absolute;
+    top:0px;
+    left:0px;
     border: 0px solid red;
-    width:600px;
-    height:0px;
-    background-color: white;
+    color: #fff;
+    height:1170px;
+    width:650px;
 }
 
+.OpeningText
+{
+    width:640px;
+    top: 675px;
+    left:0px;
+    position:absolute;
+    color:green;
+    text-align:center;
+    font-size:28px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;  
+    font-weight:normal;
+    z-index:12;
+}
 
-
+.Body_Intro
+{
+    border:0px solid blue;
+    background-color: #A7D8FF;
+    color:black;
+    height:1170px;
+    width:650px;
+    background-image:url("images/InfoScreens/StartingScreen-2023-09-20.jpg");
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:12;
+}

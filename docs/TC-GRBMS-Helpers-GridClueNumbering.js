@@ -19,7 +19,7 @@ function GR_PushAcross(sAnswer, iNumber, iStartRow, iStartLetter)
     TC_CA_MapToAcrossIfMatch(sAnswer, iStartRow, iStartLetter);
 }
 
-function TC_GRBMS_GetGridClueNumbering()
+function TC_GRB_GetGridClueNumbering()
 {
     g_aGridNumbers = g_sGridNumbering.split(g_cGeneralDelimiter);
     g_GR_aAcrossAnswers.length = 0;

@@ -8,7 +8,7 @@ var g_CAB_aAnswersPlayer            = [];
 var g_CAB_aAnswersPlayerStatus      = [];
 var g_CAB_aAnswerLocations          = [];
 var g_CAB_aAnswerType               = [];
-var g_CAB_aAnswerSpecialClueType       = [];
+var g_CAB_aAnswerSpecialClueType    = [];
 var g_sSpecialClueBefore      = ''; 
 var g_sSpecialClueBeforeLine2 = ''; 
 var g_sSpecialClueMiddle;

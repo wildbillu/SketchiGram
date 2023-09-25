@@ -44,7 +44,6 @@ function TC_GetStatusOverlayImagePathAndName(cStatus)
     if ( cStatus == g_cCode_Corrected )
     {
         return g_sImagePath_StatusIndicators + g_sStatusButtonName_Corrected;
-        return g_sImagePath_StatusIndicators + g_sStatusButtonName_Corrected;
     }
     if ( cStatus == g_cCode_Incorrect )
         return g_sImagePath_StatusIndicators + g_sStatusButtonName_Empty;
@@ -80,10 +79,12 @@ function TC_GetGridNumberImagePathAndName(sNumber)
 function TC_GetStatusImagePathAndName(cSelection)
 {
     var sStatusImage = g_sImagePath_StatusIndicators;
-    if ( cSelection == g_cCode_HasFocus || cSelection == g_cCode_HasFocusBeingMoved )
+    if ( cSelection == g_cCode_HasFocus )
         sStatusImage += g_sStatusButtonName_Focus;
     else if ( cSelection == g_cCode_ActiveRow )
         sStatusImage += g_sStatusButtonName_ActiveRow;
+    else if ( cSelection == g_cCode_HasFocusBeingSwiped )
+        sStatusImage += g_sStatusButtonName_BeingSwiped;
     else
         sStatusImage += g_sStatusButtonName_Inactive;
     return sStatusImage;

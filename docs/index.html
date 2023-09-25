@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="Styles-Info-Content.css">
     <link rel="stylesheet" href="Styles-StatusControl.css">
     <link rel="stylesheet" href="Styles-SG.css">
-    <link rel="stylesheet" href="Styles-ResultMessage.css">
-    <link rel="stylesheet" href="Styles-ScratchArea.css">
 
     <SCRIPT SRC="TC-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines-Codes.js"></SCRIPT>
@@ -37,15 +35,14 @@
     <SCRIPT SRC="TC-CAB-Helpers-Answers-Status.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-HandleArrows.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-ContextMenu.js"></SCRIPT>
+    <SCRIPT SRC="TC-SyncGridAndCA.js"></SCRIPT>    
     <link rel="stylesheet" href="Styles-CAB-Headings.css">
     <link rel="stylesheet" href="Styles-CAB-ContextMenu.css">
 
-    <SCRIPT SRC="TC-CA_SetupAndPositioning.js"></SCRIPT>
-    <SCRIPT SRC="TC-CA-DisplayHelpers.js"></SCRIPT>
-    <SCRIPT SRC="TC-SyncGridAndCA.js"></SCRIPT>
     
     <SCRIPT SRC="TC-MakeClasses.js"></SCRIPT>
 
+    
     <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-ButtonControl.js"></SCRIPT>
@@ -57,36 +54,26 @@
     <SCRIPT SRC="TC-GRBMS-Helpers-Answers-Status.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Helpers-GridClueNumbering.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Navigation.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-PointerSupport.js"></SCRIPT>
+
     <link rel="stylesheet" href="Styles-GRBMS-Base.css">
     <link rel="stylesheet" href="Styles-GRBMS-Button.css">
     <SCRIPT SRC="TC-GRBMS-ContextMenu.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-GRBMS-ContextMenu.css">
 
-    <SCRIPT SRC="TC-ResultMessage.js"></SCRIPT>
 
-    <SCRIPT SRC="TC-ScratchArea-Base-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-ScratchArea-CoreProcessing.js"></SCRIPT>
-    <SCRIPT SRC="TC-ScratchArea-EntryProcessing.js"></SCRIPT>
     <SCRIPT SRC="TC-DisplaySpecialClue.js"></SCRIPT>
 
-<!-- keyboard -->
-    <SCRIPT SRC="TC-Keyboard-AllGridChars.js"></SCRIPT>
-    <SCRIPT SRC="TC-Keyboard-AllGridChars-Buttons.js"></SCRIPT>
-    <SCRIPT SRC="TC-Keyboard-AllGridChars-HandleKeypress.js"></SCRIPT>
-
-    <SCRIPT SRC="TC-Keyboard-WindowSupport.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-Keyboard-Mini.css">
 <!-- these are the 'show/noshow' windows -->
     <SCRIPT SRC="TC-SuccessWindow.js"></SCRIPT>
     <SCRIPT SRC="TC-Info-Content.js"></SCRIPT>
 <!-- Settings -->
     <SCRIPT SRC="TC-Settings-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-Settings-DifficultySupport.js"></SCRIPT>
     <SCRIPT SRC="TC-Settings-CookieSupport.js"></SCRIPT>
 <!-- this controls the closing of the show/noshow windows  -->
     <SCRIPT SRC="TC-Popup-Support.js"></SCRIPT>
 
-    <SCRIPT SRC="TC-TopRowButton-Setup-Process.js"></SCRIPT>
     <SCRIPT SRC="TC-Cookies.js"></SCRIPT>
  
     <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
@@ -96,12 +83,8 @@
 
 <!-- specific to SG -->
     <SCRIPT SRC="TC-SG2-Base.js"></SCRIPT>
-    <SCRIPT SRC="TC-SG-SG2-SetupHelpers.js"></SCRIPT>
     <SCRIPT SRC="TC-SG2-Positioning.js"></SCRIPT>
-<!--
-    <SCRIPT SRC="TC-Archive.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-Archive.css">
--->    
+
 <!-- Archive -->
 
     <SCRIPT SRC="TC-Archive-Data.js"></SCRIPT>
@@ -115,40 +98,70 @@
 <!-- ElapsedTime -->
     <SCRIPT SRC="TC-ElapsedTime.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-ElapsedTime.css">
-<!-- Difficulty -->
-    <SCRIPT SRC="TC-DifficultyMenu-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-DifficultyMenu-Actions.js"></SCRIPT>
-    <SCRIPT SRC="TC-MiniActionsMenu-AffectingDifficultyLevel.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-DifficultyMenu.css">
-<!-- MiniActionMenu -->
-    <SCRIPT SRC="TC-MiniActionsMenu.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-MiniActionsMenu.css">
 <!-- NewThemeImage -->
-<SCRIPT SRC="TC-ThemeImage-Base.js"></SCRIPT>
-<SCRIPT SRC="TC-ThemeImage-Extra.js"></SCRIPT>
-<SCRIPT SRC="TC-ThemeImage-Solved.js"></SCRIPT>
-<SCRIPT SRC="TC-ThemeImage-Popup.js"></SCRIPT>
-<link rel="stylesheet" href="Styles-ThemeImage.css">
+    <SCRIPT SRC="TC-ThemeImage-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-ThemeImage-Extra.js"></SCRIPT>
+    <SCRIPT SRC="TC-ThemeImage-Solved.js"></SCRIPT>
+    <SCRIPT SRC="TC-ThemeImage-Popup.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-ThemeImage.css">
 
 <!-- DialogBox -->
-<SCRIPT SRC="TC-DialogBox-Base.js"></SCRIPT>
-<SCRIPT SRC="TC-DialogBox-Sizing.js"></SCRIPT>
-<link rel="stylesheet" href="Styles-DialogBox-Base.css">
+    <SCRIPT SRC="TC-DialogBox-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-DialogBox-Sizing.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-DialogBox-Base.css">
 
 <!-- ActionMenu actions themselves -->
-<SCRIPT SRC="TC-Actions.js"></SCRIPT>
+    <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-More.css">
 
-<!-- History -->
-<SCRIPT SRC="TC-History.js"></SCRIPT>
-<SCRIPT SRC="TC-SquaresPlaced.js"></SCRIPT>
+    <SCRIPT SRC="TC-Actions.js"></SCRIPT>
+    <SCRIPT SRC="TC-ControlRow.js"></SCRIPT>
+
+<!-- History and placed squares -->
+    <SCRIPT SRC="TC-History.js"></SCRIPT>
+    <SCRIPT SRC="TC-SquaresPlaced.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard-WindowSupport.js"></SCRIPT>
+
+<!-- MiniInstructionImages -->
+<SCRIPT SRC="TC-MiniInstructionImages.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-MiniInstructionImages.css">
+
+
+<!-- FullInstruction -->
+    <SCRIPT SRC="TC-FullInstructions.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-FullInstructions.css">
+
+<!-- CluesAsList -->
+<SCRIPT SRC="TC-CluesAsList.js"></SCRIPT>
+<link rel="stylesheet" href="Styles-CluesAsList.css">
+
 
 </HEAD>
-
 <SCRIPT>
-document.onkeypress = function (e) {TC_KeyboardSupport_KeyPress(e);};
 let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle001'; // used if no StartingPuzzle.txt
 let g_sPuzzleNumber          = 'puzzle000'
 let g_bConnectionIsWebBased = true;
+var g_bPlaying = false;
+
+function TC_AddScreenInfo()
+{
+    let elem = document.getElementById("OpeningText");
+    let sCredits = '';
+    sCredits += 'This Puzzle' + '<br>'
+    sCredits += g_sPuzzleTitle + '<br>'
+    sCredits += g_sPuzzleCreditAuthor + '<br>';
+    sCredits += g_sPuzzleCreditDate;
+    elem.innerHTML = sCredits;
+    ForIdSetVisibility("OpeningText", true)
+}
+
+function TC_CloseScreen()
+{
+    if ( g_bPlaying )
+        return;
+    SG2_RealStart()
+    g_bPlaying = true;
+}
 
 function Dispatch() 
 {
@@ -156,32 +169,33 @@ function Dispatch()
     if (window.location.protocol === "file:")
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
-    g_TC_iBiggestBottom = 0;
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.090';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.000';
 //
-    TC_LoadPuzzleArchive();
+    TC_LoadPuzzleArchiveDefault();
     SG2_LoadAll(0);
     return;
 }
 
 function TC_SetActiveSize()
 {
-    var elemAll = document.getElementById("Body_Any");
-    elemAll.style.height = g_TC_iBiggestBottom;
-    elemAll.style.width  = g_Window_iWidth;
-}
+    let elemAll = document.getElementById("Body_Intro");
+    elemAll.style.height = MakePixelString(g_Window_iHeight);
+    elemAll.style.width  = MakePixelString(g_Window_iWidth);
 
-function A(e)
-{
-    GRBMS_mouseMove_New(e)
+    let elemReal = document.getElementById("Body_Real");
+    elemReal.style.height = MakePixelString(g_Window_iHeight);
+    elemReal.style.width  = MakePixelString(g_Window_iWidth);
+    
 }
-var iM = 0;
+// to find elements under a point
+//a_elem = document.elementsFromPoint(rect.left, rect.top)
 
 </SCRIPT>
 
-<BODY onmousemove="TC_MousePositionSupport(event)" Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0"  OnLoad="Dispatch();">
-<DIV Id="Body_Any" class="Body_Any_BeforeLoad" ontouchmove="GRBMS_touchMove(event);" onmousemove="A(event);"></DIV>  
-<DIV Id="Messages" class="Div_Message"></DIV>  
+<BODY onclick="TC_CloseScreen();" onmousemove="TC_Global_MouseMove(event)" ontouchmove="TC_Global_MouseMove(event)" Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0"  OnLoad="Dispatch();">
+    <DIV Id="Body_Intro" class="Body_Intro" ontouchout="TC_Global_Out(event);" ontouchstart="TC_Global_Down(event, 'Touch');" ontouchend="TC_Global_Up(event);" onmouseout="TC_Global_Out(event);" onmousedown="TC_Global_Down(event, 'Mouse');" onmouseup="TC_Global_Up(event);"><DIV top=200 left=100 Id="OpeningText" class="OpeningText TC_StartHidden">SOMETEXTHERE</DIV></DIV>
+    <DIV Id="Body_Real" class="Body_Real TC_StartHidden" ontouchout="TC_Global_Out(event);" ontouchstart="TC_Global_Down(event, 'Touch');" ontouchend="TC_Global_Up(event);" onmouseout="TC_Global_Out(event);" onmousedown="TC_Global_Down(event, 'Mouse');" onmouseup="TC_Global_Up(event);">this is the new div</DIV>
+    <DIV Id="Messages" class="Div_Message"></DIV>  
 </BODY>
 </HTML>
 

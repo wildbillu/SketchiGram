@@ -15,8 +15,6 @@ var g_Cookie_bPuzzleSolved = false;
 var g_Cookie_bGridSolved = false;
 var g_Cookie_bAnswersSolved = false;
 var g_Cookie_CAB_sAnswerType = 'S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N'
-var g_Cookie_SA_EB_sWords = '||||||||||||';
-var g_Cookie_SA_EB_sWordStatus = 'FFFFFFFFFFFF';
 
 var g_Cookie_Puzzle_Version_sV1000 = 'V1.000';
 var g_Cookie_Puzzle_Version_sV1000_iCount = 13;
@@ -92,8 +90,6 @@ function GetAndSplitCookies()
 
 function HandleCookiesOnStart()
 {
-    g_Cookie_DifficultyLevel_iLevel = -1;
-//    
     let sOurCookieName_Puzzle   = 'SG2' + '-' + g_sPuzzleNumber;
     let sOurCookieName_Settings = 'SG2' + '-Settings'; 
     let sOurCookie_Puzzle = '';
@@ -142,8 +138,8 @@ function HandleCookie_Puzzle(sOurCookie_Puzzle)
     g_Cookie_bPuzzleSolved = IsTrue(aOurValues[iIndex++]);
     g_Cookie_bGridSolved = IsTrue(aOurValues[iIndex++]);
     g_Cookie_bAnswersSolved = IsTrue(aOurValues[iIndex++]);
-    g_Cookie_SA_EB_sWords = aOurValues[iIndex++];
-    g_Cookie_SA_EB_sWordStatus =  aOurValues[iIndex++];
+    dummy = aOurValues[iIndex++];
+    dummy =  aOurValues[iIndex++];
     g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(aOurValues[iIndex++]);
 
     if ( sVersion == g_Cookie_Puzzle_Version_sV1000 ) // we can set this directly
@@ -190,10 +186,10 @@ function MakeCookie_Puzzle(sDummy, sAnswersPlayer, sStatusPlayer, sGridAnswersPl
      sCookie += g_cCookieDelimiter;
     sCookie += g_bAnswersSolved;//8
      sCookie += g_cCookieDelimiter;
-    let SA_EB_sWords = g_SA_aWords.join(g_cGeneralDelimiter);
-    sCookie += SA_EB_sWords;//9
+    let sDummyA = 'A';
+    sCookie += sDummyA;//9
      sCookie += g_cCookieDelimiter;
-    sCookie += g_SA_sWordStatus//10
+    sCookie += sDummyA//10
      sCookie += g_cCookieDelimiter;
     let iTotalTime = (g_ElapsedTime_iSecondsPrevious + g_ElapsedTime_iSecondsThisAttempt);
     sCookie += iTotalTime.toString();//11

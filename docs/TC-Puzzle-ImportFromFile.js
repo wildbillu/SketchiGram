@@ -24,6 +24,7 @@ function TC_LoadFromThisPuzzle(sPuzzle)
     TC_UseFileContents();
     return true;
 }
+
 function GetQueryLinePuzzleName()
 {
     let sPageURL = window.location.search.substring(1);
@@ -92,9 +93,8 @@ function TC_InitializeFromFileOrLoadAsJS()
     let sOverrideStartingFile = TC_GetOverrideName();
     if ( sOverrideStartingFile != '' )
         g_TC_sPuzzle_NoArchive_NoCommandLine = sOverrideStartingFile;
-    if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_NoArchive_NoCommandLine) )
-        return;
-    TC_Puzzle_Load_AsJS(); // all file reads have failed 
+    if ( !TC_LoadFromThisPuzzle(g_TC_sPuzzle_NoArchive_NoCommandLine) )
+        TC_Puzzle_Load_AsJS(); // all file reads have failed 
 }
 
 var sClues = '';
@@ -102,8 +102,6 @@ var sAnswers = '';
 var sAnswersPlayers = '';
 var sStatusPlayer = '';
 var sAnswerLocation = '';
-var SA_EB_sWords = '';
-var SA_EB_sWordStatus = '';
 var iGridWidth = 4;
 var iGridHeight = 4;
 var sGridAnswers = '';
@@ -112,41 +110,26 @@ var g_bUsedCookie = false;
 var sGridSpecialClueLocations = '';
 var sAnswersSpecialClueLocations = '';
 var sClueTypes                  = 'S|S|N|N|N|N|N|N'; 
-var g_AdjustForInitialDifficultyLevel_bNewPuzzle = false;
-var g_AdjustForInitialDifficultyLevel_bActive = false;
-var g_AdjustForInitialDifficultyLevel_iLevel = 3;
-
-//g_Difficulty_iLevel_Settings = parseInt(aOurValues[iOurValue++]);
-//g_Difficulty_iLevel_OnNewPuzzle = parseInt(aOurValues[iOurValue++]);
-
 
 function TC_UseFileContents()
 {   // now we need to figure out whether to use any cookie settings
     HandleCookiesOnStart();    
     g_bUsedCookie = false;
-    if ( g_Cookie_bValid )
+    if ( g_Cookie_bValid && !g_bResettingDoNotUseCookie )
     { 
-        CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, 
-            g_Cookie_SA_EB_sWords, g_Cookie_SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes);
+        CA_SetupGlobals(sClues, sAnswers, g_Cookie_sAnswersPlayer, g_Cookie_sStatusPlayer, sAnswerLocations, sAnswersSpecialClueLocations, sClueTypes);
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations);
         g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
         g_bGridSolved = g_Cookie_bGridSolved;
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
         g_bUsedCookie = true;
-        g_AdjustForInitialDifficultyLevel_bActive = true;
-        g_AdjustForInitialDifficultyLevel_bNewPuzzle = false;
-        g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_Settings;
     }
     if ( !g_bUsedCookie )
     {
-        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, 
-                            SA_EB_sWords, SA_EB_sWordStatus, sAnswersSpecialClueLocations, sClueTypes)
+        CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations, sAnswersSpecialClueLocations, sClueTypes)
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, sGridAnswersPlayer, sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations)
         g_ElapsedTime_iSecondsPrevious = 0;
-        g_AdjustForInitialDifficultyLevel_bActive = true;
-        g_AdjustForInitialDifficultyLevel_bNewPuzzle = true;
-        g_AdjustForInitialDifficultyLevel_iLevel = g_Difficulty_iLevel_OnNewPuzzle;
     }
     return true;
 }
@@ -161,23 +144,21 @@ function TC_ProcessFileContents(sFileContents)
         let sLine = aLines[iLine];
         sLine = sLine.substring(0, sLine.length - 1)
 // the first are ones we will use as locals                
-        if ( sLine.startsWith('sGridAnswers=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswers = aEntries[1]; iUpdated++;}}
+        if ( sLine.startsWith('sGAs=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswers = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('iGridWidth=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){iGridWidth = parseInt(aEntries[1]); iUpdated++;}}
         else if ( sLine.startsWith('iGridHeight=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){iGridHeight = parseInt(aEntries[1]); iUpdated++;}}
         else if ( sLine.startsWith('iClueAnswers=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){iClueAnswers = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sClues=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sClues = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sAnswers=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswers = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sAnswersPlayer=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswersPlayer = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sAnswersPlayerStatus') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sStatusPlayer = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sGridAnswers=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswers = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sGridAnswersPlayer=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswersPlayer = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sGridStatusPlayer=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridStatusPlayer = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sAns=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswers = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sAPl=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswersPlayer = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sAPS=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sStatusPlayer = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sGAs=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswers = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sGAP=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswersPlayer = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sGSP=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridStatusPlayer = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sGridNumbering=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridNumbering = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sAnswerLocations=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswerLocations = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('SA_EB_sWords=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){SA_EB_sWords = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('SA_EB_sWordStatus=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){SA_EB_sWordStatus = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sGridSpecialClueLocations=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridSpecialClueLocations = aEntries[1]; iUpdated++;}}
-        else if ( sLine.startsWith('sAnswersSpecialClueLocations=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswersSpecialClueLocations = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sGSL=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridSpecialClueLocations = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sASL=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sAnswersSpecialClueLocations = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sClueTypes=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sClueTypes = aEntries[1]; iUpdated++;}}
         // these we set directly
         else if ( sLine.startsWith('sPuzzleDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleDate = aEntries[1]; iUpdated++;}}

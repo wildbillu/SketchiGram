@@ -19,31 +19,3 @@ function TC_ThemeImage_Extra_Create()
     elemThemeImage.innerHTML = sImage;
 }
 
-function TC_ThemeImage_Extra_PositionVisibility_Print(bVisible)
-{
-    let elemThemeImageDiv = document.getElementById("ThemeImage_Extra_Div");
-    let elemThemeImageItself = document.getElementById("ThemeImage_Extra_ImageItself");
-
-    let elemKB = document.getElementById("KB_Mini_Div");
-    let rectKB = GetBoundingClientRectAbsolute(elemKB);
-    let elemBottomMatter = document.getElementById("Div_BottomMatter");
-    let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter);
-
-    let iTop = rectKB.bottom + g_TC_Padding_Inter_Vertical_iSize;
-    let iBottom = rectBottomMatter.top - g_TC_Padding_Inter_Vertical_iSize;
-    let iHeight = iBottom - iTop;
-    let iWidth = g_ThemeImage_All_fWidthToHeight*iHeight;
-    let iLeft = TC_LeftForCentering(iWidth);
-    elemThemeImageDiv.style.top = MakePixelString(iTop);
-    elemThemeImageDiv.style.left = MakePixelString(iLeft);
-    
-    elemThemeImageDiv.style.height = MakePixelString(iHeight);
-    elemThemeImageDiv.style.width = MakePixelString(iWidth);
-
-    elemThemeImageItself.style.height = MakePixelString(iHeight);
-    elemThemeImageItself.style.width = MakePixelString(iWidth);
-    ForIdSetVisibility('ThemeImage_Extra_Div', bVisible)
-    ForIdSetVisibility('ThemeImage_Extra_ImageItself', bVisible)
-
-}
-
