@@ -6,16 +6,13 @@ function Action_Finishup()
     Status_Check();
 }
 
-
-
 function Action_ResetPuzzle()
 {
     g_bResettingDoNotUseCookie = true;
     g_bPuzzleSolved = false;
     g_bGridSolved = false;
     TC_ElapsedTime_Clear()
-
-//
+    TC_HideMoreActions();
     Restart();
 }
 
@@ -26,6 +23,5 @@ function Action_SolvePuzzle()
     g_bPuzzleSolved = true;    
     TC_ThemeImage_Solved_ShowPopup();    
     Status_Check();
-//    Action_Finishup(true);
-    TC_HideMoreActions()
+    TC_HideMoreActions();
 }

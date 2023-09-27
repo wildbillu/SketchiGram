@@ -102,6 +102,9 @@ function TC_ShowMoreActions()
     g_sCABOnMoreActionsClick = g_CAB_Focus_sId;
     g_sGRBOnMoreActionsClick = g_GRB_Focus_sId;
     g_TC_MoreActions_bActive = true;
+// set timer for to close this 
+    setTimeout(function(){TC_HideMoreActions();}, 10000);   
+    
 }
 
 function SetMoreButton(sButton, bEnabled)

@@ -111,7 +111,7 @@ function TC_Archive_Consolidated_FillSelect_Div()
 // the element exists so we can determine the width
         let iThisWidth = TC_GetWidthOfInnerTextInPixels(sId);
         if ( iThisWidth > iBiggestWidth )
-            iBiggestWidth = iThisWidth + 20;
+            iBiggestWidth = iThisWidth + g_Archive_iFudgeWidth;
     }
     let iLastButtonNumber = iAdded + g_TC_Archive_Menu_iStartAt;
     if ( iLastButtonNumber < iEntries )

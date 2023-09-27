@@ -6,7 +6,12 @@
 //    6       12          3
 //    7       14          4 
 //    8       16          up to 5
+var g_Window_iWidth = 640;
+var g_Window_iHeight = 1170;
 
+var g_iCalLineHeight = 22;
+
+var g_Archive_iFudgeWidth = 30;
 var g_TopMatter_iTop = 20;
 
 var g_iStartAtIndex = 0;
@@ -22,8 +27,7 @@ var g_TC_SyncGridAndSpecialClueAnswers_bActive = false;
 
 var g_Move_bSetFocusToDroppedSquare = true;
 
-var g_Window_iWidth = 640;
-var g_Window_iHeight = 1170;
+
 var g_InfoSettingsButtons_iLeft = 10;
 var g_InfoSettingsButtons_iTop  = 20;
 
@@ -84,7 +88,7 @@ function setV3()
     g_SpecialClueFrame_iTop = 820; g_SpecialClueFrame_iHeight = 110; g_SpecialClueFrame_bActive = true; 
     
     g_CAL_iTop = 300; g_CAL_iLeft = -1; g_CAL_iPadding = 80
-    g_MoreMenu_iTop = 70; g_MoreMenu_iLeft = 250;
+    g_MoreMenu_iTop = 52; g_MoreMenu_iLeft = 195;
     g_Archive_iTop = 190;
     g_StatusControlRow_iTop   = 80;
     g_iBottomMatterTop = 945; 

@@ -41,8 +41,7 @@ function TC_CAL_Fill()
         }
     }
     iWidthMax += g_CAL_iPadding;
-
-    elem.style.height = MakePixelString(iTotalLines * 20);
+    elem.style.height = MakePixelString(iTotalLines * g_iCalLineHeight);
     elem.style.width  = MakePixelString(iWidthMax);
     elem.style.top    = MakePixelString(g_CAL_iTop);
     if ( g_CAL_iLeft != -1 )
@@ -60,8 +59,6 @@ function TC_CAL_Show()
     let iTop = g_Window_iHeight - iHeight;
     elem.style.top = MakePixelString(iTop);
     elem.style.visibility = 'visible';
-    
-
     g_bSuppressGridNumbers = false;
     GRB_SetAllButtons_Inactive();
 }

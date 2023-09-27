@@ -44,9 +44,7 @@ function MII_Grid_SetLocationAndSize()
 // top is 1/2 square down from top of grid
     let elemGrid = document.getElementById("Div_Grid")
     let rectGrid = GetBoundingClientRectAbsolute(elemGrid);
-    let iTop  = rectGrid.top + g_GRB_Square_iSize/2;
     let iWidth = Math.round(rectGrid.width * g_MII_sImageFraction )
-    elem.style.top = MakePixelString(iTop);
     elem.style.width = MakePixelString(iWidth);
     let iLeft = TC_LeftForCentering(iWidth);
     elem.style.left = MakePixelString(iLeft);
@@ -55,7 +53,10 @@ function MII_Grid_SetLocationAndSize()
     elemImage.style.width = MakePixelString(iWidth);
     let iHeight = iWidth/fWtoH;
     elem.style.height = MakePixelString(iHeight);
+// put it just above the bottom
     elemImage.style.height = MakePixelString(iHeight);
+    let iTop = g_Window_iHeight - iHeight;
+    elem.style.top = MakePixelString(iTop);
 }
 
 function MII_Hint_SetLocationAndSize()
@@ -77,11 +78,9 @@ function MII_Hint_SetLocationAndSize()
     let iHeight = Math.round(iWidth/fWtoH);
     elem.style.height = MakePixelString(iHeight);
     elemImage.style.height = MakePixelString(iHeight);
-
-    let elemSC = document.getElementById("SpecialClue_Div");
-    let rectSC= GetBoundingClientRectAbsolute(elemSC);
-    let iTop = rectSC.top - iHeight;
-    elem.style.top = MakePixelString(Math.round(iTop));
+//
+    let iTop = g_Window_iHeight - iHeight;
+    elem.style.top = MakePixelString(iTop);
 }
 
 function MII_Grid_Handler(iSecondsActive)
@@ -93,7 +92,6 @@ function MII_Grid_Handler(iSecondsActive)
     if ( iSecondsActive < g_MII_Grid_ShowAfter_iSec )
         return;
     ForIdSetVisibility(g_MII_Grid_sId_Div, true);
-setlineAdd('S:' + iSecondsActive + "|")    
     g_MII_Grid_Show_iCloseTimerId = setInterval(MII_Grid_Hide, g_MII_Grid_ShowFor_iSec * 1000);
 }
 
