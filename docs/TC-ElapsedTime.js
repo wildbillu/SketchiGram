@@ -23,7 +23,6 @@ function TC_ElapsedTime_Resume()
 
 function TC_ElapsedTime_StartOver()
 {
-
     TC_ElapsedTime_Clear();
     g_ElapsedTime_iSecondsPrevious = 0;
     g_ElapsedTime_iSecondsThisAttempt = 0;
@@ -35,10 +34,18 @@ function TC_ElapsedTime_StartOver()
 
 function TC_ElapsedTime_Clear()
 {
+setlineAdd('CL')
+    g_ElapsedTime_iSecondsPrevious = 0;
+    g_ElapsedTime_iSecondsThisAttempt = 0;
+    const d = new Date();
+    g_ElapsedTime_iInitialTimeInSeconds = Math.trunc(d.getTime()/1000);
     if ( g_ElapsedTime_IntervalId == 0 )
         return;
     clearInterval(g_ElapsedTime_IntervalId);
     g_ElapsedTime_IntervalId = 0;
+
+
+
 }
 
 function TC_ElapsedTime_Process()

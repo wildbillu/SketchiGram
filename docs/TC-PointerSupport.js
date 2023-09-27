@@ -12,8 +12,9 @@ var g_PointerDown_sWhere_CAB         = 'CAB';
 var g_PointerDown_sWhere                 = g_PointerDown_sWhere_Unspecified
 
 var g_Swipe_iMaxTime_ms                = 500;
-var g_Swipe_Distance_iMin              = 50;
+var g_Swipe_Distance_iMin              = 20;
 var g_Swipe_Distance_iMaxPerpendicular = 300;
+var g_Swipe_Distance_iMinOnOut         = 5;
 
 var g_GlobalSwipe_Start_iX        = 0;
 var g_GlobalSwipe_Start_iY        = 0;
@@ -37,9 +38,12 @@ function TC_Swipe_Result(iElapsed, iDelta_X, iDelta_Y)
     sSwipe = 'perp';
     if ( Math.abs(iDelta_Y) > g_Swipe_Distance_iMaxPerpendicular )
         return sSwipe + iDelta_Y;
-    if ( iDelta_X > g_Swipe_Distance_iMin )
+    let iRequiredX = g_Swipe_Distance_iMin;
+    if ( g_TM_bOut )
+        iRequiredX = g_Swipe_Distance_iMinOnOut
+    if ( iDelta_X > iRequiredX )
         return 'right';
-    if ( iDelta_X < -g_Swipe_Distance_iMin)
+    if ( iDelta_X < -iRequiredX)
         return 'left'
     return 'short';
 }
@@ -88,7 +92,7 @@ function TC_Global_Down(e, sWho)
 
 function TC_Global_Out(e)
 {
-    if ( g_Pointer_sWho == g_Pointer_sNoOne )
+    if ( g_Pointer_sWho != g_Pointer_sNoOne )
         return;
     TC_Global_Up(e)
 }

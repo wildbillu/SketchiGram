@@ -13,6 +13,8 @@ function Action_ResetPuzzle()
     g_bResettingDoNotUseCookie = true;
     g_bPuzzleSolved = false;
     g_bGridSolved = false;
+    TC_ElapsedTime_Clear()
+
 //
     Restart();
 }

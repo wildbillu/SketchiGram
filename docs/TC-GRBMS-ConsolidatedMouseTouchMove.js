@@ -1,6 +1,15 @@
 // TC-GRBMS-ConsolidatedMouseTouchMove.js
 
 var g_TM_bMoved = false;
+var g_TM_bOut   = false;
+
+function GRB_MT_Out(e)
+{
+    if ( g_GRBSwipe_sIdActive == '' )
+        return;
+    g_TM_bOut   = true;
+    GRB_MT_Up(e)
+}
 
 function GRB_MT_Over(e)
 {
@@ -10,6 +19,7 @@ function GRB_MT_Over(e)
 function GRB_MT_Down(e, iRow, iLetter, sWho)
 {
     g_TM_bMoved = false;
+    g_TM_bOut   = false;
 //
     e.preventDefault();
     g_PointerDown_sWhere = g_PointerDown_sWhere_GRB;
@@ -140,9 +150,3 @@ function GRB_MT_Move(e)
     e.preventDefault();
 }
 
-function GRB_MT_Out(e)
-{
-    if ( g_GRBSwipe_sIdActive == '' )
-        return;
-    GRB_MT_Up(e)
-}

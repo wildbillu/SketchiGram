@@ -32,6 +32,10 @@ function SG2_SetVisibles(bVisible)
 
 function Restart()
 {
+    TC_ElapsedTime_Clear();
+    ForIdSetVisibility("ThemeImage_Solved_Div", false);
+    ForIdSetVisibility("MII_Hint_Div", false);
+//
     ForIdSetVisibility("Body_Real", false);
     let elemBody_Intro = document.getElementById("Body_Real");
     elemBody_Intro.style.backgroundColor = 'transparent'

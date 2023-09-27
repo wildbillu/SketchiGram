@@ -93,6 +93,7 @@ function MII_Grid_Handler(iSecondsActive)
     if ( iSecondsActive < g_MII_Grid_ShowAfter_iSec )
         return;
     ForIdSetVisibility(g_MII_Grid_sId_Div, true);
+setlineAdd('S:' + iSecondsActive + "|")    
     g_MII_Grid_Show_iCloseTimerId = setInterval(MII_Grid_Hide, g_MII_Grid_ShowFor_iSec * 1000);
 }
 
