@@ -40,7 +40,7 @@ function TC_SetBottomMatter()
     let elemArchiveButton = document.getElementById("Archive_Button_Activate");
     let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
     let rectArchiveButton_iHeight = rectArchiveButton.height;
-    let BottomMatter_iTop = g_Window_iHeight - rectArchiveButton_iHeight -3;
+    let BottomMatter_iTop = g_Window_iHeight - rectArchiveButton_iHeight -120;
 
     elemBottomMatter.style.top = MakePixelString(BottomMatter_iTop);
     let iWidth = g_Window_iWidth - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
