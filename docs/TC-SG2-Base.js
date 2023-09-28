@@ -22,7 +22,7 @@ function SG2_SetVisibles(bVisible)
     ForIdSetVisibility("Div_BottomMatter", sVisible);
     ForIdSetVisibility("OneLineDirection_Div", sVisible);
     ForIdSetVisibility("Body_Real", sVisible);
-    if ( g_bMessageVisible )                ForIdSetVisibility("Messages", sVisible);
+//    if ( g_bMessageVisible )                ForIdSetVisibility("Messages", sVisible);
     if ( g_Timer_bActive )                  ForIdSetVisibility("ElapsedTime_Div", sVisible);
     if ( g_bSettingsActive )                ForIdSetVisibility("Div_StatusControl_Right", sVisible);
     if ( !g_SG2_CAB_bVisible )              ForIdSetVisibility("ThemeImage_Base_Div", sVisible);
@@ -34,19 +34,19 @@ function Restart()
 {
     TC_ElapsedTime_Clear();
     ForIdSetVisibility("ThemeImage_Solved_Div", false);
+    ForIdSetVisibility("MII_Grid_Div", false);
     ForIdSetVisibility("MII_Hint_Div", false);
 //
     ForIdSetVisibility("Body_Real", false);
-    let elemBody_Intro = document.getElementById("Body_Real");
-    elemBody_Intro.style.backgroundColor = 'transparent'
-
+    SG2_SetVisibles(false);
+//
     let elemReal = document.getElementById("Body_Real");
+    elemReal.style.backgroundColor = 'transparent'
     elemReal.style.height = MakePixelString(0);
     elemReal.style.width  = MakePixelString(0);
-    SG2_SetVisibles(false)
+    elemReal.innerHTML = '';
     ForIdSetVisibility("Body_Intro", true);
     ForIdSetVisibility("OpeningText", true);
-    document.getElementById("Body_Real").innerHTML = '';
     SG2_LoadAll(0);
     setTimeout(function(){SG2_RealStart();}, 5000);   
 }
@@ -75,6 +75,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="MII_Hint_Div" class="MII_Hint_Div TC_StartHidden">MII_Hint_Div</DIV>';
     sMain += '<DIV Id="CluesAsList_Div" class="CluesAsList_Div TC_StartHidden" onclick="CAL_Hide()">Clues_Div</DIV>';
     sMain += '<DIV onclick="FI_Hide();" Id="FullInstructions_Div" class="FullInstructions_Div TC_StartHidden">FullInstructions</DIV>';
+
     document.getElementById("Body_Real").innerHTML = sMain;
 }
 
@@ -128,7 +129,7 @@ function SG2_LoadAll(iSection)
             getResolution(); 
             while ( document.readyState != "complete") {}
             TC_InitializeFromFileOrLoadAsJS();
-TC_AddScreenInfo()            
+            TC_AddScreenInfo();
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
             TC_Archive_ByDate_MakeAvailableButtons()

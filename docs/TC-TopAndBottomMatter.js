@@ -37,18 +37,23 @@ function TC_SetBottomMatter()
     elemBottomMatter.innerHTML += TC_Archive_MakeActivationButton();
     elemBottomMatter.innerHTML += '<DIV Id="BottomRight" class="Div_BottomMatter_Right">&nbsp;&nbsp;SketchiToons&reg; by Sketchi Bill</DIV>';
 //
-    let iBottomMatterTop = g_iBottomMatterTop; 
+    let elemArchiveButton = document.getElementById("Archive_Button_Activate");
+    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
+    let rectArchiveButton_iHeight = rectArchiveButton.height;
+    let BottomMatter_iTop = g_Window_iHeight - rectArchiveButton_iHeight -3;
+    elemBottomMatter.style.top = MakePixelString(BottomMatter_iTop);
+    let iWidth = g_Window_iWidth - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
+    elemBottomMatter.style.left = MakePixelString(g_Window_iHeight - rectArchiveButton_iHeight);
     let elemLeft = document.getElementById("BottomLeft");
     elemLeft.style.left = MakePixelString(0);
     let elemRight = document.getElementById("BottomRight");
-    let iWidth = g_Window_iWidth - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
     elemRight.style.left = MakePixelString(iWidth-200); // specified width
-    elemBottomMatter.style.top = MakePixelString(iBottomMatterTop);
-    TC_Archive_ActivationButtonSetPosition(iBottomMatterTop)
-    let rectBottomMatter = GetBoundingClientRectAbsolute(elemBottomMatter);
+    TC_Archive_ActivationButtonSetPosition(BottomMatter_iTop);
+    rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
     let elemMessages = document.getElementById("Messages");
-    let iMessagesTop = rectBottomMatter.bottom + g_TC_Padding_Inter_Vertical_iSize;
-    elemMessages.style.top = MakePixelString(iMessagesTop);
+    let rectMessages = GetBoundingClientRectAbsolute(elemMessages);
+    let elemMessages_iTop = rectArchiveButton.top - rectMessages.height;
+    elemMessages.style.top = MakePixelString(elemMessages_iTop);
     elemMessages.style.width = MakePixelString(iWidth);
     elemMessages.style.left = MakePixelString( g_TC_Padding_Left_iSize);
 }

@@ -56,7 +56,13 @@ function TC_CAL_Show()
     let elem = document.getElementById("CluesAsList_Div");
     let rectElem = GetBoundingClientRectAbsolute(elem);
     let iHeight = rectElem.height;
-    let iTop = g_Window_iHeight - iHeight;
+
+    let elemArchiveButton = document.getElementById("Archive_Button_Activate")
+    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
+    let iTopArchiveButton = rectArchiveButton.top;
+
+
+    let iTop = iTopArchiveButton - iHeight;
     elem.style.top = MakePixelString(iTop);
     elem.style.visibility = 'visible';
     g_bSuppressGridNumbers = false;

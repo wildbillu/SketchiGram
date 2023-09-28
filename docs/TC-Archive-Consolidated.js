@@ -21,6 +21,10 @@ function TC_Archive_Hide()
 
 function TC_Archive_Show()
 {
+    ForIdSetVisibility("MII_Hint_Div", false);
+    ForIdSetVisibility("MII_Grid_Div", false);
+    TC_ThemeImage_Popup_HidePopup();
+    TC_HideMoreActions();
     ForIdSetVisibility("Archive_Consolidated_Div", true);
 }
 
@@ -36,11 +40,11 @@ function TC_Archive_ToggleVisibility()
     TC_Archive_Hide();
 }
 
-function TC_Archive_ActivationButtonSetPosition(iHeight)
+function TC_Archive_ActivationButtonSetPosition(iTop)
 {
     let sId = "Archive_Button_Activate";
     let elem = document.getElementById(sId)
-    elem.style.top = MakePixelString(iHeight);
+    elem.style.top = MakePixelString(iTop);
     let iWidth = 200;
     elem.style.left = TC_LeftForCentering(iWidth);
 }

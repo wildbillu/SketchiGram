@@ -26,6 +26,10 @@ function Status_Check()
         GRB_SetAllButtons_Inactive();
         TC_SyncSpecialAnswersToGrid();
         CAB_SetAllButtons(g_cCode_Inactive);
+        ForIdSetVisibility(g_MII_Grid_sId_Div, false);
+        ForIdSetVisibility(g_MII_Hint_sId_Div, false);
+        ForIdSetVisibility("MoreActions_Div", false);
+        Setdocument.getElementById();
         TC_CAL_Show();
     }
     StoreCookie_Puzzle();

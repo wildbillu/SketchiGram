@@ -39,6 +39,10 @@ function TC_Preload_MII()
 
 function MII_Grid_SetLocationAndSize()
 {
+    let elemArchiveButton = document.getElementById("Archive_Button_Activate")
+    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
+    let iTopArchiveButton = rectArchiveButton.top;
+//
     let elem = document.getElementById(g_MII_Grid_sId_Div);
 // centered horizontally
 // top is 1/2 square down from top of grid
@@ -55,12 +59,15 @@ function MII_Grid_SetLocationAndSize()
     elem.style.height = MakePixelString(iHeight);
 // put it just above the bottom
     elemImage.style.height = MakePixelString(iHeight);
-    let iTop = g_Window_iHeight - iHeight;
+    let iTop = iTopArchiveButton - iHeight;
     elem.style.top = MakePixelString(iTop);
 }
 
 function MII_Hint_SetLocationAndSize()
 {
+    let elemArchiveButton = document.getElementById("Archive_Button_Activate");
+    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
+    let iTopArchiveButton = rectArchiveButton.top;
     let elem = document.getElementById(g_MII_Hint_sId_Div);
     // we want to make it 80% width of grid
     // centered horizontally
@@ -79,7 +86,7 @@ function MII_Hint_SetLocationAndSize()
     elem.style.height = MakePixelString(iHeight);
     elemImage.style.height = MakePixelString(iHeight);
 //
-    let iTop = g_Window_iHeight - iHeight;
+    let iTop = iTopArchiveButton - iHeight;
     elem.style.top = MakePixelString(iTop);
 }
 

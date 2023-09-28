@@ -73,28 +73,37 @@ function TC_InitializeFromFileOrLoadAsJS()
 {
     if ( !g_bConnectionIsWebBased )
     { // dont care about text file name and the other names are set in the AsJS file 
+//setlineAdd('AsJS')
         TC_Puzzle_Load_AsJS();
         return;
     }
     g_TC_bFileAccess = true;
-    let sQueryLineOverride = GetQueryLinePuzzleName();
+//    setline('X')
+//setlineAdd('A:' + g_TC_sPuzzle_Archive + '|')
     if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_Archive) )
     {
         g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
         return;
     }
     g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
+//setlineAdd('C:' + g_TC_sPuzzle_Cookie + '|')
     if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_Cookie) )
             return;
+    let sQueryLineOverride = GetQueryLinePuzzleName();
 // so now we look to see if the search string is valid - hopefully this is valid forever    
+//setlineAdd('Q:' + sQueryLineOverride + '|')
     if ( TC_LoadFromThisPuzzle(sQueryLineOverride) )
         return;
 // here we look for a file with the puzzle name
     let sOverrideStartingFile = TC_GetOverrideName();
     if ( sOverrideStartingFile != '' )
         g_TC_sPuzzle_NoArchive_NoCommandLine = sOverrideStartingFile;
+//setlineAdd('O:' + g_TC_sPuzzle_NoArchive_NoCommandLine + '|')
     if ( !TC_LoadFromThisPuzzle(g_TC_sPuzzle_NoArchive_NoCommandLine) )
+    {
+//setlineAdd('JS|')
         TC_Puzzle_Load_AsJS(); // all file reads have failed 
+    }
 }
 
 var sClues = '';
@@ -121,6 +130,7 @@ function TC_UseFileContents()
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations);
         g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
         g_bGridSolved = g_Cookie_bGridSolved;
+alert('CookieGridSolved:' + g_Cookie_bGridSolved)
         g_bAnswersSolved = g_Cookie_bAnswersSolved;
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
         g_bUsedCookie = true;
