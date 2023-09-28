@@ -185,6 +185,7 @@ function SG2_LoadAll(iSection)
             TC_SetBottomMatter();
             TC_Archive_Consolidated_Position_Div();
 // want to be just below  
+            if ( g_SpecialClueFrame_bActive ) CAB_MakeSpecialClueAnswerDiv();
             Status_Check();
             if ( g_bSettings_ShowInfoOnStart )  TC_ShowInfo();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 200);    
@@ -194,15 +195,12 @@ function SG2_LoadAll(iSection)
             {
             }
             TC_ThemeImage_GetAspectRatio_Calculate();
-            if ( g_SpecialClueFrame_bActive ) CAB_MakeSpecialClueAnswerDiv();
             MII_Grid_SetLocationAndSize();
             MII_Hint_SetLocationAndSize();
             FI_SizeAndPosition();
             TC_Archive_BySize_BaseMenu_SelectFromSize(4, true);
             TC_CAL_Fill();
             g_bPlaying = false;
-//            SG2_RealStart();
-
             break;
         default:
             alert('error section:' + iSection)                    
