@@ -18,7 +18,7 @@ var g_Window_iHeight = 1170;
 var g_ThemeImage_Base_zIndex = 20; var g_ThemeImage_Hint_zIndex = 20; var g_ThemeImage_Solved_zIndex = 20;
 
 var g_CAL_iLineHeight = 22;
-var g_CAL_zIndex = -1;
+var g_CAL_izIndex = -1;
 var g_CAL_iBottom = 1130; var g_CAL_iLeft = -1; var g_CAL_iPadding = 80
 
 var g_Archive_bActive = true; var g_Archive_iTop = 190; var g_Archive_iLeft = 300; var g_Archive_iWidth = 200;
@@ -75,7 +75,7 @@ var g_SyncSketchiToonsClue = false;
 
 function TC_Configuration_pick()
 {
-    g_CAL_iLineHeight = 22; g_CAL_zIndex = -1; g_CAL_iBottom = 1130; g_CAL_iLeft = -1; g_CAL_iPadding = 80
+    g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iBottom = 1130; g_CAL_iLeft = -1; g_CAL_iPadding = 80
 
     g_MII_Grid_iTop = 300;g_MII_Grid_ShowAfter_iSec = 60; g_MII_Grid_ShowFor_iSec   = 10;g_MII_Grid_Show_iCloseTimerId = 0;
     g_MII_Hint_iTop = 800;g_MII_Hint_ShowAfter_iSec = 120;g_MII_Hint_ShowFor_iSec   = 10;g_MII_Hint_Show_iCloseTimerId = 0;

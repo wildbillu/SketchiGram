@@ -56,7 +56,7 @@ function TC_CAL_Fill()
 function TC_CAL_Show()
 { // already set position
     TC_SetVisible("CluesAsList_Div")
-    TC_ForIdSetZIndex("CluesAsList_Div", g_CAL_zIndex);
+    TC_ForIdSetZIndex("CluesAsList_Div", g_CAL_izIndex);
 }
 
 function CAL_Hide()
