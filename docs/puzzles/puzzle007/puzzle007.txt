@@ -6,8 +6,8 @@ iGridHeight=4
 grid
 sGSL=SNNNDSSSSNNNSNNN
 sGAs=SAIDHUGEOTOETORT
-sGAP=---DH----T-E----
-sGSP=NNNGGNNNNGNGNNNN
+sGAP=---DH----T-E--R-
+sGSP=NNNGGNNNNGNGNNGN
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
 iClueAnswers=8
 sClues=Definitely not little|Tried to get 3 pointer|Semi-Nomadic people on the CentralPlains|Frankenstein helper|It keeps away mosquitos|He ____, She _____|Wrongful act|____-correct
