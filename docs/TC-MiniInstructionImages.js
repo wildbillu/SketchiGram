@@ -17,13 +17,6 @@ var g_MII_Hint_sId_Image    = "MII_Hint_Image";
 var g_MII_Hint_sClass_Div   = "MII_Hint_Div";
 var g_MII_Hint_sClass_Image = "MII_Hint_Image";
 
-var g_MII_Grid_ShowAfter_iSec = 60;
-var g_MII_Grid_ShowFor_iSec   = 10;
-var g_MII_Grid_Show_iCloseTimerId = 0;
-
-var g_MII_Hint_ShowAfter_iSec = 120;
-var g_MII_Hint_ShowFor_iSec   = 10;
-var g_MII_Hint_Show_iCloseTimerId = 0;
 
 function TC_Preload_MII()
 {
@@ -39,9 +32,6 @@ function TC_Preload_MII()
 
 function MII_Grid_SetLocationAndSize()
 {
-    let elemArchiveButton = document.getElementById("Archive_Button_Activate")
-    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
-    let iTopArchiveButton = rectArchiveButton.top;
 //
     let elem = document.getElementById(g_MII_Grid_sId_Div);
 // centered horizontally
@@ -59,15 +49,11 @@ function MII_Grid_SetLocationAndSize()
     elem.style.height = MakePixelString(iHeight);
 // put it just above the bottom
     elemImage.style.height = MakePixelString(iHeight);
-    let iTop = iTopArchiveButton - iHeight;
-    elem.style.top = MakePixelString(iTop);
+    elem.style.top = MakePixelString(g_MII_Grid_iTop);
 }
 
 function MII_Hint_SetLocationAndSize()
 {
-    let elemArchiveButton = document.getElementById("Archive_Button_Activate");
-    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
-    let iTopArchiveButton = rectArchiveButton.top;
     let elem = document.getElementById(g_MII_Hint_sId_Div);
     // we want to make it 80% width of grid
     // centered horizontally
@@ -86,8 +72,7 @@ function MII_Hint_SetLocationAndSize()
     elem.style.height = MakePixelString(iHeight);
     elemImage.style.height = MakePixelString(iHeight);
 //
-    let iTop = iTopArchiveButton - iHeight;
-    elem.style.top = MakePixelString(iTop);
+    elem.style.top = MakePixelString(g_MII_Hint_iTop);
 }
 
 function MII_Grid_Handler(iSecondsActive)
@@ -102,14 +87,18 @@ function MII_Grid_Handler(iSecondsActive)
     g_MII_Grid_Show_iCloseTimerId = setInterval(MII_Grid_Hide, g_MII_Grid_ShowFor_iSec * 1000);
 }
 
+function MII_Grid_CancelTimer()
+{
+    if ( g_MII_Grid_Show_iCloseTimerId == 0 ) return;
+    clearInterval(g_MII_Grid_Show_iCloseTimerId);
+    g_MII_Grid_Show_iCloseTimerId = 0;
+}
+
 function MII_Grid_Hide()
 {
     ForIdSetVisibility(g_MII_Grid_sId_Div, false);
     ForIdSetVisibility(g_MII_Grid_sId_Image, false);
-    if ( g_MII_Grid_Show_iCloseTimerId == 0 )
-        return;
-    clearInterval(g_MII_Grid_Show_iCloseTimerId);
-    g_MII_Grid_Show_iCloseTimerId = 0;
+    MII_Grid_CancelTimer();
 }
 
 function MII_Hint_Handler(iSecondsActive)
@@ -124,13 +113,19 @@ function MII_Hint_Handler(iSecondsActive)
     g_MII_Hint_Show_iCloseTimerId = setInterval(MII_Hint_Hide, g_MII_Hint_ShowFor_iSec * 1000);
 }
 
-function MII_Hint_Hide()
+function MII_Hint_CancelTimer()
 {
-    ForIdSetVisibility(g_MII_Hint_sId_Div, false);
-    ForIdSetVisibility(g_MII_Hint_sId_Image, false);
     if ( g_MII_Hint_Show_iCloseTimerId == 0 )
         return;
     clearInterval(g_MII_Hint_Show_iCloseTimerId);
     g_MII_Hint_Show_iCloseTimerId = 0;
+}
+
+
+function MII_Hint_Hide()
+{
+    ForIdSetVisibility(g_MII_Hint_sId_Div, false);
+    ForIdSetVisibility(g_MII_Hint_sId_Image, false);
+    MII_Hint_CancelTimer();
 }
 

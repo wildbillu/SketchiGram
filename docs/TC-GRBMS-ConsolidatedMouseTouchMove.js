@@ -25,14 +25,23 @@ function GRB_MT_Down(e, iRow, iLetter, sWho)
     g_PointerDown_sWhere = g_PointerDown_sWhere_GRB;
     g_Pointer_sWho       = sWho;
     if ( g_bGridSolved )
+    {
+//        setlineAdd('NoFocusGridSolved')
         return;
+    }
     let cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter)
 // can never pick black squares
     if ( TC_IsBlackSquare(cStatus) )
+    {
+//        setlineAdd('NoFocusBlackSquare')
         return;
+    }
 // if CAB square does not have the focus, then we cannot pick golden or corrected
     if ( g_CAB_Focus_sId == '' && ( TC_IsGolden(cStatus) || TC_IsCorrected(cStatus) ) )
+    {
+//        setlineAdd('NoFocusGolden')
         return;
+    }
 // if neither CAB or GRB has focus, we just want to set the GRB Focus to this and not consider swipe?
     let sId_GRB = GRB_MakeId(iRow, iLetter)
     if ( g_CAB_Focus_sId == '' && g_GRB_Focus_sId == '' )

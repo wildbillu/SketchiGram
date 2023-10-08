@@ -28,7 +28,7 @@ function TC_ThemeImage_Popup_SetImgHTML(sImageName)
     elemThemeImage.innerHTML = sImageHTML;
 }
 
-function TC_ThemeImage_Popup_ShowPopup(sImageName, iTop, iLeft, iHeight, iWidth, fnOnClose)
+function TC_ThemeImage_Popup_ShowPopup(sImageName, iTop, iLeft, iHeight, iWidth, fnOnClose, izIndex)
 {
     if ( g_ThemeImage_Popup_Active )
     { // we need to close the existing one
@@ -47,10 +47,9 @@ function TC_ThemeImage_Popup_ShowPopup(sImageName, iTop, iLeft, iHeight, iWidth,
     let elemPopupImageItself = document.getElementById('ThemeImage_Popup_ImageItself');
     elemPopupImageItself.style.width    = MakePixelString(iWidth);
     elemPopupImageItself.style.height    = MakePixelString(iHeight);
-    
-    ForIdSetVisibility('ThemeImage_Popup_Div', true)
-    ForIdSetVisibility('ThemeImage_Popup_ImageItself', true)
-    elemPopupImageItself.style.zIndex = 2;
+    TC_ForIdSetZIndex('ThemeImage_Popup_Div', izIndex);
+    TC_ForIdSetZIndex('ThemeImage_Popup_ImageItself', izIndex);
+    elemPopup.style.visibility = 'visible';
     g_ThemeImage_Popup_Active = true;
     g_ThemeImage_Popup_TimerId = setInterval(TC_ThemeImage_Popup_HidePopup, g_ThemeImage_Popup_iSeconds * 1000);
 }

@@ -40,33 +40,23 @@ function TC_CAL_Fill()
             iTotalLines++;
         }
     }
+    elem.innerHTML = sInner;
     iWidthMax += g_CAL_iPadding;
-    elem.style.height = MakePixelString(iTotalLines * g_iCalLineHeight);
+    let iHeight = iTotalLines * g_CAL_iLineHeight
+    elem.style.height = MakePixelString(iHeight);
     elem.style.width  = MakePixelString(iWidthMax);
-    elem.style.top    = MakePixelString(g_CAL_iTop);
+    let iTop = g_CAL_iBottom - iHeight;
+    elem.style.top    = MakePixelString(iTop);
     if ( g_CAL_iLeft != -1 )
         elem.style.left = MakePixelString(g_CAL_iLeft);
     else
         elem.style.left = MakePixelString(TC_LeftForCentering(iWidthMax));
-    elem.innerHTML = sInner;
 }
 
 function TC_CAL_Show()
-{
-    let elem = document.getElementById("CluesAsList_Div");
-    let rectElem = GetBoundingClientRectAbsolute(elem);
-    let iHeight = rectElem.height;
-
-    let elemArchiveButton = document.getElementById("Archive_Button_Activate")
-    let rectArchiveButton = GetBoundingClientRectAbsolute(elemArchiveButton);
-    let iTopArchiveButton = rectArchiveButton.top;
-
-
-    let iTop = iTopArchiveButton - iHeight;
-    elem.style.top = MakePixelString(iTop);
-    elem.style.visibility = 'visible';
-    g_bSuppressGridNumbers = false;
-    GRB_SetAllButtons_Inactive();
+{ // already set position
+    TC_SetVisible("CluesAsList_Div")
+    TC_ForIdSetZIndex("CluesAsList_Div", g_CAL_zIndex);
 }
 
 function CAL_Hide()

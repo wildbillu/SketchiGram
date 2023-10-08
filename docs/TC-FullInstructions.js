@@ -4,10 +4,10 @@ var g_FI_fOverallWidthFraction  = 0.9;
 var g_FI_fRestWidthFraction     = 0.95;
 var g_FI_fGridHintWidthFraction = 0.9;
 
-var g_FI_iLeft           = -1;
-var g_FI_iTop           = 50;
+var g_FI_iLeft                = -1;
+var g_FI_iTop                 = 50;
 var g_FI_CopyrightEtc_iHeight = 50;
-var g_FI_Credits_iHeight      = 90;
+var g_FI_Credits_iHeight      = 135;
 var g_FI_Title_iHeight        = 35;
 var g_FI_Intro_iHeight        = 135;
 

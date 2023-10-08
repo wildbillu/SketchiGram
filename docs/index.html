@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="Styles-SpecialClue.css">
     <link rel="stylesheet" href="Styles-TopRowControl.css">
     <link rel="stylesheet" href="Styles-Settings.css">
-    <link rel="stylesheet" href="Styles-Info-Content.css">
     <link rel="stylesheet" href="Styles-StatusControl.css">
     <link rel="stylesheet" href="Styles-SG.css">
 
@@ -169,7 +168,7 @@ function Dispatch()
     if (window.location.protocol === "file:")
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.001';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.010';
 //
     TC_LoadPuzzleArchiveDefault();
     SG2_LoadAll(0);
@@ -195,7 +194,7 @@ function TC_SetActiveSize()
 <BODY onclick="TC_CloseScreen();" onmousemove="TC_Global_MouseMove(event)" ontouchmove="TC_Global_MouseMove(event)" Id="Body_Nothing" class="MoveCursor" topmargin="0" leftmargin="0"  OnLoad="Dispatch();">
     <DIV Id="Body_Intro" class="Body_Intro" ontouchout="TC_Global_Out(event);" ontouchstart="TC_Global_Down(event, 'Touch');" ontouchend="TC_Global_Up(event);" onmouseout="TC_Global_Out(event);" onmousedown="TC_Global_Down(event, 'Mouse');" onmouseup="TC_Global_Up(event);"><DIV top=200 left=100 Id="OpeningText" class="OpeningText TC_StartHidden">SOMETEXTHERE</DIV></DIV>
     <DIV Id="Body_Real" class="Body_Real TC_StartHidden" ontouchout="TC_Global_Out(event);" ontouchstart="TC_Global_Down(event, 'Touch');" ontouchend="TC_Global_Up(event);" onmouseout="TC_Global_Out(event);" onmousedown="TC_Global_Down(event, 'Mouse');" onmouseup="TC_Global_Up(event);">this is the new div</DIV>
-    <DIV Id="Messages" class="Div_Message"></DIV>  
+    <DIV Id="Messages" class="Div_Messages"></DIV>  
 </BODY>
 </HTML>
 

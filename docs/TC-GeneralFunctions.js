@@ -1,15 +1,16 @@
 // TC-GeneralFunctions
+
+var g_iScreen_Width = 600;
+var g_iScreen_Height= 800;
+
+
 // 
 // function TC_LeftForCentering(iWidthElement)
 // function ForIdSetVisibility(sId, bVisible)
 
-
-
 // to detect window back forth...
 
 var g_GBRMS_fBufferFraction = .05;
-
-
 
 function TC_MonthInWordsPlusYear(sYearMonth)
 {
@@ -92,31 +93,6 @@ function TC_GetHeightOfElementById(sId)
     return rect.height;
 }
 
-function IsLocationInGridSquareWithBuffer(iRow, iLetter, iPickedX, iPickedY)
-{ // use global coordinates
-    let fBuffer = g_GBRMS_fBufferFraction * g_GRB_Square_iSize;
-    let rectFoundSquare = GetBoundingClientRectAbsolute(document.getElementById(GRB_MakeId(iRow, iLetter)));
-// we need square relative to the grid top left
-    let elemFound_iLeft   = Math.round(rectFoundSquare.left);
-    let elemFound_iTop    = Math.round(rectFoundSquare.top );
-    let elemFound_iWidth  = Math.round(rectFoundSquare.width);
-    let elemFound_iHeight = Math.round(rectFoundSquare.height);
-    let rectFoundRelative = new DOMRect(elemFound_iLeft, elemFound_iTop, elemFound_iWidth, elemFound_iHeight)
-    let rectFoundRelativeWithBuffer = MakeRectWithBuffer(rectFoundRelative, fBuffer);
-    let bWithin = IsPointWithinRect(rectFoundRelativeWithBuffer, iPickedX, iPickedY);
-    return bWithin;
-}
-
-function MakeRectWithBuffer(rect, fBuffer)
-{
-    let iLeft   = rect.left + fBuffer;
-    let iTop    = rect.top  + fBuffer;
-    let iWidth  = rect.width - 2 * fBuffer;
-    let iHeight = rect.height - 2 * fBuffer;
-    let rectWithBuffer = new DOMRect(iLeft, iTop, iWidth, iHeight);
-    return rectWithBuffer;
-}
-
 function IsPointWithinRect(rect, iX, iY)
 {
     if ( iX < rect.left ) return false;
@@ -153,7 +129,6 @@ function ForIdSetVisibility(sId, bVisible)
     document.getElementById(sId).style.visibility = sVisible;
 }
 
-
 function TC_LeftForCentering(iWidthElement)
 {
     let iWidthRemaining  = g_Window_iWidth - iWidthElement;
@@ -163,7 +138,7 @@ function TC_LeftForCentering(iWidthElement)
 
 function TC_SetVisible(sId)
 {
-    document.getElementById(sId).style.visibility = 'visible';
+    ForIdSetVisibility(sId, true)
 }
 
 function TC_GetRandomInt(iMax)
@@ -211,15 +186,6 @@ function GetBoundingClientRectAbsolute(elem)
     return rectAbsolute;
 }
 
-function GetComputedStylePropertyAsInt(elem, sProperty)
-{
-    let cssObj = window.getComputedStyle(elem, null);
-    let sValue = cssObj.getPropertyValue(sProperty);
-    sValue = removePX(sValue)
-    let iValue = parseInt(sValue);
-    return iValue;
-}
-
 function GetWidthOfTextInPixels(elem, sText)
 { // elem is used to get the font
     var sFont = GetComputedStyleProperty(elem, 'font');
@@ -231,17 +197,22 @@ function GetWidthOfTextInPixels(elem, sText)
     return iWidth;
 }
 
-var g_iScreen_Width = 600;
-var g_iScreen_Height= 800;
 function getResolution() 
 {
-g_iScreen_Width = Math.round(screen.width * window.devicePixelRatio);
-g_iScreen_Height= Math.round(screen.height * window.devicePixelRatio);
+    g_iScreen_Width = Math.round(screen.width * window.devicePixelRatio);
+    g_iScreen_Height= Math.round(screen.height * window.devicePixelRatio);
+}
+
+function TC_ForIdSetZIndex(sId, izIndex)
+{
+    let elem = document.getElementById(sId)
+    let ss = izIndex.toString();
+    elem.style.zIndex = ss;
 }
 
 function MakePixelString(i)
 {
-    var s = i.toString() + 'px';
+    let s = i.toString() + 'px';
     return s;
 }
 
@@ -261,7 +232,7 @@ function ScreenSizes()
 
 function setlineAdd(sAdd)
 {
-    if ( !g_bDisplayMessages)
+    if ( !g_Message_bVisible)
         return 0;
     g_sToDisplay += sAdd;
     let elem = document.getElementById("Messages");
@@ -274,7 +245,7 @@ function setlineAdd(sAdd)
 
 function setline(sAdd)
 {
-    if ( !g_bDisplayMessages)
+    if ( !g_Message_bVisible)
         return 0;
     let elem = document.getElementById("Messages");
     if ( !elem )
@@ -336,18 +307,6 @@ function removeAt(sOriginal, index)
 {
     var sNew = sOriginal.substring(0, index);
     sNew += sOriginal.substring(index + 1);
-    return sNew;
-}
-
-function removePX(sOriginal)
-{
-    var sNew = ''; 
-    for ( let i = 0; i < sOriginal.length; i++ )
-    {
-        let cThisChar = sOriginal.charAt(i);
-        if ( cThisChar != 'p' && cThisChar != 'x' )
-            sNew += cThisChar;
-    }            
     return sNew;
 }
 

@@ -151,6 +151,7 @@ function TC_MakeControlRow()
     sButtonsHTML += TC_MakeCRButton('Deselect',        'Button_Deselect.png',        'TC_Deselect();',        'TopRowControl_Info'); g_CR_array_sId.push('Deselect');        g_CR_array_sHint.push('Press to clear selected');           g_CR_array_bEnabled.push(false); iButtons++;
     sButtonsHTML += TC_MakeCRButton('Undo',            'Button_Undo.png',            'TC_Undo();',            'TopRowControl_Info'); g_CR_array_sId.push('Undo');            g_CR_array_sHint.push('Press to Undo last change');         g_CR_array_bEnabled.push(false); iButtons++;
     sButtonsHTML += TC_MakeCRButton('ChangeDirection', 'Button_ChangeDirection.png', 'TC_ChangeDirection();', 'TopRowControl_Info'); g_CR_array_sId.push('ChangeDirection'); g_CR_array_sHint.push('Press to change <br> direction in grid'); g_CR_array_bEnabled.push(true);  iButtons++;
+    MakeSettingsDiv();
     sButtonsHTML += TC_MakeCRButton('Settings',        'Button_Settings.png',        'TC_ShowSettings();',    'TopRowControl_Info'); g_CR_array_sId.push('Settings');        g_CR_array_sHint.push('Show and change <br> Game Settings');     g_CR_array_bEnabled.push(true);  iButtons++;
     sButtonsHTML += MakeMoreActionsDiv()
     sButtonsHTML += TC_MakeCRButton('Actions',         'Button_More.png',             'TC_ShowMoreActions();', 'TopRowControl_Info'); g_CR_array_sId.push('Actions');        g_CR_array_sHint.push('More Actions');                      g_CR_array_bEnabled.push(true);  iButtons++;
@@ -164,8 +165,8 @@ function TC_MakeControlRow()
     elemControlStatusRight.style.height = MakePixelString(g_GRB_TopRow_Buttons_iSize);
 //   
     elemControlStatusRight.style.top = MakePixelString(g_StatusControlRow_iTop);
-    let iLeft = g_TC_Padding_Left_iSize;
-    if ( g_StatusControlRow_sAlign == 'center' )
+    let iLeft = g_StatusControlRow_iLeft;
+    if ( g_StatusControlRow_iLeft == -1 )
         iLeft = TC_LeftForCentering(iWidthButtons)
     elemControlStatusRight.style.left = MakePixelString(iLeft)
     MoreActions_SizeAndPosition();

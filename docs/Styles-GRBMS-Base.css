@@ -88,16 +88,16 @@
 
 
 
-.Div_Message
+.Div_Messages
 {
+    position:absolute;
     user-select:none;
     border: 0px solid blue;
-    position:absolute;
     left:0px;
-    top:800px;
+    top:1150px;
     height:15px;
     width:100px;
-    color:blue;
+    color:red;
     font-size: 14px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;    

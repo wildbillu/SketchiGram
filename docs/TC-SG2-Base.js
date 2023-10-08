@@ -22,12 +22,12 @@ function SG2_SetVisibles(bVisible)
     ForIdSetVisibility("Div_BottomMatter", sVisible);
     ForIdSetVisibility("OneLineDirection_Div", sVisible);
     ForIdSetVisibility("Body_Real", sVisible);
-//    if ( g_bMessageVisible )                ForIdSetVisibility("Messages", sVisible);
+//    if ( g_Message_bVisible )                ForIdSetVisibility("Messages", sVisible);
     if ( g_Timer_bActive )                  ForIdSetVisibility("ElapsedTime_Div", sVisible);
     if ( g_bSettingsActive )                ForIdSetVisibility("Div_StatusControl_Right", sVisible);
     if ( !g_SG2_CAB_bVisible )              ForIdSetVisibility("ThemeImage_Base_Div", sVisible);
     if ( g_SpecialClueAnswerBoxes_bActive ) ForIdSetVisibility("SpecialClue_Div", sVisible);
-    if ( g_bArchiveShow)                    ForIdSetVisibility("Archive_Button_Activate", sVisible);
+    if ( g_Archive_bActive)                    ForIdSetVisibility("Archive_Button_Activate", sVisible);
 }
 
 function Restart()
@@ -75,7 +75,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="MII_Hint_Div" class="MII_Hint_Div TC_StartHidden">MII_Hint_Div</DIV>';
     sMain += '<DIV Id="CluesAsList_Div" class="CluesAsList_Div TC_StartHidden" onclick="CAL_Hide()">Clues_Div</DIV>';
     sMain += '<DIV onclick="FI_Hide();" Id="FullInstructions_Div" class="FullInstructions_Div TC_StartHidden">FullInstructions</DIV>';
-
+    sMain += MakeSettingsDiv();
     document.getElementById("Body_Real").innerHTML = sMain;
 }
 
@@ -98,12 +98,18 @@ function SG2_LoadAll(iSection)
             break;
         case 0:
             TC_SetActiveSize();
+            ForIdSetVisibility("Messages", false);
+            g_sToDisplay = '';
             // these reset global variables on reload or archive   
             g_CAB_Square_iSize  = 40;
+            g_GRB_Focus_sId = '';
+            g_CAB_Focus_sId = '';
             Settings_SetupVersions();
             TC_SquaresPlaced_Initialize();
             TC_Archive_ByDate_Clear();
             TC_Archive_BySize_Clear();
+            MII_Grid_CancelTimer();
+            MII_Hint_CancelTimer();
             g_TC_Archive_bDoingTodaysPuzzle = false;
             g_TC_Archive_Menu_bActive = false;
             g_GRB_bAcross = true;
@@ -183,6 +189,7 @@ function SG2_LoadAll(iSection)
             TC_ThemeImage_Solved_Create();
             TC_ThemeImage_Popup_Create();
             TC_SetBottomMatter();
+            TC_Archive_ActivationButtonSetPosition();
             TC_Archive_Consolidated_Position_Div();
 // want to be just below  
             if ( g_SpecialClueFrame_bActive ) CAB_MakeSpecialClueAnswerDiv();
@@ -207,4 +214,5 @@ function SG2_LoadAll(iSection)
             break;
     }
 }
+
 

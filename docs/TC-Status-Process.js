@@ -29,8 +29,9 @@ function Status_Check()
         ForIdSetVisibility(g_MII_Grid_sId_Div, false);
         ForIdSetVisibility(g_MII_Hint_sId_Div, false);
         ForIdSetVisibility("MoreActions_Div", false);
-        Setdocument.getElementById();
         TC_CAL_Show();
+        g_bSuppressGridNumbers = false;
+        GRB_SetAllButtons_Inactive();
     }
     StoreCookie_Puzzle();
 }

@@ -44,9 +44,9 @@ function TC_Archive_ActivationButtonSetPosition(iTop)
 {
     let sId = "Archive_Button_Activate";
     let elem = document.getElementById(sId)
-    elem.style.top = MakePixelString(iTop);
-    let iWidth = 200;
-    elem.style.left = TC_LeftForCentering(iWidth);
+    elem.style.top   = MakePixelString(g_ArchiveActivationButton_iTop);
+    elem.style.left  = MakePixelString(g_ArchiveActivationButton_iLeft);
+    elem.style.width = MakePixelString(g_ArchiveActivationButton_iWidth);
 }
 
 function TC_Archive_MakeActivationButton()
@@ -80,6 +80,8 @@ function TC_Archive_Next_Con()
 function TC_Archive_Consolidated_FillSelect_Div()
 {
     let elem = document.getElementById("Archive_Consolidated_Select_Div");
+    TC_ForIdSetZIndex("Archive_Consolidated_Select_Div" , g_Archive_izIndex);
+
     elem.innerHTML = '';
     elem.innerHTML += '<DIV class="Archive_Button_Header" Id="Archive_Button_Header">' + g_TC_Archive_Menu_sActiveSortingBy + '</DIV>';
 // we are going to determine the width of the widest title as we go and then fix them
@@ -165,9 +167,8 @@ function TC_Archive_Consolidated_Position_Div()
     let elem = document.getElementById("Archive_Consolidated_Div")
     let iWidth = TC_GetBoundingClientRectAbsoluteFromId("Archive_Consolidated_Div").width;
     elem.style.left = TC_LeftForCentering(iWidth);
-    elem.style.top = MakePixelString(g_Archive_iTop);
+    elem.style.top = MakePixelString(g_ArchiveList_iTop);
 }
-
 
 function TC_Archive_Consolidated_Make_Div()
 {

@@ -1,12 +1,5 @@
 /* Style-Overall.css */
 
-/* zIndexes
-- 0 most things
-- 2 popup images
-    width:450px;
-    height:810px;
-*/
-
 ::selection{background-color: #FFEE60}
 
 .TC_Left   {text-align:left;}
