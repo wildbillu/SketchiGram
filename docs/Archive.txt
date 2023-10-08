@@ -1,10 +1,5 @@
 archive.txt
-puzzle070=Commander Literal&trade; Introduces SketchiGram|3|2023-09-23|Win
-puzzle003=How's Your Aim?|4|2023-10-06
-puzzle004=Dinner Anyone?|4|2023-10-07
-puzzle012=Rivalry|5|2023-10-08
-puzzle021=Store in Quaint New England|6|2023-10-09
-puzzle031=The speakeasy was this|6|2023-10-10
+puzzle070=Commander Literal&trade; Introduces SketchiGram|3|2023-10-10|Win
 puzzle001=Yogi Berra Says!|4|2023-10-11
 puzzle002=Beware The Ides!|4|2023-10-12
 puzzle007=A Buzzer Beater?|4|2023-10-13
@@ -72,3 +67,8 @@ xpuzzle068=Commander Literal&trade; runs the show|6|2023-12-14|Rabbit
 xpuzzle072=Commander Literal&trade; is hoppin'|6|2023-12-15|Tigger
 xpuzzle073=Commander Literal&trade; needs to clean up|6|2023-12-16|Piglet
 xpuzzle071=Commander Literal&trade; Goes Fishing|6|2023-12-17|Reel
+puzzle003=How's Your Aim?|4|2023-12-18
+puzzle004=Dinner Anyone?|4|2023-12-19
+puzzle012=Rivalry|5|2023-12-30
+puzzle021=Store in Quaint New England|6|2023-12-31
+puzzle031=The speakeasy was this|6|2023-12-22
