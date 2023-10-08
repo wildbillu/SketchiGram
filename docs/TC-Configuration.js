@@ -15,7 +15,7 @@ var g_Window_iWidth = 640;
 var g_Window_iHeight = 1170;
 
 
-var g_ThemeImage_Base_zIndex = 20; var g_ThemeImage_Hint_zIndex = 20; var g_ThemeImage_Solved_zIndex = 20;
+var g_ThemeImage_Base_izIndex = 20; var g_ThemeImage_Hint_izIndex = 20; var g_ThemeImage_Solved_izIndex = 20;
 
 var g_CAL_iLineHeight = 22;
 var g_CAL_izIndex = -1;
@@ -37,7 +37,6 @@ var g_OneLineInstruction_iTop = 40;
 
 var g_GRB_TopRow_Buttons_iSize = 50;
 
-var g_TC_SyncGridAndSpecialClueAnswers_bActive = false;
 
 var g_InfoSettingsButtons_iLeft = 10;var g_InfoSettingsButtons_iTop  = 20;
 
@@ -53,28 +52,25 @@ var g_Timer_bActive = true; var g_Timer_iTop  = 30; var g_Timer_iLeft = 30; var 
 var g_bSettingsActive = true;
 
 var g_SpecialClue_bShowImageButton = false; var g_SpecialClueAnswerBoxes_bActive = true;
-var g_SpecialClueFrame_bActive = true;  
-var g_SpecialClueFrame_iTop = 100; 
-var g_SpecialClueFrame_iFrameWidth = 1;
+var g_SpecialClueFrame_bActive = true;  var g_SpecialClueFrame_iTop = 100; var g_SpecialClueFrame_iFrameWidth = 1; var g_SpecialClueFrame_iHeight = 110;
 
+var g_TC_SyncGridAndSpecialClueAnswers_bActive = false;
 var g_ClueAnswers_iFrameWidth = 1;
 
 var g_bSuppressGridNumbers = false;
 
-var g_ThemeImage_Base_iMinimumHeight = 250;
-
-
-var g_iBottomMatterTop = 800; 
 var g_GRB_bShowSelectRowColumn      = false;
 
 var g_StatusControlRow_iTop = 60; var g_StatusControlRow_iLeft = 50;
 
-var g_SpecialClueFrame_iHeight = 110;
+var g_Settings_iTop = 100; var g_Settings_iLeft = -1; var g_Settings_izIndex = 4;
 
 var g_SyncSketchiToonsClue = false;
 
 function TC_Configuration_pick()
 {
+    g_Settings_iTop = 150; g_Settings_iLeft = -1; g_Settings_izIndex = 22;
+
     g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iBottom = 1130; g_CAL_iLeft = -1; g_CAL_iPadding = 80
 
     g_MII_Grid_iTop = 300;g_MII_Grid_ShowAfter_iSec = 60; g_MII_Grid_ShowFor_iSec   = 10;g_MII_Grid_Show_iCloseTimerId = 0;
@@ -91,14 +87,8 @@ function TC_Configuration_pick()
 
     g_OneLineInstruction_iTop = 165;
     g_SpecialClueFrame_iTop = 820; g_SpecialClueFrame_iHeight = 110; g_SpecialClueFrame_bActive = true; 
-    
-
 
     g_MoreMenu_iTop = 52; g_MoreMenu_iLeft = 195;
-
-
-
-    g_iBottomMatterTop = 945; 
 
     g_Timer_iTop  = 140; g_Timer_bActive = true; g_Timer_iLeft = 280; g_Timer_sLabel = ''; // left from defined puzzle width
 
@@ -113,9 +103,9 @@ function TC_Configuration_pick()
 
     g_SpecialClueAnswerBoxes_bActive = true; g_SpecialClue_bShowImageButton = true;
     
-    g_ThemeImage_Base_zIndex = 20;
-    g_ThemeImage_Hint_zIndex = 20;
-    g_ThemeImage_Solved_zIndex = 20;
+    g_ThemeImage_Base_izIndex = 20;
+    g_ThemeImage_Hint_izIndex = 20;
+    g_ThemeImage_Solved_izIndex = 20;
     g_bSuppressGridNumbers = true;
 }
 

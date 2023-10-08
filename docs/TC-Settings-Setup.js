@@ -66,8 +66,6 @@ function MakeSubTitleRow(sSubTitle, sIdRaw)
 {
     let sTitleRow = '';
     let sIdA = 'Id="' + sIdRaw + 'A"';
-    let sIdB = 'Id="' + sIdRaw + 'B"';
-    let sIdC = 'Id="' + sIdRaw + 'C"';
     let sIdD = 'Id="' + sIdRaw + 'D"';
     sTitleRow += '<TR align=center ' + sIdA +'>'
     sTitleRow += '      <TD width=380 ' + sIdD + ' class="Settings_SubtitleRow">' + sSubTitle + '</TD>'
@@ -109,8 +107,18 @@ function TC_HideSettings()
 function TC_ShowSettings()
 {
     let elemSettingDiv = document.getElementById("SettingsDiv");
-    elemSettingDiv.style.visibility = 'visible'
     g_sCABOnSettingsClick = g_CAB_Focus_sId;
     g_sGRBOnSettingsClick = g_GRB_Focus_sId;
     g_TC_Settings_bActive = true;
+    elemSettingDiv.style.top = MakePixelString(g_Settings_iTop);
+    TC_ForIdSetZIndex("SettingsDiv", g_Settings_izIndex);
+    let iLeft = g_Settings_iLeft;
+    if ( iLeft == -1 )
+    {
+        let rect = GetBoundingClientRectAbsolute(elemSettingDiv);
+        let iWidth = rect.width;
+        iLeft = TC_LeftForCentering(iWidth)
+    }
+    elemSettingDiv.style.left = MakePixelString(iLeft);
+    elemSettingDiv.style.visibility = 'visible'
 }

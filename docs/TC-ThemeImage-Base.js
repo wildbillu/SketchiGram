@@ -37,7 +37,7 @@ function TC_ThemeImage_Base_TogglePopup()
     let iLeft = g_TC_Padding_Left_iSize;
     let iWidth = g_Window_iWidth;
     let iHeight = iWidth/g_ThemeImage_All_fWidthToHeight;
-    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image, iTop, iLeft, iHeight, iWidth, TC_ThemeImage_Base_OnClosePopup, g_ThemeImage_Hint_zIndex);
+    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image, iTop, iLeft, iHeight, iWidth, TC_ThemeImage_Base_OnClosePopup, g_ThemeImage_Hint_izIndex);
     let elem = document.getElementById("ThemeImage_Base_ImageItself_Div");
     elem.style.cursor = "zoom-out";
     g_ThemeImage_Base_bShown = true;
