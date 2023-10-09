@@ -15,7 +15,9 @@ var g_Window_iWidth = 640;
 var g_Window_iHeight = 1170;
 
 
-var g_ThemeImage_Base_izIndex = 20; var g_ThemeImage_Hint_izIndex = 20; var g_ThemeImage_Solved_izIndex = 20;
+var g_ThemeImage_Base_izIndex = 20; var g_ThemeImage_Hint_izIndex = 20; 
+var g_ThemeImage_Solved_iTop = 155;var g_ThemeImage_Solved_izIndex = 20;
+
 
 var g_CAL_iLineHeight = 22;
 var g_CAL_izIndex = -1;
@@ -106,6 +108,9 @@ function TC_Configuration_pick()
     g_ThemeImage_Base_izIndex = 20;
     g_ThemeImage_Hint_izIndex = 20;
     g_ThemeImage_Solved_izIndex = 20;
+    g_ThemeImage_Solved_iTop = 160
+    
+
     g_bSuppressGridNumbers = true;
 }
 

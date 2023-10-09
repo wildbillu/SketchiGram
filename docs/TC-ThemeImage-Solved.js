@@ -4,11 +4,10 @@
 
 function TC_ThemeImage_Solved_ShowPopup()
 {
-    let iTop = 150;
     let iLeft = g_TC_Padding_Left_iSize;
     let iWidth = g_Window_iWidth;
     let iHeight = iWidth/g_ThemeImage_All_fWidthToHeight;
-    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Solved, iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed, g_ThemeImage_Solved_izIndex);
+    TC_ThemeImage_Popup_ShowPopup(g_PuzzlePath_sName_Image_Solved, g_ThemeImage_Solved_iTop, iLeft, iHeight, iWidth, CAB_SpecialClueExpandClosed, g_ThemeImage_Solved_izIndex);
 }
 
 function TC_ThemeImage_Solved_Create()

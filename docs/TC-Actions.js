@@ -21,7 +21,8 @@ function Action_SolvePuzzle()
     GRB_SolveGrid();
     g_bGridSolved = true;    
     g_bPuzzleSolved = true;    
-    TC_ThemeImage_Solved_ShowPopup();    
-    Status_Check();
+    TC_ThemeImage_Solved_ShowPopup();  
+    ActionsOnPuzzleSolved();  
+//    Status_Check();
     TC_HideMoreActions();
 }

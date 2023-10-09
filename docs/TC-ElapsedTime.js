@@ -42,9 +42,6 @@ function TC_ElapsedTime_Clear()
         return;
     clearInterval(g_ElapsedTime_IntervalId);
     g_ElapsedTime_IntervalId = 0;
-
-
-
 }
 
 function TC_ElapsedTime_Process()
