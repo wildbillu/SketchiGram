@@ -19,10 +19,10 @@ function Status_Check()
         TC_ThemeImage_Solved_ShowPopup();
         if ( g_SpecialClueFrame_bActive ) TC_ShowSpecialClueAnswers();
     }
-    FeaturesDependingOnPuzzleSolved();
     g_TC_Status_bFirstCheck = false;
     if ( g_bPuzzleSolved ) 
     {
+        TC_ElapsedTime_Clear();
         GRB_SetAllButtons_Inactive();
         TC_SyncSpecialAnswersToGrid();
         CAB_SetAllButtons(g_cCode_Inactive);
@@ -31,16 +31,10 @@ function Status_Check()
         ForIdSetVisibility("MoreActions_Div", false);
         TC_CAL_Show();
         g_bSuppressGridNumbers = false;
+        TC_CR_SetStatus("ChangeDirection", false)
         GRB_SetAllButtons_Inactive();
     }
     StoreCookie_Puzzle();
-}
-
-function FeaturesDependingOnPuzzleSolved()
-{
-    if ( !g_bGridSolved )
-        return;
-    TC_ElapsedTime_Clear();
 }
 
 function Status_Check_Grid()
