@@ -11,7 +11,8 @@ var g_TC_Status_bFirstCheck = true;
 
 function ActionsOnPuzzleSolved()
 {
-    TC_ElapsedTime_Pause();
+    setlineAdd('A')
+    TC_ElapsedTime_Stop();
     GRB_SetAllButtons_Inactive();
     TC_SyncSpecialAnswersToGrid();
     CAB_SetAllButtons(g_cCode_Inactive);
@@ -22,6 +23,7 @@ function ActionsOnPuzzleSolved()
     g_bSuppressGridNumbers = false;
     TC_CR_SetStatus("ChangeDirection", false)
     GRB_SetAllButtons_Inactive();
+    setlineAdd('B')
 }
 
 function Status_Check()

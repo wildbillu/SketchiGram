@@ -6,6 +6,15 @@ var g_ElapsedTime_iInitialTimeInSeconds = 0;
 var g_ElapsedTime_IntervalId = 0;
 var g_ElapsedTime_eDiv = 0;
 
+function TC_ElapsedTime_Stop()
+{
+    if ( g_ElapsedTime_IntervalId == 0 )
+        return;
+    clearInterval(g_ElapsedTime_IntervalId);
+    g_ElapsedTime_IntervalId = 0;
+}
+
+
 function TC_ElapsedTime_Pause()
 {
     TC_ElapsedTime_Clear();
@@ -15,17 +24,8 @@ function TC_ElapsedTime_Pause()
 
 function TC_ElapsedTime_Resume()
 {
-    const d = new Date();
-    g_ElapsedTime_iInitialTimeInSeconds = Math.trunc(d.getTime()/1000);
-    TC_ElapsedTime_Process();
-    g_ElapsedTime_IntervalId = setInterval(TC_ElapsedTime_Process, 1000);
-}
-
-function TC_ElapsedTime_StartOver()
-{
-    TC_ElapsedTime_Clear();
-    g_ElapsedTime_iSecondsPrevious = 0;
-    g_ElapsedTime_iSecondsThisAttempt = 0;
+    if ( g_ElapsedTime_IntervalId == 0 )
+        return;
     const d = new Date();
     g_ElapsedTime_iInitialTimeInSeconds = Math.trunc(d.getTime()/1000);
     TC_ElapsedTime_Process();
