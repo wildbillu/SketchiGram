@@ -38,11 +38,11 @@ function MakeMoreActionsInner()
 {
     g_TC_MoreActions_aIds.length = 0;
     let sDropdownMenu = '';
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveGrid" onclick="Action_SolvePuzzle();">Reveal Puzzle</BUTTON>';
-    g_TC_MoreActions_aIds.push("Dropdown_More_SolveGrid");
-//
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ResetPuzzle" onclick="Action_ResetPuzzle();">Reset All</BUTTON>';
     g_TC_MoreActions_aIds.push("Dropdown_More_ResetPuzzle");
+//
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveGrid" onclick="Action_SolvePuzzle();">Reveal Puzzle</BUTTON>';
+    g_TC_MoreActions_aIds.push("Dropdown_More_SolveGrid");
     return sDropdownMenu;
 }
 

@@ -1,11 +1,25 @@
 // TC-Archive-Consolidated.js
 
-function Archive_PlayToday()
+
+function TC_Archive_FindPuzzleForTitle(sTitle)
 {
-    let sToday = TC_Archive_MakeTodayDateString();
-    let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
-    if ( iArchiveIndex == -1 )
-        return;
+    let iEntries = g_TC_Archive_aPuzzleReleaseDate.length;
+    if ( iEntries == 0 )
+        return -1;
+    for ( let i = 0; i < iEntries; i++ )
+    {
+        let sThisTitle = g_TC_Archive_aPuzzleTitles[i];
+        if ( sThisTitle == sTitle )
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function Archive_PracticePuzzle()
+{
+    let iArchiveIndex = TC_Archive_FindPuzzleForTitle('Practice SketchiGram');
     g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iArchiveIndex];
     g_SG_bAnswersCorrectInGridSet = false;
     g_bGridAndCA = false;
@@ -13,6 +27,20 @@ function Archive_PlayToday()
 //
     Restart();
 }
+
+function Archive_PlayToday()
+{
+    let sToday = TC_Archive_MakeTodayDateString();
+    let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
+    if ( iArchiveIndex == -1 )
+        return;
+        g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iArchiveIndex];
+        g_SG_bAnswersCorrectInGridSet = false;
+        g_bGridAndCA = false;
+        g_TC_Status_bFirstCheck = true;
+    //
+        Restart();
+    }
 
 function TC_Archive_Hide()
 {
@@ -77,11 +105,20 @@ function TC_Archive_Next_Con()
     TC_Archive_Consolidated_FillSelect_Div()
 }
 
+function TC_Archive_SetTodaysPuzzleExist()
+{
+    let sToday = TC_Archive_MakeTodayDateString();
+    let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
+    g_TC_Archive_TodaysPuzzle_bExists = false;
+    if ( iArchiveIndex != -1 )
+        g_TC_Archive_TodaysPuzzle_bExists = true;
+}
+
 function TC_Archive_Consolidated_FillSelect_Div()
 {
     let elem = document.getElementById("Archive_Consolidated_Select_Div");
     TC_ForIdSetZIndex("Archive_Consolidated_Select_Div" , g_Archive_izIndex);
-
+//
     elem.innerHTML = '';
     elem.innerHTML += '<DIV class="Archive_Button_Header" Id="Archive_Button_Header">' + g_TC_Archive_Menu_sActiveSortingBy + '</DIV>';
 // we are going to determine the width of the widest title as we go and then fix them
@@ -153,7 +190,7 @@ function TC_Archive_Consolidated_FillSelect_Div()
 // now add the top element heights 
     iHeight += TC_GetHeightOfElementById("Archive_Consolidated_Title")
     iHeight += TC_GetHeightOfElementById("Archive_Button_Header")
-    if ( !g_TC_Archive_bDoingTodaysPuzzle )
+    if ( g_TC_Archive_TodaysPuzzle_bExists && !g_TC_Archive_TodaysPuzzle_bDoing )
         iHeight += TC_GetHeightOfElementById("Archive_PlayToday")
     iHeight += TC_GetHeightOfElementById("ByDateButtons");
     iHeight += TC_GetHeightOfElementById("BySizeButtons");
@@ -174,7 +211,10 @@ function TC_Archive_Consolidated_Make_Div()
 {
     let sArchive = ""
     sArchive += '<DIV Id="Archive_Consolidated_Div" class="Archive_Consolidated_Div TC_StartHidden" align=center>'
-    if ( !g_TC_Archive_bDoingTodaysPuzzle )
+// should check if any cookies and not show this if it exists
+    let sPracticePuzzle = 'Practice puzzle';
+    sArchive += '<DIV Id="Archive_PracticePuzzle" class="Archive_PracticePuzzle" onclick="Archive_PracticePuzzle();" align=center>' + sPracticePuzzle + '</DIV>';
+    if ( g_TC_Archive_TodaysPuzzle_bExists && !g_TC_Archive_TodaysPuzzle_bDoing )
     {
         let sPlay = 'Play today\'s puzzle';
         sArchive += '<DIV Id="Archive_PlayToday" class="Archive_PlayToday" onclick="Archive_PlayToday();" align=center>' + sPlay + '</DIV>';

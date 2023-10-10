@@ -1,7 +1,8 @@
 // TC-Archive-Data.js
 var g_TC_Archive_Cookie_iSize = -1;
 var g_TC_Archive_Cookie_sYearMonth = '';
-var g_TC_Archive_bDoingTodaysPuzzle = false;
+var g_TC_Archive_TodaysPuzzle_bExists = false;
+var g_TC_Archive_TodaysPuzzle_bDoing = false;
 var g_TC_Archive_Menu_bActive = false;
 var g_TC_Archive_Menu_iWidth = 0;
 // these are the available puzzles of all sizes and dates
@@ -120,6 +121,7 @@ function TC_LoadPuzzleArchive_FromFile()
 function TC_LoadPuzzleArchiveDefault()
 { // in case file missing or local
     TC_Archive_ClearAvailablePuzzles();
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', 'Practice SketchiGram', 3, '2023-10-09')
     TC_Archive_AddPuzzleToArchive_All('puzzle001', 'Yogi Berra Says!', 4, '2023-06-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle050', 'Grammar lesson from Commander Literal&trade;',8,'2023-07-24')
     TC_Archive_AddPuzzleToArchive_All('puzzle002', 'Beware The Ides!', 4, '2023-06-26')

@@ -110,7 +110,7 @@ function SG2_LoadAll(iSection)
             TC_Archive_BySize_Clear();
             MII_Grid_CancelTimer();
             MII_Hint_CancelTimer();
-            g_TC_Archive_bDoingTodaysPuzzle = false;
+            g_TC_Archive_TodaysPuzzle_bDoing = false;
             g_TC_Archive_Menu_bActive = false;
             g_GRB_bAcross = true;
             g_GRB_ActiveId_sAcross = '';
@@ -127,6 +127,7 @@ function SG2_LoadAll(iSection)
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             TC_LoadPuzzleArchiveDefault();
             TC_LoadPuzzleArchive_FromFile();
+            TC_Archive_SetTodaysPuzzleExist();
             GetAndSplitCookies();
             if ( !g_bResettingDoNotUseCookie )
             {
@@ -205,7 +206,7 @@ function SG2_LoadAll(iSection)
             MII_Grid_SetLocationAndSize();
             MII_Hint_SetLocationAndSize();
             FI_SizeAndPosition();
-            TC_Archive_BySize_BaseMenu_SelectFromSize(4, true);
+//            TC_Archive_BySize_BaseMenu_SelectFromSize(4, true);
             TC_CAL_Fill();
             g_bPlaying = false;
             break;

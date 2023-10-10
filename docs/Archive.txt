@@ -1,5 +1,5 @@
 archive.txt
-puzzle070=Commander Literal&trade; Introduces SketchiGram|3|2023-10-10|Win
+puzzle070=Practice SketchiGram|3|2023-10-09|Win
 puzzle001=Yogi Berra Says!|4|2023-10-11
 puzzle002=Beware The Ides!|4|2023-10-12
 puzzle007=A Buzzer Beater?|4|2023-10-13

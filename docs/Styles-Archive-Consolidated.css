@@ -44,6 +44,21 @@
   background-color: white;
 }
 
+.Archive_PracticePuzzle
+{
+  user-select:none;
+  border: 1px solid black;
+  text-align:center;
+  font-size:20px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal;  
+  color:green;
+  height:24px;
+  line-height:24px;
+  font-weight:bold;
+  background-color: white;
+}
+
 .Archive_Consolidated_Title
 {
   user-select:none;

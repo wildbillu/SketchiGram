@@ -51,7 +51,7 @@ function TC_GetOverrideName()
     if ( iArchiveIndex != -1 )
     {
         let sName = g_TC_Archive_aPuzzleNames[iArchiveIndex];
-        g_TC_Archive_bDoingTodaysPuzzle = true;
+        g_TC_Archive_TodaysPuzzle_bDoing = true;
         return sName;
     }
     let sTextFileToLookFor = 'StartingPuzzle.txt'; 

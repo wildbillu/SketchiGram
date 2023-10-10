@@ -11,7 +11,6 @@ var g_TC_Status_bFirstCheck = true;
 
 function ActionsOnPuzzleSolved()
 {
-    setlineAdd('A')
     TC_ElapsedTime_Stop();
     GRB_SetAllButtons_Inactive();
     TC_SyncSpecialAnswersToGrid();
@@ -23,7 +22,7 @@ function ActionsOnPuzzleSolved()
     g_bSuppressGridNumbers = false;
     TC_CR_SetStatus("ChangeDirection", false)
     GRB_SetAllButtons_Inactive();
-    setlineAdd('B')
+    SetMoreButton('Dropdown_More_SolveGrid', false);
 }
 
 function Status_Check()

@@ -5,7 +5,8 @@ function TC_CAL_Fill()
     let elem = document.getElementById("CluesAsList_Div");
     let sInner = '';
 // want to put them in puzzle order
-    sInner += '<br>' + '&nbsp;&nbsp;&nbsp;&nbsp;Across' + '<br>';
+    sInner += '<center>' + 'As Standard Crossword' + '</center>';
+    sInner += '&nbsp;&nbsp;&nbsp;&nbsp;Across' + '<br>';
     let iTotalLines = 5;    
     let iWidthMax = 10;
     for ( let iA = 1; iA < 20; iA++ )    
