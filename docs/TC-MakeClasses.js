@@ -44,8 +44,12 @@ function TC_MakeClassesForSquares()
 
     // the character
     let sheetCharacter = document.createElement('style')
-    let sCharacterInner = '.TC_Square_Grid_Character{text-align:center;font-family:Arial, Helvetica, sans-serif;font-style:normal;'
-    sCharacterInner += 'line-height:' + iLineHeight + 'px;font-size:' + iFontSize + 'px;}'
+    let sCharacterInner = '.TC_Square_Grid_Character{'
+    sCharacterInner += 'text-align:center;font-family:Arial, Helvetica, sans-serif;font-style:normal;'
+    sCharacterInner += 'line-height:' + iLineHeight + 'px;font-size:' + iFontSize + 'px;'
+//    sCharacterInner += 'cursor: pointer;'
+//    sCharacterInner += 'cursor: url(images/StatusIndicators/ArrowCursor.png), pointer; '
+    sCharacterInner += '}';
     sheetCharacter.innerHTML = sCharacterInner;
     document.body.appendChild(sheetCharacter);
 // now for the CAB / Special Clue 

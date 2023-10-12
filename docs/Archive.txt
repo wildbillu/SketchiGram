@@ -1,6 +1,5 @@
 archive.txt
-puzzle070=Practice SketchiGram|3|2023-10-09|Win
-puzzle001=Yogi Berra Says!|4|2023-10-11
+puzzle070=Practice SketchiGram|3|2023-10-11|Win
 puzzle002=Beware The Ides!|4|2023-10-12
 puzzle007=A Buzzer Beater?|4|2023-10-13
 puzzle008=Perhaps found in your succotash?|4|2023-10-14
@@ -53,6 +52,7 @@ puzzle036=It's not just for teens|5|2023-11-29|Angst
 puzzle055=Commander Literal&trade; is not much of an artisan|5|2023-11-30|Inept
 puzzle056=Holy Toledo, Commander Literal&trade; needs a new sweater|4|2023-12-01|Moth
 puzzle061=Commander Literal&trade; knows his animals (1)|5|2023-12-02|TapirTaper
+puzzle001=Yogi Berra Says!|4|2023-12-03|Fork(in the)Road
 xpuzzle060=Commander Literal&trade; thinks that this is too much to give|5|2023-12-04|Tenth
 xpuzzle059=Commander Literal&trade;'s hats have this|5|2023-12-05|Style
 xpuzzle053=Careful who you follow|7|2023-12-06|Fealty

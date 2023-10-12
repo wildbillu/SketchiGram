@@ -2,10 +2,18 @@
 
 function TC_GRBSwipe_SetButtonStyle(bActive, iRow, iLetter)
 {
+    let elemButton = document.getElementById(GRB_MakeId(iRow, iLetter));
     if ( bActive ) 
-        TC_GRB_SetPickedForSwipe(iRow, iLetter);
+    {
+//        TC_GRB_SetPickedForSwipe(iRow, iLetter);
+//        "pointer"; 
+        elemButton.style.cursor = "url(images/StatusIndicators/SwipeCursor-A-64.png), pointer";
+}
     else
+    {
         GRB_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
+        elemButton.style.cursor = "default";
+    }
 }
 
 function TC_GRB_SetPickedForSwipe(iPickedRow, iPickedLetter)
