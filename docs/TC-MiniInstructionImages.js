@@ -6,17 +6,45 @@ var g_MII_Hint_sImage = g_MII_sDirectory + 'MII_Hint.jpg';
 
 var g_MII_sImageFraction = 0.9;
 
-
 var g_MII_Grid_sId_Div      = "MII_Grid_Div";
 var g_MII_Grid_sId_Image    = "MII_Grid_Image";
 var g_MII_Grid_sClass_Div   = "MII_Grid_Div";
 var g_MII_Grid_sClass_Image = "MII_Grid_Image";
+var g_MII_Grid_bVisible     = false;
+
+var g_MII_Grid_sActiveSquareId = '';
 
 var g_MII_Hint_sId_Div      = "MII_Hint_Div";
 var g_MII_Hint_sId_Image    = "MII_Hint_Image";
 var g_MII_Hint_sClass_Div   = "MII_Hint_Div";
 var g_MII_Hint_sClass_Image = "MII_Hint_Image";
+var g_MII_Hint_bVisible     = false;
 
+var g_MII_Hint_sActiveSquareId = '';
+
+function TC_MII_Grid_RestoreFocus()
+{
+    if ( g_MII_Grid_sActiveSquareId == '' )
+        return;
+    let elem = document.getElementById(g_MII_Grid_sActiveSquareId);
+    if ( g_MII_Grid_sActiveSquareId.indexOf('GRB') != -1 ) 
+        GRB_onfocus(elem)
+    else
+        CAB_onfocus(elem);
+    g_MII_Grid_sActiveSquareId = '';
+}
+
+function TC_MII_Hint_RestoreFocus()
+{
+    if ( g_MII_Hint_sActiveSquareId == '' )
+        return;
+    let elem = document.getElementById(g_MII_Hint_sActiveSquareId);
+    if ( g_MII_Hint_sActiveSquareId.indexOf('GRB') != -1 ) 
+        GRB_onfocus(elem)
+    else
+        CAB_onfocus(elem);
+    g_MII_Hint_sActiveSquareId = '';
+}
 
 function TC_Preload_MII()
 {
@@ -83,7 +111,14 @@ function MII_Grid_Handler(iSecondsActive)
         return;
     if ( iSecondsActive < g_MII_Grid_ShowAfter_iSec )
         return;
+    if ( g_MII_Grid_bVisible )
+        return;
+    g_MII_Grid_bVisible = true;
     ForIdSetVisibility(g_MII_Grid_sId_Div, true);
+    if ( g_GRB_Focus_sId != '' )
+        g_MII_Grid_sActiveSquareId = g_GRB_Focus_sId;
+    if ( g_CAB_Focus_sId != '' )
+        g_MII_Grid_sActiveSquareId = g_CAB_Focus_sId;
     g_MII_Grid_Show_iCloseTimerId = setInterval(MII_Grid_Hide, g_MII_Grid_ShowFor_iSec * 1000);
 }
 
@@ -99,6 +134,8 @@ function MII_Grid_Hide()
     ForIdSetVisibility(g_MII_Grid_sId_Div, false);
     ForIdSetVisibility(g_MII_Grid_sId_Image, false);
     MII_Grid_CancelTimer();
+    g_MII_Hint_bVisible = false;
+    TC_MII_Grid_RestoreFocus();
 }
 
 function MII_Hint_Handler(iSecondsActive)
@@ -109,8 +146,15 @@ function MII_Hint_Handler(iSecondsActive)
         return;
     if ( iSecondsActive < g_MII_Hint_ShowAfter_iSec )
         return;
+        if ( g_MII_Hint_bVisible )
+        return;
+    g_MII_Hint_bVisible = true;
     ForIdSetVisibility(g_MII_Hint_sId_Div, true);
     g_MII_Hint_Show_iCloseTimerId = setInterval(MII_Hint_Hide, g_MII_Hint_ShowFor_iSec * 1000);
+    if ( g_GRB_Focus_sId != '' )
+        g_MII_Hint_sActiveSquareId = g_GRB_Focus_sId;
+    if ( g_CAB_Focus_sId != '' )
+        g_MII_Hint_sActiveSquareId = g_CAB_Focus_sId;
 }
 
 function MII_Hint_CancelTimer()
@@ -121,11 +165,12 @@ function MII_Hint_CancelTimer()
     g_MII_Hint_Show_iCloseTimerId = 0;
 }
 
-
 function MII_Hint_Hide()
 {
     ForIdSetVisibility(g_MII_Hint_sId_Div, false);
     ForIdSetVisibility(g_MII_Hint_sId_Image, false);
     MII_Hint_CancelTimer();
+    g_MII_Hint_bVisible = false;
+    TC_MII_Hint_RestoreFocus();
 }
 

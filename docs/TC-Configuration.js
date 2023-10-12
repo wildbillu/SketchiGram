@@ -109,7 +109,6 @@ function TC_Configuration_pick()
     g_ThemeImage_Hint_izIndex = 20;
     g_ThemeImage_Solved_izIndex = 20;
     g_ThemeImage_Solved_iTop = 160
-    
 
     g_bSuppressGridNumbers = true;
 }

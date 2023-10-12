@@ -10,10 +10,11 @@ function TC_MakeClassesForSquares()
     g_GRB_Square_iSize = 80;
     let iFontSize   = 80;
     let iLineHeight = 80;
+    let is = 80;
     switch ( g_iGridWidth )
     {
         case 3:
-            g_GRB_Square_iSize = 146; iFontSize = 120; iLineHeight = 140;
+            g_GRB_Square_iSize = 146; iFontSize = 120; iLineHeight = 150;
             break;
         case 4:
             g_GRB_Square_iSize = 136; iFontSize = 100; iLineHeight = 140;
@@ -22,13 +23,16 @@ function TC_MakeClassesForSquares()
             g_GRB_Square_iSize = 122; iFontSize = 80; iLineHeight = 126;
             break;
         case 6:  // 630/6 = 105
+            is = 84;
             g_GRB_Square_iSize = 101; iFontSize = 60; iLineHeight = 105;
             break;
         case 7:  // 630/7 = 90
-            g_GRB_Square_iSize = 86; iFontSize = 45; iLineHeight = 90;
+            is = 84;
+            g_GRB_Square_iSize = is; iFontSize = 45; iLineHeight = is + 4;
             break;
         case 8:  // 630/8 = 76
-            g_GRB_Square_iSize = 72; iFontSize = 40; iLineHeight = 76;
+            is = 68;
+            g_GRB_Square_iSize = 68; iFontSize = 40; iLineHeight = is + 4;
             break;
     }
 // first for the Grid

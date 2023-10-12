@@ -53,6 +53,9 @@ function TC_Archive_Show()
     ForIdSetVisibility("MII_Grid_Div", false);
     TC_ThemeImage_Popup_HidePopup();
     TC_HideMoreActions();
+    ForIdSetVisibility("CluesAsList_Div", false);
+
+
     ForIdSetVisibility("Archive_Consolidated_Div", true);
 }
 

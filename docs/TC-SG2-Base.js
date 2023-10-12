@@ -123,15 +123,19 @@ function SG2_LoadAll(iSection)
             g_bSuppressGridNumbers = true;
             g_TC_bMoveMade_Hint = false;
             g_TC_bMoveMade_Grid = false;
+            g_MII_Hint_bVisible = false;
+            g_MII_Grid_bVisible = false;
             TC_History_Clear();
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             TC_LoadPuzzleArchiveDefault();
             TC_LoadPuzzleArchive_FromFile();
             TC_Archive_SetTodaysPuzzleExist();
             GetAndSplitCookies();
-            if ( !g_bResettingDoNotUseCookie )
+//            if ( !g_bResettingDoNotUseCookie )
             {
                 FromCookies_GetCurrentPuzzle();
+//                alert('CookiePuzzle:' + g_TC_sPuzzle_Cookie)
+
             }
             getResolution(); 
             while ( document.readyState != "complete") {}
