@@ -78,11 +78,11 @@ function TC_InitializeFromFileOrLoadAsJS()
         return;
     }
     g_TC_bFileAccess = true;
-//    setline('X')
+//setline('X')
 //setlineAdd('A:' + g_TC_sPuzzle_Archive + '|')
     if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_Archive) )
     {
-        g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
+        g_TC_sPuzzle_Archive = ''; // want to use it only once
         return;
     }
     g_TC_sPuzzle_Archive = ''; // don't want to use this again cause it's no good
