@@ -27,9 +27,9 @@ function TC_MII_Grid_RestoreFocus()
     if ( g_MII_Grid_sActiveSquareId == '' )
         return;
 // if the focus hasnt been lost
-if ( g_GRB_Focus_sId != '' || g_CAB_Focus_sId != '' )    
-return;
-let elem = document.getElementById(g_MII_Grid_sActiveSquareId);
+    if ( g_GRB_Focus_sId != '' || g_CAB_Focus_sId != '' )    
+        return;
+    let elem = document.getElementById(g_MII_Grid_sActiveSquareId);
     if ( g_MII_Grid_sActiveSquareId.indexOf('GRB') != -1 ) 
         GRB_onfocus(elem)
     else

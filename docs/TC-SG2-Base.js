@@ -131,15 +131,14 @@ function SG2_LoadAll(iSection)
             TC_LoadPuzzleArchive_FromFile();
             TC_Archive_SetTodaysPuzzleExist();
             GetAndSplitCookies();
-//            if ( !g_bResettingDoNotUseCookie )
-            {
-                FromCookies_GetCurrentPuzzle();
-//                alert('CookiePuzzle:' + g_TC_sPuzzle_Cookie)
-
-            }
+            HandleSettingsCookieOnStart();
+            FromCookies_GetCurrentPuzzle();
             getResolution(); 
             while ( document.readyState != "complete") {}
             TC_InitializeFromFileOrLoadAsJS();
+
+
+            
             TC_AddScreenInfo();
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();

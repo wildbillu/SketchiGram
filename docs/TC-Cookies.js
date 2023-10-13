@@ -43,7 +43,7 @@ function MakeAndStoreCookie_CurrentPuzzle()
 
 function FromCookies_GetCurrentPuzzle()
 {
-    g_TC_sPuzzle_Cookie = '';
+    g_TC_sCurrentPuzzle_FromCookie = '';
     let sCookieCurrentPuzzle = 'SG2' + '-CurrentPuzzle';
     for ( let iCookie = 0; iCookie < g_iCookies ; iCookie++)
     {
@@ -53,9 +53,9 @@ function FromCookies_GetCurrentPuzzle()
             let aOurValues = FromCookieParseContents(sThisCookie)
             if ( aOurValues.length == 1 )
             {
-                g_TC_sPuzzle_Cookie = aOurValues[0];
-                if ( g_TC_sPuzzle_Cookie == 'none')
-                    g_TC_sPuzzle_Cookie = '';
+                g_TC_sCurrentPuzzle_FromCookie = aOurValues[0];
+                if ( g_TC_sCurrentPuzzle_FromCookie == 'none')
+                g_TC_sCurrentPuzzle_FromCookie = '';
             }
         }
     }
@@ -88,23 +88,32 @@ function GetAndSplitCookies()
     g_iCookies = g_aCookies.length;
 }
 
-function HandleCookiesOnStart()
+function HandleSettingsCookieOnStart()
 {
-    let sOurCookieName_Puzzle   = 'SG2' + '-' + g_sPuzzleNumber;
     let sOurCookieName_Settings = 'SG2' + '-Settings'; 
-    let sOurCookie_Puzzle = '';
     let sOurCookie_Settings = '';
+//
+    for ( let iCookie = 0; iCookie < g_iCookies ; iCookie++)
+    {
+        let sThisCookie = g_aCookies[iCookie]
+        if ( sThisCookie.includes(sOurCookieName_Settings) )
+            sOurCookie_Settings = sThisCookie;
+    }
+    HandleCookie_Settings(sOurCookie_Settings);
+}
+
+function HandlePuzzleCookieOnStart(sPuzzleNumber)
+{
+    let sOurCookieName_Puzzle   = 'SG2' + '-' + sPuzzleNumber;
+    let sOurCookie_Puzzle = '';
 //
     for ( let iCookie = 0; iCookie < g_iCookies ; iCookie++)
     {
         let sThisCookie = g_aCookies[iCookie]
         if ( sThisCookie.includes(sOurCookieName_Puzzle) )
             sOurCookie_Puzzle = sThisCookie;
-        if ( sThisCookie.includes(sOurCookieName_Settings) )
-            sOurCookie_Settings = sThisCookie;
     }
     HandleCookie_Puzzle(sOurCookie_Puzzle);
-    HandleCookie_Settings(sOurCookie_Settings);
 }
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
