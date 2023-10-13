@@ -26,7 +26,10 @@ function TC_MII_Grid_RestoreFocus()
 {
     if ( g_MII_Grid_sActiveSquareId == '' )
         return;
-    let elem = document.getElementById(g_MII_Grid_sActiveSquareId);
+// if the focus hasnt been lost
+if ( g_GRB_Focus_sId != '' || g_CAB_Focus_sId != '' )    
+return;
+let elem = document.getElementById(g_MII_Grid_sActiveSquareId);
     if ( g_MII_Grid_sActiveSquareId.indexOf('GRB') != -1 ) 
         GRB_onfocus(elem)
     else
@@ -38,7 +41,9 @@ function TC_MII_Hint_RestoreFocus()
 {
     if ( g_MII_Hint_sActiveSquareId == '' )
         return;
-    let elem = document.getElementById(g_MII_Hint_sActiveSquareId);
+// if the focus hasnt been lost
+    if ( g_GRB_Focus_sId != '' || g_CAB_Focus_sId != '' )    
+        return;
     if ( g_MII_Hint_sActiveSquareId.indexOf('GRB') != -1 ) 
         GRB_onfocus(elem)
     else
@@ -113,6 +118,7 @@ function MII_Grid_Handler(iSecondsActive)
         return;
     if ( g_MII_Grid_bVisible )
         return;
+    g_TC_bMoveMade_Grid = true;
     g_MII_Grid_bVisible = true;
     ForIdSetVisibility(g_MII_Grid_sId_Div, true);
     if ( g_GRB_Focus_sId != '' )
@@ -149,6 +155,7 @@ function MII_Hint_Handler(iSecondsActive)
         if ( g_MII_Hint_bVisible )
         return;
     g_MII_Hint_bVisible = true;
+    g_TC_bMoveMade_Hint = true;
     ForIdSetVisibility(g_MII_Hint_sId_Div, true);
     g_MII_Hint_Show_iCloseTimerId = setInterval(MII_Hint_Hide, g_MII_Hint_ShowFor_iSec * 1000);
     if ( g_GRB_Focus_sId != '' )
