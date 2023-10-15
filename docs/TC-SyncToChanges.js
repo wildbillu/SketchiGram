@@ -25,21 +25,3 @@ function SyncTo_OthersLoseFocus(sFocusIs)
     }
     g_SyncTo_LastWithFocus = sFocusIs;
 }
-
-function Sync_CAChange()
-{
-    if ( g_bGridAndCA )
-    {
-        if ( TC_SyncGridToSpecialAnswers() )
-            TC_SyncSpecialAnswersToGrid();
-    }
-}
-
-function Sync_GridChange()
-{
-    if ( g_bGridAndCA )
-    {
-        if ( TC_SyncSpecialAnswersToGrid() )
-            TC_SyncGridToSpecialAnswers();
-    }
-}

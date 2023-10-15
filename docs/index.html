@@ -37,10 +37,8 @@
     <SCRIPT SRC="TC-SyncGridAndCA.js"></SCRIPT>    
     <link rel="stylesheet" href="Styles-CAB-Headings.css">
     <link rel="stylesheet" href="Styles-CAB-ContextMenu.css">
-
     
     <SCRIPT SRC="TC-MakeClasses.js"></SCRIPT>
-
     
     <SCRIPT SRC="TC-GRBMS-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-GRBMS-Basic.js"></SCRIPT>
@@ -61,19 +59,18 @@
     <SCRIPT SRC="TC-GRBMS-ContextMenu.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-GRBMS-ContextMenu.css">
 
-
     <SCRIPT SRC="TC-DisplaySpecialClue.js"></SCRIPT>
 
 <!-- these are the 'show/noshow' windows -->
-    <SCRIPT SRC="TC-SuccessWindow.js"></SCRIPT>
     <SCRIPT SRC="TC-Info-Content.js"></SCRIPT>
 <!-- Settings -->
     <SCRIPT SRC="TC-Settings-Setup.js"></SCRIPT>
-    <SCRIPT SRC="TC-Settings-CookieSupport.js"></SCRIPT>
 <!-- this controls the closing of the show/noshow windows  -->
     <SCRIPT SRC="TC-Popup-Support.js"></SCRIPT>
 
     <SCRIPT SRC="TC-Cookies.js"></SCRIPT>
+    <SCRIPT SRC="TC-CookiesSupport-Puzzles.js"></SCRIPT>
+    <SCRIPT SRC="TC-CookiesSupport-Settings.js"></SCRIPT>
  
     <SCRIPT SRC="TC-Puzzle-Load.js"></SCRIPT>
     <SCRIPT SRC="TC-Puzzle-AsJS.js"></SCRIPT>
@@ -85,13 +82,11 @@
     <SCRIPT SRC="TC-SG2-Positioning.js"></SCRIPT>
 
 <!-- Archive -->
-
     <SCRIPT SRC="TC-Archive-Data.js"></SCRIPT>
     <SCRIPT SRC="TC-Archive-Consolidated.js"></SCRIPT>
-    <link rel="stylesheet" href="Styles-Archive-Consolidated.css">
-
     <SCRIPT SRC="TC-Archive-BySize.js"></SCRIPT>
     <SCRIPT SRC="TC-Archive-ByDate.js"></SCRIPT>
+    <link rel="stylesheet" href="Styles-Archive-Consolidated.css">
     <link rel="stylesheet" href="Styles-Archive-BySize.css">
     <link rel="stylesheet" href="Styles-Archive-ByDate.css">
 <!-- ElapsedTime -->
@@ -103,16 +98,13 @@
     <SCRIPT SRC="TC-ThemeImage-Solved.js"></SCRIPT>
     <SCRIPT SRC="TC-ThemeImage-Popup.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-ThemeImage.css">
-
 <!-- DialogBox -->
     <SCRIPT SRC="TC-DialogBox-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-DialogBox-Sizing.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-DialogBox-Base.css">
-
 <!-- ActionMenu actions themselves -->
     <SCRIPT SRC="TC-MoreActions-Setup.js"></SCRIPT>
     <link rel="stylesheet" href="Styles-More.css">
-
     <SCRIPT SRC="TC-Actions.js"></SCRIPT>
     <SCRIPT SRC="TC-ControlRow.js"></SCRIPT>
 
@@ -139,8 +131,7 @@
 <SCRIPT>
 let g_TC_sPuzzle_NoArchive_NoCommandLine    = 'puzzle001'; // used if no StartingPuzzle.txt
 let g_TC_sPuzzle_Archive                    = '';
-let g_TC_sCurrentPuzzle_FromCookie                     = '';
-
+let g_TC_sCurrentPuzzle_FromCookie          = '';
 
 let g_sPuzzleNumber          = 'puzzle000'
 let g_bConnectionIsWebBased = true;
@@ -172,7 +163,7 @@ function Dispatch()
     if (window.location.protocol === "file:")
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.020';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.021';
 //
     TC_LoadPuzzleArchiveDefault();
     SG2_LoadAll(0);

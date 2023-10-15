@@ -34,49 +34,6 @@ function TC_ShowSpecialClueAnswers()
     }
 }
 
-function TC_SyncGridToSpecialAnswers()
-{
-    let bChange = false;
-    if ( !g_bGridAndCA ) return bChange;
-    for ( let i = 0; i < g_CA_aMappingSpecial0ToGrid.length; i++ )
-    {
-        let cPlayerAnswer = CAB_ForRowLetter_GetAnswerPlayer(0, i);
-        let cAnswer       = CAB_ForRowLetter_GetAnswer(0, i);
-        if ( cPlayerAnswer == cAnswer)
-        {
-            let sId = g_CA_aMappingSpecial0ToGrid[i];
-            let iRow = GRB_RowFromId(sId);
-            let iLetter = GRB_LetterFromId(sId);
-            let cLetterExisting = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-            if ( cLetterExisting != cAnswer )
-            { // what we want to do is an exchange
-                let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-                GRB_ReplaceMeReturnFoundId(iRow, iLetter, cAnswer, true, cNow)
-                bChange = true;
-            }
-        }
-    }
-    for ( let i = 0; i < g_CA_aMappingSpecial1ToGrid.length; i++ )
-    {
-        let cPlayerAnswer = CAB_ForRowLetter_GetAnswerPlayer(1, i);
-        let cAnswer       = CAB_ForRowLetter_GetAnswer(1, i);
-        if ( cPlayerAnswer == cAnswer)
-        {
-            let sId = g_CA_aMappingSpecial1ToGrid[i];
-            let iRow = GRB_RowFromId(sId);
-            let iLetter = GRB_LetterFromId(sId);
-            let cLetterExisting = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-            if ( cLetterExisting != cAnswer )
-            {
-                let cNow = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-                GRB_ReplaceMeReturnFoundId(iRow, iLetter, cAnswer, true, cNow)
-                bChange = true;
-            }
-        }
-    }
-    return bChange;
-}
-
 function TC_SyncSpecialAnswersToGrid()
 {
     let bChange = false;

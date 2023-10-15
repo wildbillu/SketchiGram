@@ -104,8 +104,6 @@ function CAB_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, cCodeFocusActiveI
         bChanged = true;            
     }
     CAB_ForRowLetter_SetButton(iRow, iLetter, cCodeFocusActiveInactive)
-    if ( bChanged )
-        Sync_CAChange()
     return bChanged;
 }
 

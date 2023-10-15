@@ -84,8 +84,8 @@ function CAB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
     CAB_ForRowLetter_SetButton(iRow, iLetter, g_cCode_Inactive);
     TC_History_Add_SpecialClueLetterPlaced(cAnswerPlayer, iRow, iLetter, cInitialLetter);
 //    
-    Sync_CAChange();
     CAB_SetFocusToNext(iRow, iLetter);
     g_TC_bMoveMade_Hint = true;
+    StoreCookie_Puzzle();
 }
 

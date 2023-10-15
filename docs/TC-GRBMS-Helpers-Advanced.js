@@ -198,7 +198,6 @@ function GRB_SolveGrid()
             }
         }
     }
-    Sync_GridChange();
     return true;
 }
 
@@ -298,7 +297,6 @@ function GRB_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, A_iRow, A_iLetter);
     GRB_ForRowLetter_SetButton(A_iRow, A_iLetter, g_cCode_Inactive);
     GRB_ForRowLetter_SetButton(B_iRow, B_iLetter, g_cCode_Inactive);
-    Sync_GridChange();
     SyncTo_OthersLoseFocus('NoOne');
 }
 
