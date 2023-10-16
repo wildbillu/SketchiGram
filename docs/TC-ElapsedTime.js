@@ -17,6 +17,7 @@ function TC_ElapsedTime_Stop()
 
 function TC_ElapsedTime_Pause()
 {
+    StoreCookie_Puzzle();
     TC_ElapsedTime_Clear();
     g_ElapsedTime_iSecondsPrevious += g_ElapsedTime_iSecondsThisAttempt;
     g_ElapsedTime_iSecondsThisAttempt = 0;
@@ -68,7 +69,6 @@ function TC_ElapsedTime_Process()
     if ( iSeconds < 10 )
         sFormatted += '0';
     sFormatted += iSeconds.toString();
-    StoreCookie_Puzzle();
     g_ElapsedTime_eDiv.innerHTML = g_Timer_sLabel + sFormatted;
     MII_Grid_Handler(iTotalTimeInSeconds);
     MII_Hint_Handler(iTotalTimeInSeconds);

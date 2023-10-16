@@ -1,11 +1,5 @@
 // TC-More.js
 
-function Action_Finishup()
-{
-    StoreCookie_Puzzle();    
-    Status_Check();
-}
-
 function Action_ResetPuzzle()
 {
     g_bResettingDoNotUseCookie = true;

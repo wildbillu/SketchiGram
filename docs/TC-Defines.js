@@ -2,7 +2,6 @@ var g_sCookie;
 var g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.020'
 var g_bPuzzleSolved  = false;
 var g_bGridSolved    = false;
-var g_bAnswersSolved = false;
 var g_bResettingDoNotUseCookie = false;
 
 var g_TC_bMoveMade_Grid = false;

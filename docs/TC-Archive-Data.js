@@ -1,6 +1,6 @@
 // TC-Archive-Data.js
 var g_TC_Archive_Cookie_iSize = -1;
-var g_TC_Archive_Cookie_sYearMonth = '';
+var g_TC_Archive_Cookie_sYearMonth = 'notset';
 var g_TC_Archive_TodaysPuzzle_bExists = false;
 var g_TC_Archive_TodaysPuzzle_bDoing = false;
 var g_TC_Archive_Menu_bActive = false;

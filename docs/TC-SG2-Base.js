@@ -97,6 +97,7 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, g_iDelayForStart);    
             break;
         case 0:
+            Puzzle_SetupVersions();
             TC_SetActiveSize();
             ForIdSetVisibility("Messages", false);
             g_sToDisplay = '';
@@ -136,9 +137,6 @@ function SG2_LoadAll(iSection)
             getResolution(); 
             while ( document.readyState != "complete") {}
             TC_InitializeFromFileOrLoadAsJS();
-
-
-            
             TC_AddScreenInfo();
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();

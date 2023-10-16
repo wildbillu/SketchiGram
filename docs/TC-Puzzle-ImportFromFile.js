@@ -89,12 +89,11 @@ function TC_InitializeFromFileOrLoadAsJS()
         return;
 // here we look for a file with the puzzle name
     let sOverrideStartingFile = TC_GetOverrideName();
-    if ( sOverrideStartingFile != '' )
-        g_TC_sPuzzle_NoArchive_NoCommandLine = sOverrideStartingFile;
-    if ( !TC_LoadFromThisPuzzle(g_TC_sPuzzle_NoArchive_NoCommandLine) )
-    {
-        TC_Puzzle_Load_AsJS(); // all file reads have failed 
-    }
+    if ( TC_LoadFromThisPuzzle(sOverrideStartingFile) )
+        return;
+    if ( TC_LoadFromThisPuzzle(g_TC_sPuzzle_NoArchive_NoCommandLine) )
+        return;
+    TC_Puzzle_Load_AsJS(); // all file reads have failed 
 }
 
 var sClues = '';
@@ -123,7 +122,6 @@ function TC_UseFileContents(sPuzzleNumber)
         GR_SetupGlobals(iGridWidth, iGridHeight, sGridAnswers, g_Cookie_sGridAnswersPlayer, g_Cookie_sGridStatusPlayer, sGridNumbering, sGridSpecialClueLocations);
         g_bPuzzleSolved = g_Cookie_bPuzzleSolved;
         g_bGridSolved = g_Cookie_bGridSolved;
-        g_bAnswersSolved = g_Cookie_bAnswersSolved;
         g_ElapsedTime_iSecondsPrevious = g_Cookie_ElapsedTime_iSecondsPrevious;
         g_bUsedCookie = true;
     }
