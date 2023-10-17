@@ -1,5 +1,35 @@
 // TC-Archive-Consolidated.js
 
+function TC_Archive_SetFromCookieValues()
+{
+    if ( g_TC_Archive_Cookie_iSize != -1 )
+    {
+        let sId = TC_Archive_BySize_BaseMenu_Id(g_TC_Archive_Cookie_iSize);
+        let elem = document.getElementById(sId)
+        if ( elem )
+        {
+            TC_Archive_BySize_BaseMenu_Select(elem)
+            return;
+        }
+        return;
+    }
+    let iYearMonth = TC_Archive_ByDate_aYearMonths.indexOf(g_TC_Archive_Cookie_sYearMonth);
+    if ( iYearMonth != -1 )
+    { // notset will not match anything in the actual list
+        if ( iYearMonth > 1 )
+            TC_Archive_ShowByDate_Later()
+        if ( iYearMonth > 2 )
+            TC_Archive_ShowByDate_Later()
+        let sId = TC_Archive_ByDate_BaseMenu_Id(iYearMonth);
+        let elem = document.getElementById(sId);
+        if ( elem )
+        {
+            TC_Archive_ShowByDate(elem)
+            return
+        }
+    }
+    TC_Archive_BySize_BaseMenu_SelectFromSize(4, true);
+}
 
 function TC_Archive_FindPuzzleForTitle(sTitle)
 {
@@ -93,6 +123,7 @@ function TC_Archive_Select(elem)
     g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iPuzzle];
     g_SG_bAnswersCorrectInGridSet = false;
     g_TC_Status_bFirstCheck = true;
+
     Restart();
 }
 

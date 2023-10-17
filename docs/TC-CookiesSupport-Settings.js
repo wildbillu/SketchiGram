@@ -8,7 +8,7 @@ var g_bSettings_ShowInfoOnStart = false;
 
 function Settings_SetupVersions()
 { // we are not going to support old versions
-    g_sSettings_Versions_aNames.push('V01.05'); g_sSettings_Versions_aCounts.push(3); 
+    g_sSettings_Versions_aNames.push('V01.05'); g_sSettings_Versions_aCounts.push(4); 
 }
 
 var g_bSettings_CAGR_Display_Complete = true;

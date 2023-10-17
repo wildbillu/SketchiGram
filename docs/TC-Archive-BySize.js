@@ -5,6 +5,9 @@ var g_TC_Archive_BySize_BaseMenu_iSizeMin = 4;
 var g_TC_Archive_BySize_BaseMenu_iSizeMax = 8;
 var g_TC_Archive_BySize_BaseMenu_aId   = [];
 
+
+
+
 function TC_Archive_BySize_Clear()
 {
     g_TC_Archive_BySize_BaseMenu_iActiveSize = -1;
@@ -45,6 +48,7 @@ function TC_Archive_BySize_BaseMenu_Select(e)
     TC_Archive_ByDate_SetInactive();
     let iSize = TC_Archive_BySize_BaseMenu_SizeFromId(e.id);
     g_TC_Archive_Cookie_iSize = iSize;
+    g_TC_Archive_Cookie_sYearMonth = 'notset';
     StoreCookie_Settings()
     TC_Archive_BySize_BaseMenu_SelectFromSize(iSize, false);
     e.className = "Archive_Button_Selection_BySize_BaseMenu_Selected";

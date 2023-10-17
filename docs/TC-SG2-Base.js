@@ -142,15 +142,7 @@ function SG2_LoadAll(iSection)
             SG2_LoadMainElements();
             TC_Archive_ByDate_MakeAvailableButtons()
             TC_Archive_ByDate_FillDivWithButtons();
-            let iSize = g_TC_Archive_BySize_BaseMenu_iActiveSize;
-            if ( iSize == -1 )
-            {
-                if ( g_TC_Archive_Cookie_iSize != -1 )
-                    iSize = g_TC_Archive_Cookie_iSize;
-                else
-                    iSize = 4;
-            }
-            TC_Archive_BySize_BaseMenu_SelectFromSize(iSize, true);
+            TC_Archive_SetFromCookieValues()
             GRB_SetAllowedGridLetters()
             if ( !g_bUsedCookie || g_bResettingDoNotUseCookie )
                 GRB_ScrambleCorrectAnswersToPlayer(false);
