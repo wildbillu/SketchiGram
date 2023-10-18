@@ -6,7 +6,7 @@ puzzle019=Parade your beads this day|5|2023-10-15
 puzzle032=One descriptor of Santa|6|2023-10-16
 puzzle020=Expert Gamer|7|2023-10-17
 puzzle010=Zany Musicians|5|2023-10-18
-puzzle006=Dr. Jekyll and Mr. Hyde?|4|2023-10-19
+puzzle071=Commander Literal&trade; goes super retro|4|2023-10-19|Reel
 puzzle014=Pub Game|4|2023-10-20
 puzzle015=Constraint|4|2023-10-21
 puzzle027=Like details in the Tabloids|5|2023-10-22
@@ -62,7 +62,6 @@ puzzle002=Beware The Ides!|4|2023-12-10
 xpuzzle060=Commander Literal&trade; thinks that this is too much to give|5|2023-12-11|Tenth
 xpuzzle059=Commander Literal&trade;'s hats have this|5|2023-12-12|Style
 xpuzzle053=Careful who you follow|7|2023-12-13|Fealty
-xpuzzle071=Commander Literal&trade; Goes Fishing|6|2023-12-17|Reel
 xpuzzle069=Commander Literal&trade; travels to the Hundred Akre Wood|5|2023-12-14|Robin
 puzzle063=Commander Literal&trade; is seeing double|4|2023-12-09|PoohPooh
 puzzle066=Commander Literal&trade; gives a hoot|4|2023-12-13|Owl
@@ -72,5 +71,7 @@ xpuzzle065=Commander Literal&trade; mixes up fiction|5|2023-12-12|Kanga
 xpuzzle068=Commander Literal&trade; runs the show|6|2023-12-14|Rabbit
 xpuzzle072=Commander Literal&trade; is hoppin'|6|2023-12-15|Tigger
 xpuzzle073=Commander Literal&trade; needs to clean up|6|2023-12-16|Piglet
-puzzle074=Commander Literal&trade; goes to bat|4|2023-12-17|Ott Mays
+xpuzzle074=Commander Literal&trade; goes to bat|4|2023-12-17|Ott Mays
+puzzle006=Dr. Jekyll and Mr. Hyde?|4|2023-12-18|Evil Twin
+
 
