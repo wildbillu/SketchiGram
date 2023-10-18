@@ -9,7 +9,7 @@ var g_TC_iClueAnswers_Correct = 0;
 
 var g_TC_Status_bFirstCheck = true;
 
-function ActionsOnPuzzleSolved()
+function ActionsOnPuzzleSolved(bInitiallySolved)
 {
     TC_ElapsedTime_Stop();
     GRB_SetAllButtons_Inactive();
@@ -18,7 +18,7 @@ function ActionsOnPuzzleSolved()
     ForIdSetVisibility(g_MII_Grid_sId_Div, false);
     ForIdSetVisibility(g_MII_Hint_sId_Div, false);
     ForIdSetVisibility("MoreActions_Div", false);
-    TC_CAL_Show();
+    if ( !bInitiallySolved ) TC_CAL_Show();
     g_bSuppressGridNumbers = false;
     TC_CR_SetStatus("ChangeDirection", false)
     GRB_SetAllButtons_Inactive();
@@ -37,7 +37,7 @@ function Status_Check()
     }
     g_TC_Status_bFirstCheck = false;
     if ( g_bPuzzleSolved ) 
-        ActionsOnPuzzleSolved();
+        ActionsOnPuzzleSolved(bInitiallySolved);
     StoreCookie_Puzzle();
 }
 

@@ -126,6 +126,7 @@ function SG2_LoadAll(iSection)
             g_TC_bMoveMade_Grid = false;
             g_MII_Hint_bVisible = false;
             g_MII_Grid_bVisible = false;
+
             TC_History_Clear();
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
             TC_LoadPuzzleArchiveDefault();
@@ -140,6 +141,8 @@ function SG2_LoadAll(iSection)
             TC_AddScreenInfo();
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
+            CAL_Hide()
+
             TC_Archive_ByDate_MakeAvailableButtons()
             TC_Archive_ByDate_FillDivWithButtons();
             TC_Archive_SetFromCookieValues()
@@ -199,7 +202,7 @@ function SG2_LoadAll(iSection)
             MII_Grid_SetLocationAndSize();
             MII_Hint_SetLocationAndSize();
             FI_SizeAndPosition();
-//            TC_Archive_BySize_BaseMenu_SelectFromSize(4, true);
+
             TC_CAL_Fill();
             g_bPlaying = false;
             break;
