@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle071
 sPuzzleDate=2023-09-19
-sPuzzleTitle=Commander Literal%26 Went Fishing
+sPuzzleTitle=Commander Literal%26 goes super retro
 iGridWidth=4
 iGridHeight=4
 sGSL=NSNNNSNNNSNNNSNN
