@@ -8,7 +8,7 @@
 //    8       15          4
 
 var g_Archive_bDontShowFuturePuzzles = true;
-var g_Title_bUseFromPuzzleFile = true;
+var g_Title_bUseFromPuzzleFile = false;
 
 var g_MII_Grid_iTop = 300;var g_MII_Grid_ShowAfter_iSec = 60; var g_MII_Grid_ShowFor_iSec   = 10; var g_MII_Grid_Show_iCloseTimerId = 0;
 
