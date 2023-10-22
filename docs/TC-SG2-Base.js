@@ -142,8 +142,7 @@ function SG2_LoadAll(iSection)
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
             CAL_Hide()
-
-            TC_Archive_ByDate_MakeAvailableButtons()
+            TC_Archive_ByDate_MakeAvailableButtons();
             TC_Archive_ByDate_FillDivWithButtons();
             TC_Archive_SetFromCookieValues()
             GRB_SetAllowedGridLetters()

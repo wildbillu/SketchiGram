@@ -7,6 +7,9 @@
 //    7       15          4 
 //    8       15          4
 
+var g_Archive_bDontShowFuturePuzzles = true;
+var g_Title_bUseFromPuzzleFile = true;
+
 var g_MII_Grid_iTop = 300;var g_MII_Grid_ShowAfter_iSec = 60; var g_MII_Grid_ShowFor_iSec   = 10; var g_MII_Grid_Show_iCloseTimerId = 0;
 
 var g_MII_Hint_iTop = 600;var g_MII_Hint_ShowAfter_iSec = 120;var g_MII_Hint_ShowFor_iSec   = 10;var g_MII_Hint_Show_iCloseTimerId = 0;
@@ -71,30 +74,31 @@ var g_SyncSketchiToonsClue = false;
 
 function TC_Configuration_pick()
 {
-    g_Settings_iTop = 150; g_Settings_iLeft = -1; g_Settings_izIndex = 22;
-
-    g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iBottom = 1130; g_CAL_iLeft = -1; g_CAL_iPadding = 80
-
-    g_MII_Grid_iTop = 300;g_MII_Grid_ShowAfter_iSec = 60; g_MII_Grid_ShowFor_iSec   = 10;g_MII_Grid_Show_iCloseTimerId = 0;
-    g_MII_Hint_iTop = 800;g_MII_Hint_ShowAfter_iSec = 120;g_MII_Hint_ShowFor_iSec   = 10;g_MII_Hint_Show_iCloseTimerId = 0;
-
-    g_Archive_bActive = true; g_ArchiveActivationButton_iTop = 90; g_ArchiveActivationButton_iLeft = 380; g_ArchiveActivationButton_iWidth = 200;
-    g_Archive_izIndex = 5; g_ArchiveList_iTop = 140;
-
-    g_StatusControlRow_iTop   = 80; g_StatusControlRow_iLeft = 50; // -1 to center
-
-    g_TopMatter_iTop = 20;
+// these dont move     
+    g_TopMatter_iTop = 25;
     g_BottomMatter_iTop = 1145;
-    g_Message_bVisible = true; g_Message_iTop = 1120;
+    g_Message_iTop = 1120;g_Message_bVisible = true; 
+    g_CAL_iBottom = 1130; g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iLeft = -1; g_CAL_iPadding = 80
 
-    g_OneLineInstruction_iTop = 165;
-    g_SpecialClueFrame_iTop = 820; g_SpecialClueFrame_iHeight = 110; g_SpecialClueFrame_bActive = true; 
+    // these adjust to space left for title
+    let iTopAdjust = 105;
+    g_Settings_iTop = iTopAdjust + 50; g_Settings_iLeft = -1; g_Settings_izIndex = 22;
+    g_StatusControlRow_iTop = iTopAdjust; g_StatusControlRow_iLeft = 50; // -1 to center
+    g_ArchiveActivationButton_iTop = iTopAdjust + 10; g_ArchiveActivationButton_iLeft = 380; g_ArchiveActivationButton_iWidth = 200;
+    g_ArchiveList_iTop = iTopAdjust + 50;
+    g_Archive_bActive = true; 
+    g_Archive_izIndex = 5; 
 
     g_MoreMenu_iTop = 52; g_MoreMenu_iLeft = 195;
 
-    g_Timer_iTop  = 140; g_Timer_bActive = true; g_Timer_iLeft = 280; g_Timer_sLabel = ''; // left from defined puzzle width
+    g_Timer_iTop = iTopAdjust + 55; g_Timer_bActive = true; g_Timer_iLeft = 280; g_Timer_sLabel = ''; // left from defined puzzle width
 
-    g_GR_Grid_iTop = 190;
+    g_OneLineInstruction_iTop = iTopAdjust + 75;
+    g_GR_Grid_iTop = iTopAdjust + 110;
+    g_MII_Grid_iTop = iTopAdjust + 110;g_MII_Grid_ShowAfter_iSec = 60; g_MII_Grid_ShowFor_iSec   = 10;g_MII_Grid_Show_iCloseTimerId = 0;
+
+    g_SpecialClueFrame_iTop = iTopAdjust + 730; g_SpecialClueFrame_iHeight = 110; g_SpecialClueFrame_bActive = true; 
+    g_MII_Hint_iTop = iTopAdjust + 730;g_MII_Hint_ShowAfter_iSec = 120;g_MII_Hint_ShowFor_iSec   = 10;g_MII_Hint_Show_iCloseTimerId = 0;
 
     g_SyncSketchiToonsClue = false;
     g_bGridAndCA = false;

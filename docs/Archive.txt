@@ -62,16 +62,16 @@ puzzle002=Beware The Ides!|4|2023-12-10
 xpuzzle060=Commander Literal&trade; thinks that this is too much to give|5|2023-12-11|Tenth
 xpuzzle059=Commander Literal&trade;'s hats have this|5|2023-12-12|Style
 xpuzzle053=Careful who you follow|7|2023-12-13|Fealty
-xpuzzle069=Commander Literal&trade; travels to the Hundred Akre Wood|5|2023-12-14|Robin
-puzzle063=Commander Literal&trade; is seeing double|4|2023-12-09|PoohPooh
-puzzle066=Commander Literal&trade; gives a hoot|4|2023-12-13|Owl
-xpuzzle067=Commander Literal&trade; sees rain in the forecast|6|2023-12-10|Eeyore
-xpuzzle064=Commander Literal&trade; visits down under|5|2023-12-11|Roo
-xpuzzle065=Commander Literal&trade; mixes up fiction|5|2023-12-12|Kanga
-xpuzzle068=Commander Literal&trade; runs the show|6|2023-12-14|Rabbit
-xpuzzle072=Commander Literal&trade; is hoppin'|6|2023-12-15|Tigger
-xpuzzle073=Commander Literal&trade; needs to clean up|6|2023-12-16|Piglet
-xpuzzle074=Commander Literal&trade; goes to bat|4|2023-12-17|Ott Mays
-puzzle006=Dr. Jekyll and Mr. Hyde?|4|2023-12-18|Evil Twin
+xpuzzle069=Commander Literal&trade; travels to the Hundred Achre Wood|5|2023-12-14|Robin
+puzzle063=Commander Literal&trade; sees double(Day 2 at Hundred Achre Wood)|4|2023-12-15|PoohPooh
+puzzle066=Commander Literal&trade; gives a hoot(Day 3 at Hundred Achre Wood)|4|2023-12-16|Owl
+puzzle068=Commander Literal&trade; gets vitamin A(Day 4 at Hundred Achre Wood)|6|2023-12-17|Rabbit
+xpuzzle073=Commander Literal&trade; roots around(Day 5 at Hundred Achre Wood)|6|2023-12-16|Piglet
+xpuzzle067=Commander Literal&trade; sees rain in the forecast|6|2023-12-17|Eeyore
+xpuzzle064=Commander Literal&trade; visits down under|5|2023-12-18|Roo
+xpuzzle065=Commander Literal&trade; mixes up fiction|5|2023-12-19|Kanga
+xpuzzle072=Commander Literal&trade; is bouncin n'|6|2023-12-20|Tigger
+xpuzzle074=Commander Literal&trade; goes to bat|4|2023-12-21|Ott Mays
+puzzle006=Dr. Jekyll and Mr. Hyde?|4|2023-12-22|Evil Twin
 
 

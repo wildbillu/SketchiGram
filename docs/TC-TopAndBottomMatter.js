@@ -11,12 +11,19 @@ function TC_SetTopMatter()
     let iTop = rectType.height + g_TopMatter_iTop;
     let iWidthTitle = g_Window_iWidth - 2 * g_TC_Padding_Left_iSize;
 
-// determine rows in puzzle title
     let elemPuzzleTitle = document.getElementById("Div_PuzzleTitle");
-    let iWidthIfOneLine = GetWidthOfTextInPixels(elemPuzzleTitle, g_sPuzzleTitle);
+// determine rows in puzzle title
     let bOneLine = true;
+/* old way
+    let iWidthIfOneLine = GetWidthOfTextInPixels(elemPuzzleTitle, g_sPuzzleTitle);
     if ( iWidthIfOneLine > iWidthTitle )
         bOneLine = false;
+*/
+    if ( g_sPuzzleTitle.indexOf('<br>') != -1 )   
+    { 
+        bOneLine = false;
+        setlineAdd('two')
+    }        
     if ( bOneLine )
         iTop += 10;
     elemPuzzleTitle.style.top = MakePixelString(iTop);

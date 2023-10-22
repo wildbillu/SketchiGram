@@ -17,10 +17,55 @@ var g_TC_Archive_Menu_aActiveTitles = [];
 var g_TC_Archive_Menu_aPuzzleIndex = [];
 
 var g_TC_Archive_Menu_iStartAt = 0;
-var g_TC_Archive_Menu_iMaxItems = 31;
+var g_TC_Archive_Menu_iMaxItems = 20;
 var g_TC_Archive_Menu_iActiveCount = 0;
 var g_TC_Archive_Menu_sActiveSortingBy = 'Stay Tuned';
 
+function TC_GetTitleForThisPuzzle(sPuzzle)
+{
+    let sTitle = '';
+    if ( sPuzzle == '' )
+        return sTitle;
+    let sTextFileToLookFor = g_PuzzlePath_sBaseDirectory + sPuzzle + '/' + sPuzzle + '.txt'; 
+    let sFileContents = TC_GetFile(sTextFileToLookFor, 'puzzle');
+    if ( sFileContents == '' )
+        return sTitle;
+    let iTitleIndex = sFileContents.indexOf('sPuzzleTitle=');
+    if ( iTitleIndex == -1 )
+        return sTitle;
+    let sRest = sFileContents.substring(iTitleIndex + 13);
+    let iNewline = sRest.indexOf('\n');
+    if ( iNewline == -1 )
+        return sTitle
+    sTitle = sRest.substring(0, iNewline - 1)
+    sTitle = FixSpecialCharacters(sTitle)
+    return sTitle;
+}
+//TC_Archive_AddPuzzleToArchive_All('puzzle026', 'Like the cat that swallowed the canary', 4, '2023-10-12')
+//TC_Archive_AddPuzzleToArchive_All('puzzle024', 'Odes do this', 4, '2023-10-31')
+
+function TC_Archive_AddPuzzleToArchive_All(sName, sTitle, sSize, sReleaseDate)
+{
+    if ( g_Archive_bDontShowFuturePuzzles )
+    {
+        let today = new Date();  
+        let d = TC_MakeDateObjectFromOurDateString(sReleaseDate);
+        if ( d > today )
+                return;
+    }
+    g_TC_Archive_aPuzzleNames.push(sName);
+    if ( g_bConnectionIsWebBased && g_Title_bUseFromPuzzleFile )
+    {
+        let sTitleFromFile = TC_GetTitleForThisPuzzle(sName);
+        if ( sTitleFromFile != '' )
+        {
+            sTitle = sTitleFromFile
+        }
+    }
+    g_TC_Archive_aPuzzleTitles.push(sTitle);
+    g_TC_Archive_aPuzzleSizes.push(sSize);
+    g_TC_Archive_aPuzzleReleaseDate.push(sReleaseDate);
+}
 
 function TC_Archive_ClearActivePuzzles()
 {
@@ -121,9 +166,11 @@ function TC_LoadPuzzleArchive_FromFile()
 function TC_LoadPuzzleArchiveDefault()
 { // in case file missing or local
     TC_Archive_ClearAvailablePuzzles();
-    TC_Archive_AddPuzzleToArchive_All('puzzle070', 'Practice SketchiGram', 3, '2023-10-09')
-    TC_Archive_AddPuzzleToArchive_All('puzzle001', 'Yogi Berra Says!', 4, '2023-06-26')
-    TC_Archive_AddPuzzleToArchive_All('puzzle050', 'Grammar lesson from Commander Literal&trade;',8,'2023-07-24')
+    TC_Archive_AddPuzzleToArchive_All('puzzle026', 'Like the cat that swallowed the canary', 4, '2023-10-12')
+    TC_Archive_AddPuzzleToArchive_All('puzzle024', 'Odes do this', 4, '2023-10-31')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', 'Practice SketchiGram', 3, '2023-06-09')
+    TC_Archive_AddPuzzleToArchive_All('puzzle001', 'Yogi Berra Says!', 4, '2023-06-23')
+    TC_Archive_AddPuzzleToArchive_All('puzzle050', 'Grammar lesson from Commander Literal&trade;',8,'2023-06-24')
     TC_Archive_AddPuzzleToArchive_All('puzzle002', 'Beware The Ides!', 4, '2023-06-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle003', "How's Your Aim?", 4, '2023-06-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle004', 'Dinner Anyone?', 4, '2023-06-26')
@@ -145,16 +192,7 @@ function TC_LoadPuzzleArchiveDefault()
     TC_Archive_AddPuzzleToArchive_All('puzzle021', 'Store in Quaint New England', 6, '2023-06-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle017', 'Seedy Neighborhood', 4, '2023-06-26')
     TC_Archive_AddPuzzleToArchive_All('puzzle018', 'Fried Southern Treat', 4, '2023-06-26')
-    TC_Archive_AddPuzzleToArchive_All('puzzle023', 'John Prine Sings To Her', 4, '2023-07-06')
-    TC_Archive_AddPuzzleToArchive_All('puzzle025', 'Glory? Ore bust?', 5, '2023-08-26')
-    TC_Archive_AddPuzzleToArchive_All('puzzle026', 'Like the cat that swallowed the canary', 4, '2023-09-26')
-    TC_Archive_AddPuzzleToArchive_All('puzzle024', 'Odes do this', 4, '2023-10-26')
+    TC_Archive_AddPuzzleToArchive_All('puzzle023', 'John Prine Sings To Her', 4, '2023-06-06')
+    TC_Archive_AddPuzzleToArchive_All('puzzle025', 'Glory? Ore bust?', 5, '2023-06-26')
 }
 
-function TC_Archive_AddPuzzleToArchive_All(sName, sTitle, sSize, sReleaseDate)
-{
-    g_TC_Archive_aPuzzleNames.push(sName);
-    g_TC_Archive_aPuzzleTitles.push(sTitle);
-    g_TC_Archive_aPuzzleSizes.push(sSize);
-    g_TC_Archive_aPuzzleReleaseDate.push(sReleaseDate);
-}

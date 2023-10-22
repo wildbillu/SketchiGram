@@ -50,6 +50,7 @@ function TC_Archive_BySize_BaseMenu_Select(e)
     g_TC_Archive_Cookie_iSize = iSize;
     g_TC_Archive_Cookie_sYearMonth = 'notset';
     StoreCookie_Settings()
+    g_TC_Archive_Menu_iStartAt = 0;
     TC_Archive_BySize_BaseMenu_SelectFromSize(iSize, false);
     e.className = "Archive_Button_Selection_BySize_BaseMenu_Selected";
 }

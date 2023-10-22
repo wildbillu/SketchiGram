@@ -6,11 +6,20 @@ var TC_Archive_ByDate_YearMonths_iMaxToShow = 2;
 var TC_Archive_ByDate_YearMonths_sButtonText = [];
 var TC_Archive_ByDate_YearMonths_sButtonId   = [];
 var TC_Archive_ByDate_YearMonths_iActive   = -1;
+
+function TC_Archive_ByDate_SetLast()
+{
+    let iMax = TC_Archive_ByDate_YearMonths_iStartAt + TC_Archive_ByDate_YearMonths_iMaxToShow;
+    let iAvailable = TC_Archive_ByDate_aYearMonths.length;
+    if ( iAvailable < TC_Archive_ByDate_YearMonths_iMaxToShow )
+        iMax = TC_Archive_ByDate_YearMonths_iStartAt + iAvailable;
+    return iMax;
+}
+
 function TC_Archive_ByDate_SetWidths(iWidth)
 {
     let iWidthByDate = ( iWidth - 100 - 2 * 16 )/2;
     for ( let i = 0; i < TC_Archive_ByDate_YearMonths_sButtonText.length; i++ )
-//    for ( let i = TC_Archive_ByDate_YearMonths_iStartAt; i < TC_Archive_ByDate_YearMonths_iStartAt + TC_Archive_ByDate_YearMonths_iMaxToShow; i++)
     {
         let elem = document.getElementById(TC_Archive_ByDate_YearMonths_sButtonId[i]);
         if ( elem )
@@ -20,7 +29,8 @@ function TC_Archive_ByDate_SetWidths(iWidth)
 
 function TC_Archive_ByDate_SetClasses()
 {
-    for ( let i = TC_Archive_ByDate_YearMonths_iStartAt; i < TC_Archive_ByDate_YearMonths_iStartAt + TC_Archive_ByDate_YearMonths_iMaxToShow; i++)
+    let iMax = TC_Archive_ByDate_SetLast()
+    for ( let i = TC_Archive_ByDate_YearMonths_iStartAt; i < iMax; i++)
     {
         let e = document.getElementById(TC_Archive_ByDate_BaseMenu_Id(i))
         if ( i == TC_Archive_ByDate_YearMonths_iActive )
@@ -51,6 +61,7 @@ function TC_Archive_ShowByDateIndex(iIndex)
     let sDesiredYearMonth = TC_Archive_ByDate_aYearMonths[iIndex];
     g_TC_Archive_Cookie_sYearMonth = sDesiredYearMonth;
     g_TC_Archive_Cookie_iSize = -1;
+    g_TC_Archive_Menu_iStartAt = 0;
     StoreCookie_Settings()
     TC_Archive_ByDate_YearMonths_iActive   = iIndex;
     TC_Archive_ClearActivePuzzles();
@@ -91,7 +102,7 @@ function TC_Archive_ByDate_FillDivWithButtons()
     if ( TC_Archive_ByDate_YearMonths_iStartAt != 0 )
         sEarlierText = '<'
     sAll += '<BUTTON Id="TC_Archive_ShowByDate_Earlier" class="Archive_Button_Selection_Earlier" onclick="TC_Archive_ShowByDate_Earlier();">' + sEarlierText + '</BUTTON>';
-    let iLast = TC_Archive_ByDate_YearMonths_iStartAt + TC_Archive_ByDate_YearMonths_iMaxToShow;
+    let iLast = TC_Archive_ByDate_SetLast();
     if ( iLast > TC_Archive_ByDate_YearMonths_sButtonText.length )
         iLast == TC_Archive_ByDate_YearMonths_sButtonText.length;
     for ( i = TC_Archive_ByDate_YearMonths_iStartAt; i < iLast; i++ )
@@ -124,6 +135,7 @@ function TC_Archive_GetAvailableYearMonths()
 
 function TC_Archive_ShowByDate_Later()
 {
+
     if ( 1 + TC_Archive_ByDate_YearMonths_iStartAt + TC_Archive_ByDate_YearMonths_iMaxToShow > TC_Archive_ByDate_YearMonths_sButtonText.length )
         return;
     TC_Archive_ByDate_YearMonths_iStartAt++;

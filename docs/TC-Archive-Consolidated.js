@@ -173,15 +173,18 @@ function TC_Archive_Consolidated_FillSelect_Div()
     while ( iEntry < iEntries && iAdded < g_TC_Archive_Menu_iMaxItems)
     {
         let sId = g_TC_Archive_Menu_aActiveIds[iEntry];
-        let sTitle = ''
+        let sTitle = '';
+        let sDay   = '';
         if ( TC_Archive_ByDate_YearMonths_iActive != -1 )
         {
             let iIndex = g_TC_Archive_Menu_aPuzzleIndex[iEntry];
             let sYearMonthDay = g_TC_Archive_aPuzzleReleaseDate[iIndex];
-            let sDay = ' (' +TC_GetDayFromDate(sYearMonthDay) +') '
-            sTitle += sDay;
+            let iDayOfMonth = TC_GetDayFromDate(sYearMonthDay);
+            let sDayOfMonth = TC_Time_GetDaysWithSuffixAndParens(iDayOfMonth)
+            sDay = ' (' + sDayOfMonth +') '
         }
         sTitle += g_TC_Archive_Menu_aActiveTitles[iEntry];
+        sTitle += sDay;
         elem.innerHTML += '<BUTTON Id="' + sId + '" class="Archive_Button_Selection" onclick="TC_Archive_Select(this);">' + sTitle + '</BUTTON>';
         iEntry++;
         iAdded++;

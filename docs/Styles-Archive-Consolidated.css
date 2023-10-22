@@ -25,7 +25,7 @@
     height:400px;
     text-align:left;
     position:absolute;
-    background-color: black;
+    background-color: white;
     z-index:1;
 }
 
@@ -76,7 +76,7 @@
   position:absolute;
   border: 0px solid black;
   text-align:center;
-  background-color:green;
+  background-color:white;
   height:200px;
 }
 
