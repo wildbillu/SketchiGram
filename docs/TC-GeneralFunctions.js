@@ -29,6 +29,12 @@ function TC_GetWidthOfInnerTextInPixels(sId)
     return GetWidthOfTextInPixels(elem, elem.innerHTML);
 }
 
+function TC_GetWidthOfTextInPixels(sId, sText)
+{
+    let elem = document.getElementById(sId)
+    return GetWidthOfTextInPixels(elem, sText);
+}
+
 function TC_GetHeightOfElementById(sId)
 {
     let elem = document.getElementById(sId)

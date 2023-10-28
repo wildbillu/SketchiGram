@@ -9,27 +9,34 @@ function TC_SetTopMatter()
     elemPuzzleType.innerHTML = 'Solve the SketchiGram&trade; Puzzle by rearranging the letters in the grid';
     let rectType = GetBoundingClientRectAbsolute(elemPuzzleType);
     let iTop = rectType.height + g_TopMatter_iTop;
-    let iWidthTitle = g_Window_iWidth - 2 * g_TC_Padding_Left_iSize;
 
     let elemPuzzleTitle = document.getElementById("Div_PuzzleTitle");
+    let sFull = '';
+    let iLines = 1;
+    if ( g_TitleInMainFrame_bShowPrefix )
+    {
+        let sPrefix = TC_Archive_ForPuzzleName_GetPuzzleTitlePrefix(g_sPuzzleName);
 // determine rows in puzzle title
-    let bOneLine = true;
-/* old way
-    let iWidthIfOneLine = GetWidthOfTextInPixels(elemPuzzleTitle, g_sPuzzleTitle);
-    if ( iWidthIfOneLine > iWidthTitle )
-        bOneLine = false;
-*/
-    if ( g_sPuzzleTitle.indexOf('<br>') != -1 )   
-    { 
-        bOneLine = false;
-        setlineAdd('two')
-    }        
-    if ( bOneLine )
-        iTop += 10;
+        if ( sPrefix != '' )
+        {
+            iLines++;
+            sFull += sPrefix + '<br>';
+        }
+    }
+    let sTitle = TC_Archive_ForPuzzleName_GetPuzzleTitle(g_sPuzzleName);
+    if ( sTitle.indexOf('<br>') != -1 )
+        iLines++;
+    sFull += sTitle;
+    if ( iLines == 1 )
+        iTop += 30;
+    if ( iLines == 2 )
+       iTop += 10;
+
     elemPuzzleTitle.style.top = MakePixelString(iTop);
     elemPuzzleTitle.style.left = MakePixelString(g_TC_Padding_Left_iSize);
+    let iWidthTitle = g_Window_iWidth - 2 * g_TC_Padding_Left_iSize;
     elemPuzzleTitle.style.width = MakePixelString(iWidthTitle);
-    elemPuzzleTitle.innerHTML = g_sPuzzleTitle;
+    elemPuzzleTitle.innerHTML = sFull;
 
     let elemOneLine = document.getElementById("OneLineDirection_Div");
     elemOneLine.style.top = MakePixelString(g_OneLineInstruction_iTop)

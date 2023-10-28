@@ -8,8 +8,31 @@
 //function TC_MonthYearToNameOfMonth(sYearMonth)
 
 var TC_Time_aGetDaysWithSuffixAndParens = ['--','1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th','13th','14th','15th','16th','17th','18th','19th','20th','21st','22nd','23th','24th','25th','26th','27th','28th','29th','30th','31st'];
+var TC_Time_aMonths1Based = ['invalid', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+function TC_Time_MakeWordStringFromOurFormat(sDateString)
+{
+    let iYear = TC_GetYearFromDate(sDateString);
+    let iMonthIndex = parseInt(TC_GetMonthFromDate(sDateString));
+    let sMonth = TC_Time_aMonths1Based[iMonthIndex];
+    let iDayIndex = parseInt(TC_GetDayFromDate(sDateString));
+    let sDate = sMonth + ' ' + iDayIndex + ', ' + iYear;
+    return sDate;
+}
 
+function TC_Time_MakeTodayDateString()
+{
+    const today = new Date(); 
+    let sYear = today.getFullYear();
+    let iMonth = today.getMonth() + 1;
+    let sMonth = iMonth.toString();
+    if ( iMonth < 10 ) sMonth = '0' + iMonth.toString();
+    let iDate = today.getDate();
+    let sDate = iDate.toString();
+    if ( iDate < 10 ) sDate = '0' + iDate.toString();
+    let sFull = sYear + '-' + sMonth + '-' + sDate;
+    return sFull;
+}
 
 function TC_Time_GetDaysWithSuffixAndParens(iDayOfMonth)// 1 ....
 {
@@ -17,7 +40,6 @@ function TC_Time_GetDaysWithSuffixAndParens(iDayOfMonth)// 1 ....
         return (TC_Time_aGetDaysWithSuffixAndParens[iDayOfMonth])
     return 'novalue'
 }
-
 
 function TC_MakeDateObjectFromOurDateString(sDateString)
 {

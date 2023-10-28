@@ -71,13 +71,14 @@ function TC_Archive_BySize_FillArraysWithPuzzles(iSize)
     g_TC_Archive_Menu_aActiveIds.length = 0;
     g_TC_Archive_Menu_aActiveTitles.length = 0;
     let iAt = 0;
-    while ( iAt < g_TC_Archive_aPuzzleTitles.length )
+    while ( iAt < g_TC_Archive_PuzzleTitles_arr.length )
     {
-        let iThisSize = g_TC_Archive_aPuzzleSizes[iAt];
+        let iThisSize = g_TC_Archive_PuzzleSizes_arr[iAt];
         if ( iThisSize == iSize )
         {
             let sId = TC_Archive_Id_Con(iAt);
-            let sTitle = g_TC_Archive_aPuzzleTitles[iAt];
+            let sTitle = TC_Archive_MakeEntry(iAt)
+//            let sTitle = g_TC_Archive_PuzzleTitles_arr[iAt];
             g_TC_Archive_Menu_aActiveIds.push(sId);
             g_TC_Archive_Menu_aActiveTitles.push(sTitle);
             g_TC_Archive_Menu_aPuzzleIndex.push(iAt);

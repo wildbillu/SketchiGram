@@ -138,7 +138,7 @@ function SG2_LoadAll(iSection)
             getResolution(); 
             while ( document.readyState != "complete") {}
             TC_InitializeFromFileOrLoadAsJS();
-            TC_AddScreenInfo();
+            TC_Archive_SetIntroScreenCredits()
             MakeAndStoreCookie_CurrentPuzzle();
             SG2_LoadMainElements();
             CAL_Hide()

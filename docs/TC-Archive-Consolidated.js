@@ -33,12 +33,12 @@ function TC_Archive_SetFromCookieValues()
 
 function TC_Archive_FindPuzzleForTitle(sTitle)
 {
-    let iEntries = g_TC_Archive_aPuzzleReleaseDate.length;
+    let iEntries = g_TC_Archive_PuzzleReleaseDate_arr.length;
     if ( iEntries == 0 )
         return -1;
     for ( let i = 0; i < iEntries; i++ )
     {
-        let sThisTitle = g_TC_Archive_aPuzzleTitles[i];
+        let sThisTitle = g_TC_Archive_PuzzleTitles_arr[i];
         if ( sThisTitle == sTitle )
         {
             return i;
@@ -50,7 +50,7 @@ function TC_Archive_FindPuzzleForTitle(sTitle)
 function Archive_PracticePuzzle()
 {
     let iArchiveIndex = TC_Archive_FindPuzzleForTitle('Practice SketchiGram');
-    g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iArchiveIndex];
+    g_TC_sPuzzle_Archive  = g_TC_Archive_PuzzleNames_arr[iArchiveIndex];
     g_SG_bAnswersCorrectInGridSet = false;
     g_bGridAndCA = false;
     g_TC_Status_bFirstCheck = true;
@@ -60,11 +60,11 @@ function Archive_PracticePuzzle()
 
 function Archive_PlayToday()
 {
-    let sToday = TC_Archive_MakeTodayDateString();
+    let sToday = TC_Time_MakeTodayDateString();
     let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
     if ( iArchiveIndex == -1 )
         return;
-        g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iArchiveIndex];
+        g_TC_sPuzzle_Archive  = g_TC_Archive_PuzzleNames_arr[iArchiveIndex];
         g_SG_bAnswersCorrectInGridSet = false;
         g_bGridAndCA = false;
         g_TC_Status_bFirstCheck = true;
@@ -84,8 +84,6 @@ function TC_Archive_Show()
     TC_ThemeImage_Popup_HidePopup();
     TC_HideMoreActions();
     ForIdSetVisibility("CluesAsList_Div", false);
-
-
     ForIdSetVisibility("Archive_Consolidated_Div", true);
 }
 
@@ -119,8 +117,8 @@ function TC_Archive_MakeActivationButton()
 
 function TC_Archive_Select(elem)
 {
-    let iPuzzle = TC_Archive_IndexFromId(elem.id)
-    g_TC_sPuzzle_Archive  = g_TC_Archive_aPuzzleNames[iPuzzle];
+    let iPuzzle = TC_Archive_IndexFromId_Con(elem.id)
+    g_TC_sPuzzle_Archive  = g_TC_Archive_PuzzleNames_arr[iPuzzle];
     g_SG_bAnswersCorrectInGridSet = false;
     g_TC_Status_bFirstCheck = true;
 
@@ -141,7 +139,7 @@ function TC_Archive_Next_Con()
 
 function TC_Archive_SetTodaysPuzzleExist()
 {
-    let sToday = TC_Archive_MakeTodayDateString();
+    let sToday = TC_Time_MakeTodayDateString();
     let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
     g_TC_Archive_TodaysPuzzle_bExists = false;
     if ( iArchiveIndex != -1 )
@@ -178,7 +176,7 @@ function TC_Archive_Consolidated_FillSelect_Div()
         if ( TC_Archive_ByDate_YearMonths_iActive != -1 )
         {
             let iIndex = g_TC_Archive_Menu_aPuzzleIndex[iEntry];
-            let sYearMonthDay = g_TC_Archive_aPuzzleReleaseDate[iIndex];
+            let sYearMonthDay = g_TC_Archive_PuzzleReleaseDate_arr[iIndex];
             let iDayOfMonth = TC_GetDayFromDate(sYearMonthDay);
             let sDayOfMonth = TC_Time_GetDaysWithSuffixAndParens(iDayOfMonth)
             sDay = ' (' + sDayOfMonth +') '
@@ -189,10 +187,20 @@ function TC_Archive_Consolidated_FillSelect_Div()
         iEntry++;
         iAdded++;
 // the element exists so we can determine the width
-        let iThisWidth = TC_GetWidthOfInnerTextInPixels(sId);
-        if ( iThisWidth > iBiggestWidth )
-            iBiggestWidth = iThisWidth + g_Archive_iFudgeWidth;
+// but if there is a <br> in it we want to find the max of each half
+        let sInner = document.getElementById(sId).innerHTML;
+        let iBR = sInner.indexOf('<br>');
+        if ( iBR == -1 )
+        {
+            iBiggestWidth = Math.max(iBiggestWidth, TC_GetWidthOfTextInPixels(sId, sInner));
+        }
+        else
+        {
+            iBiggestWidth = Math.max(iBiggestWidth, TC_GetWidthOfTextInPixels(sId, sInner.slice(0, iBR)));
+            iBiggestWidth = Math.max(iBiggestWidth, TC_GetWidthOfTextInPixels(sId, sInner.slice(iBR+4)));
+        }
     }
+    iBiggestWidth += g_Archive_iFudgeWidth;
     let iLastButtonNumber = iAdded + g_TC_Archive_Menu_iStartAt;
     if ( iLastButtonNumber < iEntries )
     {
@@ -222,7 +230,8 @@ function TC_Archive_Consolidated_FillSelect_Div()
     TC_Archive_BySize_SetWidths(iBiggestWidth);
 // now get the height of the selection div
     let iHeight = 0;
-    iHeight += iAdded * TC_GetHeightOfElementById(g_TC_Archive_Menu_aActiveIds[g_TC_Archive_Menu_iStartAt]);
+    if ( g_TC_Archive_Menu_aActiveIds.length > 0 )
+        iHeight += iAdded * TC_GetHeightOfElementById(g_TC_Archive_Menu_aActiveIds[g_TC_Archive_Menu_iStartAt]);
     elem.style.height = MakePixelString(iHeight);
 // now add the top element heights 
     iHeight += TC_GetHeightOfElementById("Archive_Consolidated_Title")

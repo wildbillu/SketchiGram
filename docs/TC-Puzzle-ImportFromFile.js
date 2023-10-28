@@ -44,11 +44,11 @@ function GetQueryLinePuzzleName()
 function TC_GetOverrideName()
 {
 // first see if there is a puzzle in the archive for the date
-    let sToday = TC_Archive_MakeTodayDateString();
+    let sToday = TC_Time_MakeTodayDateString();
     let iArchiveIndex = TC_Archive_FindPuzzleForDate(sToday);
     if ( iArchiveIndex != -1 )
     {
-        let sName = g_TC_Archive_aPuzzleNames[iArchiveIndex];
+        let sName = g_TC_Archive_PuzzleNames_arr[iArchiveIndex];
         g_TC_Archive_TodaysPuzzle_bDoing = true;
         return sName;
     }

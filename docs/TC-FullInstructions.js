@@ -125,11 +125,7 @@ function FI_Create()
     elemHint.innerHTML = sHint;
 
     let elemCredits = document.getElementById("FI_Credits_Div");
-    let sCredits = ""
-    sCredits += 'About This Puzzle' + '<br>';
-    sCredits += g_sPuzzleTitle + '<br>';
-    sCredits += g_sPuzzleCreditAuthor + '<br>';
-    sCredits += g_sPuzzleCreditDate + '<br>';
+    let sCredits = TC_Archive_SetIntroScreenCreditsHTML(g_TitleInFullInstructionsFrame_bShowPrefix);
     elemCredits.innerHTML = sCredits;
 
     let elemCopyrightEtc = document.getElementById("FI_CopyrightEtc_Div");

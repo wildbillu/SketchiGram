@@ -7,8 +7,15 @@
 //    7       15          4 
 //    8       15          4
 
-var g_Archive_bDontShowFuturePuzzles = true;
-var g_Title_bUseFromPuzzleFile = false;
+var g_Archive_bDontShowFuturePuzzles = false;
+
+var g_TitleInOpeningFrame_bShowPrefix = true;
+var g_TitleInFullInstructionsFrame_bShowPrefix = true;
+var g_TitleInMainFrame_bShowPrefix = true;
+
+var g_ArchiveEntries_bShowPrefix = false; // true 10 ; false 20
+var g_TC_Archive_Menu_iMaxItems = 20;
+
 
 var g_MII_Grid_iTop = 300;var g_MII_Grid_ShowAfter_iSec = 60; var g_MII_Grid_ShowFor_iSec   = 10; var g_MII_Grid_Show_iCloseTimerId = 0;
 
@@ -81,7 +88,7 @@ function TC_Configuration_pick()
     g_CAL_iBottom = 1130; g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iLeft = -1; g_CAL_iPadding = 80
 
     // these adjust to space left for title
-    let iTopAdjust = 105;
+    let iTopAdjust = 125;
     g_Settings_iTop = iTopAdjust + 50; g_Settings_iLeft = -1; g_Settings_izIndex = 22;
     g_StatusControlRow_iTop = iTopAdjust; g_StatusControlRow_iLeft = 50; // -1 to center
     g_ArchiveActivationButton_iTop = iTopAdjust + 10; g_ArchiveActivationButton_iLeft = 380; g_ArchiveActivationButton_iWidth = 200;

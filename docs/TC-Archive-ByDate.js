@@ -67,14 +67,15 @@ function TC_Archive_ShowByDateIndex(iIndex)
     TC_Archive_ClearActivePuzzles();
 // now we reset the Actives then get the menu rewritten
     let iAt = 0;
-    while ( iAt < g_TC_Archive_aPuzzleTitles.length )
+    while ( iAt < g_TC_Archive_PuzzleTitles_arr.length )
     {
-        let sThisDate = g_TC_Archive_aPuzzleReleaseDate[iAt];
+        let sThisDate = g_TC_Archive_PuzzleReleaseDate_arr[iAt];
         let sThisYearMonth = sThisDate.substring(0, 7);
         if ( sThisYearMonth == sDesiredYearMonth )
         {   
             let sId = TC_Archive_Id_Con(iAt);            
-            let sTitle = g_TC_Archive_aPuzzleTitles[iAt];
+            let sTitle = TC_Archive_MakeEntry(iAt)
+//            let sTitle = g_TC_Archive_PuzzleTitles_arr[iAt];
             g_TC_Archive_Menu_aActiveIds.push(sId);
             g_TC_Archive_Menu_aActiveTitles.push(sTitle);
             g_TC_Archive_Menu_aPuzzleIndex.push(iAt);
@@ -121,10 +122,10 @@ function TC_Archive_GetAvailableYearMonths()
 {
     TC_Archive_ByDate_aYearMonths.length = 0;
     // first get all the unique year months    
-    let iPuzzles = g_TC_Archive_aPuzzleReleaseDate.length;
+    let iPuzzles = g_TC_Archive_PuzzleReleaseDate_arr.length;
     for ( let i = 0; i < iPuzzles; i++ )
     {
-        let sDate = g_TC_Archive_aPuzzleReleaseDate[i];
+        let sDate = g_TC_Archive_PuzzleReleaseDate_arr[i];
         let sYearMonth = sDate.slice(0, 7);
         if ( !TC_Archive_ByDate_aYearMonths.includes(sYearMonth) )
         {

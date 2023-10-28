@@ -22,6 +22,7 @@ var g_PuzzlePath_sName_Image_Solved = '';
 
 function TC_SetFinalPuzzleFileNames(sName)
 {
+    g_sPuzzleName = sName;
     g_PuzzleFile_sName_Text         = g_PuzzleFile_sTemplate_Text.        replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
     g_PuzzlePath_sName_Image        = g_PuzzlePath_sTemplate_Image.       replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);
     g_PuzzlePath_sName_Image_Extra  = g_PuzzlePath_sTemplate_Image_Extra. replaceAll(g_PuzzlePath_sTemplate_ReplaceMe, sName);

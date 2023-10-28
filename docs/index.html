@@ -138,18 +138,6 @@ let g_sPuzzleNumber          = 'puzzle000'
 let g_bConnectionIsWebBased = true;
 var g_bPlaying = false;
 
-function TC_AddScreenInfo()
-{
-    let elem = document.getElementById("OpeningText");
-    let sCredits = '';
-    sCredits += 'This Puzzle:' + '<br>'
-    sCredits += g_sPuzzleTitle + '<br>'
-    sCredits += g_sPuzzleCreditAuthor + '<br>';
-    sCredits += g_sPuzzleCreditDate;
-    elem.innerHTML = sCredits;
-    ForIdSetVisibility("OpeningText", true)
-}
-
 function TC_CloseScreen()
 {
     if ( g_bPlaying )
