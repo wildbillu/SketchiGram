@@ -22,6 +22,6 @@ sSpecialClueMiddle=
 sSpecialClueEnd=
 sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
 sPuzzleCreditDate=September 26, 2022
-sAnswerLocations=1 Across|3 Down|1 Down|5 Across|4 Down|7 Across|6 Across|2 DOWN
+sAnswerLocations=1 Across|3 Down|1 Down|5 Across|4 Down|7 Across|6 Across|2 Down
 SA_EB_sWords=||||||||||||
 SA_EB_sWordStatus=FFFFFFFFFFFF
