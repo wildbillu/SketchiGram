@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle041
 sPuzzleDate=2023-05-31
-sPuzzleTitle=A Fractured Idiom by Commander Literal%26
+sPuzzleTitle=Fractured Idiom 2 by Commander Literal%26
 iGridWidth=4
 iGridHeight=4
 sGAs=RAIDORSOTINGCATS

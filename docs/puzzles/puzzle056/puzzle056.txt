@@ -1,12 +1,12 @@
 sPuzzleNumber=puzzle056
 sPuzzleDate=2023-07-24
-sPuzzleTitle=Holy Toledo, Commander Literal%26 needs a new sweater
+sPuzzleTitle=Holy Toledo, Commander Literal%26<br>needs a new sweater
 iGridWidth=4
 iGridHeight=4
 sGAs=RAJAONUSMOTHEASY
-sGSL=NNNNNNNNSSSSNNSN
-sGAP=-A-----S--T-E-G-
-sGSP=NGNNNNNGNNGNGNNN
+sGSL=NNNNNNNNSSSSNNNN
+sGAP=-A-----S--T-E-S-
+sGSP=NGNNNNNGNNGNGNGN
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
 iClueAnswers=8
 sClueTypes=S|N|N|N|N|N|N|N

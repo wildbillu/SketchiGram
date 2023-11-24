@@ -1,7 +1,7 @@
 sPuzzleNumber=puzzle058
 sWords=WORM HOLE
 sPuzzleDate=2023-07-25
-sPuzzleTitle=Commander Literal%26 tackles the space-time continuum
+sPuzzleTitle=Commander Literal%26<br>tackles the space-time continuum
 iGridWidth=4
 iGridHeight=4
 sGSL=NSNNSDSSNSNNNSNN
