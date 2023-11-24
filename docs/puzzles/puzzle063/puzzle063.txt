@@ -1,12 +1,12 @@
 sPuzzleNumber=puzzle063
 sPuzzleDate=2023-08-28
-sPuzzleTitle=Commander Literal%26 sees double
+sPuzzleTitle=Commander Literal%26 sees double<br>(Day 2 at Hundred Acher Wood)
 iGridWidth=4
 iGridHeight=4
 sGSL=DSSSSNNNSNNNSNNN
 sGAs=POOHOKRAORCAHAA.
 sGAP=P----K-A------A.
-sGSP=NNNNNGNGNNNNNNGN
+sGSP=GNNNNGNGNNNNNNGN
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
 iClueAnswers=8
 sClueTypes=S|S|N|N|N|N|N|N

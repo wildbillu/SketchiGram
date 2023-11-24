@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle066
 sPuzzleDate=2023-08-28
-sPuzzleTitle=Commander Literal%26 gives a hoot
+sPuzzleTitle=Commander Literal%26 hears a hoot<br>(Day 3 At Hundred Acher Wood)
 iGridWidth=4
 iGridHeight=4
 sGSL=NNNSNNNSNNNSNNNN
@@ -16,7 +16,7 @@ sAns=OWL|MBA|ZOO|BUHL|ZEUS|ASS|MEOW|OOHS
 sAPl=-W-|---|---|----|----|---|----|----
 sAPS=NGN|NNN|NNN|NNNN|NNNN|NNN|NNNN|NNNN
 sAnswerLocations=3 Down|4 Down|1 Across|5 Across|1 Down|6 Across|4 Across|2 Down
-ST_sClue_Itself=Ask Eeyore if he is so wise
+ST_sClue_Itself=A wise guy?
 ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=
 sSpecialClueMiddle=

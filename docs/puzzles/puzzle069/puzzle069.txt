@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle069
 sPuzzleDate=2023-08-29
-sPuzzleTitle=Commander Literal%26 travels to the Hundred Acre Wood
+sPuzzleTitle=Commander Literal%26 meets his host at the Hundred Acher Wood
 iGridWidth=5
 iGridHeight=5
 sGAs=.BRIGALONEVIBESSNIPS.INTO
