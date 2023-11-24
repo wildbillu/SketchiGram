@@ -1,5 +1,5 @@
 // TC-GRBMS-ButtonControl.js
-
+//text-decoration
 function TC_GRBSwipe_SetButtonStyle(bActive, iRow, iLetter)
 {
     let elemButton = document.getElementById(GRB_MakeId(iRow, iLetter));
@@ -93,8 +93,20 @@ function GRB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
 //    
     elem.style.left = MakePixelString(iLetter*g_GRB_Square_iSize)
     elem.style.top = MakePixelString(iRow*g_GRB_Square_iSize)
-    if ( CharValidEntry(cAnswerPlayer) )
+    let bShowLetter = true;
+    if ( g_bSuppressNonGoldenLetters )
+    {
+        if ( cStatusPlayer != g_cCode_Golden )
+            bShowLetter = false;
+    }
+    if ( bShowLetter && CharValidEntry(cAnswerPlayer) )
         elem.innerHTML = cAnswerPlayer;    
+    if ( g_bPuzzleSolved )
+    {
+        if ( cSpecialClueCode != 'N' )
+            elem.style.textDecoration = 'underline';
+    }
+
     let cColor = g_Color_sLetterUnknown;
     elem.style.color = cColor;
 }

@@ -9,3 +9,7 @@ var g_Color_sNExSWBrown = '#797837'
 
 var g_Color_sLetterCorrect = '#007700';
 var g_Color_sLetterUnknown = '#333333';
+
+var g_Color_sWhite = '#FFFFFF';
+var g_Color_sLightGray = '#EEEEEE';
+

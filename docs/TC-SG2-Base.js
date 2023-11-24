@@ -4,7 +4,7 @@
 function SG2_RealStart()
 {
     let elemBody_Intro = document.getElementById("Body_Real");
-    elemBody_Intro.style.backgroundColor = '#EEEEEE'//'lightgray'
+    elemBody_Intro.style.backgroundColor = g_sBodyBackgroundColor; '#EEEEEE'//'lightgray'
     if ( g_Timer_bActive ) TC_ElapsedTime_Setup();
     SG2_SetVisibles(true);
     document.getElementById("Body_Intro").style.visibility = 'hidden';
@@ -106,7 +106,6 @@ function SG2_LoadAll(iSection)
             g_GRB_Focus_sId = '';
             g_CAB_Focus_sId = '';
             Settings_SetupVersions();
-            TC_SquaresPlaced_Initialize();
             TC_Archive_ByDate_Clear();
             TC_Archive_BySize_Clear();
             MII_Grid_CancelTimer();
@@ -129,7 +128,7 @@ function SG2_LoadAll(iSection)
 
             TC_History_Clear();
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
-            TC_LoadPuzzleArchiveDefault();
+
             TC_LoadPuzzleArchive_FromFile();
             TC_Archive_SetTodaysPuzzleExist();
             GetAndSplitCookies();
@@ -140,14 +139,19 @@ function SG2_LoadAll(iSection)
             TC_InitializeFromFileOrLoadAsJS();
             TC_Archive_SetIntroScreenCredits()
             MakeAndStoreCookie_CurrentPuzzle();
+
+
+
             SG2_LoadMainElements();
             CAL_Hide()
             TC_Archive_ByDate_MakeAvailableButtons();
             TC_Archive_ByDate_FillDivWithButtons();
             TC_Archive_SetFromCookieValues()
-            GRB_SetAllowedGridLetters()
+g_TC_Archive_Menu_iStartAt=1;            
             if ( !g_bUsedCookie || g_bResettingDoNotUseCookie )
                 GRB_ScrambleCorrectAnswersToPlayer(false);
+            GRB_ScrambledUnplacedLettersAtStart();
+
             g_bResettingDoNotUseCookie = false;
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
@@ -201,9 +205,11 @@ function SG2_LoadAll(iSection)
             MII_Grid_SetLocationAndSize();
             MII_Hint_SetLocationAndSize();
             FI_SizeAndPosition();
-
             TC_CAL_Fill();
             g_bPlaying = false;
+
+g_bSuppressNonGoldenLetters = false;
+
             break;
         default:
             alert('error section:' + iSection)                    

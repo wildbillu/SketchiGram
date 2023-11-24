@@ -7,7 +7,7 @@
 //    7       15          4 
 //    8       15          4
 
-var g_Archive_bDontShowFuturePuzzles = true;
+var g_Archive_bDontShowFuturePuzzles = false;
 
 var g_TitleInOpeningFrame_bShowPrefix = true;
 var g_TitleInFullInstructionsFrame_bShowPrefix = true;
@@ -84,8 +84,8 @@ function TC_Configuration_pick()
 // these dont move     
     g_TopMatter_iTop = 25;
     g_BottomMatter_iTop = 1145;
-    g_Message_iTop = 1120;g_Message_bVisible = true; 
-    g_CAL_iBottom = 1130; g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iLeft = -1; g_CAL_iPadding = 80
+    g_Message_iTop = 1135;g_Message_bVisible = true; 
+    g_CAL_iBottom = 1120; g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iLeft = -1; g_CAL_iPadding = 80
 
     // these adjust to space left for title
     let iTopAdjust = 125;

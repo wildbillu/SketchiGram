@@ -109,9 +109,8 @@
     <SCRIPT SRC="TC-Actions.js"></SCRIPT>
     <SCRIPT SRC="TC-ControlRow.js"></SCRIPT>
 
-<!-- History and placed squares -->
+<!-- History -->
     <SCRIPT SRC="TC-History.js"></SCRIPT>
-    <SCRIPT SRC="TC-SquaresPlaced.js"></SCRIPT>
     <SCRIPT SRC="TC-Keyboard-WindowSupport.js"></SCRIPT>
 
 <!-- MiniInstructionImages -->
@@ -126,6 +125,9 @@
 <!-- CluesAsList -->
 <SCRIPT SRC="TC-CluesAsList.js"></SCRIPT>
 <link rel="stylesheet" href="Styles-CluesAsList.css">
+
+<!-- InPrintSupport -->
+<SCRIPT SRC="TC-InPrintHelpers.js"></SCRIPT>
 
 
 </HEAD>
@@ -153,8 +155,6 @@ function Dispatch()
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.022';
-//
-    TC_LoadPuzzleArchiveDefault();
     SG2_LoadAll(0);
     return;
 }

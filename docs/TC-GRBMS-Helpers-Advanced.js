@@ -1,7 +1,5 @@
 // TC-GRBMS-Helpers-Advanced.js
 
-var g_bUseSquaresPlaced = true;
-
 function GRB_ScrambleCorrectAnswersToPlayer(bReplaceCorrectAndCorrected)
 { // reconstitute the string
     let sPlaced = '';
@@ -62,27 +60,7 @@ function GRB_ScrambleCorrectAnswersToPlayer(bReplaceCorrectAndCorrected)
     let iAllLettersToPlace = sAllLettersToPlace.length;
     if ( iLettersPlaced != iAllLettersToPlace)
         setlineAdd('Mismatch.Placed:' + iLettersPlaced + 'ToPlace:' + iAllLettersToPlace)
-}
-
-function GRB_SetAllowedGridLetters()
-{
-    var sAllowedLetters = '';
-    var sLocalGridSolution = g_aGridAnswers.join('');
-    for ( var i = 0; i < sLocalGridSolution.length; i++ )
-    {
-        var cLetter = sLocalGridSolution.charAt(i);
-        if ( !TC_IsBlackSquare(cLetter) && !sAllowedLetters.includes(cLetter))
-            sAllowedLetters += cLetter;
-    }
-    g_GRB_sAllowedGridLetters = sAllowedLetters;
-    let iLength = g_GRB_sAllowedGridLetters.length;
-    for ( let i = 0; i < iLength; i++ )
-        g_GRB_sAllowedGridLetters_Selectable += 'T';
-}
-
-function PlacedByPlayer_SquaresPlaced(iRow, iLetter)
-{
-    return TC_SquaresPlaced_IsSet(iRow, iLetter)
+//    
 }
 
 function PlacedByPlayer_History(cLetter, iRow, iLetter)
@@ -101,63 +79,6 @@ function PlacedByPlayer_History(cLetter, iRow, iLetter)
     return bPlaced;
 }
 
-function GRB_ReplaceMeReturnFoundId(iRow, iLetter, cReplaceWithMe, bRejectDual, cNow)
-{ 
-// used to sync CA and GRB
-    let sFoundId = GRB_FindFirstSquareWithPlayerAnswer(cReplaceWithMe, bRejectDual, cNow);
-    if ( sFoundId == '')
-        return sFoundId;
-    let B_iRow = GRB_RowFromId(sFoundId);
-    let B_iLetter = GRB_LetterFromId(sFoundId);
-    GRB_SwitchAnswers(iRow, iLetter, B_iRow, B_iLetter);
-    return sFoundId;
-}
-
-function GRB_FindFirstSquareWithPlayerAnswer(sUpper, bRejectSquaresThatMake2Changes, cLetterOfSquareBeingFixed)
-{
-    let aPossibles_All = [];
-    let aPossibles_NotPlaced = [];
-    for ( let iRow = 0; iRow < g_iGridHeight; iRow++ )
-    {
-        for ( let iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
-        {
-            if ( GRB_ForRowLetter_IsSquareValidForFocus(iRow, iLetter) )
-            { // shouldnt get here unless it is okay to change character
-                let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-                if ( cAnswerPlayer == sUpper )  
-                {
-                    let sId = GRB_MakeId(iRow, iLetter);
-                    aPossibles_All.push(sId);
-                    let bPlaced = false;
-                    if ( g_bUseSquaresPlaced )
-                        bPlaced = PlacedByPlayer_SquaresPlaced(iRow, iLetter)
-                    else
-                        bPlaced = PlacedByPlayer_History(cAnswerPlayer, iRow, iLetter);
-                    if ( !bPlaced )
-                        aPossibles_NotPlaced.push(sId);
-                }
-            }
-        }
-    }
-    let iPossibles_All = aPossibles_All.length;
-    let iPossibles_NotPlaced = aPossibles_NotPlaced.length;
-    if ( iPossibles_All == 0 )
-        return '';
-    if ( iPossibles_All == 1 )
-        return aPossibles_All[0];
-    if ( iPossibles_NotPlaced != 0 )
-        return GRB_PickOne(aPossibles_NotPlaced);
-    return GRB_PickOne(aPossibles_All)
-}
-
-function GRB_PickOne(aPossibles)
-{
-    let iPossibles = aPossibles.length;
-    let iPicked = TC_GetRandomInt(iPossibles);
-    return aPossibles[iPicked];
-}
-
-
 function GRB_ForAll_SetStatusFromState()
 {
     for ( let iR = 0; iR < g_iGridWidth; iR++ )
@@ -168,10 +89,8 @@ function GRB_ForAll_SetStatusFromState()
 function GRB_ForRowLetter_SetStatusFromState(iR, iL)
 {
     let cInitialStatus = GRB_ForRowLetter_GetStatusPlayer(iR, iL);
-    if ( TC_IsGoldenOrBlackSquare(cInitialStatus) || TC_IsCorrected(cInitialStatus))
-    {
+    if ( TC_IsGoldenOrBlackSquare(cInitialStatus) || TC_IsCorrected(cInitialStatus) )
         return;
-    }
     let cAnswer = GRB_ForRowLetter_GetAnswer(iR, iL);
     let cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iR, iL);
     let cStatus = g_cCode_Correct;
@@ -289,8 +208,6 @@ function GRB_SwitchAnswers(A_iRow, A_iLetter, B_iRow, B_iLetter)
     TC_History_AddEntry_GridExchange(A_iRow, A_iLetter, B_iRow, B_iLetter);
     // switch
     GRB_ForRowLetter_SetAnswerPlayer(A_cAnswerPlayer, B_iRow, B_iLetter);
-    TC_SquaresPlaced_Set(A_iRow, A_iLetter)
-    TC_SquaresPlaced_Unset(B_iRow, B_iLetter)
     GRB_ForRowLetter_SetAnswerPlayer(B_cAnswerPlayer, A_iRow, A_iLetter);
     // since we moved letters we no longer if the status is correct
     GRB_ForRowLetter_SetStatusPlayer(g_cCode_Normal, B_iRow, B_iLetter);

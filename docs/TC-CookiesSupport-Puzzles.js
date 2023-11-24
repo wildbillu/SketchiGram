@@ -51,9 +51,9 @@ function Puzzle_SetupVersions()
 
 function HandlePuzzleVersionV1d002()
 {
-    let dummy = '';
+    let sDummy = '';
     let iIndex = 1;
-    dummy = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]; 
+    sDummy = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]; 
     g_Cookie_sAnswersPlayer = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_sStatusPlayer = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_sGridAnswersPlayer = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
@@ -61,10 +61,10 @@ function HandlePuzzleVersionV1d002()
     g_Cookie_bPuzzleSolved = IsTrue(g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]);
     g_Cookie_bGridSolved = IsTrue(g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]);
     g_Cookie_bAnswersSolved = IsTrue(g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]);
-    dummy = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
-    dummy =  g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
+    sDummy = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
+    sDummy =  g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_ElapsedTime_iSecondsPrevious = parseInt(g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]);
-    g_SquaresPlaced_sStatus = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
+    sDummy = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_CAB_sAnswerType = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_bValid = true;
 }
@@ -76,6 +76,7 @@ function HandlePuzzleVersionV1d003()
     if ( iSize != iSizeNeeded)
         return;
     let iIndex = 1;
+    let sDummy = '';
     g_Cookie_sAnswersPlayer                 = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_sStatusPlayer                  = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_sGridAnswersPlayer             = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
@@ -83,7 +84,7 @@ function HandlePuzzleVersionV1d003()
     g_Cookie_bPuzzleSolved                  = IsTrue(g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]);
     g_Cookie_bGridSolved                    = IsTrue(g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]);
     g_Cookie_ElapsedTime_iSecondsPrevious   = parseInt(g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]);
-    g_SquaresPlaced_sStatus                 = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
+    sDummy                                  = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++]; // no longer supported
     g_Cookie_CAB_sAnswerType                = g_Cookie_Puzzle_aRRofsCurrentValues[iIndex++];
     g_Cookie_bValid = true;
 }
@@ -151,7 +152,7 @@ function MakeCookie_Puzzle()
     sCookie += g_bPuzzleSolved;         sCookie += g_cCookieDelimiter;
     sCookie += g_bGridSolved;           sCookie += g_cCookieDelimiter;
     sCookie += iTotalTime.toString();   sCookie += g_cCookieDelimiter;
-    sCookie += g_SquaresPlaced_sStatus; sCookie += g_cCookieDelimiter;
+    sCookie += 'NoSquaredPlaced';       sCookie += g_cCookieDelimiter;
     sCookie += sAnswerType;             sCookie += g_cCookieDelimiter;
     sCookie += 99;
     let exdays = 365;
