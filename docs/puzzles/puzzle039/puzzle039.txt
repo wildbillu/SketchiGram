@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle039
 sPuzzleDate=2023-05-31
-sPuzzleTitle=Think 'Dust Bowl'
+sPuzzleTitle=Fractured Adage 2 by Commander Literal%26
 iGridWidth=5
 iGridHeight=5
 sGSL=NSNNNNDSSSNSNNNNSNNNNSNNN
@@ -16,7 +16,7 @@ sAPS=GNNG|NGNNN|NNN|NNNNN|NNNNN|NNNNN|NNNN|NNNNN|NNNNN|NNNNN
 sASL=DSSS|SDSSS
 sAnswerLocations=5 Across|1 Down|6 Down|6 Across|8 Across|2 Down|1 Across|4 Down|3 Down|7 Across
 sClueTypes=S|S|N|N|N|N|N|N|N|N|N|N
-ST_sClue_Itself=A Fractured Adage by Commander Literal%26
+ST_sClue_Itself=Think 'Dust Bowl'
 ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=No 
 sSpecialClueMiddle= No 

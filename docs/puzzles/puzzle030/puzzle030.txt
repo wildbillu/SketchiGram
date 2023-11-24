@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle030
 sPuzzleDate=2023-05-20
-sPuzzleTitle=Fractured Cuisine of Commander Literal%26
+sPuzzleTitle=Fractured Cuisine 1 Commander Literal%26
 iGridWidth=5
 iGridHeight=5
 sGSL=SSSSSNNNNNNNNNNNNNNNSSSSS

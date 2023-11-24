@@ -1,6 +1,6 @@
 sPuzzleNumber=puzzle034
 sPuzzleDate=2023-05-28
-sPuzzleTitle=A Fractured Fable by Commander Literal%26
+sPuzzleTitle=Fractured Fable 1 by Commander Literal%26
 iGridWidth=4
 iGridHeight=4
 sGSL=NNNNNNNNSSSSNNNN
@@ -15,7 +15,7 @@ sASL=SSSS|NNNN
 sAns=HEIR|COHO|HERS|CASH|SLID|OGLE|AGED|ODDS
 sAPl=--I-|----|----|----|----|----|----|----
 sAPS=NNGN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN|NNNN
-sAnswerLocations=1 Across|1 Down|4 Down|1 Across|3 Down|5 Across|2 Down|7 Across
+sAnswerLocations=6 Across|1 Down|4 Down|1 Across|3 Down|5 Across|2 Down|7 Across
 ST_sClue_Itself=There might be a moral here
 ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=The Tortoise and the 

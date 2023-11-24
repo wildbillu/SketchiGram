@@ -1,12 +1,12 @@
 sPuzzleNumber=puzzle038
 sPuzzleDate=2023-05-31
-sPuzzleTitle=A Fractured Idiom by Commander Literal%26
+sPuzzleTitle=Fractured Idiom 1 by Commander Literal%26
 iGridWidth=4
 iGridHeight=4
 sGAs=RAPEECRUEMIRLEGO
-sGSL=NNSENNSNNNSNNNSN
-sGAP=R--G---U-M----G-
-sGSP=GNNNNNNGNGNNNNGN
+sGSL=NNSNNNSNNNSNNNSN
+sGAP=R--E---U-M----G-
+sGSP=GNNGNNNGNGNNNNGN
 sGridNumbering=1|2|3|4|5|0|0|0|6|0|0|0|7|0|0|0
 iClueAnswers=8
 sClueTypes=S|N|N|N|N|N|N|N

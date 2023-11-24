@@ -23,6 +23,4 @@ sSpecialClueMiddle=
 sSpecialClueEnd=
 sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
 sPuzzleCreditDate=May 28, 2023
-SA_EB_sWords=||||||||||||
-SA_EB_sWordStatus=FFFFFFFFFFFF
-iCAB_SquareHeight=32
+iCAB_SquareHeight=30
