@@ -144,6 +144,7 @@ function TC_CloseScreen()
 {
     if ( g_bPlaying )
         return;
+    window.open("https://www.amazon.com/s?k='sketchigram'"); 
     SG2_RealStart()
     g_bPlaying = true;
 }
@@ -151,13 +152,12 @@ function TC_CloseScreen()
 function Dispatch() 
 {
 
-    window.open("https://www.amazon.com/s?k='sketchigram'"); 
 
     TC_MouseSupport_RightClick();
     if (window.location.protocol === "file:")
         g_bConnectionIsWebBased = false;
     TC_Configuration_pick();
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.022';
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.023';
     SG2_LoadAll(0);
     return;
 }
