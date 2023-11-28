@@ -37,6 +37,68 @@ var g_TC_Archive_PuzzleArtCredit_iLocation = 6;
 
 var g_TC_Archive_Puzzle_iRequired = 7;
 
+function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, sReleaseDate, sPuzzleCreateDate, sPuzzleCredit, sPuzzleArtCredit)
+{
+    if ( g_Archive_bDontShowFuturePuzzles )
+    {
+        let today = new Date();  
+        let d = TC_MakeDateObjectFromOurDateString(sReleaseDate);
+        if ( d > today )
+                return;
+    }
+// need to find index to insert at
+// for now set this index to the size
+    let iInitialLength = g_TC_Archive_PuzzleNames_arr.length;
+//    
+    let iInsert = 0;
+    let dDateNew = TC_MakeDateObjectFromOurDateString(sReleaseDate);
+    let bFound = false;
+    while ( iInsert < iInitialLength && !bFound )
+    {
+        let sReleaseDateAt = g_TC_Archive_PuzzleReleaseDate_arr[iInsert]
+        let dDateAtIndex = TC_MakeDateObjectFromOurDateString(sReleaseDateAt);
+        if ( dDateAtIndex > dDateNew )
+        {
+            bFound = true;
+        }
+        else
+            iInsert++;
+    }
+    if ( iInsert == 0 ) 
+    {
+        g_TC_Archive_PuzzleNames_arr.        unshift(sName);
+        g_TC_Archive_PuzzleTitles_arr.       unshift(sTitle);
+        g_TC_Archive_PuzzleSizes_arr.        unshift(sSize);
+        g_TC_Archive_PuzzleReleaseDate_arr.  unshift(sReleaseDate);
+        g_TC_Archive_PuzzleTitlePrefixes_arr.unshift(sTitlePrefix)
+        g_TC_Archive_PuzzleCreateDate_arr.   unshift(sPuzzleCreateDate);
+        g_TC_Archive_PuzzleCredit_arr.       unshift(sPuzzleCredit);
+        g_TC_Archive_PuzzleArtCredit_arr.    unshift(sPuzzleArtCredit);
+    }
+    else if ( iInsert < iInitialLength )
+    {
+        g_TC_Archive_PuzzleNames_arr.        splice(iInsert, 0, sName);
+        g_TC_Archive_PuzzleTitles_arr.       splice(iInsert, 0, sTitle);
+        g_TC_Archive_PuzzleSizes_arr.        splice(iInsert, 0, sSize);
+        g_TC_Archive_PuzzleReleaseDate_arr.  splice(iInsert, 0, sReleaseDate);
+        g_TC_Archive_PuzzleTitlePrefixes_arr.splice(iInsert, 0, sTitlePrefix)
+        g_TC_Archive_PuzzleCreateDate_arr.   splice(iInsert, 0, sPuzzleCreateDate);
+        g_TC_Archive_PuzzleCredit_arr.       splice(iInsert, 0, sPuzzleCredit);
+        g_TC_Archive_PuzzleArtCredit_arr.    splice(iInsert, 0, sPuzzleArtCredit);
+    }
+    else
+    {
+        g_TC_Archive_PuzzleNames_arr.        push(sName);
+        g_TC_Archive_PuzzleTitles_arr.       push(sTitle);
+        g_TC_Archive_PuzzleSizes_arr.        push(sSize);
+        g_TC_Archive_PuzzleReleaseDate_arr.  push(sReleaseDate);
+        g_TC_Archive_PuzzleTitlePrefixes_arr.push(sTitlePrefix)
+        g_TC_Archive_PuzzleCreateDate_arr.   push(sPuzzleCreateDate);
+        g_TC_Archive_PuzzleCredit_arr.       push(sPuzzleCredit);
+        g_TC_Archive_PuzzleArtCredit_arr.    push(sPuzzleArtCredit);
+    }
+}
+
 function TC_Archive_MakeEntry(iIndex)
 {
     let sEntry = '';
@@ -52,13 +114,12 @@ function TC_Archive_MakeEntry(iIndex)
     return sEntry;
 }
 
-
 function TC_Archive_SetIntroScreenCredits()
 {
     let elem = document.getElementById("OpeningText");
     let sCredits = TC_Archive_SetIntroScreenCreditsHTML(g_TitleInOpeningFrame_bShowPrefix)
     elem.innerHTML = sCredits;
-    ForIdSetVisibility("OpeningText", true)
+//    ForIdSetVisibility("OpeningText", true)
 }
 
 function TC_Archive_SetIntroScreenCreditsHTML(bShowPrefix)
@@ -114,7 +175,10 @@ function TC_Archive_ForPuzzleName_GetIndex(sPuzzleName)
 function TC_LoadPuzzleArchive_FromFile()
 {
     if ( !g_bConnectionIsWebBased )
+    {
+       TC_LoadPuzzleArchiveDefault();
         return false;
+    }
     let sTextFileToLookFor = 'Archive.txt'; 
     let sFileContents = TC_GetFile(sTextFileToLookFor, 'archive');
     if ( sFileContents == '' )
@@ -152,68 +216,6 @@ function TC_LoadPuzzleArchive_FromFile()
         }
     }
     return true;
-}
-
-function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, sReleaseDate, sPuzzleCreateDate, sPuzzleCredit, sPuzzleArtCredit)
-{
-
-    if ( g_Archive_bDontShowFuturePuzzles )
-    {
-        let today = new Date();  
-        let d = TC_MakeDateObjectFromOurDateString(sReleaseDate);
-        if ( d > today )
-                return;
-    }
-// need to find index to insert at
-// for now set this index to the size
-    let iInitialLength = g_TC_Archive_PuzzleNames_arr.length;
-//    
-    let iInsert = 0;
-    let dDateNew = TC_MakeDateObjectFromOurDateString(sReleaseDate);
-    let bFound = false;
-    while ( iInsert < iInitialLength && !bFound )
-    {
-        let sReleaseDateAt = g_TC_Archive_PuzzleReleaseDate_arr[iInsert]
-        let dDateAtIndex = TC_MakeDateObjectFromOurDateString(sReleaseDateAt);
-        if ( dDateNew < dDateAtIndex )
-        {
-            bFound = true;
-        }
-        iInsert++;
-    }
-    if ( iInsert == 0 ) 
-    {
-        g_TC_Archive_PuzzleNames_arr.        unshift(sName);
-        g_TC_Archive_PuzzleTitles_arr.       unshift(sTitle);
-        g_TC_Archive_PuzzleSizes_arr.        unshift(sSize);
-        g_TC_Archive_PuzzleReleaseDate_arr.  unshift(sReleaseDate);
-        g_TC_Archive_PuzzleTitlePrefixes_arr.unshift(sTitlePrefix)
-        g_TC_Archive_PuzzleCreateDate_arr.   unshift(sPuzzleCreateDate);
-        g_TC_Archive_PuzzleCredit_arr.       unshift(sPuzzleCredit);
-        g_TC_Archive_PuzzleArtCredit_arr.    unshift(sPuzzleArtCredit);
-    }
-    else if ( iInsert < iInitialLength )
-    {
-        g_TC_Archive_PuzzleNames_arr.        splice(iInsert - 1, 0, sName);
-        g_TC_Archive_PuzzleTitles_arr.       splice(iInsert - 1, 0, sTitle);
-        g_TC_Archive_PuzzleSizes_arr.        splice(iInsert - 1, 0, sSize);
-        g_TC_Archive_PuzzleReleaseDate_arr.  splice(iInsert - 1, 0, sReleaseDate);
-        g_TC_Archive_PuzzleTitlePrefixes_arr.splice(iInsert - 1, 0, sTitlePrefix)
-        g_TC_Archive_PuzzleCreateDate_arr.   splice(iInsert - 1, 0, sPuzzleCreateDate);
-        g_TC_Archive_PuzzleCredit_arr.       splice(iInsert - 1, 0, sPuzzleCredit);
-        g_TC_Archive_PuzzleArtCredit_arr.    splice(iInsert - 1, 0, sPuzzleArtCredit);
-    }
-    else
-    {
-        g_TC_Archive_PuzzleNames_arr.        push(sName);
-        g_TC_Archive_PuzzleTitles_arr.       push(sTitle);
-        g_TC_Archive_PuzzleSizes_arr.        push(sSize);
-        g_TC_Archive_PuzzleReleaseDate_arr.  push(sReleaseDate);
-        g_TC_Archive_PuzzleTitlePrefixes_arr.push(sTitlePrefix)
-        g_TC_Archive_PuzzleCreateDate_arr.   push(sPuzzleCreateDate);
-        g_TC_Archive_PuzzleCredit_arr.       push(sPuzzleCredit);
-        g_TC_Archive_PuzzleArtCredit_arr.    push(sPuzzleArtCredit);
-    }
 }
 
 function TC_Archive_ClearActivePuzzles()
@@ -262,12 +264,17 @@ function TC_Archive_FindPuzzleForDate(sDateToFind)
 function TC_LoadPuzzleArchiveDefault()
 { // in case file missing or local
     TC_Archive_ClearAvailablePuzzles();
-    TC_Archive_AddPuzzleToArchive_All('puzzle026', 'Grammar lesson from Commander Literal&trade;',         'Like the cat that swallowed the canary', 4, '2023-10-13', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle026', 'Grammar lesson from Commander Literal&trade;',         'Like the cat that swallowed the canary', 4, '2023-10-08', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 5',                 5, '2023-12-13', '2023-10-13', 'SketchiBill', 'SketchiBill')
     TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 3',                 3, '2023-10-13', '2023-10-13', 'SketchiBill', 'SketchiBill')
     TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 4',                 4, '2023-11-13', '2023-10-13', 'SketchiBill', 'SketchiBill')
-    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 5',                 5, '2023-12-13', '2023-10-13', 'SketchiBill', 'SketchiBill')
     TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 6',                 6, '2023-11-10', '2023-10-13', 'SketchiBill', 'SketchiBill')
-    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 7',                 7, '2023-10-11', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 7',                 7, '2023-12-11', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 8',                 3, '2023-12-05', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 9',                 4, '2023-12-01', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 10',                 5, '2023-12-20', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 11',                 6, '2023-12-10', '2023-10-13', 'SketchiBill', 'SketchiBill')
+    TC_Archive_AddPuzzleToArchive_All('puzzle070', '70Prefix', 'Practice SketchiGram 12',                 7, '2023-10-11', '2023-10-13', 'SketchiBill', 'SketchiBill')
 /*    
     TC_Archive_AddPuzzleToArchive_All('puzzle024', 'Odes do this', 4, '2023-10-01')
     TC_Archive_AddPuzzleToArchive_All('puzzle001', 'Yogi Berra Says!', 4, '2023-06-23')

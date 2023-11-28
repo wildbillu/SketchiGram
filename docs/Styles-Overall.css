@@ -16,6 +16,87 @@
 cursor: url('image/Button_ChangeDirection.cur'),auto;
 }
 
+.GoToScreen
+{
+    width:640px;
+    height:1170;
+    top:0px;
+    left:0px;
+    background-color: #A7D8FF;
+    position:absolute;
+    color:green;
+    text-align:center;
+    font-size:24px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;  
+    font-weight:normal;
+    z-index:12;
+}
+
+.GoToScreenTitle
+{
+    top:20px;
+    left:0px;
+    width:640px;
+    height:40px;
+    background-color: #A7D8FF;
+    position:absolute;
+    color:red;
+    text-align:center;
+    font-size:36px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;  
+    font-weight:normal;
+}
+
+.GoToAmazon
+{
+    background-image: url("images/InfoScreens/GoToAmazonButton.jpg");
+    top:100px;
+    left:70px;
+    width:500px;
+    height:300px;
+    background-color: pink;
+    color:Orange;
+    position:absolute;
+}
+
+.PlayOnLine
+{
+    background-image: url("images/InfoScreens/PlayOnlineButton.jpg");
+    top:450px;
+    left:70px;
+    width:500px;
+    height:300px;
+    background-color: lightgreen;
+    color:green;
+    position:absolute;
+}
+
+.GoToSketchiToonsBooks
+{
+    background-image: url("images/InfoScreens/GoToSketchiToonsBooksButton.jpg");
+    top:800px;
+    left:70px;
+    width:500px;
+    height:150px;
+    background-color:blue;
+    color:black;
+    position:absolute;
+}
+
+.GoToSketchiToons
+{
+    background-image: url("images/InfoScreens/GoToSketchiToonsButton.jpg");
+    top:975px;
+    left:70px;
+    width:500px;
+    height:150px;
+    background-color:gray;
+    color:black;
+    position:absolute;
+}
+
 .Body_Real
 {
     position:absolute;
@@ -27,6 +108,19 @@ cursor: url('image/Button_ChangeDirection.cur'),auto;
     width:650px;
 }
 
+.Body_Intro
+{
+    border:0px solid blue;
+    background-color: #A7D8FF;
+    background-image: url("images/InfoScreens/StartingScreen-2023-10-08.jpg");
+    color:black;
+    height:1170px;
+    width:650px;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:12;
+}
+
 .OpeningText
 {
     width:640px;
@@ -35,23 +129,9 @@ cursor: url('image/Button_ChangeDirection.cur'),auto;
     position:absolute;
     color:green;
     text-align:center;
-    font-size:24px;
+    font-size:28px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;  
     font-weight:normal;
-    z-index:12;
-}
-
-.Body_Intro
-{
-    border:0px solid blue;
-    background-color: #A7D8FF;
-    color:black;
-    height:1170px;
-    width:650px;
-/*    background-image:url("images/InfoScreens/StartingScreen-2023-09-20.jpg"); */
-    background-image:url("images/InfoScreens/StartingScreen-2023-10-08.jpg");
-    background-repeat:no-repeat;
-    background-position:center;
     z-index:12;
 }

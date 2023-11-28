@@ -39,7 +39,7 @@ function Restart()
 //
     ForIdSetVisibility("Body_Real", false);
     SG2_SetVisibles(false);
-//
+    //
     let elemReal = document.getElementById("Body_Real");
     elemReal.style.backgroundColor = 'transparent'
     elemReal.style.height = MakePixelString(0);
@@ -139,9 +139,6 @@ function SG2_LoadAll(iSection)
             TC_InitializeFromFileOrLoadAsJS();
             TC_Archive_SetIntroScreenCredits()
             MakeAndStoreCookie_CurrentPuzzle();
-
-
-
             SG2_LoadMainElements();
             CAL_Hide()
             TC_Archive_ByDate_MakeAvailableButtons();
