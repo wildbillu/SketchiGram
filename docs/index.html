@@ -155,6 +155,11 @@ function GoToSketchiToonsBooks()
     window.open("https://www.amazon.com/s?k='Sketchi Bill'", "_self"); 
 }
 
+function Download()
+{
+    window.open("https://www.sketchitoons.com/download-sketchigram-sampler", "_self"); 
+}
+
 function GoToOnlineVersion()
 {
     let elem = document.getElementById("GoToScreen");
@@ -196,6 +201,7 @@ function SetupWithGoToButtons()
     <DIV Id="GoToScreen" class="GoToScreen TC_StartHidden" top=0 left=0>
         <DIV class="GoToScreenTitle">Home of the SketchiGram&trade; Puzzle</DIV>
         <DIV class="GoToAmazon"            onclick="GoToAmazon();"></DIV>
+        <DIV class="Download"              onclick="Download();"></DIV>
         <DIV class="PlayOnLine"            onclick="GoToOnlineVersion();"></DIV>
         <DIV class="GoToSketchiToonsBooks" onClick="GoToSketchiToonsBooks();"></DIV>
         <DIV class="GoToSketchiToons"      onclick="GoToSketchiToons();"></DIV>

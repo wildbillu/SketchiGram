@@ -52,7 +52,7 @@ cursor: url('image/Button_ChangeDirection.cur'),auto;
 .GoToAmazon
 {
     background-image: url("images/InfoScreens/GoToAmazonButton.jpg");
-    top:100px;
+    top:60px;
     left:70px;
     width:500px;
     height:300px;
@@ -61,10 +61,22 @@ cursor: url('image/Button_ChangeDirection.cur'),auto;
     position:absolute;
 }
 
+.Download
+{
+    background-image: url("images/InfoScreens/SketchiMini-DownLoadSamplerButton.jpg");
+    top:375px;
+    left:70px;
+    width:500px;
+    height:82px;
+    background-color: lightgreen;
+    color:green;
+    position:absolute;
+}
+
 .PlayOnLine
 {
     background-image: url("images/InfoScreens/PlayOnlineButton.jpg");
-    top:450px;
+    top:470px;
     left:70px;
     width:500px;
     height:300px;
