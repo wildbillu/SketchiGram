@@ -140,6 +140,14 @@ let g_sPuzzleNumber          = 'puzzle000'
 let g_bConnectionIsWebBased = true;
 var g_bPlaying = false;
 
+var g_FirstScreen_bJustGotToPuzzle = true;
+var g_FirstScreen_bShowAmazonPuzzleBooksImageAndLink = true;
+var g_FirstScreen_bShowDownloadImageAndLink = false;
+var g_FirstScreen_bShowDoPuzzleNow = true;
+var g_FirstScreen_bAmazonShowSketchiToonsBooksImageAndLink = true;
+var g_FirstScreen_bShowSketchiToonsImageAndLink = false;
+
+
 function GoToAmazon()
 {
     window.open("https://www.amazon.com/s?k='sketchigram'", "_self"); 
@@ -184,7 +192,12 @@ function TC_SetActiveSize()
 function SetupWithGoToButtons()
 {
     let elem = document.getElementById("GoToScreen");
-    elem.style.visibility = 'visible';
+    if ( !g_FirstScreen_bJustGotToPuzzle )
+    {
+        let sInner = MakeBodyNothing();
+        elem.innerHTML = sInner;
+        elem.style.visibility = 'visible';
+    }
     TC_MouseSupport_RightClick();
     if (window.location.protocol === "file:")
         g_bConnectionIsWebBased = false;
@@ -192,12 +205,49 @@ function SetupWithGoToButtons()
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.3.033';
     SG2_LoadAll(0);
     TC_SetActiveSize();
+    if ( g_FirstScreen_bJustGotToPuzzle )
+    {
+        ForIdSetVisibility("Body_Intro", true);
+        ForIdSetVisibility("OpeningText", true);
+        setTimeout(function(){SG2_RealStart();}, 5000); 
+    }
+}
+
+function MakeBodyNothing()
+{
+    let sInner = '';
+    sInner += '<DIV class="GoToScreenTitle">Home of the SketchiGram&trade; Puzzle</DIV>';
+    if ( g_FirstScreen_bShowAmazonPuzzleBooksImageAndLink )
+        sInner += '<DIV class="GoToAmazon"            onclick="GoToAmazon();"></DIV>';
+    if ( g_FirstScreen_bShowDownloadImageAndLink )
+        sInner += '<DIV class="Download"              onclick="Download();"></DIV>';
+    if ( g_FirstScreen_bShowDoPuzzleNow)
+        sInner += '<DIV class="PlayOnLine"            onclick="GoToOnlineVersion();"></DIV>';
+    if ( g_FirstScreen_bAmazonShowSketchiToonsBooksImageAndLink)
+        sInner += '<DIV class="GoToSketchiToonsBooks" onClick="GoToSketchiToonsBooks();"></DIV>';
+    if ( g_FirstScreen_bShowSketchiToonsImageAndLink )
+        sInner += '<DIV class="GoToSketchiToons"      onclick="GoToSketchiToons();"></DIV>';
+    return sInner;
 }
 
 </SCRIPT>
 
 <BODY Id="Body_Nothing" class="MoveCursor" onLoad="SetupWithGoToButtons();" onmousemove="TC_Global_MouseMove(event)" ontouchmove="TC_Global_MouseMove(event)" topmargin="0" leftmargin="0">
+    <DIV Id="GoToScreen" class="GoToScreen TC_StartHidden" top=0 left=0>
     </DIV>
+    <DIV Id="Body_Intro" class="Body_Intro TC_StartHidden">
+        <DIV top=0 left=0 Id="OpeningText" class="OpeningText">SOMETEXTHERE</DIV>
+    </DIV>        
+    <DIV Id="Body_Real" class="Body_Real" ontouchout="TC_Global_Out(event);" ontouchstart="TC_Global_Down(event, 'Touch');" ontouchend="TC_Global_Up(event);" onmouseout="TC_Global_Out(event);" onmousedown="TC_Global_Down(event, 'Mouse');" onmouseup="TC_Global_Up(event);">
+        BodyReal    
+    </DIV>
+    <DIV Id="Messages" class="Div_Messages"></DIV>  
+</BODY>
+</HTML>
+
+<SCRIPT>
+/*
+<BODY Id="Body_Nothing" class="MoveCursor" onLoad="SetupWithGoToButtons();" onmousemove="TC_Global_MouseMove(event)" ontouchmove="TC_Global_MouseMove(event)" topmargin="0" leftmargin="0">
     <DIV Id="GoToScreen" class="GoToScreen TC_StartHidden" top=0 left=0>
         <DIV class="GoToScreenTitle">Home of the SketchiGram&trade; Puzzle</DIV>
         <DIV class="GoToAmazon"            onclick="GoToAmazon();"></DIV>
@@ -215,4 +265,6 @@ function SetupWithGoToButtons()
     <DIV Id="Messages" class="Div_Messages"></DIV>  
 </BODY>
 </HTML>
+*/
+</SCRIPT>
 
