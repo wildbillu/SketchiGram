@@ -5,9 +5,6 @@ var g_TC_Archive_BySize_BaseMenu_iSizeMin = 4;
 var g_TC_Archive_BySize_BaseMenu_iSizeMax = 8;
 var g_TC_Archive_BySize_BaseMenu_aId   = [];
 
-
-
-
 function TC_Archive_BySize_Clear()
 {
     g_TC_Archive_BySize_BaseMenu_iActiveSize = -1;
@@ -78,7 +75,10 @@ function TC_Archive_BySize_FillArraysWithPuzzles(iSize)
         {
             let sId = TC_Archive_Id_Con(iAt);
             let sTitle = TC_Archive_MakeEntry(iAt)
-//            let sTitle = g_TC_Archive_PuzzleTitles_arr[iAt];
+
+//            g_TC_Archive_Menu_aActiveIds.push(sId);
+//            g_TC_Archive_Menu_aActiveTitles.push(sTitle);
+//            g_TC_Archive_Menu_aPuzzleIndex.push(iAt);
             g_TC_Archive_Menu_aActiveIds.push(sId);
             g_TC_Archive_Menu_aActiveTitles.push(sTitle);
             g_TC_Archive_Menu_aPuzzleIndex.push(iAt);

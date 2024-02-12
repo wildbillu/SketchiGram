@@ -9,10 +9,6 @@ var g_TC_bMoveMade_Hint = false;
 
 // base defines
 var g_sPuzzleName = 'puzzle026';
-var g_sPuzzleDate = '';
-var g_sPuzzleTitle = '';
-var g_sPuzzleCreditAuthor = 'By Sketchi Bill';
-var g_sPuzzleCreditDate = 'March 1, 2023';
 //
 var g_ST_sClue_Itself = '';
 //

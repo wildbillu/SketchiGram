@@ -1,5 +1,6 @@
 // TC-GeneralFunctions-Time
-//
+// our format is 
+// YYYY-MM-DD
 //function TC_MakeDateObjectFromOurDateString(sDateString)
 //function TC_MonthInWordsPlusYear(sYearMonth)
 //function TC_GetYearFromDate(sDate)

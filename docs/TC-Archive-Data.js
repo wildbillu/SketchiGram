@@ -23,7 +23,6 @@ var g_TC_Archive_PuzzleTitlePrefixes_arr = [];
 var g_TC_Archive_PuzzleTitles_arr = [];
 var g_TC_Archive_PuzzleSizes_arr = [];
 var g_TC_Archive_PuzzleReleaseDate_arr = [];
-var g_TC_Archive_PuzzleCreateDate_arr = [];
 var g_TC_Archive_PuzzleCredit_arr = [];
 var g_TC_Archive_PuzzleArtCredit_arr = [];
 
@@ -31,13 +30,12 @@ var g_TC_Archive_PuzzleTitlePrefixes_iLocation = 0;
 var g_TC_Archive_PuzzleTitles_iLocation = 1;
 var g_TC_Archive_PuzzleSizes_iLocation = 2;
 var g_TC_Archive_PuzzleReleaseDate_iLocation = 3;
-var g_TC_Archive_PuzzleCreateDate_iLocation = 4;
-var g_TC_Archive_PuzzleCredit_iLocation = 5;
-var g_TC_Archive_PuzzleArtCredit_iLocation = 6;
+var g_TC_Archive_PuzzleCredit_iLocation = 4;
+var g_TC_Archive_PuzzleArtCredit_iLocation = 5;
 
-var g_TC_Archive_Puzzle_iRequired = 7;
+var g_TC_Archive_Puzzle_iRequired = 6;
 
-function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, sReleaseDate, sPuzzleCreateDate, sPuzzleCredit, sPuzzleArtCredit)
+function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, sReleaseDate, sPuzzleCredit, sPuzzleArtCredit)
 {
     if ( g_Archive_bDontShowFuturePuzzles )
     {
@@ -71,7 +69,6 @@ function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, s
         g_TC_Archive_PuzzleSizes_arr.        unshift(sSize);
         g_TC_Archive_PuzzleReleaseDate_arr.  unshift(sReleaseDate);
         g_TC_Archive_PuzzleTitlePrefixes_arr.unshift(sTitlePrefix)
-        g_TC_Archive_PuzzleCreateDate_arr.   unshift(sPuzzleCreateDate);
         g_TC_Archive_PuzzleCredit_arr.       unshift(sPuzzleCredit);
         g_TC_Archive_PuzzleArtCredit_arr.    unshift(sPuzzleArtCredit);
     }
@@ -82,7 +79,6 @@ function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, s
         g_TC_Archive_PuzzleSizes_arr.        splice(iInsert, 0, sSize);
         g_TC_Archive_PuzzleReleaseDate_arr.  splice(iInsert, 0, sReleaseDate);
         g_TC_Archive_PuzzleTitlePrefixes_arr.splice(iInsert, 0, sTitlePrefix)
-        g_TC_Archive_PuzzleCreateDate_arr.   splice(iInsert, 0, sPuzzleCreateDate);
         g_TC_Archive_PuzzleCredit_arr.       splice(iInsert, 0, sPuzzleCredit);
         g_TC_Archive_PuzzleArtCredit_arr.    splice(iInsert, 0, sPuzzleArtCredit);
     }
@@ -93,7 +89,6 @@ function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, s
         g_TC_Archive_PuzzleSizes_arr.        push(sSize);
         g_TC_Archive_PuzzleReleaseDate_arr.  push(sReleaseDate);
         g_TC_Archive_PuzzleTitlePrefixes_arr.push(sTitlePrefix)
-        g_TC_Archive_PuzzleCreateDate_arr.   push(sPuzzleCreateDate);
         g_TC_Archive_PuzzleCredit_arr.       push(sPuzzleCredit);
         g_TC_Archive_PuzzleArtCredit_arr.    push(sPuzzleArtCredit);
     }
@@ -134,19 +129,20 @@ function TC_Archive_SetIntroScreenCreditsHTML(bShowPrefix)
     }
     let sTitle  = TC_Archive_ForPuzzleName_GetPuzzleTitle(g_sPuzzleName);
     sCredits += sTitle + '<br>';
-    sCredits += g_sPuzzleCreditAuthor + '<br>';
-    sCredits += 'Created:&nbsp;' + TC_Archive_ForPuzzleName_GetPuzzleCreateDateInWords(g_sPuzzleName);
+    sCredits += TC_Archive_ForPuzzleName_GetPuzzleCredits(g_sPuzzleName) + '<br>';
     return sCredits
 }
 
-function TC_Archive_ForPuzzleName_GetPuzzleCreateDateInWords(sPuzzleName)
+function TC_Archive_ForPuzzleName_GetPuzzleCredits(sPuzzleName)
 {
-    let sDateinWords = 'notfound'
+    let sCredit = 'NF'
     let iIndex = TC_Archive_ForPuzzleName_GetIndex(sPuzzleName);
     if ( iIndex == -1 )
-        return sDateinWords;
-    sDateinWords = TC_Time_MakeWordStringFromOurFormat(g_TC_Archive_PuzzleCreateDate_arr[iIndex]);
-    return sDateinWords;
+        return sCredit;
+    let sCreditPuzzle = g_TC_Archive_PuzzleCredit_arr[iIndex];
+    let sCreditArt    = g_TC_Archive_PuzzleArtCredit_arr[iIndex];
+    sCredit = 'Puzzle by ' + sCreditPuzzle + ', Art by ' + sCreditArt;
+    return sCredit;
 }
 
 function TC_Archive_ForPuzzleName_GetPuzzleTitlePrefix(sPuzzleName)
@@ -207,14 +203,21 @@ function TC_LoadPuzzleArchive_FromFile()
                     let sPuzzleArchiveTitle = FixSpecialCharacters(aParts[g_TC_Archive_PuzzleTitles_iLocation]);
                     let sSize               = aParts[g_TC_Archive_PuzzleSizes_iLocation];
                     let sReleaseDate        = aParts[g_TC_Archive_PuzzleReleaseDate_iLocation];
-                    let sPuzzleCreateDate   = aParts[g_TC_Archive_PuzzleCreateDate_iLocation];
                     let sPuzzleCredit       = aParts[g_TC_Archive_PuzzleCredit_iLocation];
                     let sPuzzleArtCredit    = aParts[g_TC_Archive_PuzzleArtCredit_iLocation];
-                    TC_Archive_AddPuzzleToArchive_All(sPuzzleArchiveName, sPuzzlePrefix, sPuzzleArchiveTitle, sSize, sReleaseDate, sPuzzleCreateDate, sPuzzleCredit, sPuzzleArtCredit);
+                    TC_Archive_AddPuzzleToArchive_All(sPuzzleArchiveName, sPuzzlePrefix, sPuzzleArchiveTitle, sSize, sReleaseDate, sPuzzleCredit, sPuzzleArtCredit);
                 }
             }
         }
     }
+    // now make it latest first    
+    g_TC_Archive_PuzzleNames_arr.        reverse();
+    g_TC_Archive_PuzzleTitles_arr.       reverse();
+    g_TC_Archive_PuzzleSizes_arr.        reverse();
+    g_TC_Archive_PuzzleReleaseDate_arr.  reverse();
+    g_TC_Archive_PuzzleTitlePrefixes_arr.reverse();
+    g_TC_Archive_PuzzleCredit_arr.       reverse();
+    g_TC_Archive_PuzzleArtCredit_arr.    reverse();
     return true;
 }
 
@@ -236,7 +239,6 @@ function TC_Archive_ClearAvailablePuzzles()
     g_TC_Archive_PuzzleSizes_arr.length = 0;
     g_TC_Archive_PuzzleReleaseDate_arr.length = 0;
     g_TC_Archive_PuzzleTitlePrefixes_arr.length = 0;
-    g_TC_Archive_PuzzleCreateDate_arr.length = 0;
     g_TC_Archive_PuzzleCredit_arr.length = 0;
     g_TC_Archive_PuzzleArtCredit_arr.length = 0;
 }

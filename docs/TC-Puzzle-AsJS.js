@@ -1,14 +1,10 @@
 // Evil Twin
 function TC_Puzzle_Load_AsJS()
 {
-    g_sPuzzleDate     = '2022-10-21';
-    g_sPuzzleTitle    = "A Dr. Jekyll and Mr. Hyde Moment?"
     g_ST_sClue_Itself = 'Doppelg&#228;nger of the worst type?';
     g_sSpecialClueBefore = ''; 
     g_sSpecialClueMiddle = '    '; 
     g_sSpecialClueEnd = ''; 
-    g_sPuzzleCreditAuthor = 'Puzzle by Sketchi Bill<br>Images by Sketchi Bill'
-    g_sPuzzleCreditDate = 'September 22, 2023'
     g_PuzzlePath_sName_Image          = 'puzzles/puzzle006/puzzle006.jpg';
     g_PuzzlePath_sName_Image_Extra    = 'puzzles/puzzle006/puzzle006-extra.jpg';
     g_PuzzlePath_sName_Image_Solved   = 'puzzles/puzzle006/puzzle006-solved.jpg';
