@@ -1,4 +1,4 @@
-sPuzzleNumber=puzzle0
+sPuzzleNumber=puzzle086
 iGridWidth=7
 iGridHeight=7
 sGSL=NNNNNNNNNNNNNNNNNNNNNSSSSSSSNNNNNNNNNNNNNNNNNNNNN

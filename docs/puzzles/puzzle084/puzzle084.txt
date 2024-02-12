@@ -1,6 +1,4 @@
-sPuzzleNumber=puzzle050
-sPuzzleDate=2023-06-19
-sPuzzleTitle=Grammar lesson from Commander Literal%26
+sPuzzleNumber=puzzle084
 iGridWidth=8
 iGridHeight=8
 sGAs=ASP.NASHLEU.EVERPARAGONS..SCAG..ABUTTALSPRESIDIOEAR.OREORES.NOUN
@@ -21,8 +19,4 @@ ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=
 sSpecialClueMiddle=
 sSpecialClueEnd=
-sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
-sPuzzleCreditDate=February 227,2023
-SA_EB_sWords=||||||||||||
-SA_EB_sWordStatus=FFFFFFFFFFFF
 iCAB_SquareHeight=40

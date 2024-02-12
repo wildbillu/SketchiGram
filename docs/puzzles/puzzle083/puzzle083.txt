@@ -1,6 +1,4 @@
-sPuzzleNumber=puzzle021
-sPuzzleDate=2023-02-21
-sPuzzleTitle=Fractured Album Covers by Commander Literal%26
+sPuzzleNumber=puzzle083
 iGridWidth=6
 iGridHeight=6
 sGSL=NNNNNNNNNNNNNNNNNNNNNNNNSSSSSSNNNNNN
@@ -21,6 +19,4 @@ ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=
 sSpecialClueMiddle=
 sSpecialClueEnd=
-sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
-sPuzzleCreditDate=February 21,2023
 iCAB_SquareHeight=40

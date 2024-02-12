@@ -1,7 +1,7 @@
 sPuzzleNumber=puzzle087
 iGridWidth=7
 iGridHeight=7
-sGSL=NCNNNNNNSNNNNNNSNNNNNNSNNNNNNSNNNNNNSNNNNNNSNNNNN
+sGSL=NSNNNNNNSNNNNNNSNNNNNNSNNNNNNSNNNNNNSNNNNNNSNNNNN
 sGAs=ACCOSTSPALATALINUTEROENS.ARPCOTERIEELEGIES.IRONS.   
 sGAP=A-C-ST--A-A-ALI-UT-R-EN-.A-PCOT-RI---EG-ES.I-ON-.
 sGSP=GNGNGGNNGNGNGGGNGGNGNGGNNGNGGGGNGGNNNGGNGGNGNGGNN
@@ -19,6 +19,4 @@ ST_sClue_Intro=A sweet reward for losing?
 sSpecialClueBefore=
 sSpecialClueMiddle=of
 sSpecialClueEnd=
-sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
-sPuzzleCreditDate=February 227,2023
 iCAB_SquareHeight=40
