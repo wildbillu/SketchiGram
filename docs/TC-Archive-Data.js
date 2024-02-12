@@ -37,6 +37,8 @@ var g_TC_Archive_Puzzle_iRequired = 6;
 
 function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, sReleaseDate, sPuzzleCredit, sPuzzleArtCredit)
 {
+
+
     if ( g_Archive_bDontShowFuturePuzzles )
     {
         let today = new Date();  

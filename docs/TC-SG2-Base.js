@@ -97,6 +97,9 @@ function SG2_LoadAll(iSection)
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, g_iDelayForStart);    
             break;
         case 0:
+            let sCurrentUrl = window.location.href
+            if ( sCurrentUrl.includes('xampp/htdocs/docs') || sCurrentUrl.includes('192.168') )
+                g_Archive_bDontShowFuturePuzzles = false;
             Puzzle_SetupVersions();
             TC_SetActiveSize();
             ForIdSetVisibility("Messages", false);

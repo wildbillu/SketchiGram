@@ -7,7 +7,7 @@
 //    7       15          4 
 //    8       15          4
 
-var g_Archive_bDontShowFuturePuzzles = false;
+var g_Archive_bDontShowFuturePuzzles = true;
 
 var g_TitleInOpeningFrame_bShowPrefix = true;
 var g_TitleInFullInstructionsFrame_bShowPrefix = true;
