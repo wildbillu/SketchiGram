@@ -1,5 +1,6 @@
 sPuzzleNumber=puzzle088
 iGridHeight=4
+iGridWidth=4
 sGSL=NNNNSSSSNNNNNNNN
 sGAs=IDOLKIWIEDENAONE
 sGAP=I-----W--D---O-E
