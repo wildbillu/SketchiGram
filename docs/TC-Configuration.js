@@ -8,6 +8,7 @@
 //    8       15          4
 
 var g_Archive_bDontShowFuturePuzzles = true;
+var g_Archive_bSelectRandomIfNoneForTheDay = true;
 
 var g_TitleInOpeningFrame_bShowPrefix = true;
 var g_TitleInFullInstructionsFrame_bShowPrefix = true;

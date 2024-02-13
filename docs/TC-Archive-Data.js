@@ -37,8 +37,6 @@ var g_TC_Archive_Puzzle_iRequired = 6;
 
 function TC_Archive_AddPuzzleToArchive_All(sName, sTitlePrefix, sTitle, sSize, sReleaseDate, sPuzzleCredit, sPuzzleArtCredit)
 {
-
-
     if ( g_Archive_bDontShowFuturePuzzles )
     {
         let today = new Date();  
@@ -122,7 +120,10 @@ function TC_Archive_SetIntroScreenCredits()
 function TC_Archive_SetIntroScreenCreditsHTML(bShowPrefix)
 {
     let sCredits = '';
-    sCredits += 'This Puzzle:' + '<br>'
+    if ( g_TC_Archive_TodaysPuzzle_bDoing )
+        sCredits += 'Today\' Puzzle:' + '<br>'
+    else
+        sCredits += 'Puzzle From the Archive:' + '<br>' 
     if ( bShowPrefix )
     {
         let sPrefix = TC_Archive_ForPuzzleName_GetPuzzleTitlePrefix(g_sPuzzleName);

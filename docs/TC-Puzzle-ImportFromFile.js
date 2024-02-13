@@ -52,6 +52,17 @@ function TC_GetOverrideName()
         g_TC_Archive_TodaysPuzzle_bDoing = true;
         return sName;
     }
+    if ( g_Archive_bSelectRandomIfNoneForTheDay )
+    {
+        let iPuzzles = g_TC_Archive_PuzzleNames_arr.length;
+        let iPick = TC_GetRandomInt(iPuzzles);
+        let sName = g_TC_Archive_PuzzleNames_arr[iPick];
+        g_TC_Archive_TodaysPuzzle_bDoing = false;
+        return sName;
+
+    }
+
+
     let sTextFileToLookFor = 'StartingPuzzle.txt'; 
     let sStartingPuzzle = '';
     let sFileContents = TC_GetFile(sTextFileToLookFor, 'puzzle');
