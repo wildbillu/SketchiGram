@@ -1,9 +1,9 @@
 // TC-Configuration.js
 // 
-//   size    left     special
-//    4       11          1
+//   size    left     special  ~per row  ~golden
+//    4       11          1      1          5
 //    5       13          2
-//    6       15          3
+//    6       14          3      3        
 //    7       15          4 
 //    8       15          4
 
