@@ -131,7 +131,7 @@ function FI_Create()
     let elemCopyrightEtc = document.getElementById("FI_CopyrightEtc_Div");
     let sCopyrightEtc = ''
     sCopyrightEtc += 'From Absolutely Vocabulous&trade; with SketchiToons&reg; by Sketchi Bill' + '<br>';
-    sCopyrightEtc += '&copy;2022 Northeast by Southwest, Inc.' + '<br>';
+    sCopyrightEtc += '&copy;2024 Northeast by Southwest, Inc.' + '<br>';
     sCopyrightEtc += g_sPuzzleVersion + '&nbsp;&nbsp;' + g_sPuzzleName + '&nbsp;&nbsp;' + g_sExtraInfo;
     elemCopyrightEtc.innerHTML = sCopyrightEtc;
 }
