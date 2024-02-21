@@ -205,9 +205,11 @@ function SG2_LoadAll(iSection)
             while ( document.readyState != "complete") 
             {
             }
+setlineAdd('C')
             TC_ThemeImage_GetAspectRatio_Calculate();
             MII_Grid_SetLocationAndSize();
             MII_Hint_SetLocationAndSize();
+setlineAdd('F')
             FI_Create();
             FI_SizeAndPosition();
             TC_CAL_Fill();
