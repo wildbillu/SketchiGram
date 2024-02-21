@@ -188,6 +188,7 @@ function SG2_LoadAll(iSection)
             break;
         case 7:
             // we are going to do the show clues, but not make it visible to get spacing right
+            TC_ThemeImage_GetAspectRatio_Calculate();
             TC_ThemeImage_Base_Create(); // these need to wait for load
             TC_ThemeImage_Extra_Create();
             TC_ThemeImage_Solved_Create();
@@ -205,11 +206,8 @@ function SG2_LoadAll(iSection)
             while ( document.readyState != "complete") 
             {
             }
-setlineAdd('C')
-            TC_ThemeImage_GetAspectRatio_Calculate();
             MII_Grid_SetLocationAndSize();
             MII_Hint_SetLocationAndSize();
-setlineAdd('F')
             FI_Create();
             FI_SizeAndPosition();
             TC_CAL_Fill();
