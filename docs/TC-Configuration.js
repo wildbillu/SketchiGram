@@ -7,6 +7,8 @@
 //    7       15          4 
 //    8       15          4
 
+var g_sExtraInfo = '';
+
 var g_Archive_bDontShowFuturePuzzles = true;
 var g_Archive_bSelectRandomIfNoneForTheDay = true;
 
