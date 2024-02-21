@@ -16,6 +16,7 @@ function TC_ThemeImage_GetAspectRatio_Calculate()
 {
     let sId = "ThemeImage_All_GetAspectRatio_ImageItself_Div"
     g_ThemeImage_All_fWidthToHeight = GetWidthToHeightRatioOfImageWithId(sId);
+    g_sExtraInfo = 'WTH:' + g_ThemeImage_All_fWidthToHeight.toFixed(2);
 }
 
 function TC_ThemeImage_Base_Create()

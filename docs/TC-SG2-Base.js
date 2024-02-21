@@ -134,7 +134,7 @@ function SG2_LoadAll(iSection)
             g_TC_bMoveMade_Grid = false;
             g_MII_Hint_bVisible = false;
             g_MII_Grid_bVisible = false;
-
+            g_ThemeImage_All_fWidthToHeight = 1.0;
             TC_History_Clear();
             document.addEventListener('visibilitychange', TC_ActOnVisibilityChange);
 
@@ -153,11 +153,10 @@ function SG2_LoadAll(iSection)
             TC_Archive_ByDate_MakeAvailableButtons();
             TC_Archive_ByDate_FillDivWithButtons();
             TC_Archive_SetFromCookieValues()
-g_TC_Archive_Menu_iStartAt=1;            
+            g_TC_Archive_Menu_iStartAt=1;            
             if ( !g_bUsedCookie || g_bResettingDoNotUseCookie )
                 GRB_ScrambleCorrectAnswersToPlayer(false);
             GRB_ScrambledUnplacedLettersAtStart();
-
             g_bResettingDoNotUseCookie = false;
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
@@ -181,7 +180,6 @@ g_TC_Archive_Menu_iStartAt=1;
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 150);    
             break;
         case 5:
-            FI_Create();
             TC_Preload_MII();
             setTimeout(function(){SG2_LoadAll(iSection + 1);}, 100);    
             break;
@@ -210,12 +208,11 @@ g_TC_Archive_Menu_iStartAt=1;
             TC_ThemeImage_GetAspectRatio_Calculate();
             MII_Grid_SetLocationAndSize();
             MII_Hint_SetLocationAndSize();
+            FI_Create();
             FI_SizeAndPosition();
             TC_CAL_Fill();
             g_bPlaying = false;
-
-g_bSuppressNonGoldenLetters = false;
-
+            g_bSuppressNonGoldenLetters = false;
             break;
         default:
             alert('error section:' + iSection)                    
