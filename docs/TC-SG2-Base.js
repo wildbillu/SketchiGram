@@ -99,12 +99,12 @@ function SG2_LoadAll(iSection)
         case 0:
             let sCurrentUrl = window.location.href
             if ( sCurrentUrl.includes('xampp/htdocs/docs') || sCurrentUrl.includes('192.168') )
-            g_Archive_bDontShowFuturePuzzles = false;
+                g_Archive_bDontShowFuturePuzzles = false;
             // look for override in the commandline
             let sPageURL = window.location.search.substring(1);
             if (sPageURL.includes('ShowAllPuzzles') )
             {
-                g_Archive_bDontShowFuturePuzzles = true;
+                g_Archive_bDontShowFuturePuzzles = false
             }
             Puzzle_SetupVersions();
             TC_SetActiveSize();
