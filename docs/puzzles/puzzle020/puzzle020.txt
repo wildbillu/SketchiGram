@@ -1,6 +1,4 @@
 sPuzzleNumber=puzzle020
-sPuzzleDate=2023-02-14
-sPuzzleTitle=He plays by a sense of smell
 iGridWidth=7
 iGridHeight=7
 sGSL=NNSNNNNNSDSSSSNNSNNNNNNSNNNNNNSNNNNNNSNNNNNNSNNNN
@@ -21,7 +19,3 @@ ST_sClue_Intro=SketchiToons Clue
 sSpecialClueBefore=
 sSpecialClueMiddle=
 sSpecialClueEnd=
-sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
-sPuzzleCreditDate=February 7,2023
-SA_EB_sWords=||||||||||||
-SA_EB_sWordStatus=FFFFFFFFFFFF
