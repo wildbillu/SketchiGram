@@ -61,7 +61,12 @@ function TC_GetOverrideName()
         return sName;
 
     }
-
+    if ( g_Archive_bSelectLatestIfNoneForTheDay )
+    {
+        let sName = g_TC_Archive_PuzzleNames_arr[0];
+        g_TC_Archive_TodaysPuzzle_bDoing = false;
+        return sName;
+    }
 
     let sTextFileToLookFor = 'StartingPuzzle.txt'; 
     let sStartingPuzzle = '';

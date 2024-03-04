@@ -10,7 +10,8 @@
 var g_sExtraInfo = '';
 
 var g_Archive_bDontShowFuturePuzzles = true;
-var g_Archive_bSelectRandomIfNoneForTheDay = true;
+var g_Archive_bSelectRandomIfNoneForTheDay = false;
+var g_Archive_bSelectLatestIfNoneForTheDay = true;
 
 var g_TitleInOpeningFrame_bShowPrefix = true;
 var g_TitleInFullInstructionsFrame_bShowPrefix = true;
