@@ -1,4 +1,8 @@
 archive.txt
+puzzle091=Sketchi Bill Gets A Cue|Don't call him fatso|5|2023-05-01|SketchiBill|SketchiBill|Fats Shark 
+puzzle092=Sketchi Bill hones an old skill|One shot, two hit balls|5|2023-05-13|SketchiBill|SketchiBill|Carom Cue
+puzzle096=Sketchi Bill hones an old skill|Give it a go|4|2023-05-13|SketchiBill|SketchiBill|Slop Shot
+puzzle087=Commander Literal%26 Confectionery Tale|Pretty tasty if you did get run over by one|7|2023-05-15|SketchiBill|SketchiBill|Cannoli
 puzzle070=|Practice SketchiGram|3|2023-10-11|SketchiBill|SketchiBill|Win
 puzzle023=|John Prine has questions|4|2023-10-28|SketchiBill|SketchiBill|Dear Abby
 puzzle030=Commander Literal%26: Fractured Cuisine 1|Guest chef?|5|2023-10-29|SketchiBill|SketchiBill|(Chicken) Fried Steak
@@ -93,11 +97,7 @@ puzzle097=Sketchi Bill Gets A Cue|Queue Up and Cue Up with this|5|2024-02-28|Ske
 puzzle093=Sketchi Bill Gets A Cue|Perhaps over troubled waters|6|2024-03-01|SketchiBill|SketchiBill|Bridge
 puzzle020=Sketchi Bill hones an old skill|Perhaps an excuse for a new hat|7|2024-03-04|SketchiBill|SketchiBill|Pinball Wizard
 puzzle099=Sketchi Bill hones an old skill|Also a TV Star|7|2024-03-06|SketchiBill|SketchiBill|Flipper
-puzzle100=Sketchi Bill hones an old skill|Not like Don Quixote and Windmills|4|2024-03-08|SketchiBill|SketchiBill|Tilt
+puzzle100=Sketchi Bill hones an old skill|Don't do this Don Quixote Thing With Windmills|4|2024-03-08|SketchiBill|SketchiBill|Tilt
 puzzle098=Sketchi Bill hones an old skill|Movin' on up?|4|2024-03-11|SketchiBill|SketchiBill|Ramp
 puzzle101=Sketchi Bill hones an old skill|Also a car at the amusement park|6|2024-03-13|SketchiBill|SketchiBill|Bumper
 puzzle102=Sketchi Bill hones an old skill|Also a department store|6|2024-03-15|SketchiBill|SketchiBill|Target
-puzzle091=Sketchi Bill Gets A Cue|Don't call him fatso|5|2023-05-01|SketchiBill|SketchiBill|Fats Shark 
-puzzle092=Sketchi Bill hones an old skill|One shot, two hit balls|5|2023-05-13|SketchiBill|SketchiBill|Carom Cue
-puzzle096=Sketchi Bill hones an old skill|Give it a go|4|2023-05-13|SketchiBill|SketchiBill|Slop Shot
-puzzle087=Commander Literal%26 Confectionery Tale|Pretty tasty if you did get run over by one|7|2023-05-15|SketchiBill|SketchiBill|Cannoli
