@@ -75,6 +75,7 @@ function Archive_PlayToday()
 function TC_Archive_Hide()
 {
     ForIdSetVisibility("Archive_Consolidated_Div", false);
+    g_TC_Archive_Menu_bActive = false;
 }
 
 function TC_Archive_Show()
@@ -85,6 +86,10 @@ function TC_Archive_Show()
     TC_HideMoreActions();
     ForIdSetVisibility("CluesAsList_Div", false);
     ForIdSetVisibility("Archive_Consolidated_Div", true);
+    if ( g_Archive_CloseIfNoSelection_bActive )
+    { // schedule close
+        setTimeout(function(){TC_Archive_Hide();}, g_Archive_CloseIfNoSelection_iSeconds*1000);
+    }
 }
 
 function TC_Archive_ToggleVisibility()

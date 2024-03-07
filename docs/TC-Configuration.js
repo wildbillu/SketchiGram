@@ -9,6 +9,9 @@
 
 var g_sExtraInfo = '';
 
+var g_Archive_CloseIfNoSelection_bActive  = true;
+var g_Archive_CloseIfNoSelection_iSeconds = 30;
+
 var g_Archive_bDontShowFuturePuzzles = true;
 var g_Archive_bSelectRandomIfNoneForTheDay = false;
 var g_Archive_bSelectLatestIfNoneForTheDay = true;
