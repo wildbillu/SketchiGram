@@ -12,6 +12,7 @@ function Action_ResetPuzzle()
 
 function Action_SolvePuzzle()
 {
+//    TC_DrawTest();
     GRB_SolveGrid();
     g_bGridSolved = true;    
     g_bPuzzleSolved = true;    

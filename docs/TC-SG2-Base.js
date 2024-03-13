@@ -10,6 +10,7 @@ function SG2_RealStart()
     document.getElementById("Body_Intro").style.visibility = 'hidden';
     document.getElementById("OpeningText").style.visibility = 'hidden';
     document.getElementById("Body_Real").style.visibility = 'visible';
+
 }    
 
 function SG2_SetVisibles(bVisible)
@@ -75,6 +76,7 @@ function SG2_LoadMainElements()
     sMain += '<DIV Id="MII_Hint_Div" class="MII_Hint_Div TC_StartHidden">MII_Hint_Div</DIV>';
     sMain += '<DIV Id="CluesAsList_Div" class="CluesAsList_Div TC_StartHidden" onclick="CAL_Hide()">Clues_Div</DIV>';
     sMain += '<DIV onclick="FI_Hide();" Id="FullInstructions_Div" class="FullInstructions_Div TC_StartHidden">FullInstructions</DIV>';
+    sMain += '<DIV id="GridCanvasDIV" class="TC_StartHidden"></DIV>'
     sMain += MakeSettingsDiv();
     document.getElementById("Body_Real").innerHTML = sMain;
 }
@@ -213,6 +215,7 @@ function SG2_LoadAll(iSection)
             TC_CAL_Fill();
             g_bPlaying = false;
             g_bSuppressNonGoldenLetters = false;
+
             break;
         default:
             alert('error section:' + iSection)                    

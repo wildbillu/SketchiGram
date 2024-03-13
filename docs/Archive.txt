@@ -1,8 +1,8 @@
 archive.txt
-puzzle091=Sketchi Bill Gets A Cue|Don't call him fatso|5|2023-05-01|SketchiBill|SketchiBill|Fats Shark 
-puzzle092=Sketchi Bill hones an old skill|One shot, two hit balls|5|2023-05-13|SketchiBill|SketchiBill|Carom Cue
-puzzle096=Sketchi Bill hones an old skill|Give it a go|4|2023-05-13|SketchiBill|SketchiBill|Slop Shot
-puzzle087=Commander Literal%26 Confectionery Tale|Pretty tasty if you did get run over by one|7|2023-05-15|SketchiBill|SketchiBill|Cannoli
+xpuzzle091=Sketchi Bill Gets A Cue|Don't call him fatso|5|2023-05-01|SketchiBill|SketchiBill|Fats Shark 
+xpuzzle092=Sketchi Bill hones an old skill|One shot, two hit balls|5|2023-05-13|SketchiBill|SketchiBill|Carom Cue
+xpuzzle096=Sketchi Bill hones an old skill|Give it a go|4|2023-05-13|SketchiBill|SketchiBill|Slop Shot
+puzzle087=Commander Literal%26 Confectionery Tale|Pretty tasty if you did get run over by one|7|2023-10-09|SketchiBill|SketchiBill|Cannoli
 puzzle070=|Practice SketchiGram|3|2023-10-11|SketchiBill|SketchiBill|Win
 puzzle023=|John Prine has questions|4|2023-10-28|SketchiBill|SketchiBill|Dear Abby
 puzzle030=Commander Literal%26: Fractured Cuisine 1|Guest chef?|5|2023-10-29|SketchiBill|SketchiBill|(Chicken) Fried Steak
@@ -101,3 +101,8 @@ puzzle100=Sketchi Bill hones an old skill|Don't do this Don Quixote Thing With W
 puzzle098=Sketchi Bill hones an old skill|Also A Way Off The Freeway|4|2024-03-11|SketchiBill|SketchiBill|Ramp
 puzzle101=Sketchi Bill hones an old skill|Also a car at the amusement park|6|2024-03-13|SketchiBill|SketchiBill|Bumper
 puzzle102=Sketchi Bill hones an old skill|Also a department store|6|2024-03-15|SketchiBill|SketchiBill|Target
+puzzle103=Sketchi Bill hits the lanes|Start A Thanksgiving Turkey?|6|2024-03-18|SketchiBill|SketchiBill|Strike
+puzzle104=Sketchi Bill hits the lanes|Git over to the left|5|2024-03-20|SketchiBill|SketchiBill|Spare
+puzzle105=Sketchi Bill hits the lanes|Also dessert with banana|5|2024-03-22|SketchiBill|SketchiBill|Split
+puzzle106=Sketchi Bill plays a tune|Slow but sure|5|2024-03-25|SketchiBill|SketchiBill|LPSWax
+puzzle107=Sketchi Bill plays a tune|Also found on a fir tree|6|2024-03-27|SketchiBill|SketchiBill|Needle
