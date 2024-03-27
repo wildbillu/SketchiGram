@@ -1,4 +1,6 @@
 archive.txt
+xpuzzle110=Sketchi Bill and the audio history|Not a Nana|5|2020-04-03|SketchiBill|SketchiBill|Grama(phone)
+xpuzzle199=Sketchi Bill and the audio history|Only one source|4|2020-04-15|SketchiBill|SketchiBill|Stylus-Stereo-Vinyl
 xpuzzle091=Sketchi Bill Gets A Cue|Don't call him fatso|5|2023-05-01|SketchiBill|SketchiBill|Fats Shark 
 xpuzzle092=Sketchi Bill hones an old skill|One shot, two hit balls|5|2023-05-13|SketchiBill|SketchiBill|Carom Cue
 xpuzzle096=Sketchi Bill hones an old skill|Give it a go|4|2023-05-13|SketchiBill|SketchiBill|Slop Shot
@@ -104,5 +106,13 @@ puzzle102=Sketchi Bill hones an old skill|Also a department store|6|2024-03-15|S
 puzzle103=Sketchi Bill hits the lanes|Start A Thanksgiving Turkey?|6|2024-03-18|SketchiBill|SketchiBill|Strike
 puzzle105=Sketchi Bill hits the lanes|Also dessert with banana|5|2024-03-20|SketchiBill|SketchiBill|Split
 puzzle104=Sketchi Bill hits the lanes|Not a cherry|5|2024-03-22|SketchiBill|SketchiBill|Spare
-puzzle106=Sketchi Bill plays a tune|Slow but sure|5|2024-03-25|SketchiBill|SketchiBill|LPSWax
-puzzle107=Sketchi Bill plays a tune|Also found on a fir tree|6|2024-03-27|SketchiBill|SketchiBill|Needle
+puzzle115=Sketchi Bill gets in the groove|For both Input and Output|4|2024-03-25|SketchiBill|SketchiBill|Horn
+puzzle109=Sketchi Bill gets in the groove|Alternative to a Stenographer|5|2024-03-27|SketchiBill|SketchiBill|Dicta(phone)
+puzzle116=Sketchi Bill gets in the groove|Maybe you call it a Gramophone|5|2024-03-29|SketchiBill|SketchiBill|Phono-Graph
+puzzle108=Sketchi Bill gets in the groove|Best Sound Yet|4|2024-04-01|SketchiBill|SketchiBill|HiFi
+puzzle107=Sketchi Bill gets in the groove|Also found on a fir tree|6|2024-04-03|SketchiBill|SketchiBill|Needle
+puzzle114=Sketchi Bill gets in the groove|Only one source|4|2024-04-05|SketchiBill|SketchiBill|Mono
+puzzle106=Sketchi Bill gets in the groove|Slow but sure|5|2024-04-08|SketchiBill|SketchiBill|LPSWax
+puzzle112=Sketchi Bill gets in the groove|Had an Adapter long before your MP3 Player|5|2024-04-10|SketchiBill|SketchiBill|FortyFive
+puzzle111=Sketchi Bill gets in the groove|Get ready to turn it over|8|2024-04-12|SketchiBill|SketchiBill|Cassette
+puzzle113=Sketchi Bill gets in the groove|About the size of the original Flip Phone|5|2024-04-15|SketchiBill|SketchiBill|(Eight)Track
