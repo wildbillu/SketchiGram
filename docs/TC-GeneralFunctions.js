@@ -164,9 +164,9 @@ function ScreenSizes()
 
 function setlineAdd(sAdd)
 {
+    g_sToDisplay += sAdd;
     if ( !g_Message_bVisible)
         return 0;
-    g_sToDisplay += sAdd;
     let elem = document.getElementById("Messages");
     if ( !elem )
         return 1;
@@ -177,13 +177,13 @@ function setlineAdd(sAdd)
 
 function setline(sAdd)
 {
+    g_sToDisplay = sAdd;
     if ( !g_Message_bVisible)
         return 0;
     let elem = document.getElementById("Messages");
     if ( !elem )
         return 1;
     elem.style.visibility = 'visible';
-    g_sToDisplay = sAdd;
     elem.innerHTML = g_sToDisplay;
     return 2;
 }

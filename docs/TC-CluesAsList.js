@@ -46,7 +46,10 @@ function TC_CAL_Fill()
     let iHeight = iTotalLines * g_CAL_iLineHeight
     elem.style.height = MakePixelString(iHeight);
     elem.style.width  = MakePixelString(iWidthMax);
-    let iTop = g_CAL_iBottom - iHeight;
+// we position this above the bottom matter
+    let rectBottomMatter = TC_GetBoundingClientRectAbsoluteFromId("Div_BottomMatter")
+    let iBottom = rectBottomMatter.top;
+    let iTop = iBottom - iHeight;
     elem.style.top    = MakePixelString(iTop);
     if ( g_CAL_iLeft != -1 )
         elem.style.left = MakePixelString(g_CAL_iLeft);

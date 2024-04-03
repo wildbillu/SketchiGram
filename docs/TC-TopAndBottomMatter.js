@@ -47,11 +47,12 @@ function TC_SetTopMatter()
 function TC_SetBottomMatter()
 {
     let elemBottomMatter = document.getElementById("Div_BottomMatter");
-    elemBottomMatter.innerHTML = '<DIV Id="BottomLeft" class="Div_BottomMatter_Left">&copy; 2023 Northeast by Southwest, Inc.&nbsp;&nbsp;</DIV>';
+    elemBottomMatter.innerHTML = '<DIV Id="BottomLeft" class="Div_BottomMatter_Left">&copy; 2024 Northeast by Southwest, Inc.&nbsp;&nbsp;</DIV>';
     elemBottomMatter.innerHTML += TC_Archive_MakeActivationButton();
     elemBottomMatter.innerHTML += '<DIV Id="BottomRight" class="Div_BottomMatter_Right">&nbsp;&nbsp;SketchiToons&reg; by Sketchi Bill</DIV>';
 //
-    elemBottomMatter.style.top = MakePixelString(g_BottomMatter_iTop);
+    let iHeight = elemBottomMatter.getBoundingClientRect().height;
+    elemBottomMatter.style.top = MakePixelString(g_BottomMatter_iBottom - iHeight);
     let iWidth = g_Window_iWidth - g_TC_Padding_Right_iSize - g_TC_Padding_Left_iSize;
     elemBottomMatter.style.left = MakePixelString(g_TC_Padding_Left_iSize);
 //

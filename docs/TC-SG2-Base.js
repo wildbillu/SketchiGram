@@ -23,7 +23,8 @@ function SG2_SetVisibles(bVisible)
     ForIdSetVisibility("Div_BottomMatter", sVisible);
     ForIdSetVisibility("OneLineDirection_Div", sVisible);
     ForIdSetVisibility("Body_Real", sVisible);
-//    if ( g_Message_bVisible )                ForIdSetVisibility("Messages", sVisible);
+    if ( g_Message_bVisible )                ForIdSetVisibility("Messages", sVisible);
+    setlineAdd('')
     if ( g_Timer_bActive )                  ForIdSetVisibility("ElapsedTime_Div", sVisible);
     if ( g_bSettingsActive )                ForIdSetVisibility("Div_StatusControl_Right", sVisible);
     if ( !g_SG2_CAB_bVisible )              ForIdSetVisibility("ThemeImage_Base_Div", sVisible);
@@ -33,6 +34,7 @@ function SG2_SetVisibles(bVisible)
 
 function Restart()
 {
+    g_sToDisplay = '';
     TC_ElapsedTime_Clear();
     ForIdSetVisibility("ThemeImage_Solved_Div", false);
     ForIdSetVisibility("MII_Grid_Div", false);
@@ -111,7 +113,6 @@ function SG2_LoadAll(iSection)
             Puzzle_SetupVersions();
             TC_SetActiveSize();
             ForIdSetVisibility("Messages", false);
-            g_sToDisplay = '';
             // these reset global variables on reload or archive   
             g_CAB_Square_iSize  = 40;
             g_GRB_Focus_sId = '';
@@ -215,7 +216,6 @@ function SG2_LoadAll(iSection)
             TC_CAL_Fill();
             g_bPlaying = false;
             g_bSuppressNonGoldenLetters = false;
-
             break;
         default:
             alert('error section:' + iSection)                    

@@ -28,9 +28,8 @@ var g_MII_Grid_iTop = 300;var g_MII_Grid_ShowAfter_iSec = 60; var g_MII_Grid_Sho
 
 var g_MII_Hint_iTop = 600;var g_MII_Hint_ShowAfter_iSec = 120;var g_MII_Hint_ShowFor_iSec   = 10;var g_MII_Hint_Show_iCloseTimerId = 0;
 
-var g_Window_iWidth = 640;
+var g_Window_iWidth = 650;
 var g_Window_iHeight = 1170;
-
 
 var g_ThemeImage_Base_izIndex = 20; var g_ThemeImage_Hint_izIndex = 20; 
 var g_ThemeImage_Solved_iTop = 155;var g_ThemeImage_Solved_izIndex = 20;
@@ -38,14 +37,14 @@ var g_ThemeImage_Solved_iTop = 155;var g_ThemeImage_Solved_izIndex = 20;
 
 var g_CAL_iLineHeight = 22;
 var g_CAL_izIndex = -1;
-var g_CAL_iBottom = 1130; var g_CAL_iLeft = -1; var g_CAL_iPadding = 80
+var g_CAL_iLeft = -1; var g_CAL_iPadding = 80
 
 var g_Archive_bActive = true; var g_Archive_iTop = 190; var g_Archive_iLeft = 300; var g_Archive_iWidth = 200;
 var g_Archive_iFudgeWidth = 30; var g_ArchiveList_iTop = 190;
 var g_Archive_izIndex = 20;
 
 var g_TopMatter_iTop = 20;
-var g_BottomMatter_iTop = 1170;
+var g_BottomMatter_iBottom = 1170;
 var g_Message_bVisible = true; var g_Message_iTop = 1150;
 
 var g_iStartAtIndex = 0;
@@ -88,12 +87,30 @@ var g_SyncSketchiToonsClue = false;
 
 function TC_Configuration_pick()
 {
+// these items are adjusted for phone
+// first the values when it is not a phone
+    g_BottomMatter_iBottom  = 1130;
+    g_Window_iHeight        = 1170;
+    g_BottomMatter_iBottom  = 1170 ;
+    g_Message_iTop          = 1100;
+// which is determined by height/width > 1
+// 
+    let wScreen = window.screen.width;
+//    alert('Screen:' + wScreen)
+    if ( wScreen < 700 )
+    {
+        w = window.innerWidth;
+        h = window.innerHeight;
+//        setlineAdd('WindowInner w:' + w + '  h:' + h)
+        g_Window_iHeight        = Math.round(g_Window_iWidth * h / w);
+        g_BottomMatter_iBottom = g_Window_iHeight;
+//        setlineAdd('NewHeight:' + g_Window_iHeight)
+        g_Message_iTop = g_Window_iHeight - 40;
+    }
+    g_Message_bVisible = true; 
+    g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iLeft = -1; g_CAL_iPadding = 80
 // these dont move     
     g_TopMatter_iTop = 25;
-    g_BottomMatter_iTop = 1145;
-    g_Message_iTop = 1135;g_Message_bVisible = true; 
-    g_CAL_iBottom = 1120; g_CAL_iLineHeight = 22; g_CAL_izIndex = 5; g_CAL_iLeft = -1; g_CAL_iPadding = 80
-
     // these adjust to space left for title
     let iTopAdjust = 125;
     g_Settings_iTop = iTopAdjust + 50; g_Settings_iLeft = -1; g_Settings_izIndex = 22;
