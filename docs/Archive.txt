@@ -126,3 +126,5 @@ puzzle121=Sketchi Quaffs|A great one to explore|5|2024-04-29|SketchiBill|Sketchi
 puzzle122=Sketchi Quaffs|Let a smile be your umbrella|4|2024-05-01|SketchiBill|SketchiBill|MaiTai
 puzzle123=Sketchi Quaffs|It goes well with a hat|5|2024-05-03|SketchiBill|SketchiBill|Julep
 puzzle124=Sketchi Quaffs|Happy Cinco de Mayo|4|2024-05-05|SketchiBill|SketchiBill|Marg
+puzzle125=Sketchi Quaffs|Don't be stubborn, drink up|4|2024-05-08|SketchiBill|SketchiBill|Mule
+puzzle126=Sketchi Quaffs|Start the day with one|6|2024-05-10|SketchiBill|SketchiBill|Bloody
