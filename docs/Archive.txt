@@ -131,6 +131,6 @@ puzzle126=Sketchi Quaffs|It might also be a meal|6|2024-05-10|SketchiBill|Sketch
 puzzle127=Sketchi Snacks|Perfect shape to play with|4|2024-05-13|SketchiBill|SketchiBill|Oreo
 puzzle128=Sketchi Snacks|They go well with lazing|4|2024-05-22|SketchiBill|SketchiBill|Lays
 puzzle129=Sketchi Snacks|Personification at its best|6|2024-05-24|SketchiBill|SketchiBill|MandMs
-puzzle130=Sketchi Snacks|A lot, but not as many varieties as oreos|6|2024-05-20|SketchiBill|SketchiBill|Reeses
+puzzle130=Sketchi Snacks|Finally the testers get a sweet gig|6|2024-05-20|SketchiBill|SketchiBill|Reeses
 puzzle131=Sketchi Snacks|Express yourself with your snack|5|2024-05-15|SketchiBill|SketchiBill|KitKat
 puzzle132=Sketchi QuaffsSketchi Snacks|They make an a-Maize-ing Pie|6|2024-05-17|SketchiBill|SketchiBill|Fritos
