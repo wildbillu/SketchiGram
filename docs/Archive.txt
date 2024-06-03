@@ -136,5 +136,5 @@ puzzle131=Sketchi Snacks|Express yourself with your snack|5|2024-05-15|SketchiBi
 puzzle132=Sketchi Snacks|They make an a-Maize-ing Pie|6|2024-05-17|SketchiBill|SketchiBill|Fritos
 puzzle133=Sketchi enjoys Ice Hockey |They moved from Minnesota|5|2024-05-27|SketchiBill|SketchiBill|Stars
 puzzle134=Sketchi enjoys Ice Hockey |Gretzky played for them|6|2024-05-29|SketchiBill|SketchiBill|Oilers
-puzzle135=Sketchi enjoys Ice Hockey |The only Original 6 team in the semis|7|2024-06-03|SketchiBill|SketchiBill|Rangers
+puzzle135=Sketchi enjoys Ice Hockey |Founded in 1926 by Tex Rickard, and one of the original 6 NHL Teams|7|2024-06-03|SketchiBill|SketchiBill|Rangers
 puzzle136=Sketchi enjoys Ice Hockey |Yup, they evidently have some in Florida|8|2024-05-31|SketchiBill|SketchiBill|Panthers
