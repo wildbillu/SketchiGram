@@ -141,5 +141,5 @@ puzzle136=Sketchi enjoys Ice Hockey |Yup, they evidently have some in Florida|8|
 puzzle137=Sketchi Fruits|New Zealand sailors might have used them to prevent scurvy?|5|2024-06-05|SketchiBill|SketchiBill|Kiwis
 puzzle138=Sketchi Fruits|Shooting craps out on the street|5|2024-06-07|SketchiBill|SketchiBill|Pears
 puzzle139=Sketchi Fruits|Treating grass or ball field|5|2024-06-14|SketchiBill|SketchiBill|Limes
-puzzle140=Sketchi Fruits|And, Bob's your uncle!|5|2024-06-12|SketchiBill|SketchiBill|Plums
+puzzle140=Sketchi Fruits|The groundskeeper does this for the foul lines|5|2024-06-12|SketchiBill|SketchiBill|Plums
 puzzle141=Sketchi Fruits|In the world of Rock and Roll there is only one|5|2024-06-10|SketchiBill|SketchiBill|Berry
