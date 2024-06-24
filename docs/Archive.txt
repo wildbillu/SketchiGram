@@ -146,5 +146,5 @@ puzzle141=Sketchi Fruits|In the world of Rock and Roll there is only one|5|2024-
 puzzle142=Sketchi Flowers|Evidently an all purpose word|6|2024-06-17|SketchiBill|SketchiBill|Cosmos
 puzzle143=Sketchi Flowers|They're the right sort of balloons|4|2024-06-24|SketchiBill|SketchiBill|Rose
 puzzle144=Sketchi Flowers|Labium superius oris and Labium inferius oris|6|2024-06-19|SketchiBill|SketchiBill|Tulips
-puzzle145=Sketchi Flowers|Like the three wise guys|4|2024-06-26|SketchiBill|SketchiBill|Sage
+puzzle145=Sketchi Flowers|Like a wise guy|4|2024-06-26|SketchiBill|SketchiBill|Sage
 puzzle146=Sketchi Flowers|Here's looking at you|6|2024-06-21|SketchiBill|SketchiBill|Irises
