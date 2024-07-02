@@ -150,5 +150,5 @@ puzzle145=Sketchi Flowers|Like a wise guy|4|2024-06-26|SketchiBill|SketchiBill|S
 puzzle146=Sketchi Flowers|Here's looking at you|6|2024-06-21|SketchiBill|SketchiBill|Irises
 puzzle147=Sketchi Summer Treats|Slip sliding away|4|2024-07-01|SketchiBill|SketchiBill|ICEE
 puzzle148=Sketchi Summer Treats|On top of old Smokey|4|2024-07-05|SketchiBill|SketchiBill|SnowCone
-puzzle149=Sketchi Summer Treats|Rap on|6|2024-07-03|SketchiBill|SketchiBill|IceTea
+puzzle149=Sketchi Summer Treats|Rap meets Law and Order|6|2024-07-03|SketchiBill|SketchiBill|IceTea
 puzzle150=Sketchi Summer Treats|rat-a-tat-tat|5|2024-06-28|SketchiBill|SketchiBill|DrumStick
